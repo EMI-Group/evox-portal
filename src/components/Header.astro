@@ -1,43 +1,69 @@
 ---
+import { Icon } from "astro-icon/components";
 const navLinks = [
   {
     label: "Ecosystem",
     dropdown: [
-      { label: "Projects", desc: "Learn about the projects and frameworks in the EvoX Ecosystem", href: "/projects" },
-      { label: "Community", desc: "Join the EvoX developer community", href: "#community-module" },
+      {
+        label: "Projects",
+        desc: "Learn about the projects and frameworks in the EvoX Ecosystem",
+        href: "/libs",
+      },
+      {
+        label: "Community",
+        desc: "Join the EvoX developer community",
+        href: "#community-module",
+      },
       // 原代码中 Forums 是 display: none，这里暂时注释
       // { label: "Forums", desc: "A place to discuss EvoX code", href: "#" }
-    ]
+    ],
   },
   {
     label: "Tutorials",
     dropdown: [
-      { label: "English Tutorials", desc: "Follow the tutorial and run your first EvoX task instantly", href: "https://evox.readthedocs.io/en/latest/tutorial/index.html" },
-      { label: "中文教程", desc: "跟随教程，立即运行你的第一个 EvoX 任务", href: "https://evox.readthedocs.io/zh-cn/latest/tutorial/index.html" }
-    ]
+      {
+        label: "English Tutorials",
+        desc: "Follow the tutorial and run your first EvoX task instantly",
+        href: "https://evox.readthedocs.io/en/latest/tutorial/index.html",
+      },
+      {
+        label: "中文教程",
+        desc: "跟随教程，立即运行你的第一个 EvoX 任务",
+        href: "https://evox.readthedocs.io/zh-cn/latest/tutorial/index.html",
+      },
+    ],
   },
   {
     label: "Docs",
     dropdown: [
-      { label: "English Documentation", desc: "Explore the documentation", href: "https://evox.readthedocs.io/en/latest/" },
-      { label: "中文文档", desc: "阅读文档以全面了解如何使用EvoX", href: "https://evox.readthedocs.io/zh-cn/latest/" }
-    ]
+      {
+        label: "English Documentation",
+        desc: "Explore the documentation",
+        href: "https://evox.readthedocs.io/en/latest/",
+      },
+      {
+        label: "中文文档",
+        desc: "阅读文档以全面了解如何使用EvoX",
+        href: "https://evox.readthedocs.io/zh-cn/latest/",
+      },
+    ],
   },
-  {
-    label: "Contact Us",
-    href: "/contact-us"
-  },
+  // {
+  //   label: "Contact Us",
+  //   href: "/contact-us",
+  // },
   {
     label: "Blog & News",
-    href: "/blog"
-  }
+    href: "/blog",
+  },
 ];
 ---
 
-<header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300">
+<header
+  class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300"
+>
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center gap-2" aria-label="EvoX">
           <img src="/favicon.svg" alt="EvoX Logo" class="h-10 w-10" />
@@ -46,49 +72,59 @@ const navLinks = [
       </div>
 
       <nav class="hidden md:flex space-x-8 items-center">
-        {navLinks.map((link) => (
-          <div class="relative group">
-            {link.dropdown ? (
-              // Dropdown Trigger
-              <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
-                {link.label}
-                <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            ) : (
-              // Direct Link
-              <a href={link.href} class="text-sm font-medium hover:text-teal-400 transition-colors">
-                {link.label}
-              </a>
-            )}
+        {
+          navLinks.map((link) => (
+            <div class="relative group">
+              {link.dropdown ? (
+                // Dropdown Trigger
+                <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
+                  {link.label}
+                  <Icon
+                    name="heroicons:chevron-down-20-solid"
+                    class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                  />
+                </button>
+              ) : (
+                // Direct Link
+                <a
+                  href={link.href}
+                  class="text-sm font-medium hover:text-teal-400 transition-colors"
+                >
+                  {link.label}
+                </a>
+              )}
 
-            {/* Dropdown Menu (Tailwind Group Hover Implementation) */}
-            {link.dropdown && (
-              <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden ring-1 ring-black ring-opacity-5">
-                  <div class="py-2">
-                    {link.dropdown.map((item) => (
-                      <a href={item.href} target="_blank" class="block px-4 py-3 hover:bg-gray-50 transition-colors group/item">
-                        <p class="text-sm font-bold text-gray-900 group-hover/item:text-teal-600">
-                          {item.label}
-                        </p>
-                        <p class="mt-1 text-xs text-gray-500 line-clamp-2">
-                          {item.desc}
-                        </p>
-                      </a>
-                    ))}
+              {/* Dropdown Menu (Tailwind Group Hover Implementation) */}
+              {link.dropdown && (
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+                  <div class="bg-white rounded-lg shadow-xl overflow-hidden ring-1 ring-black ring-opacity-5">
+                    <div class="py-2">
+                      {link.dropdown.map((item) => (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          class="block px-4 py-3 hover:bg-gray-50 transition-colors group/item"
+                        >
+                          <p class="text-sm font-bold text-gray-900 group-hover/item:text-teal-600">
+                            {item.label}
+                          </p>
+                          <p class="mt-1 text-xs text-gray-500 line-clamp-2">
+                            {item.desc}
+                          </p>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          ))
+        }
       </nav>
 
       <div class="md:hidden">
         <button class="text-gray-300 hover:text-white p-2">
-            <img src="/icon-menu-dots.svg" alt="Menu" class="h-6 w-6" />
+          <Icon name="heroicons:ellipsis-horizontal-20-solid" class="h-6 w-6" />
         </button>
       </div>
     </div>

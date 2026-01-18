@@ -1,0 +1,37 @@
+---
+
+---
+
+<div id="cso-plot" class="w-full h-full"></div>
+<script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
+
+<script>
+  import { data, layout } from "./cso-data.js";
+
+  const cso_plot = document.getElementById("cso-plot");
+  if (cso_plot) {
+    // @ts-ignore
+    Plotly.newPlot(cso_plot, data, layout, { responsive: true })
+      .then(() => {
+        let subdata = [];
+        for (let i = 0; i < 80; i++) {
+          let frame = { data: [], name: i + "" };
+          // @ts-ignore
+          data.forEach((it) => {
+            let x = it.x.slice(0, i + 1);
+            let y = it.y.slice(0, i + 1);
+            // @ts-ignore
+            frame.data.push({ ...it, x, y });
+          });
+          // @ts-ignore
+          subdata.push(frame);
+        }
+        // @ts-ignore
+        return Plotly.addFrames(cso_plot, subdata);
+      })
+      .then(() => {
+        // @ts-ignore
+        Plotly.animate(cso_plot, null);
+      });
+  }
+</script>

@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+// 生成静态路径
+export async function getStaticPaths() {
+  const blogs = await getCollection("blogs");
+  return blogs.map((blog) => ({
+    params: { slug: blog.id },
+    props: { blog },
+  }));
+}
+
+const { blog } = Astro.props;
+const { Content } = await render(blog);
+---
+
+<Layout title={blog.data.title}>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-12 bg-white">
+    <div class="mb-10 text-center">
+      <h1
+        class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4"
+      >
+        {blog.data.title}
+      </h1>
+
+      <div
+        class="flex items-center justify-center text-sm text-gray-500 space-x-2 border-b border-gray-100 pb-8"
+      >
+        <time datetime={blog.data.pubDate.toISOString()}>
+          {
+            blog.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+      </div>
+    </div>
+
+    <div class="prose prose-lg prose-teal max-w-none news-content">
+      <Content />
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-gray-100">
+      <a
+        href="/"
+        class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group"
+      >
+        <span
+          class="mr-2 transform group-hover:-translate-x-1 transition-transform"
+          >&larr;</span
+        >
+        Back to Home
+      </a>
+    </div>
+  </article>
+</Layout>
