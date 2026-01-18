@@ -3,6 +3,8 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Code } from "astro:components";
+import { Icon } from "astro-icon/components";
+import bannerImage from "../assets/evox_banner.jpg";
 
 // 导入原始 Python 代码文件 (使用 ?raw 将其作为字符串导入)
 import codeSingleObj from "../content/examples/single-obj.py?raw";
@@ -16,7 +18,7 @@ import Neuroevolution from "../content/examples/neuroevolution.astro";
 // 1. 获取并处理数据
 const allBlogs = await getCollection("blogs");
 // 按日期降序排序并取前3
-const latestNews = allBlogs
+const latestBlogs = allBlogs
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
@@ -26,7 +28,10 @@ const ecosystem = allLibs.slice(0, 3);
 ---
 
 <Layout title="EvoX - GPU-accelerated Evolutionary Computation">
-  <div class="relative bg-gray-900 text-white py-32 overflow-hidden">
+  <div
+    class="relative bg-gray-900 text-white py-48 overflow-hidden bg-cover bg-center xl:bg-[length:100%_100%]"
+    style={`background-image: url(${bannerImage.src});`}
+  >
     <div class="absolute inset-0 bg-black/50 z-0"></div>
 
     <div class="relative z-10 container mx-auto px-4 text-center">
@@ -48,9 +53,9 @@ const ecosystem = allLibs.slice(0, 3);
 
   <div class="bg-white py-16">
     <div class="max-w-[1280px] mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
         {
-          latestNews.map((post) => (
+          latestBlogs.map((post) => (
             <div class="flex flex-col gap-2">
               <h3 class="text-xl font-bold text-gray-900">{post.data.title}</h3>
               <p class="text-gray-600 text-sm line-clamp-3">
@@ -66,6 +71,15 @@ const ecosystem = allLibs.slice(0, 3);
             </div>
           ))
         }
+      </div>
+
+      <div class="flex justify-start">
+        <a
+          href="/blogs"
+          class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1 group"
+        >
+          Sell all Blog & News <span>&rarr;</span>
+        </a>
       </div>
     </div>
   </div>
@@ -230,6 +244,68 @@ const ecosystem = allLibs.slice(0, 3);
           class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1"
         >
           See all Projects <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white py-24 border-t border-gray-100">
+    <div class="max-w-[1280px] mx-auto px-4">
+      <div class="mb-12">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Community</h2>
+        <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
+          Join the EvoX developer community to contribute, learn, and get your
+          questions answered.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- QQ Group -->
+        <a
+          href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717"
+          target="_blank"
+          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+        >
+          <div class="flex items-center gap-4 mb-5">
+            <div
+              class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm"
+            >
+              <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
+            </div>
+            <h4 class="text-2xl font-bold text-gray-900">
+              EvoX <span
+                class="text-teal-600 group-hover:text-teal-700 font-extrabold"
+                >QQ群</span
+              >
+            </h4>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            浏览并加入QQ群讨论
+          </p>
+        </a>
+
+        <!-- Discord -->
+        <a
+          href="https://discord.com/invite/Vbtgcpy7G4"
+          target="_blank"
+          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+        >
+          <div class="flex items-center gap-4 mb-5">
+            <div
+              class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm"
+            >
+              <Icon name="simple-icons:discord" class="h-6 w-6" />
+            </div>
+            <h4 class="text-2xl font-bold text-gray-900">
+              EvoX <span
+                class="text-indigo-600 group-hover:text-indigo-700 font-extrabold"
+                >Discord</span
+              >
+            </h4>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            Browse and join discussions with Discord
+          </p>
         </a>
       </div>
     </div>
