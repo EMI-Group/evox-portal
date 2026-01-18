@@ -1,11 +1,160 @@
 ---
-import Welcome from '../components/Welcome.astro';
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Code } from 'astro:components';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// 导入原始 Python 代码文件 (使用 ?raw 将其作为字符串导入)
+import codeSingleObj from '../content/examples/single-obj.py?raw';
+import codeMultiObj from '../content/examples/multi-obj.py?raw';
+import codeNeuro from '../content/examples/neuroevolution.py?raw';
+
+// 1. 获取并处理数据
+const allBlogs = await getCollection('blogs');
+// 按日期降序排序并取前3
+const latestNews = allBlogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+
+const allLibs = await getCollection('libs');
+// 取前3个生态项目
+const ecosystem = allLibs.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="EvoX - GPU-accelerated Evolutionary Computation">
+  
+  <div class="relative bg-gray-900 text-white py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-black/50 z-0"></div>
+    
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">Evolutionary Computation for Everyone</h1>
+      <p class="text-2xl md:text-3xl font-light text-gray-300 mb-10">EvoX is All You Need</p>
+      
+      <a href="https://evox.readthedocs.io/en/latest/tutorial/index.html" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200">
+        Get started
+      </a>
+    </div>
+  </div>
+
+  <div class="bg-white py-16">
+    <div class="max-w-[1280px] mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {latestNews.map((post) => (
+          <div class="flex flex-col gap-2">
+            <h3 class="text-xl font-bold text-gray-900">{post.data.title}</h3>
+            <p class="text-gray-600 text-sm line-clamp-3">
+              {post.data.summary || "Click to read more details about this release."}
+            </p>
+            <a href={`/blog/${post.id}`} class="text-teal-600 hover:text-teal-800 font-medium text-sm mt-auto">
+              Read more
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-[1280px] mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-teal-700 mb-12">&lt;&lt; Key Features &gt;&gt;</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+          <h3 class="text-lg font-bold mb-3">🚀 Ultra Performance</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>● Supports acceleration on heterogeneous hardware (CPUs & GPUs), achieving over <b>100x</b> speedups.</li>
+            <li>● Integrated distributed workflows scaling across multiple nodes.</li>
+          </ul>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+          <h3 class="text-lg font-bold mb-3">🌐 All-in-One Solution</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>● Includes <b>50+ algorithms</b> for single- and multi-objective optimization.</li>
+            <li>● Hierarchical architecture for meta learning, hyperparameter optimization, and neuroevolution.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+          <h3 class="text-lg font-bold mb-3">🛠️ Easy-to-Use Design</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>● Fully compatible with EvoX ecosystem with a tailored programming model.</li>
+            <li>● Effortless setup with one-click installation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white py-16">
+    <div class="max-w-[1280px] mx-auto px-4 flex flex-col gap-24">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-3xl font-medium text-gray-900">Single-objective Optimization</h2>
+          <div class="rounded-lg overflow-hidden shadow-lg border border-gray-200">
+            <Code code={codeSingleObj} lang="python" theme="github-dark" />
+          </div>
+        </div>
+        <div class="h-full min-h-[400px] flex items-center justify-center bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 relative">
+            <p class="text-gray-500 font-medium">Visualization Placeholder (Plotly Chart)</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-3xl font-medium text-gray-900">Multi-objective Optimization</h2>
+          <div class="rounded-lg overflow-hidden shadow-lg border border-gray-200">
+             <Code code={codeMultiObj} lang="python" theme="github-dark" />
+          </div>
+        </div>
+        <div class="h-full min-h-[400px] flex items-center justify-center bg-gray-100 rounded-lg border-2 border-dashed border-gray-300">
+            <p class="text-gray-500 font-medium">Visualization Placeholder (HTML Iframe)</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-3xl font-medium text-gray-900">Neuroevolution</h2>
+          <div class="rounded-lg overflow-hidden shadow-lg border border-gray-200">
+            <Code code={codeNeuro} lang="python" theme="github-dark" />
+          </div>
+        </div>
+        <div class="h-full min-h-[400px] flex items-center justify-center bg-gray-100 rounded-lg border-2 border-dashed border-gray-300">
+             <p class="text-gray-500 font-medium">Visualization Placeholder (Brax Render)</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bg-gray-50 py-16 border-t border-gray-200">
+    <div class="max-w-[1280px] mx-auto px-4">
+      <div class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Ecosystem</h2>
+        <h5 class="text-teal-600 font-medium mb-4">Feature Projects</h5>
+        <p class="text-xl text-gray-600">Explore a rich ecosystem of libraries, tools, and more to support development.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {ecosystem.map((item) => (
+          <a href={item.data.url} target="_blank" class="block group">
+            <div class="bg-white p-6 rounded-lg shadow-sm group-hover:shadow-md transition-shadow border border-gray-100 h-full">
+              <h4 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
+                {item.data.title}
+              </h4>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {item.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="mt-8 text-center md:text-left">
+          <a href="https://emigroup.tech/index.php?m=home&c=Lists&a=index&tid=1" class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1">
+             See all Projects <span>&rarr;</span>
+          </a>
+      </div>
+    </div>
+  </div>
+
 </Layout>

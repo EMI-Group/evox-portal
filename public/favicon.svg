@@ -1,9 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
-    <style>
-        path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { fill: #FFF; }
-        }
-    </style>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="b" data-name="图层 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 126.57 120">
+    <defs>
+        <style>
+            .g {
+            fill: url(#f);
+            }
+
+            .h {
+            fill: url(#e);
+            }
+
+            .i {
+            fill: url(#d);
+            }
+        </style>
+        <linearGradient id="d" data-name="未命名的渐变 4" x1="6.37" y1="36.57" x2="121.75" y2="88.32" gradientTransform="translate(0 122) scale(1 -1)" gradientUnits="userSpaceOnUse">
+            <stop offset=".31" stop-color="#0071bc"/>
+            <stop offset=".63" stop-color="#22b573"/>
+        </linearGradient>
+        <linearGradient id="e" data-name="未命名的渐变 2" x1="11.16" y1="8.89" x2="47.24" y2="31.77" gradientTransform="translate(0 122) scale(1 -1)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2e3192"/>
+            <stop offset="1" stop-color="#29abe2"/>
+        </linearGradient>
+        <linearGradient id="f" data-name="未命名的渐变 3" x1="80.14" y1="91.92" x2="118.69" y2="120.96" gradientTransform="translate(0 122) scale(1 -1)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#00a99d"/>
+            <stop offset="1" stop-color="#8cc63f"/>
+        </linearGradient>
+    </defs>
+    <g id="c" data-name="图层 1">
+        <path class="i" d="m67.08,62.11c-7.46-5.39-14.16-11.76-19.91-18.95h10.7c.9-2.41,1.8-4.74,2.71-7h-18.29c-1.62-2.62-3.05-5.35-4.28-8.17h25.97c1.06-2.41,2.1-4.81,3.14-7h-31.65c-.78-2.67-1.35-5.4-1.7-8.17h37.42c1.42-2.66,2.78-4.98,4.05-6.9v-.1h-41.81c.03-1.96.26-3.92.69-5.83H0s14.29,38.78,50.51,62.41c6.47,4.21,12.4,9.2,17.64,14.86h-2.09c-.91,2.41-1.82,4.74-2.73,7h10.62c1.94,2.62,3.73,5.34,5.35,8.17h-19.38c-1.07,2.41-2.13,4.81-3.17,7h26.13c1.2,2.66,2.24,5.39,3.14,8.17h-33.38c-1.28,2.4-2.68,4.74-4.2,7h39.43c.38,1.73.64,3.49.79,5.26h37.81s-17.98-27.12-59.38-57.75Z"/>
+        <path class="h" d="m0,120h35.11c-2.92-1.9-5.32-4.5-6.97-7.58-4.81-9.16,5.65-30.86,14.59-41.41C31.01,84.37,11.7,106.64,0,120Z"/>
+        <path class="g" d="m78.3,55.32C93.03,38.48,111.83,16.84,126.57,0l-38.35.14c1.33.76,2.52,1.75,3.5,2.92,11.7,14.02-11.69,49.6-13.42,52.25Z"/>
+    </g>
 </svg>

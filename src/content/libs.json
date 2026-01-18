@@ -1,0 +1,50 @@
+[
+  {
+    "id": "evox",
+    "title": "EvoX",
+    "description": "A distributed GPU-accelerated evolutionary computation framework compatible with PyTorch.",
+    "url": "https://github.com/EMI-Group/evox"
+  },
+  {
+    "id": "evogit",
+    "title": "EvoGit",
+    "description": "A decentralized multi-agent framework that reimagines software development as a collaborative, evolutionary process.",
+    "url": "https://github.com/BillHuang2001/evogit"
+  },
+  {
+    "id": "evogp",
+    "title": "EvoGP",
+    "description": "A fully GPU-accelerated Tree-based Genetic Programming (TGP) framework built on PyTorch.",
+    "url": "https://github.com/EMI-Group/evogp"
+  },
+  {
+    "id": "evorl",
+    "title": "EvoRL",
+    "description": "A fully GPU-acclerated framework for Evolutionary Reinforcement Learning.",
+    "url": "https://github.com/EMI-Group/evorl"
+  },
+  {
+    "id": "evomo",
+    "title": "EvoMO",
+    "description": "A GPU-accelerated library for evolutionary multiobjective optimization (EMO) via advanced tensorization.",
+    "url": "https://github.com/EMI-Group/evomo"
+  },
+  {
+    "id": "tensorneat",
+    "title": "TensorNEAT",
+    "description": "A JAX-based libaray for NeuroEvolution of Augmenting Topologies (NEAT) algorithms.",
+    "url": "https://github.com/EMI-Group/tensorneat"
+  },
+  {
+    "id": "metade",
+    "title": "MetaDE",
+    "description": "An advanced evolutionary framework that dynamically optimizes the strategies and hyperparameters of Differential Evolution.",
+    "url": "https://github.com/EMI-Group/metade"
+  },
+  {
+    "id": "evoxbench",
+    "title": "EvoXBench",
+    "description": "A platfrom offering instant benchmarking of evolutionary multi-objective optimization (EMO) algorithms in neural architecture search (NAS).",
+    "url": "https://github.com/EMI-Group/evoxbench"
+  }
+]
