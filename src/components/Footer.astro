@@ -1,98 +1,100 @@
 ---
 import { Icon } from "astro-icon/components";
+import logo from "../assets/logo.png";
+
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+<footer class="bg-[#e6e6e6] border-t border-gray-300 pt-16 pb-8">
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-16">
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Docs</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">Docs</h2>
         <p class="text-gray-600 mb-4 text-sm">
           Access comprehensive developer documentation for EvoX
         </p>
         <a
           href="https://evox.readthedocs.io/en/latest/"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-600 font-semibold hover:text-teal-700 flex items-center gap-1 transition-colors"
         >
           View Docs <span>&rarr;</span>
         </a>
       </div>
 
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Tutorials</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">Tutorials</h2>
         <p class="text-gray-600 mb-4 text-sm">
           Get in-depth tutorials for beginners and advanced developers
         </p>
         <a
           href="https://evox.readthedocs.io/en/latest/example/index.html"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-600 font-semibold hover:text-teal-700 flex items-center gap-1 transition-colors"
         >
           View Tutorials <span>&rarr;</span>
         </a>
       </div>
 
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Resources</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">Resources</h2>
         <p class="text-gray-600 mb-4 text-sm">
           Find development resources and get your questions answered
         </p>
         <a
           href="https://github.com/EMI-Group"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-600 font-semibold hover:text-teal-700 flex items-center gap-1 transition-colors"
         >
           View Resources <span>&rarr;</span>
         </a>
       </div>
     </div>
 
-    <hr class="border-gray-200 my-8" />
+    <hr class="border-gray-300 my-8" />
 
     <div class="flex flex-col gap-8">
       <div class="flex flex-row justify-between items-center">
         <a href="/" class="opacity-80 hover:opacity-100 transition-opacity">
-          <img src="/favicon.svg" alt="EvoX" class="w-10 h-10" />
+          <img src={logo.src} alt="EvoX" class="w-10 h-10" />
         </a>
 
-        <ul class="flex space-x-10">
+        <ul class="flex space-x-8">
           <li>
             <a
               href="https://www.facebook.com/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-[#1877F2] transition-colors"
+              class="text-gray-500 hover:text-[#1877F2] transition-colors"
               aria-label="Facebook"
             >
-              <Icon name="simple-icons:facebook" class="w-10 h-10" />
+              <Icon name="simple-icons:facebook" class="w-8 h-8" />
             </a>
           </li>
           <li>
             <a
               href="https://www.x.com/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-black transition-colors"
+              class="text-gray-500 hover:text-black transition-colors"
               aria-label="X"
             >
-              <Icon name="simple-icons:x" class="w-10 h-10" />
+              <Icon name="simple-icons:x" class="w-8 h-8" />
             </a>
           </li>
           <li>
             <a
               href="https://www.xiaohongshu.com/user/profile/67a5b52300000000040300b1"
               target="_blank"
-              class="text-gray-400 hover:text-[#FF2442] transition-colors"
+              class="text-gray-500 hover:text-[#FF2442] transition-colors"
               aria-label="RedNote"
             >
-              <Icon name="simple-icons:xiaohongshu" class="w-10 h-10" />
+              <Icon name="simple-icons:xiaohongshu" class="w-8 h-8" />
             </a>
           </li>
           <li>
             <a
               href="https://www.zhihu.com/people/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-[#0084FF] transition-colors"
+              class="text-gray-500 hover:text-[#0084FF] transition-colors"
               aria-label="Zhihu"
             >
-              <Icon name="simple-icons:zhihu" class="w-10 h-10" />
+              <Icon name="simple-icons:zhihu" class="w-8 h-8" />
             </a>
           </li>
         </ul>

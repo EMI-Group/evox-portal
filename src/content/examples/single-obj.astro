@@ -30,8 +30,20 @@
         return Plotly.addFrames(cso_plot, subdata);
       })
       .then(() => {
-        // @ts-ignore
-        Plotly.animate(cso_plot, null);
+        // 循环播放动画
+        function playAnimation() {
+          // @ts-ignore
+          Plotly.animate(cso_plot, null, {
+            frame: { duration: 200, redraw: false },
+            transition: { duration: 200 },
+            fromcurrent: false,
+            mode: 'immediate'
+          }).then(() => {
+            // 动画完成后延迟一下再重新开始
+            setTimeout(playAnimation, 2000);
+          });
+        }
+        playAnimation();
       });
   }
 </script>

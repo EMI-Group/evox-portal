@@ -1,313 +1,292 @@
 ---
-// src/pages/index.astro
-import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { Code } from "astro:components";
-import { Icon } from "astro-icon/components";
-import bannerImage from "../assets/evox_banner.jpg";
+import ScrollLayout from "../layouts/ScrollLayout.astro";
+import ExampleCarousel from "../components/ExampleCarousel.astro";
+import FeatureSections from "../components/FeatureSections.astro";
+import EcosystemSection from "../components/EcosystemSection.astro";
+import "../styles/scroll-animations.css";
 
-// 导入原始 Python 代码文件 (使用 ?raw 将其作为字符串导入)
+// Import logo assets
+import logo from "../assets/logo.png";
+import logoText from "../assets/logo_text.png";
+import tagDown from "../assets/tag_down.png";
+
+// Import raw Python code files
 import codeSingleObj from "../content/examples/single-obj.py?raw";
 import codeMultiObj from "../content/examples/multi-obj.py?raw";
 import codeNeuro from "../content/examples/neuroevolution.py?raw";
 
+// Import visualization components
 import SingleObj from "../content/examples/single-obj.astro";
 import MultiObj from "../content/examples/multi-obj.astro";
 import Neuroevolution from "../content/examples/neuroevolution.astro";
-
-// 1. 获取并处理数据
-const allBlogs = await getCollection("blogs");
-// 按日期降序排序并取前3
-const latestBlogs = allBlogs
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
-
-const allLibs = await getCollection("libs");
-// 取前3个生态项目
-const ecosystem = allLibs.slice(0, 3);
 ---
 
-<Layout title="EvoX - GPU-accelerated Evolutionary Computation">
-  <div
-    class="relative bg-gray-900 text-white py-48 overflow-hidden bg-cover bg-center xl:bg-[length:100%_100%]"
-    style={`background-image: url(${bannerImage.src});`}
-  >
-    <div class="absolute inset-0 bg-black/50 z-0"></div>
+<ScrollLayout title="EvoX - Evolutionary Computation for Everyone">
+  <!-- Scrollable container: total height 300vh -->
+  <div class="scroll-container">
+    <!-- Background layer: for background color transition -->
+    <div class="background-layer" id="bg-layer"></div>
 
-    <div class="relative z-10 container mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">
-        Evolutionary Computation for Everyone
-      </h1>
-      <p class="text-2xl md:text-3xl font-light text-gray-300 mb-10">
-        EvoX is All You Need
-      </p>
-
-      <a
-        href="https://evox.readthedocs.io/en/latest/tutorial/index.html"
-        class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200"
-      >
-        Get started
-      </a>
-    </div>
-  </div>
-
-  <div class="bg-white py-16">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-        {
-          latestBlogs.map((post) => (
-            <div class="flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-gray-900">{post.data.title}</h3>
-              <p class="text-gray-600 text-sm line-clamp-3">
-                {post.data.summary ||
-                  "Click to read more details about this release."}
-              </p>
-              <a
-                href={`/blogs/${post.id}`}
-                class="text-teal-600 hover:text-teal-800 font-medium text-sm mt-auto"
-              >
-                Read more
-              </a>
-            </div>
-          ))
-        }
-      </div>
-
-      <div class="flex justify-start">
-        <a
-          href="/blogs"
-          class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1 group"
-        >
-          Sell all Blog & News <span>&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-teal-700 mb-12">
-        &lt;&lt; Key Features &gt;&gt;
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🚀 Ultra Performance</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Supports acceleration on heterogeneous hardware (CPUs & GPUs),
-              achieving over <b>100x</b> speedups.
-            </li>
-            <li>
-              ● Integrated distributed workflows scaling across multiple nodes.
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🌐 All-in-One Solution</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Includes <b>50+ algorithms</b> for single- and multi-objective optimization.
-            </li>
-            <li>
-              ● Hierarchical architecture for meta learning, hyperparameter
-              optimization, and neuroevolution.
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🛠️ Easy-to-Use Design</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Fully compatible with EvoX ecosystem with a tailored programming
-              model.
-            </li>
-            <li>● Effortless setup with one-click installation.</li>
-          </ul>
+    <!-- Hero Section: Logo and brand name - fixed in viewport -->
+    <section class="hero-section">
+      <div class="logo-wrapper" id="logo-wrapper">
+        <img src={logo.src} alt="EvoX Logo" class="logo-large" id="logo-img" />
+        <img src={logoText.src} alt="evox" class="brand-name-img" id="brand-name" />
+        <div class="tagline" id="tagline">
+          <p>Evolutionary Computation for Everyone</p>
+          <p>EvoX is All You Need</p>
         </div>
       </div>
+    </section>
+
+    <!-- Explore Section: "Explore evox" - fixed in viewport -->
+    <section class="explore-section" id="explore-section">
+      <h2>Explore</h2>
+      <img src={logoText.src} alt="evox" class="explore-logo" />
+    </section>
+
+    <!-- Scroll down hint arrow -->
+    <div class="scroll-hint" id="scroll-hint">
+      <img src={tagDown.src} alt="Scroll down" class="scroll-arrow" />
     </div>
+
+    <!-- Content Section: Carousel - in document flow -->
+    <section class="content-section" id="content-section">
+      <div class="content-grid">
+        <ExampleCarousel codeSingleObj={codeSingleObj} codeMultiObj={codeMultiObj} codeNeuro={codeNeuro}>
+          <SingleObj slot="visual-single" />
+          <MultiObj slot="visual-multi" />
+          <Neuroevolution slot="visual-neuro" />
+        </ExampleCarousel>
+      </div>
+    </section>
+
+    <!-- Feature Sections -->
+    <section class="features-section">
+      <FeatureSections />
+    </section>
+
+    <!-- Ecosystem Section -->
+    <section class="features-section">
+      <EcosystemSection />
+    </section>
   </div>
+</ScrollLayout>
 
-  <div class="bg-white py-16">
-    <div class="max-w-[1280px] mx-auto px-4 flex flex-col gap-24">
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Single-objective Optimization
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
-          >
-            <Code
-              code={codeSingleObj}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <SingleObj />
-          </div>
-        </div>
-      </div>
+<script>
+  // Get elements
+  const header = document.getElementById('main-header');
+  const logoWrapper = document.getElementById('logo-wrapper');
+  const logoImg = document.getElementById('logo-img');
+  const brandName = document.getElementById('brand-name');
+  const tagline = document.getElementById('tagline');
+  const exploreSection = document.getElementById('explore-section');
+  const contentSection = document.getElementById('content-section');
+  const bgLayer = document.getElementById('bg-layer');
+  const scrollHint = document.getElementById('scroll-hint');
 
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Multi-objective Optimization
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
-          >
-            <Code
-              code={codeMultiObj}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <MultiObj />
-          </div>
-        </div>
-      </div>
+  // Stage state
+  let currentStage = 1; // 1 or 2
+  let isTransitioning = false;
 
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Neuroevolution
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
-          >
-            <Code
-              code={codeNeuro}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <Neuroevolution />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  // Scroll accumulator
+  let scrollAccumulator = 0;
+  const STAGE_1_TO_2_THRESHOLD = 50; // Stage 1 → Stage 2: very low, light scroll
 
-  <div class="bg-gray-50 py-16 border-t border-gray-200">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="mb-10">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Ecosystem</h2>
-        <h5 class="text-teal-600 font-medium mb-4">Feature Projects</h5>
-        <p class="text-xl text-gray-600">
-          Explore a rich ecosystem of libraries, tools, and more to support
-          development.
-        </p>
-      </div>
+  // Viewport height
+  let vh = window.innerHeight;
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {
-          ecosystem.map((item) => (
-            <a href={item.data.url} target="_blank" class="block group">
-              <div class="bg-white p-6 rounded-lg shadow-sm group-hover:shadow-md transition-shadow border border-gray-100 h-full">
-                <h4 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
-                  {item.data.title}
-                </h4>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  {item.data.description}
-                </p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
+  window.addEventListener('resize', () => {
+    vh = window.innerHeight;
+  });
 
-      <div class="mt-8 text-center md:text-left">
-        <a
-          href="/libs"
-          class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1"
-        >
-          See all Projects <span>&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
+  // Helper functions
+  function clamp(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
+  }
 
-  <div class="bg-white py-24 border-t border-gray-100">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="mb-12">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4">Community</h2>
-        <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
-          Join the EvoX developer community to contribute, learn, and get your
-          questions answered.
-        </p>
-      </div>
+  function lerp(start: number, end: number, progress: number): number {
+    return start + (end - start) * progress;
+  }
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- QQ Group -->
-        <a
-          href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717"
-          target="_blank"
-          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-        >
-          <div class="flex items-center gap-4 mb-5">
-            <div
-              class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm"
-            >
-              <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
-            </div>
-            <h4 class="text-2xl font-bold text-gray-900">
-              EvoX <span
-                class="text-teal-600 group-hover:text-teal-700 font-extrabold"
-                >QQ群</span
-              >
-            </h4>
-          </div>
-          <p class="text-gray-600 text-lg leading-relaxed">
-            浏览并加入QQ群讨论
-          </p>
-        </a>
+  // Stage 1 initial state
+  function setStage1() {
+    if (logoWrapper) {
+      logoWrapper.style.transform = 'translate(0, 0) scale(1)';
+      logoWrapper.style.opacity = '1';
+    }
+    if (tagline) tagline.style.opacity = '1';
+    if (header) {
+      header.style.opacity = '0';
+      header.style.transform = 'translateY(-100%)';
+    }
+    if (exploreSection) exploreSection.style.opacity = '0';
+    if (bgLayer) bgLayer.style.opacity = '0';
+    if (scrollHint) scrollHint.style.opacity = '0';
+  }
 
-        <!-- Discord -->
-        <a
-          href="https://discord.com/invite/Vbtgcpy7G4"
-          target="_blank"
-          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-        >
-          <div class="flex items-center gap-4 mb-5">
-            <div
-              class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm"
-            >
-              <Icon name="simple-icons:discord" class="h-6 w-6" />
-            </div>
-            <h4 class="text-2xl font-bold text-gray-900">
-              EvoX <span
-                class="text-indigo-600 group-hover:text-indigo-700 font-extrabold"
-                >Discord</span
-              >
-            </h4>
-          </div>
-          <p class="text-gray-600 text-lg leading-relaxed">
-            Browse and join discussions with Discord
-          </p>
-        </a>
-      </div>
-    </div>
-  </div>
-</Layout>
+  // Transition to Stage 2 (triggered by click or light scroll)
+  function transitionToStage2() {
+    if (currentStage !== 1 || isTransitioning) return;
+
+    isTransitioning = true;
+    currentStage = 2;
+    scrollAccumulator = 0;
+
+    const duration = 800;
+
+    // Logo moves to top-left and fades out
+    if (logoWrapper) {
+      logoWrapper.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      logoWrapper.style.transform = 'translate(-40vw, -42vh) scale(0.4)';
+      logoWrapper.style.opacity = '0';
+    }
+
+    // Tagline fades out
+    if (tagline) {
+      tagline.style.transition = `opacity ${duration}ms ease`;
+      tagline.style.opacity = '0';
+    }
+
+    // Header shows
+    if (header) {
+      header.style.transition = `all ${duration}ms ease`;
+      header.style.opacity = '1';
+      header.style.transform = 'translateY(0)';
+    }
+
+    // "Explore" fades in
+    setTimeout(() => {
+      if (exploreSection) {
+        exploreSection.style.transition = `all ${duration * 0.6}ms ease`;
+        exploreSection.style.opacity = '1';
+        exploreSection.style.transform = 'translate(-50%, -50%)';
+      }
+      // Scroll hint arrow fades in
+      if (scrollHint) {
+        scrollHint.style.opacity = '1';
+      }
+    }, duration * 0.3);
+
+    setTimeout(() => {
+      isTransitioning = false;
+      // Clear transitions
+      if (logoWrapper) logoWrapper.style.transition = 'none';
+      if (tagline) tagline.style.transition = 'none';
+      if (header) header.style.transition = 'none';
+      if (exploreSection) exploreSection.style.transition = 'none';
+
+      // Unlock scrolling, enter Stage 2 scroll animation
+      document.body.style.overflow = 'auto';
+    }, duration);
+  }
+
+  // Stage 2 scroll-driven animation
+  function handleStage2Scroll() {
+    if (currentStage !== 2 || isTransitioning) return;
+
+    const scrollY = window.scrollY;
+    // Scroll progress: 0 to 1 (based on 100vh scroll distance)
+    const progress = clamp(scrollY / vh, 0, 1);
+
+    // "Explore" text moves up with the page and gradually fades out
+    if (exploreSection) {
+      // Move up from center (-50%) of screen
+      const translateY = lerp(-50, -100, progress);
+      exploreSection.style.transform = `translate(-50%, ${translateY}%)`;
+      // Fade out with scroll (complete at 0-60% progress)
+      const opacity = 1 - clamp(progress / 0.6, 0, 1);
+      exploreSection.style.opacity = opacity.toString();
+    }
+
+    // Scroll hint arrow fades out (disappears faster)
+    if (scrollHint) {
+      const arrowOpacity = 1 - clamp(progress / 0.3, 0, 1);
+      scrollHint.style.opacity = arrowOpacity.toString();
+    }
+
+    // Background gradually turns gray
+    if (bgLayer) {
+      bgLayer.style.opacity = progress.toString();
+    }
+  }
+
+  // Stage 1 interaction handling
+  function handleStage1Interaction(deltaY: number) {
+    if (currentStage !== 1 || isTransitioning) return;
+
+    if (deltaY > 0) {
+      scrollAccumulator += Math.abs(deltaY);
+
+      if (scrollAccumulator > STAGE_1_TO_2_THRESHOLD) {
+        transitionToStage2();
+      }
+    }
+  }
+
+  // Wheel event
+  function handleWheel(e: WheelEvent) {
+    if (currentStage === 1) {
+      e.preventDefault();
+      handleStage1Interaction(e.deltaY);
+    } else if (currentStage === 2) {
+      // Stage 2: normal scroll, update animation simultaneously
+      handleStage2Scroll();
+    }
+  }
+
+  // Scroll event (for continuous animation in Stage 2)
+  function handleScroll() {
+    if (currentStage === 2) {
+      handleStage2Scroll();
+    }
+  }
+
+  // Click event (quick trigger for first stage transition)
+  function handleClick(e: MouseEvent) {
+    if (currentStage === 1 && !isTransitioning) {
+      transitionToStage2();
+    }
+  }
+
+  // Touch event support
+  let touchStartY = 0;
+
+  function handleTouchStart(e: TouchEvent) {
+    touchStartY = e.touches[0].clientY;
+  }
+
+  function handleTouchMove(e: TouchEvent) {
+    if (currentStage === 1) {
+      e.preventDefault();
+      const touchEndY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+
+      if (deltaY > 10) {
+        handleStage1Interaction(deltaY);
+      }
+      touchStartY = touchEndY;
+    }
+  }
+
+  // Add event listeners
+  window.addEventListener('wheel', handleWheel, { passive: false });
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('click', handleClick);
+  window.addEventListener('touchstart', handleTouchStart, { passive: true });
+  window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+  // Initialize
+  setStage1();
+  // Stage 1 locks scrolling
+  document.body.style.overflow = 'hidden';
+
+  // Cleanup
+  window.addEventListener('beforeunload', () => {
+    window.removeEventListener('wheel', handleWheel);
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('click', handleClick);
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchmove', handleTouchMove);
+  });
+</script>

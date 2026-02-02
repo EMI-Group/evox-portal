@@ -1,0 +1,170 @@
+---
+import { Code } from "astro:components";
+import tag1 from "../assets/tag_1.png";
+import tag2 from "../assets/tag_2.png";
+import tag3 from "../assets/tag_3.png";
+
+interface Props {
+  codeSingleObj: string;
+  codeMultiObj: string;
+  codeNeuro: string;
+}
+
+const { codeSingleObj, codeMultiObj, codeNeuro } = Astro.props;
+
+const examples = [
+  { title: "Single-objective Optimization", code: codeSingleObj, icon: tag1 },
+  { title: "Multi-objective Optimization", code: codeMultiObj, icon: tag2 },
+  { title: "Neuroevolution", code: codeNeuro, icon: tag3 },
+];
+---
+
+<div class="example-carousel" id="example-carousel">
+  <!-- Tab Bar -->
+  <div class="flex justify-between mb-8 md:mb-12">
+    {examples.map((ex, i) => (
+      <button
+        class={`carousel-tab flex flex-col items-center gap-2 md:gap-4 px-4 md:px-8 py-3 md:py-5 transition-all duration-500 ${i === 0 ? 'active' : ''}`}
+        data-index={i}
+      >
+        <img
+          src={ex.icon.src}
+          alt=""
+          class="tab-arrow w-10 h-10 md:w-16 md:h-16 object-contain transition-all duration-500"
+        />
+        <span class="tab-label text-base md:text-2xl font-medium text-gray-400 transition-all duration-500">{ex.title}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Panel 0: Single-objective Optimization -->
+  <div class="carousel-panel active" data-panel="0">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[20rem] md:h-[28rem] bg-[#0d1117] order-2 lg:order-1">
+        <Code code={codeSingleObj} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+      </div>
+      <div class="h-[20rem] md:h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative order-1 lg:order-2">
+        <slot name="visual-single" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 1: Multi-objective Optimization -->
+  <div class="carousel-panel" data-panel="1">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[20rem] md:h-[28rem] bg-[#0d1117] order-2 lg:order-1">
+        <Code code={codeMultiObj} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+      </div>
+      <div class="h-[20rem] md:h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative order-1 lg:order-2">
+        <slot name="visual-multi" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 2: Neuroevolution -->
+  <div class="carousel-panel" data-panel="2">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+      <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[20rem] md:h-[28rem] bg-[#0d1117] order-2 lg:order-1">
+        <Code code={codeNeuro} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+      </div>
+      <div class="h-[20rem] md:h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative order-1 lg:order-2">
+        <slot name="visual-neuro" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Panel animation */
+  .carousel-panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .carousel-panel.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Tab default state - arrow hidden */
+  .carousel-tab .tab-arrow {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transition: all 0.4s ease;
+  }
+  .carousel-tab .tab-label {
+    color: #9ca3af;
+    transform: scale(1);
+    transition: all 0.4s ease;
+  }
+
+  /* Tab active state - arrow visible, title enlarged */
+  .carousel-tab.active .tab-arrow {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  .carousel-tab.active .tab-label {
+    color: #111827;
+    font-weight: 600;
+    transform: scale(1.15);
+  }
+
+  /* Tab hover state */
+  .carousel-tab:hover .tab-label {
+    color: #374151;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.carousel-tab');
+  const panels = document.querySelectorAll('.carousel-panel');
+  let currentIndex = 0;
+  let autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+
+  function switchTo(index: number) {
+    if (index === currentIndex) return;
+
+    currentIndex = index;
+
+    // Update tabs
+    tabs.forEach(t => t.classList.remove('active'));
+    tabs[index]?.classList.add('active');
+
+    // Update panels
+    panels.forEach(p => p.classList.remove('active'));
+    requestAnimationFrame(() => {
+      panels[index]?.classList.add('active');
+    });
+  }
+
+  function startAutoPlay() {
+    if (autoPlayTimer) clearInterval(autoPlayTimer);
+    autoPlayTimer = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % tabs.length;
+      switchTo(nextIndex);
+    }, 8000);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  // Tab hover switching
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('mouseenter', () => {
+      stopAutoPlay();
+      switchTo(index);
+    });
+    tab.addEventListener('mouseleave', () => {
+      startAutoPlay();
+    });
+  });
+
+  // Start auto-play
+  startAutoPlay();
+</script>

@@ -629,48 +629,16 @@ export const layout = {
   sliders: [
     {
       currentvalue: { prefix: "Generation: " },
-      len: 0.8,
-      pad: { b: 1, t: 10 },
+      len: 1,
+      pad: { b: 10, t: 30 },
       steps: steps,
-      x: 0.2,
+      x: 0,
       xanchor: "left",
       y: 0,
       yanchor: "top",
     },
   ],
-  updatemenus: [
-    {
-      buttons: [
-        {
-          args: [
-            null,
-            {
-              frame: { duration: 200, redraw: false },
-              fromcurrent: true,
-              transition: { duration: 200, easing: "linear" },
-            },
-          ],
-          label: "Play",
-          method: "animate",
-        },
-        {
-          args: [
-            [null],
-            { frame: { duration: 0, redraw: false }, mode: "immediate" },
-          ],
-          label: "Pause",
-          method: "animate",
-        },
-      ],
-      direction: "left",
-      pad: { r: 10, t: 30 },
-      type: "buttons",
-      x: 0.2,
-      xanchor: "right",
-      y: 0,
-      yanchor: "top",
-    },
-  ],
+  updatemenus: [],
   xaxis: { autorange: false, range: [null, null] },
   yaxis: { autorange: false, range: [null, null] },
   template: {
@@ -857,7 +825,7 @@ export const layout = {
       hovermode: "closest",
       hoverlabel: { align: "left" },
       paper_bgcolor: "white",
-      plot_bgcolor: "#E5ECF6",
+      plot_bgcolor: "white",
       polar: {
         bgcolor: "#E5ECF6",
         angularaxis: { gridcolor: "white", linecolor: "white", ticks: "" },
@@ -888,20 +856,20 @@ export const layout = {
         ],
       },
       xaxis: {
-        gridcolor: "white",
-        linecolor: "white",
+        gridcolor: "#e5e7eb",
+        linecolor: "#e5e7eb",
         ticks: "",
         title: { standoff: 15 },
-        zerolinecolor: "white",
+        zerolinecolor: "#d1d5db",
         automargin: true,
         zerolinewidth: 2,
       },
       yaxis: {
-        gridcolor: "white",
-        linecolor: "white",
+        gridcolor: "#e5e7eb",
+        linecolor: "#e5e7eb",
         ticks: "",
         title: { standoff: 15 },
-        zerolinecolor: "white",
+        zerolinecolor: "#d1d5db",
         automargin: true,
         zerolinewidth: 2,
       },

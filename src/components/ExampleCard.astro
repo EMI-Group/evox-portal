@@ -1,0 +1,32 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+  title: string;
+  code: string;
+  delay?: string;
+}
+
+const { title, code } = Astro.props;
+---
+
+<div class="example-card">
+  <h3 class="text-2xl font-medium text-gray-900 mb-6">{title}</h3>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div
+      class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
+    >
+      <Code
+        code={code}
+        lang="python"
+        theme="github-dark"
+        class="p-4 md:p-6 min-h-full"
+      />
+    </div>
+    <div
+      class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
+    >
+      <slot />
+    </div>
+  </div>
+</div>

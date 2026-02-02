@@ -1,6 +1,8 @@
 ---
 import braxData from "./brax-data.json";
 
+const braxDataJson = JSON.stringify(braxData);
+
 const htmlContent = `
 <!doctype html>
 <html lang="en">
@@ -27,7 +29,7 @@ const htmlContent = `
     <div id="brax-viewer"></div>
     <script type="module">
       import { Viewer } from "viewer";
-      const system = ${JSON.stringify(braxData)};
+      const system = ${braxDataJson};
       const brax = document.getElementById("brax-viewer");
       if (brax) {
         if (system.geoms && system.geoms.world && system.geoms.world[0]) {
