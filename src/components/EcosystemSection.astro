@@ -1,5 +1,9 @@
 ---
 import tagRight from "../assets/tag_right.png";
+import { getCollection } from "astro:content";
+
+const allLibs = await getCollection("libs");
+const ecosystem = allLibs.slice(0, 3);
 ---
 
 <div class="ecosystem-wrapper">
@@ -30,18 +34,19 @@ import tagRight from "../assets/tag_right.png";
     <p class="section-description">Explore a rich ecosystem of libraries, tools, and more to support development.</p>
 
     <div class="project-grid">
-      <a href="https://github.com/EMI-Group/evox" class="project-card" target="_blank" rel="noopener noreferrer">
-        <h3>EvoX</h3>
-        <p>A distributed GPU-accelerated evolutionary computation framework compatible with PyTorch.</p>
-      </a>
-      <a href="https://github.com/EMI-Group/evogit" class="project-card" target="_blank" rel="noopener noreferrer">
-        <h3>EvoGit</h3>
-        <p>A cloud-centric multi-agent framework that reimagines software development as a collaborative, evolutionary process.</p>
-      </a>
-      <a href="https://github.com/EMI-Group/evogp" class="project-card" target="_blank" rel="noopener noreferrer">
-        <h3>EvoGP</h3>
-        <p>A fully GPU-accelerated tree-based genetic programming (TGP) framework built on PyTorch.</p>
-      </a>
+      {
+        ecosystem.map((project) => (
+          <a
+            href={project.data.url}
+            class="project-card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+          </a>
+        ))
+      }
     </div>
   </section>
 
