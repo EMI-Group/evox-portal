@@ -25,15 +25,6 @@ const ecosystem = allLibs.slice(0, 3);
 ---
 
 <Layout title="EvoX - GPU-accelerated Evolutionary Computation" hideHeader hideFooter>
-  <!-- ========== Fixed Logo (only visible during animation) ========== -->
-  <img
-    id="fixed-logo"
-    src="/logo.png"
-    alt=""
-    class="fixed pointer-events-none transition-all duration-700 ease-out"
-    style="z-index: 60; opacity: 0;"
-  />
-
   <!-- ========== Navbar (initially hidden) ========== -->
   <div
     id="navbar"
@@ -67,7 +58,7 @@ const ecosystem = allLibs.slice(0, 3);
   <!-- ========== Hero Section ========== -->
   <section
     id="hero-section"
-    class="relative flex flex-col items-center justify-center text-center px-4 transition-all duration-700 ease-out"
+    class="relative flex flex-col items-center justify-center text-center px-4 py-16 transition-all duration-700 ease-out"
     style="min-height: 100vh; background: rgb(22, 27, 48); z-index: 10;"
   >
     <div
@@ -82,7 +73,7 @@ const ecosystem = allLibs.slice(0, 3);
         id="hero-logo"
         src="/logo.png"
         alt="EvoX Logo"
-        class="w-28 h-28 md:w-36 md:h-36 mb-10 mx-auto transition-opacity duration-700"
+        class="h-28 md:h-36 mb-10 mx-auto"
       />
 
       <h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-white mb-5 transition-opacity duration-700">
@@ -197,7 +188,7 @@ const ecosystem = allLibs.slice(0, 3);
       <div class="bg-white py-16">
         <div class="max-w-[1280px] mx-auto px-4">
           <!-- Tab Bar -->
-          <div class="flex justify-between mb-8 h-[5rem] items-end">
+          <div class="flex justify-between mb-8 pt-4 items-end min-h-[5rem]">
             <button
               class="example-tab active flex flex-col items-center gap-2 px-6 cursor-pointer"
               data-tab="0"
@@ -360,6 +351,27 @@ const ecosystem = allLibs.slice(0, 3);
     opacity: 1;
     filter: grayscale(0%);
   }
+
+</style>
+
+<style is:global>
+  /* Disable default root crossfade during view transitions */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(logo-fly) {
+    animation: none;
+    opacity: 0;
+  }
+  ::view-transition-new(logo-fly) {
+    animation: none;
+  }
+  ::view-transition-group(logo-fly) {
+    animation-duration: 700ms;
+    animation-timing-function: ease-out;
+  }
 </style>
 
 <script>
@@ -367,27 +379,20 @@ const ecosystem = allLibs.slice(0, 3);
     const navbar = document.getElementById("navbar");
     const heroSection = document.getElementById("hero-section");
     const heroLogo = document.getElementById("hero-logo") as HTMLImageElement;
-    const fixedLogo = document.getElementById("fixed-logo") as HTMLImageElement;
     const heroGradient = document.getElementById("hero-gradient");
     const scrollIndicator = document.getElementById("scroll-indicator");
     const ctaContent = document.getElementById("cta-content");
 
-    if (!navbar || !heroSection || !heroLogo || !fixedLogo) return;
+    if (!navbar || !heroSection || !heroLogo) return;
 
     const navbarLogoImg = navbar.querySelector("img[alt='X']") as HTMLImageElement;
-    const navbarLogoLink = navbar.querySelector("a[aria-label='EvoX']") as HTMLElement;
-
-    if (!navbarLogoImg || !navbarLogoLink) return;
+    if (!navbarLogoImg) return;
 
     navbarLogoImg.style.opacity = "0";
 
     let isExpanded = false;
     let isAnimating = false;
     const scrollThreshold = 5;
-    const animationDuration = 750;
-
-    let heroPos = { left: 0, top: 0, width: 0, height: 0 };
-    let navPos = { left: 0, top: 0, width: 40, height: 40 };
 
     function lockScroll() {
       document.body.style.overflow = "hidden";
@@ -397,123 +402,84 @@ const ecosystem = allLibs.slice(0, 3);
       document.body.style.overflow = "";
     }
 
-    function measureAll() {
-      const hr = heroLogo.getBoundingClientRect();
-      heroPos = {
-        left: hr.left + hr.width / 2,
-        top: hr.top + hr.height / 2,
-        width: hr.width,
-        height: hr.height,
-      };
+    function applyExpandState() {
+      heroLogo.style.viewTransitionName = "";
+      heroLogo.style.visibility = "hidden";
+      navbarLogoImg.style.opacity = "1";
+      navbarLogoImg.style.viewTransitionName = "logo-fly";
 
-      const prevTransition = navbar.style.transition;
-      const prevTransform = navbar.style.transform;
-      navbar.style.transition = "none";
       navbar.style.transform = "translateY(0)";
-      navbar.offsetHeight;
-
-      const nr = navbarLogoImg.getBoundingClientRect();
-      navPos = {
-        left: nr.left + nr.width / 2,
-        top: nr.top + nr.height / 2,
-        width: nr.width || 40,
-        height: nr.height || 40,
-      };
-
-      navbar.style.transform = prevTransform;
-      navbar.offsetHeight;
-      navbar.style.transition = prevTransition;
+      heroSection.style.minHeight = "60vh";
+      if (heroGradient) heroGradient.style.opacity = "0.3";
+      if (ctaContent) ctaContent.style.opacity = "1";
+      if (scrollIndicator) scrollIndicator.style.opacity = "0";
     }
 
-    // --- Expand ---
+    function applyCollapseState() {
+      navbarLogoImg.style.opacity = "0";
+      navbarLogoImg.style.viewTransitionName = "";
+      heroLogo.style.visibility = "visible";
+      heroLogo.style.viewTransitionName = "logo-fly";
+
+      navbar.style.transform = "translateY(-100%)";
+      heroSection.style.minHeight = "100vh";
+      if (heroGradient) heroGradient.style.opacity = "1";
+      if (ctaContent) ctaContent.style.opacity = "0";
+      if (scrollIndicator) scrollIndicator.style.opacity = "1";
+    }
+
     function expand() {
       if (isExpanded || isAnimating) return;
       isExpanded = true;
       isAnimating = true;
       lockScroll();
 
-      fixedLogo.style.transition = "none";
-      fixedLogo.style.left = heroPos.left + "px";
-      fixedLogo.style.top = heroPos.top + "px";
-      fixedLogo.style.width = heroPos.width + "px";
-      fixedLogo.style.height = heroPos.height + "px";
-      fixedLogo.style.transform = "translate(-50%, -50%)";
-      fixedLogo.style.opacity = "1";
+      heroLogo.style.viewTransitionName = "logo-fly";
 
-      heroLogo.style.transition = "none";
-      heroLogo.style.opacity = "0";
-      fixedLogo.offsetHeight;
-
-      fixedLogo.style.transition = "";
-      heroLogo.style.transition = "";
-      requestAnimationFrame(() => {
-        fixedLogo.style.left = navPos.left + "px";
-        fixedLogo.style.top = navPos.top + "px";
-        fixedLogo.style.width = navPos.width + "px";
-        fixedLogo.style.height = navPos.height + "px";
-      });
-
-      navbar.style.transform = "translateY(0)";
-      heroSection.style.minHeight = "60vh";
-
-      if (heroGradient) heroGradient.style.opacity = "0.3";
-      if (ctaContent) ctaContent.style.opacity = "1";
-      if (scrollIndicator) scrollIndicator.style.opacity = "0";
-
-      setTimeout(() => {
+      if (!document.startViewTransition) {
+        applyExpandState();
         isAnimating = false;
         unlockScroll();
-      }, animationDuration);
+        return;
+      }
+
+      const transition = document.startViewTransition(() => {
+        applyExpandState();
+      });
+
+      transition.finished.then(() => {
+        navbarLogoImg.style.viewTransitionName = "";
+        isAnimating = false;
+        unlockScroll();
+      });
     }
 
-    // --- Collapse ---
     function collapse() {
       if (!isExpanded || isAnimating) return;
       isExpanded = false;
       isAnimating = true;
       lockScroll();
 
-      fixedLogo.style.left = heroPos.left + "px";
-      fixedLogo.style.top = heroPos.top + "px";
-      fixedLogo.style.width = heroPos.width + "px";
-      fixedLogo.style.height = heroPos.height + "px";
+      navbarLogoImg.style.viewTransitionName = "logo-fly";
 
-      navbar.style.transform = "translateY(-100%)";
-      heroSection.style.minHeight = "100vh";
-
-      if (heroGradient) heroGradient.style.opacity = "1";
-      if (ctaContent) ctaContent.style.opacity = "0";
-      if (scrollIndicator) scrollIndicator.style.opacity = "1";
-
-      setTimeout(() => {
-        const hr = heroLogo.getBoundingClientRect();
-
-        fixedLogo.style.transition = "none";
-        fixedLogo.style.left = (hr.left + hr.width / 2) + "px";
-        fixedLogo.style.top = (hr.top + hr.height / 2) + "px";
-        fixedLogo.style.width = hr.width + "px";
-        fixedLogo.style.height = hr.height + "px";
-
-        heroLogo.style.transition = "none";
-        fixedLogo.style.opacity = "0";
-        heroLogo.style.opacity = "1";
-        heroLogo.offsetHeight;
-
-        fixedLogo.style.transition = "";
-        heroLogo.style.transition = "";
-
-        heroPos = {
-          left: hr.left + hr.width / 2,
-          top: hr.top + hr.height / 2,
-          width: hr.width,
-          height: hr.height,
-        };
-
+      if (!document.startViewTransition) {
+        applyCollapseState();
         isAnimating = false;
         unlockScroll();
-        // Ensure scroll is at top
         window.scrollTo(0, 0);
-      }, animationDuration);
+        return;
+      }
+
+      const transition = document.startViewTransition(() => {
+        applyCollapseState();
+      });
+
+      transition.finished.then(() => {
+        heroLogo.style.viewTransitionName = "";
+        isAnimating = false;
+        unlockScroll();
+        window.scrollTo(0, 0);
+      });
     }
 
     function handleScroll() {
@@ -528,7 +494,6 @@ const ecosystem = allLibs.slice(0, 3);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Click anywhere on hero to trigger expand
     heroSection.addEventListener("click", () => {
       if (!isExpanded && !isAnimating) {
         window.scrollTo({ top: scrollThreshold + 10, behavior: "smooth" });
@@ -544,13 +509,6 @@ const ecosystem = allLibs.slice(0, 3);
       });
     }
 
-    window.addEventListener("resize", () => {
-      if (!isExpanded && !isAnimating) {
-        measureAll();
-      }
-    });
-
-    setTimeout(measureAll, 200);
     handleScroll();
   }
 
