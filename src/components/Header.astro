@@ -1,5 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
+
+interface Props {
+  sticky?: boolean;
+  animated?: boolean;
+}
+
+const { sticky = false, animated = false } = Astro.props;
+
 const navLinks = [
   {
     label: "Ecosystem",
@@ -60,14 +68,40 @@ const navLinks = [
 ---
 
 <header
-  class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300"
+  class:list={[
+    "w-full border-b border-gray-800 text-white transition-all duration-300",
+    !animated && "z-50",
+    !animated && (sticky ? "sticky top-0" : "fixed top-0"),
+  ]}
+  style="background: rgb(22, 27, 48);"
 >
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-2" aria-label="EvoX">
-          <img src="/favicon.svg" alt="EvoX Logo" class="h-10 w-10" />
-          <span class="font-bold text-xl tracking-wide">EvoX</span>
+        <a
+          href="/"
+          class="flex items-center"
+          aria-label="EvoX"
+          id={sticky ? "nav-logo-group" : undefined}
+          style={
+            sticky
+              ? "opacity: 0; transition: opacity 0.15s;"
+              : undefined
+          }
+        >
+          <img
+            src="/logo_text.png"
+            alt="EVO"
+            class="h-8"
+            style="filter: brightness(0) invert(1);"
+          />
+          <img
+            src="/logo.png"
+            alt="X"
+            class="h-10"
+            id={sticky ? "nav-logo" : undefined}
+            style={animated ? "opacity: 0;" : undefined}
+          />
         </a>
       </div>
 

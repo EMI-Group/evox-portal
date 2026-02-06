@@ -30,8 +30,7 @@
         return Plotly.addFrames(cso_plot, subdata);
       })
       .then(() => {
-        // @ts-ignore
-        Plotly.animate(cso_plot, null);
+        cso_plot.setAttribute("data-ready", "true");
       });
   }
 </script>
