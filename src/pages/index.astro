@@ -1,12 +1,12 @@
 ---
 // src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import { Code } from "astro:components";
 import { Icon } from "astro-icon/components";
-import bannerImage from "../assets/evox_banner.jpg";
 
-// 导入原始 Python 代码文件 (使用 ?raw 将其作为字符串导入)
 import codeSingleObj from "../content/examples/single-obj.py?raw";
 import codeMultiObj from "../content/examples/multi-obj.py?raw";
 import codeNeuro from "../content/examples/neuroevolution.py?raw";
@@ -15,299 +15,658 @@ import SingleObj from "../content/examples/single-obj.astro";
 import MultiObj from "../content/examples/multi-obj.astro";
 import Neuroevolution from "../content/examples/neuroevolution.astro";
 
-// 1. 获取并处理数据
 const allBlogs = await getCollection("blogs");
-// 按日期降序排序并取前3
 const latestBlogs = allBlogs
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
 const allLibs = await getCollection("libs");
-// 取前3个生态项目
 const ecosystem = allLibs.slice(0, 3);
 ---
 
-<Layout title="EvoX - GPU-accelerated Evolutionary Computation">
-  <div
-    class="relative bg-gray-900 text-white py-48 overflow-hidden bg-cover bg-center xl:bg-[length:100%_100%]"
-    style={`background-image: url(${bannerImage.src});`}
-  >
-    <div class="absolute inset-0 bg-black/50 z-0"></div>
+<Layout title="EvoX - GPU-accelerated Evolutionary Computation" hideHeader hideFooter>
+  <!-- ========== Fixed Logo (only visible during animation) ========== -->
+  <img
+    id="fixed-logo"
+    src="/logo.png"
+    alt=""
+    class="fixed pointer-events-none transition-all duration-700 ease-out"
+    style="z-index: 60; opacity: 0;"
+  />
 
-    <div class="relative z-10 container mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">
-        Evolutionary Computation for Everyone
+  <!-- ========== Navbar (initially hidden) ========== -->
+  <div
+    id="navbar"
+    class="fixed left-0 right-0 top-0 transition-transform duration-700 ease-out"
+    style="z-index: 50; transform: translateY(-100%);"
+  >
+    <Header animated />
+  </div>
+
+  <!-- ========== Scroll Indicator ========== -->
+  <div
+    id="scroll-indicator"
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-500 scroll-bounce cursor-pointer transition-opacity duration-300"
+    style="z-index: 35;"
+  >
+    <span class="text-sm mb-2">向下滚动</span>
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </div>
+
+  <!-- ========== Hero Section ========== -->
+  <section
+    id="hero-section"
+    class="relative flex flex-col items-center justify-center text-center px-4 transition-all duration-700 ease-out"
+    style="min-height: 100vh; background: rgb(22, 27, 48); z-index: 10;"
+  >
+    <div
+      class="absolute inset-0 transition-opacity duration-700"
+      id="hero-gradient"
+      style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.5) 0%, transparent 60%);"
+    ></div>
+
+    <div class="relative z-10">
+      <!-- Hero Logo (visible by default) -->
+      <img
+        id="hero-logo"
+        src="/logo.png"
+        alt="EvoX Logo"
+        class="w-28 h-28 md:w-36 md:h-36 mb-10 mx-auto transition-opacity duration-700"
+      />
+
+      <h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-white mb-5 transition-opacity duration-700">
+        GPU加速进化计算，PyTorch/JAX
       </h1>
-      <p class="text-2xl md:text-3xl font-light text-gray-300 mb-10">
-        EvoX is All You Need
+      <p id="hero-subtitle" class="text-lg md:text-xl text-gray-400 mb-8 transition-opacity duration-700">
+        适合所有人的进化计算
       </p>
 
-      <a
-        href="https://evox.readthedocs.io/en/latest/tutorial/index.html"
-        class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200"
-      >
-        Get started
-      </a>
-    </div>
-  </div>
-
-  <div class="bg-white py-16">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-        {
-          latestBlogs.map((post) => (
-            <div class="flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-gray-900">{post.data.title}</h3>
-              <p class="text-gray-600 text-sm line-clamp-3">
-                {post.data.summary ||
-                  "Click to read more details about this release."}
-              </p>
-              <a
-                href={`/blogs/${post.id}`}
-                class="text-teal-600 hover:text-teal-800 font-medium text-sm mt-auto"
-              >
-                Read more
-              </a>
-            </div>
-          ))
-        }
-      </div>
-
-      <div class="flex justify-start">
+      <!-- CTA Content (appears when expanded) -->
+      <div id="cta-content" class="mt-8 transition-opacity duration-700" style="opacity: 0;">
+        <p class="text-lg text-blue-400 mb-10">
+          EvoX 就是你所需要的全部
+        </p>
         <a
-          href="/blogs"
-          class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1 group"
+          href="https://evox.readthedocs.io/en/latest/tutorial/index.html"
+          class="inline-block border-2 border-blue-500 text-white font-medium px-14 py-3 rounded-lg hover:bg-blue-500 transition-colors duration-200"
         >
-          Sell all Blog & News <span>&rarr;</span>
+          开始
         </a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-teal-700 mb-12">
-        &lt;&lt; Key Features &gt;&gt;
-      </h2>
+  <!-- ========== Page Content ========== -->
+  <div id="page-content" class="relative" style="background: rgb(22, 27, 48);">
+    <div id="content-body" style="background: rgb(22, 27, 48);">
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🚀 Ultra Performance</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Supports acceleration on heterogeneous hardware (CPUs & GPUs),
-              achieving over <b>100x</b> speedups.
-            </li>
-            <li>
-              ● Integrated distributed workflows scaling across multiple nodes.
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🌐 All-in-One Solution</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Includes <b>50+ algorithms</b> for single- and multi-objective optimization.
-            </li>
-            <li>
-              ● Hierarchical architecture for meta learning, hyperparameter
-              optimization, and neuroevolution.
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500"
-        >
-          <h3 class="text-lg font-bold mb-3">🛠️ Easy-to-Use Design</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li>
-              ● Fully compatible with EvoX ecosystem with a tailored programming
-              model.
-            </li>
-            <li>● Effortless setup with one-click installation.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-white py-16">
-    <div class="max-w-[1280px] mx-auto px-4 flex flex-col gap-24">
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Single-objective Optimization
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Latest News -->
+      <section class="bg-white py-16">
+        <div class="max-w-[1280px] mx-auto px-4">
           <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
+            class="flex justify-between items-end border-b border-gray-200 pb-4 mb-8"
           >
-            <Code
-              code={codeSingleObj}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <SingleObj />
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Multi-objective Optimization
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
-          >
-            <Code
-              code={codeMultiObj}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <MultiObj />
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-medium text-gray-900 text-left">
-          Neuroevolution
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div
-            class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
-          >
-            <Code
-              code={codeNeuro}
-              lang="python"
-              theme="github-dark"
-              class="p-4 md:p-6 min-h-full"
-            />
-          </div>
-          <div
-            class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
-          >
-            <Neuroevolution />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-gray-50 py-16 border-t border-gray-200">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="mb-10">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Ecosystem</h2>
-        <h5 class="text-teal-600 font-medium mb-4">Feature Projects</h5>
-        <p class="text-xl text-gray-600">
-          Explore a rich ecosystem of libraries, tools, and more to support
-          development.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {
-          ecosystem.map((item) => (
-            <a href={item.data.url} target="_blank" class="block group">
-              <div class="bg-white p-6 rounded-lg shadow-sm group-hover:shadow-md transition-shadow border border-gray-100 h-full">
-                <h4 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">
-                  {item.data.title}
-                </h4>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  {item.data.description}
-                </p>
-              </div>
+            <h2 class="text-2xl font-bold text-gray-900 relative pb-4 -mb-4">
+              最新消息
+              <span class="absolute bottom-0 left-0 w-16 h-0.5 bg-blue-500"
+              ></span>
+            </h2>
+            <a
+              href="/blogs"
+              class="text-blue-500 hover:text-blue-700 flex items-center gap-1 text-sm font-medium"
+            >
+              查看所有新闻 <span>&rarr;</span>
             </a>
-          ))
-        }
-      </div>
-
-      <div class="mt-8 text-center md:text-left">
-        <a
-          href="/libs"
-          class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1"
-        >
-          See all Projects <span>&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-white py-24 border-t border-gray-100">
-    <div class="max-w-[1280px] mx-auto px-4">
-      <div class="mb-12">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4">Community</h2>
-        <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
-          Join the EvoX developer community to contribute, learn, and get your
-          questions answered.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- QQ Group -->
-        <a
-          href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717"
-          target="_blank"
-          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-        >
-          <div class="flex items-center gap-4 mb-5">
-            <div
-              class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm"
-            >
-              <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
-            </div>
-            <h4 class="text-2xl font-bold text-gray-900">
-              EvoX <span
-                class="text-teal-600 group-hover:text-teal-700 font-extrabold"
-                >QQ群</span
-              >
-            </h4>
           </div>
-          <p class="text-gray-600 text-lg leading-relaxed">
-            浏览并加入QQ群讨论
-          </p>
-        </a>
 
-        <!-- Discord -->
-        <a
-          href="https://discord.com/invite/Vbtgcpy7G4"
-          target="_blank"
-          class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-        >
-          <div class="flex items-center gap-4 mb-5">
-            <div
-              class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm"
-            >
-              <Icon name="simple-icons:discord" class="h-6 w-6" />
-            </div>
-            <h4 class="text-2xl font-bold text-gray-900">
-              EvoX <span
-                class="text-indigo-600 group-hover:text-indigo-700 font-extrabold"
-                >Discord</span
-              >
-            </h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {
+              latestBlogs.map((post) => (
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                  <p class="text-sm text-gray-400 mb-2">
+                    {post.data.pubDate.toLocaleDateString("zh-CN", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                  <h3 class="text-lg font-bold text-gray-900 mb-3">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                    {post.data.summary ||
+                      "Click to read more details about this release."}
+                  </p>
+                  <a
+                    href={`/blogs/${post.id}`}
+                    class="text-blue-500 hover:text-blue-700 text-sm flex items-center gap-1"
+                  >
+                    阅读更多 <span>&rarr;</span>
+                  </a>
+                </div>
+              ))
+            }
           </div>
-          <p class="text-gray-600 text-lg leading-relaxed">
-            Browse and join discussions with Discord
-          </p>
-        </a>
+        </div>
+      </section>
+
+      <!-- Key Features -->
+      <div class="bg-gray-50 py-16">
+        <div class="max-w-[1280px] mx-auto px-4 text-center">
+          <h2 class="text-3xl font-bold text-teal-700 mb-12">
+            &lt;&lt; Key Features &gt;&gt;
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+              <h3 class="text-lg font-bold mb-3">Ultra Performance</h3>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>Supports acceleration on heterogeneous hardware (CPUs & GPUs), achieving over <b>100x</b> speedups.</li>
+                <li>Integrated distributed workflows scaling across multiple nodes.</li>
+              </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+              <h3 class="text-lg font-bold mb-3">All-in-One Solution</h3>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>Includes <b>50+ algorithms</b> for single- and multi-objective optimization.</li>
+                <li>Hierarchical architecture for meta learning, hyperparameter optimization, and neuroevolution.</li>
+              </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500">
+              <h3 class="text-lg font-bold mb-3">Easy-to-Use Design</h3>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>Fully compatible with EvoX ecosystem with a tailored programming model.</li>
+                <li>Effortless setup with one-click installation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Code Examples (Tabbed) -->
+      <div class="bg-white py-16">
+        <div class="max-w-[1280px] mx-auto px-4">
+          <!-- Tab Bar -->
+          <div class="flex justify-between mb-8 h-[5rem] items-end">
+            <button
+              class="example-tab active flex flex-col items-center gap-2 px-6 cursor-pointer"
+              data-tab="0"
+            >
+              <img src="/arrow_1.png" alt="" class="h-6 tab-icon" />
+              Single-objective Optimization
+            </button>
+            <button
+              class="example-tab flex flex-col items-center gap-2 px-6 cursor-pointer"
+              data-tab="1"
+            >
+              <img src="/arrow_2.png" alt="" class="h-6 tab-icon" />
+              Multi-objective Optimization
+            </button>
+            <button
+              class="example-tab flex flex-col items-center gap-2 px-6 cursor-pointer"
+              data-tab="2"
+            >
+              <img src="/arrow_3.png" alt="" class="h-6 tab-icon" />
+              Neuroevolution
+            </button>
+          </div>
+
+          <!-- Tab Panels -->
+          <div class="example-panel" data-panel="0">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]">
+                <Code code={codeSingleObj} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+              </div>
+              <div class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative">
+                <SingleObj />
+              </div>
+            </div>
+          </div>
+          <div class="example-panel hidden" data-panel="1">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]">
+                <Code code={codeMultiObj} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+              </div>
+              <div class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative">
+                <MultiObj />
+              </div>
+            </div>
+          </div>
+          <div class="example-panel hidden" data-panel="2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]">
+                <Code code={codeNeuro} lang="python" theme="github-dark" class="p-4 md:p-6 min-h-full" />
+              </div>
+              <div class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative">
+                <Neuroevolution />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ecosystem -->
+      <div class="bg-gray-50 py-16 border-t border-gray-200">
+        <div class="max-w-[1280px] mx-auto px-4">
+          <div class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Ecosystem</h2>
+            <h5 class="text-teal-600 font-medium mb-4">Feature Projects</h5>
+            <p class="text-xl text-gray-600">Explore a rich ecosystem of libraries, tools, and more to support development.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {
+              ecosystem.map((item) => (
+                <a href={item.data.url} target="_blank" class="block group">
+                  <div class="bg-white p-6 rounded-lg shadow-sm group-hover:shadow-md transition-shadow border border-gray-100 h-full">
+                    <h4 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">{item.data.title}</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">{item.data.description}</p>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+          <div class="mt-8 text-center md:text-left">
+            <a href="/libs" class="text-teal-700 font-semibold hover:text-teal-900 inline-flex items-center gap-1">
+              See all Projects <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community -->
+      <div class="bg-white py-24 border-t border-gray-100">
+        <div class="max-w-[1280px] mx-auto px-4">
+          <div class="mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Community</h2>
+            <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">Join the EvoX developer community to contribute, learn, and get your questions answered.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717" target="_blank" class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div class="flex items-center gap-4 mb-5">
+                <div class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm">
+                  <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
+                </div>
+                <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-teal-600 group-hover:text-teal-700 font-extrabold">QQ群</span></h4>
+              </div>
+              <p class="text-gray-600 text-lg leading-relaxed">浏览并加入QQ群讨论</p>
+            </a>
+            <a href="https://discord.com/invite/Vbtgcpy7G4" target="_blank" class="group block p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div class="flex items-center gap-4 mb-5">
+                <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm">
+                  <Icon name="simple-icons:discord" class="h-6 w-6" />
+                </div>
+                <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-indigo-600 group-hover:text-indigo-700 font-extrabold">Discord</span></h4>
+              </div>
+              <p class="text-gray-600 text-lg leading-relaxed">Browse and join discussions with Discord</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   </div>
 </Layout>
+
+<style>
+  .scroll-bounce {
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+
+  /* Example tabs */
+  .example-tab {
+    color: #9ca3af;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: color 0.3s ease, font-size 0.3s ease;
+  }
+  .example-tab .tab-icon {
+    opacity: 0.25;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+  }
+  .example-tab:hover {
+    color: #374151;
+  }
+  .example-tab:hover .tab-icon {
+    opacity: 0.6;
+    filter: grayscale(50%);
+  }
+  .example-tab.active {
+    color: #0f172a;
+    font-size: 1.5rem;
+  }
+  .example-tab.active .tab-icon {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+</style>
+
+<script>
+  function init() {
+    const navbar = document.getElementById("navbar");
+    const heroSection = document.getElementById("hero-section");
+    const heroLogo = document.getElementById("hero-logo") as HTMLImageElement;
+    const fixedLogo = document.getElementById("fixed-logo") as HTMLImageElement;
+    const heroGradient = document.getElementById("hero-gradient");
+    const scrollIndicator = document.getElementById("scroll-indicator");
+    const ctaContent = document.getElementById("cta-content");
+
+    if (!navbar || !heroSection || !heroLogo || !fixedLogo) return;
+
+    const navbarLogoImg = navbar.querySelector("img[alt='X']") as HTMLImageElement;
+    const navbarLogoLink = navbar.querySelector("a[aria-label='EvoX']") as HTMLElement;
+
+    if (!navbarLogoImg || !navbarLogoLink) return;
+
+    navbarLogoImg.style.opacity = "0";
+
+    let isExpanded = false;
+    let isAnimating = false;
+    const scrollThreshold = 5;
+    const animationDuration = 750;
+
+    let heroPos = { left: 0, top: 0, width: 0, height: 0 };
+    let navPos = { left: 0, top: 0, width: 40, height: 40 };
+
+    function lockScroll() {
+      document.body.style.overflow = "hidden";
+    }
+
+    function unlockScroll() {
+      document.body.style.overflow = "";
+    }
+
+    function measureAll() {
+      const hr = heroLogo.getBoundingClientRect();
+      heroPos = {
+        left: hr.left + hr.width / 2,
+        top: hr.top + hr.height / 2,
+        width: hr.width,
+        height: hr.height,
+      };
+
+      const prevTransition = navbar.style.transition;
+      const prevTransform = navbar.style.transform;
+      navbar.style.transition = "none";
+      navbar.style.transform = "translateY(0)";
+      navbar.offsetHeight;
+
+      const nr = navbarLogoImg.getBoundingClientRect();
+      navPos = {
+        left: nr.left + nr.width / 2,
+        top: nr.top + nr.height / 2,
+        width: nr.width || 40,
+        height: nr.height || 40,
+      };
+
+      navbar.style.transform = prevTransform;
+      navbar.offsetHeight;
+      navbar.style.transition = prevTransition;
+    }
+
+    // --- Expand ---
+    function expand() {
+      if (isExpanded || isAnimating) return;
+      isExpanded = true;
+      isAnimating = true;
+      lockScroll();
+
+      fixedLogo.style.transition = "none";
+      fixedLogo.style.left = heroPos.left + "px";
+      fixedLogo.style.top = heroPos.top + "px";
+      fixedLogo.style.width = heroPos.width + "px";
+      fixedLogo.style.height = heroPos.height + "px";
+      fixedLogo.style.transform = "translate(-50%, -50%)";
+      fixedLogo.style.opacity = "1";
+
+      heroLogo.style.transition = "none";
+      heroLogo.style.opacity = "0";
+      fixedLogo.offsetHeight;
+
+      fixedLogo.style.transition = "";
+      heroLogo.style.transition = "";
+      requestAnimationFrame(() => {
+        fixedLogo.style.left = navPos.left + "px";
+        fixedLogo.style.top = navPos.top + "px";
+        fixedLogo.style.width = navPos.width + "px";
+        fixedLogo.style.height = navPos.height + "px";
+      });
+
+      navbar.style.transform = "translateY(0)";
+      heroSection.style.minHeight = "60vh";
+
+      if (heroGradient) heroGradient.style.opacity = "0.3";
+      if (ctaContent) ctaContent.style.opacity = "1";
+      if (scrollIndicator) scrollIndicator.style.opacity = "0";
+
+      setTimeout(() => {
+        isAnimating = false;
+        unlockScroll();
+      }, animationDuration);
+    }
+
+    // --- Collapse ---
+    function collapse() {
+      if (!isExpanded || isAnimating) return;
+      isExpanded = false;
+      isAnimating = true;
+      lockScroll();
+
+      fixedLogo.style.left = heroPos.left + "px";
+      fixedLogo.style.top = heroPos.top + "px";
+      fixedLogo.style.width = heroPos.width + "px";
+      fixedLogo.style.height = heroPos.height + "px";
+
+      navbar.style.transform = "translateY(-100%)";
+      heroSection.style.minHeight = "100vh";
+
+      if (heroGradient) heroGradient.style.opacity = "1";
+      if (ctaContent) ctaContent.style.opacity = "0";
+      if (scrollIndicator) scrollIndicator.style.opacity = "1";
+
+      setTimeout(() => {
+        const hr = heroLogo.getBoundingClientRect();
+
+        fixedLogo.style.transition = "none";
+        fixedLogo.style.left = (hr.left + hr.width / 2) + "px";
+        fixedLogo.style.top = (hr.top + hr.height / 2) + "px";
+        fixedLogo.style.width = hr.width + "px";
+        fixedLogo.style.height = hr.height + "px";
+
+        heroLogo.style.transition = "none";
+        fixedLogo.style.opacity = "0";
+        heroLogo.style.opacity = "1";
+        heroLogo.offsetHeight;
+
+        fixedLogo.style.transition = "";
+        heroLogo.style.transition = "";
+
+        heroPos = {
+          left: hr.left + hr.width / 2,
+          top: hr.top + hr.height / 2,
+          width: hr.width,
+          height: hr.height,
+        };
+
+        isAnimating = false;
+        unlockScroll();
+        // Ensure scroll is at top
+        window.scrollTo(0, 0);
+      }, animationDuration);
+    }
+
+    function handleScroll() {
+      if (isAnimating) return;
+      const scrollY = window.scrollY;
+      if (scrollY > scrollThreshold && !isExpanded) {
+        expand();
+      } else if (scrollY <= 0 && isExpanded) {
+        collapse();
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Click anywhere on hero to trigger expand
+    heroSection.addEventListener("click", () => {
+      if (!isExpanded && !isAnimating) {
+        window.scrollTo({ top: scrollThreshold + 10, behavior: "smooth" });
+      }
+    });
+
+    if (scrollIndicator) {
+      scrollIndicator.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!isExpanded && !isAnimating) {
+          window.scrollTo({ top: scrollThreshold + 10, behavior: "smooth" });
+        }
+      });
+    }
+
+    window.addEventListener("resize", () => {
+      if (!isExpanded && !isAnimating) {
+        measureAll();
+      }
+    });
+
+    setTimeout(measureAll, 200);
+    handleScroll();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+
+  // --- Tab carousel + animation control for code examples ---
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".example-tab");
+    const panels = document.querySelectorAll(".example-panel");
+    const totalTabs = 3;
+    let currentTab = 0;
+    let carouselTimer: ReturnType<typeof setTimeout> | null = null;
+    let animationActive = false;
+    const BRAX_DURATION = 16000;
+
+    function activateTab(tabIndex: number) {
+      stopAnimation();
+
+      tabs.forEach((t) => t.classList.remove("active"));
+      tabs[tabIndex]?.classList.add("active");
+
+      panels.forEach((p) => {
+        if ((p as HTMLElement).dataset.panel === tabIndex + "") {
+          p.classList.remove("hidden");
+        } else {
+          p.classList.add("hidden");
+        }
+      });
+
+      currentTab = tabIndex;
+
+      requestAnimationFrame(() => {
+        const plotId = tabIndex === 0 ? "cso-plot" : tabIndex === 1 ? "rvea-plot" : null;
+        if (plotId) {
+          const plot = document.getElementById(plotId);
+          // @ts-ignore
+          if (plot) Plotly.Plots.resize(plot);
+        }
+        startAnimation(tabIndex);
+      });
+    }
+
+    function startAnimation(tabIndex: number) {
+      animationActive = true;
+
+      if (tabIndex === 2) {
+        carouselTimer = setTimeout(() => {
+          if (currentTab === 2) activateTab(0);
+        }, BRAX_DURATION);
+        return;
+      }
+
+      const plotId = tabIndex === 0 ? "cso-plot" : "rvea-plot";
+      const plot = document.getElementById(plotId);
+      // @ts-ignore
+      if (!plot || !plot.data) return;
+
+      // @ts-ignore
+      Plotly.animate(plot, ["0"], {
+        frame: { duration: 0, redraw: true },
+        transition: { duration: 0 },
+        mode: "immediate",
+      })
+        .then(() => {
+          // @ts-ignore
+          return Plotly.animate(plot, null, {
+            frame: { duration: 200, redraw: false },
+            transition: { duration: 200 },
+          });
+        })
+        .then(() => {
+          if (currentTab === tabIndex && animationActive) {
+            const nextTab = (tabIndex + 1) % totalTabs;
+            activateTab(nextTab);
+          }
+        })
+        .catch(() => {});
+    }
+
+    function stopAnimation() {
+      animationActive = false;
+      if (carouselTimer) {
+        clearTimeout(carouselTimer);
+        carouselTimer = null;
+      }
+      [0, 1].forEach((idx) => {
+        const plotId = idx === 0 ? "cso-plot" : "rvea-plot";
+        const plot = document.getElementById(plotId);
+        if (plot) {
+          // @ts-ignore
+          Plotly.animate(plot, [null], {
+            frame: { duration: 0, redraw: false },
+            mode: "immediate",
+          }).catch(() => {});
+        }
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = parseInt((tab as HTMLElement).dataset.tab || "0", 10);
+        if (target !== currentTab) {
+          activateTab(target);
+        }
+      });
+    });
+
+    // Wait for first plot to be ready, then start carousel
+    function waitAndStart() {
+      const plot = document.getElementById("cso-plot");
+      if (plot?.getAttribute("data-ready") === "true") {
+        startAnimation(0);
+      } else {
+        setTimeout(waitAndStart, 300);
+      }
+    }
+    waitAndStart();
+  });
+</script>

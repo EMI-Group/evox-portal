@@ -26,8 +26,7 @@
           });
       })
       .then(() => {
-        // @ts-ignore
-        Plotly.animate(rvea_plot, null);
+        rvea_plot.setAttribute("data-ready", "true");
       });
   }
 </script>

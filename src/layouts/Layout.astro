@@ -6,10 +6,15 @@ import Footer from "../components/Footer.astro";
 
 interface Props {
   title?: string;
+  hideHeader?: boolean;
+  hideFooter?: boolean;
 }
 
-const { title = "EvoX - GPU-accelerated Evolutionary Computation" } =
-  Astro.props;
+const {
+  title = "EvoX - GPU-accelerated Evolutionary Computation",
+  hideHeader = false,
+  hideFooter = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -23,13 +28,13 @@ const { title = "EvoX - GPU-accelerated Evolutionary Computation" } =
   </head>
 
   <body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
-    <Header />
+    {!hideHeader && <Header />}
 
-    <main class="flex-grow pt-20 w-full">
+    <main class:list={["flex-grow w-full", { "pt-20": !hideHeader }]}>
       <slot />
     </main>
 
-    <Footer />
+    {!hideFooter && <Footer />}
   </body>
 </html>
 

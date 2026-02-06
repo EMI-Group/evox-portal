@@ -629,44 +629,11 @@ export const layout = {
   sliders: [
     {
       currentvalue: { prefix: "Generation: " },
-      len: 0.8,
+      len: 1,
       pad: { b: 1, t: 10 },
       steps: steps,
-      x: 0.2,
+      x: 0,
       xanchor: "left",
-      y: 0,
-      yanchor: "top",
-    },
-  ],
-  updatemenus: [
-    {
-      buttons: [
-        {
-          args: [
-            null,
-            {
-              frame: { duration: 200, redraw: false },
-              fromcurrent: true,
-              transition: { duration: 200, easing: "linear" },
-            },
-          ],
-          label: "Play",
-          method: "animate",
-        },
-        {
-          args: [
-            [null],
-            { frame: { duration: 0, redraw: false }, mode: "immediate" },
-          ],
-          label: "Pause",
-          method: "animate",
-        },
-      ],
-      direction: "left",
-      pad: { r: 10, t: 30 },
-      type: "buttons",
-      x: 0.2,
-      xanchor: "right",
       y: 0,
       yanchor: "top",
     },
