@@ -4,55 +4,60 @@ import logoCom from "../assets/logo_com.png";
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+<footer class="pt-16 pb-8 border-t border-gray-800" style="background: rgb(22, 27, 48);">
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-16">
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Docs</h2>
-        <p class="text-gray-600 mb-4 text-sm">
+        <h2 class="text-2xl font-bold text-white mb-2">Docs</h2>
+        <p class="text-gray-400 mb-4 text-sm">
           Access comprehensive developer documentation for EvoX
         </p>
         <a
           href="https://evox.readthedocs.io/en/latest/"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-400 font-semibold hover:text-teal-300 flex items-center gap-1 transition-colors"
         >
           View Docs <span>&rarr;</span>
         </a>
       </div>
 
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Tutorials</h2>
-        <p class="text-gray-600 mb-4 text-sm">
+        <h2 class="text-2xl font-bold text-white mb-2">Tutorials</h2>
+        <p class="text-gray-400 mb-4 text-sm">
           Get in-depth tutorials for beginners and advanced developers
         </p>
         <a
           href="https://evox.readthedocs.io/en/latest/example/index.html"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-400 font-semibold hover:text-teal-300 flex items-center gap-1 transition-colors"
         >
           View Tutorials <span>&rarr;</span>
         </a>
       </div>
 
       <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Resources</h2>
-        <p class="text-gray-600 mb-4 text-sm">
+        <h2 class="text-2xl font-bold text-white mb-2">Resources</h2>
+        <p class="text-gray-400 mb-4 text-sm">
           Find development resources and get your questions answered
         </p>
         <a
           href="https://github.com/EMI-Group"
-          class="text-teal-700 font-semibold hover:text-teal-900 flex items-center gap-1 transition-colors"
+          class="text-teal-400 font-semibold hover:text-teal-300 flex items-center gap-1 transition-colors"
         >
           View Resources <span>&rarr;</span>
         </a>
       </div>
     </div>
 
-    <hr class="border-gray-200 my-8" />
+    <hr class="border-gray-700 my-8" />
 
     <div class="flex flex-col gap-8">
       <div class="flex flex-row justify-between items-center">
         <a href="/" class="opacity-80 hover:opacity-100 transition-opacity">
-          <img src={logoCom.src} alt="EvoX" class="h-10" />
+          <img
+            src={logoCom.src}
+            alt="EvoX"
+            class="h-10"
+            style="filter: brightness(0) invert(1);"
+          />
         </a>
 
         <ul class="flex space-x-10">
@@ -60,7 +65,7 @@ const year = new Date().getFullYear();
             <a
               href="https://www.facebook.com/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-[#1877F2] transition-colors"
+              class="text-gray-500 hover:text-[#1877F2] transition-colors"
               aria-label="Facebook"
             >
               <Icon name="simple-icons:facebook" class="w-10 h-10" />
@@ -70,7 +75,7 @@ const year = new Date().getFullYear();
             <a
               href="https://www.x.com/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-black transition-colors"
+              class="text-gray-500 hover:text-white transition-colors"
               aria-label="X"
             >
               <Icon name="simple-icons:x" class="w-10 h-10" />
@@ -80,7 +85,7 @@ const year = new Date().getFullYear();
             <a
               href="https://www.xiaohongshu.com/user/profile/67a5b52300000000040300b1"
               target="_blank"
-              class="text-gray-400 hover:text-[#FF2442] transition-colors"
+              class="text-gray-500 hover:text-[#FF2442] transition-colors"
               aria-label="RedNote"
             >
               <Icon name="simple-icons:xiaohongshu" class="w-10 h-10" />
@@ -90,7 +95,7 @@ const year = new Date().getFullYear();
             <a
               href="https://www.zhihu.com/people/evoxhello"
               target="_blank"
-              class="text-gray-400 hover:text-[#0084FF] transition-colors"
+              class="text-gray-500 hover:text-[#0084FF] transition-colors"
               aria-label="Zhihu"
             >
               <Icon name="simple-icons:zhihu" class="w-10 h-10" />
