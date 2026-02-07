@@ -58,7 +58,7 @@ const ecosystem = allLibs.slice(0, 3);
   <!-- ========== Hero Section ========== -->
   <section
     id="hero-section"
-    class="relative flex flex-col items-center justify-center text-center px-4 py-16 transition-all duration-700 ease-out"
+    class="relative flex flex-col items-center justify-center text-center px-4 py-16"
     style="min-height: 100vh; background: rgb(22, 27, 48); z-index: 10;"
   >
     <div
@@ -275,7 +275,7 @@ const ecosystem = allLibs.slice(0, 3);
       </div>
 
       <!-- Community -->
-      <div class="bg-white py-24 border-t border-gray-100">
+      <div id="community-module" class="bg-white py-24 border-t border-gray-100">
         <div class="max-w-[1280px] mx-auto px-4">
           <div class="mb-12">
             <h2 class="text-4xl font-bold text-gray-900 mb-4">Community</h2>
@@ -354,6 +354,11 @@ const ecosystem = allLibs.slice(0, 3);
 </style>
 
 <script>
+  // Disable browser scroll restoration so page always starts at top
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
   function init() {
     const navbar = document.getElementById("navbar");
     const heroSection = document.getElementById("hero-section");
@@ -385,11 +390,17 @@ const ecosystem = allLibs.slice(0, 3);
       return 1 - (1 - t) * (1 - t);
     }
 
-    function expand() {
-      if (isExpanded || isAnimating) return;
+    let expandCallback: (() => void) | null = null;
+
+    function expand(onDone?: () => void) {
+      if (isExpanded || isAnimating) {
+        if (isExpanded && !isAnimating && onDone) onDone();
+        return;
+      }
       isExpanded = true;
       isAnimating = true;
       lockScroll();
+      if (onDone) expandCallback = onDone;
 
       // Measure hero logo position
       const logoRect = heroLogo.getBoundingClientRect();
@@ -493,6 +504,10 @@ const ecosystem = allLibs.slice(0, 3);
               flyLogo.remove();
               isAnimating = false;
               unlockScroll();
+              if (expandCallback) {
+                expandCallback();
+                expandCallback = null;
+              }
             }, 1500);
           });
         }
@@ -589,7 +604,7 @@ const ecosystem = allLibs.slice(0, 3);
 
     heroSection.addEventListener("click", () => {
       if (!isExpanded && !isAnimating) {
-        window.scrollTo({ top: scrollThreshold + 10, behavior: "smooth" });
+        expand();
       }
     });
 
@@ -597,10 +612,29 @@ const ecosystem = allLibs.slice(0, 3);
       scrollIndicator.addEventListener("click", (e) => {
         e.stopPropagation();
         if (!isExpanded && !isAnimating) {
-          window.scrollTo({ top: scrollThreshold + 10, behavior: "smooth" });
+          expand();
         }
       });
     }
+
+    // Intercept anchor links: if animation hasn't played, play it first then scroll
+    document.addEventListener("click", (e) => {
+      const anchor = (e.target as HTMLElement).closest("a[href^='#']") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const targetId = anchor.getAttribute("href")?.slice(1);
+      if (!targetId) return;
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+
+      e.preventDefault();
+      if (!isExpanded) {
+        expand(() => {
+          targetEl.scrollIntoView({ behavior: "smooth" });
+        });
+      } else if (!isAnimating) {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+      }
+    });
 
     handleScroll();
   }
