@@ -379,11 +379,18 @@ const ecosystem = allLibs.slice(0, 3);
     const scrollThreshold = 5;
     const DURATION = 1200;
 
+    function preventScroll(e: Event) {
+      e.preventDefault();
+    }
     function lockScroll() {
       document.body.style.overflow = "hidden";
+      window.addEventListener("wheel", preventScroll, { passive: false });
+      window.addEventListener("touchmove", preventScroll, { passive: false });
     }
     function unlockScroll() {
       document.body.style.overflow = "";
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
     }
 
     function easeOut(t: number) {
@@ -504,6 +511,7 @@ const ecosystem = allLibs.slice(0, 3);
               flyLogo.remove();
               isAnimating = false;
               unlockScroll();
+              removeFirstScrollListeners();
               if (expandCallback) {
                 expandCallback();
                 expandCallback = null;
@@ -592,15 +600,20 @@ const ecosystem = allLibs.slice(0, 3);
       requestAnimationFrame(animate);
     }
 
-    function handleScroll() {
-      if (isAnimating) return;
-      const scrollY = window.scrollY;
-      if (scrollY > scrollThreshold && !isExpanded) {
+    // Intercept first wheel/touch to trigger animation directly
+    function onFirstScroll(e: Event) {
+      e.preventDefault();
+      if (!isExpanded && !isAnimating) {
         expand();
       }
     }
+    window.addEventListener("wheel", onFirstScroll, { passive: false });
+    window.addEventListener("touchmove", onFirstScroll, { passive: false });
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    function removeFirstScrollListeners() {
+      window.removeEventListener("wheel", onFirstScroll);
+      window.removeEventListener("touchmove", onFirstScroll);
+    }
 
     heroSection.addEventListener("click", () => {
       if (!isExpanded && !isAnimating) {
@@ -635,8 +648,6 @@ const ecosystem = allLibs.slice(0, 3);
         targetEl.scrollIntoView({ behavior: "smooth" });
       }
     });
-
-    handleScroll();
   }
 
   document.addEventListener("DOMContentLoaded", init);
