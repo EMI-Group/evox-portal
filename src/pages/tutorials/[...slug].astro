@@ -1,0 +1,60 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl, getLocalizedArticles } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+  const allTutorials = await getCollection("tutorials");
+  const tutorials = getLocalizedArticles(allTutorials, defaultLocale);
+  return tutorials.map((tutorial) => ({
+    params: { slug: tutorial.slug },
+    props: { tutorial },
+  }));
+}
+
+const locale: Locale = defaultLocale;
+const tr = await loadTranslations(locale);
+
+const { tutorial } = Astro.props;
+const { Content } = await render(tutorial);
+
+const allTutorials = await getCollection("tutorials");
+const tutorials = getLocalizedArticles(allTutorials, locale);
+const sorted = tutorials.sort((a, b) => a.data.order - b.data.order);
+const currentIndex = sorted.findIndex((t) => t.slug === tutorial.slug);
+const prev = currentIndex > 0 ? sorted[currentIndex - 1] : null;
+const next = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
+---
+
+<Layout title={tutorial.data.title} locale={locale}>
+  <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">{tutorial.data.title}</h1>
+    </div>
+  </div>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white">
+    <div class="prose prose-lg prose-teal max-w-none news-content">
+      <Content />
+    </div>
+    <nav class="mt-16 pt-8 border-t border-gray-100 flex justify-between items-center">
+      {prev ? (
+        <a href={getLocalizedUrl(`/tutorials/${prev.slug}`, locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
+          <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span>
+          {prev.data.title}
+        </a>
+      ) : (
+        <a href={getLocalizedUrl("/tutorials", locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
+          <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span>
+          {t(tr, "tutorials.backToList")}
+        </a>
+      )}
+      {next && (
+        <a href={getLocalizedUrl(`/tutorials/${next.slug}`, locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
+          {next.data.title}
+          <span class="ml-2 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+        </a>
+      )}
+    </nav>
+  </article>
+</Layout>
