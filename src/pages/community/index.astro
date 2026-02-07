@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+
+const locale: Locale = defaultLocale;
+const tr = await loadTranslations(locale);
+---
+
+<Layout title={t(tr, "community.pageTitle")} locale={locale}>
+  <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">{t(tr, "community.title")}</h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">{t(tr, "community.desc")}</p>
+    </div>
+  </div>
+  <div class="bg-gray-50 min-h-screen py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717" target="_blank" class="group block p-8 bg-white rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-5">
+            <div class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm">
+              <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
+            </div>
+            <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-teal-600 group-hover:text-teal-700 font-extrabold">{t(tr, "community.qq.title")}</span></h4>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">{t(tr, "community.qq.desc")}</p>
+        </a>
+        <a href="https://discord.com/invite/Vbtgcpy7G4" target="_blank" class="group block p-8 bg-white rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-5">
+            <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm">
+              <Icon name="simple-icons:discord" class="h-6 w-6" />
+            </div>
+            <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-indigo-600 group-hover:text-indigo-700 font-extrabold">{t(tr, "community.discord.title")}</span></h4>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">{t(tr, "community.discord.desc")}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

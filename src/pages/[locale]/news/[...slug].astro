@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { locales, defaultLocale, type Locale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedArticles } from "../../../i18n/utils";
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection("news");
+  const nonDefaultLocales = locales.filter((l) => l !== defaultLocale);
+  return nonDefaultLocales.flatMap((locale) => {
+    const articles = getLocalizedArticles(allArticles, locale);
+    return articles.map((article) => ({
+      params: { locale, slug: article.slug },
+      props: { article },
+    }));
+  });
+}
+
+const locale = Astro.params.locale as Locale;
+const tr = await loadTranslations(locale);
+const dateLocale = getDateLocale(locale);
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+
+<Layout title={article.data.title} locale={locale}>
+  <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">{article.data.title}</h1>
+      <time datetime={article.data.pubDate.toISOString()} class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-gray-300 text-sm font-medium">
+        {article.data.pubDate.toLocaleDateString(dateLocale, { year: "numeric", month: "long", day: "numeric" })}
+      </time>
+    </div>
+  </div>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white">
+    <div class="prose prose-lg prose-teal max-w-none news-content">
+      <Content />
+    </div>
+    <div class="mt-16 pt-8 border-t border-gray-100">
+      <a href={getLocalizedUrl("/news", locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
+        <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span>
+        {t(tr, "news.backToNews")}
+      </a>
+    </div>
+  </article>
+</Layout>

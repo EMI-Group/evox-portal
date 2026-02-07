@@ -3,38 +3,44 @@ import "../styles/global.css";
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { type Locale, defaultLocale, loadTranslations, t } from "../i18n/utils";
 
 interface Props {
   title?: string;
   hideHeader?: boolean;
   hideFooter?: boolean;
+  locale?: Locale;
 }
 
 const {
-  title = "EvoX - GPU-accelerated Evolutionary Computation",
+  title = t(await loadTranslations(defaultLocale), "site.title"),
   hideHeader = false,
   hideFooter = false,
+  locale = defaultLocale,
 } = Astro.props;
+
+const translations = await loadTranslations(locale);
+const htmlLang = locale === "es-419" ? "es" : locale === "pt-br" ? "pt-BR" : locale;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
 
   <body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
-    {!hideHeader && <Header />}
+    {!hideHeader && <Header locale={locale} />}
 
     <main class:list={["flex-grow w-full", { "pt-20": !hideHeader }]}>
       <slot />
     </main>
 
-    {!hideFooter && <Footer />}
+    {!hideFooter && <Footer locale={locale} />}
   </body>
 </html>
 

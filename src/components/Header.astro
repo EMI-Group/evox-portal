@@ -1,68 +1,59 @@
 ---
 import { Icon } from "astro-icon/components";
+import { type Locale, defaultLocale, locales, localeNames, loadTranslations, t, getLocalizedUrl } from "../i18n/utils";
 
 interface Props {
   sticky?: boolean;
   animated?: boolean;
+  locale?: Locale;
 }
 
-const { sticky = false, animated = false } = Astro.props;
+const { sticky = false, animated = false, locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+const currentPath = Astro.url.pathname;
 
 const navLinks = [
   {
-    label: "Ecosystem",
-    dropdown: [
-      {
-        label: "Projects",
-        desc: "Learn about the projects and frameworks in the EvoX Ecosystem",
-        href: "/libs",
-      },
-      {
-        label: "Community",
-        desc: "Join the EvoX developer community",
-        href: "/#community-module",
-      },
-      // Forums link hidden for now
-      // { label: "Forums", desc: "A place to discuss EvoX code", href: "#" }
-    ],
+    label: t(tr, "nav.tutorials"),
+    href: getLocalizedUrl("/tutorials", locale),
   },
   {
-    label: "Tutorials",
+    label: t(tr, "nav.docs"),
     dropdown: [
       {
-        label: "English Tutorials",
-        desc: "Follow the tutorial and run your first EvoX task instantly",
-        href: "https://evox.readthedocs.io/en/latest/tutorial/index.html",
+        label: t(tr, "nav.docs.guide"),
+        desc: t(tr, "nav.docs.guide.desc"),
+        href: getLocalizedUrl("/docs", locale),
       },
       {
-        label: "中文教程",
-        desc: "跟随教程，立即运行你的第一个 EvoX 任务",
-        href: "https://evox.readthedocs.io/zh-cn/latest/tutorial/index.html",
+        label: t(tr, "nav.docs.api"),
+        desc: t(tr, "nav.docs.api.desc"),
+        href: "https://evox.readthedocs.io/en/latest/apidocs/index.html",
       },
     ],
   },
   {
-    label: "Docs",
+    label: t(tr, "nav.blog"),
     dropdown: [
       {
-        label: "English Documentation",
-        desc: "Explore the documentation",
-        href: "https://evox.readthedocs.io/en/latest/",
+        label: t(tr, "nav.blog.news"),
+        desc: t(tr, "nav.blog.news.desc"),
+        href: getLocalizedUrl("/news", locale),
       },
       {
-        label: "中文文档",
-        desc: "阅读文档以全面了解如何使用EvoX",
-        href: "https://evox.readthedocs.io/zh-cn/latest/",
+        label: t(tr, "nav.blog.releases"),
+        desc: t(tr, "nav.blog.releases.desc"),
+        href: getLocalizedUrl("/releases", locale),
       },
     ],
   },
-  // {
-  //   label: "Contact Us",
-  //   href: "/contact-us",
-  // },
   {
-    label: "Blog & News",
-    href: "/blogs",
+    label: t(tr, "nav.community"),
+    href: getLocalizedUrl("/community", locale),
+  },
+  {
+    label: t(tr, "nav.ecosystem"),
+    href: getLocalizedUrl("/libs", locale),
   },
 ];
 ---
@@ -79,7 +70,7 @@ const navLinks = [
     <div class="flex items-center justify-between h-20">
       <div class="flex-shrink-0">
         <a
-          href="/"
+          href={getLocalizedUrl("/", locale)}
           class="flex items-center"
           aria-label="EvoX"
           id={sticky ? "nav-logo-group" : undefined}
@@ -110,7 +101,6 @@ const navLinks = [
           navLinks.map((link) => (
             <div class="relative group">
               {link.dropdown ? (
-                // Dropdown Trigger
                 <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
                   {link.label}
                   <Icon
@@ -119,7 +109,6 @@ const navLinks = [
                   />
                 </button>
               ) : (
-                // Direct Link
                 <a
                   href={link.href}
                   class="text-sm font-medium hover:text-teal-400 transition-colors"
@@ -128,7 +117,6 @@ const navLinks = [
                 </a>
               )}
 
-              {/* Dropdown Menu (Tailwind Group Hover Implementation) */}
               {link.dropdown && (
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
                   <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10">
@@ -136,7 +124,7 @@ const navLinks = [
                       {link.dropdown.map((item) => (
                         <a
                           href={item.href}
-                          target={item.href.startsWith("#") ? undefined : "_blank"}
+                          target={item.href.startsWith("#") ? undefined : (item.href.startsWith("http") ? "_blank" : undefined)}
                           class="block px-4 py-3 hover:bg-white/10 transition-colors group/item"
                         >
                           <p class="text-sm font-bold text-gray-100 group-hover/item:text-teal-400">
@@ -154,6 +142,37 @@ const navLinks = [
             </div>
           ))
         }
+
+        {/* Language Switcher */}
+        <div class="relative group">
+          <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
+            <Icon name="heroicons:language-20-solid" class="w-4 h-4" />
+            {localeNames[locale]}
+            <Icon
+              name="heroicons:chevron-down-20-solid"
+              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+            />
+          </button>
+          <div class="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+            <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10 max-h-80 overflow-y-auto">
+              <div class="py-2">
+                {locales.map((loc) => (
+                  <a
+                    href={getLocalizedUrl(currentPath, loc)}
+                    class:list={[
+                      "block px-4 py-2 text-sm transition-colors",
+                      loc === locale
+                        ? "text-teal-400 font-bold"
+                        : "text-gray-300 hover:bg-white/10 hover:text-white",
+                    ]}
+                  >
+                    {localeNames[loc]}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
 
       <div class="md:hidden">
