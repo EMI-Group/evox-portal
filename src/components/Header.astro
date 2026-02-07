@@ -131,18 +131,18 @@ const navLinks = [
               {/* Dropdown Menu (Tailwind Group Hover Implementation) */}
               {link.dropdown && (
                 <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
-                  <div class="bg-white rounded-lg shadow-xl overflow-hidden ring-1 ring-black ring-opacity-5">
+                  <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10">
                     <div class="py-2">
                       {link.dropdown.map((item) => (
                         <a
                           href={item.href}
-                          target="_blank"
-                          class="block px-4 py-3 hover:bg-gray-50 transition-colors group/item"
+                          target={item.href.startsWith("#") ? undefined : "_blank"}
+                          class="block px-4 py-3 hover:bg-white/10 transition-colors group/item"
                         >
-                          <p class="text-sm font-bold text-gray-900 group-hover/item:text-teal-600">
+                          <p class="text-sm font-bold text-gray-100 group-hover/item:text-teal-400">
                             {item.label}
                           </p>
-                          <p class="mt-1 text-xs text-gray-500 line-clamp-2">
+                          <p class="mt-1 text-xs text-gray-400 line-clamp-2">
                             {item.desc}
                           </p>
                         </a>
