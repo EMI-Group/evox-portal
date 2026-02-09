@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # Пользовательский алгоритм и задача
-В этом ноутбуке мы покажем, как использовать `Algorithm` и `Problem` для создания пользовательского алгоритма и задачи. Здесь мы приведём пример **реализации алгоритма PSO, решающего задачу Sphere**.
+В этом блокноте мы покажем, как использовать `Algorithm` и `Problem` для создания пользовательского алгоритма и задачи. Мы приведем пример **реализации алгоритма PSO, который решает задачу Sphere**.
 
 
 ```python
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Пример алгоритма: алгоритм PSO
 
-Оптимизация роем частиц (PSO) — это популяционный метаэвристический алгоритм, вдохновлённый социальным поведением птиц и рыб. Он широко используется для решения задач непрерывной и дискретной оптимизации.
+Метод оптимизации роем частиц (Particle Swarm Optimization, PSO) — это популяционный метаэвристический алгоритм, вдохновленный социальным поведением птиц и рыб. Он широко используется для решения задач непрерывной и дискретной оптимизации.
 
 **Вот пример реализации алгоритма PSO в EvoX:**
 
@@ -50,9 +50,12 @@ class PSO(Algorithm):
         assert lb.shape == ub.shape and lb.ndim == 1 and ub.ndim == 1 and lb.dtype == ub.dtype
         self.pop_size = pop_size
         self.dim = lb.shape[0]
+        # Here, Parameter is used to indicate that these values are hyper-parameters
+        # so that they can be correctly traced and vector-mapped
         self.w = Parameter(w, device=device)
         self.phi_p = Parameter(phi_p, device=device)
         self.phi_g = Parameter(phi_g, device=device)
+        # setup
         lb = lb[None, :].to(device=device)
         ub = ub[None, :].to(device=device)
         length = ub - lb
@@ -60,8 +63,10 @@ class PSO(Algorithm):
         pop = length * pop + lb
         velocity = torch.rand(self.pop_size, self.dim, device=device)
         velocity = 2 * length * velocity - length
+        # write to self
         self.lb = lb
         self.ub = ub
+        # mutable
         self.pop = Mutable(pop)
         self.velocity = Mutable(velocity)
         self.fit = Mutable(torch.full((self.pop_size,), torch.inf, device=device))
@@ -99,11 +104,12 @@ class PSO(Algorithm):
         self.local_best_fit = self.fit
         self.global_best_fit = torch.min(self.fit)
 ```
+
 ## Пример задачи: задача Sphere
 
-Задача Sphere — это простая, но фундаментальная тестовая задача оптимизации, используемая для тестирования алгоритмов оптимизации.
+Задача Sphere — это простая, но фундаментальная тестовая задача оптимизации, используемая для проверки алгоритмов оптимизации.
 
-Функция Sphere определяется как:
+Функция Sphere определяется следующим образом:
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}
@@ -136,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Инициализация рабочего процесса и его запуск
+### Инициализация рабочего процесса (workflow) и его запуск
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

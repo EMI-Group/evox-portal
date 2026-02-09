@@ -4,9 +4,9 @@ pubDate: 2025-05-13
 summary: "Miglioramenti di stabilità, nuove funzioni benchmark (Ellipsoid, Griewank) e correzioni di bug."
 ---
 
-Questo e un rilascio minore focalizzato sul miglioramento della stabilita e sulla correzione di bug, con alcuni miglioramenti alla qualita d'uso.
+Questo è un rilascio minore focalizzato sul miglioramento della stabilità e sulla correzione di bug, con alcuni miglioramenti alla qualità d'uso.
 
-**Nuove funzionalita**
+**Nuove funzionalità**
 
 Nuove funzioni benchmark: aggiunte funzioni numeriche mono-obiettivo: `Ellipsoid` e `Griewank`.
 
@@ -22,7 +22,7 @@ Nuove funzioni benchmark: aggiunte funzioni numeriche mono-obiettivo: `Ellipsoid
 
 **Refactoring e manutenzione**
 
-* Riesportate le utility di uso comune al livello superiore per comodita, ad esempio:
+* Riesportate le utility di uso comune al livello superiore per comodità, ad esempio:
 
 * `evox.compile` al posto di `evox.core.compile`
 
@@ -32,7 +32,7 @@ Nuove funzioni benchmark: aggiunte funzioni numeriche mono-obiettivo: `Ellipsoid
 
 Changelog completo: [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
 
-**Codice open source / Risorse della comunita**
+**Codice open source / Risorse della comunità**
 
 Paper:
 

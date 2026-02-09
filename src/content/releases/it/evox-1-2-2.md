@@ -4,7 +4,7 @@ pubDate: 2025-06-03
 summary: "Rilascio minore focalizzato su correzioni dell'algoritmo DE e miglioramenti della documentazione."
 ---
 
-Questo e un rilascio minore focalizzato esclusivamente sulla correzione di bug:
+Questo è un rilascio minore focalizzato esclusivamente sulla correzione di bug:
 
 - Rimossi import inutilizzati per migliorare la pulizia del codice.
 - Corretto un comportamento indesiderato in alcuni algoritmi Differential Evolution (DE) in cui `step` veniva chiamato all'interno di `init_step`.

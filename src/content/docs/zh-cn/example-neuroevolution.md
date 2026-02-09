@@ -6,13 +6,13 @@ section: "examples"
 
 # 用于机器学习的神经进化
 
-EvoX 提供了基于神经进化的监督学习任务解决方案，关键模块包括 `SupervisedLearningProblem` 和 `ParamsAndVector`。以 MNIST 分类任务为例，本节通过采用 EvoX 的模块来说明监督学习的神经进化过程。
+EvoX 为基于神经进化的监督学习任务提供了解决方案，其中的关键模块包括 `SupervisedLearningProblem` 和 `ParamsAndVector`。本节以 MNIST 分类任务为例，展示如何使用 EvoX 模块进行监督学习的神经进化过程。
 
-## 基本设置
+## 基础设置
 
-基本组件导入和设备配置是神经进化过程的必要起始步骤。
+导入基础组件并配置设备是神经进化过程必不可少的起始步骤。
 
-这里，为了确保结果的可重复性，可以选择性地设置随机种子。
+在此，为了确保结果的可复现性，可以选择设置随机种子。
 
 ```python
 import torch
@@ -36,7 +36,7 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 ```
 
-在这一步中，直接基于 PyTorch 框架定义一个示例卷积神经网络（CNN）模型，然后加载到设备上。
+在这一步中，我们直接基于 PyTorch 框架定义一个简单的卷积神经网络（CNN）模型，并将其加载到设备上。
 
 ```python
 class SampleCNN(nn.Module):
@@ -68,10 +68,10 @@ total_params = sum(p.numel() for p in model.parameters())
 print(f"Total number of model parameters: {total_params}")
 ```
 
-设置数据集意味着选择任务。现在需要基于 PyTorch 的内置支持初始化数据加载器。
-这里，必须根据你的 PyTorch 版本预先安装 `torchvision` 包（如果尚未安装）。
+设置数据集意味着选择了具体的任务。现在需要基于 PyTorch 的内置支持来初始化数据加载器。
+在此，如果尚未安装 `torchvision` 包，则必须根据您的 PyTorch 版本预先安装它。
 
-如果 MNIST 数据集尚未存在于 `data_root` 目录中，`download=True` 标志将确保数据集自动下载。因此，首次运行时设置可能需要一些时间。
+如果 `data_root` 目录下尚未存在 MNIST 数据集，设置 `download=True` 标志可确保自动下载数据集。因此，首次运行时设置可能需要一些时间。
 
 ```python
 import os
@@ -109,9 +109,9 @@ test_loader = torch.utils.data.DataLoader(
 )
 ```
 
-为了加速后续过程，所有 MNIST 数据都被预加载以实现更快的执行。下面，为不同阶段预加载了三个数据集——梯度下降训练、神经进化微调和模型测试。
+为了加速后续流程，我们将预加载所有 MNIST 数据以加快执行速度。下面预加载了三个数据集，分别用于不同阶段 &ndash; 梯度下降训练、神经进化微调和模型测试。
 
-需要注意的是，这是一个以空间换时间的可选操作。是否采用取决于你的 GPU 容量，并且准备过程总是需要一些时间。
+需要注意的是，这是一个以空间换时间的可选操作。是否采用取决于您的 GPU 容量，并且准备过程总是需要花费一些时间。
 
 ```python
 # Used for gradient descent training process
@@ -132,7 +132,7 @@ pre_ne_train_loader = tuple(
 pre_test_loader = tuple([(inputs.to(device), labels.to(device)) for inputs, labels in test_loader])
 ```
 
-这里，预定义了一个 `model_test` 函数，以简化后续阶段中模型在测试数据集上的预测准确率评估。
+在此，预定义了一个 `model_test` 函数，以简化后续阶段中模型在测试数据集上的预测准确率评估。
 
 ```python
 def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, device: torch.device) -> float:
@@ -154,9 +154,9 @@ def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, devic
 
 ## 梯度下降训练（可选）
 
-首先执行基于梯度下降的模型训练。在本示例中，此训练用于初始化模型，为后续的神经进化过程做准备。
+首先执行基于梯度下降的模型训练。在本例中，采用此训练来初始化模型，为后续的神经进化过程做准备。
 
-PyTorch 中的模型训练过程与 EvoX 中的神经进化兼容，使得在后续步骤中复用相同的模型实现非常方便。
+PyTorch 中的模型训练过程与 EvoX 中的神经进化兼容，这使得在后续步骤中复用相同的模型实现变得非常方便。
 
 ```python
 def model_train(
@@ -205,9 +205,9 @@ print(f"Accuracy after gradient descent training: {gd_acc:.4f} %.")
 
 ## 神经进化微调
 
-基于前一步梯度下降过程的预训练模型，逐步应用神经进化来微调模型。
+基于前一梯度下降过程中预训练的模型，逐步应用神经进化对模型进行微调。
 
-首先，使用 `ParamsAndVector` 组件将预训练模型的权重展平为向量，作为后续神经进化过程的初始中心个体。
+首先，使用 `ParamsAndVector` 组件将预训练模型的权重展平为一个向量，该向量将作为后续神经进化过程的初始中心个体。
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
@@ -217,9 +217,9 @@ lower_bound = pop_center - 0.01
 upper_bound = pop_center + 0.01
 ```
 
-> 对于专门为神经进化设计的算法（可以直接接受批量参数字典作为输入），使用 `ParamsAndVector` 可能不是必需的。
+> 对于专门为神经进化设计的算法，如果它们可以直接接受批量参数字典作为输入，则无需使用 `ParamsAndVector`。
 
-此外，定义了一个示例评估准则。这里，选择并加权了个体模型的损失和准确率作为神经进化过程中的适应度函数。此步骤可根据优化方向进行自定义。
+此外，定义了一个示例评价标准（criterion）。在此，选取个体模型的损失（loss）和准确率（accuracy）并进行加权，作为神经进化过程中的适应度函数。此步骤可根据优化方向进行自定义。
 
 ```python
 class AccuracyCriterion(nn.Module):
@@ -260,7 +260,7 @@ weighted_criterion = WeightedCriterion(
 )
 ```
 
-同时，与梯度下降训练和模型测试过程类似，神经进化微调过程也被封装为函数，以便在后续阶段方便使用。
+同时，与梯度下降训练和模型测试过程类似，神经进化微调过程也被封装成一个函数，以便在后续阶段方便使用。
 
 ```python
 import time
@@ -293,9 +293,9 @@ def neuroevolution_process(
 
 ### 基于种群的神经进化测试
 
-在本示例中，首先测试基于种群的神经进化算法，使用粒子群优化（[PSO](#evox.algorithms.so.pso_variants.pso.PSO)）作为代表。神经进化的配置与其他优化任务类似——我们需要定义问题、算法、监视器和工作流，以及它们各自的 `setup()` 函数来完成初始化。
+在本例中，首先测试基于种群的神经进化算法，以粒子群优化算法（[PSO](#evox.algorithms.so.pso_variants.pso.PSO)）为例。神经进化的配置与其他优化任务类似 &ndash; 我们需要定义问题、算法、监控器和工作流，并调用各自的 `setup()` 函数来完成初始化。
 
-这里需要注意的关键点是，种群大小（本例中的 `POP_SIZE`）需要在**问题和算法中都进行初始化**，以避免潜在错误。
+这里需要注意的一个关键点是，种群大小（本例中为 `POP_SIZE`）需要在**问题和算法中同时**初始化，以避免潜在的错误。
 
 ```python
 POP_SIZE = 100
@@ -351,9 +351,9 @@ pop_workflow.get_submodule("monitor").plot()
 
 ### 单个体神经进化测试
 
-接下来，测试基于单个体算法的神经进化。与基于种群的情况类似，我们需要定义问题、算法、监视器和工作流，并在初始化时调用它们各自的 `setup()` 函数。在这种情况下，选择随机搜索策略作为算法。
+接下来，测试基于单个体算法的神经进化。与基于种群的情况类似，我们需要定义问题、算法、监控器和工作流，并在初始化期间调用它们各自的 `setup()` 函数。在这种情况下，选择随机搜索策略作为算法。
 
-这里需要注意的关键点是，`SupervisedLearningProblem` 应设置 `pop_size=None`，`EvalMonitor` 应设置 `topk=1`，因为只搜索单个个体。仔细的超参数设置有助于避免不必要的问题。
+这里需要注意的一个关键点是，`SupervisedLearningProblem` 应设置为 `pop_size=None`，且 `EvalMonitor` 应设置 `topk=1`，因为只搜索单个体。仔细的超参数设置有助于避免不必要的问题。
 
 ```python
 single_problem = SupervisedLearningProblem(

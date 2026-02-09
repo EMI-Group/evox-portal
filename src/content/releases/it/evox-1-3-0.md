@@ -4,7 +4,7 @@ pubDate: 2025-11-06
 summary: "Nuova funzionalità: Workflow ora accetta una lista di opt_direction. Più diverse correzioni di bug."
 ---
 
-## Funzionalita
+## Funzionalità
 
 - Workflow ora accetta una lista di `opt_direction`.
 

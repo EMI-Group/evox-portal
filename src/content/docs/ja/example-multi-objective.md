@@ -6,7 +6,7 @@ section: "examples"
 
 # 多目的アルゴリズム
 
-このノートブックでは、参照ベクトルガイド進化アルゴリズム（**RVEA**）を使用して**DTLZ2**問題の最適解を見つけます。
+このノートブックでは、Reference Vector Guided Evolutionary Algorithm (**RVEA**) を使用して、**DTLZ2** 問題の最適解を探索します。
 
 ```python
 import time
@@ -18,8 +18,8 @@ from evox.problems.numerical import DTLZ2
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-## （オプション）GPUを使用してコードを実行
-より高速な実行のためにGPU上でコードを実行することが好ましいです。ただし、GPUが利用できない場合は、CPUでの実行も許容されます。
+## (オプション) GPU を使用してコードを実行する
+高速に実行するために、GPU 上でコードを実行することが推奨されます。ただし、GPU が利用できない場合は、CPU で実行することも可能です。
 
 ```python
 # Use GPU first to run the code.
@@ -27,8 +27,8 @@ torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 print(torch.get_default_device())
 ```
 
-## 実行例：DTLZ2問題でのRVEA
-以下のコードは、`DTLZ2`問題と`RVEA`アルゴリズムをセットアップするために使用されます。問題とアルゴリズムの詳細については、ドキュメントの対応するセクションを参照してください。
+## 実行例: DTLZ2 問題に対する RVEA
+以下のコードは、`DTLZ2` 問題と `RVEA` アルゴリズムを設定するために使用されます。問題とアルゴリズムに関する詳細は、ドキュメントの該当するセクションを参照してください。
 
 ```python
 # Init the problem, algorithm and workflow.
@@ -40,7 +40,7 @@ workflow = StdWorkflow(algo, prob, monitor)
 compiled_step = torch.compile(workflow.step)
 ```
 
-このセットアップが完了したら、最適化を開始できます。多目的アルゴリズムがこの問題で100ステップ最適化するように設定します。
+これで設定が完了したので、最適化を開始できます。ここでは、この問題に対して多目的アルゴリズムを 100 ステップ実行して最適化を行うように設定します。
 
 ```python
 # Run the workflow for 100 steps

@@ -1,30 +1,30 @@
 ---
-title: "HPO efficace avec EvoX"
+title: "HPO Efficace avec EvoX"
 order: 13
 section: "examples"
 ---
 
-# HPO efficace avec EvoX
+# HPO Efficace avec EvoX
 
-Dans ce chapitre, nous explorerons comment utiliser EvoX pour l'optimisation d'hyperparamètres (HPO).
+Dans ce chapitre, nous explorerons comment utiliser EvoX pour l'optimisation des hyperparamètres (HPO).
 
-L'HPO joue un rôle crucial dans de nombreuses tâches d'apprentissage automatique mais est souvent négligée en raison de son coût computationnel élevé, qui peut parfois prendre des jours à traiter, ainsi que des défis liés au déploiement.
+L'HPO joue un rôle crucial dans de nombreuses tâches de machine learning, mais elle est souvent négligée en raison de son coût de calcul élevé, qui peut parfois prendre des jours à traiter, ainsi que des défis liés au déploiement.
 
-Avec EvoX, nous pouvons simplifier le déploiement HPO en utilisant le `HPOProblemWrapper` et atteindre un calcul efficace en exploitant la méthode `vmap` et l'accélération GPU.
+Avec EvoX, nous pouvons simplifier le déploiement de l'HPO en utilisant le `HPOProblemWrapper` et obtenir un calcul efficace en tirant parti de la méthode `vmap` et de l'accélération GPU.
 
-## Transformer le workflow en problème
+## Transformer un Workflow en Problème
 
 ![Structure HPO](/_static/HPO_structure.png)
 
-La clé du déploiement HPO avec EvoX est de transformer les `workflows` en `problems` en utilisant le `HPOProblemWrapper`. Une fois transformés, nous pouvons traiter les `workflows` comme des `problems` standard. L'entrée du 'problème HPO' consiste en les hyperparamètres, et la sortie est les métriques d'évaluation.
+La clé pour déployer l'HPO avec EvoX est de transformer les `workflows` en `problems` à l'aide du `HPOProblemWrapper`. Une fois transformés, nous pouvons traiter les `workflows` comme des `problems` standard. L'entrée du 'problème HPO' consiste en les hyperparamètres, et la sortie correspond aux métriques d'évaluation.
 
-## Le composant clé -- `HPOProblemWrapper`
+## Le Composant Clé -- `HPOProblemWrapper`
 
-Pour que le `HPOProblemWrapper` reconnaisse les hyperparamètres, nous devons les encapsuler en utilisant `Parameter`. Avec cette étape simple, les hyperparamètres seront automatiquement identifiés.
+Pour s'assurer que le `HPOProblemWrapper` reconnaisse les hyperparamètres, nous devons les envelopper en utilisant `Parameter`. Avec cette étape simple, les hyperparamètres seront automatiquement identifiés.
 
 ```python
 class ExampleAlgorithm(Algorithm):
-    def __init__(self,...):
+    def __init__(self,...): 
         self.omega = Parameter([1.0, 2.0]) # wrap the hyper-parameters with `Parameter`
         self.beta = Parameter(0.1)
         pass
@@ -36,15 +36,15 @@ class ExampleAlgorithm(Algorithm):
 
 ## Utilisation du `HPOFitnessMonitor`
 
-Nous fournissons un `HPOFitnessMonitor` qui supporte le calcul des métriques 'IGD' et 'HV' pour les problèmes multi-objectif, ainsi que la valeur minimale pour les problèmes mono-objectif.
+Nous fournissons un `HPOFitnessMonitor` qui prend en charge le calcul des métriques 'IGD' et 'HV' pour les problèmes multi-objectifs, ainsi que la valeur minimale pour les problèmes mono-objectifs.
 
-Il est important de noter que le `HPOFitnessMonitor` est un moniteur de base conçu pour les problèmes HPO. Vous pouvez également créer votre propre moniteur personnalisé de manière flexible en utilisant l'approche décrite dans [Déployer HPO avec des algorithmes personnalisés](#/guide/developer/custom_hpo_prob).
+Il est important de noter que le `HPOFitnessMonitor` est un moniteur de base conçu pour les problèmes HPO. Vous pouvez également créer votre propre moniteur personnalisé de manière flexible en utilisant l'approche décrite dans [Déployer l'HPO avec des Algorithmes Personnalisés](#/guide/developer/custom_hpo_prob).
 
 ## Un exemple simple
 
-Ici, nous démontrerons un exemple simple d'utilisation d'EvoX pour l'HPO. Plus précisément, nous utiliserons l'algorithme [PSO](#PSO) pour optimiser les hyperparamètres de l'algorithme [PSO](#PSO) pour résoudre le problème sphere.
+Ici, nous allons démontrer un exemple simple d'utilisation d'EvoX pour l'HPO. Plus précisément, nous utiliserons l'algorithme [PSO](#PSO) pour optimiser les hyperparamètres de l'algorithme [PSO](#PSO) afin de résoudre le problème de la sphère.
 
-Veuillez noter que ce chapitre ne fournit qu'un bref aperçu du déploiement HPO. Pour un guide plus détaillé, consultez [Déployer HPO avec des algorithmes personnalisés](#/guide/developer/custom_hpo_prob).
+Veuillez noter que ce chapitre ne fournit qu'un bref aperçu du déploiement de l'HPO. Pour un guide plus détaillé, reportez-vous à [Déployer l'HPO avec des Algorithmes Personnalisés](#/guide/developer/custom_hpo_prob).
 
 Pour commencer, importons les modules nécessaires.
 
@@ -67,7 +67,8 @@ class Sphere(Problem):
     def evaluate(self, x: torch.Tensor):
         return (x * x).sum(-1)
 ```
-Ensuite, nous pouvons utiliser le `StdWorkflow` pour encapsuler le `problem`, l'`algorithm` et le `monitor`. Puis nous utilisons le `HPOProblemWrapper` pour transformer le `StdWorkflow` en un problème HPO.
+
+Ensuite, nous pouvons utiliser le `StdWorkflow` pour envelopper le `problem`, l'`algorithm` et le `monitor`. Puis nous utilisons le `HPOProblemWrapper` pour transformer le `StdWorkflow` en un problème HPO.
 
 ```python
 # the inner loop is a PSO algorithm with a population size of 50
@@ -84,16 +85,16 @@ Le `HPOProblemWrapper` prend 4 arguments :
 1. `iterations` : Le nombre d'itérations à exécuter dans le processus d'optimisation.
 2. `num_instances` : Le nombre d'instances à exécuter en parallèle dans le processus d'optimisation.
 3. `workflow` : Le workflow à utiliser dans le processus d'optimisation.
-4. `copy_init_state` : Indique s'il faut copier l'état initial du workflow pour chaque évaluation. Par défaut `True`. Si votre workflow contient des opérations qui modifient EN PLACE le(s) tenseur(s) dans l'état initial, cela doit être défini à `True`. Sinon, vous pouvez le définir à `False` pour économiser de la mémoire.
+4. `copy_init_state` : Indique s'il faut copier l'état initial du workflow pour chaque évaluation. La valeur par défaut est `True`. Si votre workflow contient des opérations qui modifient sur place (IN-PLACE) le(s) tenseur(s) dans l'état initial, ceci doit être défini sur `True`. Sinon, vous pouvez le définir sur `False` pour économiser de la mémoire.
 
-Nous pouvons vérifier si le `HPOProblemWrapper` reconnaît correctement les hyperparamètres que nous définissons. Puisqu'aucune modification n'est apportée aux hyperparamètres à travers les 5 instances, ils devraient rester identiques pour toutes les instances.
+Nous pouvons vérifier si le `HPOProblemWrapper` reconnaît correctement les hyperparamètres que nous définissons. Puisqu'aucune modification n'est apportée aux hyperparamètres sur les 5 instances, ils devraient rester identiques pour toutes les instances.
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-Nous pouvons également définir un ensemble personnalisé de valeurs d'hyperparamètres. Il est important de s'assurer que le nombre d'ensembles d'hyperparamètres correspond au nombre d'instances dans le `HPOProblemWrapper`. De plus, les hyperparamètres personnalisés doivent être fournis sous forme de dictionnaire dont les valeurs sont encapsulées en utilisant le `Parameter`.
+Nous pouvons également définir un ensemble personnalisé de valeurs d'hyperparamètres. Il est important de s'assurer que le nombre d'ensembles d'hyperparamètres correspond au nombre d'instances dans le `HPOProblemWrapper`. De plus, les hyperparamètres personnalisés doivent être fournis sous forme de dictionnaire dont les valeurs sont enveloppées en utilisant `Parameter`.
 
 ```python
 params = hpo_prob.get_init_params()
@@ -109,7 +110,7 @@ Maintenant, nous utilisons l'algorithme [PSO](#PSO) pour optimiser les hyperpara
 
 Il est important de s'assurer que la taille de la population du [PSO](#PSO) correspond au nombre d'instances ; sinon, des erreurs inattendues peuvent survenir.
 
-De plus, la solution doit être transformée dans le workflow externe, car le `HPOProblemWrapper` nécessite que l'entrée soit sous forme de dictionnaire.
+De plus, la solution doit être transformée dans le workflow externe, car le `HPOProblemWrapper` nécessite que l'entrée soit sous la forme d'un dictionnaire.
 
 ```python
 class solution_transform(torch.nn.Module):

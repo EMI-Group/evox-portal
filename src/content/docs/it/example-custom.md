@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # Algoritmo e Problema Personalizzati
-In questo notebook, mostreremo come usare `Algorithm` e `Problem` per creare un algoritmo e un problema personalizzati. Qui daremo un esempio di **implementazione di un algoritmo PSO che risolve il problema Sphere**.
+In questo notebook, mostreremo come utilizzare `Algorithm` e `Problem` per creare un algoritmo e un problema personalizzati. Qui forniremo un esempio di **implementazione di un algoritmo PSO che risolve il problema Sphere**.
 
 
 ```python
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Esempio di algoritmo: algoritmo PSO
 
-L'Ottimizzazione a Sciame di Particelle (PSO) è un algoritmo meta-euristico basato sulla popolazione ispirato al comportamento sociale degli uccelli e dei pesci. È ampiamente usato per risolvere problemi di ottimizzazione continui e discreti.
+La Particle Swarm Optimization (PSO) è un algoritmo metaeuristico basato sulla popolazione ispirato al comportamento sociale di uccelli e pesci. È ampiamente utilizzato per risolvere problemi di ottimizzazione continui e discreti.
 
 **Ecco un esempio di implementazione dell'algoritmo PSO in EvoX:**
 
@@ -107,7 +107,7 @@ class PSO(Algorithm):
 
 ## Esempio di problema: problema Sphere
 
-Il problema Sphere è un problema di ottimizzazione benchmark semplice ma fondamentale usato per testare gli algoritmi di ottimizzazione.
+Il problema Sphere è un problema di ottimizzazione benchmark semplice ma fondamentale, utilizzato per testare gli algoritmi di ottimizzazione.
 
 La funzione Sphere è definita come:
 
@@ -125,9 +125,9 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## Usa l'algoritmo per risolvere il problema
+## Utilizzare l'algoritmo per risolvere il problema
 
-### Inizializza l'algoritmo, il problema e il monitor
+### Inizializzare l'algoritmo, il problema e il monitor
 
 ```python
 algorithm = PSO(
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Inizializza il workflow ed eseguilo
+### Inizializzare il workflow ed eseguirlo
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

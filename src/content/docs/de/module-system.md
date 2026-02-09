@@ -6,15 +6,15 @@ section: "developer"
 
 # Arbeiten mit Modulen in EvoX
 
-Ein **Modul** ist ein grundlegendes Konzept in der Programmierung, das sich auf eine eigenständige Codeeinheit bezieht, die eine bestimmte Aufgabe oder eine Reihe verwandter Aufgaben ausführen soll.
+Ein **Modul** ist ein grundlegendes Konzept in der Programmierung, das sich auf eine eigenständige Code-Einheit bezieht, die dazu entworfen wurde, eine bestimmte Aufgabe oder eine Reihe zusammenhängender Aufgaben auszuführen.
 
-Dieses Notebook stellt das grundlegende Modul in EvoX vor: `ModuleBase`.
+Dieses Notebook stellt das Basismodul in EvoX vor: `ModuleBase`.
 
 ## Einführung in Module
 
-Im [Tutorial](#/tutorial/index) haben wir den grundlegenden Ausführungsprozess in EvoX erwähnt:
+Im [Tutorial](#/tutorial/index) haben wir den grundlegenden Ablauf in EvoX erwähnt:
 
-<center><b>Einen Algorithmus und ein Problem initiieren -- Einen Monitor einrichten -- Einen Workflow initiieren -- Den Workflow ausführen</b></center>
+<center><b>Einen Algorithmus und ein Problem initialisieren -- Einen Monitor einrichten -- Einen Workflow initialisieren -- Den Workflow ausführen</b></center>
 
 Dieser Prozess erfordert vier grundlegende Klassen in EvoX:
 
@@ -24,47 +24,47 @@ Dieser Prozess erfordert vier grundlegende Klassen in EvoX:
 - `Workflow`
 
 
-Es ist notwendig, ein einheitliches Modul für sie bereitzustellen. In EvoX erben alle vier Klassen vom Basismodul -- `ModuleBase`.
+Es ist notwendig, ein einheitliches Modul für sie bereitzustellen. In EvoX erben alle vier Klassen vom Basismodul — `ModuleBase`.
 
-![Module base](/_static/modulebase.png)
+![Modulbasis](/_static/modulebase.png)
 
-## ModuleBase-Klasse
+## Die Klasse ModuleBase
 
-Die `ModuleBase`-Klasse erbt von [`torch.nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#).
+Die Klasse `ModuleBase` erbt von [`torch.nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#).
 
-Es gibt viele Methoden in dieser Klasse, und einige wichtige Methoden sind hier aufgeführt:
+Es gibt viele Methoden in dieser Klasse; hier sind einige wichtige Methoden:
 
-| Methode            | Signatur                                                    | Verwendung                                                        |
+| Methode           | Signatur                                                     | Verwendung                                                   |
 | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `__init__`        | `(self, ...)`                                                | Initialisiert das Modul.                                       |
+| `__init__`        | `(self, ...)`                                                | Initialisiert das Modul.                                     |
 | `load_state_dict` | `(self, state_dict: Mapping[str, torch.Tensor], copy: bool = False, ...)` | Kopiert Parameter und Puffer aus `state_dict` in dieses Modul und seine Nachkommen. Es überschreibt [`torch.nn.Module.load_state_dict`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.load_state_dict). |
-| `add_mutable`     | `(self, name: str, value: Union[torch.Tensor \| nn.Module, Sequence[torch.Tensor \| nn.Module], Dict[str, torch.Tensor \| nn.Module]]) -> None` | Definiert einen veränderbaren Wert in diesem Modul, auf den über `self.[name]` zugegriffen und der in-place modifiziert werden kann. |
+| `add_mutable`     | `(self, name: str, value: Union[torch.Tensor \| nn.Module, Sequence[torch.Tensor \| nn.Module], Dict[str, torch.Tensor \| nn.Module]]) -> None` | Definiert einen veränderlichen Wert in diesem Modul, auf den über `self.[name]` zugegriffen werden kann und der in-place modifiziert wird. |
 
 ## Rolle des Moduls
 
-In EvoX kann `ModuleBase` helfen bei:
+In EvoX hilft `ModuleBase` dabei:
 
-- **Veränderbare Werte enthalten**
+- **Veränderliche Werte enthalten**
 
-	Dieses Modul ist ein objektorientiertes Modul, das veränderbare Werte enthalten kann.
+​	Dieses Modul ist objektorientiert und kann veränderliche Werte enthalten.
 
 - **Funktionale Programmierung unterstützen**
 
-	Das funktionale Programmiermodell wird über `self.state_dict()` und `self.load_state_dict(...)` unterstützt.
+​	Das funktionale Programmiermodell wird über `self.state_dict()` und `self.load_state_dict(...)` unterstützt.
 
-- **Initialisierung standardisieren**:
+- **Die Initialisierung standardisieren**:
 
-	Grundsätzlich sollten vordefinierte Submodule, die zu diesem Modul HINZUGEFÜGT und später in Mitgliedsmethoden aufgerufen werden, als "nicht-statische Mitglieder" behandelt werden, während alle anderen Mitglieder als "statische Mitglieder" behandelt werden sollten.
+​	Grundsätzlich sollten vordefinierte Submodule, die diesem Modul HINZUGEFÜGT werden und auf die später in Member-Methoden zugegriffen wird, als „nicht-statische Member“ behandelt werden, während alle anderen Member als „statische Member“ behandelt werden sollten.
 
-	Die Modulinitialisierung für nicht-statische Mitglieder wird empfohlen, in der überschriebenen Methode von `setup` (oder einer anderen Mitgliedsmethode) statt in `__init__` geschrieben zu werden.
+​	Es wird empfohlen, die Modulinitialisierung für nicht-statische Member in der überschriebenen `setup`-Methode (oder einer anderen Member-Methode) anstatt in `__init__` vorzunehmen.
 
-## Verwendung des Moduls
+## Verwendung von Modulen
 
 Konkret gibt es einige Regeln für die Verwendung von `ModuleBase` in EvoX:
 
 ### Statische Methoden
 
-Statische Methoden, die JIT-kompiliert werden sollen, werden wie folgt definiert:
+Statische Methoden, die JIT-kompiliert werden sollen, müssen wie folgt definiert werden:
 
 ```Python
 # One example of the static method defined in a Module
@@ -75,5 +75,5 @@ def func(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
 ```
 ### Nicht-statische Methoden
 
-Wenn eine Methode mit dynamischen Python-Kontrollflüssen wie `if` mit `vmap` verwendet werden soll,
+Wenn eine Methode mit dynamischen Python-Kontrollflüssen wie `if` zusammen mit `vmap` verwendet werden soll,
 verwenden Sie bitte [`torch.cond`](https://pytorch.org/docs/main/generated/torch.cond.html#torch.cond), um den Kontrollfluss explizit zu definieren.

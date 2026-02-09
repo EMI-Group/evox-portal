@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # Algoritmo e Problema Personalizados
-Neste notebook, mostraremos como utilizar as classes `Algorithm` e `Problem` para criar um algoritmo e problema personalizados. Aqui daremos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
+Neste notebook, mostraremos como utilizar o `Algorithm` e o `Problem` para criar um algoritmo e um problema personalizados. Aqui daremos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
 
 
 ```python
@@ -16,9 +16,9 @@ from evox.utils import clamp
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-## Exemplo de Algoritmo: algoritmo PSO
+## Exemplo de Algoritmo: Algoritmo PSO
 
-A Otimização por Enxame de Partículas (PSO) é um algoritmo meta-heurístico baseado em população inspirado no comportamento social de aves e peixes. É amplamente utilizado para resolver problemas de otimização contínuos e discretos.
+A Optimização por Enxame de Partículas (Particle Swarm Optimization - PSO) é um algoritmo meta-heurístico baseado em populações, inspirado no comportamento social de aves e peixes. É amplamente utilizado para resolver problemas de optimização contínuos e discretos.
 
 **Aqui está um exemplo de implementação do algoritmo PSO no EvoX:**
 
@@ -105,9 +105,9 @@ class PSO(Algorithm):
         self.global_best_fit = torch.min(self.fit)
 ```
 
-## Exemplo de Problema: problema Sphere
+## Exemplo de Problema: Problema Sphere
 
-O problema Sphere é um problema de otimização de referência simples, mas fundamental, utilizado para testar algoritmos de otimização.
+O problema Sphere é um problema de optimização de referência (benchmark) simples, mas fundamental, utilizado para testar algoritmos de optimização.
 
 A função Sphere é definida como:
 
@@ -127,7 +127,7 @@ class Sphere(Problem):
 
 ## Utilizar o algoritmo para resolver o problema
 
-### Iniciar o algoritmo, problema e monitor
+### Inicializar o algoritmo, o problema e o monitor
 
 ```python
 algorithm = PSO(
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Iniciar o workflow e executá-lo
+### Inicializar o workflow e executá-lo
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

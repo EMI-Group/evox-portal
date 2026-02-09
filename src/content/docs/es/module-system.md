@@ -1,22 +1,22 @@
 ---
-title: "Trabajando con Modulos en EvoX"
+title: "Trabajando con Module en EvoX"
 order: 4
 section: "developer"
 ---
 
-# Trabajando con Modulos en EvoX
+# Trabajando con Module en EvoX
 
-Un **modulo** es un concepto fundamental en programacion que se refiere a una unidad de codigo autocontenida disenada para realizar una tarea especifica o un conjunto de tareas relacionadas.
+Un **module** es un concepto fundamental en programación que se refiere a una unidad de código autónoma diseñada para realizar una tarea específica o un conjunto de tareas relacionadas.
 
-Este cuaderno presentara el modulo basico en EvoX: `ModuleBase`.
+Este notebook presentará el módulo básico en EvoX: `ModuleBase`.
 
-## Introduccion a los Modulos
+## Introducción a Module
 
-En el [tutorial](#/tutorial/index), hemos mencionado el proceso basico de ejecucion en EvoX:
+En el [tutorial](#/tutorial/index), hemos mencionado el proceso de ejecución básico en EvoX:
 
-<center><b>Iniciar un algoritmo y un problema -- Establecer un monitor -- Iniciar un flujo de trabajo -- Ejecutar el flujo de trabajo</b></center>
+<center><b>Iniciar un algoritmo y un problema -- Configurar un monitor -- Iniciar un workflow -- Ejecutar el workflow</b></center>
 
-Este proceso requiere cuatro clases basicas en EvoX:
+Este proceso requiere cuatro clases básicas en EvoX:
 
 - `Algorithm`
 - `Problem`
@@ -24,47 +24,47 @@ Este proceso requiere cuatro clases basicas en EvoX:
 - `Workflow`
 
 
-Es necesario proporcionar un modulo unificado para ellos. En EvoX, las cuatro clases heredan del modulo base -- `ModuleBase`.
+Es necesario proporcionar un módulo unificado para ellas. En EvoX, las cuatro clases heredan del módulo base: `ModuleBase`.
 
-![Module base](/_static/modulebase.png)
+![Base de Module](/_static/modulebase.png)
 
 ## Clase ModuleBase
 
 La clase `ModuleBase` hereda de [`torch.nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#).
 
-Hay muchos metodos en esta clase, y algunos metodos importantes son:
+Existen muchos métodos en esta clase, y aquí se presentan algunos de los más importantes:
 
-| Metodo            | Firma                                                    | Uso                                                        |
+| Método            | Firma                                                        | Uso                                                        |
 | ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `__init__`        | `(self, ...)`                                                | Inicializar el modulo.                                       |
-| `load_state_dict` | `(self, state_dict: Mapping[str, torch.Tensor], copy: bool = False, ...)` | Copiar parametros y buffers desde `state_dict` a este modulo y sus descendientes. Sobreescribe [`torch.nn.Module.load_state_dict`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.load_state_dict). |
-| `add_mutable`     | `(self, name: str, value: Union[torch.Tensor \| nn.Module, Sequence[torch.Tensor \| nn.Module], Dict[str, torch.Tensor \| nn.Module]]) -> None` | Definir un valor mutable en este modulo que puede ser accedido via `self.[name]` y modificado in situ. |
+| `__init__`        | `(self, ...)`                                                | Inicializa el módulo.                                       |
+| `load_state_dict` | `(self, state_dict: Mapping[str, torch.Tensor], copy: bool = False, ...)` | Copia los parámetros y buffers de `state_dict` en este módulo y sus descendientes. Sobrescribe [`torch.nn.Module.load_state_dict`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.load_state_dict). |
+| `add_mutable`     | `(self, name: str, value: Union[torch.Tensor \| nn.Module, Sequence[torch.Tensor \| nn.Module], Dict[str, torch.Tensor \| nn.Module]]) -> None` | Define un valor mutable en este módulo al que se puede acceder a través de `self.[name]` y modificar in-place. |
 
-## Rol del Modulo
+## Papel de Module
 
-En EvoX, el `ModuleBase` puede ayudar a:
+En EvoX, `ModuleBase` puede ayudar a:
 
 - **Contener valores mutables**
 
-	Este modulo es uno orientado a objetos que puede contener valores mutables.
+​	Este módulo es de tipo orientado a objetos y puede contener valores mutables.
 
-- **Soportar programacion funcional**
+- **Soportar programación funcional**
 
-	El modelo de programacion funcional es soportado via `self.state_dict()` y `self.load_state_dict(...)`.
+​	El modelo de programación funcional es compatible a través de `self.state_dict()` y `self.load_state_dict(...)`.
 
-- **Estandarizar la inicializacion**:
+- **Estandarizar la inicialización**:
 
-	Basicamente, los submodulo(s) predefinidos que seran AGREGADOS a este modulo y accedidos posteriormente en metodo(s) miembro deben tratarse como "miembros no estaticos", mientras que cualquier otro miembro(s) debe tratarse como "miembros estaticos".
+​	Básicamente, los sub-módulos predefinidos que se AÑADIRÁN a este módulo y a los que se accederá más tarde en los métodos miembro deben tratarse como "miembros no estáticos", mientras que cualquier otro miembro debe tratarse como "miembro estático".
 
-	La inicializacion del modulo para miembros no estaticos se recomienda escribirla en el metodo sobreescrito de `setup` (o cualquier otro metodo miembro) en lugar de `__init__`.
+​	Se recomienda que la inicialización del módulo para los miembros no estáticos se escriba en el método sobrescrito `setup` (o cualquier otro método miembro) en lugar de en `__init__`.
 
-## Uso del Modulo
+## Uso de Module
 
-Especificamente, hay algunas reglas para usar `ModuleBase` en EvoX:
+Específicamente, existen algunas reglas para usar `ModuleBase` en EvoX:
 
-### Metodos estaticos
+### Métodos estáticos
 
-Los metodos estaticos para JIT deben definirse como:
+Los métodos estáticos que vayan a ser procesados por JIT deben definirse de la siguiente manera:
 
 ```Python
 # One example of the static method defined in a Module
@@ -73,7 +73,6 @@ Los metodos estaticos para JIT deben definirse como:
 def func(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
     return x + y
 ```
-### Metodos no estaticos
+### Métodos no estáticos
 
-Si un metodo con flujos de control dinamicos de Python como `if` fuera a usarse con `vmap`,
-por favor use [`torch.cond`](https://pytorch.org/docs/main/generated/torch.cond.html#torch.cond) para definir explicitamente el flujo de control.
+Si se va a utilizar un método con flujos de control dinámicos de Python como `if` con `vmap`, por favor use [`torch.cond`](https://pytorch.org/docs/main/generated/torch.cond.html#torch.cond) para definir explícitamente el flujo de control.

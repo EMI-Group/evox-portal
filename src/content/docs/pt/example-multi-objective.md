@@ -6,7 +6,7 @@ section: "examples"
 
 # Algoritmo Multi-Objetivo
 
-Neste notebook, utilizaremos o Algoritmo Evolutivo Guiado por Vetores de Referência (**RVEA**) para encontrar as soluções ótimas do problema **DTLZ2**.
+Neste notebook, utilizaremos o Reference Vector Guided Evolutionary Algorithm (**RVEA**) para encontrar as soluções ótimas do problema **DTLZ2**.
 
 ```python
 import time
@@ -19,7 +19,7 @@ from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
 ## (Opcional) Utilizar GPU para executar o código
-Frequentemente preferimos executar o nosso código numa GPU para execução mais rápida. No entanto, se uma GPU não estiver disponível, executar no CPU também é aceitável.
+Muitas vezes preferimos executar o nosso código numa GPU para uma execução mais rápida. No entanto, se uma GPU não estiver disponível, a execução numa CPU também é aceitável.
 
 ```python
 # Use GPU first to run the code.
@@ -28,7 +28,7 @@ print(torch.get_default_device())
 ```
 
 ## Exemplo de execução: RVEA no problema DTLZ2
-O código seguinte é utilizado para configurar o problema `DTLZ2` e o algoritmo `RVEA`. Mais informações sobre o problema e o algoritmo podem ser encontradas na secção correspondente da documentação.
+O código seguinte é utilizado para configurar o problema `DTLZ2` e o algoritmo `RVEA`. Pode encontrar mais informações sobre o problema e o algoritmo na secção correspondente da documentação.
 
 ```python
 # Init the problem, algorithm and workflow.
@@ -40,7 +40,7 @@ workflow = StdWorkflow(algo, prob, monitor)
 compiled_step = torch.compile(workflow.step)
 ```
 
-Com esta configuração em vigor, podemos agora começar a otimizar. Definimos que o algoritmo multi-objetivo otimize durante 100 passos neste problema
+Com esta configuração preparada, podemos agora começar a otimizar. Definimos que o algoritmo multi-objetivo otimize durante 100 passos neste problema.
 
 ```python
 # Run the workflow for 100 steps

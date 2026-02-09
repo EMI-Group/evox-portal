@@ -6,7 +6,7 @@ section: "examples"
 
 # Algoritmo Multiobjetivo
 
-Neste notebook, usaremos o Algoritmo Evolutivo Guiado por Vetor de Referência (**RVEA**) para encontrar as soluções ótimas do problema **DTLZ2**.
+Neste notebook, usaremos o Reference Vector Guided Evolutionary Algorithm (**RVEA**) para encontrar as soluções ótimas do problema **DTLZ2**.
 
 ```python
 import time
@@ -18,11 +18,11 @@ from evox.problems.numerical import DTLZ2
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-## (Opcional) Usar GPU para executar o código
-Frequentemente preferimos executar nosso código em uma GPU para execução mais rápida. No entanto, se uma GPU não estiver disponível, executar na CPU também é aceitável.
+## (Opcional) Use GPU para executar o código
+Muitas vezes preferimos executar nosso código em uma GPU para uma execução mais rápida. No entanto, se uma GPU não estiver disponível, a execução em uma CPU também é aceitável.
 
 ```python
-# Use GPU primeiro para executar o código.
+# Use GPU first to run the code.
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 print(torch.get_default_device())
 ```
@@ -31,7 +31,7 @@ print(torch.get_default_device())
 O código a seguir é usado para configurar o problema `DTLZ2` e o algoritmo `RVEA`. Mais informações sobre o problema e o algoritmo podem ser encontradas na seção correspondente da documentação.
 
 ```python
-# Inicializar o problema, algoritmo e workflow.
+# Init the problem, algorithm and workflow.
 prob = DTLZ2(m=3)
 pf = prob.pf()
 algo = RVEA(pop_size=100, n_objs=3, lb=-torch.zeros(12), ub=torch.ones(12))
@@ -40,10 +40,10 @@ workflow = StdWorkflow(algo, prob, monitor)
 compiled_step = torch.compile(workflow.step)
 ```
 
-Com essa configuração pronta, podemos agora começar a otimizar. Definimos que o algoritmo multiobjetivo otimize por 100 passos neste problema.
+Com essa configuração pronta, podemos agora começar a otimizar. Definimos para deixar o algoritmo multiobjetivo otimizar por 100 passos neste problema.
 
 ```python
-# Executar o workflow por 100 passos
+# Run the workflow for 100 steps
 t = time.time()
 workflow.init_step()
 for i in range(100):

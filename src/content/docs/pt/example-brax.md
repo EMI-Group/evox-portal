@@ -6,8 +6,8 @@ section: "examples"
 
 # Resolver Problemas Brax no EvoX
 
-O EvoX aprofunda-se na neuroevolução com o Brax.
-Aqui mostraremos um exemplo de resolução de um problema Brax no EvoX.
+O EvoX mergulha profundamente na neuroevolução com o Brax.
+Aqui mostraremos um exemplo de como resolver um problema Brax no EvoX.
 
 ```python
 # install EvoX and Brax, skip it if you have already installed EvoX or Brax
@@ -33,17 +33,17 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## O que é o Brax
 
-O Brax é um motor de física rápido e totalmente diferenciável utilizado para investigação e desenvolvimento de robótica, perceção humana, ciência de materiais, aprendizagem por reforço e outras aplicações intensivas em simulação.
+O Brax é um motor de física rápido e totalmente diferenciável, utilizado para investigação e desenvolvimento de robótica, perceção humana, ciência dos materiais, aprendizagem por reforço (reinforcement learning) e outras aplicações com simulação intensiva. 
 
-Aqui demonstraremos um ambiente "swimmer" do Brax.
+Aqui demonstraremos um ambiente "swimmer" do Brax. 
 
-Para mais informações, pode consultar o [Github do Brax](https://github.com/google/brax).
+Para mais informações, pode navegar no [Github do Brax](https://github.com/google/brax).
 
-## Conceber uma classe de rede neuronal
+## Projetar uma classe de rede neuronal
 
 Para começar, precisamos de decidir que rede neuronal vamos construir.
 
-Aqui daremos uma classe simples de Perceptrão Multicamada (MLP).
+Aqui apresentaremos uma classe simples de Multilayer Perceptron (MLP). 
 
 ```python
 # Construct an MLP using PyTorch.
@@ -60,9 +60,9 @@ class SimpleMLP(nn.Module):
         return torch.tanh(x)
 ```
 
-## Iniciar um modelo
+## Inicializar um modelo
 
-Através da classe ``SimpleMLP``, podemos iniciar um modelo MLP.
+Através da classe `SimpleMLP`, podemos inicializar um modelo MLP.
 
 ```python
 # Make sure that the model is on the same device, better to be on the GPU
@@ -76,21 +76,21 @@ torch.cuda.manual_seed_all(seed)
 model = SimpleMLP().to(device)
 ```
 
-### Iniciar um adaptador
+### Inicializar um adaptador
 
-Um adaptador pode ajudar-nos a converter os dados de ida e volta.
+Um adaptador pode ajudar-nos a converter os dados de um formato para o outro.
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-Com um adaptador, podemos começar esta Tarefa de Neuroevolução.
+Com um adaptador, podemos começar a realizar esta tarefa de Neuroevolução.
 
 ## Configurar o processo de execução
 
-### Iniciar um algoritmo e um problema
+### Inicializar um algoritmo e um problema
 
-Iniciamos um [algoritmo PSO](#evox.algorithms.so.pso_variants.pso.PSO), e o problema é um [problema Brax](#evox.problems.neuroevolution.brax.BraxProblem) no ambiente "swimmer".
+Inicializamos um [algoritmo PSO](#evox.algorithms.so.pso_variants.pso.PSO), e o problema é um [problema Brax](#evox.problems.neuroevolution.brax.BraxProblem) no ambiente "swimmer".
 
 ```python
 # Set the population size
@@ -121,9 +121,9 @@ problem = BraxProblem(
 )
 ```
 
-Neste caso, utilizaremos 1000 passos para cada episódio, e a recompensa média de 3 episódios será retornada como o valor de aptidão.
+Neste caso, utilizaremos 1000 passos para cada episódio, e a recompensa média de 3 episódios será devolvida como o valor de fitness.
 
-### Definir um monitor
+### Configurar um monitor
 
 ```python
 # set an monitor, and it can record the top 3 best fitnesses
@@ -133,7 +133,7 @@ monitor = EvalMonitor(
 )
 ```
 
-### Iniciar um workflow
+### Inicializar um workflow
 
 ```python
 # Initiate an workflow
@@ -149,10 +149,10 @@ workflow = StdWorkflow(
 
 ### Executar o workflow
 
-Execute o workflow e veja a magia!
+Execute o workflow e veja a magia acontecer!
 
 > **Nota:**
-> O bloco seguinte levará cerca de 20 minutos a executar.
+> O bloco seguinte demorará cerca de 20 minutos a ser executado.
 > O tempo pode variar dependendo do seu hardware.
 
 ```python
@@ -187,7 +187,7 @@ HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="
 ```
 
 > **Importante:**
-> - Normalmente, apenas precisa de `HTML(problem.visualize(best_params))` para renderizar. O código acima é uma solução alternativa para garantir que o resultado é exibido corretamente no nosso website.
-> - O algoritmo PSO não está especificamente otimizado para este tipo de tarefa, portanto são esperadas limitações de desempenho. Este exemplo é para fins de demonstração.
+> - Normalmente, apenas precisa de `HTML(problem.visualize(best_params))` para renderizar. O código acima é uma solução alternativa para garantir que o resultado seja exibido corretamente no nosso website.
+> - O algoritmo PSO não está especificamente otimizado para este tipo de tarefa, pelo que são esperadas limitações de desempenho. Este exemplo serve apenas para fins de demonstração.
 
-Esperamos que se divirta a resolver problemas Brax com o EvoX!
+Esperamos que goste de resolver problemas Brax com o EvoX e que se divirta!

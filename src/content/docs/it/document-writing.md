@@ -6,27 +6,27 @@ section: "developer"
 
 # Guida alla Scrittura della Documentazione
 
-Questa guida descrive le migliori pratiche per scrivere e mantenere la documentazione nel codebase e nei file supplementari.
+Questa guida delinea le migliori pratiche per scrivere e mantenere la documentazione all'interno del codice base e dei file supplementari.
 
 ---
 
 ## Documentazione nel Codice (Docstring)
 
-Le docstring sono essenziali per comprendere lo scopo, l'utilizzo e il comportamento del codice. Si prega di rispettare le seguenti convenzioni:
+Le docstring sono essenziali per comprendere lo scopo, l'utilizzo e il comportamento del codice. Si prega di attenersi alle seguenti convenzioni:
 
 ### Regole Generali
 
-- Documenta **tutte le classi, i metodi e le funzioni pubbliche** usando le docstring.
-- Usa docstring in **stile Sphinx**.
-- **Non** includere i tipi dei parametri nella docstring — ci si aspetta che siano dichiarati nella firma della funzione usando i type hint.
+- Documentare **tutte le classi, i metodi e le funzioni pubbliche** utilizzando le docstring.
+- Utilizzare docstring in **stile Sphinx**.
+- **Non** includere i tipi dei parametri nella docstring: si prevede che vengano dichiarati nella firma della funzione utilizzando i type hint.
 
 ### Formato e Direttive
 
-Usa le seguenti direttive per descrivere i diversi elementi:
+Utilizzare le seguenti direttive per descrivere i diversi elementi:
 
-- `:param <name>:` — Descrivi un parametro.
-- `:return:` — Descrivi il valore di ritorno.
-- `:raises <exception>:` — Descrivi le eccezioni che la funzione potrebbe sollevare.
+- `:param <name>:` — Descrive un parametro.
+- `:return:` — Descrive il valore di ritorno.
+- `:raises <exception>:` — Descrive le eccezioni che la funzione potrebbe sollevare.
 
 #### Esempio
 
@@ -53,19 +53,19 @@ Tutta la documentazione a livello di progetto si trova nella directory `docs/`. 
 
 ### Formato
 
-- Usa **Markdown (`.md`)** o **Jupyter Notebook (`.ipynb`)** per la documentazione.
-- Il Markdown è preferito per contenuti narrativi e documentazione statica.
-- Usa i Jupyter Notebook per contenuti eseguibili e interattivi (ad es. tutorial o demo).
+- Utilizzare **Markdown (`.md`)** o **Jupyter Notebooks (`.ipynb`)** per la documentazione.
+- Markdown è preferito per contenuti narrativi e documentazione statica.
+- Utilizzare i Jupyter Notebooks per contenuti eseguibili e interattivi (ad es. tutorial o demo).
 
-### Linee Guida per i Jupyter Notebook
+### Linee Guida per Jupyter Notebook
 
-- Assicurati che tutti i notebook siano **completamente eseguibili**.
-- **Esegui sempre tutte le celle** e **salva l'output** prima di fare il commit.
+- Assicurarsi che tutti i notebook siano **completamente eseguibili**.
+- **Eseguire sempre tutte le celle** e **salvare l'output** prima di effettuare il commit.
 - Il nostro ambiente CI/CD **non supporta l'esecuzione su GPU**, quindi i notebook devono essere pre-eseguiti localmente.
 
 ### Direttive Markdown e Notebook
 
-Usa i seguenti pattern per la formattazione avanzata:
+Utilizzare i seguenti pattern per una formattazione avanzata:
 
 - `[name](#ref)` — Riferimento incrociato interno, ad es. `[ModuleBase](#evox.core.module.ModuleBase)` o `[ModuleBase](#ModuleBase)`
 - `![Alt Text](path)` — Incorpora immagini, ad es. `![Module base](/_static/modulebase.png)`
@@ -74,7 +74,7 @@ Usa i seguenti pattern per la formattazione avanzata:
 
 ## Traduzione
 
-La documentazione supporta contenuti multilingue. Segui i passaggi seguenti per aggiornare o generare le traduzioni.
+La documentazione supporta contenuti multilingue. Seguire i passaggi seguenti per aggiornare o generare traduzioni.
 
 ### Aggiornamento delle Traduzioni (ad es. per `zh_CN`)
 

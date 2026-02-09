@@ -1,28 +1,28 @@
 ---
-title: "EvoRL: un framework accelerato da GPU per il Reinforcement Learning evolutivo"
+title: "EvoRL: Un Framework Accelerato su GPU per l'Evolutionary Reinforcement Learning"
 pubDate: 2025-01-14
-summary: "EvoRL è un framework open source di Reinforcement Learning evolutivo che integra algoritmi evolutivi con il RL per migliorare l'esplorazione e l'adattabilità."
+summary: "EvoRL è un framework open-source di Evolutionary Reinforcement Learning che integra algoritmi evolutivi con l'RL per una migliore esplorazione e adattabilità."
 ---
 
-Il **team EvoX** ha ufficialmente lanciato **EvoRL** (<https://github.com/EMI-Group/evorl>), un framework open source di **Reinforcement Learning Evolutivo (EvoRL)**. Ora disponibile su [GitHub](https://github.com/EMI-Group/evorl), EvoRL e progettato per spingere i confini del reinforcement learning (RL) integrando **algoritmi evolutivi (EA)** per migliorare l'esplorazione, l'adattabilita e l'efficienza in ambienti decisionali complessi.
+Il **team EvoX** ha lanciato ufficialmente **EvoRL** (<https://github.com/EMI-Group/evorl>), un framework open-source di **Evolutionary Reinforcement Learning (EvoRL)**. Ora disponibile su [GitHub](https://github.com/EMI-Group/evorl), EvoRL è progettato per spingere i confini del reinforcement learning (RL) integrando **algoritmi evolutivi (EAs)** per migliorare l'esplorazione, l'adattabilità e l'efficienza in ambienti decisionali complessi.
 
-**Ridefinire il Reinforcement Learning con l'evoluzione**
+**Ridefinire il Reinforcement Learning con l'Evoluzione**
 
-Il reinforcement learning tradizionale si basa fortemente sull'ottimizzazione basata su gradienti, che puo incontrare difficolta con **ricompense sparse, ambienti non differenziabili e spazi di ricerca ad alta dimensionalita**. EvoRL supera queste sfide combinando:
+Il reinforcement learning tradizionale si affida pesantemente all'ottimizzazione basata sul gradiente, che può avere difficoltà con **ricompense sparse, ambienti non differenziabili e spazi di ricerca ad alta dimensione**. EvoRL supera queste sfide combinando:
 
-* **Algoritmi evolutivi** per l'**esplorazione globale** e la diversita delle policy.
-* **Reinforcement learning** per l'**adattamento fine** in ambienti complessi.
-  Questo approccio ibrido consente un **apprendimento piu rapido, una maggiore robustezza e una migliore generalizzazione** in un'ampia gamma di applicazioni.
+* **Algoritmi evolutivi** per l'**esplorazione globale** e la diversità delle policy.
+* **Reinforcement learning** per un'**adattamento di precisione** in ambienti complessi.
+  Questo approccio ibrido consente **un apprendimento più rapido, una maggiore robustezza e una migliore generalizzazione** in una vasta gamma di applicazioni.
 
-**Caratteristiche principali di EvoRL**
+**Caratteristiche Chiave di EvoRL**
 
-![](/images/articles/metade-2.svg) **Architettura modulare ed estensibile** -- Personalizza facilmente i componenti evolutivi e di RL per vari compiti.
+![](/images/articles/metade-2.svg) **Architettura Modulare ed Estensibile** – Personalizza facilmente componenti evolutivi e RL per vari compiti.
 ![](/images/articles/metade-2.svg)
 
-**Promuovere l'innovazione nella ricerca e nell'industria dell'IA**
+**Guidare l'Innovazione nella Ricerca AI e nell'Industria**
 
-Sviluppato dal **team EvoX**, EvoRL rappresenta un passo importante verso il **collegamento tra algoritmi evolutivi e reinforcement learning**. Questo approccio ha gia dimostrato risultati promettenti in aree come il **controllo robotico, l'ottimizzazione finanziaria e la modellazione di sistemi complessi**.
+Sviluppato dal **team EvoX**, EvoRL rappresenta un passo importante verso il **collegamento tra algoritmi evolutivi e reinforcement learning**. Questo approccio ha già dimostrato risultati promettenti in aree come **il controllo robotico, l'ottimizzazione finanziaria e la modellazione di sistemi complessi**.
 
-EvoRL fa parte del piu ampio **ecosistema EvoX** del team EvoX, che include **EvoX, EvoNAS, EvoGP e EvoSurrogate**, promuovendo l'innovazione open source nell'IA evolutiva.
+EvoRL fa parte del più ampio **ecosistema EvoX** del team EvoX, che include **EvoX, EvoNAS, EvoGP ed EvoSurrogate**, favorendo l'innovazione open-source nell'AI evolutiva.
 
-Restate sintonizzati per aggiornamenti, articoli di ricerca e discussioni della comunita mentre EvoRL plasma il futuro del **Reinforcement Learning Evolutivo.**
+Rimanete sintonizzati per aggiornamenti, paper di ricerca e discussioni della community mentre EvoRL plasma il futuro dell'**Evolutionary Reinforcement Learning.**

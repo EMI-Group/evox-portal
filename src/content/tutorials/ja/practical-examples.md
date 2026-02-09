@@ -1,23 +1,23 @@
 ---
-title: "7. 実践例"
+title: "7. 実践的な例"
 order: 7
 ---
 
-# 7. 実践例
+# 7. 実践的な例
 
-この章では、前の章で学んだ知識を応用する方法を示すために、いくつかの完全で実践的な例を紹介します。ゼロから最適化プロジェクトを構築し、EvoXを他のツールと統合する方法を紹介します。これらの例はさまざまな問題タイプをカバーしており、実際のシナリオでEvoXを適用するのに役立ちます。
+この章では、前の章で得た知識をどのように適用するかを示すために、いくつかの完全で実践的な例を紹介します。最適化プロジェクトをゼロから構築し、EvoXを他のツールと統合する方法を紹介します。これらの例は、実際のシナリオでEvoXを適用するのに役立つよう、さまざまな種類の問題をカバーしています。
 
 ---
 
-## 例1：単目的最適化
+## 例1: 単目的最適化
 
-**問題**: 古典的なRastrigin関数を最適化する：
+**問題**: 古典的なRastrigin関数を最適化します：
 
 ```{math}
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
-ここで$\mathbf{x} \in \mathbb{R}^d$、$d$は次元数です。グローバル最適値は原点で0です。この関数は高度にマルチモーダルであり、グローバル最適化アルゴリズムのテストに最適です。以下はRastrigin関数のプロットです。
+ここで、$\mathbf{x} \in \mathbb{R}^d$ であり、$d$ は次元数です。大域的最適解は原点にあり、その値は0です。この関数は高度に多峰性であり、大域的最適化アルゴリズムのテストに最適です。以下はRastrigin関数のプロットです。
 
 ```{figure} /_static/rastrigin_function.svg
 :alt: Rastrigin関数のプロット
@@ -27,15 +27,15 @@ f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 Rastrigin関数
 ```
 
-この例では、粒子群最適化（PSO）アルゴリズムを使用して10次元のRastrigin関数を最適化します。
+この例では、Particle Swarm Optimization (PSO) アルゴリズムを使用して、10次元のRastrigin関数を最適化します。
 
-**ステップ1：セットアップ**
+**ステップ1: セットアップ**
 
-第2章で説明したようにEvoX環境を設定済みであることを前提とします。
+第2章で説明されているように、EvoX環境を設定済みであると仮定します。
 
-**ステップ2：ワークフローのセットアップ**
+**ステップ2: ワークフローのセットアップ**
 
-Pythonスクリプト`opt_rastrigin_10.py`を作成します：
+Pythonスクリプト `opt_rastrigin_10.py` を作成します：
 
 ```python
 import torch
@@ -55,7 +55,7 @@ algo = PSO(
 )
 ```
 
-問題とワークフローをセットアップします：
+問題とワークフローを設定します：
 
 ```python
 prob = Rastrigin()
@@ -67,7 +67,7 @@ workflow = StdWorkflow(
 )
 ```
 
-**ステップ3：最適化の実行**
+**ステップ3: 最適化の実行**
 
 ```python
 workflow.init_step()
@@ -80,7 +80,7 @@ for iter in range(501):
 print(f"Final Best Solution: {monitor.get_best_solution()}")
 ```
 
-**サンプル出力**:
+**出力例**:
 
 ```
 Iter 0, Best Fitness: 1398.625
@@ -92,28 +92,28 @@ Iter 500, Best Fitness: 0.9976348876953125
 Final Best Solution: tensor([...])
 ```
 
-PSOアルゴリズムは、期待通り原点に近い準最適解を見つけます。
+予想通り、PSOアルゴリズムは原点に近い準最適解を見つけました。
 
 ---
 
-## 例2：多目的最適化
+## 例2: 多目的最適化
 
-**問題**: 2つの目的を最小化する：
+**問題**: 2つの目的関数を最小化します：
 
 ```{math}
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
 
-パレートフロントは$x = 0$（$f_1$に最適）と$x = 2$（$f_2$に最適）の間にあります。
+パレートフロントは $x = 0$（$f_1$ にとって最適）と $x = 2$（$f_2$ にとって最適）の間に存在します。
 
-**ステップ1：環境のセットアップ**
+**ステップ1: 環境セットアップ**
 
-NSGA-IIサポート付きのEvoXがインストールされていることを確認してください。
+NSGA-IIをサポートするEvoXがインストールされていることを確認してください。
 
-**ステップ2：カスタム問題の定義**
+**ステップ2: カスタム問題の定義**
 
-EvoXには多くの組み込み多目的テスト問題がありますが、この例では2つの目的を最適化するカスタム問題を定義します：
+EvoXには多くの組み込み多目的テスト問題がありますが、この例では、2つの目的関数を最適化するためのカスタム問題を定義します：
 
 ```python
 import torch
@@ -122,7 +122,7 @@ import matplotlib.pyplot as plt
 
 from evox.algorithms import NSGA2
 from evox.workflows import StdWorkflow, EvalMonitor
-# evoxコアクラスをインポート、詳細は第5章を参照
+# Import evox core classes, see Chapter 5 for details
 from evox.core import Problem
 
 class TwoObjectiveProblem(Problem):
@@ -141,12 +141,12 @@ class TwoObjectiveProblem(Problem):
         f_2 = (x - 2) ** 2
         return torch.stack([f_1, f_2], dim=1)
 
-    # オプション：パレートフロント関数を定義
+    # Optional: Define the Pareto front function
     def pf(self) -> torch.Tensor:
         pass
 ```
 
-**ステップ3：アルゴリズムとワークフローの定義**
+**ステップ3: アルゴリズムとワークフローの定義**
 
 ```python
 from evox.algorithms import NSGA2
@@ -167,7 +167,7 @@ monitor = EvalMonitor()
 workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-**ステップ4：最適化と可視化**
+**ステップ4: 最適化と可視化**
 
 ```python
 workflow.init_step()
@@ -194,17 +194,17 @@ plt.grid(True)
 plt.show()
 ```
 
-Matplotlibを使用して結果を可視化できます。青い点は最適化された集団を表し、赤い線はパレートフロントを示します。
+Matplotlibを使用して結果を可視化できます。青い点は最適化された個体群を表し、赤い線はパレートフロントを示しています。
 
 ```{figure} /_static/example_nsga2_result.svg
-:alt: NSGA-II集団のプロット
+:alt: NSGA-II個体群のプロット
 :figwidth: 70%
 :align: center
 
-最適化後のNSGA-II集団のプロット
+最適化後のNSGA-II個体群のプロット
 ```
 
-Jupyter Notebookでは、EvoXの組み込みプロット機能を使用して、最適化プロセスを可視化し、世代を通じて集団がどのように進化するかを監視できます。
+Jupyter Notebookでは、EvoXの組み込みプロット機能を使用して最適化プロセスを可視化し、世代ごとの個体群の進化を監視できます。
 
 ```python
 monitor.plot()
@@ -212,11 +212,11 @@ monitor.plot()
 
 ---
 
-## 例3：ハイパーパラメータ最適化（HPO）
+## 例3: ハイパーパラメータ最適化 (HPO)
 
-**問題**: 乳がんデータセットでのロジスティック回帰分類器の`C`と`max_iter`を調整して、検証精度を最大化する。
+**問題**: 乳がんデータセットにおいて、ロジスティック回帰分類器の `C` と `max_iter` を調整し、検証精度を最大化します。
 
-**ステップ1：データとモデルの読み込み**
+**ステップ1: データとモデルの読み込み**
 
 ```python
 import torch
@@ -233,7 +233,7 @@ X_train = scaler.transform(X_train)
 X_val = scaler.transform(X_val)
 ```
 
-**ステップ2：問題の定義**
+**ステップ2: 問題の定義**
 
 ```python
 class HyperParamOptProblem(Problem):
@@ -249,11 +249,11 @@ class HyperParamOptProblem(Problem):
             model = LogisticRegression(C=C_val, max_iter=max_iter_val, solver='liblinear')
             model.fit(X_train, y_train)
             acc = model.score(X_val, y_val)
-            objs.append(1 - acc)  # エラー率
+            objs.append(1 - acc)  # error rate
         return torch.tensor(objs)
 ```
 
-**ステップ3：ワークフローのセットアップ**
+**ステップ3: ワークフローのセットアップ**
 
 ```python
 from evox.algorithms.so.es_variants import CMAES
@@ -272,7 +272,7 @@ monitor = EvalMonitor()
 workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-**ステップ4：最適化**
+**ステップ4: 最適化**
 
 ```python
 workflow.init_step()
@@ -284,15 +284,15 @@ best_error = prob.evaluate(best_params.unsqueeze(0)).item()
 print("Optimized error rate:", best_error)
 ```
 
-**サンプル出力**:
+**出力例**:
 
 ```
 Initial error rate: 0.0263
 Optimized error rate: 0.0088
 ```
 
-わずか数行のコードで、EvoXはハイパーパラメータチューニングの面倒な試行錯誤を自動化します。
+わずか数行のコードで、EvoXは退屈な試行錯誤であるハイパーパラメータ調整を自動化します。
 
 ---
 
-これらの実践例は、数学的テスト関数から機械学習ワークフローまで、さまざまなドメインでEvoXを効果的に適用する方法を示しています。基本構造である**Algorithm + Problem + Monitor + Workflow**に慣れれば、ほぼあらゆる最適化タスクに合わせてEvoXを適応させることができます。
+これらの実践的な例は、数学的なテスト関数から機械学習ワークフローに至るまで、さまざまなドメインでEvoXがいかに効果的に適用できるかを示しています。**Algorithm + Problem + Monitor + Workflow** という基本的な構造に慣れれば、ほぼすべての最適化タスクに合わせてEvoXを適応させることができます。

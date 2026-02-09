@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # カスタムアルゴリズムと問題
-このノートブックでは、`Algorithm`と`Problem`を使用してカスタムアルゴリズムと問題を作成する方法を示します。ここでは、**Sphere問題を解くPSOアルゴリズムの実装**の例を示します。
+このノートブックでは、`Algorithm` と `Problem` を使用して、カスタムアルゴリズムと問題を作成する方法を紹介します。ここでは、**Sphere問題を解くPSOアルゴリズムの実装**を例として挙げます。
 
 
 ```python
@@ -16,11 +16,11 @@ from evox.utils import clamp
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-## アルゴリズムの例：PSOアルゴリズム
+## アルゴリズムの例: PSOアルゴリズム
 
-粒子群最適化（PSO）は、鳥や魚の社会的行動に着想を得た集団ベースのメタヒューリスティックアルゴリズムです。連続および離散最適化問題の解決に広く使用されています。
+粒子群最適化法（PSO）は、鳥や魚の社会的な行動に着想を得た、個体群ベースのメタヒューリスティックアルゴリズムです。連続および離散最適化問題を解くために広く使用されています。
 
-**以下はEvoXでのPSOアルゴリズムの実装例です：**
+**以下は、EvoXにおけるPSOアルゴリズムの実装例です：**
 
 ```python
 def min_by(
@@ -105,16 +105,16 @@ class PSO(Algorithm):
         self.global_best_fit = torch.min(self.fit)
 ```
 
-## 問題の例：Sphere問題
+## 問題の例: Sphere問題
 
-Sphere問題は、最適化アルゴリズムをテストするために使用される、シンプルでありながら基本的なベンチマーク最適化問題です。
+Sphere問題は、最適化アルゴリズムをテストするために使用される、単純でありながら基本的なベンチマーク最適化問題です。
 
-Sphere関数は以下のように定義されます：
+Sphere関数は次のように定義されます：
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}
 $$
-**以下はEvoXでのSphere問題の実装例です：**
+**以下は、EvoXにおけるSphere問題の実装例です：**
 
 ```python
 class Sphere(Problem):

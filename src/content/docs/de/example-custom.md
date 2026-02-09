@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # Benutzerdefinierter Algorithmus und Problem
-In diesem Notebook zeigen wir, wie man `Algorithm` und `Problem` verwendet, um einen benutzerdefinierten Algorithmus und ein benutzerdefiniertes Problem zu erstellen. Hier geben wir ein Beispiel für die **Implementierung eines PSO-Algorithmus, der das Sphere-Problem löst**.
+In diesem Notebook zeigen wir, wie man `Algorithm` und `Problem` verwendet, um einen benutzerdefinierten Algorithmus und ein Problem zu erstellen. Hier geben wir ein Beispiel für die **Implementierung eines PSO-Algorithmus, der das Sphere-Problem löst**.
 
 
 ```python
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Algorithmus-Beispiel: PSO-Algorithmus
 
-Partikelschwarmoptimierung (PSO) ist ein populationsbasierter metaheuristischer Algorithmus, der vom Sozialverhalten von Vögeln und Fischen inspiriert ist. Er wird häufig zur Lösung kontinuierlicher und diskreter Optimierungsprobleme eingesetzt.
+Particle Swarm Optimization (PSO) ist ein populationsbasierter metaheuristischer Algorithmus, der vom Sozialverhalten von Vögeln und Fischen inspiriert ist. Er wird häufig zur Lösung kontinuierlicher und diskreter Optimierungsprobleme eingesetzt.
 
 **Hier ist ein Implementierungsbeispiel des PSO-Algorithmus in EvoX:**
 
@@ -125,9 +125,9 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## Den Algorithmus zur Lösung des Problems verwenden
+## Verwendung des Algorithmus zur Lösung des Problems
 
-### Algorithmus, Problem und Monitor initiieren
+### Initialisierung von Algorithmus, Problem und Monitor
 
 ```python
 algorithm = PSO(
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Workflow initiieren und ausführen
+### Initialisierung des Workflows und Ausführung
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

@@ -6,13 +6,13 @@ section: "examples"
 
 # 머신러닝을 위한 신경진화
 
-EvoX는 신경진화 기반의 지도 학습 작업 솔루션을 제공하며, 주요 모듈로 `SupervisedLearningProblem`과 `ParamsAndVector`가 있습니다. MNIST 분류 작업을 예로 들어, 이 섹션에서는 EvoX의 모듈을 채택하여 지도 학습을 위한 신경진화 프로세스를 설명합니다.
+EvoX는 `SupervisedLearningProblem` 및 `ParamsAndVector`와 같은 주요 모듈을 통해 신경진화(neuroevolution) 기반의 지도 학습(supervised learning) 작업을 위한 솔루션을 제공합니다. 이 섹션에서는 MNIST 분류 작업을 예로 들어, EvoX 모듈을 활용한 지도 학습의 신경진화 과정을 설명합니다.
 
 ## 기본 설정
 
-기본 구성 요소 임포트와 장치 구성은 신경진화 프로세스의 필수 시작 단계입니다.
+기본 컴포넌트 임포트와 디바이스 설정은 신경진화 과정의 필수적인 시작 단계입니다.
 
-여기서 결과의 재현성을 보장하기 위해 선택적으로 랜덤 시드를 설정할 수 있습니다.
+여기서는 결과의 재현성을 보장하기 위해 선택적으로 랜덤 시드(random seed)를 설정할 수 있습니다.
 
 ```python
 import torch
@@ -36,7 +36,7 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 ```
 
-이 단계에서는 PyTorch 프레임워크를 기반으로 샘플 합성곱 신경망(CNN) 모델을 직접 정의한 다음 장치에 로드합니다.
+이 단계에서는 PyTorch 프레임워크를 기반으로 샘플 합성곱 신경망(CNN) 모델을 직접 정의한 다음 디바이스에 로드합니다.
 
 ```python
 class SampleCNN(nn.Module):
@@ -67,10 +67,11 @@ model = SampleCNN().to(device)
 total_params = sum(p.numel() for p in model.parameters())
 print(f"Total number of model parameters: {total_params}")
 ```
-데이터셋 설정은 작업의 선택을 의미합니다. 이제 PyTorch의 내장 지원을 기반으로 데이터 로더를 초기화해야 합니다.
-여기서 PyTorch 버전에 따라 `torchvision` 패키지가 아직 사용 가능하지 않은 경우 미리 설치해야 합니다.
 
-MNIST 데이터셋이 `data_root` 디렉토리에 아직 없는 경우 `download=True` 플래그가 설정되어 데이터셋이 자동으로 다운로드됩니다. 따라서 첫 번째 실행 시 설정에 시간이 걸릴 수 있습니다.
+데이터셋 설정은 작업(task)의 선택을 의미합니다. 이제 PyTorch의 내장 기능을 기반으로 데이터 로더를 초기화해야 합니다.
+여기서 `torchvision` 패키지가 아직 없다면, 사용 중인 PyTorch 버전에 맞춰 미리 설치해야 합니다.
+
+MNIST 데이터셋이 `data_root` 디렉토리에 없는 경우, `download=True` 플래그를 설정하여 데이터셋이 자동으로 다운로드되도록 합니다. 따라서 첫 실행 시 설정에 시간이 다소 걸릴 수 있습니다.
 
 ```python
 import os
@@ -108,9 +109,9 @@ test_loader = torch.utils.data.DataLoader(
 )
 ```
 
-후속 프로세스를 가속화하기 위해 모든 MNIST 데이터를 미리 로드하여 더 빠른 실행을 합니다. 아래에서 세 가지 데이터셋이 서로 다른 단계를 위해 미리 로드됩니다 -- 경사 하강 훈련, 신경진화 미세 조정, 모델 테스트.
+이후 프로세스를 가속화하기 위해, 모든 MNIST 데이터를 미리 로드하여 실행 속도를 높입니다. 아래에서는 경사 하강법(gradient descent) 학습, 신경진화 미세 조정(fine-tuning), 모델 테스트의 세 가지 단계를 위해 세 개의 데이터셋을 미리 로드합니다.
 
-이것은 공간을 시간으로 교환하는 선택적 작업입니다. 채택 여부는 GPU 용량에 따라 다르며, 준비하는 데 항상 시간이 걸립니다.
+이는 공간을 시간과 맞바꾸는 선택적인 작업이라는 점에 유의해야 합니다. 이 방식의 채택 여부는 GPU 용량에 따라 달라지며, 준비하는 데 항상 약간의 시간이 소요됩니다.
 
 ```python
 # Used for gradient descent training process
@@ -131,7 +132,7 @@ pre_ne_train_loader = tuple(
 pre_test_loader = tuple([(inputs.to(device), labels.to(device)) for inputs, labels in test_loader])
 ```
 
-여기서 후속 단계에서 테스트 데이터셋에 대한 모델의 예측 정확도 평가를 단순화하기 위해 `model_test` 함수를 미리 정의합니다.
+여기서는 이후 단계에서 테스트 데이터셋에 대한 모델의 예측 정확도를 간편하게 평가하기 위해 `model_test` 함수를 미리 정의합니다.
 
 ```python
 def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, device: torch.device) -> float:
@@ -150,11 +151,12 @@ def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, devic
         acc = 100 * correct / total
     return acc
 ```
-## 경사 하강 훈련 (선택 사항)
 
-경사 하강 기반 모델 훈련이 먼저 수행됩니다. 이 예제에서 이 훈련은 모델을 초기화하여 후속 신경진화 프로세스를 준비하는 데 사용됩니다.
+## 경사 하강법 학습 (선택 사항)
 
-PyTorch의 모델 훈련 프로세스는 EvoX의 신경진화와 호환되므로 추가 단계에서 동일한 모델 구현을 편리하게 재사용할 수 있습니다.
+먼저 경사 하강법 기반의 모델 학습을 수행합니다. 이 예제에서는 이 학습을 통해 모델을 초기화하고, 이후의 신경진화 과정을 준비합니다.
+
+PyTorch의 모델 학습 과정은 EvoX의 신경진화와 호환되므로, 동일한 모델 구현을 후속 단계에서 재사용하기 편리합니다.
 
 ```python
 def model_train(
@@ -201,11 +203,11 @@ gd_acc = model_test(model, pre_test_loader, device)
 print(f"Accuracy after gradient descent training: {gd_acc:.4f} %.")
 ```
 
-## 신경진화 미세 조정
+## 신경진화 미세 조정 (Fine-Tuning)
 
-이전 경사 하강 프로세스에서 사전 훈련된 모델을 기반으로 신경진화가 점진적으로 적용되어 모델을 미세 조정합니다.
+이전 경사 하강법 과정에서 사전 학습된 모델을 바탕으로, 신경진화를 점진적으로 적용하여 모델을 미세 조정합니다.
 
-먼저 `ParamsAndVector` 구성 요소를 사용하여 사전 훈련된 모델의 가중치를 벡터로 평탄화하며, 이는 후속 신경진화 프로세스의 초기 중심 개체로 사용됩니다.
+먼저 `ParamsAndVector` 컴포넌트를 사용하여 사전 학습된 모델의 가중치를 벡터로 평탄화(flatten)하며, 이는 이후 신경진화 과정의 초기 중심 개체(center individual) 역할을 합니다.
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
@@ -215,9 +217,9 @@ lower_bound = pop_center - 0.01
 upper_bound = pop_center + 0.01
 ```
 
-> 신경진화를 위해 특별히 설계된 알고리즘의 경우, 배치된 파라미터의 딕셔너리를 직접 입력으로 받을 수 있으므로 `ParamsAndVector`의 사용이 불필요할 수 있습니다.
+> 배치(batched) 파라미터 딕셔너리를 입력으로 직접 받을 수 있도록 설계된 신경진화 알고리즘의 경우, `ParamsAndVector`의 사용이 불필요할 수 있습니다.
 
-또한 샘플 기준이 정의됩니다. 여기서 개별 모델의 손실과 정확도가 모두 선택되고 가중치가 적용되어 신경진화 프로세스의 적합도 함수로 사용됩니다. 이 단계는 최적화 방향에 맞게 사용자 정의할 수 있습니다.
+추가로 샘플 기준(criterion)을 정의합니다. 여기서는 개별 모델의 손실(loss)과 정확도(accuracy)를 모두 선택하고 가중치를 부여하여 신경진화 과정의 적합도 함수(fitness function)로 사용합니다. 이 단계는 최적화 방향에 맞춰 사용자 정의할 수 있습니다.
 
 ```python
 class AccuracyCriterion(nn.Module):
@@ -257,7 +259,8 @@ weighted_criterion = WeightedCriterion(
     acc_criterion=acc_criterion,
 )
 ```
-동시에 경사 하강 훈련 및 모델 테스트 프로세스와 유사하게, 신경진화 미세 조정 프로세스도 후속 단계에서 편리하게 사용할 수 있도록 함수로 캡슐화됩니다.
+
+동시에, 경사 하강법 학습 및 모델 테스트 과정과 유사하게, 신경진화 미세 조정 과정도 이후 단계에서 편리하게 사용할 수 있도록 함수로 캡슐화합니다.
 
 ```python
 import time
@@ -290,9 +293,9 @@ def neuroevolution_process(
 
 ### 개체군 기반 신경진화 테스트
 
-이 예제에서는 입자 군집 최적화([PSO](#evox.algorithms.so.pso_variants.pso.PSO))를 대표로 사용하여 개체군 기반 신경진화 알고리즘을 먼저 테스트합니다. 신경진화 구성은 다른 최적화 작업과 유사합니다 -- 문제, 알고리즘, 모니터 및 워크플로우를 정의하고 각각의 `setup()` 함수를 호출하여 초기화를 완료해야 합니다.
+이 예제에서는 입자 군집 최적화(Particle Swarm Optimization, [PSO](#evox.algorithms.so.pso_variants.pso.PSO))를 대표로 사용하여 개체군 기반 신경진화 알고리즘을 먼저 테스트합니다. 신경진화 설정은 다른 최적화 작업과 유사합니다. 문제(problem), 알고리즘(algorithm), 모니터(monitor), 워크플로우(workflow)를 정의하고 각각의 `setup()` 함수를 호출하여 초기화를 완료해야 합니다.
 
-여기서 주목할 핵심 사항은 잠재적 오류를 방지하기 위해 개체군 크기(이 경우 `POP_SIZE`)를 **문제와 알고리즘 모두에서** 초기화해야 한다는 것입니다.
+여기서 주의할 점은 잠재적인 오류를 방지하기 위해 개체군 크기(이 경우 `POP_SIZE`)를 **문제와 알고리즘 모두**에서 초기화해야 한다는 것입니다.
 
 ```python
 POP_SIZE = 100
@@ -348,9 +351,9 @@ pop_workflow.get_submodule("monitor").plot()
 
 ### 단일 개체 신경진화 테스트
 
-다음으로 단일 개체 알고리즘 기반 신경진화를 테스트합니다. 개체군 기반 경우와 유사하게 문제, 알고리즘, 모니터 및 워크플로우를 정의하고 초기화 중에 각각의 `setup()` 함수를 호출해야 합니다. 이 경우 랜덤 탐색 전략이 알고리즘으로 선택됩니다.
+다음으로 단일 개체 알고리즘 기반의 신경진화를 테스트합니다. 개체군 기반의 경우와 마찬가지로 문제, 알고리즘, 모니터, 워크플로우를 정의하고 초기화 시 각각의 `setup()` 함수를 호출해야 합니다. 이 경우 알고리즘으로 무작위 탐색(random search) 전략을 선택했습니다.
 
-여기서 주목할 핵심 사항은 단일 개체만 탐색하므로 `SupervisedLearningProblem`은 `pop_size=None`으로, `EvalMonitor`는 `topk=1`로 설정해야 한다는 것입니다. 신중한 하이퍼파라미터 설정은 불필요한 문제를 방지하는 데 도움이 됩니다.
+여기서 주의할 점은 단 하나의 개체만 탐색하므로 `SupervisedLearningProblem`은 `pop_size=None`으로 설정하고, `EvalMonitor`는 `topk=1`로 설정해야 한다는 것입니다. 신중한 하이퍼파라미터 설정은 불필요한 문제를 피하는 데 도움이 됩니다.
 
 ```python
 single_problem = SupervisedLearningProblem(

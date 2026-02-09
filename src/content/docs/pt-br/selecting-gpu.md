@@ -18,7 +18,7 @@ Para executar seu programa em múltiplas GPUs, você pode usar:
 CUDA_VISIBLE_DEVICES=0,1 python my_program.py
 ```
 
-Para desabilitar o uso da GPU (usar CPU), você pode usar:
+Para desativar o uso de GPU (usar CPU), você pode usar:
 
 ```bash
 CUDA_VISIBLE_DEVICES="" python my_program.py

@@ -1,53 +1,47 @@
 ---
-title: "Guia de Instalacion de Python"
+title: "Guía de instalación de Python"
 order: 1
 section: "install"
 ---
 
-# Guia de Instalacion de Python
+# Guía de instalación de Python
 
-Esta guia es para aquellos que son nuevos en el lenguaje de programacion Python y desean instalarlo en su sistema.
-Le ayudara a configurar el entorno Python necesario para ejecutar EvoX.
+Esta guía está dirigida a quienes se inician en el lenguaje de programación Python y desean instalarlo en su sistema. Te ayudará a configurar el entorno de Python necesario para ejecutar EvoX.
 
 > **Consejo:**
-> EvoX esta escrito en Python, por lo que necesitara tener Python instalado en su sistema.
-> EvoX soporta Python 3.10 y superior, y recomendamos usar la **ultima version** de Python.
+> EvoX está escrito en Python, por lo que necesitarás tener Python instalado en tu sistema. EvoX es compatible con Python 3.10 y versiones superiores, y recomendamos utilizar la **última versión** de Python.
 
-## Instalar el interprete de Python
+## Instalar el intérprete de Python
 
-### Version de Windows
+### Versión para Windows
 
-Vaya a [Descargar Python](https://www.python.org/downloads/) y descargue la ultima version de Python.
+Ve a [Download Python](https://www.python.org/downloads/) y descarga la última versión de Python.
 
 > **Nota:**
-> Asegurese de marcar la casilla que dice "Add Python to PATH" durante el proceso de instalacion.
+> Asegúrate de marcar la casilla que dice "Add Python to PATH" durante el proceso de instalación.
 
-### Version de Linux
+### Versión para Linux
 
-Diferentes distribuciones de Linux tienen diferentes formas de instalar Python.
-Depende del gestor de paquetes de su distribucion.
-Aqui hay algunos ejemplos:
+Las diferentes distribuciones de Linux tienen distintas formas de instalar Python. Depende del gestor de paquetes de tu distribución. Aquí tienes algunos ejemplos:
 - Debian/Ubuntu: `apt`
 - Archlinux: `pacman`
 - Fedora: `dnf`
 
-### Instalar a traves de `uv`
+### Instalación a través de `uv`
 
-`uv` es un gestor de paquetes y proyectos Python extremadamente rapido, que funciona en Windows, Linux y MacOS.
-Recomendamos usar `uv` para instalar el interprete de Python asi como para gestionar entornos Python.
-La guia de instalacion detallada se puede encontrar en la [guia de instalacion de uv](https://docs.astral.sh/uv/getting-started/installation/#installation-methods).
+`uv` es un gestor de proyectos y paquetes de Python extremadamente rápido que funciona en Windows, Linux y MacOS. Recomendamos usar `uv` tanto para instalar el intérprete de Python como para gestionar los entornos de Python. Puedes encontrar la guía de instalación detallada en la [guía de instalación de uv](https://docs.astral.sh/uv/getting-started/installation/#installation-methods).
 
 
 ### Windows
-Use `irm` para descargar el script y ejecutelo con `iex`:
+Usa `irm` para descargar el script y ejecútalo con `iex`:
 
 ```console
 $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Cambiar la [politica de ejecucion](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4#powershell-execution-policies) permite ejecutar un script de internet.
+Cambiar la [política de ejecución](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4#powershell-execution-policies) permite ejecutar un script desde Internet.
 
-Solicite una version especifica incluyendola en la URL:
+Solicita una versión específica incluyéndola en la URL:
 
 ```console
 $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/0.6.16/install.ps1 | iex"
@@ -55,96 +49,85 @@ $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/0.6.16/install
 
 
 ### Linux y MacOS
-Use `curl` para descargar el script y ejecutelo con `sh`:
+Usa `curl` para descargar el script y ejecútalo con `sh`:
 
 ```console
 $ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Si su sistema no tiene `curl`, puede usar `wget`:
+Si tu sistema no tiene `curl`, puedes usar `wget`:
 
 ```console
 $ wget -qO- https://astral.sh/uv/install.sh | sh
 ```
 
-Solicite una version especifica incluyendola en la URL:
+Solicita una versión específica incluyéndola en la URL:
 
 ```console
 $ curl -LsSf https://astral.sh/uv/0.6.16/install.sh | sh
 ```
 
 
-## Gestion de Entornos Python
+## Gestión de entornos de Python
 
 ### Pip y Venv
 
-`pip` es el gestor de paquetes para Python. `venv` es la herramienta incorporada para crear entornos virtuales en Python.
-Un entorno virtual es un directorio autocontenido que contiene una instalacion de Python para una version particular de Python, mas varios paquetes adicionales.
-Esto es util para gestionar dependencias de diferentes proyectos por separado.
+`pip` es el gestor de paquetes de Python. `venv` es la herramienta integrada para crear entornos virtuales en Python. Un entorno virtual es un directorio independiente que contiene una instalación de Python para una versión específica, además de varios paquetes adicionales. Esto es útil para gestionar las dependencias de diferentes proyectos por separado.
 
-Para crear un entorno virtual, ejecute el siguiente comando en su terminal:
+Para crear un entorno virtual, ejecuta el siguiente comando en tu terminal:
 
 ```console
-$ python -m venv <env_path> # generalmente <env_path> es un directorio `.venv` en su proyecto
+$ python -m venv <env_path> # normalmente <env_path> es un directorio `.venv` en tu proyecto
 ```
-Esto creara un nuevo directorio llamado `<env_path>` que contiene una copia del interprete de Python y la biblioteca estandar.
-Para activar el entorno virtual, ejecute el siguiente comando:
+Esto creará un nuevo directorio llamado `<env_path>` que contiene una copia del intérprete de Python y la biblioteca estándar. Para activar el entorno virtual, ejecuta el siguiente comando:
 
 ```console
 $ source <env_path>/bin/activate # Bash
 $ source <env_path>/bin/activate.fish # Fish
 $ <env_path>\Scripts\activate # Windows
 ```
-Esto cambiara el prompt de su shell para indicar que ahora esta trabajando dentro del entorno virtual.
-Para desactivar el entorno virtual, ejecute el siguiente comando:
+Esto cambiará el prompt de tu terminal para indicar que ahora estás trabajando dentro del entorno virtual. Para desactivar el entorno virtual, ejecuta el siguiente comando:
 
 ```console
 $ deactivate
 ```
-Esto le devolvera al interprete de Python predeterminado de su sistema con todas sus bibliotecas instaladas.
+Esto te devolverá al intérprete de Python predeterminado de tu sistema con todas sus librerías instaladas.
 
-Mientras el entorno virtual este activado, puede usar `pip` para instalar paquetes en el entorno virtual.
-Por ejemplo, para instalar la ultima version de `numpy`, ejecute el siguiente comando:
+Mientras el entorno virtual esté activado, puedes usar `pip` para instalar paquetes en él. Por ejemplo, para instalar la última versión de `numpy`, ejecuta el siguiente comando:
 
 ```console
 $ pip install numpy
 ```
-Esto instalara `numpy` en el entorno virtual, y no afectara la instalacion de Python del sistema.
-Para instalar una version especifica de `numpy`, ejecute el siguiente comando:
+Esto instalará `numpy` en el entorno virtual y no afectará a la instalación de Python de todo el sistema. Para instalar una versión específica de `numpy`, ejecuta el siguiente comando:
 
 ```console
 $ pip install numpy==1.23.4
 ```
-Esto instalara la version `1.23.4` de `numpy` en el entorno virtual.
-Para listar todos los paquetes instalados en el entorno virtual, ejecute el siguiente comando:
+Esto instalará la versión `1.23.4` de `numpy` en el entorno virtual. Para listar todos los paquetes instalados en el entorno virtual, ejecuta el siguiente comando:
 
 ```console
 $ pip list
 ```
-Esto le mostrara una lista de todos los paquetes instalados en el entorno virtual, junto con sus versiones.
-Para desinstalar un paquete, ejecute el siguiente comando:
+Esto te mostrará una lista de todos los paquetes instalados en el entorno virtual, junto con sus versiones. Para desinstalar un paquete, ejecuta el siguiente comando:
 
 ```console
 $ pip uninstall numpy
 ```
-Esto desinstalara `numpy` del entorno virtual.
-Para actualizar un paquete, ejecute el siguiente comando:
+Esto desinstalará `numpy` del entorno virtual. Para actualizar un paquete, ejecuta el siguiente comando:
 
 ```console
 $ pip install --upgrade numpy
 ```
-Esto actualizara `numpy` a la ultima version en el entorno virtual.
+Esto actualizará `numpy` a la última versión en el entorno virtual.
 
 ### uv
 
-`uv` no solo puede gestionar versiones de Python, sino tambien gestionar entornos Python.
-Para crear un nuevo entorno Python, ejecute el siguiente comando:
+`uv` no solo puede gestionar versiones de Python, sino también entornos de Python. Para crear un nuevo entorno de Python, ejecuta el siguiente comando:
 
 ```console
-$ uv venv --python <python_version> # por ejemplo 3.10, 3.11, ...
+$ uv venv --python <python_version> # ej. 3.10, 3.11, ...
 ```
-Esto creara un nuevo directorio llamado `.venv` que contiene una copia del interprete de Python y la biblioteca estandar.
-Para activar el entorno virtual, ejecute el siguiente comando:
+Esto creará un nuevo directorio llamado `.venv` que contiene una copia del intérprete de Python y la biblioteca estándar. Para activar el entorno virtual, ejecuta el siguiente comando:
 
 ```console
 $ source <env_path>/bin/activate # Bash
@@ -152,8 +135,7 @@ $ source <env_path>/bin/activate.fish # Fish
 $ <env_path>\Scripts\activate # Windows
 ```
 
-Despues de activar el entorno virtual, puede usar `uv pip` para instalar paquetes en el entorno virtual.
-Por ejemplo, para instalar la ultima version de `numpy`, ejecute el siguiente comando:
+Después de activar el entorno virtual, puedes usar `uv pip` para instalar paquetes en él. Por ejemplo, para instalar la última versión de `numpy`, ejecuta el siguiente comando:
 
 ```console
 $ uv pip install numpy

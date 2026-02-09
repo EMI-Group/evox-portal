@@ -6,25 +6,25 @@ section: "examples"
 
 # 使用 EvoX 進行高效 HPO
 
-在本章中，我們將探討如何使用 EvoX 進行超參數最佳化（HPO）。
+在本章中，我們將探討如何使用 EvoX 進行超參數優化（Hyperparameter Optimization, HPO）。
 
-HPO 在許多機器學習任務中扮演著至關重要的角色，但由於其高計算成本（有時需要數天處理）以及部署中的挑戰，它經常被忽視。
+HPO 在許多機器學習任務中扮演著至關重要的角色，但由於其高昂的計算成本（有時需要數天才能處理完畢）以及部署上的挑戰，往往被忽視。
 
-透過 EvoX，我們可以使用 `HPOProblemWrapper` 簡化 HPO 部署，並透過利用 `vmap` 方法和 GPU 加速來實現高效計算。
+透過 EvoX，我們可以使用 `HPOProblemWrapper` 簡化 HPO 的部署，並利用 `vmap` 方法和 GPU 加速來實現高效計算。
 
-## 將工作流程轉換為問題
+## 將工作流轉化為問題
 
 ![HPO structure](/_static/HPO_structure.png)
 
-使用 EvoX 部署 HPO 的關鍵是使用 `HPOProblemWrapper` 將 `workflows` 轉換為 `problems`。轉換後，我們可以將 `workflows` 視為標準的 `problems`。「HPO 問題」的輸入由超參數組成，輸出是評估指標。
+使用 EvoX 部署 HPO 的關鍵在於使用 `HPOProblemWrapper` 將 `workflows`（工作流）轉換為 `problems`（問題）。轉換完成後，我們可以將 `workflows` 視為標準的 `problems`。'HPO problem' 的輸入由超參數組成，輸出則是評估指標。
 
-## 關鍵元件 -- `HPOProblemWrapper`
+## 核心組件 —— `HPOProblemWrapper`
 
-為了確保 `HPOProblemWrapper` 識別超參數，我們需要使用 `Parameter` 來包裝它們。透過這個簡單的步驟，超參數將被自動識別。
+為了確保 `HPOProblemWrapper` 能夠識別超參數，我們需要使用 `Parameter` 對其進行封裝。透過這個簡單的步驟，超參數將被自動識別。
 
 ```python
 class ExampleAlgorithm(Algorithm):
-    def __init__(self,...):
+    def __init__(self,...): 
         self.omega = Parameter([1.0, 2.0]) # wrap the hyper-parameters with `Parameter`
         self.beta = Parameter(0.1)
         pass
@@ -38,15 +38,15 @@ class ExampleAlgorithm(Algorithm):
 
 我們提供了一個 `HPOFitnessMonitor`，它支援計算多目標問題的 'IGD' 和 'HV' 指標，以及單目標問題的最小值。
 
-需要注意的是，`HPOFitnessMonitor` 是為 HPO 問題設計的基本監控器。您也可以使用[使用自訂演算法部署 HPO](#/guide/developer/custom_hpo_prob)中概述的方法靈活地建立自己的自訂監控器。
+值得注意的是，`HPOFitnessMonitor` 是一個專為 HPO 問題設計的基礎監控器。您也可以按照 [使用自定義演算法部署 HPO](#/guide/developer/custom_hpo_prob) 中概述的方法，靈活地創建自定義監控器。
 
-## 簡單範例
+## 一個簡單的範例
 
-這裡，我們將展示一個使用 EvoX 進行 HPO 的簡單範例。具體來說，我們將使用 [PSO](#PSO) 演算法來最佳化 [PSO](#PSO) 演算法的超參數，以求解 sphere 問題。
+在這裡，我們將展示一個使用 EvoX 進行 HPO 的簡單範例。具體來說，我們將使用 [PSO](#PSO) 演算法來優化用於解決 Sphere 問題的 [PSO](#PSO) 演算法的超參數。
 
-請注意，本章僅提供 HPO 部署的簡要概述。更詳細的指南請參閱[使用自訂演算法部署 HPO](#/guide/developer/custom_hpo_prob)。
+請注意，本章僅提供 HPO 部署的簡要概述。有關更詳細的指南，請參閱 [使用自定義演算法部署 HPO](#/guide/developer/custom_hpo_prob)。
 
-首先，讓我們匯入必要的模組。
+首先，讓我們導入必要的模組。
 
 ```python
 import torch
@@ -68,7 +68,7 @@ class Sphere(Problem):
         return (x * x).sum(-1)
 ```
 
-接下來，我們可以使用 `StdWorkflow` 來包裝 `problem`、`algorithm` 和 `monitor`。然後我們使用 `HPOProblemWrapper` 將 `StdWorkflow` 轉換為 HPO 問題。
+接著，我們可以使用 `StdWorkflow` 來封裝 `problem`、`algorithm` 和 `monitor`。然後使用 `HPOProblemWrapper` 將 `StdWorkflow` 轉換為 HPO 問題。
 
 ```python
 # the inner loop is a PSO algorithm with a population size of 50
@@ -82,19 +82,19 @@ hpo_prob = HPOProblemWrapper(iterations=30, num_instances=128, workflow=inner_wo
 ```
 
 `HPOProblemWrapper` 接受 4 個參數：
-1. `iterations`：最佳化過程中要執行的迭代次數。
-2. `num_instances`：最佳化過程中要平行執行的實例數量。
-3. `workflow`：最佳化過程中要使用的工作流程。
-4. `copy_init_state`：是否為每次評估複製工作流程的初始狀態。預設為 `True`。如果您的工作流程包含對初始狀態中的張量進行就地修改的操作，則應設定為 `True`。否則，您可以設定為 `False` 以節省記憶體。
+1. `iterations`：優化過程中執行的迭代次數。
+2. `num_instances`：優化過程中並行執行的實例數量。
+3. `workflow`：優化過程中使用的 workflow。
+4. `copy_init_state`：是否為每次評估複製 workflow 的初始狀態。預設為 `True`。如果您的 workflow 包含會就地（IN-PLACE）修改初始狀態中張量的操作，則應將其設為 `True`。否則，您可以將其設為 `False` 以節省記憶體。
 
-我們可以驗證 `HPOProblemWrapper` 是否正確識別了我們定義的超參數。由於 5 個實例之間沒有對超參數進行修改，它們在所有實例中應該是相同的。
+我們可以驗證 `HPOProblemWrapper` 是否正確識別了我們定義的超參數。由於 5 個實例的超參數未做任何修改，因此所有實例的超參數應保持一致。
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-我們也可以定義一組自訂的超參數值。重要的是確保超參數集的數量與 `HPOProblemWrapper` 中的實例數量匹配。此外，自訂超參數必須以字典形式提供，其值使用 `Parameter` 包裝。
+我們也可以定義一組自定義的超參數值。重要的是要確保超參數組的數量與 `HPOProblemWrapper` 中的實例數量相匹配。此外，自定義超參數必須以字典形式提供，其值需使用 `Parameter` 進行封裝。
 
 ```python
 params = hpo_prob.get_init_params()
@@ -106,11 +106,11 @@ result = hpo_prob.evaluate(params)
 print("The result of the first 3 parameter sets:\n", result[:3])
 ```
 
-現在，我們使用 [PSO](#PSO) 演算法來最佳化 [PSO](#PSO) 演算法的超參數。
+現在，我們使用 [PSO](#PSO) 演算法來優化 [PSO](#PSO) 演算法的超參數。
 
-重要的是確保 [PSO](#PSO) 的種群大小與實例數量匹配；否則可能會發生意外錯誤。
+務必確保 [PSO](#PSO) 的種群大小與實例數量相匹配；否則可能會發生意外錯誤。
 
-此外，需要在外部工作流程中轉換解，因為 `HPOProblemWrapper` 要求輸入為字典形式。
+此外，解需要在外部 workflow 中進行轉換，因為 `HPOProblemWrapper` 要求輸入必須是字典形式。
 
 ```python
 class solution_transform(torch.nn.Module):

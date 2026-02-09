@@ -1,11 +1,11 @@
 ---
-title: "Algorithme et problème personnalisés"
+title: "Algorithme et Problème Personnalisés"
 order: 14
 section: "examples"
 ---
 
-# Algorithme et problème personnalisés
-Dans ce notebook, nous montrerons comment utiliser `Algorithm` et `Problem` pour créer un algorithme et un problème personnalisés. Ici, nous donnerons un exemple d'**implémentation d'un algorithme PSO qui résout le problème Sphere**.
+# Algorithme et Problème Personnalisés
+Dans ce notebook, nous allons montrer comment utiliser `Algorithm` et `Problem` pour créer un algorithme et un problème personnalisés. Ici, nous donnerons un exemple d'**implémentation d'un algorithme PSO qui résout le problème Sphere**.
 
 
 ```python
@@ -16,9 +16,9 @@ from evox.utils import clamp
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-## Exemple d'algorithme : algorithme PSO
+## Exemple d'algorithme : Algorithme PSO
 
-L'Optimisation par Essaim de Particules (PSO) est un algorithme métaheuristique basé sur la population, inspiré du comportement social des oiseaux et des poissons. Il est largement utilisé pour résoudre des problèmes d'optimisation continus et discrets.
+L'optimisation par essaim particulaire (PSO) est un algorithme métaheuristique basé sur une population, inspiré par le comportement social des oiseaux et des poissons. Il est largement utilisé pour résoudre des problèmes d'optimisation continus et discrets.
 
 **Voici un exemple d'implémentation de l'algorithme PSO dans EvoX :**
 
@@ -105,11 +105,11 @@ class PSO(Algorithm):
         self.global_best_fit = torch.min(self.fit)
 ```
 
-## Exemple de problème : problème Sphere
+## Exemple de problème : Problème Sphere
 
-Le problème Sphere est un problème d'optimisation de référence simple mais fondamental utilisé pour tester les algorithmes d'optimisation.
+Le problème Sphere est un problème d'optimisation de référence simple mais fondamental, utilisé pour tester les algorithmes d'optimisation.
 
-La fonction Sphere est définie comme :
+La fonction Sphere est définie comme suit :
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}

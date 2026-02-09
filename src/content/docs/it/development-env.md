@@ -1,17 +1,17 @@
 ---
-title: "Ambiente di Sviluppo"
+title: "Ambiente di sviluppo"
 order: 3
 section: "developer"
 ---
 
-# Ambiente di Sviluppo
+# Ambiente di sviluppo
 
-## Clona il repository e installalo in modalità modificabile (consigliato)
+## Clonare il repository e installarlo in modalità modificabile (consigliato)
 
 ```bash
 git clone https://github.com/EMI-Group/evox.git
 cd evox
-pip install -e ".[test]" # installa il pacchetto in modalità modificabile con le dipendenze di test
+pip install -e ".[test]" # install the package in editable mode with test dependencies
 ```
 
 ## Nix
@@ -26,7 +26,7 @@ Questo creerà una shell con tutte le dipendenze necessarie e una directory `.ve
 
 EvoX ha la seguente guida di stile:
 1. Assicurati di usare [ruff](https://docs.astral.sh/ruff/) per il linting del tuo codice.
-2. Assicurati che non ci siano spazi bianchi finali.
+2. Assicurati che non ci siano spazi bianchi in coda.
 
 ## Pre-commit
 
@@ -36,15 +36,15 @@ Dopo aver installato pre-commit, esegui il seguente comando per installare gli h
 pre-commit install
 ```
 
-## Esecuzione dei Test Unitari
+## Eseguire gli Unit Test
 
-1. Prepara l'ambiente di test installando i pacchetti richiesti (ad es. `torch`) nel tuo ambiente Python
-2. Esegui unittest:
+1. prepara l'ambiente di test installando i pacchetti richiesti (ad es. `torch`) nel tuo ambiente Python
+2. esegui unittest:
 ```shell
-# esegui tutti i test
+# run all tests
 python -m unittest
-# esegui i test in [percorso], ad es. python -m unittest unit_test/core/test_jit_util.py
+# run tests in [path], e.g. python -m unittest unit_test/core/test_jit_util.py
 python -m unittest [path-to-test-file]
-# esegui un metodo o modulo di test specifico, ad es. python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
+# run a specific test method or module, e.g. python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
 python -m unittest [path-to-method-or-module]
 ```

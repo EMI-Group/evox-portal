@@ -1,34 +1,34 @@
 ---
-title: "EvoX v1.1.1 Notas de lançamento"
+title: "Notas de Lançamento do EvoX v1.1.1"
 pubDate: 2025-03-16
-summary: "Correções de bugs para captura de grafo torch.compile, interrupções de grafo use_state e vazamentos de BatchedTensor."
+summary: "Correções de bugs para captura de grafo do torch.compile, quebras de grafo no use_state e vazamentos de BatchedTensor."
 ---
 
-**O Que Mudou**
+**O que mudou**
 
-**Esta versão menor inclui principalmente correções de bugs e melhorias:**
+**Esta versão secundária inclui principalmente correções de bugs e melhorias:**
 
-- Corrigido um problema onde `torch.compile` não capturava corretamente `workflow.step`.
+- Corrigido um problema onde o `torch.compile` não capturava corretamente o `workflow.step`.
 
-- Corrigido um problema onde `use_state` causava uma quebra de grafo.
+- Corrigido um problema onde o `use_state` causava uma quebra de grafo.
 
-- Corrigido uso incorreto de buffers de modelo.
+- Corrigidos alguns usos incorretos de buffer de modelo.
 
-- Corrigido um problema onde monitor.plot não estava funcionando como esperado.
+- Corrigido um problema onde o monitor.plot não estava funcionando como pretendido.
 
-- Introduzido um novo wrapper, `evox.compile`, para contornar certas limitações com `torch.compile` e `torch.vmap`.
+- Introduzido um novo wrapper, `evox.compile`, para contornar certas limitações com o `torch.compile` e o `torch.vmap`.
 
-- Resolvidos diversos problemas relacionados a `BatchedTensor`:- Corrigido um bug onde o vmapping de um workflow com EvalMonitor poderia causar vazamentos de BatchedTensor.
+- Resolvidos vários problemas relacionados ao `BatchedTensor`:- Corrigido um bug onde o vmapping de um workflow com EvalMonitor poderia causar vazamentos de BatchedTensor.
 
-- Corrigido um problema que impedia HPOProblem de funcionar com BraxProblem.
+- Corrigido um problema que impedia o HPOProblem de funcionar com o BraxProblem.
 
 - Aprimoradas as implementações de RVEA e CSO para melhor desempenho e confiabilidade.
 
-- Aprimorada a implementação de BraxProblem.
+- Aprimorada a implementação do BraxProblem.
 
-- Diversas pequenas correções e melhorias.
+- Várias pequenas correções e melhorias.
 
-**Código Open Source e Comunidade**
+**Código Aberto e Comunidade**
 
 **Artigo**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
 

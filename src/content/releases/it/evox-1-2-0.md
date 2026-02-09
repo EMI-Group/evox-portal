@@ -4,13 +4,13 @@ pubDate: 2025-04-23
 summary: "Nuove funzionalità: final_step(), ambiente Mujoco Playground, tutorial utente e integrazione EvoMO."
 ---
 
-**Siamo entusiasti di annunciare il rilascio di "EvoX v1.2.0", ricco di nuove funzionalita, miglioramenti e importanti correzioni di bug!**
+**Siamo entusiasti di annunciare il rilascio di "EvoX v1.2.0", ricco di nuove funzionalità, miglioramenti e importanti correzioni di bug!**
 
-**Questo aggiornamento migliora la flessibilita e le prestazioni del framework nei moduli chiave**.
+**Questo aggiornamento migliora la flessibilità e le prestazioni del framework nei moduli chiave**.
 
 **Punti salienti:**
 
--  Aggiunto `final_step()` e aggiornati `hpo_wrapper` e `std_workflow` per workflow di esecuzione piu fluidi.
+-  Aggiunto `final_step()` e aggiornati `hpo_wrapper` e `std_workflow` per workflow di esecuzione più fluidi.
 
 -  Introdotto il "Mujoco Playground" -- un nuovo ambiente per esperimenti di reinforcement learning.
 
@@ -18,7 +18,7 @@ summary: "Nuove funzionalità: final_step(), ambiente Mujoco Playground, tutoria
 
 -  Aggiunte nuove funzioni di estensione EvoX, che consentono una migliore integrazione con progetti correlati come [EvoMO](https://github.com/EMI-Group/evomo/ "https://github.com/EMI-Group/evomo/").
 
--  Varie correzioni di bug e aggiornamenti della documentazione per una maggiore stabilita e chiarezza.
+-  Varie correzioni di bug e aggiornamenti della documentazione per una maggiore stabilità e chiarezza.
 
 **Pull Request correlate:**
 
@@ -40,7 +40,7 @@ summary: "Nuove funzionalità: final_step(), ambiente Mujoco Playground, tutoria
 
 **Changelog completo**: [v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
 
-**Codice open source / Risorse della comunita**
+**Codice open source / Risorse della comunità**
 
 Paper:
 

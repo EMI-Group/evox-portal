@@ -1,24 +1,24 @@
 ---
-title: "Seleccion de GPU / CPU"
+title: "Selección de GPU / CPU"
 order: 15
 section: "misc"
 ---
 
-# Seleccion de GPU / CPU
+# Selección de GPU / CPU
 
-Para ejecutar su programa en una GPU especifica, puede usar la variable de entorno `CUDA_VISIBLE_DEVICES`. Por ejemplo, para ejecutar su programa en la segunda GPU, puede usar:
+Para ejecutar tu programa en una GPU específica, puedes usar la variable de entorno `CUDA_VISIBLE_DEVICES`. Por ejemplo, para ejecutar tu programa en la segunda GPU, puedes usar:
 
 ```bash
 CUDA_VISIBLE_DEVICES=1 python my_program.py
 ```
 
-Para ejecutar su programa en multiples GPUs, puede usar:
+Para ejecutar tu programa en múltiples GPUs, puedes usar:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python my_program.py
 ```
 
-Para deshabilitar el uso de GPU (usar CPU), puede usar:
+Para desactivar el uso de la GPU (usar la CPU), puedes usar:
 
 ```bash
 CUDA_VISIBLE_DEVICES="" python my_program.py

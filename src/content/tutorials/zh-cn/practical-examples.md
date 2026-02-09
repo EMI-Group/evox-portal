@@ -1,90 +1,73 @@
 ---
-title: "7. 实战案例"
+title: "7. 实践示例"
 order: 7
 ---
 
-# 7. 实战案例
+# 7. 实践示例
 
-本章将通过几个完整的实战案例，来演示如何将前面章节所学应用于具体场景。我们将从零开始搭建一个优化项目，并展示如何将 EvoX 和其他工具结合使用。这些案例涵盖不同类型的问题，帮助您举一反三，在真实需求中使用 EvoX。
+本章提供了几个完整的实践示例，以演示如何应用前几章的知识。我们将从头构建一个优化项目，并展示 EvoX 如何与其他工具集成。这些示例涵盖了一系列问题类型，旨在帮助您在实际场景中应用 EvoX。
 
 ---
 
-## 案例一：单目标优化
+## 示例 1：单目标优化
 
-**问题描述**：优化一个经典的测试函数——[Rastrigin 函数](https://www.sfu.ca/~ssurjano/rastr.html)。该函数具有大量局部极值点，是测试算法全局优化能力的常用基准。定义如下：
+**问题**：优化经典的 Rastrigin 函数：
 
 ```{math}
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
-其中$\mathbf{x} \in \mathbb{R}^d$, $d$为该函数的维数。Rastrigin 函数的全局最优值为$0$，出现在原点。为了清晰地展示该函数具有多个局部极值点的性质，我们绘制了二维 Rastrigin 函数的图像。
+其中 $\mathbf{x} \in \mathbb{R}^d$， $d$ 为维度。全局最优值为 0，位于原点。该函数具有高度多模态性，非常适合用于测试全局优化算法。下面是 Rastrigin 函数的图像
 
 ```{figure} /_static/rastrigin_function.svg
-:alt: A plot of the Rastrigin function
+:alt: Rastrigin 函数图像
 :figwidth: 70%
 :align: center
 
 Rastrigin 函数
 ```
 
-在本案例中，我们将使用粒子群优化（PSO）算法在十维 Rastrigin 函数上寻优。
+在本例中，我们将使用粒子群优化 (PSO) 算法来优化 10 维 Rastrigin 函数。
 
-**步骤1：配置环境**
+**步骤 1：设置**
 
-假设您已经按照教程第2章配置好了 EvoX 运行环境（Python 环境、安装 EvoX 等）。该问题不需要特殊依赖。
+假设您已按照第 2 章的说明配置好了 EvoX 环境。
 
-**步骤2：搭建流程**
+**步骤 2：工作流设置**
 
-编写 Python 脚本`opt_rastrigin_10.py`，内容如下：
+创建一个 Python 脚本 `opt_rastrigin_10.py`：
 
 ```python
-# 导入必要的模块
 import torch
 from evox.algorithms.so.pso_variants import PSO
 from evox.problems.numerical.basic import Rastrigin
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-首先，我们将定义需要使用的算法（Algorithm）PSO。
+定义 PSO 算法：
 
 ```python
-# 定义问题维度
 dim = 10
-
-# 初始化算法和问题
 algo = PSO(
-    pop_size = 50,
-    lb = -32 * torch.ones(dim),
-    ub = 32 * torch.ones(dim)
+    pop_size=50,
+    lb=-32 * torch.ones(dim),
+    ub=32 * torch.ones(dim)
 )
 ```
 
-在实例化一个 PSO 算法类的时候，我们需要明确其参数的含义：
-
-- `pop_size`：粒子种群的大小。
-- `lb`和`ub`：搜索空间的下界和上界。
-- 其他参数均为默认值，请查阅具体的API。
-
-由于各种常见的测试函数（包括 Ackley 函数、Rosenbrock 函数等）在 EvoX 中均已实现，在这里我们仅需直接调用 Rastrigin 函数作为问题（Problem）即可。当然，如果您想实现其他的测试函数，请您参考本教程的第五章“自定义问题（Problem）”部分的内容。同时，我们将创建一个监视器（EvalMonitor），并使用算法，问题和监视器共同创建一个工作流（StdWorkflow）。
+设置问题和工作流：
 
 ```python
-# 定义问题
 prob = Rastrigin()
-
-# 定义监视器
 monitor = EvalMonitor()
-
-# 定义工作流
 workflow = StdWorkflow(
-    algorithm = algo,
-    problem = prob,
-    monitor = monitor
+    algorithm=algo,
+    problem=prob,
+    monitor=monitor
 )
 ```
 
-**步骤3：算法迭代**
-
-接下来，我们需要通过`init_step()`和`step()`函数来进行算法的迭代。在迭代结束后，可以通过`get_best_solution()`和`get_best_fitness()`函数来分别获取最优解和其对应的适应度（在本案例中指函数值）。
+**步骤 3：运行优化**
 
 ```python
 workflow.init_step()
@@ -97,7 +80,7 @@ for iter in range(501):
 print(f"Final Best Solution: {monitor.get_best_solution()}")
 ```
 
-代码的运行结果如下：
+**示例输出**：
 
 ```
 Iter 0, Best Fitness: 1398.625
@@ -106,32 +89,31 @@ Iter 200, Best Fitness: 2.5700759887695312
 Iter 300, Best Fitness: 1.9909820556640625
 Iter 400, Best Fitness: 1.9899139404296875
 Iter 500, Best Fitness: 0.9976348876953125
-Final Best Solution: tensor([-6.8931e-04, -2.0245e-04,  7.1968e-04,  1.9589e-04, -1.0042e-03,
-         1.2888e-04, -2.6531e-03, -9.9485e-01,  2.0368e-03,  4.3372e-04])
+Final Best Solution: tensor([...])
 ```
 
-我们可以看到，使用 PSO 算法可以将十维 Rastrigin 函数的值优化至`0.99`左右，最优值在原点附近，这正是我们想看到的结果！
+正如预期的那样，PSO 算法找到了接近原点的近优解。
 
 ---
 
-## 案例二：多目标优化
+## 示例 2：多目标优化
 
-**问题描述**：考虑一个简单的双目标优化问题：同时最小化两个目标函数$f_1(x)$和$f_2(x)$，它们分别是两个单峰函数：
+**问题**：最小化两个目标：
 
 ```{math}
-f_1(x) = x^2,\\
-f_2(x) = (x-2)^2.
+f_1(x) = x^2, \quad
+f_2(x) = (x - 2)^2
 ```
 
-这里$x$是决策变量，令其取值范围为$[-5, 5]$。这实际上是一个很简单的优化，有一个帕累托最优解集在两个目标之间（当$x=0$完全最优$f_1$，当$x=2$完全最优$f_2$，中间权衡）。我们将使用经典的多目标演化算法 NSGA-II 来求解它的帕累托前沿。
+Pareto 前沿位于 $x = 0$（$f_1$ 的最优解）和 $x = 2$（$f_2$ 的最优解）之间。
 
-**步骤1：配置环境**
+**步骤 1：环境设置**
 
-需要确保安装了 EvoX 的多目标算法支持，默认安装已包含 NSGA-II 算法。
+确保您安装的 EvoX 支持 NSGA-II。
 
-**步骤2：实现自定义问题**
+**步骤 2：定义自定义问题**
 
-EvoX 内置很多多目标测试问题，但在这个案例中，我们需要参考第五章内容，自定义一个 Problem，来优化本案例中的双目标问题：
+EvoX 有许多内置的多目标测试问题，但在本例中，我们将定义一个自定义问题来优化这两个目标：
 
 ```python
 import torch
@@ -140,7 +122,7 @@ import matplotlib.pyplot as plt
 
 from evox.algorithms import NSGA2
 from evox.workflows import StdWorkflow, EvalMonitor
-# 导入EvoX的核心类，具体请查阅本教程第五章
+# Import evox core classes, see Chapter 5 for details
 from evox.core import Problem
 
 class TwoObjectiveProblem(Problem):
@@ -159,18 +141,18 @@ class TwoObjectiveProblem(Problem):
         f_2 = (x - 2) ** 2
         return torch.stack([f_1, f_2], dim=1)
 
-    # 可以定义pf函数，返回真实的Pareto前沿
+    # Optional: Define the Pareto front function
     def pf(self) -> torch.Tensor:
         pass
 ```
 
-**步骤3：搭建流程**
-
-类似与案例一，我们会先后定义算法（Algorithm），问题（Problem）和监视器（EvalMonitor），并将其组成工作流（StdWorkflow）。
+**步骤 3：定义算法和工作流**
 
 ```python
-prob = TwoObjectiveProblem()
+from evox.algorithms import NSGA2
+from evox.workflows import StdWorkflow, EvalMonitor
 
+prob = TwoObjectiveProblem()
 torch.set_default_device("cuda:0")
 
 algo = NSGA2(
@@ -185,9 +167,7 @@ monitor = EvalMonitor()
 workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-**步骤4：算法迭代**
-
-接下来，我们需要通过`init_step()`和`step()`函数来进行算法的迭代。我们可以可视化经过NSGA-II算法优化后的结果，代码如下：
+**步骤 4：优化和可视化**
 
 ```python
 workflow.init_step()
@@ -196,42 +176,35 @@ for i in range(100):
 
 data = algo.fit.cpu().numpy()
 
-def f1(x):
-    return x ** 2
-
-def f2(x):
-    return (x - 2) ** 2
-
-f1_values = data[:, 0]
-f2_values = data[:, 1]
+import numpy as np
+import matplotlib.pyplot as plt
 
 x_vals = np.linspace(0, 2, 400)
-pf_f1 = f1(x_vals)
-pf_f2 = f2(x_vals)
-# 或者利用等价关系计算：pf_f2 = 4 - 4*np.sqrt(pf_f1) + pf_f1
+pf_f1 = x_vals ** 2
+pf_f2 = (x_vals - 2) ** 2
 
-# 绘制图形
 plt.figure(figsize=(8, 6))
-plt.scatter(f1_values, f2_values, c='blue', alpha=0.7)
-plt.plot(pf_f1, pf_f2, 'r-', linewidth=2)
+plt.scatter(data[:, 0], data[:, 1], c='blue', label='Optimized Population', alpha=0.7)
+plt.plot(pf_f1, pf_f2, 'r-', linewidth=2, label='Pareto Front')
 plt.xlabel("f1")
 plt.ylabel("f2")
+plt.title("NSGA-II on Bi-objective Problem")
 plt.legend()
 plt.grid(True)
 plt.show()
 ```
 
-我们可以得到多次迭代后的种群分布情况，实验结果同样符合我们的预期：
+我们可以使用 Matplotlib 可视化结果。蓝点代表优化后的种群，红线显示 Pareto 前沿。
 
 ```{figure} /_static/example_nsga2_result.svg
-:alt: A plot of the NSGA-II population
+:alt: NSGA-II 种群图像
 :figwidth: 70%
 :align: center
 
-NSGA-II算法优化后的种群分布
+优化后的 NSGA-II 种群图像
 ```
 
-同时，在 JupyterNotebook 中，您还可以通过 EvoX 的可视化模块直接得到动态的实验结果，您可以直观地看到种群是如何随着算法的迭代更新的。为了实现这一目标，您只需要运行一行代码：
+在 Jupyter Notebook 中，您可以使用 EvoX 内置的绘图功能来可视化优化过程，并监控种群随代数的演变情况。
 
 ```python
 monitor.plot()
@@ -239,17 +212,11 @@ monitor.plot()
 
 ---
 
-## 案例三：超参数优化
+## 示例 3：超参数优化 (HPO)
 
-**问题描述**：在机器学习领域，算法的超参数对于模型的性能具有重要影响，然而，如何选择合适的超参数往往需要借助经验以及多次手动尝试。如今我们可以通过 EvoX 来简化这一流程。我们以逻辑回归(Logistic Regression)模型在乳腺癌数据集上的分类准确率为例，优化两个超参数：正则化强度 `C`（或正则项系数的倒数）和训练迭代次数 `max_iter`。我们的目标是最大化验证集准确率。
+**问题**：调整乳腺癌数据集上逻辑回归分类器的 `C` 和 `max_iter` 参数，以最大化验证准确率。
 
-**步骤1：数据与模型准备**
-
-使用`scikit-learn`加载乳腺癌数据集，并设定一个逻辑回归模型。由于 EvoX 优化目标默认是**最小化**，我们可以优化**错误率**来等价于最大化准确率。或者在 Problem 返回的时候取负的准确率作为需要最小化的值。这里选择优化验证集错误率（$1 - \text{Accuracy}$）。
-
-**步骤2：定义问题**
-
-问题（Problem）的输入为两个超参数 `[C, max_iter]`，我们在 evaluate 中训练模型并评估：
+**步骤 1：加载数据和模型**
 
 ```python
 import torch
@@ -258,87 +225,74 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from evox.core import Problem
-from evox.algorithms.so.es_variants import CMAES
-from evox.workflows import EvalMonitor, StdWorkflow
-from evox.problems.numerical.basic import Ackley
 
-# 准备数据
-data = load_breast_cancer()
-X_all, y_all = data.data, data.target
-# 划分训练集验证集
-X_train, X_val, y_train, y_val = train_test_split(X_all, y_all, test_size=0.2, random_state=42)
-# 标准化
+X, y = load_breast_cancer(return_X_y=True)
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 scaler = StandardScaler().fit(X_train)
 X_train = scaler.transform(X_train)
 X_val = scaler.transform(X_val)
+```
 
+**步骤 2：定义问题**
+
+```python
 class HyperParamOptProblem(Problem):
     def __init__(self):
         super().__init__()
+
     def evaluate(self, pop):
-        # params: (N,2)张量
-        # 因为sklearn不是GPU计算，这里将tensor转回numpy
         pop = pop.detach().cpu().numpy()
         objs = []
         for C_val, max_iter_val in pop:
-            # 注意：C是正则强度倒数，取值范围正数，max_iter范围正整数
-            # 需要对候选值进行合法变换，例如C用10**x范围变换更合理，这里简单处理
-            C_val = float(max(1e-3, C_val))  # 确保为正
-            max_iter_val = int(max(50, max_iter_val))  # 至少50次迭代
-            # 训练模型
+            C_val = float(max(1e-3, C_val))
+            max_iter_val = int(max(50, max_iter_val))
             model = LogisticRegression(C=C_val, max_iter=max_iter_val, solver='liblinear')
             model.fit(X_train, y_train)
-            acc = model.score(X_val, y_val)  # 验证集准确率
-            error_rate = 1 - acc            # 错误率作为优化目标
-            objs.append(error_rate)
-        objs = torch.tensor(objs)
-        return objs
+            acc = model.score(X_val, y_val)
+            objs.append(1 - acc)  # error rate
+        return torch.tensor(objs)
 ```
 
-**步骤3：搭建流程**
-
-我们使用CMA-ES算法来优化超参数。这里我们初始化CMA-ES的种群均值为[1.0, 100]，即初始认为`C=1`, `max_iter=100`。`sigma=1.0`是初始步长。这个问题两个决策一个取正实数，一个取正整数，但我们暂且当作连续优化，让算法自行探索。不过在 evaluate 中我们做了截断，保证含义有效。
+**步骤 3：工作流设置**
 
 ```python
-prob = HyperParamOptProblem()
+from evox.algorithms.so.es_variants import CMAES
+from evox.workflows import EvalMonitor, StdWorkflow
 
+prob = HyperParamOptProblem()
 init_params = torch.tensor([1.0, 100.0])
-init_error_rate = prob.evaluate(init_params.unsqueeze(0)).item()
-print(f"模型初始错误率为：{init_error_rate}")
+print("Initial error rate:", prob.evaluate(init_params.unsqueeze(0)).item())
+
 algo = CMAES(
     mean_init=init_params,
     sigma=1.0,
 )
+
 monitor = EvalMonitor()
-workflow = StdWorkflow(algo, prob, monitor=monitor)
+workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-我们可以看到，使用初始状态的超参数会带来较高的错误率：
-
-```
-模型初始错误率为：0.02631578966975212
-```
-
-**步骤4：算法迭代**
+**步骤 4：优化**
 
 ```python
 workflow.init_step()
 for _ in range(100):
     workflow.step()
 
-optimized_params = monitor.get_best_solution()
-optimized_error_rate = prob.evaluate(optimized_params.unsqueeze(0)).item()
-print(f"使用优化后的超参数的模型错误率为：{optimized_error_rate}")
+best_params = monitor.get_best_solution()
+best_error = prob.evaluate(best_params.unsqueeze(0)).item()
+print("Optimized error rate:", best_error)
 ```
 
-经过100次迭代后，我们可以获得更优异的超参数配置，代码运行结果如下：
+**示例输出**：
 
 ```
-使用优化后的超参数的模型错误率为：0.008771929889917374
+Initial error rate: 0.0263
+Optimized error rate: 0.0088
 ```
 
-我们可以看到，只需要灵活地根据需求定义问题，就可以使用EvoX使繁琐的调参过程完全自动化！
+只需几行代码，EvoX 就能自动完成繁琐的超参数调优试错过程。
 
 ---
 
-以下实用示例展示了 EvoX 如何在各个领域中高效应用，从数学测试函数到机器学习流程。一旦你熟悉了基本结构 —— **算法 + 问题 + 监控器 + 工作流** —— 就可以将 EvoX 灵活地适用于几乎任何优化任务。
+这些实践示例展示了 EvoX 如何有效地应用于各个领域，从数学测试函数到机器学习工作流。一旦您熟悉了 **Algorithm + Problem + Monitor + Workflow** 这一基本结构，就可以调整 EvoX 以适应几乎任何优化任务。
