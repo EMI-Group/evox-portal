@@ -25,12 +25,12 @@ Isto criará uma shell com todas as dependências necessárias e um diretório `
 ## Guia de estilo
 
 O EvoX tem o seguinte guia de estilo:
-1. Certifique-se de utilizar o [ruff](https://docs.astral.sh/ruff/) para verificar o seu código.
-2. Certifique-se de que não existem espaços em branco no final das linhas.
+1. Certifique-se de usar o [ruff](https://docs.astral.sh/ruff/) para fazer o lint do seu código.
+2. Certifique-se de que não existem espaços em branco no final das linhas (`trailing whitespaces`).
 
 ## Pre-commit
 
-Recomendamos a utilização do [pre-commit](https://pre-commit.com/) para aplicar o guia de estilo.
+Recomendamos o uso do [pre-commit](https://pre-commit.com/) para aplicar o guia de estilo.
 Após instalar o pre-commit, execute o seguinte comando para instalar os hooks no seu repositório local:
 ```bash
 pre-commit install
@@ -38,8 +38,8 @@ pre-commit install
 
 ## Executar Testes Unitários
 
-1. Prepare o ambiente de teste instalando os pacotes necessários (por exemplo, `torch`) no seu ambiente Python
-2. Execute os testes unitários:
+1. prepare o ambiente de teste instalando os pacotes necessários (ex: `torch`) no seu ambiente Python
+2. execute o unittest:
 ```shell
 # run all tests
 python -m unittest

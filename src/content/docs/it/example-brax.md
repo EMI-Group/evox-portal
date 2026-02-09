@@ -6,11 +6,11 @@ section: "examples"
 
 # Risolvere Problemi Brax in EvoX
 
-EvoX approfondisce la neuroevoluzione con Brax.
+EvoX si immerge profondamente nella neuroevoluzione con Brax.
 Qui mostreremo un esempio di risoluzione di un problema Brax in EvoX.
 
 ```python
-# installa EvoX e Brax, salta se hai già installato EvoX o Brax
+# install EvoX and Brax, skip it if you have already installed EvoX or Brax
 from importlib.util import find_spec
 from IPython.display import HTML
 
@@ -21,7 +21,7 @@ if find_spec("brax") is None:
 ```
 
 ```python
-# I pacchetti o le funzioni dipendenti in questo esempio
+# The dependent packages or functions in this example
 import torch
 import torch.nn as nn
 
@@ -33,7 +33,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Cos'è Brax
 
-Brax è un motore fisico veloce e completamente differenziabile usato per la ricerca e lo sviluppo di robotica, percezione umana, scienza dei materiali, apprendimento per rinforzo e altre applicazioni ad alta intensità di simulazione.
+Brax è un motore fisico veloce e completamente differenziabile utilizzato per la ricerca e lo sviluppo di robotica, percezione umana, scienza dei materiali, reinforcement learning e altre applicazioni ad alta intensità di simulazione.
 
 Qui dimostreremo un ambiente "swimmer" di Brax.
 
@@ -41,13 +41,13 @@ Per maggiori informazioni, puoi consultare il [Github di Brax](https://github.co
 
 ## Progettare una classe di rete neurale
 
-Per iniziare, dobbiamo decidere quale rete neurale costruire.
+Per iniziare, dobbiamo decidere quale rete neurale stiamo per costruire.
 
-Qui daremo una semplice classe Multilayer Perceptron (MLP).
+Qui forniremo una semplice classe Multilayer Perceptron (MLP).
 
 ```python
-# Costruisci un MLP usando PyTorch.
-# Questo MLP ha 3 strati.
+# Construct an MLP using PyTorch.
+# This MLP has 3 layers.
 
 
 class SimpleMLP(nn.Module):
@@ -65,44 +65,44 @@ class SimpleMLP(nn.Module):
 Attraverso la classe ``SimpleMLP``, possiamo inizializzare un modello MLP.
 
 ```python
-# Assicurati che il modello sia sullo stesso dispositivo, preferibilmente sulla GPU
+# Make sure that the model is on the same device, better to be on the GPU
 device = "cuda" if torch.cuda.is_available() else "cpu"
-# Reimposta il seed casuale
+# Reset the random seed
 seed = 1234
 torch.manual_seed(seed)
 torch.cuda.manual_seed_all(seed)
 
-# Inizializza il modello MLP
+# Initialize the MLP model
 model = SimpleMLP().to(device)
 ```
 
-### Inizializzare un adattatore
+### Inizializzare un adapter
 
-Un adattatore può aiutarci a convertire i dati avanti e indietro.
+Un adapter può aiutarci a convertire i dati avanti e indietro.
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-Con un adattatore, possiamo procedere con questa attività di Neuroevoluzione.
+Con un adapter, possiamo accingerci a svolgere questo task di Neuroevoluzione.
 
-## Configurare il processo di esecuzione
+## Impostare il processo di esecuzione
 
 ### Inizializzare un algoritmo e un problema
 
 Inizializziamo un [algoritmo PSO](#evox.algorithms.so.pso_variants.pso.PSO), e il problema è un [problema Brax](#evox.problems.neuroevolution.brax.BraxProblem) nell'ambiente "swimmer".
 
 ```python
-# Imposta la dimensione della popolazione
+# Set the population size
 POP_SIZE = 1024
 
-# Ottieni i limiti dell'algoritmo PSO
+# Get the bound of the PSO algorithm
 model_params = dict(model.named_parameters())
 pop_center = adapter.to_vector(model_params)
 lower_bound = torch.full_like(pop_center, -5)
 upper_bound = torch.full_like(pop_center, 5)
 
-# Inizializza il PSO, puoi anche usare qualsiasi altro algoritmo
+# Initialize the PSO, and you can also use any other algorithms
 algorithm = PSO(
     pop_size=POP_SIZE,
     lb=lower_bound,
@@ -110,7 +110,7 @@ algorithm = PSO(
     device=device,
 )
 
-# Inizializza il problema Brax
+# Initialize the Brax problem
 problem = BraxProblem(
     policy=model,
     env_name="halfcheetah",
@@ -121,12 +121,12 @@ problem = BraxProblem(
 )
 ```
 
-In questo caso, useremo 1000 passi per ogni episodio, e la ricompensa media di 3 episodi verrà restituita come valore di fitness.
+In questo caso, utilizzeremo 1000 step per ogni episodio, e la ricompensa media di 3 episodi verrà restituita come valore di fitness.
 
 ### Impostare un monitor
 
 ```python
-# imposta un monitor, che può registrare le 3 migliori fitness
+# set an monitor, and it can record the top 3 best fitnesses
 monitor = EvalMonitor(
     topk=3,
     device=device,
@@ -136,7 +136,7 @@ monitor = EvalMonitor(
 ### Inizializzare un workflow
 
 ```python
-# Inizializza un workflow
+# Initiate an workflow
 workflow = StdWorkflow(
     algorithm=algorithm,
     problem=problem,
@@ -152,14 +152,14 @@ workflow = StdWorkflow(
 Esegui il workflow e guarda la magia!
 
 > **Nota:**
-> Il seguente blocco impiegherà circa 20 minuti per l'esecuzione.
+> Il seguente blocco impiegherà circa 20 minuti per essere eseguito.
 > Il tempo può variare a seconda del tuo hardware.
 
 ```python
-# Imposta il numero massimo di generazioni
+# Set the maximum number of generations
 max_generation = 50
 
-# Esegui il workflow
+# Run the workflow
 workflow.init_step()
 compiled_step = torch.compile(workflow.step)
 for i in range(max_generation):
@@ -187,7 +187,7 @@ HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="
 ```
 
 > **Importante:**
-> - Normalmente, ti basta `HTML(problem.visualize(best_params))` per il rendering. Il codice sopra è un workaround per assicurare che il risultato sia visualizzato correttamente sul nostro sito web.
-> - L'algoritmo PSO non è specificamente ottimizzato per questo tipo di attività, quindi sono previste limitazioni di prestazioni. Questo esempio è a scopo dimostrativo.
+> - Normalmente, hai solo bisogno di `HTML(problem.visualize(best_params))` per il rendering. Il codice sopra è un workaround per garantire che il risultato venga visualizzato correttamente sul nostro sito web.
+> - L'algoritmo PSO non è specificamente ottimizzato per questo tipo di task, quindi sono previste limitazioni nelle prestazioni. Questo esempio è a scopo dimostrativo.
 
-Speriamo che ti diverta a risolvere problemi Brax con EvoX!
+Speriamo che ti piaccia risolvere problemi Brax con EvoX e buon divertimento!

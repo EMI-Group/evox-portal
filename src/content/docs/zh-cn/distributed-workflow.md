@@ -6,22 +6,22 @@ section: "experimental"
 
 # 多 GPU 与分布式工作流
 
-EvoX 对分布式工作流提供了实验性支持，允许你在多个 GPU 甚至多台机器上运行任何常规进化算法。这可以显著加速优化过程，尤其是对于耗时较长的问题。
+EvoX 对分布式工作流提供了实验性支持，允许你在多个 GPU 甚至多台机器上运行任何常规的进化算法。这可以显著加速优化过程，特别是对于耗时的问题。
 
-## 使用方法
+## 如何使用
 
 要使用分布式工作流，你需要进行以下设置：
-1. 确保手动固定随机数生成器的种子。
+1. 确保你已手动固定随机数生成器的种子。
 ```python
 torch.manual_seed(seed)
-# 可选：设置 numpy 的种子
+# Optional: set the seed for numpy
 np.random.seed(seed)
-# 可选：使用确定性算法
+# Optional: use deterministic algorithms
 torch.use_deterministic_algorithms(True)
 ```
-> **重要：**
-> 确保在任何 torch 或 numpy 操作**之前**设置所有随机数生成器的种子。这可以确保随机数生成器在执行任何操作之前处于已知状态。
-2. 使用 `torch.distributed` 或 `torchrun` 命令来启动你的脚本。例如：
+> **重要提示：**
+> 确保在执行任何 torch 或 numpy 操作**之前**设置所有随机数生成器的种子。这能确保随机数生成器在执行任何操作前处于已知状态。
+2. 使用 `torch.distributed` 或 `torchrun` 命令启动你的脚本。例如：
 ```bash
 torchrun
     --standalone

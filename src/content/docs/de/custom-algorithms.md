@@ -6,11 +6,11 @@ section: "developer"
 
 # Benutzerdefinierte Algorithmen und Probleme in EvoX
 
-In diesem Kapitel stellen wir vor, wie Sie Ihre eigenen Algorithmen und Probleme in EvoX implementieren.
+In diesem Kapitel stellen wir vor, wie Sie Ihre eigenen Algorithmen und Probleme in EvoX implementieren können.
 
-## Aufbau der Algorithmen und Probleme
+## Struktur der Algorithmen und Probleme
 
-In den meisten traditionellen EC-Bibliotheken rufen Algorithmen normalerweise die Zielfunktion intern auf, was folgenden Aufbau ergibt:
+In den meisten traditionellen EC-Bibliotheken rufen Algorithmen normalerweise intern die Zielfunktion auf, was zu folgender Struktur führt:
 
 ```
 Algorithm
@@ -18,31 +18,31 @@ Algorithm
 +--Problem
 ```
 
-**Aber in EvoX haben wir einen flachen Aufbau:**
+**Aber in EvoX haben wir eine flache Struktur:**
 
 ```
 Algorithm.step -- Problem.evaluate
 ```
 
-Dieser Aufbau macht sowohl Algorithmen als auch Probleme universeller: Ein Algorithmus kann verschiedene Probleme optimieren, während ein Problem auch für viele Algorithmen geeignet sein kann.
+Diese Struktur macht sowohl Algorithmen als auch Probleme universeller: Ein Algorithmus kann verschiedene Probleme optimieren, während ein Problem auch für viele Algorithmen geeignet sein kann.
 
 
 ## Algorithm-Klasse
 
 Die `Algorithm`-Klasse erbt von `ModuleBase`.
 
-**Insgesamt gibt es 5 Methoden (2 Methoden sind optional), die wir implementieren müssen:**
+**Insgesamt** **gibt es 5 Methoden (2 Methoden sind optional), die wir implementieren müssen:**
 
-| Methode       | Signatur                               | Verwendung                                                                                                              |
+| Methode       | Signatur                               | Verwendung                                                                                                              |
 | ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `__init__` | `(self, ...)`                   | Initialisiert die Algorithmusinstanz, zum Beispiel die Populationsgröße (bleibt während der Iteration konstant), Hyperparameter (können nur vom HPO-Problem-Wrapper gesetzt oder hier initialisiert werden) und/oder veränderliche Tensoren (können im laufenden Betrieb modifiziert werden). |
-| `step`               | `(self)`                        | Führt einen normalen Optimierungsiterationsschritt des Algorithmus durch. |
-| `init_step` (optional) | `(self)` | Führt den ersten Schritt der Optimierung des Algorithmus durch. Wenn diese Methode nicht überschrieben wird, wird stattdessen die `step`-Methode aufgerufen. |
+| `__init__` | `(self, ...)`                   | Initialisiert die Algorithmus-Instanz, zum Beispiel die Populationsgröße (bleibt während der Iteration konstant), Hyperparameter (können nur durch den HPO-Problem-Wrapper gesetzt oder hier initialisiert werden) und/oder veränderliche Tensoren (können während der Ausführung geändert werden). |
+| `step`               | `(self)`                        | Führt einen normalen Optimierungs-Iterationsschritt des Algorithmus aus. |
+| `init_step` (optional) | `(self)` | Führt den ersten Schritt der Optimierung des Algorithmus aus. Wenn diese Methode nicht überschrieben wird, wird stattdessen die `step`-Methode aufgerufen. |
 
 > **Hinweis:**
-> Die statische Initialisierung kann weiterhin in `__init__` geschrieben werden, während die Initialisierung veränderbarer Submodule dies nicht kann. Daher sind mehrere Aufrufe von `setup` für wiederholte Initialisierungen möglich, wenn die überschriebene `setup`-Methode zuerst `setup()` von `ModuleBase` aufruft.
->
-> Wenn eine solche `setup`-Methode in `ModuleBase` nicht für Ihren Algorithmus geeignet ist, können Sie die `setup`-Methode überschreiben, wenn Sie Ihre eigene Algorithmusklasse erstellen.
+> Die statische Initialisierung kann weiterhin in `__init__` geschrieben werden, während die Initialisierung veränderlicher Submodule dies nicht kann. Daher sind mehrfache Aufrufe von `setup` für wiederholte Initialisierungen möglich, wenn die überschriebene `setup`-Methode zuerst `setup()` von `ModuleBase` aufruft.
+> 
+> Wenn eine solche `setup`-Methode in `ModuleBase` für Ihren Algorithmus nicht geeignet ist, können Sie die `setup`-Methode überschreiben, wenn Sie Ihre eigene Algorithmus-Klasse erstellen.
 
 
 ## Problem-Klasse
@@ -56,7 +56,7 @@ Die Problem-Klasse ist jedoch recht einfach. **Neben der `__init__`-Methode ist 
 | `__init__` | `(self, ...)`                       | Initialisiert die Einstellungen des Problems.       |
 | `evaluate` | `(self, pop: torch.Tensor) -> torch.Tensor` | Bewertet die Fitness der gegebenen Population. |
 
-Der Typ des `pop`-Arguments in `evaluate` kann jedoch in der überschriebenen Methode auf andere JIT-kompatible Typen geändert werden.
+Der Typ des `pop`-Arguments in `evaluate` kann jedoch in der überschriebenen Methode in andere JIT-kompatible Typen geändert werden.
 
 
 ## Beispiel
@@ -81,7 +81,7 @@ Do
 Until stopping criterion
 ```
 
-Und hier ist, was jeder Teil des Algorithmus und des Problems in EvoX entspricht.
+Und hier sehen Sie, was jeder Teil des Algorithmus und des Problems in EvoX entspricht.
 
 ```text
 Set hyper-parameters # Algorithm.__init__
@@ -101,7 +101,7 @@ Until stopping criterion
 
 ### Algorithmus-Beispiel: PSO-Algorithmus
 
-Partikelschwarmoptimierung (PSO) ist ein populationsbasierter metaheuristischer Algorithmus, der vom Sozialverhalten von Vögeln und Fischen inspiriert ist. Er wird häufig zur Lösung kontinuierlicher und diskreter Optimierungsprobleme eingesetzt.
+Particle Swarm Optimization (PSO) ist ein populationsbasierter metaheuristischer Algorithmus, der vom Sozialverhalten von Vögeln und Fischen inspiriert ist. Er wird häufig zur Lösung kontinuierlicher und diskreter Optimierungsprobleme eingesetzt.
 
 **Hier ist ein Implementierungsbeispiel des PSO-Algorithmus in EvoX:**
 

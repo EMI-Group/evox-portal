@@ -1,18 +1,18 @@
 ---
-title: "カスタムアルゴリズムによるHPOのデプロイ"
+title: "カスタムアルゴリズムを用いたHPOのデプロイ"
 order: 6
 section: "developer"
 ---
 
-# カスタムアルゴリズムによるHPOのデプロイ
+# カスタムアルゴリズムを用いたHPOのデプロイ
 
-この章では、カスタムアルゴリズムによるHPOのデプロイに焦点を当て、全体的なワークフローではなく詳細を強調します。HPOデプロイの簡単な紹介は[チュートリアル](#/tutorial/tutorial_part7)で提供されており、事前に読むことを強く推奨します。
+本章では、全体的なワークフローよりも詳細に重点を置いて、カスタムアルゴリズムを用いたHPO（ハイパーパラメータ最適化）のデプロイに焦点を当てます。HPOのデプロイに関する簡単な紹介は[チュートリアル](#/tutorial/tutorial_part7)にありますので、事前に読んでおくことを強く推奨します。
 
-## アルゴリズムの並列化可能性の確保
+## アルゴリズムの並列化
 
-内部アルゴリズムを問題に変換する必要があるため、内部アルゴリズムが並列化可能であることが重要です。そのため、アルゴリズムにいくつかの修正が必要になる場合があります。
+内部アルゴリズムを問題（problem）に変換する必要があるため、内部アルゴリズムが並列化可能であることが重要です。したがって、アルゴリズムにいくつかの修正が必要になる場合があります。
 
-1. アルゴリズムは、アルゴリズム自体の属性に対するインプレース操作を持つメソッドがあってはなりません。
+1. アルゴリズムは、アルゴリズム自体の属性に対してインプレース操作（in-place operations）を行うメソッドを持ってはいけません。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -26,7 +26,7 @@ class ExampleAlgorithm(Algorithm):
         self.pop = pop
 ```
 
-2. コードロジックがPythonの制御フローに依存しないこと。
+2. コードロジックはPythonの制御フローに依存してはいけません。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -56,17 +56,17 @@ class ExampleAlgorithm(Algorithm):
 
 ## HPOMonitorの活用
 
-HPOタスクでは、各内部アルゴリズムのメトリクスを追跡するために`HPOMonitor`を使用する必要があります。`HPOMonitor`は標準の`monitor`と比較して、`tell_fitness`メソッドを1つだけ追加しています。この追加は、HPOタスクが多次元で複雑なメトリクスを含むことが多いため、メトリクス評価の柔軟性を高めるために設計されています。
+HPOタスクでは、各内部アルゴリズムの指標を追跡するために `HPOMonitor` を使用する必要があります。`HPOMonitor` は、標準の `monitor` と比較して `tell_fitness` というメソッドを1つだけ追加しています。HPOタスクは多次元で複雑な指標を伴うことが多いため、この追加は指標の評価においてより高い柔軟性を提供するために設計されています。
 
-ユーザーは`HPOMonitor`のサブクラスを作成し、`tell_fitness`メソッドをオーバーライドしてカスタム評価メトリクスを定義するだけです。
+ユーザーは `HPOMonitor` のサブクラスを作成し、`tell_fitness` メソッドをオーバーライドしてカスタム評価指標を定義するだけで済みます。
 
-また、シンプルな`HPOFitnessMonitor`も提供しており、多目的問題の「IGD」と「HV」メトリクスの計算、および単目的問題の最小値をサポートしています。
+また、多目的問題に対する 'IGD' や 'HV' 指標の計算、および単一目的問題に対する最小値の計算をサポートする、シンプルな `HPOFitnessMonitor` も提供しています。
 
 ## 簡単な例
 
-ここでは、EvoXでHPOを使用する簡単な例を示します。`PSO`アルゴリズムを使用して、sphere問題を解くための基本アルゴリズムの最適なハイパーパラメータを探索します。
+ここでは、EvoXでHPOを使用する簡単な例を示します。`PSO` アルゴリズムを使用して、Sphere問題を解くための基本的なアルゴリズムの最適なハイパーパラメータを探索します。
 
-まず、必要なモジュールをインポートしましょう。
+まず、必要なモジュールをインポートします。
 
 ```python
 import torch
@@ -77,7 +77,7 @@ from evox.problems.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-次に、シンプルなsphere問題を定義します。これは通常の`problems`と違いはありません。
+次に、単純なSphere問題を定義します。これは一般的な `problems` と違いがないことに注意してください。
 
 ```python
 class Sphere(Problem):
@@ -88,7 +88,7 @@ class Sphere(Problem):
         return (x * x).sum(-1)
 ```
 
-次に、アルゴリズムを定義します。`torch.cond`関数を使用し、並列化可能であることを確認します。具体的には、インプレース操作を修正し、Pythonの制御フローを調整します。
+次に、アルゴリズムを定義します。`torch.cond` 関数を使用し、並列化可能であることを確認します。具体的には、インプレース操作を修正し、Pythonの制御フローを調整します。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -121,7 +121,7 @@ class ExampleAlgorithm(Algorithm):
 
 ```
 
-Pythonの制御フローを処理するために[`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html)を使用します。次に、`StdWorkflow`を使用して`problem`、`algorithm`、`monitor`をラップできます。そして`HPOProblemWrapper`を使用して`StdWorkflow`をHPO問題に変換します。
+Pythonの制御フローを扱うために [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html) を使用します。次に、`StdWorkflow` を使用して `problem`、`algorithm`、`monitor` をラップします。そして、`HPOProblemWrapper` を使用して `StdWorkflow` をHPO問題に変換します。
 
 ```python
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
@@ -135,14 +135,14 @@ inner_workflow.setup(inner_algo, inner_prob, monitor=inner_monitor)
 hpo_prob = HPOProblemWrapper(iterations=9, num_instances=7, workflow=inner_workflow, copy_init_state=True)
 ```
 
-`HPOProblemWrapper`が定義したハイパーパラメータを正しく認識するかテストできます。7つのインスタンスに対してハイパーパラメータを変更していないため、すべてのインスタンスで同一であるはずです。
+`HPOProblemWrapper` が定義したハイパーパラメータを正しく認識しているかどうかをテストできます。7つのインスタンスに対してハイパーパラメータに変更を加えていないため、すべてのインスタンスで同一であるはずです。
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-独自のハイパーパラメータ値のセットを指定することもできます。ハイパーパラメータセットの数は`HPOProblemWrapper`のインスタンス数と一致する必要があることに注意してください。カスタムハイパーパラメータは、値が`Parameter`でラップされた辞書として提供する必要があります。
+独自のハイパーパラメータ値のセットを指定することもできます。ハイパーパラメータセットの数は、`HPOProblemWrapper` のインスタンス数と一致する必要があることに注意してください。カスタムハイパーパラメータは、値が `Parameter` でラップされた辞書として提供する必要があります。
 
 ```python
 params = hpo_prob.get_init_params()
@@ -153,7 +153,7 @@ print("params:\n", params, "\n")
 print("result:\n", result)
 ```
 
-次に、`PSO`アルゴリズムを使用して`ExampleAlgorithm`のハイパーパラメータを最適化します。`PSO`の集団サイズはインスタンス数と一致する必要があります。そうでないと、予期しないエラーが発生する可能性があります。この場合、`HPOProblemWrapper`は辞書を入力として必要とするため、外部ワークフローで解を変換する必要があります。
+これで、`PSO` アルゴリズムを使用して `ExampleAlgorithm` のハイパーパラメータを最適化します。`PSO` の個体群サイズ（population size）はインスタンス数と一致する必要があることに注意してください。そうでない場合、予期しないエラーが発生する可能性があります。この場合、`HPOProblemWrapper` は辞書を入力として必要とするため、外部ワークフローで解（solution）を変換する必要があります。
 
 ```python
 class solution_transform(torch.nn.Module):

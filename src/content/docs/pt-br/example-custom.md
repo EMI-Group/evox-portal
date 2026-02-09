@@ -1,11 +1,11 @@
 ---
-title: "Algoritmo e Problema Personalizados"
+title: "Algoritmo e Problema Customizados"
 order: 14
 section: "examples"
 ---
 
-# Algoritmo e Problema Personalizados
-Neste notebook, mostraremos como usar `Algorithm` e `Problem` para criar um algoritmo e problema personalizados. Aqui daremos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
+# Algoritmo e Problema Customizados
+Neste notebook, mostraremos como usar `Algorithm` e `Problem` para criar um algoritmo e um problema customizados. Aqui daremos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
 
 
 ```python
@@ -16,9 +16,9 @@ from evox.utils import clamp
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-## Exemplo de algoritmo: algoritmo PSO
+## Exemplo de Algoritmo: algoritmo PSO
 
-A Otimização por Enxame de Partículas (PSO) é um algoritmo meta-heurístico baseado em população inspirado no comportamento social de pássaros e peixes. É amplamente utilizado para resolver problemas de otimização contínuos e discretos.
+Particle Swarm Optimization (PSO) é um algoritmo meta-heurístico baseado em população, inspirado no comportamento social de pássaros e peixes. É amplamente utilizado para resolver problemas de otimização contínuos e discretos.
 
 **Aqui está um exemplo de implementação do algoritmo PSO no EvoX:**
 
@@ -27,7 +27,7 @@ def min_by(
     values,
     keys,
 ):
-    """Uma função auxiliar para encontrar o valor mínimo em uma lista de valores."""
+    """A helper function to find the minimum value in a list of values."""
     values = torch.cat(values, dim=0)
     keys = torch.cat(keys, dim=0)
     min_index = torch.argmin(keys)
@@ -96,18 +96,18 @@ class PSO(Algorithm):
         self.fit = self.evaluate(self.pop)
 
     def init_step(self):
-        """Executar o primeiro passo da otimização PSO.
+        """Perform the first step of the PSO optimization.
 
-        Veja `step` para mais detalhes.
+        See `step` for more details.
         """
         self.fit = self.evaluate(self.pop)
         self.local_best_fit = self.fit
         self.global_best_fit = torch.min(self.fit)
 ```
 
-## Exemplo de problema: problema Sphere
+## Exemplo de Problema: problema Sphere
 
-O problema Sphere é um problema de otimização de referência simples, porém fundamental, usado para testar algoritmos de otimização.
+O problema Sphere é um problema de benchmark de otimização simples, porém fundamental, usado para testar algoritmos de otimização.
 
 A função Sphere é definida como:
 
@@ -125,9 +125,9 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## Usar o algoritmo para resolver o problema
+## Use o algoritmo para resolver o problema
 
-### Iniciar o algoritmo, problema e monitor
+### Inicialize o algoritmo, o problema e o monitor
 
 ```python
 algorithm = PSO(
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Iniciar o workflow e executá-lo
+### Inicialize o workflow e execute-o
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

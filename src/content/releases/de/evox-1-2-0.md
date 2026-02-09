@@ -1,46 +1,46 @@
 ---
 title: "EvoX v1.2.0 Versionshinweise"
 pubDate: 2025-04-23
-summary: "Neue Funktionen: final_step(), Mujoco Playground-Umgebung, Benutzer-Tutorials und EvoMO-Integration."
+summary: "Neue Funktionen einschließlich final_step(), Mujoco Playground-Umgebung, Benutzer-Tutorials und EvoMO-Integration."
 ---
 
-**Wir freuen uns, die Veroeffentlichung von "EvoX v1.2.0" bekannt zu geben, vollgepackt mit neuen Funktionen, Verbesserungen und wichtigen Fehlerbehebungen!**
+**Wir freuen uns, die Veröffentlichung von „EvoX v1.2.0“ bekannt zu geben, vollgepackt mit neuen Funktionen, Verbesserungen und wichtigen Fehlerbehebungen!**
 
-**Dieses Update verbessert die Flexibilitaet und Leistung des Frameworks in wichtigen Modulen**.
+**Dieses Update verbessert die Flexibilität und Leistung des Frameworks in wichtigen Modulen.**
 
 **Highlights:**
 
--  `final_step()` hinzugefuegt und `hpo_wrapper` sowie `std_workflow` fuer reibungslosere Ausfuehrungs-Workflows aktualisiert.
+-  `final_step()` hinzugefügt und `hpo_wrapper` sowie `std_workflow` für reibungslosere Ausführungsabläufe aktualisiert.
 
--  "Mujoco Playground" eingefuehrt -- eine neue Umgebung fuer Reinforcement-Learning-Experimente.
+-  Einführung des „Mujoco Playground“ – einer neuen Umgebung für Reinforcement Learning-Experimente.
 
--  Ein brandneues [Tutorial](https://evox.readthedocs.io/en/latest/tutorial/ "https://evox.readthedocs.io/en/latest/tutorial/") veroeffentlicht, um Benutzern den schnellen Einstieg zu ermoeglichen.
+-  Veröffentlichung eines brandneuen [Tutorials](https://evox.readthedocs.io/en/latest/tutorial/ "https://evox.readthedocs.io/en/latest/tutorial/"), um Benutzern einen schnellen Einstieg zu ermöglichen.
 
--  Neue EvoX-Erweiterungsfunktionen hinzugefuegt, die eine bessere Integration mit Schwesterprojekten wie [EvoMO](https://github.com/EMI-Group/evomo/ "https://github.com/EMI-Group/evomo/") ermoeglichen.
+-  Neue EvoX-Erweiterungsfunktionen hinzugefügt, die eine bessere Integration mit Schwesterprojekten wie [EvoMO](https://github.com/EMI-Group/evomo/ "https://github.com/EMI-Group/evomo/") ermöglichen.
 
--  Verschiedene Fehlerbehebungen und Dokumentationsaktualisierungen fuer bessere Stabilitaet und Klarheit.
+-  Verschiedene Fehlerbehebungen und Dokumentationsaktualisierungen für bessere Stabilität und Klarheit.
 
-**Zugehoerige Pull Requests:**
+**Zugehörige Pull Requests:**
 
-- Docstring-Aktualisierungen fuer MOEAs -- [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
+- Docstring-Aktualisierungen für MOEAs -- [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
 
-- `vmap`-Korrektur in `hpo_wrapper.py` -- [#232](https://github.com/EMI-Group/evox/pull/232) (@starquakee)
+- `vmap`-Fix in `hpo_wrapper.py` -- [#232](https://github.com/EMI-Group/evox/pull/232) (@starquakee)
 
--  RVEAa hinzugefuegt und DTLZ-, IGD-, RVEA-Unterstuetzung verbessert -- [#231](https://github.com/EMI-Group/evox/pull/231) (@XU-Boqing)
+-  RVEAa hinzugefügt und Unterstützung für DTLZ, IGD, RVEA verbessert -- [#231](https://github.com/EMI-Group/evox/pull/231) (@XU-Boqing)
 
 - `final_step()`-Aktualisierungen in Workflow-Modulen -- [#233](https://github.com/EMI-Group/evox/pull/233) (@XU-Boqing)
 
 -  Mujoco Playground-Umgebung -- [#234](https://github.com/EMI-Group/evox/pull/234) (@Nam-dada)
 
--  Dokumentationsverfeinerungen -- [#235](https://github.com/EMI-Group/evox/pull/235) (@Zhenyu2Liang)
+-  Verfeinerungen der Dokumentation -- [#235](https://github.com/EMI-Group/evox/pull/235) (@Zhenyu2Liang)
 
--  Fehlerbehebungen fuer Mujoco Playground -- [#236](https://github.com/EMI-Group/evox/pull/236) (@Nam-dada)
+-  Fehlerbehebungen für Mujoco Playground -- [#236](https://github.com/EMI-Group/evox/pull/236) (@Nam-dada)
 
 -  Neues Benutzer-Tutorial -- [#237](https://github.com/EMI-Group/evox/pull/237) (@BillHuang2001)
 
-**Vollstaendiges Changelog**: [v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
+**Vollständiger Changelog**: [v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
 
-**Open-Source-Code / Community-Ressourcen**
+**Open Source Code / Community-Ressourcen**
 
 Paper:
 

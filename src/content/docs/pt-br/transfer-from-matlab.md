@@ -1,12 +1,12 @@
 ---
-title: "Transformação do MATLAB para PyTorch e EvoX"
+title: "Transformação de MATLAB para PyTorch e EvoX"
 order: 18
 section: "misc"
 ---
 
-# Transformação do MATLAB para PyTorch e EvoX
+# Transformação de MATLAB para PyTorch e EvoX
 
-Este documento tem como objetivo guiar usuários do MATLAB na transição para PyTorch e EvoX para computação evolutiva. Destacaremos as principais diferenças entre MATLAB e PyTorch em termos de sintaxe, estruturas de dados e fluxo de trabalho. Em seguida, ilustraremos essas diferenças usando um exemplo de Otimização por Enxame de Partículas (PSO) tanto em MATLAB quanto em PyTorch.
+Este documento visa orientar os usuários de MATLAB na transição para PyTorch e EvoX para computação evolutiva. Destacaremos as principais diferenças entre MATLAB e PyTorch em termos de sintaxe, estruturas de dados e fluxo de trabalho. Em seguida, ilustraremos essas diferenças usando um exemplo de Otimização por Enxame de Partículas (PSO) tanto em MATLAB quanto em PyTorch.
 
 ## Diferenças de Sintaxe
 
@@ -15,8 +15,8 @@ Este documento tem como objetivo guiar usuários do MATLAB na transição para P
 #### MATLAB
 
 - Usa indexação baseada em 1.
-- Vetores e matrizes são declarados usando colchetes e ponto e vírgula (por exemplo, `[1 2 3; 4 5 6]`). A inicialização aleatória com `rand()` retorna valores no intervalo $[0, 1)$.
-- O fatiamento é realizado usando a sintaxe `(start:end)` e utiliza indexação baseada em 1.
+- Vetores e matrizes são declarados usando colchetes e pontos e vírgulas (ex: `[1 2 3; 4 5 6]`). A inicialização aleatória com `rand()` retorna valores no intervalo $[0, 1)$.
+- O fatiamento (slicing) é realizado usando a sintaxe `(start:end)` e utiliza indexação baseada em 1.
 
 #### PyTorch
 
@@ -24,51 +24,51 @@ Este documento tem como objetivo guiar usuários do MATLAB na transição para P
 - Arrays (tensores) são tipicamente criados usando construtores como `torch.rand()`, `torch.zeros()`, ou listas Python convertidas em tensores com `torch.tensor()`.
 - O fatiamento é feito usando `[start:end]` com índices baseados em 0.
 
-### Computação Matricial
+### Computação de Matrizes
 
 #### MATLAB
 
-- Realiza multiplicação matricial de álgebra linear por `*`.
+- Realiza multiplicação de matrizes de álgebra linear por `*`.
 - Usa `.*` para multiplicar elementos correspondentes de matrizes do mesmo tamanho.
-- `/` representa a divisão matricial à direita.
+- `/` representa a divisão de matriz à direita.
 - `.^` representa a potência elemento a elemento.
-- Dimensão(ões) inicial(is) e final(is) de tensores com comprimento 1 é/são **ignorada(s)**.
-- Encontra automaticamente dimensões expansíveis para operações elemento a elemento e realiza extensão de dimensão **implícita**.
+- Dimensões finais e iniciais de tensores com comprimento 1 são **ignoradas**.
+- Encontra automaticamente dimensões compatíveis para broadcasting em operações elemento a elemento e realiza extensão de dimensão **implícita**.
 
 #### PyTorch
 
-- Realiza multiplicação matricial de álgebra linear por `@` ou `torch.matmul()`.
-- Usa diretamente `*` para multiplicar elementos correspondentes de tensores com a mesma forma ou formas expansíveis.
+- Realiza multiplicação de matrizes de álgebra linear por `@` ou `torch.matmul()`.
+- Usa diretamente `*` para multiplicar elementos correspondentes de tensores do mesmo formato ou formatos compatíveis para broadcasting.
 - `/` representa a divisão elemento a elemento.
 - `**` representa a potência elemento a elemento.
-- Dimensão(ões) de tensores com comprimento 1 é/são **preservada(s)** e tratada(s) como **dimensão de broadcast**.
-- **Previne** a maioria das extensões implícitas de dimensão, dimensão(ões) de broadcast geralmente são necessárias.
+- Dimensões de tensores com comprimento 1 são **preservadas** e tratadas como **dimensão de broadcast**.
+- **Evita** a maioria das extensões de dimensão implícitas; dimensões de broadcast geralmente são obrigatórias.
 
 ### Funções e Definições
 
 #### MATLAB
 
 - Uma função é definida pela palavra-chave `function`.
-- Um arquivo pode conter múltiplas funções, mas tipicamente a função principal compartilha o nome do arquivo.
-- Funções anônimas (por exemplo, `@(x) sum(x.^2)`) são usadas para cálculos curtos inline.
+- Um arquivo pode conter múltiplas funções, mas tipicamente a função primária compartilha o nome do arquivo.
+- Funções anônimas (ex: `@(x) sum(x.^2)`) são usadas para cálculos curtos em linha.
 
 #### PyTorch
 
-- Funções são definidas usando a palavra-chave def, tipicamente dentro de um único arquivo `.py` ou módulo.
-- Classes são usadas para encapsular dados e métodos de forma orientada a objetos.
+- Funções são definidas usando a palavra-chave `def`, tipicamente dentro de um único arquivo `.py` ou módulo.
+- Classes são usadas para encapsular dados e métodos de maneira orientada a objetos.
 - Lambdas servem como funções anônimas curtas (`lambda x: x.sum()`), mas lambdas de múltiplas linhas não são permitidas.
 
 ### Fluxo de Controle
 
 #### MATLAB
 
-- Usa `for i = 1:N` ... `end` loops com indexação baseada em 1.
-- Instruções condicionais como `if`, `elseif` e `else`.
+- Usa loops `for i = 1:N` ... `end` com indexação baseada em 1.
+- Declarações condicionais como `if`, `elseif` e `else`.
 
 #### PyTorch
 
 - Usa `for i in range(N):` com indexação baseada em 0.
-- A indentação é significativa para escopo em loops e condicionais (sem palavra-chave `end`).
+- A indentação é significativa para o escopo em loops e condicionais (sem a palavra-chave `end`).
 
 ### Impressão e Comentários
 
@@ -86,11 +86,11 @@ Este documento tem como objetivo guiar usuários do MATLAB na transição para P
 
 #### MATLAB
 
-- Usa `...` no final de uma linha para indicar que a próxima linha deve ser tratada como a mesma linha.
+- Usa `...` ao final de uma linha para indicar que a próxima linha deve ser tratada como a mesma linha.
 #### Python
 
-- Usa `\` no final de uma linha para indicar que a próxima linha deve ser tratada como a mesma linha.
-- Se múltiplas linhas estiverem dentro de parênteses, nenhum símbolo específico no final é necessário.
+- Usa `\` ao final de uma linha para indicar que a próxima linha deve ser tratada como a mesma linha.
+- Se múltiplas linhas estiverem dentro de parênteses, nenhum símbolo final específico é necessário.
 
 ## Como Escrever Algoritmos de Computação Evolutiva via EvoX?
 
@@ -157,12 +157,12 @@ function [self] = step_pso(self, evaluate)
     self.velocity = min(max(velocity, self.lb), self.ub);
 end
 ```
-No MATLAB, a função `init_pso()` inicializa o algoritmo, e uma função separada `step_pso()` executa um passo de iteração e a função principal `example_pso()` orquestra o loop.
+No MATLAB, a função `init_pso()` inicializa o algoritmo, uma função separada `step_pso()` realiza um passo de iteração e a função principal `example_pso()` orquestra o loop.
 
 ### EvoX
-No EvoX, você pode construir o algoritmo PSO da seguinte forma:
+No EvoX, você pode construir o algoritmo PSO da seguinte maneira:
 
-Primeiro, é recomendado importar os módulos e funções necessários do EvoX e PyTorch.
+Primeiro, recomenda-se importar os módulos e funções necessários do EvoX e PyTorch.
 ```python
 import torch
 
@@ -172,7 +172,7 @@ from evox.workflows import *
 from evox.problems.numerical import Sphere
 ```
 
-Então, você pode transformar o código MATLAB para o código Python correspondentemente de acordo com a seção "Diferenças de Sintaxe".
+Em seguida, você pode transformar o código MATLAB para o código Python correspondente de acordo com a seção "Diferenças de Sintaxe".
 ```python
 def main():
     pso = PSO(pop_size=10, lb=torch.tensor([-10.0, -10.0]), ub=torch.tensor([10.0, 10.0]))
@@ -242,12 +242,12 @@ if __name__ == "__main__":
 
 > **Nota:**
 > Vale notar que usamos `[]` com `;` e `,` no MATLAB para concatenar matrizes e vetores ao longo de uma dimensão específica; no entanto, no EvoX, o `torch.cat` deve ser invocado com o argumento `dim` para indicar a dimensão de concatenação.
-> Além disso, no PyTorch, tensores a serem concatenados devem ter o mesmo número de dimensões; portanto, `XXX.unsqueeze(0)` adicional é aplicado para adicionar uma nova dimensão de comprimento 1 antes da primeira dimensão.
+> Além disso, no PyTorch, os tensores a serem concatenados devem ter o mesmo número de dimensões; portanto, um `XXX.unsqueeze(0)` adicional é aplicado para adicionar uma nova dimensão de comprimento 1 antes da primeira dimensão.
 
 No EvoX, a lógica do PSO é encapsulada dentro de uma classe que herda de `Algorithm`. Este design orientado a objetos simplifica o gerenciamento de estado e a iteração, e introduz as seguintes vantagens:
 - Método `evaluate()` herdado
-    Você pode simplesmente chamar `self.evaluate(self.population)` para calcular valores de fitness, em vez de passar manualmente sua função objetivo a cada iteração.
-- Integração com Workflow Integrada
-    Quando você registra sua classe PSO com um workflow `StdWorkflow`, ele lida com chamadas iterativas ao `step()` em seu nome.
+    Você pode simplesmente chamar `self.evaluate(self.population)` para calcular os valores de fitness, em vez de passar manualmente sua função objetivo a cada iteração.
+- Integração de Fluxo de Trabalho Integrada
+    Quando você registra sua classe PSO com um fluxo de trabalho `StdWorkflow`, ele lida com as chamadas iterativas para `step()` em seu nome.
 
-Ao estender `Algorithm`, `__init__()` configura todos os principais componentes do PSO (população, velocidade, melhor local/global, etc.) em um construtor de classe Python padrão.
+Ao estender `Algorithm`, o `__init__()` configura todos os principais componentes do PSO (população, velocidade, melhor local/global, etc.) em um construtor de classe Python padrão.

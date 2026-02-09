@@ -1,14 +1,14 @@
 ---
-title: "Optimizacion Numerica"
+title: "Optimización Numérica"
 order: 9
 section: "examples"
 ---
 
-# Optimizacion Numerica
+# Optimización Numérica
 
-Este cuaderno ofrece un tutorial paso a paso sobre como utilizar EvoX para optimizar la funcion Ackley mediante el algoritmo de Optimizacion por Enjambre de Particulas (PSO). Tanto el algoritmo PSO como el problema de optimizacion Ackley estan integrados como componentes incorporados dentro del marco EvoX.
+Este notebook ofrece un tutorial paso a paso sobre cómo utilizar EvoX para optimizar la función Ackley mediante el algoritmo Particle Swarm Optimization (PSO). Tanto el algoritmo PSO como el problema de optimización Ackley están integrados como componentes nativos dentro del framework EvoX.
 
-Primero, debemos importar todos los modulos necesarios incluyendo `PSO` (algoritmo), `Ackley` (problema) y `StdWorkflow` & `EvalMonitor` (flujo de trabajo).
+En primer lugar, debemos importar todos los módulos necesarios, incluyendo `PSO` (algoritmo), `Ackley` (problema) y `StdWorkflow` & `EvalMonitor` (workflow).
 
 ```python
 import torch
@@ -18,52 +18,52 @@ from evox.problems.numerical import Ackley
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-Aqui, instanciamos el algoritmo `PSO`. Especificamos las siguientes configuraciones:
+Aquí, instanciamos el algoritmo `PSO`. Especificamos los siguientes ajustes:
 
-- `pop_size`: El tamano del enjambre de particulas (poblacion).
-- `lb` y `ub`: Los limites inferior y superior para cada dimension en el espacio de busqueda.
-- Otros parametros son todos por defecto. Consulte la API detallada.
+- `pop_size`: El tamaño del enjambre de partículas (población).
+- `lb` y `ub`: Los límites inferior y superior para cada dimensión en el espacio de búsqueda.
+- El resto de parámetros se mantienen por defecto. Por favor, consulta la API detallada.
 
 ```python
-# Definir el algoritmo
+# Define the algorithm
 algorithm = PSO(pop_size=100, lb=-32 * torch.ones(10), ub=32 * torch.ones(10))
 ```
 
-A continuacion, elegimos la funcion `Ackley` en los problemas numericos de EvoX.
+A continuación, seleccionamos la función `Ackley` dentro de los problemas numéricos de EvoX.
 
 ```python
-# Definir el problema
+# Define the problem
 problem = Ackley()
 ```
 
-Creamos una instancia de `EvalMonitor` para rastrear la informacion necesaria durante el procedimiento de optimizacion.
+Creamos una instancia de `EvalMonitor` para realizar un seguimiento de la información necesaria durante el procedimiento de optimización.
 
 ```python
-# Definir el monitor
+# Define the monitor
 monitor = EvalMonitor()
 ```
 
 La clase `StdWorkflow` proporciona un proceso estandarizado para integrar el algoritmo, el problema y el monitor.
 
 ```python
-# Definir el flujo de trabajo
+# Define the workflow
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)
 ```
 
-Llamar a `setup()` inicializa los componentes para que el flujo de trabajo este listo para realizar pasos de optimizacion.
+Al llamar a `setup()` se inicializan los componentes para que el workflow esté listo para ejecutar los pasos de optimización.
 
-Ejecutamos la optimizacion durante un cierto numero de iteraciones (100 en este ejemplo). En cada iteracion, el metodo `step()` actualiza el algoritmo PSO, evalua nuevas soluciones candidatas en la funcion Ackley y rastrea su aptitud a traves del monitor.
+Ejecutamos la optimización durante un número determinado de iteraciones (100 en este ejemplo). En cada iteración, el método `step()` actualiza el algoritmo PSO, evalúa las nuevas soluciones candidatas en la función Ackley y registra su fitness a través del monitor.
 
 ```python
-# Realizar el procedimiento de optimizacion de la funcion Ackley
+# Perform the Ackley function optimization procedure
 for _ in range(100):
     workflow.step()
 ```
 
-Finalmente, recuperamos el submodulo `monitor` del flujo de trabajo para acceder a las mejores soluciones encontradas hasta ahora (`topk_solutions`) y sus valores objetivo correspondientes (`topk_fitness`). Luego imprimimos el mejor resultado y la solucion asociada.
+Finalmente, recuperamos el submódulo `monitor` del workflow para acceder a las mejores soluciones encontradas hasta el momento (`topk_solutions`) y sus correspondientes valores objetivo (`topk_fitness`). A continuación, imprimimos el mejor resultado y la solución asociada.
 
 ```python
-# Obtener la mejor solucion y su aptitud
+# Get the best solution and its fitness
 population = monitor.topk_solutions
 fitness = monitor.topk_fitness
 print(f"The best solution is:\n{population},\nwith the minimum value:\n{fitness}")

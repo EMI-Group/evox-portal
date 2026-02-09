@@ -6,11 +6,11 @@ section: "examples"
 
 # Neuroevoluzione per il machine learning
 
-EvoX fornisce soluzioni per attività di apprendimento supervisionato basate sulla neuroevoluzione, con moduli chiave tra cui `SupervisedLearningProblem` e `ParamsAndVector`. Prendendo come esempio l'attività di classificazione MNIST, questa sezione illustra il processo di neuroevoluzione per l'apprendimento supervisionato adottando i moduli di EvoX.
+EvoX fornisce soluzioni per compiti di apprendimento supervisionato basati sulla neuroevoluzione, con moduli chiave che includono `SupervisedLearningProblem` e `ParamsAndVector`. Prendendo come esempio il compito di classificazione MNIST, questa sezione illustra il processo di neuroevoluzione per l'apprendimento supervisionato adottando i moduli di EvoX.
 
 ## Configurazione di Base
 
-Le importazioni dei componenti di base e la configurazione del dispositivo servono come passaggi iniziali essenziali per il processo di neuroevoluzione.
+L'importazione dei componenti di base e la configurazione del dispositivo fungono da passaggi iniziali essenziali per il processo di neuroevoluzione.
 
 Qui, per garantire la riproducibilità dei risultati, è possibile impostare opzionalmente un seed casuale.
 
@@ -36,7 +36,7 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 ```
 
-In questo passaggio, un modello di rete neurale convoluzionale (CNN) di esempio viene definito direttamente sul framework PyTorch e poi caricato sul dispositivo.
+In questo passaggio, un modello campione di rete neurale convoluzionale (CNN) viene definito direttamente sul framework PyTorch e quindi caricato sul dispositivo.
 
 ```python
 class SampleCNN(nn.Module):
@@ -68,10 +68,10 @@ total_params = sum(p.numel() for p in model.parameters())
 print(f"Total number of model parameters: {total_params}")
 ```
 
-L'impostazione del dataset implica la selezione dell'attività. Il data loader deve ora essere inizializzato basandosi sul supporto integrato di PyTorch.
+L'impostazione del dataset implica la selezione del compito. Il data loader deve ora essere inizializzato in base al supporto integrato di PyTorch.
 Qui, il pacchetto `torchvision` deve essere installato in anticipo a seconda della versione di PyTorch, se non è già disponibile.
 
-Nel caso in cui il dataset MNIST non sia già presente nella directory `data_root`, il flag `download=True` è impostato per garantire che il dataset venga scaricato automaticamente. Pertanto, la configurazione potrebbe richiedere del tempo durante la prima esecuzione.
+Nel caso in cui il dataset MNIST non sia già presente nella directory `data_root`, il flag `download=True` viene impostato per garantire che il dataset venga scaricato automaticamente. Pertanto, la configurazione potrebbe richiedere del tempo durante la prima esecuzione.
 
 ```python
 import os
@@ -109,9 +109,9 @@ test_loader = torch.utils.data.DataLoader(
 )
 ```
 
-Per accelerare i processi successivi, tutti i dati MNIST vengono pre-caricati per un'esecuzione più veloce. Di seguito, tre dataset vengono pre-caricati per diverse fasi &ndash; addestramento con discesa del gradiente, fine-tuning con neuroevoluzione e test del modello.
+Per accelerare i processi successivi, tutti i dati MNIST vengono pre-caricati per un'esecuzione più rapida. Di seguito, tre dataset vengono pre-caricati per diverse fasi &ndash; addestramento con discesa del gradiente, fine-tuning con neuroevoluzione e test del modello.
 
-Va notato che questa è un'operazione opzionale che scambia spazio per tempo. La sua adozione dipende dalla capacità della tua GPU, e richiederà sempre del tempo per la preparazione.
+Va notato che questa è un'operazione opzionale che sacrifica spazio in cambio di tempo. La sua adozione dipende dalla capacità della tua GPU e richiederà sempre un po' di tempo per la preparazione.
 
 ```python
 # Used for gradient descent training process
@@ -132,7 +132,7 @@ pre_ne_train_loader = tuple(
 pre_test_loader = tuple([(inputs.to(device), labels.to(device)) for inputs, labels in test_loader])
 ```
 
-Qui, una funzione `model_test` viene pre-definita per semplificare la valutazione dell'accuratezza di predizione del modello sul dataset di test durante le fasi successive.
+Qui, una funzione `model_test` è predefinita per semplificare la valutazione dell'accuratezza di previsione del modello sul dataset di test durante le fasi successive.
 
 ```python
 def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, device: torch.device) -> float:
@@ -156,7 +156,7 @@ def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, devic
 
 L'addestramento del modello basato sulla discesa del gradiente viene eseguito per primo. In questo esempio, questo addestramento viene adottato per inizializzare il modello, preparandolo per i successivi processi di neuroevoluzione.
 
-Il processo di addestramento del modello in PyTorch è compatibile con la neuroevoluzione in EvoX, rendendo conveniente riutilizzare la stessa implementazione del modello per i passaggi successivi.
+Il processo di addestramento del modello in PyTorch è compatibile con la neuroevoluzione in EvoX, rendendo conveniente il riutilizzo della stessa implementazione del modello per i passaggi successivi.
 
 ```python
 def model_train(
@@ -205,9 +205,9 @@ print(f"Accuracy after gradient descent training: {gd_acc:.4f} %.")
 
 ## Fine-Tuning con Neuroevoluzione
 
-Basandosi sul modello pre-addestrato dal precedente processo di discesa del gradiente, la neuroevoluzione viene applicata progressivamente per affinare il modello.
+Basandosi sul modello pre-addestrato dal precedente processo di discesa del gradiente, la neuroevoluzione viene applicata progressivamente per il fine-tuning del modello.
 
-Per prima cosa, il componente `ParamsAndVector` viene usato per appiattire i pesi del modello pre-addestrato in un vettore, che serve come individuo centro iniziale per il successivo processo di neuroevoluzione.
+Innanzitutto, il componente `ParamsAndVector` viene utilizzato per appiattire i pesi del modello pre-addestrato in un vettore, che funge da individuo centrale iniziale per il successivo processo di neuroevoluzione.
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
@@ -217,9 +217,9 @@ lower_bound = pop_center - 0.01
 upper_bound = pop_center + 0.01
 ```
 
-> Nel caso di algoritmi specificamente progettati per la neuroevoluzione, che possono accettare direttamente un dizionario di parametri batch come input, l'uso di `ParamsAndVector` può non essere necessario.
+> Nel caso di algoritmi specificamente progettati per la neuroevoluzione, che possono accettare direttamente un dizionario di parametri in batch come input, l'uso di `ParamsAndVector` può non essere necessario.
 
-Inoltre, viene definito un criterio di esempio. Qui, sia la perdita che l'accuratezza del modello individuale vengono selezionate e pesate per servire come funzione di fitness nel processo di neuroevoluzione. Questo passaggio è personalizzabile per adattarsi alla direzione di ottimizzazione.
+Inoltre, viene definito un criterio campione. Qui, sia la perdita (loss) che l'accuratezza del singolo modello vengono selezionate e pesate per fungere da funzione di fitness nel processo di neuroevoluzione. Questo passaggio è personalizzabile per adattarsi alla direzione dell'ottimizzazione.
 
 ```python
 class AccuracyCriterion(nn.Module):
@@ -260,7 +260,7 @@ weighted_criterion = WeightedCriterion(
 )
 ```
 
-Allo stesso tempo, similmente ai processi di addestramento con discesa del gradiente e test del modello, anche il processo di fine-tuning con neuroevoluzione viene incapsulato in una funzione per un uso conveniente nelle fasi successive.
+Allo stesso tempo, in modo simile ai processi di addestramento con discesa del gradiente e di test del modello, anche il processo di fine-tuning con neuroevoluzione è incapsulato in una funzione per un uso conveniente nelle fasi successive.
 
 ```python
 import time
@@ -291,9 +291,9 @@ def neuroevolution_process(
         print(f"\tBest accuracy: {best_acc:.4f} %.")
 ```
 
-### Test di Neuroevoluzione Basata sulla Popolazione
+### Test di Neuroevoluzione Basato sulla Popolazione
 
-In questo esempio, l'algoritmo basato sulla popolazione per la neuroevoluzione viene testato per primo, usando l'Ottimizzazione a Sciame di Particelle ([PSO](#evox.algorithms.so.pso_variants.pso.PSO)) come rappresentazione. La configurazione per la neuroevoluzione è simile a quella di altre attività di ottimizzazione &ndash; dobbiamo definire il problema, l'algoritmo, il monitor e il workflow, insieme alle rispettive funzioni `setup()` per completare l'inizializzazione.
+In questo esempio, l'algoritmo basato sulla popolazione per la neuroevoluzione viene testato per primo, utilizzando Particle Swarm Optimization ([PSO](#evox.algorithms.so.pso_variants.pso.PSO)) come rappresentazione. La configurazione per la neuroevoluzione è simile a quella di altri compiti di ottimizzazione &ndash; dobbiamo definire il problema, l'algoritmo, il monitor e il workflow, insieme alle loro rispettive funzioni `setup()` per completare l'inizializzazione.
 
 Un punto chiave da notare qui è che la dimensione della popolazione (`POP_SIZE` in questo caso) deve essere inizializzata **sia nel problema che nell'algoritmo** per evitare potenziali errori.
 
@@ -351,9 +351,9 @@ pop_workflow.get_submodule("monitor").plot()
 
 ### Test di Neuroevoluzione a Singolo Individuo
 
-Successivamente, viene testata la neuroevoluzione basata su algoritmo a singolo individuo. Similmente al caso basato sulla popolazione, dobbiamo definire il problema, l'algoritmo, il monitor e il workflow, e chiamare le rispettive funzioni `setup()` durante l'inizializzazione. In questo caso, viene selezionata una strategia di ricerca casuale come algoritmo.
+Successivamente, viene testata la neuroevoluzione basata su algoritmo a singolo individuo. Similmente al caso basato sulla popolazione, dobbiamo definire il problema, l'algoritmo, il monitor e il workflow, e chiamare le loro rispettive funzioni `setup()` durante l'inizializzazione. In questo caso, viene selezionata una strategia di ricerca casuale come algoritmo.
 
-Un punto chiave da notare qui è che `SupervisedLearningProblem` dovrebbe essere impostato con `pop_size=None`, e `EvalMonitor` dovrebbe avere `topk=1`, poiché viene cercato un solo individuo. Una configurazione attenta degli iperparametri aiuta a evitare problemi inutili.
+Un punto chiave da notare qui è che `SupervisedLearningProblem` dovrebbe essere impostato con `pop_size=None`, e `EvalMonitor` dovrebbe avere `topk=1`, poiché viene cercato solo un singolo individuo. Un'attenta configurazione degli iperparametri aiuta a evitare problemi inutili.
 
 ```python
 single_problem = SupervisedLearningProblem(

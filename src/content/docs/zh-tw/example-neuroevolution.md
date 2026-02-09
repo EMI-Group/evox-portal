@@ -1,18 +1,18 @@
 ---
-title: "機器學習的神經演化"
+title: "用於機器學習的神經演化"
 order: 12
 section: "examples"
 ---
 
-# 機器學習的神經演化
+# 用於機器學習的神經演化
 
-EvoX 提供了基於神經演化的監督式學習任務解決方案，關鍵模組包括 `SupervisedLearningProblem` 和 `ParamsAndVector`。以 MNIST 分類任務為例，本節透過採用 EvoX 的模組來說明監督式學習的神經演化過程。
+EvoX 為基於神經演化的監督式學習任務提供了解決方案，其關鍵模組包括 `SupervisedLearningProblem` 和 `ParamsAndVector`。本節以 MNIST 分類任務為例，展示如何使用 EvoX 的模組進行監督式學習的神經演化過程。
 
-## 基本設定
+## 基本設置
 
-基本元件匯入和裝置配置是神經演化過程的基本起始步驟。
+導入基本組件和配置設備是神經演化過程必不可少的起始步驟。
 
-這裡，為了確保結果的可重現性，可以選擇性地設定隨機種子。
+在此，為了確保結果的可重現性，可以選擇設置隨機數種子。
 
 ```python
 import torch
@@ -36,7 +36,7 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 ```
 
-在此步驟中，直接在 PyTorch 框架上定義一個範例卷積神經網路（CNN）模型，然後載入到裝置上。
+在此步驟中，我們直接基於 PyTorch 框架定義了一個卷積神經網路 (CNN) 模型範例，並將其加載到設備上。
 
 ```python
 class SampleCNN(nn.Module):
@@ -68,10 +68,10 @@ total_params = sum(p.numel() for p in model.parameters())
 print(f"Total number of model parameters: {total_params}")
 ```
 
-設定資料集意味著選擇任務。現在需要基於 PyTorch 的內建支援初始化資料載入器。
-這裡，必須根據您的 PyTorch 版本預先安裝 `torchvision` 套件（如果尚未可用）。
+設置資料集意味著選擇任務。現在需要基於 PyTorch 的內建支援來初始化資料加載器 (data loader)。
+在此，如果尚未安裝 `torchvision` 套件，則必須根據您的 PyTorch 版本預先安裝。
 
-如果 MNIST 資料集尚未存在於 `data_root` 目錄中，則設定 `download=True` 標誌以確保資料集將被自動下載。因此，首次執行時設定可能需要一些時間。
+如果 `data_root` 目錄中尚未存在 MNIST 資料集，則設置 `download=True` 標誌以確保自動下載資料集。因此，首次運行時設置可能需要一些時間。
 
 ```python
 import os
@@ -109,9 +109,9 @@ test_loader = torch.utils.data.DataLoader(
 )
 ```
 
-為了加速後續過程，所有 MNIST 資料都被預先載入以加快執行速度。以下為不同階段預先載入了三個資料集——梯度下降訓練、神經演化微調和模型測試。
+為了加速後續流程，所有 MNIST 資料都被預先加載以加快執行速度。下面預先加載了三個資料集，分別用於不同階段——梯度下降訓練、神經演化微調和模型測試。
 
-需要注意的是，這是一個以空間換時間的可選操作。其採用取決於您的 GPU 容量，且準備過程總是需要一些時間。
+需要注意的是，這是一個以空間換取時間的可選操作。是否採用取決於您的 GPU 容量，並且總是需要一些時間來準備。
 
 ```python
 # Used for gradient descent training process
@@ -132,7 +132,7 @@ pre_ne_train_loader = tuple(
 pre_test_loader = tuple([(inputs.to(device), labels.to(device)) for inputs, labels in test_loader])
 ```
 
-這裡，預先定義了一個 `model_test` 函數，以簡化後續階段中模型在測試資料集上的預測準確率評估。
+在此，預先定義了一個 `model_test` 函數，以簡化後續階段中模型在測試資料集上的預測準確率評估。
 
 ```python
 def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, device: torch.device) -> float:
@@ -154,9 +154,9 @@ def model_test(model: nn.Module, data_loader: torch.utils.data.DataLoader, devic
 
 ## 梯度下降訓練（可選）
 
-首先執行基於梯度下降的模型訓練。在此範例中，此訓練用於初始化模型，為後續的神經演化過程做準備。
+首先執行基於梯度下降的模型訓練。在本範例中，採用此訓練來初始化模型，為後續的神經演化過程做準備。
 
-PyTorch 中的模型訓練過程與 EvoX 中的神經演化相容，使得在後續步驟中重用相同的模型實作變得方便。
+PyTorch 中的模型訓練過程與 EvoX 中的神經演化相容，這使得在後續步驟中重複使用相同的模型實作變得非常方便。
 
 ```python
 def model_train(
@@ -205,9 +205,9 @@ print(f"Accuracy after gradient descent training: {gd_acc:.4f} %.")
 
 ## 神經演化微調
 
-基於前一個梯度下降過程的預訓練模型，逐步應用神經演化來微調模型。
+基於先前梯度下降過程中的預訓練模型，逐步應用神經演化來微調模型。
 
-首先，使用 `ParamsAndVector` 元件將預訓練模型的權重展平為向量，作為後續神經演化過程的初始中心個體。
+首先，使用 `ParamsAndVector` 組件將預訓練模型的權重展平為向量，該向量作為後續神經演化過程的初始中心個體。
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
@@ -217,9 +217,9 @@ lower_bound = pop_center - 0.01
 upper_bound = pop_center + 0.01
 ```
 
-> 對於專門為神經演化設計的演算法（可以直接接受批次參數字典作為輸入），使用 `ParamsAndVector` 可能不是必需的。
+> 對於專門為神經演化設計的演算法，如果它們可以直接接受批量參數字典作為輸入，則可能不需要使用 `ParamsAndVector`。
 
-此外，定義了一個範例準則。這裡，選擇並加權了個體模型的損失和準確率作為神經演化過程中的適應度函數。此步驟可根據最佳化方向進行自訂。
+此外，定義了一個範例準則 (criterion)。在此，選取個體模型的損失 (loss) 和準確率 (accuracy) 並進行加權，作為神經演化過程中的適應度函數。此步驟可根據優化方向進行自定義。
 
 ```python
 class AccuracyCriterion(nn.Module):
@@ -260,7 +260,7 @@ weighted_criterion = WeightedCriterion(
 )
 ```
 
-同時，與梯度下降訓練和模型測試過程類似，神經演化微調過程也被封裝成一個函數，以便在後續階段中方便使用。
+同時，與梯度下降訓練和模型測試過程類似，神經演化微調過程也被封裝成一個函數，以便在後續階段方便使用。
 
 ```python
 import time
@@ -291,11 +291,11 @@ def neuroevolution_process(
         print(f"\tBest accuracy: {best_acc:.4f} %.")
 ```
 
-### 基於種群的神經演化測試
+### 基於族群的神經演化測試
 
-在此範例中，首先測試基於種群的神經演化演算法，使用粒子群最佳化（[PSO](#evox.algorithms.so.pso_variants.pso.PSO)）作為代表。神經演化的配置與其他最佳化任務類似——我們需要定義問題、演算法、監控器和工作流程，以及它們各自的 `setup()` 函數來完成初始化。
+在本範例中，首先測試基於族群的神經演化演算法，並以粒子群優化演算法 ([PSO](#evox.algorithms.so.pso_variants.pso.PSO)) 為代表。神經演化的配置與其他優化任務類似——我們需要定義問題、演算法、監控器和工作流，並調用它們各自的 `setup()` 函數來完成初始化。
 
-這裡需要注意的一個關鍵點是，種群大小（本例中的 `POP_SIZE`）需要在**問題和演算法中都進行初始化**，以避免潛在的錯誤。
+這裡需要注意的一個關鍵點是，族群大小（本例中為 `POP_SIZE`）需要在 **問題和演算法** 中同時進行初始化，以避免潛在的錯誤。
 
 ```python
 POP_SIZE = 100
@@ -349,11 +349,11 @@ neuroevolution_process(
 pop_workflow.get_submodule("monitor").plot()
 ```
 
-### 單個體神經演化測試
+### 單一個體神經演化測試
 
-接下來，測試基於單個體演算法的神經演化。與基於種群的情況類似，我們需要定義問題、演算法、監控器和工作流程，並在初始化時呼叫它們各自的 `setup()` 函數。在這種情況下，選擇隨機搜尋策略作為演算法。
+接下來，測試基於單一個體演算法的神經演化。與基於族群的情況類似，我們需要定義問題、演算法、監控器和工作流，並在初始化期間調用它們各自的 `setup()` 函數。在這種情況下，選擇隨機搜索策略作為演算法。
 
-這裡需要注意的一個關鍵點是，`SupervisedLearningProblem` 應設定 `pop_size=None`，`EvalMonitor` 應設定 `topk=1`，因為只搜尋單個個體。仔細的超參數設定有助於避免不必要的問題。
+這裡需要注意的一個關鍵點是，`SupervisedLearningProblem` 應設置為 `pop_size=None`，並且 `EvalMonitor` 應設置 `topk=1`，因為只搜索單一個體。仔細的超參數設置有助於避免不必要的問題。
 
 ```python
 single_problem = SupervisedLearningProblem(

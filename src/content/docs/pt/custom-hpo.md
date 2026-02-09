@@ -8,9 +8,9 @@ section: "developer"
 
 Neste capítulo, focar-nos-emos na implementação de HPO com algoritmos personalizados, enfatizando os detalhes em vez do fluxo de trabalho geral. Uma breve introdução à implementação de HPO é fornecida no [tutorial](#/tutorial/tutorial_part7), e a leitura prévia é altamente recomendada.
 
-## Tornar Algoritmos Paralelizáveis
+## Tornar os Algoritmos Paralelizáveis
 
-Uma vez que precisamos de transformar o algoritmo interno no problema, é crucial que o algoritmo interno seja paralelizável. Portanto, algumas modificações ao algoritmo podem ser necessárias.
+Uma vez que precisamos de transformar o algoritmo interno no problema, é crucial que o algoritmo interno seja paralelizável. Portanto, algumas modificações no algoritmo podem ser necessárias.
 
 1. O algoritmo não deve ter métodos com operações in-place nos atributos do próprio algoritmo.
 
@@ -26,7 +26,7 @@ class ExampleAlgorithm(Algorithm):
         self.pop = pop
 ```
 
-2. A lógica do código não depende do fluxo de controlo Python.
+2. A lógica do código não depende do fluxo de controlo de python.
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -56,7 +56,7 @@ class ExampleAlgorithm(Algorithm):
 
 ## Utilizar o HPOMonitor
 
-Na tarefa de HPO, devemos utilizar o `HPOMonitor` para acompanhar as métricas de cada algoritmo interno. O `HPOMonitor` adiciona apenas um método, `tell_fitness`, em comparação com o `monitor` padrão. Esta adição é concebida para oferecer maior flexibilidade na avaliação de métricas, uma vez que as tarefas de HPO frequentemente envolvem métricas multidimensionais e complexas.
+Na tarefa de HPO, devemos utilizar o `HPOMonitor` para acompanhar as métricas de cada algoritmo interno. O `HPOMonitor` adiciona apenas um método, `tell_fitness`, em comparação com o `monitor` padrão. Esta adição foi concebida para oferecer maior flexibilidade na avaliação de métricas, uma vez que as tarefas de HPO envolvem frequentemente métricas multidimensionais e complexas.
 
 Os utilizadores apenas precisam de criar uma subclasse de `HPOMonitor` e substituir o método `tell_fitness` para definir métricas de avaliação personalizadas.
 
@@ -64,7 +64,7 @@ Também fornecemos um `HPOFitnessMonitor` simples, que suporta o cálculo das m�
 
 ## Um exemplo simples
 
-Aqui, demonstraremos um exemplo simples de como utilizar HPO com o EvoX. Utilizaremos o algoritmo `PSO` para procurar os hiperparâmetros ótimos de um algoritmo básico para resolver o problema sphere.
+Aqui, demonstraremos um exemplo simples de como utilizar HPO com EvoX. Utilizaremos o algoritmo `PSO` para procurar os hiperparâmetros ideais de um algoritmo básico para resolver o problema da esfera.
 
 Primeiro, vamos importar os módulos necessários.
 
@@ -77,7 +77,7 @@ from evox.problems.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-A seguir, definimos um problema sphere simples. Note que isto não tem diferença dos `problems` comuns.
+Em seguida, definimos um problema de esfera simples. Note que isto não tem diferença em relação aos `problems` comuns.
 
 ```python
 class Sphere(Problem):
@@ -88,7 +88,7 @@ class Sphere(Problem):
         return (x * x).sum(-1)
 ```
 
-A seguir, definimos o algoritmo, utilizamos a função `torch.cond` e certificamo-nos de que é paralelizável. Especificamente, modificamos operações in-place e ajustamos o fluxo de controlo Python.
+Em seguida, definimos o algoritmo, utilizamos a função `torch.cond` e garantimos que é paralelizável. Especificamente, modificamos as operações in-place e ajustamos o fluxo de controlo de Python.
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -121,7 +121,7 @@ class ExampleAlgorithm(Algorithm):
 
 ```
 
-Para lidar com o fluxo de controlo Python, utilizamos [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html), a seguir, podemos utilizar o `StdWorkflow` para envolver o `problem`, `algorithm` e `monitor`. Depois utilizamos o `HPOProblemWrapper` para transformar o `StdWorkflow` em problema HPO.
+Para lidar com o fluxo de controlo de Python, utilizamos [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html); em seguida, podemos utilizar o `StdWorkflow` para envolver o `problem`, `algorithm` e `monitor`. Depois, utilizamos o `HPOProblemWrapper` para transformar o `StdWorkflow` num problema de HPO.
 
 ```python
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
@@ -135,14 +135,14 @@ inner_workflow.setup(inner_algo, inner_prob, monitor=inner_monitor)
 hpo_prob = HPOProblemWrapper(iterations=9, num_instances=7, workflow=inner_workflow, copy_init_state=True)
 ```
 
-Podemos testar se o `HPOProblemWrapper` reconhece corretamente os hiperparâmetros que definimos. Uma vez que não fizemos modificações aos hiperparâmetros para as 7 instâncias, devem ser idênticos em todas as instâncias.
+Podemos testar se o `HPOProblemWrapper` reconhece corretamente os hiperparâmetros que definimos. Como não fizemos modificações nos hiperparâmetros para as 7 instâncias, eles devem ser idênticos em todas as instâncias.
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-Também podemos especificar o nosso próprio conjunto de valores de hiperparâmetros. Note que o número de conjuntos de hiperparâmetros deve corresponder ao número de instâncias no `HPOProblemWrapper`. Os hiperparâmetros personalizados devem ser fornecidos como um dicionário cujos valores são envolvidos no `Parameter`.
+Também podemos especificar o nosso próprio conjunto de valores de hiperparâmetros. Note que o número de conjuntos de hiperparâmetros deve corresponder ao número de instâncias no `HPOProblemWrapper`. Os hiperparâmetros personalizados devem ser fornecidos como um dicionário cujos valores estão envolvidos no `Parameter`.
 
 ```python
 params = hpo_prob.get_init_params()
@@ -153,7 +153,7 @@ print("params:\n", params, "\n")
 print("result:\n", result)
 ```
 
-Agora, utilizamos o algoritmo `PSO` para otimizar os hiperparâmetros do `ExampleAlgorithm`. Note que o tamanho da população do `PSO` deve corresponder ao número de instâncias; caso contrário, podem ocorrer erros inesperados. Neste caso, precisamos de transformar a solução no workflow externo, uma vez que o `HPOProblemWrapper` requer um dicionário como entrada.
+Agora, utilizamos o algoritmo `PSO` para otimizar os hiperparâmetros do `ExampleAlgorithm`. Note que o tamanho da população do `PSO` deve corresponder ao número de instâncias; caso contrário, podem ocorrer erros inesperados. Neste caso, precisamos de transformar a solução no fluxo de trabalho externo, uma vez que o `HPOProblemWrapper` requer um dicionário como entrada.
 
 ```python
 class solution_transform(torch.nn.Module):

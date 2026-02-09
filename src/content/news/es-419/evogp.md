@@ -1,31 +1,31 @@
 ---
-title: "EvoGP: un framework acelerado por GPU para programación genética basada en árboles"
+title: "EvoGP: Un framework acelerado por GPU para Programación Genética basada en árboles"
 pubDate: 2025-01-10
-summary: "EvoGP es un framework de programación genética basada en árboles completamente acelerado por GPU, construido sobre PyTorch, que logra hasta 100x de aceleración respecto a implementaciones en CPU."
+summary: "EvoGP es un framework de Programación Genética basada en árboles totalmente acelerado por GPU y construido sobre PyTorch, logrando una aceleración de hasta 100 veces en comparación con las implementaciones en CPU."
 ---
 
-**Revolucionando la programación genética con aceleración GPU**
+**Revolucionando la Programación Genética con aceleración por GPU**
 
-EvoGP está diseñado para abordar las limitaciones computacionales de la **programación genética basada en árboles** tradicional mediante el uso de computación paralela en **GPUs**. Las operaciones evolutivas clave, como la generación de árboles, mutación, cruce y evaluación de aptitud, están completamente optimizadas usando **CUDA**, lo que permite a EvoGP lograr hasta **100x de aceleración** en comparación con implementaciones basadas en CPU.
+EvoGP está diseñado para abordar las limitaciones computacionales de la **Programación Genética basada en árboles** (TGP) tradicional mediante el uso de computación paralela en **GPUs**. Las operaciones evolutivas clave, como la generación de árboles, mutación, cruce y evaluación de aptitud (fitness), están totalmente optimizadas mediante **CUDA**, lo que permite a EvoGP alcanzar una aceleración de hasta **100 veces** en comparación con las implementaciones basadas en CPU.
 
-**Características principales de EvoGP**
+**Características clave de EvoGP**
 
-* **Kernels CUDA personalizados para operaciones evolutivas** -- Mejora la eficiencia en optimización a gran escala.
-* **Integración perfecta con PyTorch** -- Combina la flexibilidad de Python con computación GPU de alto rendimiento.
-* **Soporte para árboles de múltiples salidas** -- Amplía el potencial de aplicación en tareas complejas como clasificación y optimización de políticas.
-* **Suite completa de benchmarks** -- Incluye regresión simbólica, clasificación y control robótico (Brax).
-* **Operadores genéticos avanzados** -- Soporta diversos métodos de selección, mutación y cruce.
+* **Kernels de CUDA personalizados para operaciones evolutivas** – Mejora la eficiencia en la optimización a gran escala.
+* **Integración fluida con PyTorch** – Combina la flexibilidad de Python con la computación de alto rendimiento en GPU.
+* **Soporte para árboles de múltiples salidas** – Amplía el potencial de aplicación en tareas complejas como la clasificación y la optimización de políticas.
+* **Suite de pruebas (benchmarks) integral** – Incluye Regresión Simbólica, Clasificación y Control Robótico (Brax).
+* **Operadores genéticos avanzados** – Soporta diversos métodos de selección, mutación y cruce.
 
-**Un avance significativo para la investigación en programación genética**
+**Un salto significativo para la investigación en Programación Genética**
 
-EvoGP proporciona a investigadores y profesionales una plataforma robusta y escalable para explorar nuevas metodologías de **TGP**. Al integrar **algoritmos evolutivos** con **aceleración GPU**, EvoGP abre nuevas posibilidades en **aprendizaje automático, inteligencia artificial y programación automatizada**.
+EvoGP proporciona a investigadores y profesionales una plataforma robusta y escalable para explorar nuevas metodologías de **TGP**. Al integrar **algoritmos evolutivos** con **aceleración por GPU**, EvoGP abre nuevas posibilidades en **machine learning, inteligencia artificial y programación automatizada**.
 
-**Instalación y participación comunitaria**
+**Instalación y participación de la comunidad**
 
-El framework es de **código abierto** y está disponible en GitHub bajo **EMI-Group/EvoGP**. Investigadores y desarrolladores pueden contribuir, compartir conocimientos y mejorar el framework a través de **Issues y Pull Requests** en GitHub. Las mejoras futuras incluyen variantes adicionales de **GP**, métodos extendidos de **múltiples salidas** y más **optimizaciones computacionales**.
+El framework es de **código abierto** (open-source) y está disponible en GitHub bajo **EMI-Group/EvoGP**. Los investigadores y desarrolladores pueden contribuir, compartir conocimientos y mejorar el framework a través de **Issues y Pull Requests** en GitHub. Las mejoras futuras incluyen variantes adicionales de **GP**, métodos extendidos de **múltiples salidas** y mayores **optimizaciones computacionales**.
 
 **Agradecimientos y perspectivas futuras**
 
-EvoGP se basa en los principios fundamentales de la **programación genética** establecidos por **John R. Koza** e incorpora avances de **PyTorch, CUDA y bibliotecas de regresión simbólica**. El EMI-Group visualiza a EvoGP evolucionando hacia una **plataforma líder acelerada por GPU** para computación evolutiva, expandiendo significativamente su impacto en **automatización y optimización impulsadas por IA**.
+EvoGP se basa en los principios fundamentales de la **Programación Genética** iniciados por **John R. Koza** e incorpora avances de **PyTorch, CUDA y librerías de regresión simbólica**. El EMI-Group visualiza a EvoGP evolucionando hacia una **plataforma líder acelerada por GPU** para la computación evolutiva, expandiendo significativamente su impacto en la **automatización y optimización impulsadas por IA**.
 
-Para más detalles, visite el **repositorio de EvoGP en GitHub**: [https://github.com/EMI-Group/evogp](https://github.com/EMI-Group/evogp "https://github.com/EMI-Group/evogp").
+Para más detalles, visite el **repositorio de GitHub de EvoGP**: [https://github.com/EMI-Group/evogp](https://github.com/EMI-Group/evogp "https://github.com/EMI-Group/evogp").

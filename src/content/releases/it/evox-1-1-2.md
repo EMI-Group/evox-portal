@@ -4,11 +4,11 @@ pubDate: 2025-03-31
 summary: "Aggiornamenti della documentazione, funzionalità vmap e HPO, correzioni dei benchmark e supporto iniziale per workflow distribuiti."
 ---
 
-**Cosa e cambiato**
+**Cosa è cambiato**
 
 - Aggiornata la documentazione con note d'uso e indicazioni per la regolazione dei parametri
 
-- Aggiunte nuove funzionalita relative a `vmap` e all'ottimizzazione degli iperparametri (HPO), insieme a correzioni di bug
+- Aggiunte nuove funzionalità relative a `vmap` e all'ottimizzazione degli iperparametri (HPO), insieme a correzioni di bug
 
 - Corretti vari problemi nella documentazione
 
@@ -18,7 +18,7 @@ summary: "Aggiornamenti della documentazione, funzionalità vmap e HPO, correzio
 
 - Changelog completo: [https://github.com/EMI-Group/evox/compare/v1.1.1...v1.1.2](https://github.com/EMI-Group/evox/compare/v1.1.1...v1.1.2 "https://github.com/EMI-Group/evox/compare/v1.1.1...v1.1.2")
 
-**Codice open source e comunita**
+**Codice open source e comunità**
 
 **Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
 

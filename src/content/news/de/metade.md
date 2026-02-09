@@ -1,168 +1,152 @@
 ---
-title: "MetaDE: Differentielle Evolution durch Differentielle Evolution weiterentwickeln"
+title: "MetaDE: Entwicklung von Differential Evolution durch Differential Evolution"
 pubDate: 2025-02-15
-summary: "MetaDE ist eine meta-evolutionaere Methode, die Differentielle Evolution nutzt, um ihre eigenen Hyperparameter und Strategien zu optimieren, veroeffentlicht in IEEE TEVC."
+summary: "MetaDE ist eine meta-evolutionäre Methode, die Differential Evolution nutzt, um ihre eigenen Hyperparameter und Strategien zu entwickeln, veröffentlicht in IEEE TEVC."
 ---
 
-Differential Evolution (DE), einer der Kernalgorithmen der evolutionaeren Berechnung, wird aufgrund seiner Einfachheit und hohen Effizienz haeufig bei Black-Box-Optimierungsproblemen eingesetzt. Dennoch haengt seine Leistung stark von der Wahl der Hyperparameter und Strategien ab -- ein anhaltendes Problem fuer Forscher. Um diese Herausforderung zu bewaeltigen, hat das EvoX-Team kuerzlich eine Studie in den *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* mit dem Titel "MetaDE: Evolving Differential Evolution by Differential Evolution" veroeffentlicht. Als meta-evolutionaere Methode, die DE nutzt, um ihre eigenen Hyperparameter und Strategien weiterzuentwickeln, ermoeglicht MetaDE die dynamische Anpassung von Parametern und Strategien bei gleichzeitiger Einbindung GPU-beschleunigter paralleler Berechnung. Dieses Design verbessert die Recheneffizienz zusammen mit der Optimierungsleistung erheblich. Experimentelle Ergebnisse zeigen, dass MetaDE herausragende Leistung sowohl auf der CEC2022-Benchmark-Suite als auch bei Robotersteuerungsaufgaben erzielt. Der Quellcode fuer MetaDE ist als Open Source auf GitHub verfuegbar unter [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade").
+Differential Evolution (DE), einer der Kernalgorithmen in der evolutionären Berechnung, wird aufgrund seiner Einfachheit und hohen Effizienz häufig bei Black-Box-Optimierungsproblemen eingesetzt. Dennoch hängt seine Leistung stark von der Wahl der Hyperparameter und Strategien ab, was für Forscher ein ständiges Problem darstellt. Um dieser Herausforderung zu begegnen, veröffentlichte das EvoX-Team kürzlich eine Studie in *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* mit dem Titel „MetaDE: Evolving Differential Evolution by Differential Evolution“. Als meta-evolutionäre Methode, die DE nutzt, um ihre eigenen Hyperparameter und Strategien zu entwickeln, ermöglicht MetaDE die dynamische Anpassung von Parametern und Strategien unter Einbeziehung von GPU-beschleunigtem parallelem Rechnen. Dieses Design verbessert sowohl die Recheneffizienz als auch die Optimierungsleistung erheblich. Experimentelle Ergebnisse zeigen, dass MetaDE sowohl bei der CEC2022-Benchmark-Suite als auch bei Robotersteuerungsaufgaben eine hervorragende Leistung erbringt. Der Quellcode für MetaDE ist als Open Source auf GitHub unter [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade") verfügbar.
 
 **Hintergrund**
 
-Im Bereich der evolutionaeren Berechnung wird die Leistung von Algorithmen oft erheblich durch die Wahl der Hyperparameter beeinflusst. Die Bestimmung der am besten geeigneten Parametereinstellungen fuer ein bestimmtes Problem ist eine langjaerige Forschungsherausforderung. Differential Evolution (DE) als klassischer evolutionaerer Algorithmus wird wegen seiner Einfachheit und robusten globalen Suchfaehigkeit weithin geschaetzt; dennoch ist seine Leistung hochempfindlich gegenueber der Hyperparameter-Auswahl. Konventionelle Methoden stuetzen sich typischerweise entweder auf erfahrungsbasiertes Tuning oder adaptive Mechanismen zur Leistungsverbesserung. Angesichts vielfaeltiger Problemszenarien haben diese Ansaetze jedoch haeufig Schwierigkeiten, Effizienz und breite Anwendbarkeit in Einklang zu bringen.
+Im Bereich der evolutionären Berechnung wird die Leistung von Algorithmen oft maßgeblich durch die Wahl der Hyperparameter beeinflusst. Die Bestimmung der geeignetsten Parametereinstellungen für ein spezifisches Problem ist seit langem eine Herausforderung in der Forschung. Differential Evolution (DE) ist als klassischer evolutionärer Algorithmus wegen seiner Einfachheit und robusten globalen Suchfähigkeit sehr beliebt; dennoch ist seine Leistung sehr empfindlich gegenüber der Wahl der Hyperparameter. Konventionelle Methoden verlassen sich typischerweise entweder auf erfahrungsbasierte Abstimmung oder adaptive Mechanismen, um die Leistung zu verbessern. Angesichts diverser Problemszenarien haben diese Ansätze jedoch häufig Schwierigkeiten, ein Gleichgewicht zwischen Effizienz und breiter Anwendbarkeit zu finden.
 
-Das Konzept der "Meta-Evolution" wurde bereits im letzten Jahrhundert eingefuehrt, mit dem Ziel, evolutionaere Algorithmen selbst zur Optimierung der Hyperparameter-Konfigurationen dieser Algorithmen zu nutzen. Obwohl Meta-Evolution seit vielen Jahren existiert, war ihre praktische Anwendung durch den hohen Rechenaufwand eingeschraenkt. Juengste Fortschritte im GPU-Computing haben diese Einschraenkungen gelockert und bieten starke Hardware-Unterstuetzung fuer evolutionaere Algorithmen. Insbesondere die Einfuehrung des verteilten GPU-beschleunigten EvoX-Frameworks hat die Entwicklung GPU-basierter evolutionaerer Algorithmen erheblich erleichtert. Vor diesem Hintergrund hat unser Forschungsteam einen neuartigen Meta-Evolutionsansatz vorgeschlagen, der DE nutzt, um seine eigenen Hyperparameter und Strategien weiterzuentwickeln, und damit einen neuen Weg zur Loesung des langjaerigen Parameter-Tuning-Problems in evolutionaeren Algorithmen bietet.
-
-
+Das Konzept der „Meta-Evolution“ wurde bereits im letzten Jahrhundert eingeführt, mit dem Ziel, evolutionäre Algorithmen selbst zu nutzen, um die Hyperparameter-Konfigurationen dieser Algorithmen zu optimieren. Obwohl Meta-Evolution schon seit vielen Jahren existiert, war ihre praktische Anwendung durch den hohen Rechenaufwand begrenzt. Jüngste Fortschritte im GPU-Computing haben diese Einschränkungen gelockert und bieten starke Hardware-Unterstützung für evolutionäre Algorithmen. Insbesondere die Einführung des verteilten, GPU-beschleunigten EvoX-Frameworks hat die Entwicklung GPU-basierter evolutionärer Algorithmen stark erleichtert. Vor diesem Hintergrund schlug unser Forschungsteam einen neuartigen Meta-Evolutionsansatz vor, der DE nutzt, um seine eigenen Hyperparameter und Strategien zu entwickeln, und damit einen neuen Weg zur Lösung des langjährigen Problems der Parameterabstimmung in evolutionären Algorithmen bietet.
 
 **Was ist Meta-Evolution?**
 
-Die Kernidee hinter Meta-Evolution laesst sich zusammenfassen als "**einen evolutionaeren Algorithmus nutzen, um sich selbst weiterzuentwickeln**" (Evolving an Evolutionary Algorithm by an Evolutionary Algorithm). Dieses Konzept geht ueber traditionelle Methoden der evolutionaeren Berechnung hinaus, indem es nicht nur evolutionaere Algorithmen zur Suche nach optimalen Loesungen fuer ein Problem einsetzt, sondern auch die Hyperparameter und Strategien der Algorithmen durch ihre eigenen evolutionaeren Prozesse anpasst.
+Die Kernidee hinter der Meta-Evolution lässt sich zusammenfassen als „**Verwendung eines evolutionären Algorithmus zur Weiterentwicklung seiner selbst**“ (Evolving an Evolutionary Algorithm by an Evolutionary Algorithm). Dieses Konzept geht über traditionelle Methoden der evolutionären Berechnung hinaus, indem es nicht nur evolutionäre Algorithmen einsetzt, um optimale Lösungen für ein Problem zu suchen, sondern auch die Hyperparameter und Strategien der Algorithmen durch deren eigene evolutionäre Prozesse anpasst.
 
-Mit anderen Worten fuehrt Meta-Evolution ein "**Selbstevolutions**"-Paradigma ein, das es Algorithmen ermoeglicht, sich selbst zu optimieren, waehrend sie den Suchraum nach Problemloesungen erkunden. Durch kontinuierliche Verfeinerung waehrend des evolutionaeren Prozesses werden Algorithmen anpassungsfaehiger und koennen in verschiedenen Problemszenarien hohe Effizienz beibehalten.
+Mit anderen Worten führt die Meta-Evolution ein Paradigma der „**Selbst-Evolution**“ ein, das es Algorithmen ermöglicht, sich selbst zu optimieren, während sie den Suchraum nach Problemlösungen erkunden. Durch die kontinuierliche Verfeinerung während des evolutionären Prozesses werden die Algorithmen anpassungsfähiger und können in verschiedenen Problemszenarien eine hohe Effizienz aufrechterhalten.
 
-Am Beispiel von MetaDE basiert dessen Design auf dieser Philosophie. In einer zweischichtigen Struktur loest die untere Schicht (der "**Executor**") das gegebene Optimierungsproblem mit einem parametrisierten DE. Die obere Schicht (der "**Evolver**") setzt gleichzeitig DE ein, um die Hyperparameter-Konfigurationen des Executors zu optimieren. Dieses Framework laesst DE nicht nur als Loeser dienen, sondern auch "erkunden", wie seine eigenen Parameter und Strategien am besten angepasst werden koennen, um verschiedene Probleme effektiver zu loesen. Ein solcher Prozess gleicht einem System, das sich schrittweise selbst versteht und verfeinert -- eine Transformation von **"passivem Problemloesen" zu "aktiver Selbstevolution."** Folglich kann es sich besser an vielfaeltige Aufgaben anpassen. **Wenn wir DE als komplexes System betrachten, ermoeglicht MetaDE effektiv eine "rekursive" Art des Selbstverstaendnisses und der Selbstverbesserung innerhalb dieses Systems.**
+Am Beispiel von MetaDE zeigt sich, dass dessen Design in dieser Philosophie verwurzelt ist. In einer zweischichtigen Struktur löst die untere Schicht (der „**Executor**“) das gegebene Optimierungsproblem unter Verwendung eines parametrisierten DE. Die obere Schicht (der „**Evolver**“) verwendet gleichzeitig DE, um die Hyperparameter-Konfigurationen des Executors zu optimieren. Dieses Framework lässt DE nicht nur als Löser fungieren, sondern auch „erforschen“, wie die eigenen Parameter und Strategien am besten angepasst werden können, um verschiedene Probleme effektiver zu lösen. Ein solcher Prozess ähnelt einem System, das sich schrittweise selbst versteht und verfeinert – eine Transformation vom **„passiven Lösen eines Problems“ zur „aktiven Selbst-Evolution“.** Folglich kann es sich besser an diverse Aufgaben anpassen. **Wenn wir DE als komplexes System betrachten, ermöglicht MetaDE effektiv eine „rekursive“ Art des Selbstverständnisses und der Selbstverbesserung innerhalb dieses Systems.**
 
-Der Begriff "**Rekursion**" beschreibt in der Informatik typischerweise eine Funktion oder Prozedur, die sich selbst aufruft. Innerhalb von MetaDE erhaelt dieses Konzept eine neue Bedeutung: Es ist ein **intern rekursiver** Optimierungsmechanismus, der DE einsetzt, um DEs Hyperparameter weiterzuentwickeln. Dieses selbstreferenzielle Schema verkoerpert nicht nur starke Anpassungsfaehigkeit, sondern bietet auch eine neuartige Perspektive auf das "No Free Lunch"-Theorem. Da es keinen einzelnen, universell optimalen Satz von Parametern fuer alle Probleme gibt, ist es der Schluessel, den Algorithmus sich autonom weiterentwickeln zu lassen, um die besten Parameterkonfigurationen fuer eine gegebene Aufgabe zu finden.
+Der Begriff „**Rekursion**“ in der Informatik beschreibt typischerweise eine Funktion oder Prozedur, die sich selbst aufruft. Innerhalb von MetaDE erhält dieses Konzept eine neue Bedeutung: Es ist ein **intern rekursiver** Optimierungsmechanismus, der DE verwendet, um die Hyperparameter von DE zu entwickeln. Dieses selbstreferenzielle Schema verkörpert nicht nur eine starke Anpassungsfähigkeit, sondern bietet auch eine neue Perspektive auf das „No Free Lunch“-Theorem. Da es keinen einzelnen, universell optimalen Parametersatz für alle Probleme gibt, ist die autonome Selbstentwicklung des Algorithmus der Schlüssel zum Finden der besten Parameterkonfigurationen für eine gegebene Aufgabe.
 
-Durch diesen rekursiven meta-evolutionaeren Ansatz erzielt MetaDE mehrere Vorteile:
+Durch diesen rekursiven meta-evolutionären Ansatz erzielt MetaDE mehrere Vorteile:
 
-**1. Automatisiertes Parameter-Tuning**
+**1. Automatisierte Parameterabstimmung**
 
-     Der arbeitsintensive manuelle Tuning-Prozess entfaellt. Der Algorithmus lernt selbst, wie er seine Hyperparameter anpassen kann, wodurch menschliches Eingreifen reduziert und die Effizienz verbessert wird.
+     Der arbeitsintensive manuelle Abstimmungsprozess entfällt. Der Algorithmus lernt selbst, wie er seine Hyperparameter anpasst, was menschliche Eingriffe reduziert und die Effizienz verbessert.
 
-**2. Verbesserte Anpassungsfaehigkeit**
+**2. Verbesserte Anpassungsfähigkeit**
 
-     MetaDE reagiert dynamisch auf sich aendernde Problemeigenschaften und -bedingungen und passt Strategien in Echtzeit an, um die Leistung zu verbessern. Dies erhoeht die Flexibilitaet des Algorithmus erheblich.
+     MetaDE reagiert dynamisch auf sich ändernde Problemeigenschaften und Bedingungen und modifiziert Strategien in Echtzeit, um die Leistung zu verbessern. Dies erhöht die Flexibilität des Algorithmus erheblich.
 
 **3. Effiziente Suche**
-      Durch die Nutzung inhaerent paralleler Berechnung beschleunigt MetaDE die Suche bei grossskaligen Optimierungsproblemen erheblich. Es liefert machbare Loesungen fuer hochdimensionale, komplexe Probleme in angemessenen Zeitrahmen.
+      Durch die Nutzung inhärenter Parallelität beschleunigt MetaDE die Suche in groß angelegten Optimierungsproblemen erheblich. Es liefert machbare Lösungen für hochdimensionale, komplexe Probleme innerhalb angemessener Zeitrahmen.
 
 **Algorithmische Implementierung**
 
-MetaDE setzt tensorbasierte Techniken und GPU-Beschleunigung ein, um effiziente parallele Berechnung zu ermoeglichen. Durch die gleichzeitige Verarbeitung vieler Individuen einer Population wird die Gesamtrecheneffizienz deutlich verbessert, was besonders bei einkriterieller Black-Box-Optimierung und grossskaligen Optimierungsproblemen vorteilhaft ist. Durch Tensorisierung von Schluesselparametern und Datenstrukturen (z.B. Population, Fitness, Strategieparameter) erreicht MetaDE nicht nur hoehere Recheneffizienz, sondern verbessert auch seine Faehigkeit, komplexe Optimierungsherausforderungen zu bewaeltigen. Im Vergleich zu klassischem DE und anderen evolutionaeren Algorithmen (EAs) zeigt MetaDE ueberlegene Leistung bei der Loesung grossskaliger Probleme. Dank des tensorbasierten Ansatzes nutzt MetaDE Rechenressourcen effektiver und liefert schnellere Loesungen und praezisere Optimierungsergebnisse als traditionelle Methoden.
+MetaDE verwendet tensorbasierte Techniken und GPU-Beschleunigung, um effizientes paralleles Rechnen zu ermöglichen. Durch die gleichzeitige Verarbeitung vieler Individuen einer Population wird die gesamte Recheneffizienz deutlich verbessert, was besonders bei der einzieligen Black-Box-Optimierung und groß angelegten Optimierungsproblemen vorteilhaft ist. Durch die Tensorisierung von Schlüsselparametern und Datenstrukturen (z. B. Population, Fitness, Strategieparameter) erreicht MetaDE nicht nur eine höhere Recheneffizienz, sondern verbessert auch seine Fähigkeit, komplexe Optimierungsherausforderungen zu bewältigen. Im Vergleich zu klassischem DE und anderen evolutionären Algorithmen (EAs) zeigt MetaDE eine überlegene Leistung bei der Lösung groß angelegter Probleme. Dank des tensorbasierten Ansatzes nutzt MetaDE Rechenressourcen effektiver und liefert schnellere Lösungen und präzisere Optimierungsergebnisse als traditionelle Methoden.
 
 ![1.png](/images/articles/metade-4.png "1.png")
 
 PDE-Architektur
 
-Das Forschungsteam schlug zunaechst ein parametrisiertes DE-Algorithmus-Framework (PDE) vor, das Aenderungen von Parametern und Strategien vollstaendig unterstuetzt. In diesem Framework sind F und CR kontinuierliche Parameter, waehrend andere Parameter diskret sind. Die gestrichelten Kaesten zeigen den Bereich zulaessiger Parameterwerte an. Die Mutationsfunktion wird aus den linken und rechten Basisvektoren sowie dem Parameter zur Steuerung der Anzahl der Differenzvektoren abgeleitet.
+Das Forschungsteam schlug zunächst ein parametrisiertes DE-Algorithmus-Framework (PDE) vor, das Modifikationen von Parametern und Strategien vollständig unterstützt. In diesem Framework sind F und CR kontinuierliche Parameter, während andere Parameter diskret sind. Die gestrichelten Kästen zeigen den Bereich der zulässigen Parameterwerte an. Die Mutationsfunktion wird aus den linken und rechten Basisvektoren sowie dem Parameter abgeleitet, der die Anzahl der Differenzvektoren steuert.
 
 ![2.png](/images/articles/metade-5.png "2.png")
 
 MetaDE-Architektur
 
-MetaDE verwendet eine zweischichtige Struktur, bestehend aus **einem Evolver** (obere Schicht) und **mehreren Executors** (untere Schicht). Der Evolver ist ein DE (oder potenziell ein anderer evolutionaerer Algorithmus), der fuer die Optimierung der PDE-Parameter verantwortlich ist. Jedes Individuum![spacer.gif](/images/articles/metade-6.gif) x_i in der Population des Evolvers entspricht einer einzigartigen Parameterkonfiguration θ_i. Diese Konfigurationen werden an das PDE weitergegeben, um verschiedene DE-Varianten zu instanziieren, die jeweils von einem Executor verwaltet werden, der unabhaengig an der gegebenen Optimierungsaufgabe arbeitet. Jeder Executor gibt seinen besten Fitnesswert y^* an den Evolver zurueck, der diesen Fitnesswert y_i dem entsprechenden Individuum x_i zuweist.
-
-
+MetaDE verwendet eine zweischichtige Struktur, bestehend aus **einem Evolver** (obere Schicht) und **mehreren Executoren** (untere Schicht). Der Evolver ist ein DE (oder potenziell ein anderer evolutionärer Algorithmus), der für die Optimierung der Parameter von PDE verantwortlich ist. Jedes Individuum ![spacer.gif](/images/articles/metade-6.gif) x_i in der Population des Evolvers entspricht einer eindeutigen Parameterkonfiguration θ_i. Diese Konfigurationen werden an das PDE übergeben, um verschiedene DE-Varianten zu instanziieren, die jeweils von einem Executor verwaltet werden, der unabhängig an der gegebenen Optimierungsaufgabe arbeitet. Jeder Executor gibt seinen besten Fitnesswert y^* an den Evolver zurück, der diesen Fitnesswert y_i dem entsprechenden Individuum x_i zuweist.
 
 **Experimentelle Leistung**
 
-Um die Wirksamkeit von MetaDE umfassend zu bewerten, fuehrte das Forschungsteam systematische Experimente ueber mehrere Benchmark-Tests und reale Szenarien durch. Jedes Experiment verwendete einen Evolver (DE mit rand/1/bin-Strategie) und Executors (PDE mit einer Populationsgroesse von 100). Wichtige experimentelle Komponenten umfassen:
+Um die Wirksamkeit von MetaDE umfassend zu bewerten, führte das Forschungsteam systematische Experimente durch, die mehrere Benchmark-Tests und reale Szenarien umfassten. Jedes Experiment verwendete einen Evolver (DE mit rand/1/bin-Strategie) und Executoren (PDE mit einer Populationsgröße von 100). Zu den wichtigsten experimentellen Komponenten gehören:
 
-**CEC2022-Benchmark**
- Vergleich von MetaDE mit verschiedenen DE-Varianten bei einkriteriellen Optimierungsaufgaben.
+**CEC2022 Benchmark**
+ Vergleich von MetaDE mit verschiedenen DE-Varianten in Aufgaben der einzieligen Optimierung.
 
-**Vergleich mit den vier besten CEC2022-Algorithmen**
- Bewertung von MetaDE gegenueber den vier leistungsstaerksten Algorithmen des CEC2022-Wettbewerbs unter identischen Funktionsauswertungs-Budgets (FEs).
+**Vergleich mit den Top-Vier CEC2022-Algorithmen**
+ Bewertung von MetaDE im Vergleich zu den vier leistungsstärksten Algorithmen des CEC2022-Wettbewerbs unter identischen Budgets für Funktionsauswertungen (FEs).
 
-**Funktionsauswertungen (FEs) bei fester Rechenzeit**
+**Funktionsauswertungen (FEs) bei fester Wall-Clock-Zeit**
  Analyse der Recheneffizienz von MetaDE unter GPU-Beschleunigung.
 
 **Robotersteuerungsaufgaben**
- Anwendung von MetaDE auf Robotersteuerungsaufgaben in einer Brax-Plattformumgebung zur Validierung seiner praktischen Nuetzlichkeit.
+ Anwendung von MetaDE auf Robotersteuerungsaufgaben in einer Brax-Plattformumgebung zur Validierung des praktischen Nutzens.
 
+**CEC2022 Benchmark: Vergleich mit gängigen DE-Varianten**
 
-
-**CEC2022-Benchmark: Vergleich mit gaengigen DE-Varianten**
-
-Das Team verglich MetaDE mit mehreren repraesentativen DE-Varianten auf der CEC2022-Benchmark-Suite, darunter:
+Das Team verglich MetaDE mit mehreren repräsentativen DE-Varianten auf der CEC2022-Benchmark-Suite, darunter:
 
 * **Standard DE (rand/1/bin)**
 * **SaDE und JaDE (adaptive DE-Algorithmen)**
 * **CoDE (DE mit Strategieintegration)**
-* **SHADE und LSHADE-RSP (erfolgshistorienbasiertes adaptives DE)**
+* **SHADE und LSHADE-RSP (erfolgsbasierte adaptive DE)**
 * **EDEV (integrierte DE-Varianten)**
 
-Alle Algorithmen wurden auf der EvoX-Plattform implementiert und nutzten GPU-Beschleunigung mit einer Populationsgroesse von 100 fuer Fairness. Experimente wurden bei verschiedenen Dimensionalitaeten (10D und 20D) unter **derselben Rechenzeitbeschraenkung (60 Sekunden)** durchgefuehrt.
+Alle Algorithmen wurden auf der EvoX-Plattform implementiert, wobei GPU-Beschleunigung mit einer Populationsgröße von 100 aus Fairnessgründen genutzt wurde. Die Experimente wurden bei unterschiedlichen Dimensionalitäten (10D und 20D) unter **der gleichen Rechenzeitbeschränkung (60 Sekunden)** durchgeführt.
 
 ![3.png](/images/articles/metade-7.png "3.png")
 
-10D CEC2022-Optimierungsergebnisse
+10D CEC2022 Optimierungsergebnisse
 
 ![4.png](/images/articles/metade-8.png "4.png")
 
-20D CEC2022-Optimierungsergebnisse
+20D CEC2022 Optimierungsergebnisse
 
-MetaDE erzielt im Allgemeinen eine schnellere und stabilere Konvergenz bei den meisten Testfunktionen. Sein parametrisiertes DE (PDE) in Kombination mit der Optimierung auf oberer Ebene ermoeglicht eine dynamische Anpassung an verschiedene Problemraeume und verbessert die Gesamtrobustheit und Suchleistung.
+MetaDE erreicht im Allgemeinen eine schnellere und stabilere Konvergenz bei den meisten Testfunktionen. Sein parametrisiertes DE (PDE) in Verbindung mit der Optimierung auf der oberen Ebene ermöglicht eine dynamische Anpassung an verschiedene Problemräume, was die allgemeine Robustheit und Suchleistung verbessert.
 
+**Vergleich mit den Top-Vier CEC2022-Algorithmen (Unter identischen FEs)**
 
+Um die Optimierungsfähigkeit von MetaDE weiter zu bewerten, verglichen wir es mit den vier besten Algorithmen des CEC2022-Wettbewerbs innerhalb **des gleichen Budgets für Funktionsauswertungen**:
 
-**Vergleich mit den vier besten CEC2022-Algorithmen (bei identischen FEs)**
-
-Um die Optimierungsfaehigkeit von MetaDE weiter zu bewerten, verglichen wir es mit den vier besten Algorithmen des CEC2022-Wettbewerbs innerhalb **desselben Funktionsauswertungs-Budgets**:
-
-* **EA4eig**: Eine Hybridmethode, die mehrere EAs integriert
+* **EA4eig**: Eine hybride Methode, die mehrere EAs integriert
 * **NL-SHADE-LBC**: Ein verbessertes adaptives DE
-* **NL-SHADE-RSP-MID**: Ein erweitertes SHADE mit Mittelpunktschaetzung
-* **S-LSHADE-DP**: Eine DE-Variante, die Populationsdiversitaet durch dynamische Stoerung aufrechterhaelt
+* **NL-SHADE-RSP-MID**: Ein erweitertes SHADE mit Mittelpunktschätzung
+* **S-LSHADE-DP**: Eine DE-Variante, die die Populationsvielfalt durch dynamische Störung aufrechterhält
 
-Jeder dieser Algorithmen wurde mit seinen offiziellen Parametereinstellungen und Quellcode unter **denselben FE-Beschraenkungen** ausgefuehrt. Statistische Vergleiche (Wilcoxon-Rangsummentest, Signifikanzniveau 0,05)
+Jeder dieser Algorithmen wurde mit seinen offiziellen Parametereinstellungen und Quellcode unter **den gleichen FE-Beschränkungen** ausgeführt. Statistische Vergleiche (Wilcoxon-Rangsummentest, Signifikanzniveau 0,05)
 
-wurden zwischen MetaDE und jeder Baseline auf der CEC2022-Testsuite durchgefuehrt. Die letzte Zeile der Tabelle zeigt die Leistung jedes Algorithmus im Vergleich zu MetaDE bei den verschiedenen Testfunktionen: + (signifikant besser), ≈ (kein signifikanter Unterschied) und − (signifikant schlechter).
+wurden zwischen MetaDE und jeder Baseline auf der CEC2022-Testsuite durchgeführt. Die letzte Zeile der Tabelle zeigt die Leistung jedes Algorithmus im Vergleich zu MetaDE bei den verschiedenen Testfunktionen: + (signifikant besser), ≈ (kein signifikanter Unterschied) und − (signifikant schlechter).
 
 ![5.png](/images/articles/metade-9.png "5.png")
 
-Vergleich der 10D CEC2022-Wettbewerbsalgorithmen (gleiche FEs)
+Vergleich der 10D CEC2022 Wettbewerbsalgorithmen (Gleiche FEs)
 
 ![6.png](/images/articles/metade-10.png "6.png")
 
-Vergleich der 20D CEC2022-Wettbewerbsalgorithmen (gleiche FEs)
+Vergleich der 20D CEC2022 Wettbewerbsalgorithmen (Gleiche FEs)
 
-MetaDE zeigt durchgehend starke Leistung, insbesondere bei komplexen Problemen, die robuste Konvergenz erfordern. Dank seines **selbstadaptiven Mechanismus** passt MetaDE seine Strategie effektiv an verschiedene Suchlandschaften an und verbessert dadurch die Sucheffizienz und globale Optimierungsfaehigkeit. Diese Ergebnisse zeigen, dass MetaDE nicht nur gaengige DE-Varianten uebertrifft, sondern auch starke Wettbewerbsfaehigkeit gegenueber Spitzenalgorithmen aus Wettbewerben aufweist.
-
-
+MetaDE zeigt durchweg eine starke Leistung, insbesondere bei komplexen Problemen, die eine robuste Konvergenz erfordern. Dank seines **selbstadaptiven Mechanismus** passt MetaDE seine Strategie effektiv an verschiedene Suchlandschaften an und verbessert so die Sucheffizienz und die globale Optimierungsfähigkeit. Diese Ergebnisse zeigen, dass MetaDE nicht nur gängige DE-Varianten übertrifft, sondern auch eine starke Wettbewerbsfähigkeit gegenüber erstklassigen Wettbewerbsalgorithmen aufweist.
 
 **Recheneffizienz: FEs innerhalb einer festen Zeit (60 Sekunden)**
 
-Das Forschungsteam zeichnete weiterhin **die Anzahl der Funktionsauswertungen (FEs) auf, die verschiedene Algorithmen innerhalb derselben festen Laufzeit (60 Sekunden) abschlossen**.
+Das Forschungsteam erfasste außerdem **die Anzahl der Funktionsauswertungen (FEs), die von verschiedenen Algorithmen innerhalb derselben festen Laufzeit (60 Sekunden) durchgeführt wurden**.
 
 ![图片2.png](/images/articles/metade-11.png)
 
-           Von jedem Algorithmus in 60 Sekunden erreichte FEs
+           Erreichte FEs von jedem Algorithmus in 60 Sekunden
 
-Unter demselben EvoX-Framework mit GPU-beschleunigter paralleler Berechnung erreichte MetaDE im Durchschnitt FEs auf **10****⁹**-Niveau, waehrend traditionelle DE-Varianten nur etwa ***10^6*** FEs erreichten. Dieser Vorteil ergibt sich aus MetaDEs parametrisiertem Ansatz, der **grossskalige parallele Auswertungen** von Individuen durchfuehrt und so eine **effizientere Nutzung der Hardware-Ressourcen** ermoeglicht. Folglich erkundet der Algorithmus mehr Loesungen im selben Zeitfenster und verbessert sowohl die Loesungsqualitaet als auch die Stabilitaet.
+Unter demselben EvoX-Framework mit GPU-beschleunigter paralleler Berechnung erreichte MetaDE im Durchschnitt FEs im Bereich von **10****⁹**, während traditionelle DE-Varianten nur etwa ***10^6*** FEs erreichten. Dieser Vorteil ergibt sich aus dem parametrisierten Ansatz von MetaDE, der **groß angelegte parallele Auswertungen** von Individuen durchführt und so eine **effizientere Nutzung der Hardware-Ressourcen** ermöglicht. Folglich erkundet der Algorithmus mehr Lösungen innerhalb desselben Zeitfensters, was sowohl die Lösungsqualität als auch die Stabilität verbessert.
 
+**Evolutionäres Reinforcement Learning: Robotersteuerungsaufgaben**
 
-
-**Evolutionaeres Reinforcement Learning: Robotersteuerungsaufgaben**
-
-Im Reinforcement Learning (RL) sind die Effizienz und Stabilitaet der Policy-Optimierung entscheidend. Gradientenbasierte Methoden wie PPO und SAC koennen in hochdimensionalen Umgebungen unter Gradientenverschwinden oder -explosion leiden. Im Gegensatz dazu umgeht Evolutionary Reinforcement Learning (EvoRL) diese Probleme durch **gradientenfreie Suche** zur direkten Optimierung von Policy-Parametern.
+Im Reinforcement Learning (RL) sind die Effizienz und Stabilität der Policy-Optimierung entscheidend. Gradientenbasierte Methoden wie PPO und SAC können in hochdimensionalen Umgebungen unter Gradientenverschwinden oder -explosion leiden. Im Gegensatz dazu umgeht Evolutionary Reinforcement Learning (EvoRL) diese Probleme, indem es **gradientenfreie Suchen** verwendet, um Policy-Parameter direkt zu optimieren.
 
 ![8.png](/images/articles/metade-12.png "8.png")
 
-Prozess des evolutionaeren Reinforcement Learning
+Prozess des evolutionären Reinforcement Learning
 
 Innerhalb des EvoRL-Frameworks:
 
-* MetaDE **optimiert automatisch neuronale Netzwerkparameter** und erhoeht die Anpassungsfaehigkeit von Policy-Modellen.
-* MetaDE **passt Hyperparameter dynamisch an** und verbessert die Trainingsstabilitaet.
-* MetaDE **nutzt GPU-Beschleunigung**, um die Policy-Optimierung zu beschleunigen.
+* **Optimiert MetaDE automatisch neuronale Netzwerkparameter**, was die Anpassungsfähigkeit von Policy-Modellen erhöht.
+* **Passt MetaDE Hyperparameter dynamisch an**, was die Trainingsstabilität verbessert.
+* **Nutzt MetaDE GPU-Beschleunigung**, um die Policy-Optimierung zu beschleunigen.
 
-Um die Leistung von MetaDE bei komplexen Optimierungsaufgaben zu bewerten, wendeten wir es auf **Robotersteuerungsprobleme** mit GPU-beschleunigter Optimierung in der **Brax-Simulationsplattform** an. Die Studie umfasste drei Aufgaben -- **Swimmer**, **Hopper** und **Reacher** -- die jeweils durch ein dreischichtiges vollstaendig verbundenes neuronales Netzwerk (MLP) modelliert wurden, mit dem Ziel der **Maximierung der Belohnung**. Bemerkenswert ist, dass jedes MLP etwa **1.500 Parameter** enthaelt, was eine **1.500-dimensionale Optimierungsherausforderung** fuer evolutionaere Algorithmen (EAs) darstellt. Dies stellt strenge Anforderungen sowohl an die Suchfaehigkeit als auch an die Recheneffizienz.
+Um die Leistung von MetaDE bei komplexen Optimierungsaufgaben zu bewerten, wendeten wir es auf **Robotersteuerungsaufgaben** unter Verwendung von GPU-beschleunigter Optimierung in der **Brax-Simulationsplattform** an. Die Studie umfasste drei Aufgaben – **Swimmer**, **Hopper** und **Reacher** –, die jeweils durch ein dreischichtiges vollständig verbundenes neuronales Netzwerk (MLP) modelliert wurden, mit dem Ziel, **die Belohnung zu maximieren**. Bemerkenswert ist, dass jedes MLP etwa **1.500 Parameter** enthält, was eine **1.500-dimensionale Optimierungsherausforderung** für evolutionäre Algorithmen (EAs) darstellt. Dies stellt strenge Anforderungen an sowohl die Suchfähigkeit als auch die Recheneffizienz.
 
 ![9.png](/images/articles/metade-13.png "9.png")
 
-Konvergenzkurven fuer drei Brax-Umgebungen
+Konvergenzkurven für drei Brax-Umgebungen
 
-Wie in der Abbildung gezeigt, demonstriert MetaDE starke Leistung bei Brax-basierten Robotersteuerungsaufgaben und erzielt die besten Ergebnisse bei der Swimmer-Aufgabe sowie nahezu optimale Ergebnisse bei Hopper und Reacher. Sein Hauptvorteil liegt in der hohen Qualitaet der Anfangspopulation, die eine schnelle fruehe Konvergenz und hochwertige Loesungen ermoeglicht. Diese Ergebnisse deuten darauf hin, dass MetaDE **neuronale Netzwerk-Policies effizient optimieren** kann, was es **gut geeignet fuer Robotersteuerungsaufgaben mit komplexen physikalischen Simulationen** macht und **breites Potenzial fuer praktische Anwendungen bietet**.
+Wie in der Abbildung gezeigt, demonstriert MetaDE eine starke Leistung bei Brax-basierten Robotersteuerungsaufgaben und erzielt die besten Ergebnisse bei der Swimmer-Aufgabe sowie nahezu optimale Ergebnisse bei Hopper und Reacher. Sein Hauptvorteil liegt in der hohen Qualität der Anfangspopulation, die eine schnelle Konvergenz in der frühen Phase ermöglicht und qualitativ hochwertige Lösungen produziert. Diese Ergebnisse legen nahe, dass MetaDE **neuronale Netzwerk-Policies effizient optimieren** kann, was es **gut geeignet für Robotersteuerungsaufgaben mit komplexen physikalischen Simulationen** macht und **breites Potenzial für praktische Anwendungen bietet**.
 
+**Fazit und zukünftige Richtungen**
 
-
-**Fazit und zukuenftige Richtungen**
-
-MetaDE ist ein innovativer Meta-Evolutionsansatz, der nicht nur bei der Loesung von Optimierungsaufgaben hervorragend abschneidet, sondern auch seine eigenen Strategien autonom abstimmt und verfeinert. Unter Nutzung der Staerken von Differential Evolution zeigt MetaDE starkes Potenzial bei der adaptiven Parameterkonfiguration und Strategieevolution. Experimentelle Ergebnisse zeigen ueberlegene Robustheit in einer Reihe von Benchmark-Tests, und seine praktische Anwendbarkeit wird durch den Erfolg bei Robotersteuerungsaufgaben mittels evolutionaeren Reinforcement Learnings unterstrichen. Eine zentrale Herausforderung besteht darin, ein optimales Gleichgewicht zwischen Generalisierung und Spezialisierung aufrechtzuerhalten -- sicherzustellen, dass der Algorithmus sich an vielfaeltige Aufgaben anpassen und gleichzeitig fuer spezifische Probleme effektiv optimieren kann. Diese Forschung bietet neue Perspektiven fuer selbstadaptive evolutionaere Algorithmen und koennte weitere Fortschritte in der Meta-Evolution fuer komplexe Systeme anstossen.
-
-
+MetaDE ist ein innovativer Meta-Evolutionsansatz, der nicht nur bei der Lösung von Optimierungsaufgaben hervorragt, sondern auch seine eigenen Strategien autonom abstimmt und verfeinert. Durch die Nutzung der Stärken von Differential Evolution zeigt MetaDE ein starkes Potenzial bei der adaptiven Parameterkonfiguration und Strategieentwicklung. Experimentelle Ergebnisse zeigen eine überlegene Robustheit in einer Reihe von Benchmark-Tests, und seine Anwendbarkeit in der realen Welt wird durch den Erfolg bei Robotersteuerungsaufgaben mittels evolutionärem Reinforcement Learning unterstrichen. Eine zentrale Herausforderung besteht darin, ein optimales Gleichgewicht zwischen Generalisierung und Spezialisierung aufrechtzuerhalten – sicherzustellen, dass sich der Algorithmus an diverse Aufgaben anpassen kann, während er gleichzeitig effektiv für spezifische Probleme optimiert. Diese Forschung bietet neue Perspektiven für selbstadaptive evolutionäre Algorithmen und könnte weitere Fortschritte in der Meta-Evolution für komplexe Systeme anregen.
 
 **Open-Source-Code und Community**
 
@@ -178,7 +162,7 @@ MetaDE ist ein innovativer Meta-Evolutionsansatz, der nicht nur bei der Loesung 
 
   QQ-Gruppe | Evolving Machine Intelligence
 
-MetaDE basiert auf dem EvoX-Framework. Wenn Sie an EvoX interessiert sind, lesen Sie bitte den Artikel ueber EvoX 1.0 fuer weitere Details.
+MetaDE baut auf dem EvoX-Framework auf. Wenn Sie an EvoX interessiert sind, lesen Sie bitte den Artikel zu EvoX 1.0 für weitere Details.
 
 ![image.png](/images/articles/metade-1.png)
 

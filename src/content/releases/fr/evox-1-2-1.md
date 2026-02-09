@@ -1,26 +1,26 @@
 ---
-title: "EvoX v1.2.1 - Notes de version"
+title: "Notes de version EvoX v1.2.1"
 pubDate: 2025-05-13
-summary: "Améliorations de stabilité, nouvelles fonctions de benchmark (Ellipsoid, Griewank) et corrections de bugs."
+summary: "Améliorations de la stabilité avec de nouvelles fonctions de benchmark (Ellipsoid, Griewank) et corrections de bugs."
 ---
 
-Il s'agit d'une version mineure axée sur l'amélioration de la stabilité et la correction de bugs, avec quelques améliorations de confort d'utilisation.
+Il s'agit d'une version mineure axée sur l'amélioration de la stabilité et la correction de bugs, avec quelques améliorations de confort.
 
-**Nouvelles fonctionnalités**
+**Nouvelles Fonctionnalités**
 
 Nouvelles fonctions de benchmark : Ajout de fonctions numériques mono-objectif : `Ellipsoid` et `Griewank`.
 
-**Corrections de bugs**
+**Corrections de Bugs**
 
-* Correction d'un problème où `StdWorkflow` ne fonctionnait pas avec les algorithmes héritant d'autres algorithmes.
+* Correction d'un problème où `StdWorkflow` ne fonctionnait pas avec des algorithmes héritant d'autres algorithmes.
 
 * Correction d'un bug dans la fonction `latin_hypercube_sampling_standard`.
 
-* Résolution d'un problème avec `non_dominate` qui échouait sous `torch.compile`.
+* Résolution d'un problème où `non_dominate` échouait sous `torch.compile`.
 
-* Correction d'un problème où `PSO` n'utilisait pas correctement le périphérique par défaut dans certains cas.
+* Correction d'un problème où `PSO` n'utilisait pas correctement le périphérique (device) par défaut dans certains cas.
 
-**Refactorisation et maintenance**
+**Refactorisation & Maintenance**
 
 * Réexportation des utilitaires couramment utilisés au niveau supérieur pour plus de commodité, par exemple :
 
@@ -30,9 +30,9 @@ Nouvelles fonctions de benchmark : Ajout de fonctions numériques mono-objectif 
 
 * Suppression du code obsolète ou redondant.
 
-Journal des modifications complet : [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
+Journal complet des modifications : [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
 
-**Code open source / Ressources communautaires**
+**Code Open Source / Ressources Communautaires**
 
 Article :
 
@@ -42,7 +42,7 @@ GitHub :
 
 [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
-Projet amont (EvoX) :
+Projet en amont (EvoX) :
 
 [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
 

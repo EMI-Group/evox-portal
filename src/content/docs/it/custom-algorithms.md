@@ -10,7 +10,7 @@ In questo capitolo, introdurremo come implementare i propri algoritmi e problemi
 
 ## Struttura degli algoritmi e dei problemi
 
-Nella maggior parte delle librerie EC tradizionali, gli algoritmi di solito chiamano la funzione obiettivo internamente, il che dà la seguente struttura:
+Nella maggior parte delle librerie EC tradizionali, gli algoritmi chiamano solitamente la funzione obiettivo internamente, il che porta alla seguente struttura:
 
 ```
 Algorithm
@@ -24,30 +24,30 @@ Algorithm
 Algorithm.step -- Problem.evaluate
 ```
 
-Questa struttura rende sia gli algoritmi che i problemi più universali: un algoritmo può ottimizzare problemi diversi, mentre un problema può anche essere adatto a molti algoritmi.
+Questa struttura rende sia gli algoritmi che i problemi più universali: un algoritmo può ottimizzare diversi problemi, mentre un problema può essere adatto a molti algoritmi.
 
 
 ## Classe Algorithm
 
 La classe `Algorithm` eredita da `ModuleBase`.
 
-**In totale, ci sono 5 metodi (2 metodi sono opzionali) che dobbiamo implementare:**
+**In totale,** **ci sono 5 metodi (2 metodi sono opzionali) che dobbiamo implementare:**
 
-| Metodo       | Firma                               | Utilizzo                                                                                                              |
+| Metodo       | Firma                               | Utilizzo                                                                                                              |
 | ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `__init__` | `(self, ...)`                   | Inizializza l'istanza dell'algoritmo, ad esempio, la dimensione della popolazione (rimane costante durante l'iterazione), gli iperparametri (possono essere impostati solo dal wrapper del problema HPO o inizializzati qui), e/o tensori mutabili (possono essere modificati al volo). |
-| `step`               | `(self)`                        | Esegue un normale passo di iterazione dell'ottimizzazione dell'algoritmo. |
-| `init_step` (opzionale) | `(self)` | Esegue il primo passo dell'ottimizzazione dell'algoritmo. Se questo metodo non viene sovrascritto, verrà invocato il metodo `step`. |
+| `__init__` | `(self, ...)`                   | Inizializza l'istanza dell'algoritmo, ad esempio, la dimensione della popolazione (mantenuta costante durante l'iterazione), gli iperparametri (possono essere impostati solo dal wrapper del problema HPO o inizializzati qui) e/o i tensori mutabili (possono essere modificati al volo). |
+| `step`               | `(self)`                        | Esegue un normale passo di iterazione di ottimizzazione dell'algoritmo. |
+| `init_step` (opzionale) | `(self)` | Esegue il primo passo dell'ottimizzazione dell'algoritmo. Se questo metodo non venisse sovrascritto, verrebbe invocato invece il metodo `step`. |
 
 > **Nota:**
-> L'inizializzazione statica può ancora essere scritta in `__init__` mentre l'inizializzazione dei sottomoduli mutabili no. Pertanto, chiamate multiple di `setup` per inizializzazioni ripetute sono possibili se il metodo `setup` sovrascritto invoca prima il `setup()` di `ModuleBase`.
->
+> L'inizializzazione statica può ancora essere scritta in `__init__`, mentre l'inizializzazione dei sottomoduli mutabili no. Pertanto, sono possibili chiamate multiple di `setup` per inizializzazioni ripetute se il metodo `setup` sovrascritto invoca prima il `setup()` di `ModuleBase`.
+> 
 > Se tale metodo `setup` in `ModuleBase` non è adatto al tuo algoritmo, puoi sovrascrivere il metodo `setup` quando crei la tua classe algoritmo.
 
 
 ## Classe Problem
 
-La classe `Problem` eredita anch'essa da `ModuleBase`.
+Anche la classe `Problem` eredita da `ModuleBase`.
 
 Tuttavia, la classe Problem è piuttosto semplice. **Oltre al metodo `__init__`, l'unico metodo necessario è il metodo `evaluate`.**
 
@@ -56,12 +56,12 @@ Tuttavia, la classe Problem è piuttosto semplice. **Oltre al metodo `__init__`,
 | `__init__` | `(self, ...)`                       | Inizializza le impostazioni del problema.       |
 | `evaluate` | `(self, pop: torch.Tensor) -> torch.Tensor` | Valuta la fitness della popolazione data. |
 
-Tuttavia, il tipo dell'argomento `pop` in `evaluate` può essere cambiato in altri tipi compatibili con JIT nel metodo sovrascritto.
+Tuttavia, il tipo dell'argomento `pop` in `evaluate` può essere modificato in altri tipi compatibili con JIT nel metodo sovrascritto.
 
 
 ## Esempio
 
-Qui diamo un esempio di **implementazione di un algoritmo PSO che risolve il problema Sphere**.
+Qui forniamo un esempio di **implementazione di un algoritmo PSO che risolve il problema Sphere**.
 
 ### Pseudo-codice dell'esempio
 
@@ -101,7 +101,7 @@ Until stopping criterion
 
 ### Esempio di algoritmo: algoritmo PSO
 
-L'Ottimizzazione a Sciame di Particelle (PSO) è un algoritmo meta-euristico basato sulla popolazione ispirato al comportamento sociale degli uccelli e dei pesci. È ampiamente usato per risolvere problemi di ottimizzazione continui e discreti.
+La Particle Swarm Optimization (PSO) è un algoritmo meta-euristico basato sulla popolazione ispirato al comportamento sociale di uccelli e pesci. È ampiamente utilizzato per risolvere problemi di ottimizzazione continui e discreti.
 
 **Ecco un esempio di implementazione dell'algoritmo PSO in EvoX:**
 
@@ -189,7 +189,7 @@ class PSO(Algorithm):
 
 ### Esempio di problema: problema Sphere
 
-Il problema Sphere è un problema di ottimizzazione benchmark semplice ma fondamentale usato per testare gli algoritmi di ottimizzazione.
+Il problema Sphere è un problema di ottimizzazione benchmark semplice, ma fondamentale, utilizzato per testare gli algoritmi di ottimizzazione.
 
 La funzione Sphere è definita come:
 
@@ -211,4 +211,4 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-Ora puoi inizializzare un workflow ed eseguirlo.
+Ora puoi avviare un workflow ed eseguirlo.

@@ -5,11 +5,11 @@ order: 7
 
 # 7. Exemplos Práticos
 
-Este capítulo apresenta vários exemplos completos e práticos para demonstrar como aplicar o conhecimento dos capítulos anteriores. Iremos construir um projeto de otimização do zero e mostrar como o EvoX pode ser integrado com outras ferramentas. Estes exemplos abrangem uma variedade de tipos de problemas para o ajudar a aplicar o EvoX em cenários do mundo real.
+Este capítulo apresenta vários exemplos práticos e completos para demonstrar como aplicar os conhecimentos dos capítulos anteriores. Vamos construir um projeto de otimização do zero e mostrar como o EvoX pode ser integrado com outras ferramentas. Estes exemplos abrangem uma variedade de tipos de problemas para o ajudar a aplicar o EvoX em cenários do mundo real.
 
 ---
 
-## Exemplo 1: Otimização de Objetivo Único
+## Exemplo 1: Otimização Mono-Objetivo
 
 **Problema**: Otimizar a clássica função Rastrigin:
 
@@ -17,17 +17,17 @@ Este capítulo apresenta vários exemplos completos e práticos para demonstrar 
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
-onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global é 0 na origem. A função é altamente multimodal, tornando-a ideal para testar algoritmos de otimização global. Aqui está um gráfico da função Rastrigin
+onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global é 0 na origem. A função é altamente multimodal, o que a torna ideal para testar algoritmos de otimização global. Aqui está um gráfico da função Rastrigin:
 
 ```{figure} /_static/rastrigin_function.svg
-:alt: A plot of the Rastrigin function
+:alt: Um gráfico da função Rastrigin
 :figwidth: 70%
 :align: center
 
 Função Rastrigin
 ```
 
-Neste exemplo, utilizaremos o algoritmo de Otimização por Enxame de Partículas (PSO) para otimizar a função Rastrigin de 10 dimensões.
+Neste exemplo, utilizaremos o algoritmo Particle Swarm Optimization (PSO) para otimizar a função Rastrigin de 10 dimensões.
 
 **Passo 1: Configuração**
 
@@ -80,7 +80,7 @@ for iter in range(501):
 print(f"Final Best Solution: {monitor.get_best_solution()}")
 ```
 
-**Saída de Exemplo**:
+**Exemplo de Saída**:
 
 ```
 Iter 0, Best Fitness: 1398.625
@@ -92,7 +92,7 @@ Iter 500, Best Fitness: 0.9976348876953125
 Final Best Solution: tensor([...])
 ```
 
-O algoritmo PSO encontra uma solução quase ótima próxima da origem, como esperado.
+O algoritmo PSO encontra uma solução quase ótima perto da origem, como esperado.
 
 ---
 
@@ -105,15 +105,15 @@ f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
 
-A frente de Pareto situa-se entre $x = 0$ (ótimo para $f_1$) e $x = 2$ (ótimo para $f_2$).
+A fronteira de Pareto situa-se entre $x = 0$ (ótimo para $f_1$) e $x = 2$ (ótimo para $f_2$).
 
 **Passo 1: Configuração do Ambiente**
 
-Certifique-se de que tem o EvoX instalado com suporte NSGA-II.
+Certifique-se de que tem o EvoX instalado com suporte para NSGA-II.
 
 **Passo 2: Definir o Problema Personalizado**
 
-O EvoX tem muitos problemas de teste multi-objetivo integrados, mas para este exemplo, definiremos um problema personalizado para otimizar os dois objetivos:
+O EvoX possui muitos problemas de teste multi-objetivo integrados, mas para este exemplo, definiremos um problema personalizado para otimizar os dois objetivos:
 
 ```python
 import torch
@@ -146,7 +146,7 @@ class TwoObjectiveProblem(Problem):
         pass
 ```
 
-**Passo 3: Definir Algoritmo e Workflow**
+**Passo 3: Definir o Algoritmo e o Workflow**
 
 ```python
 from evox.algorithms import NSGA2
@@ -194,14 +194,14 @@ plt.grid(True)
 plt.show()
 ```
 
-Podemos visualizar os resultados utilizando Matplotlib. Os pontos azuis representam a população otimizada, enquanto a linha vermelha mostra a frente de Pareto.
+Podemos visualizar os resultados utilizando Matplotlib. Os pontos azuis representam a população otimizada, enquanto a linha vermelha mostra a fronteira de Pareto.
 
 ```{figure} /_static/example_nsga2_result.svg
-:alt: A plot of the NSGA-II population
+:alt: Um gráfico da população NSGA-II
 :figwidth: 70%
 :align: center
 
-Um gráfico da população NSGA-II após otimização
+Um gráfico da população NSGA-II após a otimização
 ```
 
 No Jupyter Notebook, pode utilizar as capacidades de visualização integradas do EvoX para visualizar o processo de otimização e monitorizar como a população evolui ao longo das gerações.
@@ -214,7 +214,7 @@ monitor.plot()
 
 ## Exemplo 3: Otimização de Hiperparâmetros (HPO)
 
-**Problema**: Ajustar `C` e `max_iter` de um classificador de regressão logística no conjunto de dados de cancro da mama para maximizar a precisão de validação.
+**Problema**: Ajustar o `C` e o `max_iter` de um classificador de regressão logística no conjunto de dados breast cancer para maximizar a precisão de validação.
 
 **Passo 1: Carregar Dados e Modelo**
 
@@ -284,7 +284,7 @@ best_error = prob.evaluate(best_params.unsqueeze(0)).item()
 print("Optimized error rate:", best_error)
 ```
 
-**Saída de Exemplo**:
+**Exemplo de Saída**:
 
 ```
 Initial error rate: 0.0263
@@ -295,4 +295,4 @@ Com apenas algumas linhas de código, o EvoX automatiza o tedioso processo de te
 
 ---
 
-Estes exemplos práticos ilustram como o EvoX pode ser eficazmente aplicado em vários domínios, desde funções de teste matemáticas até workflows de aprendizagem automática. Uma vez que esteja confortável com a estrutura básica — **Algoritmo + Problema + Monitor + Workflow** — pode adaptar o EvoX para se adequar a praticamente qualquer tarefa de otimização.
+Estes exemplos práticos ilustram como o EvoX pode ser aplicado eficazmente em vários domínios, desde funções de teste matemáticas a workflows de machine learning. Assim que estiver familiarizado com a estrutura básica — **Algorithm + Problem + Monitor + Workflow** — poderá adaptar o EvoX para quase qualquer tarefa de otimização.

@@ -6,8 +6,8 @@ section: "examples"
 
 # EvoXでBrax問題を解く
 
-EvoXはBraxを使用したニューロエボリューションに深く取り組んでいます。
-ここでは、EvoXでBrax問題を解く例を示します。
+EvoXはBraxを用いたニューロエボリューション（神経進化）を深くサポートしています。
+ここでは、EvoXを使用してBraxの問題を解く例を紹介します。
 
 ```python
 # install EvoX and Brax, skip it if you have already installed EvoX or Brax
@@ -33,17 +33,17 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Braxとは
 
-Braxは、ロボティクス、人間の知覚、材料科学、強化学習、その他のシミュレーション集約型アプリケーションの研究開発に使用される、高速で完全に微分可能な物理エンジンです。
+Braxは、ロボティクス、人間の知覚、材料科学、強化学習、その他のシミュレーション重視のアプリケーションの研究開発に使用される、高速で完全に微分可能な物理エンジンです。
 
-ここでは、Braxの「swimmer」環境をデモンストレーションします。
+ここでは、Braxの「swimmer」環境を例示します。
 
-詳細については、[BraxのGithub](https://github.com/google/brax)を参照してください。
+詳細については、[BraxのGithub](https://github.com/google/brax)をご覧ください。
 
 ## ニューラルネットワーククラスの設計
 
 まず、構築するニューラルネットワークを決定する必要があります。
 
-ここでは、シンプルな多層パーセプトロン（MLP）クラスを示します。
+ここでは、シンプルな多層パーセプトロン（MLP）クラスを提示します。
 
 ```python
 # Construct an MLP using PyTorch.
@@ -62,7 +62,7 @@ class SimpleMLP(nn.Module):
 
 ## モデルの初期化
 
-``SimpleMLP``クラスを通じて、MLPモデルを初期化できます。
+`SimpleMLP`クラスを通じて、MLPモデルを初期化できます。
 
 ```python
 # Make sure that the model is on the same device, better to be on the GPU
@@ -78,19 +78,19 @@ model = SimpleMLP().to(device)
 
 ### アダプターの初期化
 
-アダプターはデータの相互変換を支援します。
+アダプターを使用することで、データの相互変換が可能になります。
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-アダプターを使用して、このニューロエボリューションタスクに取り組むことができます。
+アダプターがあれば、このニューロエボリューションタスクに取り組む準備が整います。
 
 ## 実行プロセスのセットアップ
 
 ### アルゴリズムと問題の初期化
 
-[PSOアルゴリズム](#evox.algorithms.so.pso_variants.pso.PSO)を初期化し、問題は「swimmer」環境の[Brax問題](#evox.problems.neuroevolution.brax.BraxProblem)です。
+[PSOアルゴリズム](#evox.algorithms.so.pso_variants.pso.PSO)を初期化し、問題として「swimmer」環境の[Brax問題](#evox.problems.neuroevolution.brax.BraxProblem)を設定します。
 
 ```python
 # Set the population size
@@ -121,7 +121,7 @@ problem = BraxProblem(
 )
 ```
 
-この場合、各エピソードで1000ステップを使用し、3エピソードの平均報酬が適応度値として返されます。
+このケースでは、各エピソードに1000ステップを使用し、3エピソードの平均報酬を適応度（fitness）として返します。
 
 ### モニターの設定
 
@@ -149,11 +149,11 @@ workflow = StdWorkflow(
 
 ### ワークフローの実行
 
-ワークフローを実行して、その効果を確認しましょう！
+ワークフローを実行して、その成果を確認しましょう！
 
-> **注意:**
+> **注:**
 > 以下のブロックの実行には約20分かかります。
-> 時間はハードウェアによって異なります。
+> 時間はハードウェアによって異なる場合があります。
 
 ```python
 # Set the maximum number of generations
@@ -187,7 +187,7 @@ HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="
 ```
 
 > **重要:**
-> - 通常、レンダリングには`HTML(problem.visualize(best_params))`のみが必要です。上記のコードは、当ウェブサイトで結果が正しく表示されるようにするための回避策です。
-> - PSOアルゴリズムはこのタイプのタスクに特化して最適化されていないため、パフォーマンスの制限が予想されます。この例はデモンストレーション目的です。
+> - 通常、レンダリングには `HTML(problem.visualize(best_params))` だけで十分です。上記のコードは、当Webサイト上で結果が正しく表示されるようにするための回避策です。
+> - PSOアルゴリズムはこの種のタスクに特化して最適化されているわけではないため、性能には限界があることが予想されます。この例はデモンストレーションを目的としています。
 
-EvoXでBrax問題を解くことを楽しんでいただければ幸いです！
+EvoXを使ったBrax問題の解決を楽しんでいただければ幸いです！

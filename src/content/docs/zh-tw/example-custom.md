@@ -1,11 +1,11 @@
 ---
-title: "自訂演算法和問題"
+title: "自定義演算法與問題"
 order: 14
 section: "examples"
 ---
 
-# 自訂演算法和問題
-在本筆記本中，我們將展示如何使用 `Algorithm` 和 `Problem` 來建立自訂演算法和問題。這裡我們將給出一個**實作 PSO 演算法求解 Sphere 問題**的範例。
+# 自定義演算法與問題
+在本筆記本中，我們將展示如何使用 `Algorithm` 和 `Problem` 來建立自定義的演算法與問題。在此，我們將提供一個**實作 PSO 演算法來解決 Sphere 問題**的範例。
 
 
 ```python
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## 演算法範例：PSO 演算法
 
-粒子群最佳化（PSO）是一種基於種群的元啟發式演算法，靈感來自鳥類和魚類的社會行為。它廣泛用於求解連續和離散最佳化問題。
+粒子群最佳化 (Particle Swarm Optimization, PSO) 是一種基於群體的元啟發式演算法，其靈感來自鳥類和魚類的社會行為。它被廣泛用於解決連續和離散的最佳化問題。
 
 **以下是 EvoX 中 PSO 演算法的實作範例：**
 
@@ -107,9 +107,9 @@ class PSO(Algorithm):
 
 ## 問題範例：Sphere 問題
 
-Sphere 問題是一個簡單但基本的基準最佳化問題，用於測試最佳化演算法。
+Sphere 問題是一個簡單但基礎的基準最佳化問題，用於測試最佳化演算法。
 
-Sphere 函數定義為：
+Sphere 函數定義如下：
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}
@@ -125,7 +125,7 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## 使用演算法求解問題
+## 使用演算法解決問題
 
 ### 初始化演算法、問題和監控器
 
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### 初始化工作流程並執行
+### 初始化工作流並執行
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

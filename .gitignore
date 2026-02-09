@@ -80,3 +80,8 @@ refpage/
 
 # antigravity:
 .agent/
+
+# temp/build artifacts
+.vercel/
+articles_md/
+debug-screenshots/

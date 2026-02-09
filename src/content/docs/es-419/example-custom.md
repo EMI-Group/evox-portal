@@ -1,11 +1,11 @@
 ---
-title: "Algoritmo y Problema Personalizado"
+title: "Algoritmo y Problema Personalizados"
 order: 14
 section: "examples"
 ---
 
-# Algoritmo y Problema Personalizado
-En este cuaderno, mostraremos como usar `Algorithm` y `Problem` para crear un algoritmo y problema personalizado. Aqui daremos un ejemplo de **implementacion de un algoritmo PSO que resuelve el problema Sphere**.
+# Algoritmo y Problema Personalizados
+En este notebook, mostraremos cómo usar `Algorithm` y `Problem` para crear un algoritmo y un problema personalizados. Aquí daremos un ejemplo de la **implementación de un algoritmo PSO que resuelve el problema Sphere**.
 
 
 ```python
@@ -18,9 +18,9 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## Ejemplo de algoritmo: algoritmo PSO
 
-La Optimizacion por Enjambre de Particulas (PSO) es un algoritmo metaheuristico basado en poblacion inspirado en el comportamiento social de las aves y los peces. Es ampliamente utilizado para resolver problemas de optimizacion continuos y discretos.
+La Optimización por Enjambre de Partículas (PSO) es un algoritmo metaheurístico basado en poblaciones inspirado en el comportamiento social de aves y peces. Es ampliamente utilizado para resolver problemas de optimización continuos y discretos.
 
-**Aqui hay un ejemplo de implementacion del algoritmo PSO en EvoX:**
+**Aquí hay un ejemplo de implementación del algoritmo PSO en EvoX:**
 
 ```python
 def min_by(
@@ -107,14 +107,14 @@ class PSO(Algorithm):
 
 ## Ejemplo de problema: problema Sphere
 
-El problema Sphere es un problema de optimizacion de referencia simple pero fundamental utilizado para probar algoritmos de optimizacion.
+El problema Sphere es un problema de optimización de referencia simple, pero fundamental, utilizado para probar algoritmos de optimización.
 
-La funcion Sphere se define como:
+La función Sphere se define como:
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}
 $$
-**Aqui hay un ejemplo de implementacion del problema Sphere en EvoX:**
+**Aquí hay un ejemplo de implementación del problema Sphere en EvoX:**
 
 ```python
 class Sphere(Problem):
@@ -127,7 +127,7 @@ class Sphere(Problem):
 
 ## Usar el algoritmo para resolver el problema
 
-### Iniciar el algoritmo, problema y monitor
+### Inicializar el algoritmo, el problema y el monitor
 
 ```python
 algorithm = PSO(
@@ -142,7 +142,7 @@ problem = Sphere()
 monitor = EvalMonitor()
 ```
 
-### Iniciar el flujo de trabajo y ejecutarlo
+### Inicializar el workflow y ejecutarlo
 
 ```python
 workflow = StdWorkflow(algorithm=algorithm, problem=problem, monitor=monitor)

@@ -6,27 +6,27 @@ section: "developer"
 
 # 文件撰寫指南
 
-本指南概述了在程式碼庫和補充檔案中撰寫和維護文件的最佳實踐。
+本指南概述了撰寫和維護程式碼庫及補充檔案文件的最佳實踐。
 
 ---
 
-## 程式碼內文件（Docstrings）
+## 程式碼內文件 (Docstrings)
 
-Docstrings 對於理解程式碼的目的、用法和行為至關重要。請遵循以下慣例：
+Docstrings 對於理解程式碼的目的、用法和行為至關重要。請遵守以下約定：
 
 ### 一般規則
 
-- 使用 docstrings 記錄**所有公開的類別、方法和函數**。
-- 使用 **Sphinx 風格**的 docstrings。
-- **不要**在 docstring 中包含參數類型——它們應該在函數簽名中使用型別提示宣告。
+- 使用 docstrings 記錄 **所有公開類別 (classes)、方法 (methods) 和函式 (functions)**。
+- 使用 **Sphinx 風格** 的 docstrings。
+- **不要** 在 docstring 中包含參數型別——這些應透過型別提示 (type hints) 在函式簽章中宣告。
 
-### 格式和指令
+### 格式與指令
 
 使用以下指令來描述不同的元素：
 
-- `:param <name>:` — 描述一個參數。
-- `:return:` — 描述返回值。
-- `:raises <exception>:` — 描述函數可能引發的例外。
+- `:param <name>:` — 描述參數。
+- `:return:` — 描述回傳值。
+- `:raises <exception>:` — 描述函式可能引發的例外。
 
 #### 範例
 
@@ -47,27 +47,27 @@ def add(a: int, b: int) -> int:
 
 ---
 
-## 外部文件（`docs/` 目錄）
+## 外部文件 (`docs/` 目錄)
 
-所有專案級別的文件位於 `docs/` 目錄中。這些文件透過提供指南、範例和參考資料來支援使用者和開發者。
+所有專案層級的文件都位於 `docs/` 目錄中。這些文件透過提供指南、範例和參考資料來支援使用者和開發者。
 
 ### 格式
 
-- 使用 **Markdown（`.md`）** 或 **Jupyter Notebooks（`.ipynb`）** 撰寫文件。
-- Markdown 適用於敘述性內容和靜態文件。
-- 使用 Jupyter Notebooks 撰寫可執行的互動式內容（如教學或演示）。
+- 使用 **Markdown (`.md`)** 或 **Jupyter Notebooks (`.ipynb`)** 撰寫文件。
+- 敘述性內容和靜態文件首選 Markdown。
+- 對於可執行的互動式內容（例如教學或展示），請使用 Jupyter Notebooks。
 
 ### Jupyter Notebook 指南
 
-- 確保所有筆記本**完全可執行**。
-- 在提交前始終**執行所有儲存格**並**儲存輸出**。
-- 我們的 CI/CD 環境**不支援 GPU 執行**，因此筆記本必須在本地預先執行。
+- 確保所有 notebooks 都是 **完全可執行** 的。
+- 在提交 (commit) 之前，務必 **執行所有儲存格 (cells)** 並 **儲存輸出**。
+- 我們的 CI/CD 環境 **不支援 GPU 執行**，因此 notebooks 必須在本地預先執行。
 
-### Markdown 和 Notebook 指令
+### Markdown 與 Notebook 指令
 
-使用以下模式進行豐富的格式化：
+使用以下模式進行豐富格式化：
 
-- `[name](#ref)` — 內部交叉引用，例如 `[ModuleBase](#evox.core.module.ModuleBase)` 或 `[ModuleBase](#ModuleBase)`
+- `[name](#ref)` — 內部交叉參照，例如 `[ModuleBase](#evox.core.module.ModuleBase)` 或 `[ModuleBase](#ModuleBase)`
 - `![Alt Text](path)` — 嵌入圖片，例如 `![Module base](/_static/modulebase.png)`
 
 ---
