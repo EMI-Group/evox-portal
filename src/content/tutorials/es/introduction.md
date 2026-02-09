@@ -9,7 +9,7 @@ order: 1
 
 EvoX es una librería de computación evolutiva de código abierto, utilizada principalmente para resolver diversos problemas de optimización complejos. La computación evolutiva es una categoría de algoritmos que simulan la evolución natural para buscar soluciones óptimas, incluyendo Algoritmos Genéticos (GA), Estrategias de Evolución (ES), Optimización por Enjambre de Partículas (PSO), etc.
 
-Los frameworks evolutivos tradicionales suelen estar limitados por los recursos computacionales y los modelos de programación, lo que los hace ineficientes para problemas a gran escala. EvoX supera estos desafíos combinando **GPU acceleration** y **distributed computing**, ofreciendo una solución eficiente y escalable que permite a los usuarios encontrar mejores soluciones más rápido en espacios de búsqueda complejos.
+Los frameworks evolutivos tradicionales suelen estar limitados por los recursos computacionales y los modelos de programación, lo que los hace ineficientes para problemas a gran escala. EvoX supera estos desafíos combinando **aceleración por GPU** y **computación distribuida**, ofreciendo una solución eficiente y escalable que permite a los usuarios encontrar mejores soluciones más rápido en espacios de búsqueda complejos.
 
 ## Características clave de EvoX
 

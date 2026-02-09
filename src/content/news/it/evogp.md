@@ -1,7 +1,7 @@
 ---
 title: "EvoGP: Un Framework Accelerato su GPU per la Programmazione Genetica Basata su Alberi"
 pubDate: 2025-01-10
-summary: "EvoGP è un framework di Programmazione Genetica Basata su Alberi completamente accelerato su GPU è costruito su PyTorch, che raggiunge un'accelerazione fino a 100x rispetto alle implementazioni su CPU."
+summary: "EvoGP è un framework di Programmazione Genetica Basata su Alberi completamente accelerato su GPU e costruito su PyTorch, che raggiunge un'accelerazione fino a 100x rispetto alle implementazioni su CPU."
 ---
 
 **Rivoluzionare la Programmazione Genetica con l'Accelerazione GPU**

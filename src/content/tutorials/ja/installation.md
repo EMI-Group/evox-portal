@@ -1,5 +1,5 @@
 ---
-title: "2. Installation and Environment Setup"
+title: "2. インストールと環境設定"
 order: 2
 ---
 
