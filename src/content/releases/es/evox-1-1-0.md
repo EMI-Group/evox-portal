@@ -1,64 +1,64 @@
 ---
-title: "EvoX 1.1: ahora con torch.compile (TorchDynamo)"
+title: "Lanzamiento de EvoX 1.1: Ahora con torch.compile (TorchDynamo)"
 pubDate: 2025-03-01
-summary: "EvoX 1.1 introduce la integración completa de torch.compile (TorchDynamo), reemplazando TorchScript para mejor compatibilidad y rendimiento."
+summary: "EvoX 1.1 introduce la integración completa de torch.compile (TorchDynamo), sustituyendo a TorchScript para una mejor compatibilidad y rendimiento."
 ---
 
-Nos complace anunciar el lanzamiento de **EvoX 1.1**, que introduce la **integración completa de torch.compile (TorchDynamo)** como compilador backend. Esta actualización reemplaza el enfoque anterior basado en TorchScript, haciendo que EvoX sea **más fácil de usar y altamente compatible con el ecosistema Python en general**.
+¡Nos complace anunciar el lanzamiento de **EvoX 1.1**, que introduce la **integración completa de torch.compile (TorchDynamo)** como compilador de backend! Esta actualización sustituye el enfoque anterior basado en TorchScript, haciendo que EvoX sea **más fácil de usar y altamente compatible con el ecosistema de Python en general**.
 
-Al aprovechar **torch.compile**, EvoX ahora captura los grafos de computación de forma dinámica en tiempo de ejecución, eliminando la necesidad de trazado manual y optimizando el rendimiento automáticamente.
+Al aprovechar **torch.compile**, EvoX ahora captura los grafos de computación de forma dinámica en tiempo de ejecución, eliminando la necesidad de realizar un rastreo manual (`tracing`) mientras optimiza el rendimiento automáticamente.
 
-**Novedades**
+**¿Qué hay de nuevo?**
 
-**torch.compile: compilación más inteligente y flexible**
+**torch.compile: Compilación más inteligente y flexible**
 
-En EvoX 1.1, adoptamos plenamente **torch.compile** como el nuevo backend de compilación. A diferencia del enfoque anterior basado en trazado, torch.compile --que **utiliza internamente TorchDynamo**-- intercepta la ejecución de Python, extrae dinámicamente los grafos de computación y los optimiza en tiempo real.
+En EvoX 1.1, adoptamos plenamente **torch.compile** como el nuevo backend de compilación. A diferencia del enfoque anterior basado en `tracing`, torch.compile —que **utiliza internamente TorchDynamo**— intercepta la ejecución de Python, extrae dinámicamente los grafos de computación y los optimiza en tiempo real.
 
 Esto significa:
 
-l  **Sin más trazado manual** -- Basta con llamar a **torch.compile(workflow.step)** y EvoX se encarga del resto.
+l  **Se acabó el tracing manual** — Simplemente llama a **torch.compile(workflow.step)** y EvoX se encarga del resto.
 
-l  **Compatibilidad fluida con Python** -- Funciona con funciones nativas de Python y bibliotecas externas como NumPy y SciPy.
+l  **Compatibilidad total con Python** — Funciona con funciones nativas de Python y librerías externas como NumPy y SciPy.
 
-l  **Mejor rendimiento** -- Los grafos de computación optimizados resultan en una **ejecución más rápida y un mejor aprovechamiento del hardware**.
+l  **Mejor rendimiento** — Los grafos de computación optimizados dan como resultado una **ejecución más rápida y una mejor utilización del hardware**.
 
-l  **Diseño preparado para el futuro** -- Se alinea con la hoja de ruta de PyTorch, garantizando compatibilidad a largo plazo y mejoras continuas de rendimiento.
+l  **Diseño preparado para el futuro** — Se alinea con la hoja de ruta de PyTorch, garantizando la compatibilidad a largo plazo y mejoras de rendimiento.
 
-**Por qué pasar de TorchScript a torch.compile**
+**¿Por qué pasar de TorchScript a torch.compile?**
 
-En versiones anteriores, EvoX dependía de **métodos basados en trazado**:
+En versiones anteriores, EvoX dependía de **métodos basados en tracing**:
 
-l  **Antes de la 1.0.0** se utilizaba el **trazado de JAX** para la extracción de grafos de computación.
+l  **Anterior a 1.0.0** utilizaba **JAX tracing** para la extracción de grafos de computación.
 
-l  **La v1.0.0** cambió a **TorchScript**, mejorando la integración con PyTorch.
+l  **v1.0.0** cambió a **TorchScript**, mejorando la integración con PyTorch.
 
-Sin embargo, estos métodos tenían varios inconvenientes:
+Sin embargo, estos métodos presentaban varios inconvenientes:
 
-l  **Complejidad de uso** -- Los usuarios debían trazar grafos manualmente y gestionar una depuración compleja.
+l  **Complejos de usar** — Los usuarios tenían que rastrear manualmente los grafos y lidiar con depuraciones complicadas.
 
-l  **Compatibilidad limitada** -- Dificultades con flujos de trabajo dinámicos y funciones ajenas a PyTorch.
+l  **Compatibilidad limitada** — Dificultades con flujos de trabajo dinámicos y funciones ajenas a PyTorch.
 
-l  **Flexibilidad restringida** -- Los bucles, condicionales y otras construcciones de Python no siempre se capturaban correctamente.
+l  **Flexibilidad restringida** — Los bucles, condicionales y otras construcciones de Python no siempre se capturaban correctamente.
 
-Con torch.compile y **TorchDynamo**, **estos problemas han desaparecido**. EvoX ahora optimiza de forma dinámica, soportando una gama más amplia de flujos de trabajo **sin ningún esfuerzo adicional por parte de los usuarios**.
+Con torch.compile y **TorchDynamo**, **estos problemas han desaparecido**. EvoX ahora optimiza de forma dinámica, admitiendo una gama más amplia de flujos de trabajo con **cero esfuerzo adicional por parte de los usuarios**.
 
-**Cómo EvoX 1.1 le facilita la vida**
+**Cómo EvoX 1.1 te facilita la vida**
 
-l  **Sin complicaciones con el trazado** -- Todo ocurre entre bastidores, haciendo que su código sea más limpio y fácil de mantener.
+l  **Sin complicaciones con el tracing** — Todo sucede entre bastidores, lo que hace que tu código sea más limpio y fácil de mantener.
 
-l  **Funciona con su código Python existente** -- No es necesario modificar su flujo de trabajo para lograr compatibilidad.
+l  **Funciona con tu código Python actual** — No es necesario modificar tu flujo de trabajo para lograr compatibilidad.
 
-l  **Ejecución más rápida, mejor escalabilidad** -- Benefíciese de las últimas optimizaciones de PyTorch para GPUs y TPUs.
+l  **Ejecución más rápida, mejor escalabilidad** — Benefíciate de las últimas optimizaciones de PyTorch para GPUs y TPUs.
 
-l  **Preparado para el futuro** -- Manténgase alineado con la evolución a largo plazo de PyTorch, garantizando mejoras continuas de rendimiento.
+l  **Preparado para el futuro** — Mantente alineado con la evolución a largo plazo de PyTorch, asegurando ganancias de rendimiento continuas.
 
-**Actualice a EvoX 1.1 ahora**
+**¡Actualiza a EvoX 1.1 ahora!**
 
-EvoX 1.1 ya está disponible oficialmente. Actualice hoy para experimentar un flujo de trabajo computacional **más inteligente, más rápido y más intuitivo**.
+¡EvoX 1.1 ya está disponible oficialmente! Actualiza hoy mismo para experimentar un flujo de trabajo computacional **más inteligente, rápido e intuitivo**.
 
-**Obtenga EvoX 1.1**: [GitHub](https://github.com/EMI-Group/EvoX)
+**Obtén EvoX 1.1**: [GitHub](https://github.com/EMI-Group/EvoX)
 
-¿Tiene preguntas o comentarios? Abra un issue en GitHub o únase a nuestro debate comunitario. ¡Empujemos juntos los límites de la **inteligencia computacional**!
+¿Tienes preguntas o comentarios? Abre una incidencia (`issue`) en GitHub o únete a nuestra discusión comunitaria. ¡Superemos juntos los límites de la **inteligencia computacional!**
 
 **Código fuente / Comunidad / Documentación**
 
@@ -68,6 +68,6 @@ GitHub: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "h
 
 Documentación: [https://evox.readthedocs.io/en/latest/](https://evox.readthedocs.io/en/latest/ "https://evox.readthedocs.io/en/latest/")
 
-Grupo QQ: 297969717
+Grupo de QQ: 297969717
 
 ![4.png](/images/articles/evox-1-1-0-1.png)

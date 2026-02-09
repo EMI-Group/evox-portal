@@ -6,22 +6,24 @@ section: "experimental"
 
 # マルチGPUと分散ワークフロー
 
-EvoXは分散ワークフローの実験的サポートを提供しており、通常の進化アルゴリズムを複数のGPUや複数のマシンにまたがって実行できます。これにより、特に時間のかかる問題に対して最適化プロセスを大幅に高速化できます。
+EvoXは分散ワークフローを実験的にサポートしており、通常の進化的アルゴリズムを複数のGPUや複数のマシンで実行することができます。これにより、特に処理に時間のかかる問題において、最適化プロセスを大幅に高速化できます。
 
 ## 使用方法
 
-分散ワークフローを使用するには、いくつかの設定が必要です：
+分散ワークフローを使用するには、いくつかの設定を行う必要があります。
+
 1. 乱数生成器のシードを手動で固定していることを確認してください。
 ```python
 torch.manual_seed(seed)
-# オプション：numpyのシードを設定
+# Optional: set the seed for numpy
 np.random.seed(seed)
-# オプション：決定論的アルゴリズムを使用
+# Optional: use deterministic algorithms
 torch.use_deterministic_algorithms(True)
 ```
 > **重要:**
-> torchやnumpyの操作の**前に**、すべての乱数生成器のシードを設定してください。これにより、操作が実行される前に乱数生成器が既知の状態にあることが保証されます。
-2. `torch.distributed`または`torchrun`コマンドを使用してスクリプトを起動します。例えば：
+> すべての乱数生成器のシードは、必ずtorchやnumpyの操作を行う**前に**設定してください。これにより、操作が実行される前に乱数生成器が既知の状態にあることが保証されます。
+
+2. スクリプトを起動するには、`torch.distributed`または`torchrun`コマンドを使用します。例：
 ```bash
 torchrun
     --standalone
@@ -30,4 +32,4 @@ torchrun
     your_program.py (--arg1 ... train script args...)
 ```
 > **ヒント:**
-> `torchrun`は分散torchプログラムを起動するための推奨方法です。詳細については、[PyTorchドキュメント](https://pytorch.org/docs/stable/elastic/run.html)を参照してください。
+> `torchrun`は、分散torchプログラムを起動するための推奨される方法です。詳細については、[PyTorchのドキュメント](https://pytorch.org/docs/stable/elastic/run.html)を参照してください。

@@ -1,12 +1,12 @@
 ---
-title: "Mehrziel-Algorithmus"
+title: "Multi-Objective-Algorithmus"
 order: 10
 section: "examples"
 ---
 
-# Mehrziel-Algorithmus
+# Multi-Objective-Algorithmus
 
-In diesem Notebook verwenden wir den Reference Vector Guided Evolutionary Algorithm (**RVEA**), um die optimalen Lösungen des **DTLZ2**-Problems zu finden.
+In diesem Notebook werden wir den Reference Vector Guided Evolutionary Algorithm (**RVEA**) verwenden, um die optimalen Lösungen des **DTLZ2**-Problems zu finden.
 
 ```python
 import time
@@ -18,8 +18,8 @@ from evox.problems.numerical import DTLZ2
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-## (Optional) GPU verwenden, um den Code auszuführen
-Wir bevorzugen es oft, unseren Code auf einer GPU für schnellere Ausführung auszuführen. Wenn jedoch keine GPU verfügbar ist, ist die Ausführung auf einer CPU ebenfalls akzeptabel.
+## (Optional) Verwendung einer GPU zur Ausführung des Codes
+Wir bevorzugen oft die Ausführung unseres Codes auf einer GPU für eine schnellere Ausführung. Wenn jedoch keine GPU verfügbar ist, ist die Ausführung auf einer CPU ebenfalls akzeptabel.
 
 ```python
 # Use GPU first to run the code.
@@ -27,7 +27,7 @@ torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 print(torch.get_default_device())
 ```
 
-## Laufendes Beispiel: RVEA auf dem DTLZ2-Problem
+## Ausführungsbeispiel: RVEA auf dem DTLZ2-Problem
 Der folgende Code wird verwendet, um das `DTLZ2`-Problem und den `RVEA`-Algorithmus einzurichten. Weitere Informationen über das Problem und den Algorithmus finden Sie im entsprechenden Abschnitt der Dokumentation.
 
 ```python
@@ -40,7 +40,7 @@ workflow = StdWorkflow(algo, prob, monitor)
 compiled_step = torch.compile(workflow.step)
 ```
 
-Mit dieser Einrichtung können wir nun mit der Optimierung beginnen. Wir lassen den Mehrziel-Algorithmus 100 Schritte auf diesem Problem optimieren.
+Mit dieser Einrichtung können wir nun mit der Optimierung beginnen. Wir lassen den Multi-Objective-Algorithmus dieses Problem über 100 Schritte optimieren.
 
 ```python
 # Run the workflow for 100 steps

@@ -1,14 +1,14 @@
 ---
-title: "Início rápido EvoX: execute computação evolutiva acelerada por GPU em apenas 10 minutos"
+title: "Início Rápido EvoX: Execute Computação Evolutiva Acelerada por GPU em Apenas 10 Minutos"
 pubDate: 2025-04-30
-summary: "Um tutorial para iniciantes para começar com computação evolutiva acelerada por GPU usando EvoX em apenas 10 minutos."
+summary: "Um tutorial para principiantes para começar a utilizar computação evolutiva acelerada por GPU com o EvoX em apenas 10 minutos."
 ---
 
-Por um lado, a Computação Evolutiva é extremamente poderosa na investigação e engenharia do mundo real, mas difícil de utilizar. Por outro lado, as capacidades das GPUs são cada vez mais poderosas, mas é difícil para elas exercerem o seu poder em tarefas de computação evolutiva.
+Por um lado, a Computação Evolutiva é extremamente poderosa na investigação e engenharia do mundo real, mas difícil de invocar. Por outro lado, as capacidades das GPUs estão a tornar-se cada vez mais potentes, mas é difícil para elas exercerem o seu poder em tarefas de computação evolutiva.
 
-Precisamos de uma solução verdadeiramente moderna: suporte nativo a GPU, arquitetura modular, interfaces claras, usabilidade imediata e escalabilidade personalizável. Isto é o EvoX - um motor de computação evolutiva para o futuro.
+Precisamos de uma solução verdadeiramente moderna: suporte nativo para GPU, arquitetura modular, interfaces claras, usabilidade imediata e escalabilidade personalizável. Este é o EvoX - um motor de computação evolutiva para o futuro.
 
-Para ajudar os utilizadores a começar rapidamente, a equipa EvoX lançou o "Tutorial para Iniciantes do EvoX". O tutorial é composto por 8 capítulos, cobrindo tudo desde o básico até à aplicação prática avançada, guiando-o passo a passo sobre como executar algoritmos evolutivos numa GPU.
+Para ajudar os utilizadores a começar rapidamente, a equipa do EvoX lançou o "Tutorial para Principiantes do EvoX". O tutorial consiste em 8 capítulos, cobrindo tudo, desde o básico até à aplicação prática avançada, guiando-o passo a passo sobre como executar algoritmos evolutivos numa GPU.
 
 **Recursos Completos do Tutorial**
 
@@ -18,9 +18,9 @@ Tutorial online em chinês:
 
 Tutorial em PDF em chinês:
 
-Por favor, junte-se ao Grupo QQ para o obter: 297969717
+Por favor, junte-se ao grupo QQ para o obter: 297969717
 
-A seguir, vamos guiá-lo por todo o processo, desde a instalação até à execução, em apenas 10 minutos.
+De seguida, vamos guiá-lo por todo o processo, desde a instalação até à operação, em apenas 10 minutos.
 
 **Passo 1: Configuração do Ambiente**
 
@@ -52,19 +52,19 @@ Apenas uma linha é suficiente:
 
 ![monitor_output.png](/images/articles/quickstart-7.png)
 
-Vê aquela curva descendente? Essa é a **trajetória em que o seu algoritmo evolutivo se aproxima do objetivo**, e **o caminho que percorre para explorar o mundo desconhecido.**
+Vê aquela curva descendente? Essa é a **trajetória onde o seu algoritmo evolutivo se aproxima do alvo** e **o caminho que percorre para explorar o mundo desconhecido.**
 
-**Passo 5: Experimente Estender**
+**Passo 5: Tente Estender**
 
-Se "apenas executar um Ackley" não é satisfatório, pode:
+Se "apenas executar um Ackley" não for satisfatório, pode:
 
 · Trocar PSO por GA, DE, CMA-ES, NSGA-II, RVEA...
- · Trocar Ackley por Rastrigin, Griewank, CEC2022
- · Mudar para um problema multi-objetivo definindo n_objs >= 2
- · Implementar a sua própria lógica com MyProblem e MyAlgorithm
- · Integrar com modelos PyTorch ou ambientes de aprendizagem por reforço (Gym, Brax, MuJoCo Playground)
+· Trocar Ackley por Rastrigin, Griewank, CEC2022
+· Mudar para um problema multi-objetivo definindo `n_objs >= 2`
+· Implementar a sua própria lógica com `MyProblem` e `MyAlgorithm`
+· Ligar-se a modelos PyTorch ou ambientes de aprendizagem por reforço (Gym, Brax, MuJoCo Playground)
 
-Quer se trate de ajuste de hiperparâmetros, pesquisa de arquitetura, neuroevolução ou otimização de estratégias de controlo, o EvoX lida com tudo com facilidade.
+Seja ajuste de hiperparâmetros, pesquisa de arquitetura, neuroevolução ou otimização de estratégias de controlo, o EvoX lida com tudo com facilidade.
 
 **Porquê Escolher o EvoX?**
 
@@ -74,13 +74,13 @@ Quer se trate de ajuste de hiperparâmetros, pesquisa de arquitetura, neuroevolu
 
 **Agradecimentos**
 
-Este tutorial foi escrito por **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** e **Xinyao Li**. **Beichen Huang** foi responsável pela compilação, edição e publicação online do tutorial.
+Este tutorial foi escrito por **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** e **Xinyao Li**. **Beichen Huang** foi responsável pela compilação, edição e lançamento online do tutorial.
 
-Agradecemos sinceramente a cada membro da comunidade EvoX. São os nossos esforços conjuntos que permitiram ao EvoX continuar a evoluir.
+Agradecemos sinceramente a todos os membros da comunidade EvoX. São os nossos esforços conjuntos que têm permitido ao EvoX continuar a evoluir.
 
-**Código Open Source / Recursos da Comunidade**
+**Código de Código Aberto / Recursos da Comunidade**
 
-Paper:
+Artigo (Paper):
 
 [https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
 
@@ -88,7 +88,7 @@ GitHub:
 
 [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
-Projeto Principal (EvoX):
+Projeto Upstream (EvoX):
 
 [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
 
@@ -98,7 +98,7 @@ Grupo QQ: 297969717
 
 Grupo QQ | Evolving Machine Intelligence
 
-O EvoMO é construído sobre o framework EvoX. Se estiver interessado em saber mais sobre o EvoX, consulte o artigo oficial sobre o EvoX 1.0 publicado na nossa conta pública do WeChat para mais detalhes.
+O EvoMO é construído sobre a framework EvoX. Se estiver interessado em saber mais sobre o EvoX, sinta-se à vontade para consultar o artigo oficial sobre o EvoX 1.0 publicado na nossa conta pública do WeChat para mais detalhes.
 
 ![image.png](/images/articles/metade-1.png)
 

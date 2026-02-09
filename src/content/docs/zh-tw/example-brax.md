@@ -1,13 +1,13 @@
 ---
-title: "在 EvoX 中求解 Brax 問題"
+title: "在 EvoX 中解決 Brax 問題"
 order: 11
 section: "examples"
 ---
 
-# 在 EvoX 中求解 Brax 問題
+# 在 EvoX 中解決 Brax 問題
 
-EvoX 深入探索了結合 Brax 的神經演化。
-這裡我們將展示一個在 EvoX 中求解 Brax 問題的範例。
+EvoX 透過 Brax 深入探索神經進化（Neuroevolution）。
+在此，我們將展示如何在 EvoX 中解決 Brax 問題的範例。
 
 ```python
 # install EvoX and Brax, skip it if you have already installed EvoX or Brax
@@ -33,17 +33,17 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## 什麼是 Brax
 
-Brax 是一個快速且完全可微分的物理引擎，用於機器人學、人類感知、材料科學、強化學習和其他模擬密集型應用的研究和開發。
+Brax 是一個快速且完全可微分的物理引擎，用於機器人技術、人類感知、材料科學、強化學習以及其他高度依賴模擬的應用研發。
 
-這裡我們將展示 Brax 的「swimmer」環境。
+這裡我們將演示 Brax 的 "swimmer" 環境。
 
-更多資訊，您可以瀏覽 [Brax 的 Github](https://github.com/google/brax)。
+如需更多資訊，您可以瀏覽 [Brax 的 Github](https://github.com/google/brax)。
 
 ## 設計神經網路類別
 
 首先，我們需要決定要建構哪種神經網路。
 
-這裡我們將給出一個簡單的多層感知器（MLP）類別。
+這裡我們將提供一個簡單的多層感知器（MLP）類別。
 
 ```python
 # Construct an MLP using PyTorch.
@@ -62,7 +62,7 @@ class SimpleMLP(nn.Module):
 
 ## 初始化模型
 
-透過 ``SimpleMLP`` 類別，我們可以初始化一個 MLP 模型。
+透過 `SimpleMLP` 類別，我們可以初始化一個 MLP 模型。
 
 ```python
 # Make sure that the model is on the same device, better to be on the GPU
@@ -76,21 +76,21 @@ torch.cuda.manual_seed_all(seed)
 model = SimpleMLP().to(device)
 ```
 
-### 初始化轉接器
+### 初始化適配器 (Adapter)
 
-轉接器可以幫助我們來回轉換資料。
+適配器可以幫助我們進行資料的雙向轉換。
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-有了轉接器，我們就可以開始進行這個神經演化任務了。
+有了適配器，我們就可以開始執行這項神經進化任務。
 
 ## 設定執行流程
 
-### 初始化演算法和問題
+### 初始化演算法與問題
 
-我們初始化一個 [PSO 演算法](#evox.algorithms.so.pso_variants.pso.PSO)，問題是「swimmer」環境中的 [Brax 問題](#evox.problems.neuroevolution.brax.BraxProblem)。
+我們初始化一個 [PSO 演算法](#evox.algorithms.so.pso_variants.pso.PSO)，問題則是 "swimmer" 環境下的 [Brax 問題](#evox.problems.neuroevolution.brax.BraxProblem)。
 
 ```python
 # Set the population size
@@ -121,9 +121,9 @@ problem = BraxProblem(
 )
 ```
 
-在這種情況下，我們將使用每個回合 1000 步，3 個回合的平均獎勵將作為適應度值返回。
+在此案例中，每個 episode 我們將使用 1000 步，並將 3 個 episode 的平均獎勵（reward）作為適應度值（fitness value）返回。
 
-### 設定監控器
+### 設定監控器 (Monitor)
 
 ```python
 # set an monitor, and it can record the top 3 best fitnesses
@@ -133,7 +133,7 @@ monitor = EvalMonitor(
 )
 ```
 
-### 初始化工作流程
+### 初始化工作流 (Workflow)
 
 ```python
 # Initiate an workflow
@@ -147,13 +147,13 @@ workflow = StdWorkflow(
 )
 ```
 
-### 執行工作流程
+### 執行工作流
 
-執行工作流程，見證奇蹟！
+執行工作流，見證神奇的時刻！
 
 > **注意：**
-> 以下區塊大約需要 20 分鐘執行。
-> 時間可能因您的硬體而異。
+> 以下程式碼區塊大約需要 20 分鐘執行。
+> 具體時間可能因您的硬體設備而異。
 
 ```python
 # Set the maximum number of generations
@@ -187,7 +187,7 @@ HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="
 ```
 
 > **重要：**
-> - 通常，您只需要 `HTML(problem.visualize(best_params))` 來渲染。上面的程式碼是一個變通方法，以確保結果在我們的網站上正確顯示。
-> - PSO 演算法並非專門針對此類任務進行最佳化，因此效能限制是預期的。此範例僅用於演示目的。
+> - 通常，您只需要 `HTML(problem.visualize(best_params))` 即可進行渲染。上述程式碼是一種變通方法，以確保結果能正確顯示在我們的網站上。
+> - PSO 演算法並未針對此類任務進行特別最佳化，因此預期會有性能限制。此範例僅供演示之用。
 
-我們希望您享受使用 EvoX 求解 Brax 問題的樂趣！
+我們希望您享受使用 EvoX 解決 Brax 問題的過程，祝您使用愉快！

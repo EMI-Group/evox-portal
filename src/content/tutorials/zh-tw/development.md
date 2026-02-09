@@ -1,19 +1,19 @@
 ---
-title: "5. 開發與擴展"
+title: "5. 開發與擴充"
 order: 5
 ---
 
-# 5. 開發與擴展
+# 5. 開發與擴充
 
-EvoX 不僅提供開箱即用的功能，還為開發者和進階使用者提供了豐富的介面，用於自訂開發和擴展整合。本章詳細介紹如何實作自訂演算法和問題、如何利用 EvoX 的 API 進行更深入的控制，以及如何將 EvoX 與其他工具整合以建構更複雜的應用。
+EvoX 不僅提供開箱即用的功能，還為開發者和進階使用者提供了一套豐富的介面，用於自定義開發和擴充整合。本章將詳細介紹如何實作自定義演算法和問題、如何利用 EvoX 的 API 進行更深層次的控制，以及如何將 EvoX 與其他工具整合以構建更複雜的應用程式。
 
-## 5.1 開發自訂模組
+## 5.1 開發自定義模組
 
-有時您要解決的問題或想使用的演算法不在 EvoX 的標準函式庫中。在這種情況下，您可以使用 EvoX 提供的介面開發自訂模組。
+有時您要解決的問題或想使用的演算法並未包含在 EvoX 的標準庫中。在這種情況下，您可以使用 EvoX 提供的介面來開發自定義模組。
 
-### 5.1.1 自訂問題（MyProblem）
+### 5.1.1 自定義問題 (MyProblem)
 
-如果您的目標函數在 `evox.problems` 中不可用，您可以透過繼承 `evox.core.Problem` 基底類別（或符合所需介面）來定義自己的問題。典型的問題類別需要實作一個 `evaluate` 函數，它接收一批解（`pop`）並返回對應的適應度/目標值。為了利用平行計算，EvoX 要求 `evaluate` 支援**批次輸入**。
+如果您的目標函數在 `evox.problems` 中不可用，您可以透過繼承 `evox.core.Problem` 基類（或符合所需的介面）來定義自己的問題。一個典型的問題類別需要實作 `evaluate` 函數，該函數接收一批解 (`pop`) 並返回相應的適應度/目標值。為了利用平行運算，EvoX 要求 `evaluate` 支援 **批次輸入 (batch input)**。
 
 ```python
 import torch
@@ -35,7 +35,7 @@ $$
 \min f(x) = \sum_{i=1}^{n} x_i^3
 $$
 
-您可以這樣實作一個 `MyProblem` 類別：
+您可以像這樣實作一個 `MyProblem` 類別：
 
 ```python
 import torch
@@ -50,9 +50,9 @@ class MyProblem(Problem):
         return fitness
 ```
 
-這裡，`pop` 是一個形狀為 `(population_size, dim)` 的張量。`evaluate` 函數返回一個一維的適應度值張量。對於多目標問題，您可以返回一個字典，每個目標對應一個鍵。
+在這裡，`pop` 是一個形狀為 `(population_size, dim)` 的張量。`evaluate` 函數返回一個適應度值的一維張量。對於多目標問題，您可以返回一個字典，其中包含每個目標的單獨鍵值。
 
-您可以像使用內建問題一樣使用自訂問題：
+您可以像使用內建問題一樣使用您的自定義問題：
 
 ```python
 import torch
@@ -65,14 +65,14 @@ problem = MyProblem()
 initial_fitness = problem.evaluate(initial_pop)
 ```
 
-### 5.1.2 自訂演算法（MyAlgorithm）
+### 5.1.2 自定義演算法 (MyAlgorithm)
 
-建立自訂演算法更為複雜，因為它包括初始化、產生新解和選擇。要建立新演算法，請繼承 `evox.core.Algorithm` 並至少實作：
+建立自定義演算法較為複雜，因為它包含初始化、生成新解和選擇。要建立一個新演算法，請繼承 `evox.core.Algorithm` 並至少實作：
 
 - `__init__`：用於初始化。
 - `step`：主要的演化步驟邏輯。
 
-以下是在 EvoX 中實作粒子群最佳化（PSO）演算法的範例：
+以下是在 EvoX 中實作粒子群最佳化 (PSO) 演算法的範例：
 
 ```python
 import torch
@@ -147,7 +147,7 @@ class PSO(Algorithm):
         self.global_best_fit = torch.min(self.fit)
 ```
 
-要將演算法整合到工作流程中：
+將演算法整合到工作流中：
 
 ```python
 import torch
@@ -167,15 +167,15 @@ for i in range(10):
     workflow.step()
 ```
 
-### 5.1.3 自訂其他模組
+### 5.1.3 自定義其他模組
 
-您也可以自訂 `Monitor`、`Operator` 或 EvoX 中的任何模組。例如，實作一個 `MyMonitor` 來記錄種群多樣性，或建立一個 `MyOperator` 用於自訂交叉/變異策略。請參考現有的基底類別和範例以了解需要覆寫哪些方法。
+您也可以自定義 `Monitor`、`Operator` 或 EvoX 中的任何模組。例如，實作一個 `MyMonitor` 來記錄族群多樣性，或建立一個 `MyOperator` 用於自定義交配/突變策略。請參考現有的基類和範例，以了解需要覆寫哪些方法。
 
 ## 5.2 使用 API
 
-EvoX 將其 API 組織成模組，使其易於擴展和組合元件。
+EvoX 將其 API 組織成模組，使其易於擴充和組合組件。
 
-### 5.2.1 演算法和問題
+### 5.2.1 演算法與問題
 
 - **演算法**：位於 `evox.algorithms.so`（單目標）和 `evox.algorithms.mo`（多目標）。
 
@@ -185,11 +185,11 @@ from evox.algorithms.mo import RVEA
 ```
 
 - **問題**：位於 `evox.problems`，包括：
-  - `numerical` – 經典測試函數（如 Ackley、Sphere）。
-  - `neuroevolution` – 強化學習環境如 Brax。
-  - `hpo_wrapper` – 將機器學習訓練包裝為 HPO 問題。
+  - `numerical` – 經典測試函數（例如 Ackley, Sphere）。
+  - `neuroevolution` – RL 環境，如 Brax。
+  - `hpo_wrapper` – 將 ML 訓練包裝成 HPO 問題。
 
-範例：使用 Brax 環境包裝 PyTorch MLP：
+範例：將 PyTorch MLP 與 Brax 環境包裝在一起：
 
 ```python
 import torch.nn as nn
@@ -206,7 +206,7 @@ problem = BraxProblem(
 )
 ```
 
-範例：為 HPO 包裝最佳化過程：
+範例：包裝 HPO 的最佳化過程：
 
 ```python
 from evox.problems.hpo_wrapper import HPOProblemWrapper
@@ -219,9 +219,9 @@ hpo_problem = HPOProblemWrapper(
 )
 ```
 
-### 5.2.2 工作流程和工具
+### 5.2.2 工作流與工具
 
-- **工作流程**：`evox.workflows.StdWorkflow` 用於基本最佳化迴圈。
+- **工作流**：`evox.workflows.StdWorkflow` 用於基本最佳化迴圈。
 - **監控器**：`EvalMonitor` 用於追蹤效能。
 
 範例：
@@ -234,7 +234,7 @@ for i in range(10):
     print("Top fitness:", monitor.topk_fitness)
 ```
 
-- **指標**：`evox.metrics` 提供 IGD、超體積等。
+- **指標**：`evox.metrics` 提供 IGD, Hypervolume 等。
 
 ```python
 from evox.metrics import igd
@@ -245,28 +245,28 @@ igd_value = igd(current_population, true_pareto_front)
 
 ## 5.3 與其他工具整合
 
-EvoX 設計為易於與外部工具整合。
+EvoX 的設計旨在輕鬆與外部工具整合。
 
 ### 5.3.1 機器學習整合
 
 使用 EvoX 調整超參數：
 
 1. 將訓練/驗證包裝為 `Problem`。
-2. 使用 CMA-ES 等演算法。
-3. 在多次執行中最佳化超參數。
+2. 使用如 CMA-ES 等演算法。
+3. 透過多次執行來最佳化超參數。
 4. 使用最佳參數訓練最終模型。
 
 ### 5.3.2 強化學習整合
 
 使用 EvoX 演化神經網路策略：
 
-1. 使用 `BraxProblem` 包裝強化學習環境。
+1. 使用 `BraxProblem` 包裝 RL 環境。
 2. 使用 `ParamsAndVector` 展平策略網路。
 3. 使用 GA 或 CMA-ES 等演化演算法進行最佳化。
-4. 直接部署最佳化後的策略或使用強化學習進行微調。
+4. 直接部署最佳化後的策略或使用 RL 進行微調。
 
-EvoX 支援批次環境模擬以充分利用 GPU/CPU 的能力。
+EvoX 支援批次環境模擬，以充分利用 GPU/CPU 算力。
 
 ---
 
-**總結而言**，EvoX 提供了強大的模組化 API 和開發者友善的設計，用於實作自訂演算法、包裝任何最佳化問題，以及與機器學習和強化學習工具整合。隨著您加深理解，您可以創造性地應用這些介面來建構量身定制的最佳化解決方案。
+**總結來說**，EvoX 提供了強大、模組化的 API 和對開發者友善的設計，用於實作自定義演算法、包裝任何最佳化問題，以及與 ML 和 RL 工具整合。隨著您理解的加深，您可以創造性地應用這些介面來構建量身打造的最佳化解決方案。

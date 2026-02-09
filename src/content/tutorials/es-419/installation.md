@@ -1,99 +1,99 @@
 ---
-title: "2. Instalacion y Configuracion del Entorno"
+title: "2. Instalación y Configuración del Entorno"
 order: 2
 ---
 
-# 2. Instalacion y Configuracion del Entorno
+# 2. Instalación y Configuración del Entorno
 
-Antes de usar EvoX, necesitas instalar correctamente el software y sus dependencias. Este capitulo cubre los pasos de instalacion tanto para Windows como para Linux, asi como la preparacion y configuracion de las dependencias requeridas. Asegurate de cumplir con los requisitos basicos del sistema antes de la instalacion: **Python 3.10+**, suficiente espacio en disco y, opcionalmente, una GPU compatible con el controlador apropiado.
+Antes de usar EvoX, es necesario instalar correctamente el software y sus dependencias. Este capítulo cubre los pasos de instalación tanto para Windows como para Linux, así como la forma de preparar y configurar las dependencias requeridas. Asegúrese de cumplir con los requisitos básicos del sistema antes de la instalación: **Python 3.10+**, espacio en disco suficiente y, opcionalmente, una GPU compatible con el driver adecuado.
 
 ## Dependencias y Preparativos
 
-- **Entorno Python**: EvoX esta construido sobre Python, asi que asegurate de tener instalado Python 3.10 o superior. Se recomienda usar un entorno virtual (como `venv`) para evitar conflictos de dependencias.
+- **Entorno de Python**: EvoX está construido sobre Python, así que asegúrese de tener instalado Python 3.10 o superior. Se recomienda utilizar un entorno virtual (como `venv`) para evitar conflictos de dependencias.
 
-- **PyTorch**: EvoX utiliza PyTorch para operaciones con tensores y aceleracion por hardware. Por lo tanto, **PyTorch debe instalarse antes de instalar EvoX**. Elige la version segun tu hardware: instala la version CUDA si tienes una GPU NVIDIA, la version ROCm para GPUs AMD, o la version CPU si no tienes GPU disponible. Consulta la [guia oficial de PyTorch](https://pytorch.org) para el comando apropiado, por ejemplo:
+- **PyTorch**: EvoX utiliza PyTorch para operaciones de tensores y aceleración de hardware. Por lo tanto, **PyTorch debe instalarse antes de instalar EvoX**. Elija la versión según su hardware: instale la versión CUDA si tiene una GPU NVIDIA, la versión ROCm para GPUs AMD, o la versión CPU si no hay una GPU disponible. Consulte la [guía oficial de PyTorch](https://pytorch.org) para obtener el comando adecuado, por ejemplo:
 
   ```bash
-  # Para GPUs NVIDIA (CUDA)
+  # For NVIDIA GPUs (CUDA)
   pip install torch torchvision torchaudio
 
-  # Para GPUs AMD (ROCm)
+  # For AMD GPUs (ROCm)
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.2.4
 
-  # Solo CPU
+  # For CPU-only
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
   ```
 
-Se recomienda actualizar `pip` a la ultima version y asegurar una conexion a internet estable antes de la instalacion (los paquetes se descargaran desde PyPI). Una vez que el entorno este listo, puedes instalar EvoX.
+Se recomienda actualizar `pip` a la última versión y asegurar una conexión a internet estable antes de la instalación (los paquetes se descargarán de PyPI). Una vez que el entorno esté listo, puede instalar EvoX.
 
-### Instalacion en Windows
+### Instalación en Windows
 
-Los usuarios de Windows pueden elegir entre **instalacion automatica con script** o **instalacion manual**. El instalador oficial de un clic proporciona una forma facil de configurar EvoX y sus dependencias en un entorno limpio, pero la instalacion manual permite mayor control.
+Los usuarios de Windows pueden elegir entre la **instalación automática mediante script** o la **instalación manual**. El instalador oficial de un solo clic ofrece una forma sencilla de configurar EvoX y sus dependencias en un entorno limpio, pero la instalación manual permite un mayor control.
 
-**Opcion 1: Usando el Script de Instalacion de Un Clic (win-install.bat)**
-EvoX proporciona un [script de instalacion rapida](/_static/win-install.bat) para Windows 10/11 (64 bits). El script instala Miniforge3 (un Conda ligero), Python, PyTorch (con CUDA), EvoX y herramientas utiles como VSCode y Git. Para usarlo:
+**Opción 1: Uso del script de instalación de un solo clic (win-install.bat)**
+EvoX proporciona un [script de instalación rápida](/_static/win-install.bat) para Windows 10/11 (64 bits). El script instala Miniforge3 (un Conda ligero), Python, PyTorch (con CUDA), EvoX y herramientas útiles como VSCode y Git. Para usarlo:
 
-1. Descarga `win-install.bat` desde la documentacion de EvoX o GitHub. Asegurate de tener un [controlador NVIDIA](https://www.nvidia.com/en-us/drivers/) instalado y una conexion a internet estable.
-2. Ejecuta el script. No requiere privilegios de administrador, pero puede solicitar permisos durante la ejecucion; permitelos. El script instalara y configurara todo automaticamente.
-3. Espera a que se complete. Al finalizar exitosamente, veras un mensaje y posiblemente VSCode se abrira. EvoX y sus dependencias estaran instalados.
+1. Descargue `win-install.bat` de la documentación de EvoX o de GitHub. Asegúrese de tener instalado un [driver de NVIDIA](https://www.nvidia.com/en-us/drivers/) y una conexión a internet estable.
+2. Ejecute el script. No requiere privilegios de administrador, pero puede solicitar permiso durante la ejecución; acéptelo. El script instalará y configurará todo automáticamente.
+3. Espere a que finalice. Tras el éxito, verá un mensaje y posiblemente se abra VSCode. EvoX y sus dependencias estarán instalados.
 
-> **Nota**: Si el script falla debido a problemas de red, cierralo y vuelve a ejecutarlo. Soporta reanudacion en caso de fallo.
+> **Nota**: Si el script falla debido a problemas de red, ciérrelo y vuelva a ejecutarlo. Admite la reanudación en caso de fallo.
 
-**Opcion 2: Instalacion Manual**
+**Opción 2: Instalación manual**
 Para instalar EvoX manualmente:
 
-1. **Instalar Controlador de GPU**: Instala el ultimo controlador NVIDIA desde el [sitio web oficial](https://www.nvidia.cn/Download/index.aspx). Si no tienes GPU dedicada, omite este paso.
+1. **Instalar el driver de la GPU**: Instale el último driver de NVIDIA desde el [sitio web oficial](https://www.nvidia.cn/Download/index.aspx). Si no tiene una GPU dedicada, omita este paso.
 
-2. **Instalar Python**: Descarga [Python 3.10+ para Windows](https://www.python.org/downloads/windows/) y habilita "Agregar Python al PATH" durante la instalacion.
+2. **Instalar Python**: Descargue [Python 3.10+ para Windows](https://www.python.org/downloads/windows/) y active la opción “Add Python to PATH” durante la instalación.
 
-3. **Instalar PyTorch**: Abre CMD o PowerShell e instala PyTorch segun tu hardware:
+3. **Instalar PyTorch**: Abra CMD o PowerShell e instale PyTorch según su hardware:
 
    ```bash
    pip install torch torchvision torchaudio
    ```
 
-4. **(Opcional) Instalar Compilador Triton**: PyTorch en Windows carece de soporte para Triton. Si deseas usar `torch.compile` (disponible en PyTorch 2.0), instala el paquete de terceros [triton-windows](https://github.com/woct0rdho/triton-windows). Opcional pero util para optimizacion de rendimiento.
+4. **(Opcional) Instalar el compilador Triton**: PyTorch en Windows carece de soporte para Triton. Si desea utilizar `torch.compile` (disponible en PyTorch 2.0), instale el paquete de terceros [triton-windows](https://github.com/woct0rdho/triton-windows). Es opcional pero útil para la optimización del rendimiento.
 
 5. **Instalar EvoX**:
 
    ```bash
    pip install "evox[default]"
 
-   # Extras opcionales:
-   pip install "evox[vis]"           # Soporte de visualizacion
-   pip install "evox[neuroevolution]" # Soporte de neuroevolucion
+   # Optional extras:
+   pip install "evox[vis]"           # Visualization support
+   pip install "evox[neuroevolution]" # Neuroevolution support
    ```
 
 
-  `> **Nota:**
-> Algunos paquetes pueden requerir dependencias adicionales del sistema. Si este es el caso, el instalador te mostrara un mensaje como el siguiente:console
+  > **Nota:**
+> Algunos paquetes pueden requerir dependencias adicionales del sistema. Si este es el caso, el instalador le mostrará un mensaje como el siguiente:
+  ```console
   error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
   ```
 
-  Cuando encuentres tales mensajes, sigue las instrucciones proporcionadas para instalar las dependencias necesarias antes de continuar.
-  ````
+  Cuando encuentre este tipo de mensajes, siga las instrucciones proporcionadas para instalar las dependencias necesarias antes de continuar.
 
 
-### Instalacion en Linux
+### Instalación en Linux
 
-Instalar EvoX en Linux (por ejemplo, Ubuntu) es sencillo y se maneja principalmente a traves de `pip`.
+Instalar EvoX en Linux (por ejemplo, Ubuntu) es sencillo y se realiza principalmente a través de `pip`.
 
-1. **Instalar Dependencias del Sistema**: Asegurate de que las herramientas basicas de desarrollo y Python 3.10+ esten instalados. Puedes usar un gestor de paquetes (apt, yum) o Anaconda.
+1. **Instalar dependencias del sistema**: Asegúrese de que las herramientas básicas de desarrollo y Python 3.10+ estén instalados. Puede usar un administrador de paquetes (apt, yum) o Anaconda.
 
-2. **Instalar Controlador de GPU** (si usas GPU): Usa el gestor de paquetes apropiado (por ejemplo, `apt`) para instalar los controladores NVIDIA. Verifica la instalacion con `nvidia-smi`. Omite si usas CPU.
+2. **Instalar el driver de la GPU** (si usa GPU): Use el administrador de paquetes adecuado (por ejemplo, `apt`) para instalar los drivers de NVIDIA. Verifique la instalación con `nvidia-smi`. Omita este paso si usa CPU.
 
 > **Nota:**
-> En WSL, **no** instales controladores NVIDIA dentro del subsistema Linux; instalalo en el lado de Windows.
+> En WSL, **no** instale los drivers de NVIDIA dentro del subsistema Linux; instálelos en el lado de Windows.
 
-> **Consejo:**
-> Es muy probable que solo necesites instalar el controlador, pero NO necesites instalar CUDA u otras dependencias.
-> Esas bibliotecas ya estan incluidas en la instalacion de PyTorch via pip.
+> **Tip:**
+> Es muy probable que solo necesite instalar el driver, pero NO necesite instalar CUDA u otras dependencias.
+> Esas librerías ya están incluidas en la instalación de PyTorch a través de pip.
 
-> **Consejo:**
-> La version del controlador requerida depende de tu hardware. Si tienes una GPU NVIDIA reciente, usar la ultima version del controlador suele ser la mejor opcion.
-> Para asegurar mejor compatibilidad y acceso a los ultimos controladores, generalmente es buena idea usar una distribucion Linux mas nueva (por ejemplo, Ubuntu 25.04 en lugar de 22.04).
+> **Tip:**
+> La versión del driver requerida depende de su hardware. Si tiene una GPU NVIDIA reciente, usar la versión más reciente del driver suele ser la mejor opción.
+> Para asegurar una mejor compatibilidad y acceso a los drivers más recientes, generalmente es una buena idea usar una distribución de Linux más nueva (por ejemplo, Ubuntu 25.04 en lugar de 22.04).
 
-1. **Instalar PyTorch**: Como en Windows, instala segun el hardware. Consulta la [guia oficial de PyTorch](https://pytorch.org).
+1. **Instalar PyTorch**: Al igual que en Windows, instale según su hardware. Consulte la [guía oficial de PyTorch](https://pytorch.org).
 
 2. **Instalar EvoX**:
 
@@ -107,23 +107,23 @@ Instalar EvoX en Linux (por ejemplo, Ubuntu) es sencillo y se maneja principalme
    pip install evox[vis,neuroevolution]
    ```
 
-   Esto instala modulos de visualizacion y dependencias de neuroevolucion (como Brax). Tambien puedes elegir extras individuales como `vis` o `neuroevolution`.
+   Esto instala los módulos de visualización y las dependencias de neuroevolución (como Brax). También puede elegir extras individuales como `vis` o `neuroevolution`.
 
-#### Instalacion en Contenedor (Docker, Podman)
+#### Instalación en contenedores (Docker, Podman)
 
-Para usuarios de GPU AMD o aquellos que buscan aislamiento de entorno, se recomienda Docker. Por ejemplo, usando la imagen oficial de Docker de PyTorch con ROCm:
+Para los usuarios de GPUs AMD o aquellos que buscan aislamiento del entorno, se recomienda Docker. Por ejemplo, usando la imagen oficial de Docker de PyTorch con ROCm:
 
 ```bash
 docker run -it --gpus all --shm-size=8g rocm/pytorch:latest
 ```
 
-Dentro del contenedor, instala EvoX como de costumbre usando `pip`.
+Dentro del contenedor, instale EvoX como de costumbre usando `pip`.
 
-## Verificacion de la Instalacion de EvoX
+## Verificando la Instalación de EvoX
 
-Para verificar que EvoX esta correctamente instalado:
+Para verificar que EvoX está instalado correctamente:
 
-- **Verificacion Basica**: En la terminal o shell de Python, ejecuta:
+- **Comprobación básica**: En la terminal o en el shell de Python, ejecute:
 
   ```python
   from torch.utils.collect_env import get_pretty_env_info
@@ -131,17 +131,17 @@ Para verificar que EvoX esta correctamente instalado:
   print(get_pretty_env_info())
   ```
 
-  Esto imprime la informacion de configuracion de PyTorch y del sistema. Si EvoX se importa sin errores, la instalacion fue exitosa. Tambien puedes verificar la version:
+  Esto imprime la información de configuración de PyTorch y del sistema. Si EvoX se importa sin errores, la instalación fue exitosa. También puede verificar la versión:
 
   ```python
   import evox
   print(evox.__version__)
   ```
 
-- **Configuraciones Opcionales**: Puedes ajustar configuraciones relacionadas con el rendimiento, como:
+- **Configuraciones opcionales**: Puede ajustar configuraciones relacionadas con el rendimiento, como:
 
-  - Establecer variables de entorno como `OMP_NUM_THREADS` para controlar el conteo de hilos de CPU
-  - Aumentar la memoria compartida de Docker con `--shm-size`
-  - Asegurar que tu IDE (Jupyter, PyCharm, etc.) use el entorno Python correcto
+  - Configurar variables de entorno como `OMP_NUM_THREADS` para controlar el número de hilos de la CPU.
+  - Aumentar la memoria compartida de Docker con `--shm-size`.
+  - Asegurarse de que su IDE (Jupyter, PyCharm, etc.) utilice el entorno de Python correcto.
 
-Una vez que la configuracion este completa, estas listo para comenzar a optimizar con EvoX.
+Una vez completada la configuración, estará listo para comenzar a optimizar con EvoX.

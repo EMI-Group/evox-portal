@@ -6,27 +6,27 @@ section: "developer"
 
 # Guia de Escrita de Documentação
 
-Este guia descreve as melhores práticas para escrever e manter documentação em todo o código-fonte e ficheiros suplementares.
+Este guia descreve as melhores práticas para escrever e manter a documentação em toda a base de código e ficheiros suplementares.
 
 ---
 
 ## Documentação no Código (Docstrings)
 
-As docstrings são essenciais para compreender o propósito, utilização e comportamento do seu código. Por favor, siga as seguintes convenções:
+As docstrings são essenciais para compreender o propósito, a utilização e o comportamento do seu código. Por favor, siga as seguintes convenções:
 
 ### Regras Gerais
 
 - Documente **todas as classes, métodos e funções públicas** utilizando docstrings.
-- Utilize docstrings ao **estilo Sphinx**.
-- **Não** inclua tipos de parâmetros na docstring — espera-se que sejam declarados na assinatura da função utilizando type hints.
+- Utilize docstrings no **estilo Sphinx**.
+- **Não** inclua tipos de parâmetros na docstring — espera-se que estes sejam declarados na assinatura da função utilizando type hints.
 
 ### Formato e Diretivas
 
 Utilize as seguintes diretivas para descrever diferentes elementos:
 
-- `:param <name>:` — Descrever um parâmetro.
-- `:return:` — Descrever o valor de retorno.
-- `:raises <exception>:` — Descrever exceções que a função pode lançar.
+- `:param <name>:` — Descreve um parâmetro.
+- `:return:` — Descreve o valor de retorno.
+- `:raises <exception>:` — Descreve as exceções que a função pode lançar.
 
 #### Exemplo
 
@@ -53,22 +53,22 @@ Toda a documentação ao nível do projeto está localizada no diretório `docs/
 
 ### Formato
 
-- Utilize **Markdown (`.md`)** ou **Jupyter Notebooks (`.ipynb`)** para documentação.
-- Markdown é preferido para conteúdo narrativo e documentação estática.
-- Utilize Jupyter Notebooks para conteúdo executável e interativo (por exemplo, tutoriais ou demonstrações).
+- Utilize **Markdown (`.md`)** ou **Jupyter Notebooks (`.ipynb`)** para a documentação.
+- O Markdown é preferível para conteúdo narrativo e documentação estática.
+- Utilize Jupyter Notebooks para conteúdo executável e interativo (ex: tutoriais ou demonstrações).
 
 ### Diretrizes para Jupyter Notebooks
 
 - Certifique-se de que todos os notebooks são **totalmente executáveis**.
-- Execute sempre **todas as células** e **guarde a saída** antes de fazer commit.
-- O nosso ambiente de CI/CD **não suporta execução em GPU**, portanto os notebooks devem ser pré-executados localmente.
+- **Execute sempre todas as células** e **guarde o output** antes de submeter (commit).
+- O nosso ambiente de CI/CD **não suporta execução em GPU**, pelo que os notebooks devem ser pré-executados localmente.
 
-### Diretivas de Markdown e Notebooks
+### Diretivas de Markdown e Notebook
 
-Utilize os seguintes padrões para formatação rica:
+Utilize os seguintes padrões para formatação avançada:
 
-- `[name](#ref)` — Referência cruzada interna, por exemplo, `[ModuleBase](#evox.core.module.ModuleBase)` ou `[ModuleBase](#ModuleBase)`
-- `![Alt Text](path)` — Incorporar imagens, por exemplo, `![Module base](/_static/modulebase.png)`
+- `[name](#ref)` — Referência cruzada interna, ex: `[ModuleBase](#evox.core.module.ModuleBase)` ou `[ModuleBase](#ModuleBase)`
+- `![Alt Text](path)` — Incorporar imagens, ex: `![Module base](/_static/modulebase.png)`
 
 ---
 
@@ -76,7 +76,7 @@ Utilize os seguintes padrões para formatação rica:
 
 A documentação suporta conteúdo multilingue. Siga os passos abaixo para atualizar ou gerar traduções.
 
-### Atualizar Traduções (por exemplo, para `zh_CN`)
+### Atualizar Traduções (ex: para `zh_CN`)
 
 ```bash
 cd docs

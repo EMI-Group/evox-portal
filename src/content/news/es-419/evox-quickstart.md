@@ -1,14 +1,14 @@
 ---
-title: "Inicio rápido de EvoX: ejecuta computación evolutiva acelerada por GPU en solo 10 minutos"
+title: "Guía de inicio rápido de EvoX: Ejecute Evolutionary Computation acelerada por GPU en solo 10 minutos"
 pubDate: 2025-04-30
-summary: "Un tutorial para principiantes para comenzar con la computación evolutiva acelerada por GPU usando EvoX en solo 10 minutos."
+summary: "Un tutorial para principiantes para comenzar con la Evolutionary Computation acelerada por GPU usando EvoX en solo 10 minutos."
 ---
 
-Por un lado, la computación evolutiva es extremadamente poderosa en la investigación y la ingeniería del mundo real, pero difícil de utilizar. Por otro lado, las capacidades de las GPUs son cada vez más potentes, pero es difícil que ejerzan su poder en tareas de computación evolutiva.
+Por un lado, la Evolutionary Computation es extremadamente potente en la investigación e ingeniería del mundo real, pero difícil de invocar. Por otro lado, las capacidades de las GPU son cada vez más potentes, pero les resulta difícil ejercer su poder en tareas de computación evolutiva.
 
-Necesitamos una solución verdaderamente moderna: soporte nativo de GPU, arquitectura modular, interfaces claras, usabilidad lista para usar y escalabilidad personalizable. Esto es EvoX: un motor de computación evolutiva para el futuro.
+Necesitamos una solución verdaderamente moderna: soporte nativo para GPU, arquitectura modular, interfaces claras, facilidad de uso inmediata y escalabilidad personalizable. Esto es EvoX: un motor de computación evolutiva para el futuro.
 
-Para ayudar a los usuarios a comenzar rápidamente, el equipo de EvoX ha publicado el "Tutorial para principiantes de EvoX". El tutorial consta de 8 capítulos, cubriendo todo desde los conceptos básicos hasta la aplicación práctica avanzada, guiándolos paso a paso sobre cómo ejecutar algoritmos evolutivos en una GPU.
+Para ayudar a los usuarios a comenzar rápidamente, el equipo de EvoX ha lanzado el "Tutorial para principiantes de EvoX". El tutorial consta de 8 capítulos que cubren desde lo básico hasta aplicaciones prácticas avanzadas, guiándolo paso a paso sobre cómo ejecutar algoritmos evolutivos en una GPU.
 
 **Recursos completos del tutorial**
 
@@ -18,17 +18,17 @@ Tutorial en línea en chino:
 
 Tutorial en PDF en chino:
 
-Únase al Grupo QQ para obtenerlo: 297969717
+Por favor, únase al grupo de QQ para obtenerlo: 297969717
 
-A continuación, los llevaremos a través de todo el proceso desde la instalación hasta la ejecución en solo 10 minutos.
+A continuación, lo guiaremos a través de todo el proceso, desde la instalación hasta la operación, en solo 10 minutos.
 
 **Paso 1: Configuración del entorno**
 
-Abra su terminal y cree un entorno Python limpio:
+Abra su terminal y cree un entorno de Python limpio:
 
 ![代码片段1.png](/images/articles/quickstart-1.png)
 
-También pueden usar su herramienta preferida para crear un entorno Python limpio.
+También puede usar su herramienta preferida para crear un entorno de Python limpio.
 
 **Paso 2: Instalar PyTorch y EvoX**
 
@@ -46,23 +46,23 @@ Verifique si la GPU está disponible:
 
 **Paso 4: Graficar la curva de convergencia**
 
-Solo se necesita una línea:
+Solo una línea es suficiente:
 
 ![代码片段5.png](/images/articles/quickstart-6.png "代码片段5.png")
 
 ![monitor_output.png](/images/articles/quickstart-7.png)
 
-¿Ven esa curva descendente? Esa es la **trayectoria donde su algoritmo evolutivo se acerca al objetivo**, y **el camino que toma para explorar el mundo desconocido.**
+¿Ve esa curva descendente? Esa es la **trayectoria donde su algoritmo evolutivo se acerca al objetivo**, y **el camino que toma para explorar el mundo desconocido.**
 
-**Paso 5: Intente extender**
+**Paso 5: Intente extenderlo**
 
-Si "solo ejecutar un Ackley" no es suficiente, pueden:
+Si "solo ejecutar un Ackley" no es suficiente, puede:
 
 · Cambiar PSO por GA, DE, CMA-ES, NSGA-II, RVEA...
- · Cambiar Ackley por Rastrigin, Griewank, CEC2022
- · Cambiar a un problema multiobjetivo configurando n_objs >= 2
- · Implementar su propia lógica con MyProblem y MyAlgorithm
- · Conectar con modelos de PyTorch o entornos de aprendizaje por refuerzo (Gym, Brax, MuJoCo Playground)
+· Cambiar Ackley por Rastrigin, Griewank, CEC2022
+· Cambiar a un problema multiobjetivo configurando `n_objs >= 2`
+· Implementar su propia lógica con `MyProblem` y `MyAlgorithm`
+· Integrarse con modelos de PyTorch o entornos de reinforcement-learning (Gym, Brax, MuJoCo Playground)
 
 Ya sea ajuste de hiperparámetros, búsqueda de arquitectura, neuroevolución u optimización de estrategias de control, EvoX lo maneja todo con facilidad.
 
@@ -78,7 +78,7 @@ Este tutorial fue escrito por **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** y *
 
 Agradecemos sinceramente a cada miembro de la comunidad de EvoX. Son nuestros esfuerzos conjuntos los que han permitido que EvoX siga evolucionando.
 
-**Código abierto / Recursos comunitarios**
+**Código de fuente abierta / Recursos de la comunidad**
 
 Paper:
 
@@ -88,17 +88,17 @@ GitHub:
 
 [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
-Proyecto principal (EvoX):
+Proyecto original (EvoX):
 
 [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
 
-Grupo QQ: 297969717
+Grupo de QQ: 297969717
 
 ![图片11.png](/images/articles/evox-1-1-0-1.png)
 
-Grupo QQ | Evolving Machine Intelligence
+Grupo de QQ | Evolving Machine Intelligence
 
-EvoMO está construido sobre el framework EvoX. Si están interesados en conocer más sobre EvoX, no duden en consultar el artículo oficial sobre EvoX 1.0 publicado en nuestra cuenta pública de WeChat para más detalles.
+EvoMO está construido sobre el framework EvoX. Si está interesado en aprender más sobre EvoX, no dude en consultar el artículo oficial sobre EvoX 1.0 publicado en nuestra cuenta pública de WeChat para más detalles.
 
 ![image.png](/images/articles/metade-1.png)
 

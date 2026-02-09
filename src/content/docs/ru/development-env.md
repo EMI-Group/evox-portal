@@ -11,7 +11,7 @@ section: "developer"
 ```bash
 git clone https://github.com/EMI-Group/evox.git
 cd evox
-pip install -e ".[test]" # установка пакета в режиме редактирования с тестовыми зависимостями
+pip install -e ".[test]" # install the package in editable mode with test dependencies
 ```
 
 ## Nix
@@ -20,31 +20,31 @@ pip install -e ".[test]" # установка пакета в режиме ре�
 ```bash
 nix develop .
 ```
-Это создаст оболочку со всеми необходимыми зависимостями и каталог `.venv` с окружением Python.
+Это создаст оболочку со всеми необходимыми зависимостями и директорию `.venv` с окружением Python.
 
 ## Руководство по стилю
 
-EvoX имеет следующее руководство по стилю:
-1. Убедитесь, что используете [ruff](https://docs.astral.sh/ruff/) для проверки кода.
-2. Убедитесь, что нет завершающих пробелов.
+В EvoX приняты следующие правила оформления кода:
+1. Обязательно используйте [ruff](https://docs.astral.sh/ruff/) для линтинга вашего кода.
+2. Убедитесь в отсутствии лишних пробелов в конце строк (trailing whitespaces).
 
 ## Pre-commit
 
 Мы рекомендуем использовать [pre-commit](https://pre-commit.com/) для соблюдения руководства по стилю.
-После установки pre-commit выполните следующую команду для установки хуков в вашем локальном репозитории:
+После установки pre-commit выполните следующую команду, чтобы установить хуки в вашем локальном репозитории:
 ```bash
 pre-commit install
 ```
 
-## Запуск модульных тестов
+## Запуск модульных тестов (Unit Test)
 
-1. Подготовьте тестовое окружение, установив необходимые пакеты (например, `torch`) в вашем окружении Python
+1. Подготовьте тестовую среду, установив необходимые пакеты (например, `torch`) в ваше окружение Python.
 2. Запустите unittest:
 ```shell
-# запуск всех тестов
+# run all tests
 python -m unittest
-# запуск тестов в [path], например python -m unittest unit_test/core/test_jit_util.py
+# run tests in [path], e.g. python -m unittest unit_test/core/test_jit_util.py
 python -m unittest [path-to-test-file]
-# запуск конкретного тестового метода или модуля, например python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
+# run a specific test method or module, e.g. python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
 python -m unittest [path-to-method-or-module]
 ```

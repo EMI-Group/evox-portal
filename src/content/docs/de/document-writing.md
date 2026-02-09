@@ -1,24 +1,24 @@
 ---
-title: "Leitfaden zum Schreiben von Dokumentation"
+title: "Leitfaden zum Verfassen von Dokumentation"
 order: 7
 section: "developer"
 ---
 
-# Leitfaden zum Schreiben von Dokumentation
+# Leitfaden zum Verfassen von Dokumentation
 
-Dieser Leitfaden beschreibt Best Practices für das Schreiben und Pflegen von Dokumentation im gesamten Codebase und in ergänzenden Dateien.
+Dieser Leitfaden beschreibt Best Practices für das Schreiben und Pflegen der Dokumentation innerhalb der Codebasis und ergänzender Dateien.
 
 ---
 
-## Code-interne Dokumentation (Docstrings)
+## Dokumentation im Code (Docstrings)
 
-Docstrings sind essenziell für das Verständnis des Zwecks, der Verwendung und des Verhaltens Ihres Codes. Bitte halten Sie sich an die folgenden Konventionen:
+Docstrings sind essenziell, um den Zweck, die Verwendung und das Verhalten Ihres Codes zu verstehen. Bitte halten Sie sich an die folgenden Konventionen:
 
 ### Allgemeine Regeln
 
-- Dokumentieren Sie **alle öffentlichen Klassen, Methoden und Funktionen** mit Docstrings.
+- Dokumentieren Sie **alle öffentlichen Klassen, Methoden und Funktionen** mittels Docstrings.
 - Verwenden Sie Docstrings im **Sphinx-Stil**.
-- Fügen Sie **keine** Parametertypen in den Docstring ein – diese werden in der Funktionssignatur mittels Type Hints deklariert.
+- Fügen Sie **keine** Parametertypen in den Docstring ein – diese sollten in der Funktionssignatur mittels Type Hints deklariert werden.
 
 ### Format und Direktiven
 
@@ -26,7 +26,7 @@ Verwenden Sie die folgenden Direktiven, um verschiedene Elemente zu beschreiben:
 
 - `:param <name>:` — Beschreibt einen Parameter.
 - `:return:` — Beschreibt den Rückgabewert.
-- `:raises <exception>:` — Beschreibt Ausnahmen, die die Funktion auslösen könnte.
+- `:raises <exception>:` — Beschreibt Ausnahmen (Exceptions), die die Funktion auslösen könnte.
 
 #### Beispiel
 
@@ -47,36 +47,36 @@ def add(a: int, b: int) -> int:
 
 ---
 
-## Externe Dokumentation (`docs/`-Verzeichnis)
+## Externe Dokumentation (Verzeichnis `docs/`)
 
-Die gesamte Projektdokumentation befindet sich im `docs/`-Verzeichnis. Diese Dokumente unterstützen sowohl Benutzer als auch Entwickler, indem sie Anleitungen, Beispiele und Referenzen bereitstellen.
+Die gesamte Dokumentation auf Projektebene befindet sich im Verzeichnis `docs/`. Diese Dokumente unterstützen sowohl Benutzer als auch Entwickler durch die Bereitstellung von Anleitungen, Beispielen und Referenzen.
 
 ### Format
 
 - Verwenden Sie **Markdown (`.md`)** oder **Jupyter Notebooks (`.ipynb`)** für die Dokumentation.
-- Markdown wird für narrative Inhalte und statische Dokumentation bevorzugt.
-- Verwenden Sie Jupyter Notebooks für ausführbare, interaktive Inhalte (z.B. Tutorials oder Demos).
+- Markdown wird für narrativen Inhalt und statische Dokumentation bevorzugt.
+- Verwenden Sie Jupyter Notebooks für ausführbaren, interaktiven Inhalt (z. B. Tutorials oder Demos).
 
-### Jupyter-Notebook-Richtlinien
+### Richtlinien für Jupyter Notebooks
 
 - Stellen Sie sicher, dass alle Notebooks **vollständig ausführbar** sind.
-- Führen Sie immer **alle Zellen aus** und **speichern Sie die Ausgabe**, bevor Sie committen.
-- Unsere CI/CD-Umgebung unterstützt **keine GPU-Ausführung**, daher müssen Notebooks lokal vorab ausgeführt werden.
+- Führen Sie vor dem Committen immer **alle Zellen aus** und **speichern Sie die Ausgabe**.
+- Unsere CI/CD-Umgebung unterstützt **keine GPU-Ausführung**, daher müssen Notebooks lokal vorausgeführt werden.
 
-### Markdown- und Notebook-Direktiven
+### Markdown- & Notebook-Direktiven
 
-Verwenden Sie die folgenden Muster für reichhaltige Formatierung:
+Verwenden Sie die folgenden Muster für erweiterte Formatierung:
 
-- `[name](#ref)` — Interner Querverweis, z.B. `[ModuleBase](#evox.core.module.ModuleBase)` oder `[ModuleBase](#ModuleBase)`
-- `![Alt Text](path)` — Bilder einbetten, z.B. `![Module base](/_static/modulebase.png)`
+- `[name](#ref)` — Interner Querverweis, z. B. `[ModuleBase](#evox.core.module.ModuleBase)` oder `[ModuleBase](#ModuleBase)`
+- `![Alt Text](path)` — Bilder einbetten, z. B. `![Module base](/_static/modulebase.png)`
 
 ---
 
 ## Übersetzung
 
-Die Dokumentation unterstützt mehrsprachige Inhalte. Befolgen Sie die folgenden Schritte, um Übersetzungen zu aktualisieren oder zu generieren.
+Die Dokumentation unterstützt mehrsprachige Inhalte. Befolgen Sie die untenstehenden Schritte, um Übersetzungen zu aktualisieren oder zu generieren.
 
-### Übersetzungen aktualisieren (z.B. für `zh_CN`)
+### Aktualisieren von Übersetzungen (z. B. für `zh_CN`)
 
 ```bash
 cd docs

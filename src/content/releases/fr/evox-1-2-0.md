@@ -1,32 +1,32 @@
 ---
-title: "EvoX v1.2.0 - Notes de version"
+title: "Note de version EvoX v1.2.0"
 pubDate: 2025-04-23
-summary: "Nouvelles fonctionnalités : final_step(), environnement Mujoco Playground, tutoriels utilisateur et intégration EvoMO."
+summary: "Nouvelles fonctionnalités incluant final_step(), l'environnement Mujoco Playground, des tutoriels utilisateurs et l'intégration d'EvoMO."
 ---
 
-**Nous sommes ravis d'annoncer la sortie d'"EvoX v1.2.0", riche en nouvelles fonctionnalités, améliorations et corrections de bugs importantes !**
+**Nous sommes ravis d'annoncer la sortie d'« EvoX v1.2.0 », remplie de nouvelles fonctionnalités, d'améliorations et de corrections de bugs importantes !**
 
-**Cette mise à jour améliore la flexibilité et les performances du framework sur les modules clés**.
+**Cette mise à jour améliore la flexibilité et les performances du framework à travers des modules clés**.
 
 **Points forts :**
 
--  Ajout de `final_step()` et mise à jour de `hpo_wrapper` et `std_workflow` pour des workflows d'exécution plus fluides.
+-  Ajout de `final_step()` et mise à jour de `hpo_wrapper` et `std_workflow` pour des flux d'exécution plus fluides.
 
--  Introduction du "Mujoco Playground" -- un nouvel environnement pour les expériences d'apprentissage par renforcement.
+-  Introduction du « Mujoco Playground » -- un nouvel environnement pour les expériences d'apprentissage par renforcement.
 
--  Publication d'un tout nouveau [tutoriel](https://evox.readthedocs.io/en/latest/tutorial/ "https://evox.readthedocs.io/en/latest/tutorial/") pour aider les utilisateurs à démarrer rapidement.
+-  Publication d'un tout nouveau [tutoriel](https://evox.readthedocs.io/en/latest/tutorial/ "https://evox.readthedocs.io/en/latest/tutorial/") pour aider les utilisateurs à se familiariser rapidement.
 
--  Ajout de nouvelles fonctions d'extension EvoX, permettant une meilleure intégration avec les projets associés comme [EvoMO](https://github.com/EMI-Group/evomo/ "https://github.com/EMI-Group/evomo/").
+-  Ajout de nouvelles fonctions d'extension EvoX, permettant une meilleure intégration avec des projets frères comme [EvoMO](https://github.com/EMI-Group/evomo/ "https://github.com/EMI-Group/evomo/").
 
 -  Diverses corrections de bugs et mises à jour de la documentation pour une meilleure stabilité et clarté.
 
 **Pull Requests associées :**
 
-- Mises à jour des docstrings pour les MOEAs -- [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
+- Mises à jour des docstrings pour les MOEA -- [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
 
 - Correction de `vmap` dans `hpo_wrapper.py` -- [#232](https://github.com/EMI-Group/evox/pull/232) (@starquakee)
 
--  Ajout de RVEAa et amélioration du support DTLZ, IGD, RVEA -- [#231](https://github.com/EMI-Group/evox/pull/231) (@XU-Boqing)
+-  Ajout de RVEAa et amélioration du support de DTLZ, IGD, RVEA -- [#231](https://github.com/EMI-Group/evox/pull/231) (@XU-Boqing)
 
 - Mises à jour de `final_step()` dans les modules de workflow -- [#233](https://github.com/EMI-Group/evox/pull/233) (@XU-Boqing)
 
@@ -40,7 +40,7 @@ summary: "Nouvelles fonctionnalités : final_step(), environnement Mujoco Playgr
 
 **Journal des modifications complet** : [v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
 
-**Code open source / Ressources communautaires**
+**Code Open Source / Ressources communautaires**
 
 Article :
 
@@ -50,12 +50,12 @@ GitHub :
 
 [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
-Projet amont (EvoX) :
+Projet en amont (EvoX) :
 
 [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
 
 Groupe QQ : 297969717
 
-![图片11.png](/images/articles/evox-1-2-0-1.png)
+![Image 11.png](/images/articles/evox-1-2-0-1.png)
 
 Groupe QQ | Evolving Machine Intelligence

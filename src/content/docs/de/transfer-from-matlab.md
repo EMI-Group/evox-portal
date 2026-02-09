@@ -6,55 +6,55 @@ section: "misc"
 
 # Transformation von MATLAB zu PyTorch und EvoX
 
-Dieses Dokument soll MATLAB-Benutzer beim Übergang zu PyTorch und EvoX für evolutionäre Berechnungen anleiten. Wir werden die Kernunterschiede zwischen MATLAB und PyTorch in Bezug auf Syntax, Datenstrukturen und Workflow hervorheben. Anschließend veranschaulichen wir diese Unterschiede anhand eines Partikelschwarmoptimierungs-Beispiels (PSO) in sowohl MATLAB als auch PyTorch.
+Dieses Dokument soll MATLAB-Benutzern den Übergang zu PyTorch und EvoX für evolutionäre Berechnungen erleichtern. Wir werden die wesentlichen Unterschiede zwischen MATLAB und PyTorch in Bezug auf Syntax, Datenstrukturen und Arbeitsabläufe hervorheben. Anschließend veranschaulichen wir diese Unterschiede anhand eines Beispiels zur Partikelschwarmoptimierung (PSO) sowohl in MATLAB als auch in PyTorch.
 
-## Syntaxunterschiede
+## Syntax-Unterschiede
 
 ### Array-Erstellung und Indizierung
 
 #### MATLAB
 
 - Verwendet 1-basierte Indizierung.
-- Vektoren und Matrizen werden mit eckigen Klammern und Semikolons deklariert (z.B. `[1 2 3; 4 5 6]`). Zufällige Initialisierung mit `rand()` gibt Werte im Intervall $[0, 1)$ zurück.
-- Slicing wird mit der `(start:end)`-Syntax durchgeführt und verwendet 1-basierte Indizierung.
+- Vektoren und Matrizen werden mit eckigen Klammern und Semikolons deklariert (z. B. `[1 2 3; 4 5 6]`). Die zufällige Initialisierung mit `rand()` liefert Werte im Intervall $[0, 1)$.
+- Slicing erfolgt mit der Syntax `(start:end)` und verwendet 1-basierte Indizierung.
 
 #### PyTorch
 
 - Verwendet 0-basierte Indizierung.
-- Arrays (Tensoren) werden typischerweise mit Konstruktoren wie `torch.rand()`, `torch.zeros()` oder Python-Listen erstellt, die mit `torch.tensor()` in Tensoren konvertiert werden.
-- Slicing wird mit `[start:end]` und 0-basierten Indizes durchgeführt.
+- Arrays (Tensoren) werden typischerweise mit Konstruktoren wie `torch.rand()`, `torch.zeros()` oder durch Konvertierung von Python-Listen in Tensoren mit `torch.tensor()` erstellt.
+- Slicing erfolgt mit `[start:end]` unter Verwendung von 0-basierten Indizes.
 
-### Matrixberechnung
+### Matrix-Berechnung
 
 #### MATLAB
 
-- Führt lineare algebraische Matrixmultiplikation mit `*` durch.
-- Verwendet `.*` zur Multiplikation entsprechender Elemente von Matrizen gleicher Größe.
-- `/` repräsentiert die Matrix-Rechtsdivision.
-- `.^` repräsentiert die elementweise Potenz.
-- Nachfolgende und führende Dimension(en) von Tensoren mit Länge 1 werden **ignoriert**.
-- Findet automatisch broadcastbare Dimensionen für elementweise Operationen und führt **implizite** Dimensionserweiterung durch.
+- Führt linear-algebraische Matrixmultiplikation mit `*` durch.
+- Verwendet `.*`, um korrespondierende Elemente von Matrizen gleicher Größe zu multiplizieren.
+- `/` steht für die Matrix-Rechtsdivision.
+- `.^` steht für das elementweise Potenzieren.
+- Führende und nachgestellte Dimension(en) von Tensoren mit der Länge 1 werden **ignoriert**.
+- Findet automatisch broadcast-fähige Dimensionen für elementweise Operationen und führt eine **implizite** Dimensionserweiterung durch.
 
 #### PyTorch
 
-- Führt lineare algebraische Matrixmultiplikation mit `@` oder `torch.matmul()` durch.
-- Verwendet direkt `*` zur Multiplikation entsprechender Elemente von Tensoren gleicher Form oder broadcastbarer Formen.
-- `/` repräsentiert die elementweise Division.
-- `**` repräsentiert die elementweise Potenz.
-- Dimension(en) von Tensoren mit Länge 1 werden **beibehalten** und als **Broadcast-Dimension** behandelt.
-- **Verhindert** die meisten impliziten Dimensionserweiterungen, Broadcast-Dimension(en) sind normalerweise erforderlich.
+- Führt linear-algebraische Matrixmultiplikation mit `@` oder `torch.matmul()` durch.
+- Verwendet direkt `*`, um korrespondierende Elemente von Tensoren gleicher Form oder broadcast-fähiger Formen zu multiplizieren.
+- `/` steht für die elementweise Division.
+- `**` steht für das elementweise Potenzieren.
+- Dimension(en) von Tensoren mit der Länge 1 bleiben **erhalten** und werden als **Broadcast-Dimension** behandelt.
+- **Verhindert** die meisten impliziten Dimensionserweiterungen; Broadcast-Dimension(en) sind normalerweise erforderlich.
 
 ### Funktionen und Definitionen
 
 #### MATLAB
 
-- Eine Funktion wird mit dem Schlüsselwort `function` definiert.
-- Eine Datei kann mehrere Funktionen enthalten, aber typischerweise teilt die Hauptfunktion den Dateinamen.
-- Anonyme Funktionen (z.B. `@(x) sum(x.^2)`) werden für kurze Inline-Berechnungen verwendet.
+- Eine Funktion wird durch das Schlüsselwort `function` definiert.
+- Eine Datei kann mehrere Funktionen enthalten, aber typischerweise teilt sich die Hauptfunktion den Dateinamen.
+- Anonyme Funktionen (z. B. `@(x) sum(x.^2)`) werden für kurze Inline-Berechnungen verwendet.
 
 #### PyTorch
 
-- Funktionen werden mit dem Schlüsselwort def definiert, typischerweise innerhalb einer einzelnen `.py`-Datei oder eines Moduls.
+- Funktionen werden mit dem Schlüsselwort `def` definiert, typischerweise innerhalb einer einzelnen `.py`-Datei oder eines Moduls.
 - Klassen werden verwendet, um Daten und Methoden objektorientiert zu kapseln.
 - Lambdas dienen als kurze anonyme Funktionen (`lambda x: x.sum()`), aber mehrzeilige Lambdas sind nicht erlaubt.
 
@@ -62,41 +62,41 @@ Dieses Dokument soll MATLAB-Benutzer beim Übergang zu PyTorch und EvoX für evo
 
 #### MATLAB
 
-- Verwendet for `i = 1:N` ... `end`-Schleifen mit 1-basierter Indizierung.
+- Verwendet `for i = 1:N` ... `end`-Schleifen mit 1-basierter Indizierung.
 - Bedingte Anweisungen wie `if`, `elseif` und `else`.
 
 #### PyTorch
 
 - Verwendet `for i in range(N):` mit 0-basierter Indizierung.
-- Einrückung ist für die Gültigkeitsbereiche in Schleifen und Bedingungen signifikant (kein `end`-Schlüsselwort).
+- Einrückung ist entscheidend für den Gültigkeitsbereich in Schleifen und Bedingungen (kein `end`-Schlüsselwort).
 
 ### Ausgabe und Kommentare
 
 #### MATLAB
 
-- Verwendet `fprintf()`-Funktionen für formatierte Ausgabe.
+- Verwendet `fprintf()`-Funktionen für formatierte Ausgaben.
 - Verwendet `%` für einzeilige Kommentare.
 
 #### PyTorch
 
-- Verwendet `print` mit f-Strings für formatierte Ausgabe.
+- Verwendet `print` mit f-Strings für formatierte Ausgaben.
 - Verwendet `#` für einzeilige Kommentare.
 
 ### Mehrzeiliger Code
 
 #### MATLAB
 
-- Verwendet `...` am Ende einer Zeile, um anzuzeigen, dass die nächste Zeile als dieselbe Zeile behandelt werden soll.
+- Verwendet `...` am Ende einer Zeile, um anzuzeigen, dass die nächste Zeile als Fortsetzung derselben Zeile behandelt werden soll.
 #### Python
 
-- Verwendet `\` am Ende einer Zeile, um anzuzeigen, dass die nächste Zeile als dieselbe Zeile behandelt werden soll.
-- Wenn mehrere Zeilen innerhalb von Klammern stehen, ist kein spezielles Endsymbol erforderlich.
+- Verwendet `\` am Ende einer Zeile, um anzuzeigen, dass die nächste Zeile als Fortsetzung derselben Zeile behandelt werden soll.
+- Wenn sich mehrere Zeilen innerhalb von Klammern befinden, ist kein spezielles Endsymbol erforderlich.
 
 ## Wie schreibt man einen evolutionären Berechnungsalgorithmus mit EvoX?
 
 ### MATLAB
 
-Ein MATLAB-Codebeispiel für den PSO-Algorithmus ist wie folgt:
+Ein MATLAB-Codebeispiel für den PSO-Algorithmus sieht wie folgt aus:
 ```matlab
 function [] = example_pso()
     pso = init_pso(100, [-10, -10], [10, 10], 0.6, 2.5, 0.8);
@@ -157,12 +157,12 @@ function [self] = step_pso(self, evaluate)
     self.velocity = min(max(velocity, self.lb), self.ub);
 end
 ```
-In MATLAB initialisiert die Funktion `init_pso()` den Algorithmus, und eine separate Funktion `step_pso()` führt einen Iterationsschritt durch, und die Hauptfunktion `example_pso()` orchestriert die Schleife.
+In MATLAB initialisiert die Funktion `init_pso()` den Algorithmus, eine separate Funktion `step_pso()` führt einen Iterationsschritt aus, und die Hauptfunktion `example_pso()` steuert die Schleife.
 
 ### EvoX
 In EvoX können Sie den PSO-Algorithmus auf folgende Weise konstruieren:
 
-Zunächst wird empfohlen, die notwendigen Module und Funktionen aus EvoX und PyTorch zu importieren.
+Zuerst wird empfohlen, die notwendigen Module und Funktionen von EvoX und PyTorch zu importieren.
 ```python
 import torch
 
@@ -172,7 +172,7 @@ from evox.workflows import *
 from evox.problems.numerical import Sphere
 ```
 
-Dann können Sie den MATLAB-Code entsprechend dem Abschnitt "Syntaxunterschiede" in Python-Code transformieren.
+Dann können Sie den MATLAB-Code entsprechend dem Abschnitt „Syntax-Unterschiede“ in Python-Code umwandeln.
 ```python
 def main():
     pso = PSO(pop_size=10, lb=torch.tensor([-10.0, -10.0]), ub=torch.tensor([10.0, 10.0]))
@@ -242,12 +242,12 @@ if __name__ == "__main__":
 
 > **Hinweis:**
 > Es ist erwähnenswert, dass wir in MATLAB `[]` mit `;` und `,` verwenden, um Matrizen und Vektoren entlang einer bestimmten Dimension zu verketten; in EvoX muss jedoch `torch.cat` mit dem Argument `dim` aufgerufen werden, um die Verkettungsdimension anzugeben.
-> Darüber hinaus müssen in PyTorch zu verkettende Tensoren die gleiche Anzahl von Dimensionen haben; daher wird zusätzlich `XXX.unsqueeze(0)` angewendet, um eine neue Dimension der Länge 1 vor der ersten Dimension hinzuzufügen.
+> Außerdem müssen in PyTorch Tensoren, die verkettet werden sollen, die gleiche Anzahl von Dimensionen haben; daher wird zusätzlich `XXX.unsqueeze(0)` angewendet, um eine neue Dimension der Länge 1 vor der ersten Dimension hinzuzufügen.
 
-In EvoX ist die PSO-Logik in einer Klasse gekapselt, die von `Algorithm` erbt. Dieses objektorientierte Design vereinfacht die Zustandsverwaltung und Iteration und führt folgende Vorteile ein:
+In EvoX ist die PSO-Logik in einer Klasse gekapselt, die von `Algorithm` erbt. Dieses objektorientierte Design vereinfacht die Zustandsverwaltung und Iteration und bietet folgende Vorteile:
 - Geerbte `evaluate()`-Methode
     Sie können einfach `self.evaluate(self.population)` aufrufen, um Fitnesswerte zu berechnen, anstatt Ihre Zielfunktion bei jeder Iteration manuell zu übergeben.
-- Eingebaute Workflow-Integration
+- Integrierte Workflow-Einbindung
     Wenn Sie Ihre PSO-Klasse bei einem Workflow `StdWorkflow` registrieren, übernimmt dieser die iterativen Aufrufe von `step()` für Sie.
 
-Durch die Erweiterung von `Algorithm` richtet `__init__()` alle wichtigen PSO-Komponenten (Population, Geschwindigkeit, lokales/globales Bestes usw.) in einem Standard-Python-Klassenkonstruktor ein.
+Durch die Erweiterung von `Algorithm` richtet `__init__()` alle wichtigen PSO-Komponenten (Population, Geschwindigkeit, lokales/globales Optimum usw.) in einem Standard-Python-Klassenkonstruktor ein.

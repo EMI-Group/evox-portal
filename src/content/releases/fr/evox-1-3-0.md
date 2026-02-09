@@ -1,12 +1,12 @@
 ---
-title: "EvoX v1.3.0 - Notes de version"
+title: "Note de version EvoX v1.3.0"
 pubDate: 2025-11-06
-summary: "Nouvelle fonctionnalité : Workflow accepte désormais une liste de opt_direction. Plus plusieurs corrections de bugs."
+summary: "Nouvelle fonctionnalité : le Workflow accepte désormais une liste de opt_direction. Ainsi que plusieurs corrections de bugs."
 ---
 
 ## Fonctionnalité
 
-- Workflow accepte désormais une liste de `opt_direction`.
+- Le Workflow accepte désormais une liste de `opt_direction`.
 
 ## Corrections
 

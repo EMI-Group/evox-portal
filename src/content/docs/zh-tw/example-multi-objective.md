@@ -6,7 +6,7 @@ section: "examples"
 
 # 多目標演算法
 
-在本筆記本中，我們將使用參考向量引導演化演算法（**RVEA**）來尋找 **DTLZ2** 問題的最優解。
+在本筆記本中，我們將使用參考向量引導進化演算法 (**RVEA**) 來尋找 **DTLZ2** 問題的最佳解。
 
 ```python
 import time
@@ -18,8 +18,8 @@ from evox.problems.numerical import DTLZ2
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-## （可選）使用 GPU 執行程式碼
-我們通常偏好在 GPU 上執行程式碼以獲得更快的執行速度。然而，如果 GPU 不可用，在 CPU 上執行也是可以接受的。
+## (可選) 使用 GPU 執行程式碼
+我們通常傾向於在 GPU 上執行程式碼以獲得更快的執行速度。然而，如果 GPU 不可用，在 CPU 上執行也是可以的。
 
 ```python
 # Use GPU first to run the code.
@@ -27,8 +27,8 @@ torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 print(torch.get_default_device())
 ```
 
-## 執行範例：RVEA 求解 DTLZ2 問題
-以下程式碼用於設定 `DTLZ2` 問題和 `RVEA` 演算法。有關問題和演算法的更多資訊，請參閱文件的相應章節。
+## 執行範例：在 DTLZ2 問題上執行 RVEA
+以下程式碼用於設定 `DTLZ2` 問題和 `RVEA` 演算法。關於該問題和演算法的更多資訊，可以在文件的相應章節中找到。
 
 ```python
 # Init the problem, algorithm and workflow.
@@ -40,7 +40,7 @@ workflow = StdWorkflow(algo, prob, monitor)
 compiled_step = torch.compile(workflow.step)
 ```
 
-設定完成後，我們現在可以開始最佳化。我們設定讓多目標演算法在此問題上最佳化 100 步
+設定完成後，我們現在可以開始進行最佳化。我們設定讓多目標演算法在這個問題上最佳化 100 步。
 
 ```python
 # Run the workflow for 100 steps

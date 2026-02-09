@@ -11,40 +11,40 @@ section: "developer"
 ```bash
 git clone https://github.com/EMI-Group/evox.git
 cd evox
-pip install -e ".[test]" # instalar el paquete en modo editable con dependencias de prueba
+pip install -e ".[test]" # install the package in editable mode with test dependencies
 ```
 
 ## Nix
 
-Habilite el entorno Nix ejecutando el siguiente comando:
+Activa el entorno Nix ejecutando el siguiente comando:
 ```bash
 nix develop .
 ```
-Esto creara un shell con todas las dependencias necesarias y un directorio `.venv` con el entorno Python.
+Esto creará una shell con todas las dependencias necesarias y un directorio `.venv` con el entorno de Python.
 
-## Guia de estilo
+## Guía de estilo
 
-EvoX tiene la siguiente guia de estilo:
-1. Asegurese de usar [ruff](https://docs.astral.sh/ruff/) para verificar su codigo.
-2. Asegurese de que no haya espacios en blanco al final de las lineas.
+EvoX tiene la siguiente guía de estilo:
+1. Asegúrate de usar [ruff](https://docs.astral.sh/ruff/) para analizar (lint) tu código.
+2. Asegúrate de que no haya espacios en blanco al final de las líneas.
 
 ## Pre-commit
 
-Recomendamos usar [pre-commit](https://pre-commit.com/) para aplicar la guia de estilo.
-Despues de instalar pre-commit, ejecute el siguiente comando para instalar los hooks en su repositorio local:
+Recomendamos usar [pre-commit](https://pre-commit.com/) para aplicar la guía de estilo.
+Tras instalar pre-commit, ejecuta el siguiente comando para instalar los hooks en tu repositorio local:
 ```bash
 pre-commit install
 ```
 
-## Ejecutar Pruebas Unitarias
+## Ejecutar pruebas unitarias
 
-1. Prepare el entorno de prueba instalando los paquetes requeridos (por ejemplo, `torch`) en su entorno Python
-2. Ejecute unittest:
+1. Prepara el entorno de pruebas instalando los paquetes necesarios (por ejemplo, `torch`) en tu entorno de Python.
+2. Ejecuta `unittest`:
 ```shell
-# ejecutar todas las pruebas
+# run all tests
 python -m unittest
-# ejecutar pruebas en [ruta], por ejemplo python -m unittest unit_test/core/test_jit_util.py
+# run tests in [path], e.g. python -m unittest unit_test/core/test_jit_util.py
 python -m unittest [path-to-test-file]
-# ejecutar un metodo o modulo de prueba especifico, por ejemplo python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
+# run a specific test method or module, e.g. python -m unittest unit_test.core.test_jit_util.TestJitUtil.test_single_eval
 python -m unittest [path-to-method-or-module]
 ```

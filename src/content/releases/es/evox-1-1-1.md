@@ -1,32 +1,32 @@
 ---
-title: "EvoX v1.1.1 Notas de versión"
+title: "Nota de lanzamiento de EvoX v1.1.1"
 pubDate: 2025-03-16
-summary: "Correcciones de errores para la captura de grafos de torch.compile, interrupciones de grafos de use_state y fugas de BatchedTensor."
+summary: "Correcciones de errores para la captura de grafos de torch.compile, rupturas de grafos en use_state y fugas de BatchedTensor."
 ---
 
-**Cambios realizados**
+**Novedades**
 
 **Esta versión menor incluye principalmente correcciones de errores y mejoras:**
 
-- Se corrigió un problema por el que `torch.compile` no capturaba correctamente `workflow.step`.
+- Se ha corregido un problema por el cual `torch.compile` no capturaba correctamente `workflow.step`.
 
-- Se corrigió un problema por el que `use_state` provocaba una interrupción del grafo.
+- Se ha corregido un problema por el cual `use_state` provocaba una ruptura del grafo.
 
-- Se corrigió el uso incorrecto de algunos buffers del modelo.
+- Se han corregido algunos usos incorrectos de los buffers del modelo.
 
-- Se corrigió un problema por el que monitor.plot no funcionaba según lo previsto.
+- Se ha corregido un problema por el cual monitor.plot no funcionaba según lo previsto.
 
-- Se introdujo un nuevo wrapper, `evox.compile`, para solucionar ciertas limitaciones de `torch.compile` y `torch.vmap`.
+- Se ha introducido un nuevo wrapper, `evox.compile`, para solventar ciertas limitaciones de `torch.compile` y `torch.vmap`.
 
-- Se resolvieron diversos problemas relacionados con `BatchedTensor`:- Se corrigió un error por el que aplicar vmap a un flujo de trabajo con EvalMonitor podía causar fugas de BatchedTensor.
+- Se han resuelto varios problemas relacionados con `BatchedTensor`:- Se ha corregido un error por el cual el uso de vmap en un workflow con EvalMonitor podía causar fugas de `BatchedTensor`.
 
-- Se corrigió un problema que impedía que HPOProblem funcionase con BraxProblem.
+- Se ha corregido un problema que impedía que HPOProblem funcionara con BraxProblem.
 
-- Se mejoraron las implementaciones de RVEA y CSO para un mejor rendimiento y fiabilidad.
+- Se han mejorado las implementaciones de RVEA y CSO para un mejor rendimiento y fiabilidad.
 
-- Se mejoró la implementación de BraxProblem.
+- Se ha mejorado la implementación de BraxProblem.
 
-- Diversas correcciones y mejoras menores.
+- Varias correcciones y mejoras menores.
 
 **Código abierto y comunidad**
 
@@ -34,10 +34,10 @@ summary: "Correcciones de errores para la captura de grafos de torch.compile, in
 
 **GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
 
-**Proyecto principal (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
+**Proyecto original (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
 
-**Grupo QQ**: 297969717
+**Grupo de QQ**: 297969717
 
 ![image.png](/images/articles/evox-1-1-1-1.png)
 
-  Grupo QQ | Evolving Machine Intelligence
+  Grupo de QQ | Evolving Machine Intelligence

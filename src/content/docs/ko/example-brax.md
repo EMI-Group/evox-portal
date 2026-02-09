@@ -6,8 +6,8 @@ section: "examples"
 
 # EvoX에서 Brax 문제 해결하기
 
-EvoX는 Brax를 활용한 신경진화에 깊이 관여합니다.
-여기서는 EvoX에서 Brax 문제를 해결하는 예제를 보여줍니다.
+EvoX는 Brax를 통해 신경진화(neuroevolution)를 깊이 있게 다룹니다.
+여기서는 EvoX에서 Brax 문제를 해결하는 예제를 보여드리겠습니다.
 
 ```python
 # install EvoX and Brax, skip it if you have already installed EvoX or Brax
@@ -31,19 +31,19 @@ from evox.utils import ParamsAndVector
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-## Brax란 무엇인가
+## Brax란 무엇인가요?
 
-Brax는 로봇 공학, 인간 인식, 재료 과학, 강화학습 및 기타 시뮬레이션 집약적 애플리케이션의 연구 및 개발에 사용되는 빠르고 완전히 미분 가능한 물리 엔진입니다.
+Brax는 로봇 공학, 인간 지각, 재료 과학, 강화 학습 및 기타 시뮬레이션 집약적 애플리케이션의 연구 개발에 사용되는 빠르고 완전히 미분 가능한 물리 엔진입니다.
 
-여기서는 Brax의 "swimmer" 환경을 시연합니다.
+여기서는 Brax의 "swimmer" 환경을 시연해 보겠습니다.
 
-자세한 정보는 [Brax의 Github](https://github.com/google/brax)를 참조하세요.
+더 자세한 정보는 [Brax Github](https://github.com/google/brax)에서 확인할 수 있습니다.
 
 ## 신경망 클래스 설계
 
-시작하려면 어떤 신경망을 구성할지 결정해야 합니다.
+먼저, 어떤 신경망을 구축할지 결정해야 합니다.
 
-여기서는 간단한 다층 퍼셉트론(MLP) 클래스를 제공합니다.
+여기서는 간단한 다층 퍼셉트론(MLP) 클래스를 제시하겠습니다.
 
 ```python
 # Construct an MLP using PyTorch.
@@ -59,9 +59,10 @@ class SimpleMLP(nn.Module):
         x = self.features(x)
         return torch.tanh(x)
 ```
+
 ## 모델 초기화
 
-``SimpleMLP`` 클래스를 통해 MLP 모델을 초기화할 수 있습니다.
+`SimpleMLP` 클래스를 통해 MLP 모델을 초기화할 수 있습니다.
 
 ```python
 # Make sure that the model is on the same device, better to be on the GPU
@@ -75,21 +76,21 @@ torch.cuda.manual_seed_all(seed)
 model = SimpleMLP().to(device)
 ```
 
-### 어댑터 초기화
+### Adapter 초기화
 
-어댑터는 데이터를 앞뒤로 변환하는 데 도움을 줄 수 있습니다.
+Adapter는 데이터를 상호 변환하는 데 도움을 줍니다.
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-어댑터를 사용하면 이 신경진화 작업을 시작할 수 있습니다.
+Adapter를 사용하여 이 신경진화(Neuroevolution) 작업을 시작할 수 있습니다.
 
 ## 실행 프로세스 설정
 
-### 알고리즘과 문제 초기화
+### 알고리즘 및 문제 초기화
 
-[PSO 알고리즘](#evox.algorithms.so.pso_variants.pso.PSO)을 초기화하고, 문제는 "swimmer" 환경의 [Brax 문제](#evox.problems.neuroevolution.brax.BraxProblem)입니다.
+[PSO 알고리즘](#evox.algorithms.so.pso_variants.pso.PSO)을 초기화하고, 문제는 "swimmer" 환경의 [Brax 문제](#evox.problems.neuroevolution.brax.BraxProblem)로 설정합니다.
 
 ```python
 # Set the population size
@@ -120,9 +121,9 @@ problem = BraxProblem(
 )
 ```
 
-이 경우 각 에피소드에 1000단계를 사용하며, 3개 에피소드의 평균 보상이 적합도 값으로 반환됩니다.
+이 경우, 각 에피소드마다 1000 스텝을 사용하며, 3개 에피소드의 평균 보상이 적합도(fitness) 값으로 반환됩니다.
 
-### 모니터 설정
+### Monitor 설정
 
 ```python
 # set an monitor, and it can record the top 3 best fitnesses
@@ -132,7 +133,7 @@ monitor = EvalMonitor(
 )
 ```
 
-### 워크플로우 초기화
+### Workflow 초기화
 
 ```python
 # Initiate an workflow
@@ -146,13 +147,13 @@ workflow = StdWorkflow(
 )
 ```
 
-### 워크플로우 실행
+### Workflow 실행
 
-워크플로우를 실행하고 마법을 확인하세요!
+Workflow를 실행하고 마법 같은 결과를 확인해 보세요!
 
 > **참고:**
-> 다음 블록은 실행하는 데 약 20분이 소요됩니다.
-> 시간은 하드웨어에 따라 다를 수 있습니다.
+> 다음 블록을 실행하는 데 약 20분이 소요됩니다.
+> 하드웨어 사양에 따라 소요 시간은 달라질 수 있습니다.
 
 ```python
 # Set the maximum number of generations
@@ -186,7 +187,7 @@ HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="
 ```
 
 > **중요:**
-> - 일반적으로 렌더링하려면 `HTML(problem.visualize(best_params))`만 필요합니다. 위의 코드는 웹사이트에서 결과가 올바르게 표시되도록 하기 위한 해결 방법입니다.
-> - PSO 알고리즘은 이 유형의 작업에 특별히 최적화되어 있지 않으므로 성능 제한이 예상됩니다. 이 예제는 시연 목적입니다.
+> - 일반적으로 렌더링하려면 `HTML(problem.visualize(best_params))`만 있으면 됩니다. 위의 코드는 웹사이트에서 결과가 올바르게 표시되도록 하기 위한 임시 방편입니다.
+> - PSO 알고리즘은 이러한 유형의 작업에 특별히 최적화되지 않았으므로 성능상의 한계가 있을 수 있습니다. 이 예제는 데모 목적으로 제공됩니다.
 
-EvoX로 Brax 문제를 해결하는 것을 즐기시기 바랍니다!
+EvoX로 Brax 문제를 해결하며 즐거운 시간을 보내시길 바랍니다!

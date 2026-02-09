@@ -1,16 +1,16 @@
 ---
-title: "Algoritmos e problemas personalizados no EvoX"
+title: "Algoritmos e problemas customizados no EvoX"
 order: 5
 section: "developer"
 ---
 
-# Algoritmos e problemas personalizados no EvoX
+# Algoritmos e problemas customizados no EvoX
 
 Neste capítulo, apresentaremos como implementar seus próprios algoritmos e problemas no EvoX.
 
 ## Layout dos algoritmos e problemas
 
-Na maioria das bibliotecas tradicionais de EC, os algoritmos geralmente chamam a função objetivo internamente, o que resulta no seguinte layout:
+Na maioria das bibliotecas de EC tradicionais, os algoritmos geralmente chamam a função objetivo internamente, o que resulta no seguinte layout:
 
 ```
 Algorithm
@@ -18,7 +18,7 @@ Algorithm
 +--Problem
 ```
 
-**Mas no EvoX, temos um layout plano:**
+**Mas no EvoX, temos um layout plano (flat):**
 
 ```
 Algorithm.step -- Problem.evaluate
@@ -31,18 +31,18 @@ Este layout torna tanto os algoritmos quanto os problemas mais universais: um al
 
 A classe `Algorithm` é herdada de `ModuleBase`.
 
-**No total, existem 5 métodos (2 métodos são opcionais) que precisamos implementar:**
+**No total,** **existem 5 métodos (2 métodos são opcionais) que precisamos implementar:**
 
-| Método       | Assinatura                               | Uso                                                                                                              |
+| Método       | Assinatura                               | Uso                                                                                                              |
 | ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `__init__` | `(self, ...)`                   | Inicializar a instância do algoritmo, por exemplo, o tamanho da população (mantém-se constante durante a iteração), hiperparâmetros (só podem ser definidos pelo wrapper de problema HPO ou inicializados aqui), e/ou tensores mutáveis (podem ser modificados durante a execução). |
-| `step`               | `(self)`                        | Executar um passo normal de iteração de otimização do algoritmo. |
-| `init_step` (opcional) | `(self)` | Executar o primeiro passo da otimização do algoritmo. Se este método não for sobrescrito, o método `step` será invocado em seu lugar. |
+| `__init__` | `(self, ...)`                   | Inicializa a instância do algoritmo, por exemplo, o tamanho da população (mantém-se constante durante a iteração), hiperparâmetros (só podem ser definidos pelo wrapper de problema HPO ou inicializados aqui) e/ou tensores mutáveis (podem ser modificados on-the-fly). |
+| `step`               | `(self)`                        | Executa um passo de iteração de otimização normal do algoritmo. |
+| `init_step` (opcional) | `(self)` | Executa o primeiro passo da otimização do algoritmo. Se este método não for sobrescrito, o método `step` será invocado em seu lugar. |
 
 > **Nota:**
-> A inicialização estática ainda pode ser escrita no `__init__` enquanto a inicialização de submódulo(s) mutável(is) não pode. Portanto, múltiplas chamadas de `setup` para inicializações repetidas são possíveis se o método `setup` sobrescrito invocar o `setup()` de `ModuleBase` primeiro.
->
-> Se tal método `setup` em `ModuleBase` não for adequado para seu algoritmo, você pode sobrescrever o método `setup` ao criar sua própria classe de algoritmo.
+> A inicialização estática ainda pode ser escrita no `__init__`, enquanto a inicialização de submódulo(s) mutável(eis) não pode. Portanto, múltiplas chamadas de `setup` para inicializações repetidas são possíveis se o método `setup` sobrescrito invocar o `setup()` de `ModuleBase` primeiro.
+> 
+> Se tal método `setup` em `ModuleBase` não for adequado para o seu algoritmo, você pode sobrescrever o método `setup` ao criar sua própria classe de algoritmo.
 
 
 ## Classe Problem
@@ -53,15 +53,15 @@ No entanto, a classe Problem é bastante simples. **Além do método `__init__`,
 
 | Método     | Assinatura                                   | Uso                                         |
 | ---------- | ------------------------------------------- | --------------------------------------------- |
-| `__init__` | `(self, ...)`                       | Inicializar as configurações do problema.       |
-| `evaluate` | `(self, pop: torch.Tensor) -> torch.Tensor` | Avaliar o fitness da população fornecida. |
+| `__init__` | `(self, ...)`                       | Inicializa as configurações do problema.       |
+| `evaluate` | `(self, pop: torch.Tensor) -> torch.Tensor` | Avalia o fitness da população fornecida. |
 
 No entanto, o tipo do argumento `pop` em `evaluate` pode ser alterado para outros tipos compatíveis com JIT no método sobrescrito.
 
 
 ## Exemplo
 
-Aqui damos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
+Aqui apresentamos um exemplo de **implementação de um algoritmo PSO que resolve o problema Sphere**.
 
 ### Pseudocódigo do exemplo
 
@@ -101,7 +101,7 @@ Until stopping criterion
 
 ### Exemplo de algoritmo: algoritmo PSO
 
-A Otimização por Enxame de Partículas (PSO) é um algoritmo meta-heurístico baseado em população inspirado no comportamento social de pássaros e peixes. É amplamente utilizado para resolver problemas de otimização contínuos e discretos.
+Particle Swarm Optimization (PSO) é um algoritmo meta-heurístico baseado em população inspirado no comportamento social de pássaros e peixes. É amplamente utilizado para resolver problemas de otimização contínuos e discretos.
 
 **Aqui está um exemplo de implementação do algoritmo PSO no EvoX:**
 
@@ -189,7 +189,7 @@ class PSO(Algorithm):
 
 ### Exemplo de problema: problema Sphere
 
-O problema Sphere é um problema de otimização de referência simples, porém fundamental, usado para testar algoritmos de otimização.
+O problema Sphere é um problema de otimização de benchmark simples, porém fundamental, usado para testar algoritmos de otimização.
 
 A função Sphere é definida como:
 

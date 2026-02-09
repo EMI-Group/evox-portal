@@ -1,10 +1,10 @@
 ---
-title: "Sélection GPU / CPU"
+title: "Sélection du GPU / CPU"
 order: 15
 section: "misc"
 ---
 
-# Sélection GPU / CPU
+# Sélection du GPU / CPU
 
 Pour exécuter votre programme sur un GPU spécifique, vous pouvez utiliser la variable d'environnement `CUDA_VISIBLE_DEVICES`. Par exemple, pour exécuter votre programme sur le deuxième GPU, vous pouvez utiliser :
 

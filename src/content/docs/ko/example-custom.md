@@ -1,10 +1,10 @@
 ---
-title: "사용자 정의 알고리즘과 문제"
+title: "사용자 정의 알고리즘 및 문제"
 order: 14
 section: "examples"
 ---
 
-# 사용자 정의 알고리즘과 문제
+# 사용자 정의 알고리즘 및 문제
 이 노트북에서는 `Algorithm`과 `Problem`을 사용하여 사용자 정의 알고리즘과 문제를 만드는 방법을 보여줍니다. 여기서는 **Sphere 문제를 해결하는 PSO 알고리즘을 구현하는** 예제를 제공합니다.
 
 
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## 알고리즘 예제: PSO 알고리즘
 
-입자 군집 최적화(PSO)는 새와 물고기의 사회적 행동에서 영감을 받은 개체군 기반 메타휴리스틱 알고리즘입니다. 연속 및 이산 최적화 문제를 해결하는 데 널리 사용됩니다.
+Particle Swarm Optimization (PSO)은 새와 물고기의 사회적 행동에서 영감을 받은 개체군 기반 메타휴리스틱 알고리즘입니다. 이 알고리즘은 연속 및 이산 최적화 문제를 해결하는 데 널리 사용됩니다.
 
 **다음은 EvoX에서의 PSO 알고리즘 구현 예제입니다:**
 
@@ -104,6 +104,7 @@ class PSO(Algorithm):
         self.local_best_fit = self.fit
         self.global_best_fit = torch.min(self.fit)
 ```
+
 ## 문제 예제: Sphere 문제
 
 Sphere 문제는 최적화 알고리즘을 테스트하는 데 사용되는 간단하지만 기본적인 벤치마크 최적화 문제입니다.
@@ -124,7 +125,7 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## 알고리즘을 사용하여 문제 해결
+## 알고리즘을 사용하여 문제 해결하기
 
 ### 알고리즘, 문제 및 모니터 초기화
 

@@ -1,157 +1,157 @@
 ---
-title: "6. Solucion de Problemas y Optimizacion"
+title: "6. Solución de problemas y optimización"
 order: 6
 ---
 
-# 6. Solucion de Problemas y Optimizacion
+# 6. Solución de problemas y optimización
 
-Al usar EvoX, puedes encontrar problemas o querer ajustar tus algoritmos. Este capitulo describe problemas comunes y sus soluciones, junto con estrategias de depuracion y consejos de ajuste de rendimiento para ayudarte a resolver problemas y optimizar tu experiencia.
+Al usar EvoX, es posible que encuentres problemas o desees ajustar tus algoritmos. Este capítulo describe problemas y soluciones comunes, junto con estrategias de depuración y consejos de ajuste de rendimiento para ayudarte a resolver inconvenientes y optimizar tu experiencia.
 
 ---
 
-## 6.1 Problemas Comunes y Soluciones
+## 6.1 Problemas comunes y soluciones
 
-Aqui hay algunos problemas frecuentes y como abordarlos:
+Aquí hay algunos problemas encontrados con frecuencia y cómo abordarlos:
 
-**(1) Errores de Instalacion o Importacion**:
+**(1) Errores de instalación o importación**:
 
-- **Sintoma**: Error al ejecutar `import evox`.
-- **Solucion**:
-  - **Verificar instalacion**: Ejecuta `pip show evox` para verificar. Si no esta instalado, revisa tu entorno virtual y reinstala.
-  - **Dependencias faltantes**: Si ves `ModuleNotFoundError: No module named 'torch'`, instala PyTorch como se indica en el Capitulo 2.
-  - **Incompatibilidad de CUDA**: Asegurate de que tu version de PyTorch coincida con los controladores CUDA instalados.
+- **Síntoma**: Error al ejecutar `import evox`.
+- **Solución**:
+  - **Verifica la instalación**: Ejecuta `pip show evox` para verificar. Si no está instalado, revisa tu entorno virtual y reinstala.
+  - **Dependencias faltantes**: Si ves `ModuleNotFoundError: No module named 'torch'`, instala PyTorch como se describe en el Capítulo 2.
+  - **Incompatibilidad de CUDA**: Asegúrate de que tu versión de PyTorch coincida con tus controladores CUDA instalados.
 
-**(2) La GPU No Se Esta Usando**:
+**(2) La GPU no se está utilizando**:
 
-- **Sintoma**: EvoX se ejecuta en CPU en lugar de GPU.
-- **Solucion**:
-  - Verifica con `torch.cuda.is_available()`. Si devuelve `False`, reinstala un PyTorch compatible con GPU y verifica la instalacion de CUDA.
-  - Si devuelve `True` pero EvoX aun usa CPU, asegurate de que tus tensores esten en la GPU (consulta el Capitulo 3 para la configuracion).
+- **Síntoma**: EvoX se está ejecutando en la CPU en lugar de la GPU.
+- **Solución**:
+  - Verifica con `torch.cuda.is_available()`. Si es `False`, reinstala una versión de PyTorch compatible con GPU y verifica la instalación de CUDA.
+  - Si es `True` pero EvoX sigue usando la CPU, asegúrate de que tus tensores se muevan a la GPU (consulta el Capítulo 3 para la configuración).
 
-**(3) Sin Memoria (RAM/VRAM)**:
+**(3) Memoria agotada (RAM/VRAM)**:
 
-- **Sintoma**: Ves `OutOfMemoryError`.
-- **Solucion**:
-  - Reduce el tamano de la poblacion, la dimension del problema o la frecuencia de evaluacion.
-  - Usa float16 (media precision) o division de evaluacion por lotes.
-  - Desactiva los modos de depuracion/deterministicos en PyTorch.
-  - Almacena solo estadisticas en lugar de frentes de Pareto completos (para multiobjetivo).
-  - Actualizar el hardware es la solucion definitiva para cuellos de botella de memoria.
+- **Síntoma**: Ves un `OutOfMemoryError`.
+- **Solución**:
+  - Reduce el tamaño de la población, la dimensión del problema o la frecuencia de evaluación.
+  - Usa float16 (precisión media) o división de evaluación por lotes (batch evaluation splitting).
+  - Desactiva los modos de depuración/deterministas en PyTorch.
+  - Almacena solo estadísticas en lugar de frentes de Pareto completos (para multi-objetivo).
+  - Actualizar el hardware es la solución definitiva para los cuellos de botella de memoria.
 
-**(4) Estancamiento de Convergencia**:
+**(4) Estancamiento de la convergencia**:
 
-- **Sintoma**: El algoritmo se queda atrapado en un optimo local.
-- **Solucion**:
-  - Aumenta la diversidad de la poblacion (por ejemplo, mayor tasa de mutacion).
-  - Prueba diferentes algoritmos o parametros.
-  - Asegurate de que la funcion objetivo este bien definida (no demasiado ruidosa o plana).
-  - Ejecuta multiples pruebas y elige la mejor: EvoX facilita las ejecuciones paralelas.
+- **Síntoma**: El algoritmo se queda atascado en un óptimo local.
+- **Solución**:
+  - Aumenta la diversidad de la población (por ejemplo, una tasa de mutación más alta).
+  - Prueba diferentes algoritmos o parámetros.
+  - Asegúrate de que la función objetivo esté bien definida (que no sea demasiado ruidosa o plana).
+  - Ejecuta múltiples pruebas y elige la mejor; EvoX facilita las ejecuciones en paralelo.
 
-**(5) Resultados de Optimizacion Deficientes**:
+**(5) Resultados de optimización deficientes**:
 
-- **Sintoma**: Los resultados finales estan por debajo de las expectativas.
-- **Solucion**:
-  - **Verifica la definicion del problema**: Asegurate de que la aptitud se calcule correctamente (por ejemplo, signos, escalado).
-  - **Ajuste del algoritmo**: Prueba otros o ajusta los hiperparametros.
+- **Síntoma**: Los resultados finales están por debajo de las expectativas.
+- **Solución**:
+  - **Verifica la definición del problema**: Asegúrate de que el fitness se calcule correctamente (por ejemplo, signos, escalado).
+  - **Ajuste del algoritmo**: Prueba otros o ajusta los hiperparámetros.
   - **Usa curvas de convergencia**:
-    - Linea plana temprana: convergencia prematura.
-    - Oscilante: aleatoriedad demasiado alta.
-  - Ajusta la configuracion del algoritmo y analiza el comportamiento a lo largo del tiempo.
+    - Línea plana temprana → convergencia prematura.
+    - Oscilación → aleatoriedad demasiado alta.
+  - Ajusta la configuración del algoritmo y analiza el comportamiento a lo largo del tiempo.
 
-**(6) Conflictos de Backend (JAX vs PyTorch)**:
+**(6) Conflictos de backend (JAX vs PyTorch)**:
 
-- **Sintoma**: Instalaste accidentalmente la version JAX de EvoX mientras usas ejemplos de PyTorch.
-- **Solucion**: El `pip install evox` predeterminado te da la version de PyTorch. Si instalaste una version JAX, reinstala usando las instrucciones de PyTorch (consulta el Capitulo 2). Las caracteristicas de JAX se documentan por separado.
+- **Síntoma**: Instalaste accidentalmente la versión JAX de EvoX mientras usabas ejemplos de PyTorch.
+- **Solución**: El comando predeterminado `pip install evox` te da la versión de PyTorch. Si instalaste una versión de JAX, reinstala siguiendo las instrucciones de PyTorch (consulta el Capítulo 2). Las funciones de JAX se documentan por separado.
 
-**(7) Incompatibilidad de Version**:
+**(7) Desajuste de versiones**:
 
-- **Sintoma**: Las llamadas a la API no coinciden con la version instalada.
-- **Solucion**:
-  - Las actualizaciones de EvoX pueden cambiar nombres de metodos (por ejemplo, `ask/tell` a `step`).
-  - Usa la ultima version estable y consulta su documentacion.
-  - Ajusta el codigo para alinearlo con tu version de EvoX o considera actualizar.
+- **Síntoma**: Las llamadas a la API no coinciden con la versión instalada.
+- **Solución**:
+  - Las actualizaciones de EvoX pueden cambiar los nombres de los métodos (por ejemplo, `ask/tell` → `step`).
+  - Usa la última versión estable y consulta su documentación.
+  - Ajusta el código para alinearlo con tu versión de EvoX o considera actualizar.
 
 ---
 
-## 6.2 Consejos de Depuracion
+## 6.2 Consejos de depuración
 
-Depurar algoritmos evolutivos puede ser complicado debido a su naturaleza estocastica. Aqui hay consejos practicos:
+Depurar algoritmos evolutivos puede ser complicado debido a su naturaleza estocástica. Aquí tienes algunos consejos prácticos:
 
-**(1) Usa Pruebas a Pequena Escala**:
+**(1) Usa pruebas a pequeña escala**:
 
-- Reduce el tamano de la poblacion y el conteo de iteraciones para simplificar la depuracion.
+- Reduce el tamaño de la población y el recuento de iteraciones para simplificar la depuración.
 - Ejemplo: `pop_size=5`, `iterations=20`.
-- Facilita el seguimiento del comportamiento de la poblacion y el aislamiento de problemas.
+- Facilita el seguimiento del comportamiento de la población y el aislamiento de problemas.
 
-**(2) Inserta Sentencias Print**:
+**(2) Inserta sentencias de impresión (Print)**:
 
-- Imprime la aptitud de la poblacion, los mejores individuos y valores intermedios.
-- Para tensores grandes, imprime las formas o usa `.tolist()` para los mas pequenos.
-- Te ayuda a entender la convergencia y los efectos de los operadores.
+- Imprime el fitness de la población, los mejores individuos y los valores intermedios.
+- Para tensores grandes, imprime las formas (shapes) o usa `.tolist()` para los más pequeños.
+- Te ayuda a comprender la convergencia y los efectos de los operadores.
 
-**(3) Usa Puntos de Interrupcion del IDE**:
+**(3) Usa puntos de interrupción (Breakpoints) del IDE**:
 
-- Usa PyCharm o VS Code para establecer puntos de interrupcion dentro del `step()` del algoritmo o la logica de evaluacion.
-- Inspecciona valores de variables, contenido de tensores o transiciones de estado.
-- Ten cuidado con tensores grandes: limita lo que inspeccionas para evitar bloqueos.
+- Usa PyCharm o VS Code para establecer puntos de interrupción dentro del `step()` del algoritmo o la lógica de evaluación.
+- Inspecciona los valores de las variables, el contenido de los tensores o las transiciones de estado.
+- Ten cuidado con los tensores grandes: limita lo que inspeccionas para evitar bloqueos.
 
-**(4) Pruebas Unitarias de Componentes Personalizados**:
+**(4) Realiza pruebas unitarias de componentes personalizados**:
 
-- Prueba las funciones de cruce/mutacion por separado.
-- Usa entradas sinteticas para validar las formas de salida y la logica antes de la integracion completa.
+- Prueba las funciones de cruce/mutación por separado.
+- Usa entradas sintéticas para validar las formas de salida y la lógica antes de la integración completa.
 
-**(5) Perfila la Ejecucion**:
+**(5) Perfilado de ejecución (Profiling)**:
 
 - Usa `torch.autograd.profiler.profile` o `time.time()` para medir los tiempos de los pasos.
 - Te ayuda a localizar cuellos de botella o bucles infinitos.
-- Identifica si las ralentizaciones estan en la evaluacion o en la logica del algoritmo.
+- Identifica si las ralentizaciones están en la evaluación o en la lógica del algoritmo.
 
-**(6) Registra la Salida en Archivo**:
+**(6) Registra la salida en un archivo (Logging)**:
 
 - Escribe registros en archivos `.csv` para ejecuciones largas.
-- Incluye la mejor aptitud por generacion, estadisticas de diversidad, etc.
-- Util cuando los bloqueos impiden ver la salida de la consola.
+- Incluye el mejor fitness por generación, estadísticas de diversidad, etc.
+- Es útil cuando los bloqueos impiden que se vea la salida de la consola.
 
-En general, depurar proyectos de EvoX requiere un equilibrio entre verificaciones de correccion y analisis de resultados. Enfocate primero en asegurar que el algoritmo se ejecute correctamente, luego optimiza su efectividad.
+En general, depurar proyectos de EvoX requiere un equilibrio entre comprobaciones de corrección y análisis de resultados. Concéntrate primero en asegurar que el algoritmo se ejecute correctamente y luego optimiza su efectividad.
 
 ---
 
-## 6.3 Guia de Ajuste de Rendimiento
+## 6.3 Guía de ajuste de rendimiento
 
-Estos consejos te ayudan a obtener mas velocidad y calidad de EvoX:
+Estos consejos te ayudarán a obtener más velocidad y calidad de EvoX:
 
-**(1) Escalado Progresivo**:
+**(1) Escalado progresivo**:
 
-- **Comienza pequeno**: Prueba la logica con entradas pequenas.
-- **Escala gradualmente** y observa como aumenta el tiempo de ejecucion.
-- **Identifica ineficiencias** si el escalado no es lineal (por ejemplo, 10x poblacion -> >10x tiempo).
+- **Comienza poco a poco**: Prueba la lógica con entradas pequeñas.
+- **Escala gradualmente** y observa cómo aumenta el tiempo de ejecución.
+- **Identifica ineficiencias** si el escalado no es lineal (por ejemplo, 10x población → >10x tiempo).
 
-**(2) Monitorea el Uso del Hardware**:
+**(2) Monitorea el uso del hardware**:
 
-- Usa `nvidia-smi` para GPU, `htop` para CPU.
-- Una alta utilizacion de GPU (>50%) es ideal.
-- Baja utilizacion de GPU puede significar que los datos no estan en la GPU o que transferencias frecuentes CPU-GPU estan ralentizando las cosas.
+- Usa `nvidia-smi` para la GPU, `htop` para la CPU.
+- Una utilización alta de la GPU (>50%) es ideal.
+- Un uso bajo de la GPU puede significar que los datos no están en la GPU o que las transferencias frecuentes entre CPU y GPU están ralentizando las cosas.
 
-**(3) Ajusta el Paralelismo**:
+**(3) Ajusta el paralelismo**:
 
-- Establece hilos de CPU: `torch.set_num_threads(n)`.
-- Evita la sobresuscripcion si usas herramientas de evaluacion multihilo.
-- Para GPU, optimiza los hilos del `DataLoader` si usas entornos por lotes o conjuntos de datos.
+- Establece los hilos de la CPU: `torch.set_num_threads(n)`.
+- Evita la sobreasignación (oversubscription) si usas herramientas de evaluación multihilo.
+- Para la GPU, optimiza los hilos del `DataLoader` si usas entornos por lotes o conjuntos de datos.
 
-**(4) Aprovecha la Evaluacion por Lotes**:
+**(4) Aprovecha la evaluación por lotes (Batch Evaluation)**:
 
-- La evaluacion por lotes es mas rapida que la evaluacion por individuo.
-- Siempre vectoriza `Problem.evaluate()` para procesar poblaciones completas.
+- La evaluación por lotes es más rápida que la evaluación por individuo.
+- Vectoriza siempre `Problem.evaluate()` para procesar poblaciones enteras.
 
-**(5) Reduce la Sobrecarga de Python**:
+**(5) Reduce la sobrecarga (Overhead) de Python**:
 
-- Mueve la logica pesada dentro de `Algorithm` o `Problem`, evita codigo Python complejo en el bucle principal.
-- Usa `workflow.step()` para la mayoria de las operaciones.
-- Minimiza los diagnosticos por generacion si ralentizan las ejecuciones.
+- Mueve la lógica pesada dentro de `Algorithm` o `Problem`, evita código Python complejo en el bucle principal.
+- Usa `workflow.step()` para la mayoría de las operaciones.
+- Minimiza los diagnósticos por generación si ralentizan las ejecuciones.
 
-**(6) Ajusta la Eleccion del Algoritmo**:
+**(6) Ajusta la elección del algoritmo**:
 
-- Prueba CMA-ES, GA, PSO, RVEA, etc.: ningun algoritmo es el mejor para todos los problemas.
-- Un algoritmo que converge mas rapido puede ahorrar mas tiempo que micro-optimizar uno que converge lentamente.
+- Prueba CMA-ES, GA, PSO, RVEA, etc.; ningún algoritmo es el mejor para todos los problemas.
+- Un algoritmo que converja más rápido puede ahorrar más tiempo que micro-optimizar uno que converja lentamente.
 
-El ajuste de rendimiento es iterativo. Con paciencia, puedes pasar de horas de ejecucion a minutos. EvoX te da muchas "perillas": usalas sabiamente para equilibrar velocidad y calidad de la solucion.
+El ajuste de rendimiento es iterativo. Con paciencia, puedes pasar de horas de tiempo de ejecución a minutos. EvoX te ofrece muchos "controles"; úsalos sabiamente para equilibrar la velocidad y la calidad de la solución.

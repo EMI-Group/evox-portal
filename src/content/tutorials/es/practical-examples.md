@@ -1,41 +1,41 @@
 ---
-title: "7. Ejemplos Practicos"
+title: "7. Ejemplos prácticos"
 order: 7
 ---
 
-# 7. Ejemplos Practicos
+# 7. Ejemplos prácticos
 
-Este capitulo presenta varios ejemplos completos y practicos para demostrar como aplicar el conocimiento de los capitulos anteriores. Construiremos un proyecto de optimizacion desde cero y mostraremos como EvoX puede integrarse con otras herramientas. Estos ejemplos cubren una variedad de tipos de problemas para ayudarle a aplicar EvoX en escenarios del mundo real.
+Este capítulo presenta varios ejemplos prácticos y completos para demostrar cómo aplicar los conocimientos de los capítulos anteriores. Construiremos un proyecto de optimización desde cero y mostraremos cómo se puede integrar EvoX con otras herramientas. Estos ejemplos cubren diversos tipos de problemas para ayudarte a aplicar EvoX en escenarios del mundo real.
 
 ---
 
-## Ejemplo 1: Optimizacion de Objetivo Unico
+## Ejemplo 1: Optimización mono-objetivo
 
-**Problema**: Optimizar la clasica funcion Rastrigin:
+**Problema**: Optimizar la clásica función Rastrigin:
 
 ```{math}
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
-donde $\mathbf{x} \in \mathbb{R}^d$ y $d$ es la dimensionalidad. El optimo global es 0 en el origen. La funcion es altamente multimodal, lo que la hace ideal para probar algoritmos de optimizacion global. Aqui hay un grafico de la funcion Rastrigin
+donde $\mathbf{x} \in \mathbb{R}^d$ y $d$ es la dimensionalidad. El óptimo global es 0 en el origen. La función es altamente multimodal, lo que la hace ideal para probar algoritmos de optimización global. Aquí tienes una gráfica de la función Rastrigin:
 
 ```{figure} /_static/rastrigin_function.svg
-:alt: Un grafico de la funcion Rastrigin
+:alt: Una gráfica de la función Rastrigin
 :figwidth: 70%
 :align: center
 
-Funcion Rastrigin
+Función Rastrigin
 ```
 
-En este ejemplo, usaremos el algoritmo de Optimizacion por Enjambre de Particulas (PSO) para optimizar la funcion Rastrigin de 10 dimensiones.
+En este ejemplo, utilizaremos el algoritmo Particle Swarm Optimization (PSO) para optimizar la función Rastrigin de 10 dimensiones.
 
-**Paso 1: Configuracion**
+**Paso 1: Configuración**
 
-Asumiendo que ha configurado su entorno EvoX como se explica en el Capitulo 2.
+Asumiendo que has configurado tu entorno EvoX como se explicó en el Capítulo 2.
 
-**Paso 2: Configuracion del Flujo de Trabajo**
+**Paso 2: Configuración del flujo de trabajo (Workflow)**
 
-Cree un script Python `opt_rastrigin_10.py`:
+Crea un script de Python `opt_rastrigin_10.py`:
 
 ```python
 import torch
@@ -44,7 +44,7 @@ from evox.problems.numerical.basic import Rastrigin
 from evox.workflows import StdWorkflow, EvalMonitor
 ```
 
-Defina el algoritmo PSO:
+Define el algoritmo PSO:
 
 ```python
 dim = 10
@@ -55,7 +55,7 @@ algo = PSO(
 )
 ```
 
-Configure el problema y el flujo de trabajo:
+Configura el problema y el flujo de trabajo:
 
 ```python
 prob = Rastrigin()
@@ -67,7 +67,7 @@ workflow = StdWorkflow(
 )
 ```
 
-**Paso 3: Ejecutar Optimizacion**
+**Paso 3: Ejecutar la optimización**
 
 ```python
 workflow.init_step()
@@ -80,7 +80,7 @@ for iter in range(501):
 print(f"Final Best Solution: {monitor.get_best_solution()}")
 ```
 
-**Salida de Ejemplo**:
+**Ejemplo de salida**:
 
 ```
 Iter 0, Best Fitness: 1398.625
@@ -92,11 +92,11 @@ Iter 500, Best Fitness: 0.9976348876953125
 Final Best Solution: tensor([...])
 ```
 
-El algoritmo PSO encuentra una solucion casi optima cercana al origen, como se esperaba.
+El algoritmo PSO encuentra una solución casi óptima cerca del origen, como era de esperar.
 
 ---
 
-## Ejemplo 2: Optimizacion Multiobjetivo
+## Ejemplo 2: Optimización multi-objetivo
 
 **Problema**: Minimizar dos objetivos:
 
@@ -105,15 +105,15 @@ f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
 
-El frente de Pareto se encuentra entre $x = 0$ (optimo para $f_1$) y $x = 2$ (optimo para $f_2$).
+El frente de Pareto se encuentra entre $x = 0$ (óptimo para $f_1$) y $x = 2$ (óptimo para $f_2$).
 
-**Paso 1: Configuracion del Entorno**
+**Paso 1: Configuración del entorno**
 
-Asegurese de tener EvoX instalado con soporte para NSGA-II.
+Asegúrate de tener instalado EvoX con soporte para NSGA-II.
 
-**Paso 2: Definir el Problema Personalizado**
+**Paso 2: Definir el problema personalizado**
 
-EvoX tiene muchos problemas de prueba multiobjetivo incorporados, pero para este ejemplo, definiremos un problema personalizado para optimizar los dos objetivos:
+EvoX tiene muchos problemas de prueba multi-objetivo integrados, pero para este ejemplo, definiremos un problema personalizado para optimizar los dos objetivos:
 
 ```python
 import torch
@@ -122,7 +122,7 @@ import matplotlib.pyplot as plt
 
 from evox.algorithms import NSGA2
 from evox.workflows import StdWorkflow, EvalMonitor
-# Importar clases principales de evox, vea el Capitulo 5 para detalles
+# Import evox core classes, see Chapter 5 for details
 from evox.core import Problem
 
 class TwoObjectiveProblem(Problem):
@@ -141,12 +141,12 @@ class TwoObjectiveProblem(Problem):
         f_2 = (x - 2) ** 2
         return torch.stack([f_1, f_2], dim=1)
 
-    # Opcional: Definir la funcion del frente de Pareto
+    # Optional: Define the Pareto front function
     def pf(self) -> torch.Tensor:
         pass
 ```
 
-**Paso 3: Definir Algoritmo y Flujo de Trabajo**
+**Paso 3: Definir el algoritmo y el flujo de trabajo**
 
 ```python
 from evox.algorithms import NSGA2
@@ -167,7 +167,7 @@ monitor = EvalMonitor()
 workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-**Paso 4: Optimizacion y Visualizacion**
+**Paso 4: Optimización y visualización**
 
 ```python
 workflow.init_step()
@@ -184,27 +184,27 @@ pf_f1 = x_vals ** 2
 pf_f2 = (x_vals - 2) ** 2
 
 plt.figure(figsize=(8, 6))
-plt.scatter(data[:, 0], data[:, 1], c='blue', label='Poblacion Optimizada', alpha=0.7)
-plt.plot(pf_f1, pf_f2, 'r-', linewidth=2, label='Frente de Pareto')
+plt.scatter(data[:, 0], data[:, 1], c='blue', label='Optimized Population', alpha=0.7)
+plt.plot(pf_f1, pf_f2, 'r-', linewidth=2, label='Pareto Front')
 plt.xlabel("f1")
 plt.ylabel("f2")
-plt.title("NSGA-II en Problema Biobjetivo")
+plt.title("NSGA-II on Bi-objective Problem")
 plt.legend()
 plt.grid(True)
 plt.show()
 ```
 
-Podemos visualizar los resultados usando Matplotlib. Los puntos azules representan la poblacion optimizada, mientras que la linea roja muestra el frente de Pareto.
+Podemos visualizar los resultados utilizando Matplotlib. Los puntos azules representan la población optimizada, mientras que la línea roja muestra el frente de Pareto.
 
 ```{figure} /_static/example_nsga2_result.svg
-:alt: Un grafico de la poblacion NSGA-II
+:alt: Una gráfica de la población de NSGA-II
 :figwidth: 70%
 :align: center
 
-Un grafico de la poblacion NSGA-II despues de la optimizacion
+Una gráfica de la población de NSGA-II tras la optimización
 ```
 
-En Jupyter Notebook, puede usar las capacidades de graficado incorporadas de EvoX para visualizar el proceso de optimizacion y monitorear como evoluciona la poblacion a lo largo de las generaciones.
+En Jupyter Notebook, puedes usar las capacidades de visualización integradas de EvoX para visualizar el proceso de optimización y monitorizar cómo evoluciona la población a lo largo de las generaciones.
 
 ```python
 monitor.plot()
@@ -212,11 +212,11 @@ monitor.plot()
 
 ---
 
-## Ejemplo 3: Optimizacion de Hiperparametros (HPO)
+## Ejemplo 3: Optimización de hiperparámetros (HPO)
 
-**Problema**: Ajustar `C` y `max_iter` de un clasificador de regresion logistica en el conjunto de datos de cancer de mama para maximizar la precision de validacion.
+**Problema**: Ajustar `C` y `max_iter` de un clasificador de regresión logística en el conjunto de datos de cáncer de mama para maximizar la precisión de validación.
 
-**Paso 1: Cargar Datos y Modelo**
+**Paso 1: Cargar datos y modelo**
 
 ```python
 import torch
@@ -233,7 +233,7 @@ X_train = scaler.transform(X_train)
 X_val = scaler.transform(X_val)
 ```
 
-**Paso 2: Definir el Problema**
+**Paso 2: Definir el problema**
 
 ```python
 class HyperParamOptProblem(Problem):
@@ -249,11 +249,11 @@ class HyperParamOptProblem(Problem):
             model = LogisticRegression(C=C_val, max_iter=max_iter_val, solver='liblinear')
             model.fit(X_train, y_train)
             acc = model.score(X_val, y_val)
-            objs.append(1 - acc)  # tasa de error
+            objs.append(1 - acc)  # error rate
         return torch.tensor(objs)
 ```
 
-**Paso 3: Configuracion del Flujo de Trabajo**
+**Paso 3: Configuración del flujo de trabajo**
 
 ```python
 from evox.algorithms.so.es_variants import CMAES
@@ -261,7 +261,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 prob = HyperParamOptProblem()
 init_params = torch.tensor([1.0, 100.0])
-print("Tasa de error inicial:", prob.evaluate(init_params.unsqueeze(0)).item())
+print("Initial error rate:", prob.evaluate(init_params.unsqueeze(0)).item())
 
 algo = CMAES(
     mean_init=init_params,
@@ -272,7 +272,7 @@ monitor = EvalMonitor()
 workflow = StdWorkflow(algo, prob, monitor)
 ```
 
-**Paso 4: Optimizacion**
+**Paso 4: Optimización**
 
 ```python
 workflow.init_step()
@@ -281,18 +281,18 @@ for _ in range(100):
 
 best_params = monitor.get_best_solution()
 best_error = prob.evaluate(best_params.unsqueeze(0)).item()
-print("Tasa de error optimizada:", best_error)
+print("Optimized error rate:", best_error)
 ```
 
-**Salida de Ejemplo**:
+**Ejemplo de salida**:
 
 ```
-Tasa de error inicial: 0.0263
-Tasa de error optimizada: 0.0088
+Initial error rate: 0.0263
+Optimized error rate: 0.0088
 ```
 
-Con solo unas pocas lineas de codigo, EvoX automatiza el tedioso proceso de prueba y error del ajuste de hiperparametros.
+Con solo unas pocas líneas de código, EvoX automatiza el tedioso proceso de prueba y error del ajuste de hiperparámetros.
 
 ---
 
-Estos ejemplos practicos ilustran como EvoX puede aplicarse efectivamente en varios dominios, desde funciones de prueba matematicas hasta flujos de trabajo de aprendizaje automatico. Una vez que se sienta comodo con la estructura basica -- **Algoritmo + Problema + Monitor + Flujo de Trabajo** -- puede adaptar EvoX para casi cualquier tarea de optimizacion.
+Estos ejemplos prácticos ilustran cómo se puede aplicar EvoX de manera efectiva en diversos dominios, desde funciones de prueba matemáticas hasta flujos de trabajo de machine learning. Una vez que te sientas cómodo con la estructura básica —**Algorithm + Problem + Monitor + Workflow**— podrás adaptar EvoX para que se ajuste a casi cualquier tarea de optimización.

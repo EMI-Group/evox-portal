@@ -6,7 +6,7 @@ section: "developer"
 
 # Entwicklungsumgebung
 
-## Repository klonen und im editierbaren Modus installieren (empfohlen)
+## Das Repository klonen und im bearbeitbaren Modus installieren (empfohlen)
 
 ```bash
 git clone https://github.com/EMI-Group/evox.git
@@ -16,29 +16,29 @@ pip install -e ".[test]" # install the package in editable mode with test depend
 
 ## Nix
 
-Aktivieren Sie die Nix-Umgebung mit folgendem Befehl:
+Aktivieren Sie die Nix-Umgebung, indem Sie den folgenden Befehl ausführen:
 ```bash
 nix develop .
 ```
-Dies erstellt eine Shell mit allen notwendigen Abhängigkeiten und ein `.venv`-Verzeichnis mit der Python-Umgebung.
+Dies erstellt eine Shell mit allen notwendigen Abhängigkeiten und einem `.venv`-Verzeichnis mit der Python-Umgebung.
 
-## Stilrichtlinien
+## Style Guide
 
-EvoX hat die folgenden Stilrichtlinien:
+EvoX hat den folgenden Style Guide:
 1. Stellen Sie sicher, dass Sie [ruff](https://docs.astral.sh/ruff/) verwenden, um Ihren Code zu linten.
-2. Stellen Sie sicher, dass keine nachgestellten Leerzeichen vorhanden sind.
+2. Stellen Sie sicher, dass keine nachgestellten Leerzeichen (trailing whitespaces) vorhanden sind.
 
 ## Pre-commit
 
-Wir empfehlen die Verwendung von [pre-commit](https://pre-commit.com/), um die Stilrichtlinien durchzusetzen.
-Nach der Installation von pre-commit führen Sie den folgenden Befehl aus, um die Hooks in Ihrem lokalen Repository zu installieren:
+Wir empfehlen die Verwendung von [pre-commit](https://pre-commit.com/), um den Style Guide durchzusetzen.
+Führen Sie nach der Installation von pre-commit den folgenden Befehl aus, um die Hooks in Ihrem lokalen Repository zu installieren:
 ```bash
 pre-commit install
 ```
 
 ## Unit-Tests ausführen
 
-1. Bereiten Sie die Testumgebung vor, indem Sie die erforderlichen Pakete (z.B. `torch`) in Ihrer Python-Umgebung installieren
+1. Bereiten Sie die Testumgebung vor, indem Sie die erforderlichen Pakete (z. B. `torch`) in Ihrer Python-Umgebung installieren.
 2. Führen Sie unittest aus:
 ```shell
 # run all tests

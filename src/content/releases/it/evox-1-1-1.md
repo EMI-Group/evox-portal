@@ -4,7 +4,7 @@ pubDate: 2025-03-16
 summary: "Correzioni di bug per la cattura del grafo torch.compile, interruzioni del grafo use_state e perdite di BatchedTensor."
 ---
 
-**Cosa e cambiato**
+**Cosa è cambiato**
 
 **Questo rilascio minore include principalmente correzioni di bug e miglioramenti:**
 
@@ -22,13 +22,13 @@ summary: "Correzioni di bug per la cattura del grafo torch.compile, interruzioni
 
 - Corretto un problema che impediva a HPOProblem di funzionare con BraxProblem.
 
-- Migliorate le implementazioni di RVEA e CSO per prestazioni e affidabilita superiori.
+- Migliorate le implementazioni di RVEA e CSO per prestazioni e affidabilità superiori.
 
 - Migliorata l'implementazione di BraxProblem.
 
 - Varie piccole correzioni e miglioramenti.
 
-**Codice open source e comunita**
+**Codice open source e comunità**
 
 **Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
 

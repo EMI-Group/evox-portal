@@ -1,18 +1,18 @@
 ---
-title: "使用自訂演算法部署 HPO"
+title: "使用自定義演算法部署 HPO"
 order: 6
 section: "developer"
 ---
 
-# 使用自訂演算法部署 HPO
+# 使用自定義演算法部署 HPO
 
-在本章中，我們將重點介紹使用自訂演算法部署 HPO，強調細節而非整體工作流程。HPO 部署的簡要介紹在[教學](#/tutorial/tutorial_part7)中提供，強烈建議先閱讀。
+在本章中，我們將重點介紹如何使用自定義演算法部署 HPO，著重於細節而非整體工作流程。關於 HPO 部署的簡要介紹已在 [教學](#/tutorial/tutorial_part7) 中提供，強烈建議您先閱讀該部分。
 
 ## 使演算法可平行化
 
-由於我們需要將內部演算法轉換為問題，因此內部演算法必須是可平行化的。因此，可能需要對演算法進行一些修改。
+由於我們需要將內部演算法轉換為問題，因此內部演算法必須是可平行化的，這一點至關重要。因此，可能需要對演算法進行一些修改。
 
-1. 演算法不應有對演算法自身屬性進行就地操作的方法。
+1. 演算法不應包含對其自身屬性進行原地（in-place）操作的方法。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -26,7 +26,7 @@ class ExampleAlgorithm(Algorithm):
         self.pop = pop
 ```
 
-2. 程式碼邏輯不依賴 Python 控制流。
+2. 程式碼邏輯不依賴 Python 的控制流程。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -56,15 +56,15 @@ class ExampleAlgorithm(Algorithm):
 
 ## 使用 HPOMonitor
 
-在 HPO 任務中，我們應使用 `HPOMonitor` 來追蹤每個內部演算法的指標。與標準 `monitor` 相比，`HPOMonitor` 僅增加了一個方法 `tell_fitness`。此新增旨在提供更大的評估指標靈活性，因為 HPO 任務通常涉及多維度和複雜的指標。
+在 HPO 任務中，我們應該使用 `HPOMonitor` 來追蹤每個內部演算法的指標。與標準 `monitor` 相比，`HPOMonitor` 僅增加了一個方法：`tell_fitness`。此新增功能旨在為評估指標提供更大的靈活性，因為 HPO 任務通常涉及多維且複雜的指標。
 
-使用者只需建立 `HPOMonitor` 的子類別並覆寫 `tell_fitness` 方法來定義自訂評估指標。
+使用者只需建立 `HPOMonitor` 的子類別並覆寫 `tell_fitness` 方法，即可定義自定義評估指標。
 
-我們還提供了一個簡單的 `HPOFitnessMonitor`，它支援計算多目標問題的 'IGD' 和 'HV' 指標，以及單目標問題的最小值。
+我們也提供了一個簡單的 `HPOFitnessMonitor`，它支援計算多目標問題的 'IGD' 和 'HV' 指標，以及單目標問題的最小值。
 
-## 簡單範例
+## 一個簡單的範例
 
-這裡，我們將展示一個如何在 EvoX 中使用 HPO 的簡單範例。我們將使用 `PSO` 演算法來搜尋一個基本演算法的最優超參數，以求解 sphere 問題。
+在這裡，我們將展示一個如何使用 EvoX 進行 HPO 的簡單範例。我們將使用 `PSO` 演算法來搜尋一個基礎演算法的最佳超參數，以解決 Sphere 問題。
 
 首先，讓我們匯入必要的模組。
 
@@ -77,7 +77,7 @@ from evox.problems.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-接下來，我們定義一個簡單的 sphere 問題。請注意，這與普通的 `problems` 沒有區別。
+接下來，我們定義一個簡單的 Sphere 問題。請注意，這與一般的 `problems` 沒有區別。
 
 ```python
 class Sphere(Problem):
@@ -88,7 +88,7 @@ class Sphere(Problem):
         return (x * x).sum(-1)
 ```
 
-接下來，我們定義演算法，使用 `torch.cond` 函數並確保它是可平行化的。具體來說，我們修改就地操作並調整 Python 控制流。
+接著，我們定義演算法，我們使用 `torch.cond` 函數並確保它是可平行化的。具體來說，我們修改了原地操作並調整了 Python 控制流程。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -121,7 +121,7 @@ class ExampleAlgorithm(Algorithm):
 
 ```
 
-為了處理 Python 控制流，我們使用 [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html)，接下來，我們可以使用 `StdWorkflow` 來包裝 `problem`、`algorithm` 和 `monitor`。然後我們使用 `HPOProblemWrapper` 將 `StdWorkflow` 轉換為 HPO 問題。
+為了處理 Python 控制流程，我們使用 [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html)，接下來，我們可以使用 `StdWorkflow` 來封裝 `problem`、`algorithm` 和 `monitor`。然後我們使用 `HPOProblemWrapper` 將 `StdWorkflow` 轉換為 HPO 問題。
 
 ```python
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
@@ -135,14 +135,14 @@ inner_workflow.setup(inner_algo, inner_prob, monitor=inner_monitor)
 hpo_prob = HPOProblemWrapper(iterations=9, num_instances=7, workflow=inner_workflow, copy_init_state=True)
 ```
 
-我們可以測試 `HPOProblemWrapper` 是否正確識別了我們定義的超參數。由於我們沒有對 7 個實例的超參數進行修改，它們在所有實例中應該是相同的。
+我們可以測試 `HPOProblemWrapper` 是否正確識別了我們定義的超參數。由於我們沒有對這 7 個實例的超參數進行任何修改，因此它們在所有實例中應該是相同的。
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-我們也可以指定自己的一組超參數值。請注意，超參數集的數量必須與 `HPOProblemWrapper` 中的實例數量匹配。自訂超參數應以字典形式提供，其值使用 `Parameter` 包裝。
+我們也可以指定我們自己的一組超參數值。請注意，超參數組的數量必須與 `HPOProblemWrapper` 中的實例數量相符。自定義超參數應以字典形式提供，其值需封裝在 `Parameter` 中。
 
 ```python
 params = hpo_prob.get_init_params()
@@ -153,7 +153,7 @@ print("params:\n", params, "\n")
 print("result:\n", result)
 ```
 
-現在，我們使用 `PSO` 演算法來最佳化 `ExampleAlgorithm` 的超參數。請注意，`PSO` 的種群大小必須與實例數量匹配；否則可能會發生意外錯誤。在這種情況下，我們需要在外部工作流程中轉換解，因為 `HPOProblemWrapper` 要求字典作為輸入。
+現在，我們使用 `PSO` 演算法來最佳化 `ExampleAlgorithm` 的超參數。請注意，`PSO` 的族群大小必須與實例數量相符；否則可能會發生意外錯誤。在這種情況下，我們需要在外部工作流程中轉換解，因為 `HPOProblemWrapper` 需要字典作為輸入。
 
 ```python
 class solution_transform(torch.nn.Module):

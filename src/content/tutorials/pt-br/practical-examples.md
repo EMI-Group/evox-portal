@@ -5,7 +5,7 @@ order: 7
 
 # 7. Exemplos Práticos
 
-Este capítulo apresenta vários exemplos completos e práticos para demonstrar como aplicar o conhecimento dos capítulos anteriores. Construiremos um projeto de otimização do zero e mostraremos como o EvoX pode ser integrado com outras ferramentas. Esses exemplos cobrem uma variedade de tipos de problemas para ajudá-lo a aplicar o EvoX em cenários do mundo real.
+Este capítulo apresenta vários exemplos práticos e completos para demonstrar como aplicar o conhecimento dos capítulos anteriores. Construiremos um projeto de otimização do zero e mostraremos como o EvoX pode ser integrado a outras ferramentas. Estes exemplos abrangem uma variedade de tipos de problemas para ajudá-lo a aplicar o EvoX em cenários do mundo real.
 
 ---
 
@@ -17,7 +17,7 @@ Este capítulo apresenta vários exemplos completos e práticos para demonstrar 
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
-onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global é 0 na origem. A função é altamente multimodal, tornando-a ideal para testar algoritmos de otimização global. Aqui está um gráfico da função Rastrigin
+onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global é 0 na origem. A função é altamente multimodal, tornando-a ideal para testar algoritmos de otimização global. Aqui está um gráfico da função Rastrigin:
 
 ```{figure} /_static/rastrigin_function.svg
 :alt: Um gráfico da função Rastrigin
@@ -27,7 +27,7 @@ onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global 
 Função Rastrigin
 ```
 
-Neste exemplo, usaremos o algoritmo de Otimização por Enxame de Partículas (PSO) para otimizar a função Rastrigin de 10 dimensões.
+Neste exemplo, usaremos o algoritmo Particle Swarm Optimization (PSO) para otimizar a função Rastrigin de 10 dimensões.
 
 **Passo 1: Configuração**
 
@@ -67,7 +67,7 @@ workflow = StdWorkflow(
 )
 ```
 
-**Passo 3: Executar Otimização**
+**Passo 3: Executar a Otimização**
 
 ```python
 workflow.init_step()
@@ -80,7 +80,7 @@ for iter in range(501):
 print(f"Final Best Solution: {monitor.get_best_solution()}")
 ```
 
-**Saída de Exemplo**:
+**Exemplo de Saída**:
 
 ```
 Iter 0, Best Fitness: 1398.625
@@ -105,7 +105,7 @@ f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
 
-A fronteira de Pareto está entre $x = 0$ (ótimo para $f_1$) e $x = 2$ (ótimo para $f_2$).
+A fronteira de Pareto (Pareto front) situa-se entre $x = 0$ (ótimo para $f_1$) e $x = 2$ (ótimo para $f_2$).
 
 **Passo 1: Configuração do Ambiente**
 
@@ -113,7 +113,7 @@ Certifique-se de ter o EvoX instalado com suporte ao NSGA-II.
 
 **Passo 2: Definir o Problema Personalizado**
 
-O EvoX tem muitos problemas de teste multiobjetivo integrados, mas para este exemplo, definiremos um problema personalizado para otimizar os dois objetivos:
+O EvoX possui muitos problemas de teste multiobjetivo integrados, mas para este exemplo, definiremos um problema personalizado para otimizar os dois objetivos:
 
 ```python
 import torch
@@ -122,7 +122,7 @@ import matplotlib.pyplot as plt
 
 from evox.algorithms import NSGA2
 from evox.workflows import StdWorkflow, EvalMonitor
-# Importar classes core do evox, veja o Capítulo 5 para detalhes
+# Import evox core classes, see Chapter 5 for details
 from evox.core import Problem
 
 class TwoObjectiveProblem(Problem):
@@ -141,7 +141,7 @@ class TwoObjectiveProblem(Problem):
         f_2 = (x - 2) ** 2
         return torch.stack([f_1, f_2], dim=1)
 
-    # Opcional: Definir a função da fronteira de Pareto
+    # Optional: Define the Pareto front function
     def pf(self) -> torch.Tensor:
         pass
 ```
@@ -184,27 +184,27 @@ pf_f1 = x_vals ** 2
 pf_f2 = (x_vals - 2) ** 2
 
 plt.figure(figsize=(8, 6))
-plt.scatter(data[:, 0], data[:, 1], c='blue', label='População Otimizada', alpha=0.7)
-plt.plot(pf_f1, pf_f2, 'r-', linewidth=2, label='Fronteira de Pareto')
+plt.scatter(data[:, 0], data[:, 1], c='blue', label='Optimized Population', alpha=0.7)
+plt.plot(pf_f1, pf_f2, 'r-', linewidth=2, label='Pareto Front')
 plt.xlabel("f1")
 plt.ylabel("f2")
-plt.title("NSGA-II no Problema Biobjetivo")
+plt.title("NSGA-II on Bi-objective Problem")
 plt.legend()
 plt.grid(True)
 plt.show()
 ```
 
-Podemos visualizar os resultados usando o Matplotlib. Os pontos azuis representam a população otimizada, enquanto a linha vermelha mostra a fronteira de Pareto.
+Podemos visualizar os resultados usando Matplotlib. Os pontos azuis representam a população otimizada, enquanto a linha vermelha mostra a fronteira de Pareto.
 
 ```{figure} /_static/example_nsga2_result.svg
-:alt: Um gráfico da população NSGA-II
+:alt: Um gráfico da população do NSGA-II
 :figwidth: 70%
 :align: center
 
-Um gráfico da população NSGA-II após a otimização
+Um gráfico da população do NSGA-II após a otimização
 ```
 
-No Jupyter Notebook, você pode usar as capacidades de plotagem integradas do EvoX para visualizar o processo de otimização e monitorar como a população evolui ao longo das gerações.
+No Jupyter Notebook, você pode usar os recursos de plotagem integrados do EvoX para visualizar o processo de otimização e monitorar como a população evolui ao longo das gerações.
 
 ```python
 monitor.plot()
@@ -249,7 +249,7 @@ class HyperParamOptProblem(Problem):
             model = LogisticRegression(C=C_val, max_iter=max_iter_val, solver='liblinear')
             model.fit(X_train, y_train)
             acc = model.score(X_val, y_val)
-            objs.append(1 - acc)  # taxa de erro
+            objs.append(1 - acc)  # error rate
         return torch.tensor(objs)
 ```
 
@@ -261,7 +261,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 prob = HyperParamOptProblem()
 init_params = torch.tensor([1.0, 100.0])
-print("Taxa de erro inicial:", prob.evaluate(init_params.unsqueeze(0)).item())
+print("Initial error rate:", prob.evaluate(init_params.unsqueeze(0)).item())
 
 algo = CMAES(
     mean_init=init_params,
@@ -281,10 +281,10 @@ for _ in range(100):
 
 best_params = monitor.get_best_solution()
 best_error = prob.evaluate(best_params.unsqueeze(0)).item()
-print("Taxa de erro otimizada:", best_error)
+print("Optimized error rate:", best_error)
 ```
 
-**Saída de Exemplo**:
+**Exemplo de Saída**:
 
 ```
 Initial error rate: 0.0263
@@ -295,4 +295,4 @@ Com apenas algumas linhas de código, o EvoX automatiza o tedioso processo de te
 
 ---
 
-Esses exemplos práticos ilustram como o EvoX pode ser efetivamente aplicado em vários domínios, desde funções de teste matemáticas até fluxos de trabalho de aprendizado de máquina. Uma vez que você esteja confortável com a estrutura básica -- **Algoritmo + Problema + Monitor + Workflow** -- você pode adaptar o EvoX para praticamente qualquer tarefa de otimização.
+Estes exemplos práticos ilustram como o EvoX pode ser aplicado de forma eficaz em vários domínios, desde funções de teste matemáticas até workflows de machine learning. Uma vez que você esteja confortável com a estrutura básica — **Algorithm + Problem + Monitor + Workflow** — você poderá adaptar o EvoX para atender a quase qualquer tarefa de otimização.

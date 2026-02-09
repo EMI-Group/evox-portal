@@ -1,14 +1,14 @@
 ---
 title: "EvoX v1.2.1 Versionshinweise"
 pubDate: 2025-05-13
-summary: "Stabilitaetsverbesserungen, neue Benchmark-Funktionen (Ellipsoid, Griewank) und Fehlerbehebungen."
+summary: "Stabilitätsverbesserungen mit neuen Benchmark-Funktionen (Ellipsoid, Griewank) und Fehlerbehebungen."
 ---
 
-Dies ist eine kleinere Version mit Fokus auf Stabilitaetsverbesserungen und Fehlerbehebungen sowie einigen Komfortverbesserungen.
+Dies ist ein kleineres Release, das sich auf die Verbesserung der Stabilität und die Behebung von Fehlern konzentriert, mit einigen Komfortverbesserungen.
 
 **Neue Funktionen**
 
-Neue Benchmark-Funktionen: Einkriterielle numerische Funktionen `Ellipsoid` und `Griewank` hinzugefuegt.
+Neue Benchmark-Funktionen: Numerische Single-Objective-Funktionen hinzugefügt: `Ellipsoid` und `Griewank`.
 
 **Fehlerbehebungen**
 
@@ -16,13 +16,13 @@ Neue Benchmark-Funktionen: Einkriterielle numerische Funktionen `Ellipsoid` und 
 
 * Ein Fehler in der Funktion `latin_hypercube_sampling_standard` wurde korrigiert.
 
-* Ein Problem mit `non_dominate` unter `torch.compile` wurde behoben.
+* Ein Problem wurde gelöst, bei dem `non_dominate` unter `torch.compile` fehlschlug.
 
-* Ein Problem wurde korrigiert, bei dem `PSO` in bestimmten Faellen das Standard-Geraet nicht korrekt verwendete.
+* Ein Problem wurde korrigiert, bei dem `PSO` in bestimmten Fällen das Standardgerät (Default Device) nicht korrekt verwendete.
 
-**Refactoring und Wartung**
+**Refactoring & Wartung**
 
-* Haeufig verwendete Hilfsfunktionen wurden zur Vereinfachung auf die oberste Ebene re-exportiert, zum Beispiel:
+* Häufig verwendete Utilities wurden der Einfachheit halber auf die oberste Ebene re-exportiert, zum Beispiel:
 
 * `evox.compile` anstelle von `evox.core.compile`
 
@@ -30,7 +30,7 @@ Neue Benchmark-Funktionen: Einkriterielle numerische Funktionen `Ellipsoid` und 
 
 * Veralteter oder redundanter Code wurde entfernt.
 
-Vollstaendiges Changelog: [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
+Vollständiges Änderungsprotokoll: [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
 
 **Open-Source-Code / Community-Ressourcen**
 

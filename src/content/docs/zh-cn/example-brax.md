@@ -6,7 +6,7 @@ section: "examples"
 
 # 在 EvoX 中求解 Brax 问题
 
-EvoX 深入探索了基于 Brax 的神经进化。
+EvoX 深度结合 Brax 进行神经进化研究。
 这里我们将展示一个在 EvoX 中求解 Brax 问题的示例。
 
 ```python
@@ -33,17 +33,17 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## 什么是 Brax
 
-Brax 是一个快速且完全可微分的物理引擎，用于机器人学、人类感知、材料科学、强化学习以及其他计算密集型仿真应用的研究和开发。
+Brax 是一个快速且完全可微的物理引擎，用于机器人、人类感知、材料科学、强化学习以及其他重度依赖模拟的应用的研究与开发。
 
 这里我们将演示 Brax 的 "swimmer" 环境。
 
-更多信息请浏览 [Brax 的 Github](https://github.com/google/brax)。
+欲了解更多信息，您可以浏览 [Brax 的 Github](https://github.com/google/brax)。
 
 ## 设计神经网络类
 
-首先，我们需要决定要构建哪种神经网络。
+首先，我们需要决定构建哪种神经网络。
 
-这里我们将给出一个简单的多层感知机（MLP）类。
+这里我们将给出一个简单的多层感知机 (MLP) 类。
 
 ```python
 # Construct an MLP using PyTorch.
@@ -62,7 +62,7 @@ class SimpleMLP(nn.Module):
 
 ## 初始化模型
 
-通过 ``SimpleMLP`` 类，我们可以初始化一个 MLP 模型。
+通过 `SimpleMLP` 类，我们可以初始化一个 MLP 模型。
 
 ```python
 # Make sure that the model is on the same device, better to be on the GPU
@@ -78,19 +78,19 @@ model = SimpleMLP().to(device)
 
 ### 初始化适配器
 
-适配器可以帮助我们来回转换数据。
+适配器可以帮助我们进行数据的来回转换。
 
 ```python
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-有了适配器，我们就可以开始进行这个神经进化任务了。
+有了适配器，我们就可以着手进行这项神经进化任务了。
 
 ## 设置运行流程
 
 ### 初始化算法和问题
 
-我们初始化一个 [PSO 算法](#evox.algorithms.so.pso_variants.pso.PSO)，问题是 "swimmer" 环境中的 [Brax 问题](#evox.problems.neuroevolution.brax.BraxProblem)。
+我们初始化一个 [PSO 算法](#evox.algorithms.so.pso_variants.pso.PSO)，问题是在 "swimmer" 环境下的 [Brax 问题](#evox.problems.neuroevolution.brax.BraxProblem)。
 
 ```python
 # Set the population size
@@ -121,9 +121,9 @@ problem = BraxProblem(
 )
 ```
 
-在这个例子中，我们将使用每个 episode 1000 步，3 个 episode 的平均奖励将作为适应度值返回。
+在本例中，我们将为每个回合（episode）使用 1000 步，并返回 3 个回合的平均奖励作为适应度值。
 
-### 设置监视器
+### 设置监控器
 
 ```python
 # set an monitor, and it can record the top 3 best fitnesses
@@ -152,8 +152,8 @@ workflow = StdWorkflow(
 运行工作流，见证奇迹！
 
 > **注意：**
-> 以下代码块大约需要 20 分钟运行。
-> 具体时间取决于你的硬件配置。
+> 下面的代码块大约需要运行 20 分钟。
+> 具体时间可能因您的硬件而异。
 
 ```python
 # Set the maximum number of generations
@@ -186,8 +186,8 @@ escaped_string = html_string.replace('"', "&quot;")
 HTML(f'<iframe srcdoc="{escaped_string}" width="100%" height="480" frameborder="0"></iframe>')
 ```
 
-> **重要：**
-> - 通常，你只需要 `HTML(problem.visualize(best_params))` 来渲染。上面的代码是一个变通方案，以确保结果在我们的网站上正确显示。
-> - PSO 算法并非专门为此类任务优化，因此性能限制是预期的。此示例仅用于演示目的。
+> **重要提示：**
+> - 通常情况下，您只需要 `HTML(problem.visualize(best_params))` 即可进行渲染。上面的代码是一个变通方法，以确保结果在我们的网站上正确显示。
+> - PSO 算法并未针对此类任务进行专门优化，因此性能可能会受到限制。本示例仅用于演示目的。
 
-希望你享受使用 EvoX 求解 Brax 问题的过程，祝你玩得开心！
+我们希望您享受使用 EvoX 求解 Brax 问题的过程，祝您玩得开心！

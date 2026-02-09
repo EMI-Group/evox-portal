@@ -1,14 +1,14 @@
 ---
-title: "EvoX-Installationsanleitung"
+title: "EvoX Installationsanleitung"
 order: 2
 section: "install"
 ---
 
-# EvoX-Installationsanleitung
+# EvoX Installationsanleitung
 
 ## EvoX installieren
 
-EvoX ist auf PyPI verfügbar und kann installiert werden über:
+EvoX ist auf PyPI verfügbar und kann wie folgt installiert werden:
 
 ```bash
 # install pytorch first
@@ -19,7 +19,7 @@ pip install torch
 pip install "evox[default]"
 ```
 
-Sie können auch zusätzliche Optionen während der Installation angeben. Derzeit verfügbare Extras sind `vis`, `neuroevolution`, `test`, `docs`, `default`. Um beispielsweise EvoX mit allen Funktionen zu installieren, führen Sie den folgenden Befehl aus:
+Sie können während der Installation auch zusätzliche Optionen zuweisen. Derzeit verfügbare Extras sind `vis`, `neuroevolution`, `test`, `docs`, `default`. Um beispielsweise EvoX mit allen Funktionen zu installieren, führen Sie den folgenden Befehl aus:
 
 ```bash
 pip install "evox[vis,neuroevolution]"
@@ -27,7 +27,7 @@ pip install "evox[vis,neuroevolution]"
 
 ## PyTorch mit Beschleuniger-Unterstützung installieren
 
-`evox` basiert auf `torch` für Hardware-Beschleunigung.
+`evox` verlässt sich auf `torch`, um Hardwarebeschleunigung bereitzustellen.
 Die Gesamtarchitektur dieser Python-Pakete sieht wie folgt aus:
 
 ```{mermaid}
@@ -45,26 +45,26 @@ stateDiagram-v2
     torch --> cpu
 ```
 
-Zusammenfassend hängt es von der installierten PyTorch-Version ab, ob `evox` CPU-Unterstützung oder Nvidia-GPU-Unterstützung (CUDA) oder AMD-GPU-Unterstützung (ROCm) hat. Bitte beziehen Sie sich auf die offizielle PyTorch-Website für weitere Installationshilfe: [`torch`](https://pytorch.org/)
+Zusammenfassend lässt sich sagen, dass die Unterstützung von `evox` für CPU, Nvidia GPU (CUDA) oder AMD GPU (ROCm) von der installierten PyTorch-Version abhängt. Bitte besuchen Sie die offizielle PyTorch-Website für weitere Installationshilfen: [`torch`](https://pytorch.org/)
 
 
-## Nvidia-GPU-Unterstützung unter Windows
+## Nvidia GPU-Unterstützung unter Windows
 
-EvoX unterstützt GPU-Beschleunigung über PyTorch.
+EvoX unterstützt GPU-Beschleunigung durch PyTorch.
 Es gibt zwei Möglichkeiten, PyTorch mit GPU-Beschleunigung unter Windows zu verwenden:
 
 1. Verwendung von WSL 2 (Windows Subsystem for Linux) und Installation von PyTorch auf der Linux-Seite.
 2. Direkte Installation von PyTorch unter Windows.
 
-Für Option 2 bieten wir ein [Ein-Klick-Skript](/_static/win-install.bat) für die schnelle Bereitstellung auf frisch installiertem Windows 10/11 64-Bit mit Nvidia-GPUs. Das Skript verwendet kein WSL 2 und installiert die native PyTorch-Version unter Windows. Es installiert automatisch zugehörige Anwendungen wie VSCode, Git und MiniForge3.
+Für Option 2 stellen wir ein [One-Click-Skript](/_static/win-install.bat) für die schnelle Bereitstellung auf frisch installierten Windows 10/11 64-Bit-Systemen mit Nvidia GPUs zur Verfügung. Das Skript verwendet kein WSL 2 und installiert die native PyTorch-Version unter Windows. Es installiert automatisch verwandte Anwendungen wie VSCode, Git und MiniForge3.
 
-* Stellen Sie sicher, dass der [Nvidia-Treiber](https://www.nvidia.com/Download/index.aspx?lang=en-us) zuerst ordnungsgemäß installiert ist. Andernfalls fällt das Skript auf den CPU-Modus zurück.
-* Stellen Sie beim Ausführen des Skripts eine stabile Netzwerkverbindung sicher (Zugang zu `github.com` usw.).
+* Stellen Sie sicher, dass der [Nvidia-Treiber](https://www.nvidia.com/Download/index.aspx?lang=en-us) zuerst ordnungsgemäß installiert ist. Andernfalls fällt das Skript in den CPU-Modus zurück.
+* Stellen Sie beim Ausführen des Skripts eine stabile Netzwerkverbindung sicher (Zugriff auf `github.com` usw.).
 * Wenn das Skript aufgrund eines Netzwerkfehlers fehlschlägt, schließen Sie es und öffnen Sie es erneut, um die Installation fortzusetzen.
 
 ### Manuelle Installation unter Windows
 
-Wenn Sie PyTorch lieber manuell direkt unter Windows installieren möchten, können Sie die folgenden Schritte befolgen:
+Wenn Sie es vorziehen, PyTorch manuell direkt unter Windows zu installieren, können Sie die folgenden Schritte ausführen:
 1. Installieren Sie den Nvidia-Treiber wie oben erwähnt.
 2. Installieren Sie Python 3.10 oder höher von [python.org](https://www.python.org/downloads/).
 3. Installieren Sie PyTorch.
@@ -73,16 +73,16 @@ Wenn Sie PyTorch lieber manuell direkt unter Windows installieren möchten, kön
 
 ### Windows WSL 2
 
-Laden Sie den [neuesten NVIDIA Windows GPU-Treiber](https://www.nvidia.com/Download/index.aspx?lang=en-us) herunter und installieren Sie ihn. Dann unterstützt Ihr WSL 2 Nvidia-GPUs in seinen Linux-Umgebungen.
+Laden Sie den [neuesten NVIDIA Windows GPU-Treiber](https://www.nvidia.com/Download/index.aspx?lang=en-us) herunter und installieren Sie ihn. Dann unterstützt Ihr WSL 2 Nvidia GPUs in seinen Linux-Umgebungen.
 
 > **Warnung:**
 > Installieren Sie **KEINEN** NVIDIA GPU Linux-Treiber innerhalb von WSL 2. Installieren Sie den Treiber auf der Windows-Seite.
 
 ```{seealso}
-NVIDIA hat einen detaillierten [CUDA on WSL User Guide](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)
+NVIDIA bietet ein detailliertes [Benutzerhandbuch für CUDA auf WSL](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)
 ```
 
-## AMD-GPU (ROCm)-Unterstützung
+## AMD GPU (ROCm) Unterstützung
 
 Wir empfehlen die Verwendung eines Docker-Containers von [`rocm/pytorch`](https://hub.docker.com/r/rocm/pytorch).
 

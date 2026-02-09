@@ -5,7 +5,7 @@ section: "examples"
 ---
 
 # 自定义算法和问题
-在本教程中，我们将展示如何使用 `Algorithm` 和 `Problem` 来创建自定义算法和问题。这里我们将给出一个**实现 PSO 算法求解 Sphere 问题**的示例。
+在本 notebook 中，我们将展示如何使用 `Algorithm` 和 `Problem` 来创建自定义算法和问题。这里我们将给出一个**实现 PSO 算法来求解 Sphere 问题**的示例。
 
 
 ```python
@@ -18,7 +18,7 @@ from evox.workflows import EvalMonitor, StdWorkflow
 
 ## 算法示例：PSO 算法
 
-粒子群优化（PSO）是一种基于种群的元启发式算法，灵感来源于鸟群和鱼群的社会行为。它被广泛用于求解连续和离散优化问题。
+粒子群优化 (PSO) 是一种基于种群的元启发式算法，其灵感来源于鸟类和鱼类的社会行为。它被广泛用于解决连续和离散优化问题。
 
 **以下是 EvoX 中 PSO 算法的实现示例：**
 
@@ -109,7 +109,7 @@ class PSO(Algorithm):
 
 Sphere 问题是一个简单但基础的基准优化问题，用于测试优化算法。
 
-Sphere 函数定义为：
+Sphere 函数定义如下：
 
 $$
 \min f(x)= \sum_{i=1}^{n} x_{i}^{2}
@@ -125,9 +125,9 @@ class Sphere(Problem):
         return (pop**2).sum(-1)
 ```
 
-## 使用算法求解问题
+## 使用算法解决问题
 
-### 初始化算法、问题和监视器
+### 初始化算法、问题和监控器
 
 ```python
 algorithm = PSO(

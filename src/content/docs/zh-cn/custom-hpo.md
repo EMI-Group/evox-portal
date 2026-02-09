@@ -6,23 +6,23 @@ section: "developer"
 
 # 使用自定义算法部署 HPO
 
-在本章中，我们将重点介绍使用自定义算法部署 HPO，着重于细节而非整体工作流。HPO 部署的简要介绍在[教程](#/tutorial/tutorial_part7)中提供，强烈建议先行阅读。
+在本章中，我们将重点介绍如何使用自定义算法部署 HPO，着重于细节而非整体工作流程。关于 HPO 部署的简要介绍已在 [教程](#/tutorial/tutorial_part7) 中提供，强烈建议您先阅读该教程。
 
 ## 使算法可并行化
 
-由于我们需要将内部算法转换为问题，因此内部算法必须是可并行化的。因此，可能需要对算法进行一些修改。
+由于我们需要将内部算法转换为问题，因此内部算法必须是可并行化的，这一点至关重要。因此，可能需要对算法进行一些修改。
 
-1. 算法不应有对算法自身属性进行就地操作的方法。
+1. 算法不应包含对其自身属性进行原地（in-place）操作的方法。
 
 ```python
 class ExampleAlgorithm(Algorithm):
     def __init__(self,...):
-        self.pop = torch.rand(10,10) #算法自身的属性
+        self.pop = torch.rand(10,10) #attribute of the algorithm itself
 
-    def step_in_place(self): # 有就地操作的方法
+    def step_in_place(self): # method with in-place operations
         self.pop.copy_(pop)
 
-    def step_out_of_place(self): # 没有就地操作的方法
+    def step_out_of_place(self): # method without in-place operations
         self.pop = pop
 ```
 
@@ -31,7 +31,7 @@ class ExampleAlgorithm(Algorithm):
 ```python
 class ExampleAlgorithm(Algorithm):
     def __init__(self,...):
-        self.pop = rand(10,10) #算法自身的属性
+        self.pop = rand(10,10) #attribute of the algorithm itself
         pass
 
     def plus(self, y):
@@ -40,14 +40,14 @@ class ExampleAlgorithm(Algorithm):
     def minus(self, y):
         return self.pop - y
 
-    def step_with_python_control_flow(self, y): # 有 Python 控制流的函数
+    def step_with_python_control_flow(self, y): # function with python control flow
         x = rand()
         if x > 0.5:
             self.pop = self.plus(y)
         else:
             self.pop = self.minus(y)
 
-    def step_without_python_control_flow(self, y): # 没有 Python 控制流的函数
+    def step_without_python_control_flow(self, y): # function without python control flow
         x = rand()
         cond = x > 0.5
         self.pop = torch.cond(cond, self.plus, self.minus, y)
@@ -56,15 +56,15 @@ class ExampleAlgorithm(Algorithm):
 
 ## 使用 HPOMonitor
 
-在 HPO 任务中，我们应使用 `HPOMonitor` 来跟踪每个内部算法的指标。与标准 `monitor` 相比，`HPOMonitor` 仅增加了一个方法 `tell_fitness`。这一设计旨在为评估指标提供更大的灵活性，因为 HPO 任务通常涉及多维度和复杂的指标。
+在 HPO 任务中，我们应该使用 `HPOMonitor` 来跟踪每个内部算法的指标。与标准 `monitor` 相比，`HPOMonitor` 仅增加了一个方法 `tell_fitness`。这一新增功能旨在为评估指标提供更大的灵活性，因为 HPO 任务通常涉及多维且复杂的指标。
 
-用户只需创建 `HPOMonitor` 的子类并重写 `tell_fitness` 方法来定义自定义评估指标。
+用户只需创建一个 `HPOMonitor` 的子类并重写 `tell_fitness` 方法，即可定义自定义评估指标。
 
 我们还提供了一个简单的 `HPOFitnessMonitor`，它支持计算多目标问题的 'IGD' 和 'HV' 指标，以及单目标问题的最小值。
 
-## 简单示例
+## 一个简单的示例
 
-这里，我们将演示一个使用 EvoX 进行 HPO 的简单示例。我们将使用 `PSO` 算法来搜索一个基础算法的最优超参数，以求解 sphere 问题。
+在这里，我们将展示一个如何使用 EvoX 进行 HPO 的简单示例。我们将使用 `PSO` 算法来搜索一个基础算法的最佳超参数，以解决 Sphere 问题。
 
 首先，让我们导入必要的模块。
 
@@ -77,7 +77,7 @@ from evox.problems.hpo_wrapper import HPOFitnessMonitor, HPOProblemWrapper
 from evox.workflows import EvalMonitor, StdWorkflow
 ```
 
-接下来，我们定义一个简单的 sphere 问题。注意这与普通的 `problems` 没有区别。
+接下来，我们定义一个简单的 Sphere 问题。请注意，这与普通的 `problems` 没有区别。
 
 ```python
 class Sphere(Problem):
@@ -88,7 +88,7 @@ class Sphere(Problem):
         return (x * x).sum(-1)
 ```
 
-接下来，我们定义算法，使用 `torch.cond` 函数并确保它是可并行化的。具体来说，我们修改就地操作并调整 Python 控制流。
+接下来，我们定义算法，我们使用 `torch.cond` 函数并确保它是可并行化的。具体来说，我们修改了原地操作并调整了 Python 控制流。
 
 ```python
 class ExampleAlgorithm(Algorithm):
@@ -121,7 +121,7 @@ class ExampleAlgorithm(Algorithm):
 
 ```
 
-为了处理 Python 控制流，我们使用 [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html)，接下来，我们可以使用 `StdWorkflow` 来包装 `problem`、`algorithm` 和 `monitor`。然后使用 `HPOProblemWrapper` 将 `StdWorkflow` 转换为 HPO 问题。
+为了处理 Python 控制流，我们使用 [`torch.cond`](https://pytorch.org/docs/stable/generated/torch.cond.html)，接下来，我们可以使用 `StdWorkflow` 来封装 `problem`、`algorithm` 和 `monitor`。然后我们使用 `HPOProblemWrapper` 将 `StdWorkflow` 转换为 HPO 问题。
 
 ```python
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
@@ -135,14 +135,14 @@ inner_workflow.setup(inner_algo, inner_prob, monitor=inner_monitor)
 hpo_prob = HPOProblemWrapper(iterations=9, num_instances=7, workflow=inner_workflow, copy_init_state=True)
 ```
 
-我们可以测试 `HPOProblemWrapper` 是否正确识别了我们定义的超参数。由于我们没有对 7 个实例的超参数进行任何修改，它们在所有实例中应该是相同的。
+我们可以测试 `HPOProblemWrapper` 是否正确识别了我们定义的超参数。由于我们没有对这 7 个实例的超参数进行任何修改，因此它们在所有实例中应该都是相同的。
 
 ```python
 params = hpo_prob.get_init_params()
 print("init params:\n", params)
 ```
 
-我们也可以指定自己的超参数值集合。注意超参数集的数量必须与 `HPOProblemWrapper` 中的实例数量匹配。自定义超参数应以字典形式提供，其值用 `Parameter` 包装。
+我们也可以指定自己的一组超参数值。请注意，超参数组的数量必须与 `HPOProblemWrapper` 中的实例数量相匹配。自定义超参数应以字典形式提供，其值需封装在 `Parameter` 中。
 
 ```python
 params = hpo_prob.get_init_params()
@@ -153,7 +153,7 @@ print("params:\n", params, "\n")
 print("result:\n", result)
 ```
 
-现在，我们使用 `PSO` 算法来优化 `ExampleAlgorithm` 的超参数。注意 `PSO` 的种群大小必须与实例数量匹配；否则可能会出现意外错误。在这种情况下，我们需要在外部工作流中转换解，因为 `HPOProblemWrapper` 需要字典作为输入。
+现在，我们使用 `PSO` 算法来优化 `ExampleAlgorithm` 的超参数。请注意，`PSO` 的种群大小必须与实例数量相匹配；否则，可能会发生意外错误。在这种情况下，我们需要在外部工作流中转换解，因为 `HPOProblemWrapper` 需要字典作为输入。
 
 ```python
 class solution_transform(torch.nn.Module):

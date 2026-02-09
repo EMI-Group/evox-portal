@@ -1,19 +1,19 @@
 ---
-title: "5. Desarrollo y Extension"
+title: "5. Desarrollo y Extensión"
 order: 5
 ---
 
-# 5. Desarrollo y Extension
+# 5. Desarrollo y Extensión
 
-EvoX no solo ofrece funcionalidad lista para usar, sino que tambien proporciona a los desarrolladores y usuarios avanzados un rico conjunto de interfaces para desarrollo personalizado e integracion extendida. Este capitulo detalla como implementar algoritmos y problemas personalizados, como utilizar las APIs de EvoX para un control mas profundo, y como integrar EvoX con otras herramientas para construir aplicaciones mas complejas.
+EvoX no solo ofrece funcionalidad lista para usar, sino que también proporciona a los desarrolladores y usuarios avanzados un conjunto rico de interfaces para el desarrollo personalizado y la integración extendida. Este capítulo detalla cómo implementar algoritmos y problemas personalizados, cómo utilizar las API de EvoX para un control más profundo y cómo integrar EvoX con otras herramientas para construir aplicaciones más complejas.
 
-## 5.1 Desarrollo de Modulos Personalizados
+## 5.1 Desarrollo de Módulos Personalizados
 
-A veces, el problema que estas resolviendo o el algoritmo que deseas usar no esta incluido en la biblioteca estandar de EvoX. En tales casos, puedes desarrollar modulos personalizados usando las interfaces que EvoX proporciona.
+A veces, el problema que está resolviendo o el algoritmo que desea utilizar no está incluido en la biblioteca estándar de EvoX. En tales casos, puede desarrollar módulos personalizados utilizando las interfaces que proporciona EvoX.
 
 ### 5.1.1 Problemas Personalizados (MyProblem)
 
-Si tu funcion objetivo no esta disponible en `evox.problems`, puedes definir la tuya propia heredando de la clase base `evox.core.Problem` (o cumpliendo con la interfaz requerida). Una clase de problema tipica necesita implementar una funcion `evaluate`, que recibe un lote de soluciones (`pop`) y devuelve los valores de aptitud/objetivo correspondientes. Para aprovechar la computacion paralela, EvoX requiere que `evaluate` soporte **entrada por lotes**.
+Si su función objetivo no está disponible en `evox.problems`, puede definir la suya propia heredando de la clase base `evox.core.Problem` (o cumpliendo con la interfaz requerida). Una clase de problema típica necesita implementar una función `evaluate`, que recibe un lote de soluciones (`pop`) y devuelve los valores de fitness/objetivo correspondientes. Para aprovechar el cómputo paralelo, EvoX requiere que `evaluate` admita **entrada por lotes** (batch input).
 
 ```python
 import torch
@@ -29,13 +29,13 @@ class Problem(ModuleBase, ABC):
         return torch.empty(0)
 ```
 
-Por ejemplo, para minimizar la suma de cubos del vector de decision:
+Por ejemplo, para minimizar la suma de los cubos del vector de decisión:
 
 $$
 \min f(x) = \sum_{i=1}^{n} x_i^3
 $$
 
-Puedes implementar una clase `MyProblem` asi:
+Puede implementar una clase `MyProblem` de la siguiente manera:
 
 ```python
 import torch
@@ -50,9 +50,9 @@ class MyProblem(Problem):
         return fitness
 ```
 
-Aqui, `pop` es un tensor de forma `(population_size, dim)`. La funcion `evaluate` devuelve un tensor 1D de valores de aptitud. Para problemas multiobjetivo, puedes devolver un diccionario con claves separadas para cada objetivo.
+Aquí, `pop` es un tensor de forma `(population_size, dim)`. La función `evaluate` devuelve un tensor 1D de valores de fitness. Para problemas multi-objetivo, puede devolver un diccionario con claves separadas para cada objetivo.
 
-Puedes usar tu problema personalizado como uno integrado:
+Puede usar su problema personalizado como uno incorporado:
 
 ```python
 import torch
@@ -67,12 +67,12 @@ initial_fitness = problem.evaluate(initial_pop)
 
 ### 5.1.2 Algoritmos Personalizados (MyAlgorithm)
 
-Crear un algoritmo personalizado es mas complejo, ya que incluye inicializacion, generacion de nuevas soluciones y seleccion. Para crear un nuevo algoritmo, hereda de `evox.core.Algorithm` e implementa al menos:
+Crear un algoritmo personalizado es más complejo, ya que incluye la inicialización, la generación de nuevas soluciones y la selección. Para crear un nuevo algoritmo, herede de `evox.core.Algorithm` e implemente al menos:
 
-- `__init__`: Para la inicializacion.
-- `step`: La logica principal del paso evolutivo.
+- `__init__`: Para la inicialización.
+- `step`: La lógica principal del paso evolutivo.
 
-A continuacion se muestra un ejemplo de implementacion del algoritmo de Optimizacion por Enjambre de Particulas (PSO) en EvoX:
+A continuación se muestra un ejemplo de implementación del algoritmo Particle Swarm Optimization (PSO) en EvoX:
 
 ```python
 import torch
@@ -147,7 +147,7 @@ class PSO(Algorithm):
         self.global_best_fit = torch.min(self.fit)
 ```
 
-Para integrar el algoritmo en un flujo de trabajo:
+Para integrar el algoritmo en un workflow:
 
 ```python
 import torch
@@ -167,17 +167,17 @@ for i in range(10):
     workflow.step()
 ```
 
-### 5.1.3 Otros Modulos Personalizados
+### 5.1.3 Otros Módulos Personalizados
 
-Tambien puedes personalizar `Monitor`, `Operator` o cualquier modulo en EvoX. Por ejemplo, implementar un `MyMonitor` para registrar la diversidad de la poblacion o crear un `MyOperator` para estrategias personalizadas de cruce/mutacion. Consulta las clases base existentes y los ejemplos para entender que metodos sobreescribir.
+También puede personalizar `Monitor`, `Operator` o cualquier módulo en EvoX. Por ejemplo, implemente un `MyMonitor` para registrar la diversidad de la población o cree un `MyOperator` para estrategias personalizadas de cruce/mutación. Consulte las clases base y los ejemplos existentes para comprender qué métodos sobrescribir.
 
 ## 5.2 Uso de la API
 
-EvoX organiza sus APIs en modulos, facilitando la extension y combinacion de componentes.
+EvoX organiza sus API en módulos, lo que facilita la extensión y combinación de componentes.
 
 ### 5.2.1 Algoritmos y Problemas
 
-- **Algoritmos**: Se encuentran en `evox.algorithms.so` (objetivo unico) y `evox.algorithms.mo` (multiobjetivo).
+- **Algoritmos**: Se encuentran en `evox.algorithms.so` (objetivo único) y `evox.algorithms.mo` (multi-objetivo).
 
 ```python
 from evox.algorithms.so import PSO
@@ -185,11 +185,11 @@ from evox.algorithms.mo import RVEA
 ```
 
 - **Problemas**: Se encuentran en `evox.problems`, incluyendo:
-  - `numerical` -- funciones de prueba clasicas (por ejemplo, Ackley, Sphere).
-  - `neuroevolution` -- entornos de RL como Brax.
-  - `hpo_wrapper` -- envolver entrenamiento de ML en problemas de HPO.
+  - `numerical` – funciones de prueba clásicas (ej. Ackley, Sphere).
+  - `neuroevolution` – entornos de RL como Brax.
+  - `hpo_wrapper` – envuelve el entrenamiento de ML en problemas de HPO.
 
-Ejemplo: Envolver un MLP de PyTorch con un entorno Brax:
+Ejemplo: Envolver un MLP de PyTorch con un entorno de Brax:
 
 ```python
 import torch.nn as nn
@@ -206,7 +206,7 @@ problem = BraxProblem(
 )
 ```
 
-Ejemplo: Envolver un proceso de optimizacion para HPO:
+Ejemplo: Envolver un proceso de optimización para HPO:
 
 ```python
 from evox.problems.hpo_wrapper import HPOProblemWrapper
@@ -219,10 +219,10 @@ hpo_problem = HPOProblemWrapper(
 )
 ```
 
-### 5.2.2 Flujos de Trabajo y Herramientas
+### 5.2.2 Workflows y Herramientas
 
-- **Flujos de Trabajo**: `evox.workflows.StdWorkflow` para bucles de optimizacion basicos.
-- **Monitores**: `EvalMonitor` para rastrear el rendimiento.
+- **Workflows**: `evox.workflows.StdWorkflow` para bucles de optimización básicos.
+- **Monitors**: `EvalMonitor` para el seguimiento del rendimiento.
 
 Ejemplo:
 
@@ -231,42 +231,42 @@ workflow = StdWorkflow(algorithm, problem, monitor)
 compiled_step = torch.compile(workflow.step)
 for i in range(10):
     compiled_step()
-    print("Mejor aptitud:", monitor.topk_fitness)
+    print("Top fitness:", monitor.topk_fitness)
 ```
 
-- **Metricas**: `evox.metrics` proporciona IGD, Hipervolumen, etc.
+- **Metrics**: `evox.metrics` proporciona IGD, Hypervolume, etc.
 
 ```python
 from evox.metrics import igd
 igd_value = igd(current_population, true_pareto_front)
 ```
 
-- **Interoperabilidad con PyTorch**: Integracion transparente con `torch.nn`, `torch.Tensor`, etc.
+- **Interoperabilidad con PyTorch**: Integración fluida con `torch.nn`, `torch.Tensor`, etc.
 
-## 5.3 Integracion con Otras Herramientas
+## 5.3 Integración con Otras Herramientas
 
-EvoX esta disenado para integrarse facilmente con herramientas externas.
+EvoX está diseñado para integrarse fácilmente con herramientas externas.
 
-### 5.3.1 Integracion con Aprendizaje Automatico
+### 5.3.1 Integración con Machine Learning
 
-Usa EvoX para ajustar hiperparametros:
+Use EvoX para ajustar hiperparámetros:
 
-1. Envuelve el entrenamiento/validacion como un `Problem`.
-2. Usa un algoritmo como CMA-ES.
-3. Optimiza hiperparametros a traves de multiples ejecuciones.
-4. Entrena el modelo final con los mejores parametros.
+1. Envuelva el entrenamiento/validación como un `Problem`.
+2. Use un algoritmo como CMA-ES.
+3. Optimice los hiperparámetros a lo largo de múltiples ejecuciones.
+4. Entrene el modelo final con los mejores parámetros.
 
-### 5.3.2 Integracion con Aprendizaje por Refuerzo
+### 5.3.2 Integración con Reinforcement Learning
 
-Usa EvoX para evolucionar politicas de redes neuronales:
+Use EvoX para evolucionar políticas de redes neuronales:
 
-1. Envuelve el entorno de RL usando `BraxProblem`.
-2. Aplana la red de politicas usando `ParamsAndVector`.
-3. Optimiza usando algoritmos evolutivos como GA o CMA-ES.
-4. Despliega las politicas optimizadas directamente o ajustalas con RL.
+1. Envuelva el entorno de RL usando `BraxProblem`.
+2. Aplane la red de políticas usando `ParamsAndVector`.
+3. Optimice utilizando algoritmos evolutivos como GA o CMA-ES.
+4. Despliegue las políticas optimizadas directamente o ajústelas con RL.
 
-EvoX soporta simulacion de entornos por lotes para aprovechar completamente la potencia de GPU/CPU.
+EvoX admite la simulación de entornos por lotes para utilizar plenamente la potencia de la GPU/CPU.
 
 ---
 
-**En resumen**, EvoX proporciona APIs poderosas y modulares y un diseno amigable para desarrolladores para implementar algoritmos personalizados, envolver cualquier problema de optimizacion e integrarse con herramientas de ML y RL. A medida que profundices tu comprension, puedes aplicar creativamente estas interfaces para construir soluciones de optimizacion a medida.
+**En resumen**, EvoX proporciona API potentes y modulares, y un diseño amigable para el desarrollador para implementar algoritmos personalizados, envolver cualquier problema de optimización e integrarse con herramientas de ML y RL. A medida que profundice su comprensión, podrá aplicar creativamente estas interfaces para construir soluciones de optimización a medida.
