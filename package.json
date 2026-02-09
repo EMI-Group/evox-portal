@@ -11,13 +11,14 @@
   "dependencies": {
     "@astrojs/vercel": "^9.0.4",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.9",
+    "@vercel/analytics": "^1.6.1",
+    "astro": "^5.17.1",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.66",
+    "@iconify-json/simple-icons": "^1.2.70",
     "@tailwindcss/typography": "^0.5.19",
     "playwright": "^1.58.2"
   }
