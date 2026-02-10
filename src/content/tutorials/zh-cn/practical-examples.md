@@ -13,19 +13,15 @@ order: 7
 
 **问题**：优化经典的 Rastrigin 函数：
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 其中 $\mathbf{x} \in \mathbb{R}^d$， $d$ 为维度。全局最优值为 0，位于原点。该函数具有高度多模态性，非常适合用于测试全局优化算法。下面是 Rastrigin 函数的图像
 
-```{figure} /_static/rastrigin_function.svg
-:alt: Rastrigin 函数图像
-:figwidth: 70%
-:align: center
+![Rastrigin 函数图像](/_static/rastrigin_function.svg)
 
-Rastrigin 函数
-```
+*Rastrigin 函数*
 
 在本例中，我们将使用粒子群优化 (PSO) 算法来优化 10 维 Rastrigin 函数。
 
@@ -100,7 +96,7 @@ Final Best Solution: tensor([...])
 
 **问题**：最小化两个目标：
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 我们可以使用 Matplotlib 可视化结果。蓝点代表优化后的种群，红线显示 Pareto 前沿。
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: NSGA-II 种群图像
-:figwidth: 70%
-:align: center
+![NSGA-II 种群图像](/_static/example_nsga2_result.svg)
 
-优化后的 NSGA-II 种群图像
-```
+*优化后的 NSGA-II 种群图像*
 
 在 Jupyter Notebook 中，您可以使用 EvoX 内置的绘图功能来可视化优化过程，并监控种群随代数的演变情况。
 

@@ -30,7 +30,7 @@ pip install "evox[vis,neuroevolution]"
 `evox`는 하드웨어 가속을 제공하기 위해 `torch`에 의존합니다.
 이러한 Python 패키지들의 전체적인 아키텍처는 다음과 같습니다:
 
-```{mermaid}
+```mermaid
 stateDiagram-v2
     torch : torch
     nv_gpu : NVIDIA GPU
@@ -78,9 +78,7 @@ Windows에 PyTorch를 직접 수동으로 설치하고 싶다면 다음 단계�
 > **경고:**
 > WSL 2 내부에 NVIDIA GPU Linux 드라이버를 설치하지 **마세요**. 드라이버는 Windows 측에 설치해야 합니다.
 
-```{seealso}
-NVIDIA는 자세한 [CUDA on WSL 사용자 가이드](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)를 제공합니다.
-```
+> NVIDIA는 자세한 [CUDA on WSL 사용자 가이드](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)를 제공합니다.
 
 ## AMD GPU (ROCm) 지원
 

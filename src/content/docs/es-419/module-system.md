@@ -66,7 +66,7 @@ Específicamente, existen algunas reglas para usar `ModuleBase` en EvoX:
 
 Los métodos estáticos que serán procesados por JIT deben definirse como:
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

@@ -30,7 +30,7 @@ pip install "evox[vis,neuroevolution]"
 `evox` はハードウェアアクセラレーションを提供するために `torch` に依存しています。
 これらの Python パッケージの全体的なアーキテクチャは以下のようになります。
 
-```{mermaid}
+```mermaid
 stateDiagram-v2
     torch : torch
     nv_gpu : NVIDIA GPU
@@ -78,9 +78,7 @@ Windows に直接 PyTorch を手動でインストールしたい場合は、以
 > **警告:**
 > WSL 2 内には NVIDIA GPU Linux ドライバーを**インストールしないでください**。ドライバーは Windows 側にインストールしてください。
 
-```{seealso}
-NVIDIA による詳細な [CUDA on WSL ユーザーガイド](https://docs.nvidia.com/cuda/wsl-user-guide/index.html) があります。
-```
+> NVIDIA による詳細な [CUDA on WSL ユーザーガイド](https://docs.nvidia.com/cuda/wsl-user-guide/index.html) があります。
 
 ## AMD GPU (ROCm) サポート
 
