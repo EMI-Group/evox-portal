@@ -90,7 +90,7 @@ Com um adaptador, podemos começar a realizar esta tarefa de Neuroevolução.
 
 ### Inicializando um algoritmo e um problema
 
-Inicializamos um [algoritmo PSO](#evox.algorithms.so.pso_variants.pso.PSO), e o problema é um [problema Brax](#evox.problems.neuroevolution.brax.BraxProblem) no ambiente "swimmer".
+Inicializamos um `algoritmo PSO`, e o problema é um `problema Brax` no ambiente "swimmer".
 
 ```python
 # Set the population size

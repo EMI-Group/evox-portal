@@ -90,7 +90,7 @@ adapter = ParamsAndVector(dummy_model=model)
 
 ### アルゴリズムと問題の初期化
 
-[PSOアルゴリズム](#evox.algorithms.so.pso_variants.pso.PSO)を初期化し、問題として「swimmer」環境の[Brax問題](#evox.problems.neuroevolution.brax.BraxProblem)を設定します。
+`PSOアルゴリズム`を初期化し、問題として「swimmer」環境の`Brax問題`を設定します。
 
 ```python
 # Set the population size

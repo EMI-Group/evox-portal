@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 我們提供了一個 `HPOFitnessMonitor`，它支援計算多目標問題的 'IGD' 和 'HV' 指標，以及單目標問題的最小值。
 
-值得注意的是，`HPOFitnessMonitor` 是一個專為 HPO 問題設計的基礎監控器。您也可以按照 [使用自定義演算法部署 HPO](#/guide/developer/custom_hpo_prob) 中概述的方法，靈活地創建自定義監控器。
+值得注意的是，`HPOFitnessMonitor` 是一個專為 HPO 問題設計的基礎監控器。您也可以按照 [使用自定義演算法部署 HPO](../custom-hpo) 中概述的方法，靈活地創建自定義監控器。
 
 ## 一個簡單的範例
 
-在這裡，我們將展示一個使用 EvoX 進行 HPO 的簡單範例。具體來說，我們將使用 [PSO](#PSO) 演算法來優化用於解決 Sphere 問題的 [PSO](#PSO) 演算法的超參數。
+在這裡，我們將展示一個使用 EvoX 進行 HPO 的簡單範例。具體來說，我們將使用 `PSO` 演算法來優化用於解決 Sphere 問題的 `PSO` 演算法的超參數。
 
-請注意，本章僅提供 HPO 部署的簡要概述。有關更詳細的指南，請參閱 [使用自定義演算法部署 HPO](#/guide/developer/custom_hpo_prob)。
+請注意，本章僅提供 HPO 部署的簡要概述。有關更詳細的指南，請參閱 [使用自定義演算法部署 HPO](../custom-hpo)。
 
 首先，讓我們導入必要的模組。
 
@@ -106,9 +106,9 @@ result = hpo_prob.evaluate(params)
 print("The result of the first 3 parameter sets:\n", result[:3])
 ```
 
-現在，我們使用 [PSO](#PSO) 演算法來優化 [PSO](#PSO) 演算法的超參數。
+現在，我們使用 `PSO` 演算法來優化 `PSO` 演算法的超參數。
 
-務必確保 [PSO](#PSO) 的種群大小與實例數量相匹配；否則可能會發生意外錯誤。
+務必確保 `PSO` 的種群大小與實例數量相匹配；否則可能會發生意外錯誤。
 
 此外，解需要在外部 workflow 中進行轉換，因為 `HPOProblemWrapper` 要求輸入必須是字典形式。
 

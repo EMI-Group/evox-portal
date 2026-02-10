@@ -293,7 +293,7 @@ def neuroevolution_process(
 
 ### 개체군 기반 신경진화 테스트
 
-이 예제에서는 입자 군집 최적화(Particle Swarm Optimization, [PSO](#evox.algorithms.so.pso_variants.pso.PSO))를 대표로 사용하여 개체군 기반 신경진화 알고리즘을 먼저 테스트합니다. 신경진화 설정은 다른 최적화 작업과 유사합니다. 문제(problem), 알고리즘(algorithm), 모니터(monitor), 워크플로우(workflow)를 정의하고 각각의 `setup()` 함수를 호출하여 초기화를 완료해야 합니다.
+이 예제에서는 입자 군집 최적화(Particle Swarm Optimization, `PSO`)를 대표로 사용하여 개체군 기반 신경진화 알고리즘을 먼저 테스트합니다. 신경진화 설정은 다른 최적화 작업과 유사합니다. 문제(problem), 알고리즘(algorithm), 모니터(monitor), 워크플로우(workflow)를 정의하고 각각의 `setup()` 함수를 호출하여 초기화를 완료해야 합니다.
 
 여기서 주의할 점은 잠재적인 오류를 방지하기 위해 개체군 크기(이 경우 `POP_SIZE`)를 **문제와 알고리즘 모두**에서 초기화해야 한다는 것입니다.
 

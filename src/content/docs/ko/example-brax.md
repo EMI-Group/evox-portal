@@ -90,7 +90,7 @@ Adapter를 사용하여 이 신경진화(Neuroevolution) 작업을 시작할 수
 
 ### 알고리즘 및 문제 초기화
 
-[PSO 알고리즘](#evox.algorithms.so.pso_variants.pso.PSO)을 초기화하고, 문제는 "swimmer" 환경의 [Brax 문제](#evox.problems.neuroevolution.brax.BraxProblem)로 설정합니다.
+`PSO 알고리즘`을 초기화하고, 문제는 "swimmer" 환경의 `Brax 문제`로 설정합니다.
 
 ```python
 # Set the population size

@@ -90,7 +90,7 @@ adapter = ParamsAndVector(dummy_model=model)
 
 ### 初始化算法和问题
 
-我们初始化一个 [PSO 算法](#evox.algorithms.so.pso_variants.pso.PSO)，问题是在 "swimmer" 环境下的 [Brax 问题](#evox.problems.neuroevolution.brax.BraxProblem)。
+我们初始化一个 `PSO 算法`，问题是在 "swimmer" 环境下的 `Brax 问题`。
 
 ```python
 # Set the population size
