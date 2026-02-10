@@ -267,26 +267,26 @@ const ecosystem = allLibs.slice(0, 3);
       <div class="bg-white py-16">
         <div class="max-w-[1280px] mx-auto px-4">
           <!-- Tab Bar -->
-          <div class="flex justify-between mb-8 pt-4 items-end min-h-[5rem]">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-3 mb-8 pt-4 sm:items-end sm:min-h-[5rem]">
             <button
-              class="example-tab active flex flex-col items-center gap-2 px-6 cursor-pointer"
+              class="example-tab active flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="0"
             >
-              <img src="/arrow_1.png" alt="" class="h-6 tab-icon" />
+              <img src="/arrow_1.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.singleObj")}
             </button>
             <button
-              class="example-tab flex flex-col items-center gap-2 px-6 cursor-pointer"
+              class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="1"
             >
-              <img src="/arrow_2.png" alt="" class="h-6 tab-icon" />
+              <img src="/arrow_2.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.multiObj")}
             </button>
             <button
-              class="example-tab flex flex-col items-center gap-2 px-6 cursor-pointer"
+              class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="2"
             >
-              <img src="/arrow_3.png" alt="" class="h-6 tab-icon" />
+              <img src="/arrow_3.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.neuro")}
             </button>
           </div>
@@ -295,7 +295,7 @@ const ecosystem = allLibs.slice(0, 3);
           <div class="example-panel" data-panel="0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
-                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
+                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
               >
                 <Code
                   code={codeSingleObj}
@@ -314,7 +314,7 @@ const ecosystem = allLibs.slice(0, 3);
           <div class="example-panel hidden" data-panel="1">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
-                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
+                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
               >
                 <Code
                   code={codeMultiObj}
@@ -333,7 +333,7 @@ const ecosystem = allLibs.slice(0, 3);
           <div class="example-panel hidden" data-panel="2">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
-                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117]"
+                class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
               >
                 <Code
                   code={codeNeuro}
@@ -417,6 +417,10 @@ const ecosystem = allLibs.slice(0, 3);
     color: #9ca3af;
     font-size: 1.25rem;
     font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
     transition:
       color 0.3s ease,
       font-size 0.3s ease;
@@ -443,6 +447,16 @@ const ecosystem = allLibs.slice(0, 3);
   .example-tab.active .tab-icon {
     opacity: 1;
     filter: grayscale(0%);
+  }
+
+  @media (max-width: 640px) {
+    .example-tab {
+      font-size: 1rem;
+    }
+
+    .example-tab.active {
+      font-size: 1.125rem;
+    }
   }
 </style>
 
