@@ -66,7 +66,7 @@ EvoX에서 `ModuleBase`는 다음을 돕습니다:
 
 JIT 컴파일될 정적 메서드는 다음과 같이 정의해야 합니다:
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

@@ -13,19 +13,15 @@ order: 7
 
 **問題**：優化經典的 Rastrigin 函數：
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 其中 $\mathbf{x} \in \mathbb{R}^d$，而 $d$ 是維度。全域最優值位於原點，值為 0。該函數具有高度多模態特性，使其成為測試全域優化演算法的理想選擇。以下是 Rastrigin 函數的繪圖
 
-```{figure} /_static/rastrigin_function.svg
-:alt: Rastrigin 函數的繪圖
-:figwidth: 70%
-:align: center
+![Rastrigin 函數的繪圖](/_static/rastrigin_function.svg)
 
-Rastrigin 函數
-```
+*Rastrigin 函數*
 
 在本範例中，我們將使用粒子群優化 (PSO) 演算法來優化 10 維的 Rastrigin 函數。
 
@@ -100,7 +96,7 @@ Final Best Solution: tensor([...])
 
 **問題**：最小化兩個目標：
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 我們可以使用 Matplotlib 將結果視覺化。藍點代表優化後的種群，紅線則顯示 Pareto 前沿。
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: NSGA-II 種群繪圖
-:figwidth: 70%
-:align: center
+![NSGA-II 種群繪圖](/_static/example_nsga2_result.svg)
 
-優化後的 NSGA-II 種群繪圖
-```
+*優化後的 NSGA-II 種群繪圖*
 
 在 Jupyter Notebook 中，您可以使用 EvoX 內建的繪圖功能來視覺化優化過程，並監控種群隨世代演變的情況。
 

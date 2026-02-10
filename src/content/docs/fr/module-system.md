@@ -66,7 +66,7 @@ Plus précisément, il existe certaines règles pour utiliser `ModuleBase` dans 
 
 Les méthodes statiques devant être compilées JIT doivent être définies comme suit :
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

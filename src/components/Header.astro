@@ -175,11 +175,68 @@ const navLinks = [
         </div>
       </nav>
 
-      <div class="md:hidden">
-        <button class="text-gray-300 hover:text-white p-2">
+      <details class="relative md:hidden">
+        <summary class="list-none text-gray-300 hover:text-white p-2 cursor-pointer">
+          <span class="sr-only">Open menu</span>
           <Icon name="heroicons:ellipsis-horizontal-20-solid" class="h-6 w-6" />
-        </button>
-      </div>
+        </summary>
+        <div class="absolute right-0 top-full mt-2 w-[min(88vw,20rem)] bg-[rgb(22,27,48)] rounded-lg shadow-xl ring-1 ring-white/10 overflow-hidden z-50">
+          <nav class="py-2">
+            {
+              navLinks.map((link) => (
+                link.dropdown ? (
+                  <details class="border-b border-white/5 last:border-b-0">
+                    <summary class="list-none flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-100 cursor-pointer hover:bg-white/10">
+                      {link.label}
+                      <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4" />
+                    </summary>
+                    <div class="pb-2">
+                      {link.dropdown.map((item) => (
+                        <a
+                          href={item.href}
+                          target={item.href.startsWith("http") ? "_blank" : undefined}
+                          class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  </details>
+                ) : (
+                  <a
+                    href={link.href}
+                    class="block px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10"
+                  >
+                    {link.label}
+                  </a>
+                )
+              ))
+            }
+
+            <details class="border-t border-white/10 mt-1">
+              <summary class="list-none flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-100 cursor-pointer hover:bg-white/10">
+                {localeNames[locale]}
+                <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4" />
+              </summary>
+              <div class="max-h-64 overflow-y-auto pb-2">
+                {locales.map((loc) => (
+                  <a
+                    href={getLocalizedUrl(currentPath, loc)}
+                    class:list={[
+                      "block px-6 py-2 text-sm transition-colors",
+                      loc === locale
+                        ? "text-teal-400 font-bold"
+                        : "text-gray-300 hover:bg-white/10 hover:text-white",
+                    ]}
+                  >
+                    {localeNames[loc]}
+                  </a>
+                ))}
+              </div>
+            </details>
+          </nav>
+        </div>
+      </details>
     </div>
   </div>
 </header>

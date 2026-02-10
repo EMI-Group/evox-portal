@@ -66,7 +66,7 @@ section: "developer"
 
 需要進行 JIT 編譯的靜態方法應定義如下：
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

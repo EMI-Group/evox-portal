@@ -13,19 +13,15 @@ order: 7
 
 **Задача**: Оптимизация классической функции Растригина:
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 где $\mathbf{x} \in \mathbb{R}^d$, а $d$ — размерность. Глобальный оптимум равен 0 в начале координат. Функция является высокомультимодальной, что делает её идеальной для тестирования алгоритмов глобальной оптимизации. Ниже представлен график функции Растригина:
 
-```{figure} /_static/rastrigin_function.svg
-:alt: A plot of the Rastrigin function
-:figwidth: 70%
-:align: center
+![A plot of the Rastrigin function](/_static/rastrigin_function.svg)
 
-Функция Растригина
-```
+*Функция Растригина*
 
 В этом примере мы будем использовать алгоритм Particle Swarm Optimization (PSO) для оптимизации 10-мерной функции Растригина.
 
@@ -100,7 +96,7 @@ Final Best Solution: tensor([...])
 
 **Задача**: Минимизация двух целевых функций:
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 Мы можем визуализировать результаты с помощью Matplotlib. Синие точки представляют оптимизированную популяцию, а красная линия — фронт Парето.
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: A plot of the NSGA-II population
-:figwidth: 70%
-:align: center
+![A plot of the NSGA-II population](/_static/example_nsga2_result.svg)
 
-График популяции NSGA-II после оптимизации
-```
+*График популяции NSGA-II после оптимизации*
 
 В Jupyter Notebook вы можете использовать встроенные возможности визуализации EvoX для отслеживания процесса оптимизации и того, как популяция эволюционирует с течением поколений.
 

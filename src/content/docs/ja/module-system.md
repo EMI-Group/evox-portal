@@ -66,7 +66,7 @@ EvoXにおいて、`ModuleBase` は以下のことに役立ちます：
 
 JITコンパイルされる静的メソッドは、以下のように定義する必要があります：
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

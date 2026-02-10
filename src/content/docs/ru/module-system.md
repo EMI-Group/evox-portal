@@ -65,7 +65,7 @@ section: "developer"
 
 Статические методы, подлежащие JIT-компиляции, должны быть определены следующим образом:
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

@@ -30,7 +30,7 @@ pip install "evox[vis,neuroevolution]"
 `evox` 依賴 `torch` 來提供硬體加速。
 這些 Python 套件的整體架構如下所示：
 
-```{mermaid}
+```mermaid
 stateDiagram-v2
     torch : torch
     nv_gpu : NVIDIA GPU
@@ -78,9 +78,7 @@ EvoX 透過 PyTorch 支援 GPU 加速。
 > **警告：**
 > 請 **勿** 在 WSL 2 內部安裝任何 NVIDIA GPU Linux 驅動程式。請在 Windows 端安裝驅動程式。
 
-```{seealso}
-NVIDIA 提供了詳細的 [CUDA on WSL 使用者指南](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)
-```
+> NVIDIA 提供了詳細的 [CUDA on WSL 使用者指南](https://docs.nvidia.com/cuda/wsl-user-guide/index.html)
 
 ## AMD GPU (ROCm) 支援
 

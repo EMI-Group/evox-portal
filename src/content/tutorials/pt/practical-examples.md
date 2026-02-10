@@ -13,19 +13,15 @@ Este capítulo apresenta vários exemplos práticos e completos para demonstrar 
 
 **Problema**: Otimizar a clássica função Rastrigin:
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 onde $\mathbf{x} \in \mathbb{R}^d$ e $d$ é a dimensionalidade. O ótimo global é 0 na origem. A função é altamente multimodal, o que a torna ideal para testar algoritmos de otimização global. Aqui está um gráfico da função Rastrigin:
 
-```{figure} /_static/rastrigin_function.svg
-:alt: Um gráfico da função Rastrigin
-:figwidth: 70%
-:align: center
+![Um gráfico da função Rastrigin](/_static/rastrigin_function.svg)
 
-Função Rastrigin
-```
+*Função Rastrigin*
 
 Neste exemplo, utilizaremos o algoritmo Particle Swarm Optimization (PSO) para otimizar a função Rastrigin de 10 dimensões.
 
@@ -100,7 +96,7 @@ O algoritmo PSO encontra uma solução quase ótima perto da origem, como espera
 
 **Problema**: Minimizar dois objetivos:
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 Podemos visualizar os resultados utilizando Matplotlib. Os pontos azuis representam a população otimizada, enquanto a linha vermelha mostra a fronteira de Pareto.
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: Um gráfico da população NSGA-II
-:figwidth: 70%
-:align: center
+![Um gráfico da população NSGA-II](/_static/example_nsga2_result.svg)
 
-Um gráfico da população NSGA-II após a otimização
-```
+*Um gráfico da população NSGA-II após a otimização*
 
 No Jupyter Notebook, pode utilizar as capacidades de visualização integradas do EvoX para visualizar o processo de otimização e monitorizar como a população evolui ao longo das gerações.
 
