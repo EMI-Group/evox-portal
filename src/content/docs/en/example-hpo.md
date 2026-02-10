@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 We provide an `HPOFitnessMonitor` that supports calculating 'IGD' and 'HV' metrics for multi-objective problems, as well as the minimum value for single-objective problems.
 
-It is important to note that the `HPOFitnessMonitor` is a basic monitor designed for HPO problems. You can also create your own customized monitor flexibly using the approach outlined in [Deploy HPO with Custom Algorithms](#/guide/developer/custom_hpo_prob).
+It is important to note that the `HPOFitnessMonitor` is a basic monitor designed for HPO problems. You can also create your own customized monitor flexibly using the approach outlined in [Deploy HPO with Custom Algorithms](../custom-hpo).
 
 ## A simple example
 
-Here, we'll demonstrate a simple example of using EvoX for HPO. Specifically, we will use the [PSO](#PSO) algorithm to optimize the hyper-parameters of the [PSO](#PSO) algorithm for solving the sphere problem.
+Here, we'll demonstrate a simple example of using EvoX for HPO. Specifically, we will use the `PSO` algorithm to optimize the hyper-parameters of the `PSO` algorithm for solving the sphere problem.
 
-Please note that this chapter provides only a brief overview of HPO deployment. For a more detailed guide, refer to [Deploy HPO with Custom Algorithms](#/guide/developer/custom_hpo_prob).
+Please note that this chapter provides only a brief overview of HPO deployment. For a more detailed guide, refer to [Deploy HPO with Custom Algorithms](../custom-hpo).
 
 To start, let's import the necessary modules.
 
@@ -106,9 +106,9 @@ result = hpo_prob.evaluate(params)
 print("The result of the first 3 parameter sets:\n", result[:3])
 ```
 
-Now, we use the [PSO](#PSO) algorithm to optimize the hyperparameters of the [PSO](#PSO) algorithm.
+Now, we use the `PSO` algorithm to optimize the hyperparameters of the `PSO` algorithm.
 
-It is important to ensure that the population size of the [PSO](#PSO) matches the number of instances; otherwise, unexpected errors may occur.
+It is important to ensure that the population size of the `PSO` matches the number of instances; otherwise, unexpected errors may occur.
 
 Additionally, the solution needs to be transformed in the outer workflow, as the `HPOProblemWrapper` requires the input to be in the form of a dictionary.
 

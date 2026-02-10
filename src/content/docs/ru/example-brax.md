@@ -90,7 +90,7 @@ adapter = ParamsAndVector(dummy_model=model)
 
 ### Инициализация алгоритма и задачи
 
-Мы инициализируем [алгоритм PSO](#evox.algorithms.so.pso_variants.pso.PSO), а задачей будет [задача Brax](#evox.problems.neuroevolution.brax.BraxProblem) в среде "swimmer".
+Мы инициализируем `алгоритм PSO`, а задачей будет `задача Brax` в среде "swimmer".
 
 ```python
 # Set the population size

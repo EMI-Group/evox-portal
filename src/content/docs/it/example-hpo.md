@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 Forniamo un `HPOFitnessMonitor` che supporta il calcolo delle metriche 'IGD' e 'HV' per problemi multi-obiettivo, così come il valore minimo per problemi a singolo obiettivo.
 
-È importante notare che `HPOFitnessMonitor` è un monitor di base progettato per problemi HPO. Puoi anche creare il tuo monitor personalizzato in modo flessibile utilizzando l'approccio descritto in [Deployment di HPO con Algoritmi Personalizzati](#/guide/developer/custom_hpo_prob).
+È importante notare che `HPOFitnessMonitor` è un monitor di base progettato per problemi HPO. Puoi anche creare il tuo monitor personalizzato in modo flessibile utilizzando l'approccio descritto in [Deployment di HPO con Algoritmi Personalizzati](../custom-hpo).
 
 ## Un semplice esempio
 
-Qui mostreremo un semplice esempio di utilizzo di EvoX per l'HPO. Nello specifico, utilizzeremo l'algoritmo [PSO](#PSO) per ottimizzare gli iperparametri dell'algoritmo [PSO](#PSO) per risolvere il problema della sfera (sphere problem).
+Qui mostreremo un semplice esempio di utilizzo di EvoX per l'HPO. Nello specifico, utilizzeremo l'algoritmo `PSO` per ottimizzare gli iperparametri dell'algoritmo `PSO` per risolvere il problema della sfera (sphere problem).
 
-Si noti che questo capitolo fornisce solo una breve panoramica del deployment dell'HPO. Per una guida più dettagliata, fare riferimento a [Deployment di HPO con Algoritmi Personalizzati](#/guide/developer/custom_hpo_prob).
+Si noti che questo capitolo fornisce solo una breve panoramica del deployment dell'HPO. Per una guida più dettagliata, fare riferimento a [Deployment di HPO con Algoritmi Personalizzati](../custom-hpo).
 
 Per iniziare, importiamo i moduli necessari.
 
@@ -106,9 +106,9 @@ result = hpo_prob.evaluate(params)
 print("The result of the first 3 parameter sets:\n", result[:3])
 ```
 
-Ora, utilizziamo l'algoritmo [PSO](#PSO) per ottimizzare gli iperparametri dell'algoritmo [PSO](#PSO).
+Ora, utilizziamo l'algoritmo `PSO` per ottimizzare gli iperparametri dell'algoritmo `PSO`.
 
-È importante assicurarsi che la dimensione della popolazione del [PSO](#PSO) corrisponda al numero di istanze; in caso contrario, potrebbero verificarsi errori imprevisti.
+È importante assicurarsi che la dimensione della popolazione del `PSO` corrisponda al numero di istanze; in caso contrario, potrebbero verificarsi errori imprevisti.
 
 Inoltre, la soluzione deve essere trasformata nel workflow esterno, poiché `HPOProblemWrapper` richiede che l'input sia sotto forma di dizionario.
 

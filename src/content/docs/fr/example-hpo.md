@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 Nous fournissons un `HPOFitnessMonitor` qui prend en charge le calcul des métriques 'IGD' et 'HV' pour les problèmes multi-objectifs, ainsi que la valeur minimale pour les problèmes mono-objectifs.
 
-Il est important de noter que le `HPOFitnessMonitor` est un moniteur de base conçu pour les problèmes HPO. Vous pouvez également créer votre propre moniteur personnalisé de manière flexible en utilisant l'approche décrite dans [Déployer l'HPO avec des Algorithmes Personnalisés](#/guide/developer/custom_hpo_prob).
+Il est important de noter que le `HPOFitnessMonitor` est un moniteur de base conçu pour les problèmes HPO. Vous pouvez également créer votre propre moniteur personnalisé de manière flexible en utilisant l'approche décrite dans [Déployer l'HPO avec des Algorithmes Personnalisés](../custom-hpo).
 
 ## Un exemple simple
 
-Ici, nous allons démontrer un exemple simple d'utilisation d'EvoX pour l'HPO. Plus précisément, nous utiliserons l'algorithme [PSO](#PSO) pour optimiser les hyperparamètres de l'algorithme [PSO](#PSO) afin de résoudre le problème de la sphère.
+Ici, nous allons démontrer un exemple simple d'utilisation d'EvoX pour l'HPO. Plus précisément, nous utiliserons l'algorithme `PSO` pour optimiser les hyperparamètres de l'algorithme `PSO` afin de résoudre le problème de la sphère.
 
-Veuillez noter que ce chapitre ne fournit qu'un bref aperçu du déploiement de l'HPO. Pour un guide plus détaillé, reportez-vous à [Déployer l'HPO avec des Algorithmes Personnalisés](#/guide/developer/custom_hpo_prob).
+Veuillez noter que ce chapitre ne fournit qu'un bref aperçu du déploiement de l'HPO. Pour un guide plus détaillé, reportez-vous à [Déployer l'HPO avec des Algorithmes Personnalisés](../custom-hpo).
 
 Pour commencer, importons les modules nécessaires.
 
@@ -106,9 +106,9 @@ result = hpo_prob.evaluate(params)
 print("The result of the first 3 parameter sets:\n", result[:3])
 ```
 
-Maintenant, nous utilisons l'algorithme [PSO](#PSO) pour optimiser les hyperparamètres de l'algorithme [PSO](#PSO).
+Maintenant, nous utilisons l'algorithme `PSO` pour optimiser les hyperparamètres de l'algorithme `PSO`.
 
-Il est important de s'assurer que la taille de la population du [PSO](#PSO) correspond au nombre d'instances ; sinon, des erreurs inattendues peuvent survenir.
+Il est important de s'assurer que la taille de la population du `PSO` correspond au nombre d'instances ; sinon, des erreurs inattendues peuvent survenir.
 
 De plus, la solution doit être transformée dans le workflow externe, car le `HPOProblemWrapper` nécessite que l'entrée soit sous la forme d'un dictionnaire.
 

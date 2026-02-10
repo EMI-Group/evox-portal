@@ -12,7 +12,7 @@ Este notebook irá introduzir o module básico no EvoX: `ModuleBase`.
 
 ## Introdução ao Module
 
-No [tutorial](#/tutorial/index), mencionámos o processo de execução básico no EvoX:
+No [tutorial](../../tutorials), mencionámos o processo de execução básico no EvoX:
 
 <center><b>Iniciar um algoritmo e um problema -- Definir um monitor -- Iniciar um workflow -- Executar o workflow</b></center>
 
