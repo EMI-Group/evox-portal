@@ -46,5 +46,17 @@
     "title": "EvoXBench",
     "description": "A platfrom offering instant benchmarking of evolutionary multi-objective optimization (EMO) algorithms in neural architecture search (NAS).",
     "url": "https://github.com/EMI-Group/evoxbench"
+  },
+  {
+    "id": "istratde",
+    "title": "iStratDE",
+    "description": "A GPU-accelerated Differential Evolution framework that enhances performance through individual-level strategy diversity.",
+    "url": "https://github.com/EMI-Group/istratde"
+  },
+  {
+    "id": "evogo",
+    "title": "EvoGO",
+    "description": "A fully data-driven framework for black-box optimization, replacing manual heuristic operators by learning search behaviors from historical data",
+    "url": "https://github.com/EMI-Group/evogo"
   }
 ]
