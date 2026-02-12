@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import logoCom from "../assets/logo_com.png";
 import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl } from "../i18n/utils";
 
 interface Props {
@@ -59,10 +58,19 @@ const year = new Date().getFullYear();
 
     <div class="flex flex-col gap-8">
       <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-        <a href={getLocalizedUrl("/", locale)} class="opacity-80 hover:opacity-100 transition-opacity flex-shrink-0">
+        <a
+          href={getLocalizedUrl("/", locale)}
+          class="opacity-80 hover:opacity-100 transition-opacity flex-shrink-0 flex items-center"
+        >
           <img
-            src={logoCom.src}
-            alt="EvoX"
+            src="/logo_text.png"
+            alt="EVO"
+            class="h-8"
+            style="filter: brightness(0) invert(1);"
+          />
+          <img
+            src="/logo.png"
+            alt="X"
             class="h-10"
             style="filter: brightness(0) invert(1);"
           />
