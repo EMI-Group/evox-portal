@@ -26,8 +26,8 @@ export const localeNames: Record<Locale, string> = {
 };
 
 // Lazy-load translation files
-const translationModules: Record<string, () => Promise<Record<string, string>>> = {
-  "en": () => import("./locales/en.json").then((m) => m.default),
+const translationModules: Record<Locale, () => Promise<Record<string, string>>> = {
+  "en": () => Promise.resolve(en as Record<string, string>),
   "zh-cn": () => import("./locales/zh-cn.json").then((m) => m.default),
   "zh-tw": () => import("./locales/zh-tw.json").then((m) => m.default),
   "ja": () => import("./locales/ja.json").then((m) => m.default),

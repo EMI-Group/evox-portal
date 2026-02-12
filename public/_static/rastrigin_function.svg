@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Rastrigin function placeholder</title>
+  <desc id="desc">Placeholder chart for the Rastrigin function used in tutorials.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)" />
+  <g stroke="#334155" stroke-width="1">
+    <path d="M100 100H1100M100 200H1100M100 300H1100M100 400H1100M100 500H1100M100 600H1100" />
+    <path d="M100 100V600M250 100V600M400 100V600M550 100V600M700 100V600M850 100V600M1000 100V600" />
+  </g>
+  <path d="M100 360 C170 260, 230 460, 300 360 S430 260, 500 360 S630 460, 700 360 S830 260, 900 360 S1030 460, 1100 360"
+    fill="none" stroke="#22d3ee" stroke-width="5" />
+  <path d="M100 420 C170 320, 230 520, 300 420 S430 320, 500 420 S630 520, 700 420 S830 320, 900 420 S1030 520, 1100 420"
+    fill="none" stroke="#38bdf8" stroke-opacity="0.55" stroke-width="3" />
+  <text x="600" y="72" text-anchor="middle" fill="#e2e8f0" font-size="40" font-family="Arial, sans-serif">Rastrigin Function (Illustration)</text>
+  <text x="600" y="650" text-anchor="middle" fill="#94a3b8" font-size="22" font-family="Arial, sans-serif">Reference image placeholder for EvoX tutorial</text>
+</svg>

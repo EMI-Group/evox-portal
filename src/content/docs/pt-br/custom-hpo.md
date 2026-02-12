@@ -6,7 +6,7 @@ section: "developer"
 
 # Implantar HPO com Algoritmos Personalizados
 
-Neste capítulo, focaremos na implantação de HPO com algoritmos personalizados, enfatizando os detalhes em vez do fluxo de trabalho geral. Uma breve introdução à implantação de HPO é fornecida no [tutorial](#/tutorial/tutorial_part7), e a leitura prévia é altamente recomendada.
+Neste capítulo, focaremos na implantação de HPO com algoritmos personalizados, enfatizando os detalhes em vez do fluxo de trabalho geral. Uma breve introdução à implantação de HPO é fornecida no [tutorial](../../tutorials/practical-examples), e a leitura prévia é altamente recomendada.
 
 ## Tornando Algoritmos Paralelizáveis
 

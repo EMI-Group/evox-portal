@@ -13,19 +13,15 @@ order: 7
 
 **問題**: 古典的なRastrigin関数を最適化します：
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 ここで、$\mathbf{x} \in \mathbb{R}^d$ であり、$d$ は次元数です。大域的最適解は原点にあり、その値は0です。この関数は高度に多峰性であり、大域的最適化アルゴリズムのテストに最適です。以下はRastrigin関数のプロットです。
 
-```{figure} /_static/rastrigin_function.svg
-:alt: Rastrigin関数のプロット
-:figwidth: 70%
-:align: center
+![Rastrigin関数のプロット](/_static/rastrigin_function.svg)
 
-Rastrigin関数
-```
+*Rastrigin関数*
 
 この例では、Particle Swarm Optimization (PSO) アルゴリズムを使用して、10次元のRastrigin関数を最適化します。
 
@@ -100,7 +96,7 @@ Final Best Solution: tensor([...])
 
 **問題**: 2つの目的関数を最小化します：
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 Matplotlibを使用して結果を可視化できます。青い点は最適化された個体群を表し、赤い線はパレートフロントを示しています。
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: NSGA-II個体群のプロット
-:figwidth: 70%
-:align: center
+![NSGA-II個体群のプロット](/_static/example_nsga2_result.svg)
 
-最適化後のNSGA-II個体群のプロット
-```
+*最適化後のNSGA-II個体群のプロット*
 
 Jupyter Notebookでは、EvoXの組み込みプロット機能を使用して最適化プロセスを可視化し、世代ごとの個体群の進化を監視できます。
 

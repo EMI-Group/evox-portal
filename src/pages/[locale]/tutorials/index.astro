@@ -32,12 +32,12 @@ const sorted = tutorials.sort((a, b) => a.data.order - b.data.order);
     <div class="max-w-4xl mx-auto px-6 lg:px-8">
       <div class="flex flex-col gap-4">
         {sorted.map((tutorial, i) => (
-          <a href={getLocalizedUrl(`/tutorials/${tutorial.slug}`, locale)} class="group flex items-center bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-xl hover:border-teal-100 transition-all duration-300">
-            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-teal-50 text-teal-700 font-bold flex items-center justify-center mr-5 text-lg">{i + 1}</span>
-            <div class="flex-grow">
-              <h2 class="text-xl font-bold text-gray-900 group-hover:text-teal-600 transition-colors">{tutorial.data.title}</h2>
+          <a href={getLocalizedUrl(`/tutorials/${tutorial.slug}`, locale)} class="group flex items-start sm:items-center bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 shadow-sm hover:shadow-xl hover:border-teal-100 transition-all duration-300">
+            <span class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-teal-50 text-teal-700 font-bold flex items-center justify-center mr-3 sm:mr-5 text-base sm:text-lg">{i + 1}</span>
+            <div class="flex-grow min-w-0">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-teal-600 transition-colors break-words">{tutorial.data.title}</h2>
             </div>
-            <span class="ml-4 text-gray-400 group-hover:text-teal-600 transition-colors">&rarr;</span>
+            <span class="ml-2 sm:ml-4 text-gray-400 group-hover:text-teal-600 transition-colors flex-shrink-0">&rarr;</span>
           </a>
         ))}
       </div>

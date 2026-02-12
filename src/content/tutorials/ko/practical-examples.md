@@ -13,19 +13,15 @@ order: 7
 
 **문제**: 고전적인 Rastrigin 함수를 최적화합니다:
 
-```{math}
+```math
 f(\mathbf{x}) = 10 d + \sum_{i=1}^{d}[x_i^2 - 10 \cos{(2\pi x_i)}],
 ```
 
 여기서 $\mathbf{x} \in \mathbb{R}^d$이고 $d$는 차원입니다. 전역 최적해(global optimum)는 원점에서 0입니다. 이 함수는 다봉성(multimodal)이 강하여 전역 최적화 알고리즘을 테스트하는 데 이상적입니다. 다음은 Rastrigin 함수의 플롯입니다.
 
-```{figure} /_static/rastrigin_function.svg
-:alt: Rastrigin 함수 플롯
-:figwidth: 70%
-:align: center
+![Rastrigin 함수 플롯](/_static/rastrigin_function.svg)
 
-Rastrigin 함수
-```
+*Rastrigin 함수*
 
 이 예제에서는 Particle Swarm Optimization (PSO) 알고리즘을 사용하여 10차원 Rastrigin 함수를 최적화합니다.
 
@@ -100,7 +96,7 @@ Final Best Solution: tensor([...])
 
 **문제**: 두 가지 목적 함수를 최소화합니다:
 
-```{math}
+```math
 f_1(x) = x^2, \quad
 f_2(x) = (x - 2)^2
 ```
@@ -196,13 +192,9 @@ plt.show()
 
 Matplotlib을 사용하여 결과를 시각화할 수 있습니다. 파란색 점은 최적화된 개체군(population)을 나타내고, 빨간색 선은 Pareto front를 보여줍니다.
 
-```{figure} /_static/example_nsga2_result.svg
-:alt: NSGA-II 개체군 플롯
-:figwidth: 70%
-:align: center
+![NSGA-II 개체군 플롯](/_static/example_nsga2_result.svg)
 
-최적화 후 NSGA-II 개체군 플롯
-```
+*최적화 후 NSGA-II 개체군 플롯*
 
 Jupyter Notebook에서는 EvoX의 내장 플로팅 기능을 사용하여 최적화 과정을 시각화하고 세대에 따라 개체군이 어떻게 진화하는지 모니터링할 수 있습니다.
 

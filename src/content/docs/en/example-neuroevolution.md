@@ -293,7 +293,7 @@ def neuroevolution_process(
 
 ### Population-Based Neuroevolution Test
 
-In this example, the population-based algorithm for neuroevolution is tested first, using Particle Swarm Optimization ([PSO](#evox.algorithms.so.pso_variants.pso.PSO)) as a representation. The configuration for neuroevolution is similar to that of other optimization tasks &ndash; we need to define the problem, algorithm, monitor, and workflow, along with their respective `setup()` functions to complete the initialization.
+In this example, the population-based algorithm for neuroevolution is tested first, using Particle Swarm Optimization (`PSO`) as a representation. The configuration for neuroevolution is similar to that of other optimization tasks &ndash; we need to define the problem, algorithm, monitor, and workflow, along with their respective `setup()` functions to complete the initialization.
 
 A key point to note here is that the population size (`POP_SIZE` in this case) needs to be initialized in **both the problem and the algorithm** to avoid potential errors.
 

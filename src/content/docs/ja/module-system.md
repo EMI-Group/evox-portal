@@ -12,7 +12,7 @@ section: "developer"
 
 ## Moduleの紹介
 
-[チュートリアル](#/tutorial/index)では、EvoXにおける基本的な実行プロセスについて触れました：
+[チュートリアル](../../tutorials)では、EvoXにおける基本的な実行プロセスについて触れました：
 
 <center><b>アルゴリズムと問題を初期化 -- モニターを設定 -- ワークフローを初期化 -- ワークフローを実行</b></center>
 
@@ -66,7 +66,7 @@ EvoXにおいて、`ModuleBase` は以下のことに役立ちます：
 
 JITコンパイルされる静的メソッドは、以下のように定義する必要があります：
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

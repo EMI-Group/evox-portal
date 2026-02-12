@@ -12,7 +12,7 @@ Dieses Notebook stellt das Basismodul in EvoX vor: `ModuleBase`.
 
 ## Einführung in Module
 
-Im [Tutorial](#/tutorial/index) haben wir den grundlegenden Ablauf in EvoX erwähnt:
+Im [Tutorial](../../tutorials) haben wir den grundlegenden Ablauf in EvoX erwähnt:
 
 <center><b>Einen Algorithmus und ein Problem initialisieren -- Einen Monitor einrichten -- Einen Workflow initialisieren -- Den Workflow ausführen</b></center>
 
@@ -66,7 +66,7 @@ Konkret gibt es einige Regeln für die Verwendung von `ModuleBase` in EvoX:
 
 Statische Methoden, die JIT-kompiliert werden sollen, müssen wie folgt definiert werden:
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

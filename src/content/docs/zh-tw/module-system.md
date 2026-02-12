@@ -12,7 +12,7 @@ section: "developer"
 
 ## Module 簡介
 
-在 [教學](#/tutorial/index) 中，我們提到了 EvoX 的基本執行流程：
+在 [教學](../../tutorials) 中，我們提到了 EvoX 的基本執行流程：
 
 <center><b>初始化演算法和問題 -- 設定監控器 -- 初始化工作流 -- 執行工作流</b></center>
 
@@ -66,7 +66,7 @@ section: "developer"
 
 需要進行 JIT 編譯的靜態方法應定義如下：
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

@@ -293,7 +293,7 @@ def neuroevolution_process(
 
 ### Prueba de neuroevolución basada en población
 
-En este ejemplo, se prueba primero el algoritmo basado en población para la neuroevolución, utilizando Particle Swarm Optimization ([PSO](#evox.algorithms.so.pso_variants.pso.PSO)) como representación. La configuración para la neuroevolución es similar a la de otras tareas de optimización &ndash; necesitamos definir el problema, el algoritmo, el monitor y el workflow, junto con sus respectivas funciones `setup()` para completar la inicialización.
+En este ejemplo, se prueba primero el algoritmo basado en población para la neuroevolución, utilizando Particle Swarm Optimization (`PSO`) como representación. La configuración para la neuroevolución es similar a la de otras tareas de optimización &ndash; necesitamos definir el problema, el algoritmo, el monitor y el workflow, junto con sus respectivas funciones `setup()` para completar la inicialización.
 
 Un punto clave a tener en cuenta aquí es que el tamaño de la población (`POP_SIZE` en este caso) debe inicializarse **tanto en el problema como en el algoritmo** para evitar posibles errores.
 

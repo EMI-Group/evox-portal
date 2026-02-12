@@ -12,7 +12,7 @@ section: "developer"
 
 ## Введение в Module
 
-В [руководстве](#/tutorial/index) мы упоминали основной процесс запуска в EvoX:
+В [руководстве](../../tutorials) мы упоминали основной процесс запуска в EvoX:
 
 <center><b>Инициализация Algorithm и Problem — Настройка Monitor — Инициализация Workflow — Запуск Workflow</b></center>
 
@@ -65,7 +65,7 @@ section: "developer"
 
 Статические методы, подлежащие JIT-компиляции, должны быть определены следующим образом:
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit

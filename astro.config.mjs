@@ -6,6 +6,8 @@ import icon from "astro-icon";
 
 import vercel from "@astrojs/vercel";
 
+const isVercelDeployment = process.env.VERCEL === "1" || process.env.VERCEL === "true";
+
 // https://astro.build/config
 export default defineConfig({
   devToolbar: { enabled: false },
@@ -30,7 +32,7 @@ export default defineConfig({
   integrations: [icon()],
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: isVercelDeployment,
     },
   }),
 });

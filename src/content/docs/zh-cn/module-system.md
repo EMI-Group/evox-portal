@@ -12,7 +12,7 @@ section: "developer"
 
 ## Module 简介
 
-在 [教程](#/tutorial/index) 中，我们提到了 EvoX 的基本运行流程：
+在 [教程](../../tutorials) 中，我们提到了 EvoX 的基本运行流程：
 
 <center><b>初始化算法和问题 -- 设置监视器 -- 初始化工作流 -- 运行工作流</b></center>
 
@@ -66,7 +66,7 @@ section: "developer"
 
 需要进行 JIT（即时编译）的静态方法应定义如下：
 
-```Python
+```python
 # One example of the static method defined in a Module
 
 @jit
