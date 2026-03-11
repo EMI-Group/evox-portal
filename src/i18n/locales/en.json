@@ -14,6 +14,7 @@
   "nav.blog.releases.desc": "Version updates, new features, and changelogs",
   "nav.community": "Community",
   "nav.ecosystem": "Ecosystem",
+  "nav.contact": "Contact Us",
 
   "hero.title": "GPU-accelerated Evolutionary Computation, PyTorch/JAX",
   "hero.subtitle": "The Foundation for Self-Evolving Agents",

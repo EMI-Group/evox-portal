@@ -13,6 +13,7 @@
   "nav.blog.releases.desc": "版本更新、新特性和变更日志",
   "nav.community": "社区",
   "nav.ecosystem": "生态系统",
+  "nav.contact": "联系我们",
   "hero.title": "GPU 加速进化计算，支持 PyTorch/JAX",
   "hero.subtitle": "自进化智能体的基础平台",
   "hero.cta.tagline": "EvoX：你所需要的一切",

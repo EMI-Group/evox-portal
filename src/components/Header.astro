@@ -55,6 +55,10 @@ const navLinks = [
     label: t(tr, "nav.ecosystem"),
     href: getLocalizedUrl("/libs", locale),
   },
+  {
+    label: t(tr, "nav.contact"),
+    href: "https://chengran.tech/",
+  },
 ];
 ---
 
@@ -111,6 +115,8 @@ const navLinks = [
               ) : (
                 <a
                   href={link.href}
+                  target={link.href?.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                   class="text-sm font-medium hover:text-teal-400 transition-colors"
                 >
                   {link.label}
@@ -207,6 +213,8 @@ const navLinks = [
                 ) : (
                   <a
                     href={link.href}
+                    target={link.href?.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                     class="block px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10"
                   >
                     {link.label}
