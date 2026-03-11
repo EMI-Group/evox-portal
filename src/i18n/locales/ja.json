@@ -13,6 +13,7 @@
   "nav.blog.releases.desc": "バージョン更新、新機能、変更履歴",
   "nav.community": "コミュニティ",
   "nav.ecosystem": "エコシステム",
+  "nav.contact": "お問い合わせ",
   "hero.title": "GPU加速による進化的計算、PyTorch/JAX",
   "hero.subtitle": "自己進化型エージェントの基盤",
   "hero.cta.tagline": "必要なのは、EvoXだけ",

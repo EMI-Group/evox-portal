@@ -13,6 +13,7 @@
   "nav.blog.releases.desc": "Обновления версий, новые функции и списки изменений",
   "nav.community": "Сообщество",
   "nav.ecosystem": "Экосистема",
+  "nav.contact": "Связаться с нами",
   "hero.title": "Эволюционные вычисления с ускорением на GPU, PyTorch/JAX",
   "hero.subtitle": "Основа для самоэволюционирующих агентов",
   "hero.cta.tagline": "EvoX — это всё, что вам нужно",
