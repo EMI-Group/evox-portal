@@ -1,10 +1,10 @@
 ---
-title: "IEEE TEVC | iStratDE: GPU Computing x Ultra-Large Populations Unlock the Full Potential of Differential Evolution"
+title: "iStratDE: GPU Computing x Ultra-Large Populations Unlock the Full Potential of Differential Evolution"
 pubDate: 2026-03-16
 summary: "The EvoX team introduces iStratDE, a GPU-accelerated differential evolution method that assigns fixed strategies at the individual level, enabling communication-free large-scale parallel search with strong empirical performance and theoretical convergence guarantees."
 ---
 
-**IEEE TEVC | iStratDE: GPU Computing x Ultra-Large Populations Unlock the Full Potential of Differential Evolution**
+**iStratDE: GPU Computing x Ultra-Large Populations Unlock the Full Potential of Differential Evolution**
 
 ![](/images/articles/istratde-1.png)
 
@@ -12,7 +12,7 @@ Differential Evolution (DE) is highly sensitive to strategy selection. Most exis
 
 To address this gap, the EvoX team investigated how **individual-level strategy diversity** shapes DE search dynamics and optimization performance, and proposed a minimalist variant: **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. The core idea is simple: at initialization, each individual is assigned its own mutation and crossover strategy, and that assignment remains fixed throughout evolution. By introducing diversity at the individual level - while discarding complicated adaptation and feedback loops - iStratDE creates persistent behavioral heterogeneity across the population.
 
-This property becomes especially powerful in large populations. Because the algorithm is communication-free by design, it naturally supports efficient parallel execution and scales smoothly to GPU environments. The team also provides a convergence analysis under standard reachability assumptions, establishing the almost-sure convergence of the best-so-far fitness. Extensive experiments on the **CEC2022 benchmark suite** and **robot control tasks** show that iStratDE can match or even outperform mainstream adaptive DE variants. The source code has been publicly released on GitHub.
+This property becomes especially powerful in large populations. Because the algorithm is communication-free by design, it naturally supports efficient parallel execution and scales smoothly to GPU environments. The team also provides a convergence analysis under standard reachability assumptions, establishing the almost-sure convergence of the best-so-far fitness. Extensive experiments on the **CEC2022 benchmark suite** and **robot control tasks** show that iStratDE can match or even outperform mainstream adaptive DE variants. The source code has been publicly released on GitHub: https://github.com/EMI-Group/istratde
 
 ## Background: Evolutionary Computation in the Complexity Trap
 
