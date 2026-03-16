@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedArticles } from "../../i18n/utils";
+import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedNews } from "../../i18n/utils";
 
 export async function getStaticPaths({ paginate }) {
   const allArticles = await getCollection("news");
-  const articles = getLocalizedArticles(allArticles, defaultLocale);
+  const articles = getLocalizedNews(allArticles, defaultLocale);
   const sorted = articles.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );

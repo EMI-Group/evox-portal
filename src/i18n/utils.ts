@@ -152,3 +152,38 @@ export function findLocalizedArticle<T extends { id: string }>(
   const enArticle = localeArticle || allArticles.find((a) => a.id === `en/${slug}`);
   return enArticle ? { ...enArticle, slug } : undefined;
 }
+
+/** Extract slug from a news ID (e.g. "evogp/en" → "evogp") */
+export function getNewsSlug(id: string): string {
+  const slash = id.indexOf("/");
+  return slash >= 0 ? id.slice(0, slash) : id;
+}
+
+/** Pick locale-specific news with English fallback. Returns entries with a `slug` field. */
+export function getLocalizedNews<T extends { id: string }>(
+  allNews: T[],
+  locale: Locale,
+): (T & { slug: string })[] {
+  const enArticles = allNews.filter((a) => a.id.endsWith("/en"));
+  const localeArticles = locale === defaultLocale
+    ? []
+    : allNews.filter((a) => a.id.endsWith(`/${locale}`));
+
+  return enArticles.map((enArticle) => {
+    const slug = getNewsSlug(enArticle.id);
+    const localeArticle = localeArticles.find((a) => a.id === `${slug}/${locale}`);
+    const picked = localeArticle || enArticle;
+    return { ...picked, slug };
+  });
+}
+
+/** Find a single news entry by slug for a given locale, with English fallback. */
+export function findLocalizedNews<T extends { id: string }>(
+  allNews: T[],
+  slug: string,
+  locale: Locale,
+): (T & { slug: string }) | undefined {
+  const localeArticle = allNews.find((a) => a.id === `${slug}/${locale}`);
+  const enArticle = localeArticle || allNews.find((a) => a.id === `${slug}/en`);
+  return enArticle ? { ...enArticle, slug } : undefined;
+}

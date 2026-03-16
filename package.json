@@ -9,16 +9,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
-    "@tailwindcss/vite": "^4.1.18",
+    "@astrojs/vercel": "^9.0.5",
+    "@tailwindcss/vite": "^4.2.1",
     "@vercel/analytics": "^1.6.1",
-    "astro": "^5.17.1",
+    "astro": "^5.18.1",
     "astro-icon": "^1.1.5",
-    "tailwindcss": "^4.1.18"
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.70",
+    "@iconify-json/simple-icons": "^1.2.74",
     "@tailwindcss/typography": "^0.5.19",
     "playwright": "^1.58.2"
   }

@@ -1,13 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
-import { locales, defaultLocale, type Locale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedArticles } from "../../../i18n/utils";
+import { locales, defaultLocale, type Locale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedNews } from "../../../i18n/utils";
 
 export async function getStaticPaths() {
   const allArticles = await getCollection("news");
   const nonDefaultLocales = locales.filter((l) => l !== defaultLocale);
   return nonDefaultLocales.flatMap((locale) => {
-    const articles = getLocalizedArticles(allArticles, locale);
+    const articles = getLocalizedNews(allArticles, locale);
     return articles.map((article) => ({
       params: { locale, slug: article.slug },
       props: { article },

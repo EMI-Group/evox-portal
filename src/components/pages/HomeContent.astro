@@ -13,6 +13,7 @@ import {
   getLocalizedUrl,
   getDateLocale,
   getLocalizedArticles,
+  getLocalizedNews,
 } from "../../i18n/utils";
 
 import codeSingleObj from "../../content/examples/single-obj.py?raw";
@@ -33,7 +34,7 @@ const dateLocale = getDateLocale(locale);
 
 const allNews = await getCollection("news");
 const allReleases = await getCollection("releases");
-const localizedNews = getLocalizedArticles(allNews, locale);
+const localizedNews = getLocalizedNews(allNews, locale);
 const localizedReleases = getLocalizedArticles(allReleases, locale);
 const latestRelease = localizedReleases.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
