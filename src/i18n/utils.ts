@@ -118,10 +118,10 @@ export function getDateLocale(locale: Locale): string {
   return map[locale] || "en-US";
 }
 
-/** Extract slug from a locale-prefixed article ID (e.g. "en/evogp" → "evogp") */
+/** Extract slug from an article ID (e.g. "evogp/en" → "evogp") */
 export function getArticleSlug(id: string): string {
-  const slash = id.indexOf("/");
-  return slash >= 0 ? id.slice(slash + 1) : id;
+  const slash = id.lastIndexOf("/");
+  return slash >= 0 ? id.slice(0, slash) : id;
 }
 
 /** Pick locale-specific articles with English fallback. Returns articles with a `slug` field. */
@@ -129,14 +129,14 @@ export function getLocalizedArticles<T extends { id: string }>(
   allArticles: T[],
   locale: Locale,
 ): (T & { slug: string })[] {
-  const enArticles = allArticles.filter((a) => a.id.startsWith("en/"));
+  const enArticles = allArticles.filter((a) => a.id.endsWith("/en"));
   const localeArticles = locale === defaultLocale
     ? []
-    : allArticles.filter((a) => a.id.startsWith(`${locale}/`));
+    : allArticles.filter((a) => a.id.endsWith(`/${locale}`));
 
   return enArticles.map((enArticle) => {
     const slug = getArticleSlug(enArticle.id);
-    const localeArticle = localeArticles.find((a) => a.id === `${locale}/${slug}`);
+    const localeArticle = localeArticles.find((a) => a.id === `${slug}/${locale}`);
     const picked = localeArticle || enArticle;
     return { ...picked, slug };
   });
@@ -148,8 +148,8 @@ export function findLocalizedArticle<T extends { id: string }>(
   slug: string,
   locale: Locale,
 ): (T & { slug: string }) | undefined {
-  const localeArticle = allArticles.find((a) => a.id === `${locale}/${slug}`);
-  const enArticle = localeArticle || allArticles.find((a) => a.id === `en/${slug}`);
+  const localeArticle = allArticles.find((a) => a.id === `${slug}/${locale}`);
+  const enArticle = localeArticle || allArticles.find((a) => a.id === `${slug}/en`);
   return enArticle ? { ...enArticle, slug } : undefined;
 }
 
