@@ -520,23 +520,31 @@ const ecosystem = allLibs.slice(0, 3);
   function init() {
     const navbar = document.getElementById("navbar");
     const heroSection = document.getElementById("hero-section");
-    const heroLogo = document.getElementById("hero-logo") as HTMLImageElement;
+    const heroLogo = document.getElementById("hero-logo");
     const heroGradient = document.getElementById("hero-gradient");
     const scrollIndicator = document.getElementById("scroll-indicator");
     const ctaContent = document.getElementById("cta-content");
 
-    if (!navbar || !heroSection || !heroLogo) return;
+    if (!(navbar instanceof HTMLElement) ||
+      !(heroSection instanceof HTMLElement) ||
+      !(heroLogo instanceof HTMLImageElement)) {
+      return;
+    }
 
     const navbarLogoImg = navbar.querySelector(
       "img[alt='X']",
-    ) as HTMLImageElement;
-    if (!navbarLogoImg) return;
+    );
+    if (!(navbarLogoImg instanceof HTMLImageElement)) return;
 
-    navbarLogoImg.style.opacity = "0";
+    const navbarEl = navbar;
+    const heroSectionEl = heroSection;
+    const heroLogoImg = heroLogo;
+    const navbarLogoEl = navbarLogoImg;
+
+    navbarLogoEl.style.opacity = "0";
 
     let isExpanded = false;
     let isAnimating = false;
-    const scrollThreshold = 5;
     const DURATION = 1200;
 
     function preventScroll(e: Event) {
@@ -570,33 +578,32 @@ const ecosystem = allLibs.slice(0, 3);
       if (onDone) expandCallback = onDone;
 
       // Measure hero logo position
-      const logoRect = heroLogo.getBoundingClientRect();
+      const logoRect = heroLogoImg.getBoundingClientRect();
       const logoStartX = logoRect.left;
       const logoStartY = logoRect.top;
       const logoW = logoRect.width;
       const logoH = logoRect.height;
 
       // Measure navbar height and logo end position
-      navbar.style.transition = "none";
-      navbar.style.transform = "translateY(0)";
-      navbar.offsetHeight;
-      const navbarH = navbar.offsetHeight;
-      const navLogoRect = navbarLogoImg.getBoundingClientRect();
+      navbarEl.style.transition = "none";
+      navbarEl.style.transform = "translateY(0)";
+      navbarEl.offsetHeight;
+      const navLogoRect = navbarLogoEl.getBoundingClientRect();
       const logoEndX = navLogoRect.left;
       const logoEndY = navLogoRect.top;
       const logoEndW = navLogoRect.width;
       const logoEndH = navLogoRect.height;
-      navbar.style.transform = `translateY(${window.innerHeight}px)`;
-      navbar.offsetHeight;
-      navbar.style.transition = "";
+      navbarEl.style.transform = `translateY(${window.innerHeight}px)`;
+      navbarEl.offsetHeight;
+      navbarEl.style.transition = "";
 
       // Clone logo for flying
-      const flyLogo = heroLogo.cloneNode(true) as HTMLImageElement;
+      const flyLogo = heroLogoImg.cloneNode(true) as HTMLImageElement;
       flyLogo.id = "";
       flyLogo.className = "";
       flyLogo.style.cssText = `position:fixed;left:${logoStartX}px;top:${logoStartY}px;width:${logoW}px;height:${logoH}px;z-index:60;pointer-events:none;margin:0;padding:0;`;
       document.body.appendChild(flyLogo);
-      heroLogo.style.visibility = "hidden";
+      heroLogoImg.style.visibility = "hidden";
 
       const startTime = performance.now();
 
@@ -607,7 +614,7 @@ const ecosystem = allLibs.slice(0, 3);
 
         // Navbar flies from bottom to top
         const navbarY = window.innerHeight * (1 - t);
-        navbar.style.transform = `translateY(${navbarY}px)`;
+        navbarEl.style.transform = `translateY(${navbarY}px)`;
 
         // Use calculated position directly
         const navTopY = navbarY;
@@ -620,7 +627,7 @@ const ecosystem = allLibs.slice(0, 3);
           flyLogo.style.width = `${logoW}px`;
           flyLogo.style.height = `${logoH}px`;
 
-          heroSection.style.minHeight = "100vh";
+          heroSectionEl.style.minHeight = "100vh";
           if (heroGradient) heroGradient.style.opacity = "1";
           if (ctaContent) ctaContent.style.opacity = "0";
           if (scrollIndicator) scrollIndicator.style.opacity = "1";
@@ -650,7 +657,7 @@ const ecosystem = allLibs.slice(0, 3);
 
           // Other elements animate only after contact
           const heroMinH = 100 - 40 * progressAfterContact;
-          heroSection.style.minHeight = `${heroMinH}vh`;
+          heroSectionEl.style.minHeight = `${heroMinH}vh`;
           if (heroGradient)
             heroGradient.style.opacity = `${1 - 0.7 * progressAfterContact}`;
           if (ctaContent) ctaContent.style.opacity = `${progressAfterContact}`;
@@ -662,7 +669,7 @@ const ecosystem = allLibs.slice(0, 3);
           requestAnimationFrame(animate);
         } else {
           // Ensure navbar is at final position
-          navbar.style.transform = "translateY(0)";
+          navbarEl.style.transform = "translateY(0)";
           // Place flyLogo exactly at navbarLogo position
           flyLogo.style.left = `${logoEndX}px`;
           flyLogo.style.top = `${logoEndY}px`;
@@ -672,7 +679,7 @@ const ecosystem = allLibs.slice(0, 3);
           // THEN swap flyLogo → navbarLogo after a short delay
           requestAnimationFrame(() => {
             setTimeout(() => {
-              navbarLogoImg.style.opacity = "1";
+              navbarLogoEl.style.opacity = "1";
               flyLogo.remove();
               isAnimating = false;
               unlockScroll();
@@ -683,82 +690,6 @@ const ecosystem = allLibs.slice(0, 3);
               }
             }, 1500);
           });
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    function collapse() {
-      if (!isExpanded || isAnimating) return;
-      isExpanded = false;
-      isAnimating = true;
-      lockScroll();
-
-      // Measure current navbar logo position
-      const navLogoRect = navbarLogoImg.getBoundingClientRect();
-      const logoStartX = navLogoRect.left;
-      const logoStartY = navLogoRect.top;
-      const logoStartW = navLogoRect.width;
-      const logoStartH = navLogoRect.height;
-
-      const heroEndW = heroLogo.offsetWidth || 144;
-      const heroEndH = heroLogo.offsetHeight || 144;
-
-      const flyLogo = heroLogo.cloneNode(true) as HTMLImageElement;
-      flyLogo.id = "";
-      flyLogo.className = "";
-      flyLogo.style.cssText = `position:fixed;left:${logoStartX}px;top:${logoStartY}px;width:${logoStartW}px;height:${logoStartH}px;z-index:60;pointer-events:none;margin:0;padding:0;`;
-      document.body.appendChild(flyLogo);
-      navbarLogoImg.style.opacity = "0";
-
-      const startTime = performance.now();
-
-      function animate(now: number) {
-        const elapsed = now - startTime;
-        const rawT = Math.min(elapsed / DURATION, 1);
-        const t = easeOut(rawT);
-
-        // Navbar flies back down
-        const navbarY = window.innerHeight * t;
-        navbar.style.transform = `translateY(${navbarY}px)`;
-
-        const navRect = navbar.getBoundingClientRect();
-        const navTopY = navRect.top;
-
-        // Hero expands
-        const heroMinH = 60 + 40 * t;
-        heroSection.style.minHeight = `${heroMinH}vh`;
-
-        // Logo grows + moves right + rides on navbar
-        const heroRect = heroLogo.getBoundingClientRect();
-        const heroLogoX = heroRect.left;
-        const heroLogoY = heroRect.top;
-
-        const curW = logoStartW + (heroEndW - logoStartW) * t;
-        const curH = logoStartH + (heroEndH - logoStartH) * t;
-        const curX = logoStartX + (heroLogoX - logoStartX) * t;
-        // Logo bottom sticks to navbar top, but don't go below hero logo position
-        const ridingTop = navTopY - curH;
-        const curY = Math.min(ridingTop, heroLogoY);
-
-        flyLogo.style.left = `${curX}px`;
-        flyLogo.style.top = `${curY}px`;
-        flyLogo.style.width = `${curW}px`;
-        flyLogo.style.height = `${curH}px`;
-
-        if (heroGradient) heroGradient.style.opacity = `${0.3 + 0.7 * t}`;
-        if (ctaContent) ctaContent.style.opacity = `${1 - t}`;
-        if (scrollIndicator) scrollIndicator.style.opacity = `${t}`;
-
-        if (rawT < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          heroLogo.style.visibility = "visible";
-          flyLogo.remove();
-          isAnimating = false;
-          unlockScroll();
-          window.scrollTo(0, 0);
         }
       }
 

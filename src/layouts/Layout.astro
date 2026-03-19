@@ -18,7 +18,6 @@ const {
   locale = defaultLocale,
 } = Astro.props;
 
-const translations = await loadTranslations(locale);
 const htmlLang = locale === "es-419" ? "es" : locale === "pt-br" ? "pt-BR" : locale;
 ---
 

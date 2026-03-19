@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob, file } from 'astro/loaders';
+import { z } from "zod";
 
 const articleSchema = z.object({
     title: z.string(),
@@ -40,7 +41,7 @@ const libs = defineCollection({
         id: z.string(),
         title: z.string(),
         description: z.string(),
-        url: z.string().url(),
+        url: z.url(),
     })
 });
 

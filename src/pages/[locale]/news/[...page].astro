@@ -1,9 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import { locales, defaultLocale, type Locale, loadTranslations, t, getLocalizedUrl, getDateLocale, getLocalizedNews } from "../../../i18n/utils";
+import type { PaginateFunction, PaginatedPage } from "../../../types/pagination";
 
-export async function getStaticPaths({ paginate }) {
+type NewsArticle = CollectionEntry<"news"> & { slug: string };
+type LocaleParams = { locale: Locale };
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction<NewsArticle, LocaleParams> }) {
   const allArticles = await getCollection("news");
   const nonDefaultLocales = locales.filter((l) => l !== defaultLocale);
   return nonDefaultLocales.flatMap((locale) => {
@@ -13,11 +17,11 @@ export async function getStaticPaths({ paginate }) {
   });
 }
 
-const locale = Astro.params.locale as Locale;
+const { locale } = Astro.params as { locale: Locale };
 const tr = await loadTranslations(locale);
 const dateLocale = getDateLocale(locale);
 
-const { page } = Astro.props;
+const { page } = Astro.props as { page: PaginatedPage<NewsArticle> };
 const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, "news.page")} ${page.currentPage}` : "" });
 ---
 

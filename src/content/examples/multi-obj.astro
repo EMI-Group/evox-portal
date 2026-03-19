@@ -4,7 +4,7 @@
 
 <div id="rvea-plot" class="w-full h-full"></div>
 
-<script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
+<script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8" is:inline></script>
 
 <script>
   import { coordinate, splashed, layout } from "./rvea-data.js";
@@ -12,21 +12,17 @@
 
   const rvea_plot = document.getElementById("rvea-plot");
   if (rvea_plot) {
-    let data = [coordinate, splashed];
-    // @ts-ignore
-    Plotly.newPlot(rvea_plot, data, layout, { responsive: true })
-      .then(() => {
-        return fetch(framesUrl)
-          .then((v) => v.json())
-          .then((values) => {
-            // @ts-ignore
-            values.forEach((it) => (it.data[0] = coordinate));
-            // @ts-ignore
-            Plotly.addFrames(rvea_plot, values);
-          });
-      })
-      .then(() => {
-        rvea_plot.setAttribute("data-ready", "true");
-      });
+    const data = [coordinate, splashed];
+    const initPlot = async () => {
+      // @ts-ignore
+      await Plotly.newPlot(rvea_plot, data, layout, { responsive: true });
+      const values = await fetch(framesUrl).then((v) => v.json());
+      // @ts-ignore
+      values.forEach((it) => (it.data[0] = coordinate));
+      // @ts-ignore
+      Plotly.addFrames(rvea_plot, values);
+      rvea_plot.setAttribute("data-ready", "true");
+    };
+    initPlot().catch(() => {});
   }
 </script>

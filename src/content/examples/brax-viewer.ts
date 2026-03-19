@@ -35,13 +35,38 @@ export const braxViewerHtml = `
       import { Viewer } from "viewer";
       const system = ${braxDataString};
       const brax = document.getElementById("brax-viewer");
+      const setFallback = (message) => {
+        if (!brax) return;
+        brax.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:24px;box-sizing:border-box;background:linear-gradient(180deg,#0f172a,#111827);color:#e5e7eb;font:500 14px/1.6 system-ui,sans-serif;text-align:center;">' + message + "</div>";
+      };
+      const hasWebGLSupport = () => {
+        try {
+          const canvas = document.createElement("canvas");
+          return Boolean(
+            window.WebGLRenderingContext &&
+            (canvas.getContext("webgl") ||
+              canvas.getContext("experimental-webgl") ||
+              canvas.getContext("webgl2")),
+          );
+        } catch {
+          return false;
+        }
+      };
       if (brax) {
+        if (!hasWebGLSupport()) {
+          setFallback("3D preview is unavailable on this device or browser.");
+        } else {
+          try {
         if (system.geoms && system.geoms.world && system.geoms.world[0]) {
           system.geoms.world[0].size = [0, 0, 40];
         }
-        var viewer = new Viewer(brax, system);
-        if (viewer.animator && viewer.animator.mixer) {
-          viewer.animator.mixer.timeScale = 0.1;
+            const viewer = new Viewer(brax, system);
+            if (viewer.animator && viewer.animator.mixer) {
+              viewer.animator.mixer.timeScale = 0.1;
+            }
+          } catch {
+            setFallback("3D preview could not be initialized in this browser.");
+          }
         }
       }
     </script>
