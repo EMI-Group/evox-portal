@@ -69,6 +69,8 @@
   "libs.desc.tensorneat": "基於 JAX 的增強拓撲神經演化 (NEAT) 演算法函式庫。",
   "libs.desc.metade": "動態最佳化差分演化策略與超參數的進階演化框架。",
   "libs.desc.evoxbench": "提供神經架構搜尋 (NAS) 中演化多目標最佳化 (EMO) 演算法即時基準測試的平台。",
+  "libs.desc.istratde": "一個 GPU 加速的 Differential Evolution 框架，透過個體級別的策略多樣性來提升效能。",
+  "libs.desc.evogo": "一個完全資料驅動的黑箱最佳化框架，透過從歷史資料中學習搜尋行為來取代手工啟發式運算子。",
   "news.pageTitle": "最新消息 {page} | EvoX",
   "news.heroTitle": "最新消息",
   "news.heroDesc": "深入探討演化計算、專案更新與社群動態。",

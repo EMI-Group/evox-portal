@@ -69,6 +69,8 @@
   "libs.desc.tensorneat": "Une bibliothèque basée sur JAX pour les algorithmes de neuro-évolution des topologies augmentées (NEAT).",
   "libs.desc.metade": "Un framework évolutif avancé qui optimise dynamiquement les stratégies et hyperparamètres de l'évolution différentielle.",
   "libs.desc.evoxbench": "Une plateforme offrant un benchmarking instantané des algorithmes d'optimisation multi-objectif évolutive (EMO) pour la recherche d'architecture neuronale (NAS).",
+  "libs.desc.istratde": "Un framework de Differential Evolution accéléré par GPU qui améliore les performances grâce à la diversité des stratégies au niveau individuel.",
+  "libs.desc.evogo": "Un framework entièrement piloté par les données pour l'optimisation boîte noire, remplaçant les opérateurs heuristiques manuels par l'apprentissage de comportements de recherche à partir de données historiques.",
   "news.pageTitle": "Actualités {page} | EvoX",
   "news.heroTitle": "Dernières Actualités",
   "news.heroDesc": "Plongées au cœur du calcul évolutionnaire, mises à jour du projet et actualités de la communauté.",

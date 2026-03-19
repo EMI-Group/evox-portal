@@ -38,6 +38,6 @@ summary: "修复了 torch.compile 图捕获、use_state 图中断以及 BatchedT
 
 **QQ 群**：297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   QQ 群 | 演化机器智能

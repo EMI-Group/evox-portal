@@ -28,6 +28,6 @@ summary: "Dokumentationsaktualisierungen, vmap- und HPO-Funktionen, Benchmark-Ko
 
 **QQ-Gruppe**: 297969717
 
-![图片11.png](/images/articles/evox-1-1-2-1.png)
+![图片11.png](./evox-1-1-2-1.png)
 
 QQ-Gruppe | Evolving Machine Intelligence

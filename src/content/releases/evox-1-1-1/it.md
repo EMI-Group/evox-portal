@@ -38,6 +38,6 @@ summary: "Correzioni di bug per la cattura del grafo torch.compile, interruzioni
 
 **Gruppo QQ**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   Gruppo QQ | Evolving Machine Intelligence

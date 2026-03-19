@@ -38,6 +38,6 @@ summary: "Bug fixes for torch.compile graph capture, use_state graph breaks, and
 
 **QQ Group**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   QQ Group | Evolving Machine Intelligence

@@ -28,6 +28,6 @@ summary: "문서 업데이트, vmap 및 HPO 기능, 벤치마크 수정, 그리�
 
 **QQ 그룹**: 297969717
 
-![图片11.png](/images/articles/evox-1-1-2-1.png)
+![图片11.png](./evox-1-1-2-1.png)
 
 QQ 그룹 | Evolving Machine Intelligence

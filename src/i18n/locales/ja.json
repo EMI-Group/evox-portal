@@ -69,6 +69,8 @@
   "libs.desc.tensorneat": "JAX ベースの拡張トポロジーニューロ進化 (NEAT) アルゴリズムライブラリ。",
   "libs.desc.metade": "差分進化の戦略とハイパーパラメータを動的に最適化する高度な進化フレームワーク。",
   "libs.desc.evoxbench": "ニューラルアーキテクチャ探索 (NAS) における進化的多目的最適化 (EMO) アルゴリズムの即時ベンチマークを提供するプラットフォーム。",
+  "libs.desc.istratde": "個体レベルの戦略多様性によって性能を向上させる、GPU 加速の Differential Evolution フレームワーク。",
+  "libs.desc.evogo": "手動のヒューリスティック演算子を履歴データからの探索行動の学習に置き換える、完全データ駆動型のブラックボックス最適化フレームワーク。",
   "news.pageTitle": "ニュース {page} | EvoX",
   "news.heroTitle": "最新ニュース",
   "news.heroDesc": "進化的計算の深掘り記事、プロジェクトの更新情報、コミュニティニュース。",

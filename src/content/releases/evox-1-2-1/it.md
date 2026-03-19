@@ -48,6 +48,6 @@ Progetto upstream (EvoX):
 
 Gruppo QQ: 297969717
 
-![图片11.png](/images/articles/evox-1-2-1-1.png)
+![图片11.png](./evox-1-2-1-1.png)
 
 Gruppo QQ | Evolving Machine Intelligence

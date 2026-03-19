@@ -38,6 +38,6 @@ summary: "Correcciones de errores para la captura de grafos de torch.compile, ru
 
 **Grupo de QQ**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   Grupo de QQ | Evolving Machine Intelligence

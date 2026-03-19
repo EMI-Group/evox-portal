@@ -28,6 +28,6 @@ summary: "文档更新、vmap 和 HPO 功能、基准测试修复以及初步的
 
 **QQ 群**：297969717
 
-![图片11.png](/images/articles/evox-1-1-2-1.png)
+![图片11.png](./evox-1-1-2-1.png)
 
 QQ 群 | 演化机器智能

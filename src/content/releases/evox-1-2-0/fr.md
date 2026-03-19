@@ -56,6 +56,6 @@ Projet en amont (EvoX) :
 
 Groupe QQ : 297969717
 
-![Image 11.png](/images/articles/evox-1-2-0-1.png)
+![Image 11.png](./evox-1-2-0-1.png)
 
 Groupe QQ | Evolving Machine Intelligence

@@ -38,6 +38,6 @@ summary: "Fehlerbehebungen für die torch.compile Graph-Erfassung, use_state Gra
 
 **QQ-Gruppe**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   QQ-Gruppe | Evolving Machine Intelligence

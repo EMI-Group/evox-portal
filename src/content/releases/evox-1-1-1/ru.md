@@ -38,6 +38,6 @@ summary: "Исправления ошибок захвата графа torch.co
 
 **Группа QQ**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   Группа QQ | Evolving Machine Intelligence

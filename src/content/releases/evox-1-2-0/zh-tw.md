@@ -56,6 +56,6 @@ GitHub：
 
 QQ 群：297969717
 
-![圖片11.png](/images/articles/evox-1-2-0-1.png)
+![圖片11.png](./evox-1-2-0-1.png)
 
 QQ 群 | Evolving Machine Intelligence

@@ -38,6 +38,6 @@ summary: "torch.compile 그래프 캡처, use_state 그래프 중단(break), Bat
 
 **QQ 그룹**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   QQ 그룹 | Evolving Machine Intelligence

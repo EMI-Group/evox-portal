@@ -38,6 +38,6 @@ summary: "torch.compileのグラフキャプチャ、use_stateによるグラフ
 
 **QQグループ**: 297969717
 
-![image.png](/images/articles/evox-1-1-1-1.png)
+![image.png](./evox-1-1-1-1.png)
 
   QQグループ | Evolving Machine Intelligence

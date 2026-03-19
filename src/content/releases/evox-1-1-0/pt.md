@@ -70,4 +70,4 @@ Documentation: [https://evox.readthedocs.io/en/latest/](https://evox.readthedocs
 
 QQ Group: 297969717
 
-![4.png](/images/articles/evox-1-1-0-1.png)
+![4.png](./evox-1-1-0-1.png)

@@ -28,6 +28,6 @@ summary: "Mises à jour de la documentation, fonctionnalités vmap et HPO, corre
 
 **Groupe QQ** : 297969717
 
-![Image11.png](/images/articles/evox-1-1-2-1.png)
+![Image11.png](./evox-1-1-2-1.png)
 
 Groupe QQ | Evolving Machine Intelligence
