@@ -20,7 +20,7 @@
   {
     "id": "evorl",
     "title": "EvoRL",
-    "description": "A fully GPU-acclerated framework for Evolutionary Reinforcement Learning.",
+    "description": "A fully GPU-accelerated framework for Evolutionary Reinforcement Learning.",
     "url": "https://github.com/EMI-Group/evorl"
   },
   {
@@ -32,7 +32,7 @@
   {
     "id": "tensorneat",
     "title": "TensorNEAT",
-    "description": "A JAX-based libaray for NeuroEvolution of Augmenting Topologies (NEAT) algorithms.",
+    "description": "A JAX-based library for NeuroEvolution of Augmenting Topologies (NEAT) algorithms.",
     "url": "https://github.com/EMI-Group/tensorneat"
   },
   {
@@ -44,7 +44,7 @@
   {
     "id": "evoxbench",
     "title": "EvoXBench",
-    "description": "A platfrom offering instant benchmarking of evolutionary multi-objective optimization (EMO) algorithms in neural architecture search (NAS).",
+    "description": "A platform offering instant benchmarking of evolutionary multi-objective optimization (EMO) algorithms in neural architecture search (NAS).",
     "url": "https://github.com/EMI-Group/evoxbench"
   },
   {
