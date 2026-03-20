@@ -6,7 +6,7 @@ summary: "EvoRL es un framework de aprendizaje por refuerzo evolutivo de código
 
 El **equipo de EvoX** ha lanzado oficialmente **EvoRL** (<https://github.com/EMI-Group/evorl>), un framework de **aprendizaje por refuerzo evolutivo (EvoRL)** de código abierto. Ya disponible en [GitHub](https://github.com/EMI-Group/evorl), EvoRL está diseñado para ampliar los límites del aprendizaje por refuerzo (RL) mediante la integración de **algoritmos evolutivos (EAs)** para mejorar la exploración, la adaptabilidad y la eficiencia en entornos complejos de toma de decisiones.
 
-**Redefiniendo el aprendizaje por refuerzo con la evolución**
+## Redefiniendo el aprendizaje por refuerzo con la evolución
 
 El aprendizaje por refuerzo tradicional depende en gran medida de la optimización basada en gradientes, que puede tener dificultades con **recompensas dispersas, entornos no diferenciables y espacios de búsqueda de alta dimensión**. EvoRL supera estos desafíos combinando:
 
@@ -14,12 +14,12 @@ El aprendizaje por refuerzo tradicional depende en gran medida de la optimizaci�
 * **Aprendizaje por refuerzo** para una **adaptación ajustada** en entornos complejos.
   Este enfoque híbrido permite un **aprendizaje más rápido, una mayor robustez y una mejor generalización** en una amplia gama de aplicaciones.
 
-**Características clave de EvoRL**
+## Características clave de EvoRL
 
 **Arquitectura modular y extensible** – Personalice fácilmente los componentes evolutivos y de RL para diversas tareas.
 
 
-**Impulsando la innovación en la investigación de IA y la industria**
+## Impulsando la innovación en la investigación de IA y la industria
 
 Desarrollado por el **equipo de EvoX**, EvoRL representa un paso importante hacia la **unión de los algoritmos evolutivos y el aprendizaje por refuerzo**. Este enfoque ya ha demostrado resultados prometedores en áreas como el **control robótico, la optimización financiera y el modelado de sistemas complejos**.
 

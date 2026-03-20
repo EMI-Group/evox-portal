@@ -10,7 +10,7 @@ Necesitamos una solución verdaderamente moderna: soporte nativo para GPU, arqui
 
 Para ayudar a los usuarios a empezar rápidamente, el equipo de EvoX ha lanzado el «Tutorial de EvoX para principiantes». El tutorial consta de 8 capítulos que cubren desde los conceptos básicos hasta aplicaciones prácticas avanzadas, guiándote paso a paso sobre cómo ejecutar algoritmos evolutivos en una GPU.
 
-**Recursos completos del tutorial**
+## Recursos completos del tutorial
 
 Tutorial online en chino:
 
@@ -22,7 +22,7 @@ Por favor, únete al grupo de QQ para obtenerlo: 297969717
 
 A continuación, te guiaremos a través de todo el proceso, desde la instalación hasta la operación, en solo 10 minutos.
 
-**Paso 1: Configuración del entorno**
+## Paso 1: Configuración del entorno
 
 Abre tu terminal y crea un entorno de Python limpio:
 
@@ -30,7 +30,7 @@ Abre tu terminal y crea un entorno de Python limpio:
 
 También puedes usar tu herramienta preferida para crear un entorno de Python limpio.
 
-**Paso 2: Instalar PyTorch y EvoX**
+## Paso 2: Instalar PyTorch y EvoX
 
 ![代码片段2.png](./quickstart-2.png)
 
@@ -38,13 +38,13 @@ Comprueba si la GPU está disponible:
 
 ![代码片段3.png](./quickstart-3.png)
 
-**Paso 3: Ejecuta tu primer algoritmo evolutivo**
+## Paso 3: Ejecuta tu primer algoritmo evolutivo
 
 **![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
 
 ¿Qué hace esto? Compone un algoritmo (PSO), un problema (Ackley) y un monitor (EvalMonitor) a través de una interfaz estándar. ¡EvoX se encarga de todo el paralelismo, la aceleración y la monitorización!
 
-**Paso 4: Graficar la curva de convergencia**
+## Paso 4: Graficar la curva de convergencia
 
 Solo una línea es suficiente:
 
@@ -54,7 +54,7 @@ Solo una línea es suficiente:
 
 ¿Ves esa curva descendente? Esa es la **trayectoria donde tu algoritmo evolutivo se acerca al objetivo** y **el camino que toma para explorar el mundo desconocido.**
 
-**Paso 5: Intenta extenderlo**
+## Paso 5: Intenta extenderlo
 
 Si «simplemente ejecutar un Ackley» no es suficiente, puedes:
 
@@ -66,19 +66,19 @@ Si «simplemente ejecutar un Ackley» no es suficiente, puedes:
 
 Ya sea el ajuste de hiperparámetros, la búsqueda de arquitectura, la neuroevolución o la optimización de estrategias de control, EvoX lo gestiona todo con facilidad.
 
-**¿Por qué elegir EvoX?**
+## ¿Por qué elegir EvoX?
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
 
 
-**Agradecimientos**
+## Agradecimientos
 
 Este tutorial fue escrito por **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** y **Xinyao Li**. **Beichen Huang** fue responsable de la recopilación, edición y publicación online del tutorial.
 
 Agradecemos sinceramente a cada miembro de la comunidad de EvoX. Son nuestros esfuerzos conjuntos los que han permitido que EvoX siga evolucionando.
 
-**Código de código abierto / Recursos de la comunidad**
+## Código de código abierto / Recursos de la comunidad
 
 Artículo científico:
 

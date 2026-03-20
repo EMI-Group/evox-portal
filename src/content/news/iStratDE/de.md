@@ -4,7 +4,7 @@ pubDate: 2026-03-16
 summary: "Das EvoX-Team stellt iStratDE vor, eine GPU-beschleunigte Methode der Differentiellen Evolution, die auf Individuen-Ebene feste Strategien zuweist und so eine kommunikationsfreie, massiv parallele Suche mit starker empirischer Leistung und theoretischen Konvergenzgarantien ermöglicht."
 ---
 
-**iStratDE: GPU-Computing x ultragroße Populationen erschließen das volle Potenzial der Differentiellen Evolution**
+## iStratDE: GPU-Computing x ultragroße Populationen erschließen das volle Potenzial der Differentiellen Evolution
 
 ![](./istratde-1.png)
 

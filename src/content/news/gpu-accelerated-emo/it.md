@@ -4,9 +4,7 @@ pubDate: 2025-04-16
 summary: "Collegare l'ottimizzazione multi-obiettivo evolutiva e l'accelerazione GPU tramite tensorizzazione, con la libreria EvoMO."
 ---
 
-**Collegare l'ottimizzazione multi-obiettivo evolutiva**
-
-**e l'accelerazione GPU tramite tensorizzazione**
+## Collegare l'ottimizzazione multi-obiettivo evolutiva e l'accelerazione GPU tramite tensorizzazione
 
 Zhenyu Liang,Hao Li,Naiwei Yu, Kebin Sun, and Ran Cheng, Senior Member, IEEE
 
@@ -16,7 +14,7 @@ Per affrontare questa limitazione, il team EvoX ha proposto di parallelizzare gl
 
 Sulla base di questi progressi nella ricerca, il team EvoX ha rilasciato **EvoMO**, una libreria di algoritmi EMO accelerati da GPU ad alte prestazioni. Il codice sorgente corrispondente è disponibile pubblicamente su GitHub: [https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
 
-**Metodologia di tensorizzazione**
+## Metodologia di tensorizzazione
 
 Nel campo dell'ottimizzazione computazionale, un **tensore** si riferisce a una struttura dati di array multidimensionale capace di rappresentare scalari, vettori, matrici e dati di ordine superiore. La **tensorizzazione** e il processo di conversione delle strutture dati e delle operazioni all'interno di un algoritmo in forma tensoriale, consentendo all'algoritmo di sfruttare appieno le capacità di calcolo parallelo delle GPU.
 
@@ -40,7 +38,7 @@ Fig.1: Confronto tra implementazioni convenzionali e basate su tensori del rilev
 
 Da una prospettiva più profonda, la tensorizzazione è particolarmente adatta all'accelerazione GPU perché le GPU possiedono un gran numero di core paralleli, e la loro architettura single-instruction multiple-thread (SIMT) si allinea naturalmente con i calcoli tensoriali, eccellendo in particolare nelle operazioni matriciali. Hardware dedicato come i Tensor Core di NVIDIA migliora ulteriormente il throughput delle operazioni tensoriali. In generale, gli algoritmi che presentano un alto parallelismo, contengono compiti computazionali indipendenti e hanno un minimo di ramificazioni condizionali sono più adatti alla tensorizzazione. Per algoritmi come MOEA/D, che coinvolgono dipendenze sequenziali, la struttura intrinseca pone sfide alla tensorizzazione diretta. Tuttavia, attraverso la ristrutturazione e il disaccoppiamento dei calcoli critici, e comunque possibile ottenere un'accelerazione parallela efficace.
 
-**Esempio applicativo della tensorizzazione degli algoritmi**
+## Esempio applicativo della tensorizzazione degli algoritmi
 
 Sulla base della metodologia di rappresentazione tensorizzata, il team EvoX ha progettato è implementato versioni tensorizzate di tre algoritmi EMO classici: NSGA-III basato sulla dominanza, MOEA/D basato sulla decomposizione e HypE basato sugli indicatori. La sezione seguente fornisce una spiegazione dettagliata utilizzando MOEA/D come esempio. Le implementazioni tensorizzate di NSGA-III e HypE possono essere trovate nell'articolo di riferimento.
 
@@ -62,7 +60,7 @@ Per ottenere una comprensione più completa del valore della tensorizzazione neg
 
 Fig.4: La trasformazione fluida dell'ordinamento non dominato tensorizzato dallo pseudocodice (sinistra) al codice Python (destra).
 
-**Dimostrazione delle prestazioni**
+## Dimostrazione delle prestazioni
 
 Per valutare le prestazioni degli algoritmi di ottimizzazione multi-obiettivo accelerati da GPU, il team EvoX ha condotto sistematicamente tre categorie di esperimenti, concentrandosi sull'accelerazione computazionale, sulle prestazioni di ottimizzazione numerica e sull'efficacia nei compiti di controllo robotico multi-obiettivo.
 
@@ -106,12 +104,12 @@ Gli esperimenti hanno confrontato le prestazioni di TensorNSGA-III, TensorMOEA/D
 
 
 
-**Conclusioni e lavori futuri**
+## Conclusioni e lavori futuri
  Questo studio propone una metodologia di rappresentazione tensorizzata per affrontare i limiti degli algoritmi EMO tradizionali basati su CPU in termini di efficienza computazionale e scalabilità. L'approccio è stato applicato a diversi algoritmi rappresentativi, tra cui NSGA-III, MOEA/D e HypE, ottenendo significativi miglioramenti delle prestazioni su GPU mantenendo la qualità delle soluzioni. Per validarne l'applicabilità pratica, il team ha anche sviluppato MoRobtrol, una suite di benchmark per il controllo robotico multi-obiettivo che riformula i compiti di controllo robotico in ambienti di simulazione fisica come problemi di ottimizzazione multi-obiettivo. I risultati dimostrano il potenziale degli algoritmi tensorizzati in scenari computazionalmente intensivi come l'intelligenza incarnata. Sebbene il metodo di tensorizzazione abbia migliorato sostanzialmente l'efficienza algoritmica, c'è ancora spazio per ulteriori miglioramenti. Le direzioni future includono il miglioramento degli operatori fondamentali come l'ordinamento non dominato, la progettazione di nuove operazioni tensorizzate per sistemi multi-GPU e l'integrazione di dati su larga scala e tecniche di deep learning per migliorare ulteriormente le prestazioni sui problemi di ottimizzazione su larga scala.
 
 
 
-**Codice open source / Risorse della comunità**
+## Codice open source / Risorse della comunità
 
 Paper:
 

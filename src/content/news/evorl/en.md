@@ -6,7 +6,7 @@ summary: "EvoRL is an open-source Evolutionary Reinforcement Learning framework 
 
 The **EvoX team** has officially launched **EvoRL** (<https://github.com/EMI-Group/evorl>), an open-source **Evolutionary Reinforcement Learning (EvoRL)** framework. Now available on [GitHub](https://github.com/EMI-Group/evorl), EvoRL is designed to push the boundaries of reinforcement learning (RL) by integrating **evolutionary algorithms (EAs)** to improve exploration, adaptability, and efficiency in complex decision-making environments.
 
-**Redefining Reinforcement Learning with Evolution**
+## Redefining Reinforcement Learning with Evolution
 
 Traditional reinforcement learning relies heavily on gradient-based optimization, which can struggle with **sparse rewards, non-differentiable environments, and high-dimensional search spaces**. EvoRL overcomes these challenges by combining:
 
@@ -14,11 +14,11 @@ Traditional reinforcement learning relies heavily on gradient-based optimization
 * **Reinforcement learning** for **fine-tuned adaptation** in complex environments.
   This hybrid approach enables **faster learning, higher robustness, and improved generalization** across a wide range of applications.
 
-**Key Features of EvoRL**
+## Key Features of EvoRL
 
 **Modular & Extensible Architecture** – Easily customize evolutionary and RL components for various tasks.
 
-**Driving Innovation in AI Research & Industry**
+## Driving Innovation in AI Research & Industry
 
 Developed by **EvoX team**, EvoRL represents a major step toward **bridging evolutionary algorithms and reinforcement learning**. This approach has already demonstrated promising results in areas like **robotic control, financial optimization, and complex system modeling**.
 

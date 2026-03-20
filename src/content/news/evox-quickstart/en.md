@@ -10,7 +10,7 @@ We need a truly modern solution: native GPU support, modular architecture, clear
 
 To help users get started quickly, the EvoX team has released the "EvoX Beginner's Tutorial". The tutorial consists of 8 chapters, covering everything from the basics to advanced practical application, guiding you step by step on how to run evolutionary algorithms on a GPU.
 
-**Complete Tutorial Resources**
+## Complete Tutorial Resources
 
 Chinese online tutorial:
 
@@ -22,7 +22,7 @@ Please join the QQ group to obtain it: 297969717
 
 Next, we will take you through the entire process from installation to operation in just 10 minutes.
 
-**Step 1: Environment Setup**
+## Step 1: Environment Setup
 
 Open your terminal and create a clean Python environment:
 
@@ -30,7 +30,7 @@ Open your terminal and create a clean Python environment:
 
 You can also use your preferred tool to create a clean Python environment.
 
-**Step 2: Install PyTorch and EvoX**
+## Step 2: Install PyTorch and EvoX
 
 ![代码片段2.png](./quickstart-2.png)
 
@@ -38,13 +38,13 @@ Check whether the GPU is available:
 
 ![代码片段3.png](./quickstart-3.png)
 
-**Step 3: Run your first evolutionary algorithm**
+## Step 3: Run your first evolutionary algorithm
 
 **![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
 
 What does this do? It composes an algorithm (PSO), a problem (Ackley), and a monitor (EvalMonitor) via a standard interface. EvoX takes care of all the parallelism, acceleration, and monitoring!
 
-**Step 4: Plot The Convergence Curve**
+## Step 4: Plot The Convergence Curve
 
 Only one line is enough:
 
@@ -54,7 +54,7 @@ Only one line is enough:
 
 See that descending curve? That is the **trajectory where your evolutionary algorithm is approaching the target**, and **the path it takes to explore the unknown world.**
 
-**Step 5: Try Extending**
+## Step 5: Try Extending
 
 If "just running an Ackley" is not satisfying, you can:
 
@@ -66,19 +66,19 @@ If "just running an Ackley" is not satisfying, you can:
 
 Whether it's hyperparameter tuning, architecture search, neuroevolution, or control-strategy optimization, EvoX handles it all with ease.
 
-**Why Choose EvoX?**
+## Why Choose EvoX?
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
 
 
-**Acknowledgement**
+## Acknowledgement
 
 This tutorial was written by **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng**, and **Xinyao Li**. **Beichen Huang** was responsible for the collation, editing and online release of the tutorial.
 
 We sincerely thank every member of the EvoX community. It is our joint efforts that have enabled EvoX to keep evolving.
 
-**Open Source Code / Community Resources**
+## Open Source Code / Community Resources
 
 Paper:
 

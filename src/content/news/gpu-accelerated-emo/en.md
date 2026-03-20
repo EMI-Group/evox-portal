@@ -4,9 +4,7 @@ pubDate: 2025-04-16
 summary: "Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization, introducing the EvoMO library."
 ---
 
-**Bridging Evolutionary Multiobjective Optimization**
-
-**and GPU Acceleration via Tensorization**
+## Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization
 
 Zhenyu Liang,Hao Li,Naiwei Yu, Kebin Sun, and Ran Cheng, Senior Member, IEEE
 
@@ -16,7 +14,7 @@ To address this limitation, the EvoX team proposed to parallelize EMO algorithms
 
 Based on these research advancements, the EvoX team has released **EvoMO**, a high-performance GPU-accelerated EMO algorithm library. The corresponding source code is publicly available on GitHub: [https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
 
-**Tensorization Methodology**
+## Tensorization Methodology
 
 In the field of computational optimization, a **tensor** refers to a multi-dimensional array data structure capable of representing scalars, vectors, matrices, and higher-order data. **Tensorization** is the process of converting data structures and operations within an algorithm into tensor form, enabling the algorithm to fully leverage the parallel computing capabilities of GPUs.
 
@@ -40,7 +38,7 @@ Fig.1: Comparison between conventional and tensor-based implementations of Paret
 
 From a deeper perspective, tensorization is well-suited for GPU acceleration because GPUs possess a large number of parallel cores, and their single-instruction multiple-thread (SIMT) architecture aligns naturally with tensor computations, particularly excelling in matrix operations. Dedicated hardware such as NVIDIA's Tensor Cores further enhances the throughput of tensor operations. In general, algorithms that exhibit high parallelism, contain independent computational tasks, and have minimal conditional branching are more amenable to tensorization. For algorithms like MOEA/D, which involve sequential dependencies, the inherent structure poses challenges to direct tensorization. However, through structural refactoring and decoupling of critical computations, it is still possible to achieve effective parallel acceleration.
 
-**Application Example of Algorithm Tensorization**
+## Application Example of Algorithm Tensorization
 
 Based on the tensorized representation methodology, the EvoX team has designed and implemented tensorized versions of three classical EMO algorithms: the dominance-based NSGA-III, the decomposition-based MOEA/D, and the indicator-based HypE. The following section provides a detailed explanation using MOEA/D as an example. Tensorized implementations of NSGA-III and HypE can be found in the referenced paper.
 
@@ -62,7 +60,7 @@ To gain a more comprehensive understanding of the value of tensorization in EMO 
 
 Fig.4: he seamless transformation of the tensorized non-dominated sorting from pseudocode (Left) to Python code (Right).
 
-**Performance Demonstration**
+## Performance Demonstration
 
 To evaluate the performance of GPU-accelerated multiobjective optimization algorithms, the EvoX team systematically conducted three categories of experiments, focusing on computational acceleration, numerical optimization performance, and effectiveness in multiobjective robotic control tasks.
 
@@ -106,12 +104,12 @@ The experiments compared the performance of TensorNSGA-III, TensorMOEA/D, Tensor
 
 
 
-**Conclusion and Future Work**
+## Conclusion and Future Work
  This study proposes a tensorized representation methodology to address the limitations of traditional CPU-based EMO algorithms in terms of computational efficiency and scalability. The approach has been applied to several representative algorithms, including NSGA-III, MOEA/D, and HypE, achieving significant performance improvements on GPUs while maintaining solution quality. To validate its practical applicability, the team also developed MoRobtrol, a multiobjective robotic control benchmark suite that reformulates robotic control tasks in physics simulation environments as multiobjective optimization problems. The results demonstrate the potential of tensorized algorithms in computationally intensive scenarios such as embodied intelligence. Although the tensorization method has substantially improved algorithmic efficiency, there remains room for further enhancement. Future directions include improving core operators such as non-dominated sorting, designing new tensorized operations for multi-GPU systems, and integrating large-scale data and deep learning techniques to further enhance performance on large-scale optimization problems.
 
 
 
-**Open Source Code / Community Resources**
+## Open Source Code / Community Resources
 
 Paper:
 

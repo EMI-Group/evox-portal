@@ -4,7 +4,7 @@ pubDate: 2026-03-16
 summary: "EvoX 团队提出 iStratDE，一种 GPU 加速的差分进化方法。该方法在个体层面分配固定策略，实现无通信的大规模并行搜索，兼具优异的实验性能与理论收敛保证。"
 ---
 
-**iStratDE：GPU 计算 x 超大种群，释放差分进化的全部潜力**
+## iStratDE：GPU 计算 x 超大种群，释放差分进化的全部潜力
 
 ![](./istratde-1.png)
 

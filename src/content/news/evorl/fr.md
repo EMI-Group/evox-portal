@@ -6,7 +6,7 @@ summary: "EvoRL est un framework open-source d'apprentissage par renforcement é
 
 L'équipe **EvoX** a officiellement lancé **EvoRL** (<https://github.com/EMI-Group/evorl>), un framework open-source d'**apprentissage par renforcement évolutif (EvoRL)**. Désormais disponible sur [GitHub](https://github.com/EMI-Group/evorl), EvoRL est conçu pour repousser les limites de l'apprentissage par renforcement (RL) en intégrant des **algorithmes évolutifs (EAs)** afin d'améliorer l'exploration, l'adaptabilité et l'efficacité dans des environnements de prise de décision complexes.
 
-**Redéfinir l'apprentissage par renforcement avec l'évolution**
+## Redéfinir l'apprentissage par renforcement avec l'évolution
 
 L'apprentissage par renforcement traditionnel repose fortement sur l'optimisation basée sur le gradient, qui peut rencontrer des difficultés avec des **récompenses éparses, des environnements non différentiables et des espaces de recherche à haute dimension**. EvoRL surmonte ces défis en combinant :
 
@@ -14,12 +14,12 @@ L'apprentissage par renforcement traditionnel repose fortement sur l'optimisatio
 *   L'**apprentissage par renforcement** pour une **adaptation fine** dans des environnements complexes.
     Cette approche hybride permet un **apprentissage plus rapide, une plus grande robustesse et une généralisation améliorée** à travers une large gamme d'applications.
 
-**Fonctionnalités clés d'EvoRL**
+## Fonctionnalités clés d'EvoRL
 
 **Architecture modulaire et extensible** – Personnalisez facilement les composants évolutifs et RL pour diverses tâches.
 
 
-**Stimuler l'innovation dans la recherche en IA et l'industrie**
+## Stimuler l'innovation dans la recherche en IA et l'industrie
 
 Développé par l'équipe **EvoX**, EvoRL représente une étape majeure vers le **rapprochement des algorithmes évolutifs et de l'apprentissage par renforcement**. Cette approche a déjà démontré des résultats prometteurs dans des domaines tels que le **contrôle robotique, l'optimisation financière et la modélisation de systèmes complexes**.
 

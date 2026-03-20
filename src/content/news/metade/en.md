@@ -6,7 +6,7 @@ summary: "MetaDE is a meta-evolutionary method that uses Differential Evolution 
 
 Differential Evolution (DE), one of the core algorithms in evolutionary computation, has been widely employed in black-box optimization problems due to its simplicity and high efficiency. Nevertheless, its performance is heavily dependent on the selection of hyperparameters and strategies, a persistent issue for researchers. To address this challenge, the EvoX team recently published a study in *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* entitled "MetaDE: Evolving Differential Evolution by Differential Evolution." As a meta-evolutionary method that leverages DE to evolve its own hyperparametes and strategies, MetaDE enables the dynamic adjustment of parameters and strategies while incorporating GPU-accelerated parallel computing. This design substantially improves computational efficiency alongside optimization performance. Experimental resultsdemonstrate that MetaDE delivers outstanding performance on both the CEC2022 benchmark suite and robot control tasks. The source code for MetaDE is open sourced on GitHu b at [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade").
 
-**Background**
+## Background
 
 In the field of Evolutionary Computation, the performance of algorithms is often significantly influenced by the choice of hyperparameters. Determining the most suitable parameter settings for a specific problem has been a longstanding research challenge. Differential Evolution (DE), as a classical evolutionary algorithm, is widely favored for its simplicity and robust global search capability; nonetheless, its performance is highly sensitive to hyperparameter selection. Conventional methods typically rely on either experience-based tuning or adaptive mechanisms to improve performance. However, in the face of diverse problem scenarios, these approaches frequently struggle to balance efficiency and broad applicability.
 
@@ -14,7 +14,7 @@ The concept of "Meta-Evolution" was introduced as early as the previous century,
 
 
 
-**What Is Meta-Evolution?**
+## What Is Meta-Evolution?
 
 The core idea behind meta-evolution can be summarized as "**using an evolutionary algorithm to evolve itself**" (Evolving an Evolutionary Algorithm by an Evolutionary Algorithm). This concept transcends traditional evolutionary computation methods by not only employing evolutionary algorithms to search for optimal solutions to a problem, but also adapting the algorithms' hyperpa rameters and strategies through their own evolutionary processes.
 
@@ -37,7 +37,7 @@ Through this recursive meta-evolutionary approach, MetaDE achieves several benef
 **3. Efficient Search**
       By leveraging inherent parallelism, MetaDE greatly accelerates searches in large-scale optimization problems. It delivers feasible solutions to high-dimensional, complex problems within reasonable time frames.
 
-**Algorithmic Implementation**
+## Algorithmic Implementation
 
 MetaDE employs tensor-based techniques and GPU acceleration to enable efficient parallel computing. By processing many individuals of a population simultaneously, the overall computational efficiency is markedly improved, making it particularly advantageous in single-objective black-box optimization and large-scale optimization problems. Through tensorization of key parameters and data structures (e.g., population, fitness, strategy parameters), MetaDE not only achieves higher computational efficiency but also enhances its capacity to tackle complex optimization challenges. Compared with classical DE and other evolutionary algorithms (EAs), MetaDE shows superior performance in solving large-scale problems. Owing to the tensor-based approach, MetaDE harnesses computational resources more effectively, yielding faster solutions and more precise optimization outcomes than traditional methods.
 
@@ -55,25 +55,25 @@ MetaDE adopts a two-layer structure, comprising **an evolver** (upper layer) and
 
 
 
-**Experimental Performance**
+## Experimental Performance
 
 To comprehensively assess the effectiveness of MetaDE, the research team performed systematic experiments spanning multiple benchmark tests and real-world scenarios. Each experiment used an evolver (DE with rand/1/bin strategy) and executors (PDE with a population size of 100). Key experimental components include:
 
-**CEC2022 Benchmark**
+### CEC2022 Benchmark
  Comparing MetaDE to various DE variants in single-objective optimization tasks.
 
-**Comparison with the Top Four CEC2022 Algorithms**
+### Comparison with the Top Four CEC2022 Algorithms
  Evaluating MetaDE against the four best-performing algorithms from the CEC2022 competition under identical function evaluations (FEs) budgets.
 
-**Function Evaluations (FEs) Under Fixed Wall-Clock Time**
+### Function Evaluations (FEs) Under Fixed Wall-Clock Time
  Analyzing MetaDE's computational efficiency under GPU acceleration.
 
-**Robot Control Tasks**
+### Robot Control Tasks
  Applying MetaDE to robot control tasks in a Brax platform environment to validate its practical utility.
 
 
 
-**CEC2022 Benchmark: Comparison with Mainstream DE Variants**
+## CEC2022 Benchmark: Comparison with Mainstream DE Variants
 
 The team compared MetaDE to several representative DE variants on the CEC2022 benchmark suite, including:
 
@@ -97,7 +97,7 @@ MetaDE generally achieves more rapid and stable convergence across most test fun
 
 
 
-**Comparison with Top Four CEC2022 Algorithms (Under Identical FEs)**
+## Comparison with Top Four CEC2022 Algorithms (Under Identical FEs)
 
 To further evaluate MetaDE's optimization capability, we compared it with the top four algorithms from the CEC2022 competition within **the same function evaluation budget**:
 
@@ -122,7 +122,7 @@ MetaDE consistently demonstrates strong performance, especially on complex probl
 
 
 
-**Computational Efficiency: FEs Within a Fixed Time (60 seconds)**
+## Computational Efficiency: FEs Within a Fixed Time (60 seconds)
 
 The research team further recorded **the number of function evaluations (FEs) completed by different algorithms within the same fixed runtime (60 seconds)**.
 
@@ -134,7 +134,7 @@ Under the same EvoX framework with GPU-accelerated parallel computation, MetaDE 
 
 
 
-**Evolutionary Reinforcement Learning: Robot Control Tasks**
+## Evolutionary Reinforcement Learning: Robot Control Tasks
 
 In Reinforcement Learning (RL), the efficiency and stability of policy optimization are crucial. Gradient-based methods such as PPO and SAC can suffer from gradient vanishing or exploding in high-dimensional environments. By contrast, Evolutionary Reinforcement Learning (EvoRL) circumvents these issues by using **gradient-free searches** to directly optimize policy parameters.
 
@@ -158,13 +158,13 @@ As shown in the figure, MetaDE demonstrates strong performance in Brax-based rob
 
 
 
-**Conclusion and Future Directions**
+## Conclusion and Future Directions
 
 MetaDE is an innovative meta-evolution approach that not only excels in solving optimization tasks but also autonomously tunes and refines its own strategies. Capitalizing on the strengths of Differential Evolution, MetaDE exhibits strong potential in adaptive parameter configuration and strategy evolution. Experimental results show superior robustness in a range of benchmark tests, and its real-world applicability is underscored by success in robot control tasks via evolutionary reinforcement learning. A core challenge involves maintaining an optimal balance between generalization and specialization--ensuring that the algorithm can adapt to diverse tasks while also optimizing effectively for specific problems. This research offers new perspectives for self-adaptive evolutionary algorithms and may spur further advances in meta-evolution for complex systems.
 
 
 
-**Open-Source Code and Community**
+## Open-Source Code and Community
 
 **Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
 

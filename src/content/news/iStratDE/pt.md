@@ -4,7 +4,7 @@ pubDate: 2026-03-16
 summary: "A equipa EvoX apresenta o iStratDE, um método de evolução diferencial acelerado por GPU que atribui estratégias fixas ao nível individual, permitindo pesquisa paralela em grande escala sem comunicação, com forte desempenho empírico e garantias teóricas de convergência."
 ---
 
-**iStratDE: Computação GPU x Populações Ultra-Grandes Libertam Todo o Potencial da Evolução Diferencial**
+## iStratDE: Computação GPU x Populações Ultra-Grandes Libertam Todo o Potencial da Evolução Diferencial
 
 ![](./istratde-1.png)
 
