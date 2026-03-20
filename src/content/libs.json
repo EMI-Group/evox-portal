@@ -58,5 +58,11 @@
     "title": "EvoGO",
     "description": "A fully data-driven framework for black-box optimization, replacing manual heuristic operators by learning search behaviors from historical data",
     "url": "https://github.com/EMI-Group/evogo"
+  },
+  {
+    "id": "evonas",
+    "title": "EvoNAS",
+    "description": "A framework for neural architecture search, implemented with PyTorch. It supports supernet training, evolutionary multi-objective optimization, and seamless integration with modern computer vision training pipelines.",
+    "url": "https://github.com/EMI-Group/evonas"
   }
 ]
