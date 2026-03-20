@@ -71,6 +71,7 @@
   "libs.desc.evoxbench": "Une plateforme offrant un benchmarking instantané des algorithmes d'optimisation multi-objectif évolutive (EMO) pour la recherche d'architecture neuronale (NAS).",
   "libs.desc.istratde": "Un framework de Differential Evolution accéléré par GPU qui améliore les performances grâce à la diversité des stratégies au niveau individuel.",
   "libs.desc.evogo": "Un framework entièrement piloté par les données pour l'optimisation boîte noire, remplaçant les opérateurs heuristiques manuels par l'apprentissage de comportements de recherche à partir de données historiques.",
+  "libs.desc.evonas": "Un framework pour la recherche d'architecture neuronale, implémenté avec PyTorch. Il prend en charge l'entraînement de super-réseaux, l'optimisation multi-objectifs évolutive et l'intégration fluide avec les pipelines d'entraînement de vision par ordinateur modernes.",
   "news.pageTitle": "Actualités {page} | EvoX",
   "news.heroTitle": "Dernières Actualités",
   "news.heroDesc": "Plongées au cœur du calcul évolutionnaire, mises à jour du projet et actualités de la communauté.",

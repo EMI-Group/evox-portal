@@ -71,6 +71,7 @@
   "libs.desc.evoxbench": "提供神经架构搜索 (NAS) 中进化多目标优化 (EMO) 算法即时基准测试的平台。",
   "libs.desc.istratde": "一个 GPU 加速的 Differential Evolution 框架，通过个体级别的策略多样性来提升性能。",
   "libs.desc.evogo": "一个完全数据驱动的黑箱优化框架，通过从历史数据中学习搜索行为来替代手工启发式算子。",
+  "libs.desc.evonas": "一个基于 PyTorch 实现的神经架构搜索框架。它支持超网训练、进化多目标优化，并能无缝集成到现代计算机视觉训练管线中。",
   "news.pageTitle": "新闻 {page} | EvoX",
   "news.heroTitle": "最新新闻",
   "news.heroDesc": "深入探讨进化计算、项目更新和社区新闻。",
