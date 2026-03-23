@@ -81,6 +81,7 @@
   "libs.desc.istratde": "A GPU-accelerated Differential Evolution framework that enhances performance through individual-level strategy diversity.",
   "libs.desc.evogo": "A fully data-driven framework for black-box optimization, replacing manual heuristic operators by learning search behaviors from historical data.",
   "libs.desc.evonas": "A framework for neural architecture search, implemented with PyTorch. It supports supernet training, evolutionary multi-objective optimization, and seamless integration with modern computer vision training pipelines.",
+  "libs.desc.evocmo": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
 
   "news.pageTitle": "News {page} | EvoX",
   "news.heroTitle": "Latest News",

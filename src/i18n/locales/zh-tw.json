@@ -72,6 +72,7 @@
   "libs.desc.istratde": "一個 GPU 加速的 Differential Evolution 框架，透過個體級別的策略多樣性來提升效能。",
   "libs.desc.evogo": "一個完全資料驅動的黑箱最佳化框架，透過從歷史資料中學習搜尋行為來取代手工啟發式運算子。",
   "libs.desc.evonas": "一個基於 PyTorch 實現的神經架構搜索框架。它支持超網訓練、進化多目標優化，並能無縫集成到現代計算機視覺訓練管線中。",
+  "libs.desc.evocmo": "一個完全張量化、支援GPU加速的多族群進化演算法，用於高效求解受限多目標優化問題（CMOPs）。",
   "news.pageTitle": "最新消息 {page} | EvoX",
   "news.heroTitle": "最新消息",
   "news.heroDesc": "深入探討演化計算、專案更新與社群動態。",

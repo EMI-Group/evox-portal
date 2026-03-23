@@ -72,6 +72,7 @@
   "libs.desc.istratde": "개체 수준의 전략 다양성을 통해 성능을 향상시키는 GPU 가속 Differential Evolution 프레임워크.",
   "libs.desc.evogo": "수동 휴리스틱 연산자를 과거 데이터로부터의 탐색 행동 학습으로 대체하는 완전 데이터 기반 블랙박스 최적화 프레임워크.",
   "libs.desc.evonas": "PyTorch로 구현된 신경망 아키텍처 탐색을 위한 프레임워크. 슈퍼넷 훈련, 진화적 다목적 최적화 및 최신 컴퓨터 비전 훈련 파이프라인과의 원활한 통합을 지원합니다.",
+  "libs.desc.evocmo": "제약이 있는 다목적 최적화 문제(CMOP)를 효율적으로 해결하기 위한 완전 텐서화된 GPU 가속 다중 모집단 진화 알고리즘입니다.",
   "news.pageTitle": "뉴스 {page} | EvoX",
   "news.heroTitle": "최신 뉴스",
   "news.heroDesc": "진화 연산에 대한 심층 분석, 프로젝트 업데이트 및 커뮤니티 소식.",

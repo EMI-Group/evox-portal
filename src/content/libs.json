@@ -64,5 +64,11 @@
     "title": "EvoNAS",
     "description": "A framework for neural architecture search, implemented with PyTorch. It supports supernet training, evolutionary multi-objective optimization, and seamless integration with modern computer vision training pipelines.",
     "url": "https://github.com/EMI-Group/evonas"
+  },
+  {
+    "id": "evocmo",
+    "title": "EvoCmo",
+    "description": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
+    "url": "https://github.com/785509490/EvoCmo"
   }
 ]
