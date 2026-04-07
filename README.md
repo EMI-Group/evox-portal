@@ -26,13 +26,13 @@ EvoX Portal is the Landing Pages of EvoX, built with **Astro 5.0**, **Tailwind C
 
 3. **Start the development server**:
    ```bash
-   pnpm dev
+   pnpm run dev
    ```
    The site will be available at `http://localhost:4321`.
 
 ## 🛠️ Components & Architecture
 
-- **Framework**: [Astro 5](https://astro.build/) - Selected for its excellent performance and content-first architecture.
+- **Framework**: [Astro 6](https://astro.build/) - Selected for its excellent performance and content-first architecture.
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) - Using the latest features including CSS-first configuration and high-performance engine.
 - **Icons**: [astro-icon](https://github.com/natemoo-re/astro-icon) with Heroicons and Simple Icons sets.
 - **Content**: Managed via [Content Collections](https://docs.astro.build/en/guides/content-collections/) for blogs and library metadata.
@@ -55,18 +55,27 @@ src/
 
 | Script           | Description                                                     |
 | :--------------- | :-------------------------------------------------------------- |
-| `pnpm dev`       | Starts the local development server with HMR.                   |
-| `pnpm build`     | Bundles your site into static files for production to `./dist`. |
-| `pnpm preview`   | Previews your build locally before deploying.                   |
+| `pnpm run dev`   | Starts the local development server with HMR.                   |
+| `pnpm run build`     | Bundles your site into static files for production to `./dist`. |
+| `pnpm run preview`   | Previews your build locally before deploying.                   |
 | `pnpm astro ...` | Run any specialized Astro CLI commands.                         |
 
-## 🌟 Key Features
+## Development
 
-- **GPU Visualization**: Interactive demos of evolutionary algorithms.
-- **Dynamic Blogs**: Paginated news and updates sourced from Markdown.
-- **Ecosystem Directory**: Clean, searchable list of EvoX-related libraries.
-- **Community Focused**: Quick access to QQ Groups and Discord channels.
-- **Fully Responsive**: Optimized for everything from mobile phones up to large desktop monitors.
+### 📰 Writing News
+
+1. Create a new folder for your news article under `src/content/news/` (e.g., `src/content/news/my-new-release/`).
+2. Inside the folder, create an `en.md` file with the English content and the required frontmatter.
+3. You can use the `\translate` skill within your Code Agent (eg: Claude Code) to automatically translate the English article into all supported languages. 
+   - Ask the assistant: `\translate /absolute/path/to/src/content/news/my-new-release/en.md`
+   - *Note: The generated translations serve as a starting point and should be manually reviewed.*
+
+### 📚 Adding a Library
+
+1. You can add a new library manually by editing `src/content/libs.json` and adding the corresponding description strings in the locale files.
+2. **Recommended:** Use the `/add-lib` skill for an automated workflow. Provide a GitHub URL, and the skill will fetch metadata, update `libs.json`, and add i18n keys for all locales.
+   - Ask the assistant: `/add-lib https://github.com/EMI-Group/evox`
+   - *Note: Always review the generated entry and translations.*
 
 ---
 
