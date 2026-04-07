@@ -7,7 +7,7 @@ summary: "EvoGO is a fully data-driven evolutionary optimization framework that 
 
 # EvoGO: GPU Compute × Generative Learning → A New Paradigm for Evolutionary Algorithms with 10-Generation Convergence
 
-![图片1](./图片1.png)
+![image1](./image1.png)
 
 In recent years, data-driven evolutionary optimization methods have made remarkable progress. From surrogate-assisted evolutionary algorithms to generative evolutionary algorithms, evolutionary optimization has been gradually shifting from traditional fixed-operator-driven paradigms toward learning-driven ones. However, the data-driven nature of existing methods remains incomplete in three important respects. First, coordination between the generative mechanism and the evolutionary process still often depends on manually designed heuristic rules. Second, the training objectives of generative models are usually inherited from general-purpose generation tasks and are not sufficiently aligned with optimization objectives. Third, the extremely limited yet highly valuable online samples available in black-box optimization have not yet been systematically organized into learnable and transferable optimization experience. To address these issues, the EvoX team proposed Evolutionary Generative Optimization (EvoGO), which organizes the entire optimization process into three unified stages: data preparation, model training, and population generation. The aim is to enable optimization algorithms to directly learn the improvement law of moving from inferior solutions to superior ones from historical data. Experimental results show that EvoGO demonstrates stable advantages across three categories of tasks—numerical optimization, classical control, and high-dimensional robotic control—covering 25 benchmark tests and problem scales ranging from 10 to 1000 dimensions, and converging on most large-scale tasks in roughly 10 generations. In complex tasks, when combined with GPU-parallel inference, EvoGO also shows significant practical runtime advantages; when CMA-ES reaches its converged performance, EvoGO can achieve the same performance up to 134× faster. These results indicate that fully data-driven evolutionary optimization can not only achieve competitive results on standard benchmark tests, but also opens up new possibilities for a unified generative framework for solving complex high-dimensional black-box optimization problems.
 
@@ -23,7 +23,7 @@ Therefore, what is truly missing today is not more models per se, but the final 
 
 To address the issues above, EvoGO does not continue along the traditional route of improving local operators such as crossover and mutation. Instead, it attempts to rewrite the optimization pipeline at a more holistic level. Its core idea is to remove the process of “how to generate the next generation of candidate solutions” from manually written rules and hand it over to a data-driven generative mechanism to learn. Specifically, EvoGO organizes the entire optimization process into three unified stages—**data preparation, model training, and population generation**—so that experience organization, directional learning, and population updating are no longer fragmented, but instead integrated into a single optimization loop.
 
-![图片2](./图片2.png)
+![image2](./image2.png)
 
 In the data preparation stage, EvoGO first filters high-quality samples from historical populations to build a more reliable training foundation. When samples are scarce, learned augmentation can also be used to alleviate data scarcity. More importantly, the samples are further divided into superior and inferior solutions and organized into paired relationships. As a result, what the model learns is no longer just a static distribution of candidate solutions, but rather the directional relationship of moving from inferior solutions to superior ones.
 
@@ -43,13 +43,13 @@ To rigorously evaluate the effectiveness of this new fully data-driven paradigm,
 
 The paper conducts a systematic evaluation on three categories of tasks—numerical optimization, classical control, and high-dimensional robotic control—covering 25 benchmark tests with problem dimensions ranging from 10 to 1000. EvoGO is comprehensively compared with Bayesian optimization, classical evolution strategies, heuristic methods, and advanced surrogate-assisted methods.
 
-![图片3](./图片3.png)
+![image3](./image3.png)
 
-![图片4](./图片4.png)
+![image4](./image4.png)
 
 Overall, EvoGO shows clear advantages on most tasks. Notably, this advantage is not confined to low-dimensional or relatively regular problems. On the contrary, as problem dimensionality and task complexity increase, EvoGO’s advantage often becomes more pronounced. Under low-dimensional and small-sample conditions, some of the strongest surrogate-assisted methods remain highly competitive. But once the problems become high-dimensional, complex, and dependent on parallel computation, EvoGO’s generative mechanism is able to unfold more fully, and on most large-scale tasks it can converge in roughly 10 generations. This suggests that EvoGO’s value does not lie in achieving local superiority on a single type of problem, but in being better suited to the large-scale experience utilization and parallel search required by complex black-box optimization.
 
-![图片5](./图片5.png)
+![image5](./image5.png)
 
 This is especially evident in the high-dimensional robotic control environment Hopper in Brax. Under the same function-evaluation budget and runtime budget, EvoGO significantly outperforms traditional optimization algorithms such as CMA-ES and TPE, and also surpasses the PPO reinforcement learning algorithm, which requires online interaction with the environment. More importantly, thanks to the parallel computing power of modern hardware such as GPUs, EvoGO can reach a high reward level in about 500 seconds. When CMA-ES finally converges to its best performance level, the actual wall-clock time required for EvoGO to reach the same performance is much shorter—up to 134× speedup. This result shows that EvoGO’s advantage is not merely in reducing the number of generations, but in the fact that its search process itself is better matched to parallel computing resources, compressing optimization actions that would otherwise be spread across many generations into a high-throughput generative update process.
 
@@ -65,7 +65,7 @@ The experimental results show that the paired generative architecture, the surro
 
 To more intuitively analyze EvoGO’s search dynamics, the paper presents a visualization experiment on the two-dimensional Ackley function, with the population size set to 100. Specifically, at different evolutionary generations, the transformation results of the trained forward generator on input solutions are recorded—that is, the mapping process from input solutions to output solutions is tracked. In the figure, arrows represent vectors from input solutions to output solutions, and their colors correspond to vector lengths. The star marks the global optimum, and dashed boxes indicate the regions covered by generated solutions in different generations. For clarity, the translation and rotation settings of the function landscape are omitted in this visualization.
 
-![图片7](./图片7.png)
+![image7](./image7.png)
 
 The visualization results show that what EvoGO learns is not directionless random perturbation, but an update pattern that adapts with the search stage. In the early stage, the generated vectors are generally longer, indicating that the algorithm tends toward large-amplitude global exploration. As evolution proceeds, vector lengths gradually decrease and the generated regions continue to contract, showing that the search shifts toward finer local exploitation. At the same time, the vectors as a whole gather toward the optimal region, indicating that the forward generator has already extracted a practically meaningful search direction from historical samples. At the behavioral level, this phenomenon supports EvoGO’s central property: it learns not merely the distribution of candidate solutions, but the update law that moves from the current state toward a better state.
 
@@ -73,15 +73,15 @@ The visualization results show that what EvoGO learns is not directionless rando
 
 The successful delivery of the **C919** marks a crucial step for China in the development of domestically produced large aircraft. However, as a single-aisle narrow-body airliner, the C919 mainly serves short- and medium-haul routes, and breakthroughs in the wide-body airliner domain are still needed. To meet the development needs of the next generation of domestic wide-body aircraft, **supercritical wing design** has become a key issue in aerodynamic optimization, playing an important role in reducing cruise drag, improving fuel efficiency, and enhancing flight stability. Therefore, how to achieve efficient and reliable supercritical wing optimization has become a core technical challenge in China’s wide-body aircraft development process.
 
-![图片8](./图片8.png)
+![image8](./image8.png)
 
 As shown in the original article, by optimizing geometric features such as a longer chord, a flatter upper surface, and increased trailing-edge camber, a supercritical wing can regulate transonic pressure distribution, suppress shock-wave formation, reduce wave drag, and improve lift efficiency. However, its optimal design faces multiple challenges. On the one hand, under the high-Reynolds-number conditions of wide-body aircraft, the design must simultaneously satisfy strict aerodynamic constraints such as lift-to-drag ratio, lift coefficient, and cruise angle of attack, which imposes extremely high precision requirements on shape parameters. On the other hand, there is a strongly nonlinear coupling relationship between airfoil geometry and aerodynamic performance, which is difficult for traditional modeling methods to characterize accurately. In addition, the existing design process relies heavily on experience, repeated CFD simulations, and wind-tunnel experiments, leading to high computational cost, long development cycles, and difficulty in effectively approaching the global optimum in a high-dimensional design space.
 
-![图片9](./图片9.png)
+![image9](./image9.png)
 
 To address this problem, the EvoX team built an integrated design pipeline based on EvoGO, consisting of performance evaluation, airfoil generation, and candidate screening. Based on a small number of historical airfoil samples, the method constructs a performance evaluation model, an airfoil generation model, and a screening model, and continuously improves the airfoil design through iterative evolution. A surrogate model is used to accurately predict key metrics such as lift-to-drag ratio, lift coefficient, and cruise angle of attack. At the same time, a generative mechanism is introduced to replace traditional heuristic search, enabling efficient approximation of the optimum in a high-dimensional design space. Combined with a candidate screening strategy, this method can rapidly identify candidate airfoils that satisfy both physical constraints and aerodynamic performance requirements from a vast search space, thereby improving design efficiency.
 
-![图片10](./图片10.png)
+![image10](./image10.png)
 
 Using only 500 historical airfoil samples, the method achieves more than 99.5% prediction accuracy on three key aerodynamic indicators—lift-to-drag ratio, lift coefficient, and cruise angle of attack—and the qualification rate of automatically generated airfoils exceeds 95%. These results indicate that fully data-driven evolutionary optimization methods such as EvoGO can not only perform well on standard benchmark tests, but are also beginning to demonstrate the ability to provide effective design support for real engineering problems.
 
