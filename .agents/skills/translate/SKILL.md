@@ -38,7 +38,7 @@ For each target locale, create a translated version following these rules:
 3. **Technical terms**: Keep technical terms, project names, library names, and code in English. Examples: EvoX, EvoGP, PyTorch, CUDA, GPU, CPU, TGP, NSGA-II, Brax, JAX, pip, conda.
 4. **URLs and links**: Keep all URLs unchanged. Translate link text if it's descriptive.
 5. **Markdown formatting**: Preserve all markdown formatting exactly (headers, bold, italic, lists, code blocks, images).
-6. **Image paths**: Keep image paths exactly as they are — do not translate or modify image references.
+6. **Image paths**: In markdown image syntax such as `![alt text](/image/path/example.png)`, you may translate the alt text when appropriate, but you must keep the entire path inside parentheses exactly unchanged, including the filename, extension, and any query/hash suffix. Do not translate or modify image references.
 7. **Natural tone**: Write naturally in each target language, not word-for-word translation. The text should read as if originally written in that language.
 
 ### Locale-specific guidelines:
