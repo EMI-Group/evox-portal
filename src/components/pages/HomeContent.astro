@@ -95,7 +95,7 @@ const ecosystem = allLibs.slice(0, 3);
       <!-- Hero Logo (visible by default) -->
       <img
         id="hero-logo"
-        src="/logo.png"
+        src="/logo.svg"
         alt="EvoX Logo"
         class="h-28 md:h-36 mb-10 mx-auto"
       />
@@ -531,9 +531,7 @@ const ecosystem = allLibs.slice(0, 3);
       return;
     }
 
-    const navbarLogoImg = navbar.querySelector(
-      "img[alt='X']",
-    );
+    const navbarLogoImg = navbar.querySelector("img[data-logo-mark]");
     if (!(navbarLogoImg instanceof HTMLImageElement)) return;
 
     const navbarEl = navbar;
