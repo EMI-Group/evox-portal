@@ -1,6 +1,6 @@
 ﻿---
 title: "ICML 2026 | EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining"
-pubDate: 2026-05-29
+pubDate: 2026-06-28
 summary: "The EvoX team, in collaboration with Peng Cheng Laboratory, proposes EvoGM, a generative evolutionary model merging framework that reformulates coefficient search as a learnable generative optimization problem, enabling autonomous model merging without retraining large models."
 ---
 

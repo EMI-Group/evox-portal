@@ -1,6 +1,6 @@
 ﻿---
 title: "ICML 2026 | EvoGM: fusión autónoma de modelos de gran escala mediante evolución poblacional sin reentrenamiento"
-pubDate: 2026-05-29
+pubDate: 2026-06-28
 summary: "El equipo EvoX, en colaboración con el Laboratorio Peng Cheng, presenta EvoGM, un marco de fusión evolutiva generativa de modelos que transforma la búsqueda de coeficientes de fusión en un problema de optimización generativa aprendible, permitiendo la fusión autónoma de modelos sin reentrenar los modelos de gran escala participantes."
 ---
 
