@@ -1,4 +1,4 @@
----
+﻿---
 title: "EvoGP: un framework GPU nativo per la programmazione genetica ad albero a 10^11 GPops/s"
 pubDate: 2026-06-02
 summary: "EvoGP riorganizza da zero la rappresentazione ad albero, gli operatori genetici e l'esecuzione parallela, raggiungendo un throughput di picco superiore a 10^11 GPops/s e un'accelerazione fino a 304× rispetto alle implementazioni GPU esistenti."
@@ -28,7 +28,7 @@ Per gestire alberi di dimensioni diverse, **EvoGP introduce un vincolo di lunghe
 
 
 
-![img](./evogp-2.jpg)
+![img](./evogp-2.png)
 
 Figura 1: Rappresentazione tensorizzata delle strutture ad albero. EvoGP codifica gli alberi in una rappresentazione batch unificata, consentendo un'elaborazione efficiente su GPU di individui di programma con strutture diverse.
 
@@ -40,7 +40,7 @@ Dopo aver completato la rappresentazione tensorizzata delle strutture ad albero,
 
 Sfruttando questo vantaggio, **EvoGP estrae le somiglianze strutturali di vari operatori genetici ad albero — come crossover a un punto e mutazione di sottoalbero — e li unifica in un'unica primitiva computazionale fondamentale: lo scambio di sottoalberi.** Ciò trasforma l'evoluzione strutturale complessa in operazioni altamente regolari di slicing della memoria e concatenazione di tensori. Questo refactoring riduce significativamente l'overhead del flusso di controllo durante l'esecuzione parallela, rendendo il processo evolutivo centrale della programmazione genetica una forma di calcolo ben adatta all'hardware ad alto throughput moderno.
 
-![img](./evogp-3.jpg)
+![img](./evogp-3.png)
 
 Figura 2: Operazioni unificate di crossover/mutazione. EvoGP unifica più operatori genetici ad albero sotto un unico meccanismo sottostante, rendendo il processo evolutivo centrale più adatto all'esecuzione parallela su GPU.
 
@@ -52,7 +52,7 @@ Per prosperare nell'era GPU, un algoritmo deve essere in grado di estrarre la ma
 
 Quando si elaborano dataset di piccole e medie dimensioni, il sistema adotta una modalità parallela ibrida, combinando parallelismo a livello di dati e di popolazione all'interno di un singolo kernel di calcolo — garantendo che quando i carichi di lavoro individuali sono insufficienti, la concorrenza a livello di popolazione riempia i core GPU inattivi. Per dataset su larga scala, un singolo compito di valutazione può saturare l'hardware, e il sistema passa automaticamente alla modalità puramente data-parallela, avviando kernel di calcolo indipendenti per la valutazione di ciascun individuo e caricando le strutture ad albero in memoria costante di sola lettura — massimizzando l'efficienza di broadcast della memoria e migliorando significativamente il throughput di accesso alla memoria. Questo meccanismo adattivo garantisce che il sistema mantenga un'efficienza computazionale estremamente elevata su carichi di lavoro diversi, fungendo da garanzia centrale del framework di accelerazione GPU.
 
-![img](./evogp-4.jpg)
+![img](./evogp-4.png)
 
 Figura 3: Meccanismo parallelo adattivo. EvoGP passa automaticamente tra diverse modalità parallele in base alla scala del compito per mantenere un'efficienza computazionale più elevata.
 
@@ -66,7 +66,7 @@ Inoltre, per sfruttare appieno i vantaggi dell'architettura GPU, **EvoGP adotta 
 
 
 
-![img](./evogp-5.jpg)
+![img](./evogp-5.png)
 
 Figura 4: Architettura complessiva. EvoGP non è un modulo di accelerazione isolato, ma un framework completo che bilancia le prestazioni sottostanti con l'usabilità del livello superiore.
 
@@ -78,11 +78,11 @@ Superare i colli di bottiglia computazionali espande direttamente i confini di r
 
 I test di benchmark principali mostrano che il throughput di picco di EvoGP supera 10^11 GPops/s, dimostrando una velocità sorprendente sotto massiccia concorrenza — completando la valutazione completa di popolazioni fino a 500.000 individui in un solo secondo. Nel runtime stabilisce un vantaggio decisivo rispetto alle implementazioni GPU esistenti. Ancora più critico, nei test su larga scala di popolazione, l'algoritmo mostra un'eccellente scalabilità: sulla convergenza dell'errore in regressione simbolica, sul miglioramento dell'accuratezza in classificazione e sulle ricompense cumulative nei compiti di controllo robotico, popolazioni più grandi producono costantemente prestazioni finali migliori. Ciò dimostra che EvoGP libera non solo la velocità computazionale — consente a popolazioni più grandi di raggiungere soluzioni di qualità superiore in un tempo di esecuzione più breve, elevando fondamentalmente il potenziale di ricerca e il limite di capacità dei metodi di programmazione genetica.
 
-![img](./evogp-6.jpg)
+![img](./evogp-6.png)
 
 Figura 5: Confronto complessivo delle prestazioni. EvoGP ottiene significativi vantaggi di prestazione su più configurazioni di compiti mantenendo una qualità dei risultati stabile.
 
-![img](./evogp-7.jpg)
+![img](./evogp-7.png)
 
 Figura 6: Prestazioni su diverse scale di popolazione. EvoGP rende dimensioni di popolazione maggiori praticamente utilizzabili entro tempi accettabili e sblocca un potenziale di ricerca più forte.
 

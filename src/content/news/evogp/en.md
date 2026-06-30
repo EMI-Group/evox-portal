@@ -1,4 +1,4 @@
----
+﻿---
 title: "EvoGP: A GPU-Native Framework for Tree-Based Genetic Programming at 10^11 GPops/s"
 pubDate: 2026-06-02
 summary: "EvoGP reorganizes tree representation, genetic operators, and parallel execution from the ground up, achieving peak throughput exceeding 10^11 GPops/s and up to 304× speedup over existing GPU implementations."
@@ -28,7 +28,7 @@ To handle trees of varying sizes, **EvoGP introduces a maximum allowed length co
 
 
 
-![img](./evogp-2.jpg)
+![img](./evogp-2.png)
 
 Figure 1: Tensorized representation of tree structures. EvoGP encodes trees into a unified batch representation, enabling GPU-efficient processing of program individuals with diverse structures.
 
@@ -40,7 +40,7 @@ After completing the tensorized representation of tree structures, EvoGP further
 
 Building on this advantage, **EvoGP extracts the structural commonalities of various tree-based genetic operators—such as one-point crossover and subtree mutation—and unifies them into a single core computational primitive: subtree exchange.** This transforms complex structural evolution into highly regular memory slicing and tensor concatenation operations. This refactoring significantly reduces control-flow overhead during parallel execution, making the core evolutionary process of genetic programming a form of computation well suited to modern high-throughput hardware.
 
-![img](./evogp-3.jpg)
+![img](./evogp-3.png)
 
 Figure 2: Unified crossover/mutation operations. EvoGP unifies multiple tree-based genetic operators under a single underlying mechanism, making the core evolutionary process better suited for GPU parallel execution.
 
@@ -52,7 +52,7 @@ To thrive in the GPU era, an algorithm must be capable of extracting maximum har
 
 When processing small to medium-sized datasets, the system adopts a hybrid parallel mode, combining data-level and population-level parallelism within a single compute kernel—ensuring that when individual workloads are insufficient, population-level concurrency fills idle GPU cores. For large-scale datasets, a single evaluation task can saturate the hardware, and the system automatically switches to pure data-parallel mode, launching independent compute kernels for each individual's evaluation and loading tree structures into read-only constant memory—maximizing memory broadcast efficiency and significantly improving memory access throughput. This adaptive mechanism ensures the system maintains extremely high computational efficiency across diverse workloads, serving as a core guarantee of the GPU acceleration framework.
 
-![img](./evogp-4.jpg)
+![img](./evogp-4.png)
 
 Figure 3: Adaptive parallel mechanism. EvoGP automatically switches between different parallel modes based on task scale to maintain higher computational efficiency.
 
@@ -66,7 +66,7 @@ Furthermore, to fully leverage GPU architecture advantages, **EvoGP adopts a ful
 
 
 
-![img](./evogp-5.jpg)
+![img](./evogp-5.png)
 
 Figure 4: Overall architecture. EvoGP is not an isolated acceleration module, but a complete framework that balances underlying performance with upper-layer usability.
 
@@ -78,11 +78,11 @@ Breaking through compute bottlenecks directly expands the search boundaries of e
 
 Core benchmark tests show that EvoGP's peak throughput exceeds 10^11 GPops/s, demonstrating astonishing speed under massive concurrency—completing comprehensive evaluation of populations up to 500,000 individuals in just one second. In runtime, it establishes a decisive lead over existing GPU implementations. More critically, in large-scale population tests, the algorithm exhibits excellent scalability: on symbolic regression error convergence, classification accuracy improvement, and cumulative rewards in robot control tasks, larger populations consistently yield better final performance. This proves that EvoGP releases not just computational speed—it enables larger populations to reach higher-quality solutions in shorter wall-clock time, fundamentally raising the search potential and capability ceiling of genetic programming methods.
 
-![img](./evogp-6.jpg)
+![img](./evogp-6.png)
 
 Figure 5: Overall performance comparison. EvoGP achieves significant performance advantages across multiple task settings while maintaining stable result quality.
 
-![img](./evogp-7.jpg)
+![img](./evogp-7.png)
 
 Figure 6: Performance across different population scales. EvoGP makes larger population sizes practically usable within acceptable time and unlocks stronger search potential.
 
