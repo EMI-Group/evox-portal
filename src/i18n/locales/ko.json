@@ -1,5 +1,5 @@
 {
-  "site.title": "EvoX - GPU 가속 진화 연산",
+  "site.title": "EvoX - 미래 AI 인프라를 위한 진화 런타임",
   "nav.tutorials": "튜토리얼",
   "nav.docs": "문서",
   "nav.docs.guide": "가이드",
@@ -14,8 +14,8 @@
   "nav.community": "커뮤니티",
   "nav.ecosystem": "생태계",
   "nav.contact": "문의하기",
-  "hero.title": "GPU 가속 진화 연산, PyTorch/JAX",
-  "hero.subtitle": "자기 진화 에이전트를 위한 기반",
+  "hero.title": "미래 AI 인프라를 위한 진화 런타임",
+  "hero.subtitle": "자기 진화 에이전트, 모델, 워크플로우, 과학적 발견을 위한 오픈소스 GPU 가속 인프라.",
   "hero.cta.tagline": "EvoX 하나면 충분합니다",
   "hero.cta.button": "시작하기",
   "hero.scroll": "아래로 스크롤",

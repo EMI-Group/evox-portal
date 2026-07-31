@@ -1,5 +1,5 @@
 {
-  "site.title": "EvoX - GPU-accelerated Evolutionary Computation",
+  "site.title": "EvoX - The Evolution Runtime for Future AI Infrastructure",
 
   "nav.tutorials": "Tutorials",
   "nav.docs": "Docs",
@@ -16,8 +16,8 @@
   "nav.ecosystem": "Ecosystem",
   "nav.contact": "Contact Us",
 
-  "hero.title": "GPU-accelerated Evolutionary Computation, PyTorch/JAX",
-  "hero.subtitle": "The Foundation for Self-Evolving Agents",
+  "hero.title": "The Evolution Runtime for Future AI Infrastructure",
+  "hero.subtitle": "Open-source, GPU-accelerated infrastructure for self-evolving agents, models, workflows, and scientific discovery.",
   "hero.cta.tagline": "EvoX is All You Need",
   "hero.cta.button": "Get Started",
   "hero.scroll": "Scroll Down",
