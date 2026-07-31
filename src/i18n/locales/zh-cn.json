@@ -1,5 +1,5 @@
 {
-  "site.title": "EvoX - GPU 加速的进化计算",
+  "site.title": "EvoX - 面向未来 AI 基础设施的进化运行时",
   "nav.tutorials": "教程",
   "nav.docs": "文档",
   "nav.docs.guide": "指南",
@@ -14,8 +14,8 @@
   "nav.community": "社区",
   "nav.ecosystem": "生态系统",
   "nav.contact": "联系我们",
-  "hero.title": "GPU 加速进化计算，支持 PyTorch/JAX",
-  "hero.subtitle": "自进化智能体的基础平台",
+  "hero.title": "面向未来 AI 基础设施的进化运行时",
+  "hero.subtitle": "开源、GPU 加速的基础设施，助力自进化智能体、模型、工作流与科学发现。",
   "hero.cta.tagline": "EvoX：你所需要的一切",
   "hero.cta.button": "快速开始",
   "hero.scroll": "向下滚动",

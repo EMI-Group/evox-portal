@@ -1,5 +1,5 @@
 {
-  "site.title": "EvoX - GPU 加速演化計算",
+  "site.title": "EvoX - 面向未來 AI 基礎設施的進化運行時",
   "nav.tutorials": "教學",
   "nav.docs": "文件",
   "nav.docs.guide": "指南",
@@ -14,8 +14,8 @@
   "nav.community": "社群",
   "nav.ecosystem": "生態系統",
   "nav.contact": "聯絡我們",
-  "hero.title": "GPU 加速演化計算，PyTorch/JAX",
-  "hero.subtitle": "自進化智能體的基礎平台",
+  "hero.title": "面向未來 AI 基礎設施的進化運行時",
+  "hero.subtitle": "開源、GPU 加速的基礎設施，支援自進化智能體、模型、工作流與科學發現。",
   "hero.cta.tagline": "EvoX 滿足你的一切需求",
   "hero.cta.button": "立即開始",
   "hero.scroll": "向下捲動",

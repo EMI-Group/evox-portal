@@ -1,5 +1,5 @@
 {
-  "site.title": "EvoX - GPU-beschleunigte Evolutionäre Berechnung",
+  "site.title": "EvoX - Die Evolution Runtime für die KI-Infrastruktur der Zukunft",
   "nav.tutorials": "Tutorials",
   "nav.docs": "Doku",
   "nav.docs.guide": "Guide",
@@ -14,8 +14,8 @@
   "nav.community": "Community",
   "nav.ecosystem": "Ökosystem",
   "nav.contact": "Kontakt",
-  "hero.title": "GPU-beschleunigte Evolutionäre Berechnung, PyTorch/JAX",
-  "hero.subtitle": "Das Fundament für sich selbst entwickelnde Agenten",
+  "hero.title": "Die Evolution Runtime für die KI-Infrastruktur der Zukunft",
+  "hero.subtitle": "Open-Source, GPU-beschleunigte Infrastruktur für sich selbst entwickelnde Agenten, Modelle, Workflows und wissenschaftliche Entdeckungen.",
   "hero.cta.tagline": "EvoX ist alles, was Sie brauchen",
   "hero.cta.button": "Jetzt starten",
   "hero.scroll": "Nach unten scrollen",
