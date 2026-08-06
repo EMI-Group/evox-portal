@@ -1,5 +1,6 @@
 {
   "site.title": "EvoX - The Evolution Runtime for Future AI Infrastructure",
+  "meta.description": "EvoX is a distributed, GPU-accelerated framework for evolutionary computation, designed for scalable optimization and evolutionary reinforcement learning.",
 
   "nav.tutorials": "Tutorials",
   "nav.docs": "Docs",
@@ -16,7 +17,8 @@
   "nav.ecosystem": "Ecosystem",
   "nav.contact": "Contact Us",
 
-  "hero.title": "The Evolution Runtime for Future AI Infrastructure",
+  "hero.title.line1": "The Evolution Runtime",
+  "hero.title.line2": "for Future AI Infrastructure",
   "hero.subtitle": "Open-source, GPU-accelerated infrastructure for self-evolving agents, models, workflows, and scientific discovery.",
   "hero.cta.tagline": "EvoX is All You Need",
   "hero.cta.button": "Get Started",
@@ -24,7 +26,7 @@
 
   "news.title": "Latest News",
   "news.viewAll": "View All News",
-  "news.defaultSummary": "Click to read more details about this release.",
+  "news.defaultSummary": "Click to read more details about this article.",
 
   "features.title": "<< Key Features >>",
   "features.perf.title": "Ultra Performance",
@@ -83,24 +85,25 @@
   "libs.desc.evonas": "A framework for neural architecture search, implemented with PyTorch. It supports supernet training, evolutionary multi-objective optimization, and seamless integration with modern computer vision training pipelines.",
   "libs.desc.evocmo": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
 
-  "news.pageTitle": "News {page} | EvoX",
+  "news.pageTitle": "News{page} | EvoX",
+  "news.pageTitlePage": " - Page {page}",
   "news.heroTitle": "Latest News",
   "news.heroDesc": "Deep dives into evolutionary computation, project updates, and community news.",
   "news.readMore": "Read More",
   "news.prev": "Previous",
   "news.next": "Next",
-  "news.page": "Page",
-  "news.of": "of",
+  "news.pageInfo": "Page {current} of {total}",
   "news.backToNews": "Back to News",
 
-  "releases.pageTitle": "Releases {page} | EvoX",
+  "releases.defaultSummary": "Click to read more details about this release.",
+  "releases.pageTitle": "Releases{page} | EvoX",
+  "releases.pageTitlePage": " - Page {page}",
   "releases.heroTitle": "Release Notes",
   "releases.heroDesc": "Version updates, new features, and changelogs for the EvoX framework.",
   "releases.readMore": "Read More",
   "releases.prev": "Previous",
   "releases.next": "Next",
-  "releases.page": "Page",
-  "releases.of": "of",
+  "releases.pageInfo": "Page {current} of {total}",
   "releases.backToReleases": "Back to Releases",
 
   "tutorials.pageTitle": "Tutorials | EvoX",

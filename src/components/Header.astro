@@ -104,13 +104,17 @@ const navLinks = [
       <nav class="hidden md:flex space-x-8 items-center">
         {
           navLinks.map((link) => (
-            <div class="relative group">
+            <div class="relative group" data-dropdown>
               {link.dropdown ? (
-                <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
+                <button
+                  class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
                   {link.label}
                   <Icon
                     name="heroicons:chevron-down-20-solid"
-                    class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                    class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 group-[.dropdown-open]:rotate-180"
                   />
                 </button>
               ) : (
@@ -125,7 +129,7 @@ const navLinks = [
               )}
 
               {link.dropdown && (
-                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible group-[.dropdown-open]:opacity-100 group-[.dropdown-open]:visible transition-all duration-200 transform origin-top" data-dropdown-menu>
                   <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10">
                     <div class="py-2">
                       {link.dropdown.map((item) => (
@@ -152,21 +156,26 @@ const navLinks = [
         }
 
         {/* Language Switcher */}
-        <div class="relative group">
-          <button class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer">
+        <div class="relative group" data-dropdown>
+          <button
+            class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none cursor-pointer"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             <Icon name="heroicons:language-20-solid" class="w-4 h-4" />
             {localeNames[locale]}
             <Icon
               name="heroicons:chevron-down-20-solid"
-              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 group-[.dropdown-open]:rotate-180"
             />
           </button>
-          <div class="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+          <div class="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible group-[.dropdown-open]:opacity-100 group-[.dropdown-open]:visible transition-all duration-200 transform origin-top" data-dropdown-menu>
             <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10 max-h-80 overflow-y-auto">
               <div class="py-2">
                 {locales.map((loc) => (
                   <a
                     href={getLocalizedUrl(currentPath, loc)}
+                    data-locale-link
                     class:list={[
                       "block px-4 py-2 text-sm transition-colors",
                       loc === locale
@@ -233,6 +242,7 @@ const navLinks = [
                 {locales.map((loc) => (
                   <a
                     href={getLocalizedUrl(currentPath, loc)}
+                    data-locale-link
                     class:list={[
                       "block px-6 py-2 text-sm transition-colors",
                       loc === locale
@@ -251,3 +261,142 @@ const navLinks = [
     </div>
   </div>
 </header>
+
+<style>
+  /* JS adds .dropdown-suppressed to a just-closed dropdown so group-hover
+     and group-focus-within cannot re-show its menu while the pointer still
+     hovers it or focus returns to its trigger. */
+  [data-dropdown].dropdown-suppressed [data-dropdown-menu] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+</style>
+
+<script>
+  // Desktop dropdowns: CSS group-hover handles hover; JS is the single source
+  // of truth for click/focus state — it manages the dropdown-open class,
+  // aria-expanded, and blurs focused elements on close so that
+  // group-focus-within cannot keep a closed dropdown open. A just-closed
+  // dropdown gets dropdown-suppressed so group-hover/group-focus-within
+  // cannot re-show it until the pointer leaves or focus moves on.
+  const dropdowns = document.querySelectorAll<HTMLElement>("[data-dropdown]");
+
+  function isDropdownOpen(dropdown: HTMLElement) {
+    return (
+      dropdown.classList.contains("dropdown-open") ||
+      dropdown.matches(":focus-within")
+    );
+  }
+
+  function openDropdown(dropdown: HTMLElement, button: HTMLButtonElement) {
+    dropdown.classList.remove("dropdown-suppressed");
+    dropdown.classList.add("dropdown-open");
+    button.setAttribute("aria-expanded", "true");
+  }
+
+  function closeDropdown(dropdown: HTMLElement) {
+    dropdown.classList.remove("dropdown-open");
+    dropdown.querySelector("button")?.setAttribute("aria-expanded", "false");
+    // Blur any focused element inside so group-focus-within releases the menu
+    const active = document.activeElement;
+    if (active instanceof HTMLElement && dropdown.contains(active)) {
+      active.blur();
+    }
+  }
+
+  function closeAllDropdowns(except?: HTMLElement) {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown !== except) closeDropdown(dropdown);
+    });
+  }
+
+  dropdowns.forEach((dropdown) => {
+    const button = dropdown.querySelector("button");
+    if (!button) return;
+
+    // Capture the open state before the activation moves focus. At
+    // pointerdown focus has not moved yet, so isDropdownOpen reflects the
+    // pre-click state; on keyboard activation focus is already on the
+    // button (:focus-within always matches), so only the pinned
+    // dropdown-open class counts as "open".
+    let openBeforeClick = false;
+    button.addEventListener("pointerdown", () => {
+      openBeforeClick = isDropdownOpen(dropdown);
+    });
+    button.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        openBeforeClick = dropdown.classList.contains("dropdown-open");
+      }
+    });
+
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (openBeforeClick) {
+        closeDropdown(dropdown);
+        // The pointer may still hover this dropdown: keep the menu hidden
+        // until it leaves, otherwise group-hover re-shows it at once.
+        dropdown.classList.add("dropdown-suppressed");
+      } else {
+        // Exclude this dropdown so closeDropdown cannot blur the button
+        // that just received focus.
+        closeAllDropdowns(dropdown);
+        openDropdown(dropdown, button);
+      }
+    });
+
+    // Menubar behavior: while a dropdown is pinned open via click, hovering
+    // another dropdown closes the pinned one.
+    dropdown.addEventListener("pointerenter", () => {
+      dropdowns.forEach((other) => {
+        if (other !== dropdown && other.classList.contains("dropdown-open")) {
+          closeDropdown(other);
+        }
+      });
+    });
+
+    dropdown.addEventListener("mouseleave", () => {
+      dropdown.classList.remove("dropdown-suppressed");
+    });
+    dropdown.addEventListener("focusout", (event) => {
+      if (
+        !(event.relatedTarget instanceof Node) ||
+        !dropdown.contains(event.relatedTarget)
+      ) {
+        dropdown.classList.remove("dropdown-suppressed");
+      }
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Node)) return;
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target as Node)) closeDropdown(dropdown);
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    dropdowns.forEach((dropdown) => {
+      if (!isDropdownOpen(dropdown)) return;
+      // Return focus to the trigger button; suppression keeps the menu
+      // closed even though focus-within now matches again.
+      const hadFocusInside = dropdown.contains(document.activeElement);
+      closeDropdown(dropdown);
+      if (hadFocusInside) {
+        dropdown.classList.add("dropdown-suppressed");
+        dropdown.querySelector("button")?.focus();
+      }
+    });
+  });
+
+  // Preserve query string and hash when switching locales; in a static build
+  // they are only known on the client.
+  const urlSuffix = window.location.search + window.location.hash;
+  if (urlSuffix) {
+    document
+      .querySelectorAll<HTMLAnchorElement>("a[data-locale-link]")
+      .forEach((link) => {
+        link.href += urlSuffix;
+      });
+  }
+</script>

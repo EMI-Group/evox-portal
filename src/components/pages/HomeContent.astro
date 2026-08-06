@@ -104,7 +104,8 @@ const ecosystem = allLibs.slice(0, 3);
         id="hero-title"
         class="text-4xl md:text-6xl font-bold text-white mb-5 transition-opacity duration-700 mx-auto max-w-full"
       >
-        {t(tr, "hero.title")}
+        <span class="block">{t(tr, "hero.title.line1")}</span>
+        <span class="block">{t(tr, "hero.title.line2")}</span>
       </h1>
       <p
         id="hero-subtitle"
@@ -117,7 +118,8 @@ const ecosystem = allLibs.slice(0, 3);
       <div
         id="cta-content"
         class="mt-8 transition-opacity duration-700"
-        style="opacity: 0;"
+        style="opacity: 0; pointer-events: none;"
+        inert
       >
         <p class="text-lg text-blue-400 mb-10">
           {t(tr, "hero.cta.tagline")}
@@ -174,7 +176,10 @@ const ecosystem = allLibs.slice(0, 3);
                       {post.data.title}
                     </h3>
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {post.data.summary || t(tr, "news.defaultSummary")}
+                      {post.data.summary ||
+                        (section === "releases"
+                          ? t(tr, "releases.defaultSummary")
+                          : t(tr, "news.defaultSummary"))}
                     </p>
                     <a
                       href={getLocalizedUrl(`/${section}/${post.slug}`, locale)}
@@ -564,6 +569,7 @@ const ecosystem = allLibs.slice(0, 3);
     }
 
     let expandCallback: (() => void) | null = null;
+    let pendingAnchor: HTMLElement | null = null;
 
     function expand(onDone?: () => void) {
       if (isExpanded || isAnimating) {
@@ -658,9 +664,17 @@ const ecosystem = allLibs.slice(0, 3);
           heroSectionEl.style.minHeight = `${heroMinH}vh`;
           if (heroGradient)
             heroGradient.style.opacity = `${1 - 0.7 * progressAfterContact}`;
-          if (ctaContent) ctaContent.style.opacity = `${progressAfterContact}`;
-          if (scrollIndicator)
+          if (ctaContent) {
+            ctaContent.style.opacity = `${progressAfterContact}`;
+            if (progressAfterContact >= 1) {
+              ctaContent.style.pointerEvents = "";
+              ctaContent.removeAttribute("inert");
+            }
+          }
+          if (scrollIndicator) {
             scrollIndicator.style.opacity = `${1 - progressAfterContact}`;
+            scrollIndicator.style.pointerEvents = "none";
+          }
         }
 
         if (rawT < 1) {
@@ -686,12 +700,42 @@ const ecosystem = allLibs.slice(0, 3);
                 expandCallback();
                 expandCallback = null;
               }
+              if (pendingAnchor) {
+                pendingAnchor.scrollIntoView({ behavior: "smooth" });
+                pendingAnchor = null;
+              }
             }, 1500);
           });
         }
       }
 
       requestAnimationFrame(animate);
+    }
+
+    // Skip the flight animation and jump straight to the expanded final state
+    function completeExpand() {
+      if (isExpanded || isAnimating) return;
+      isExpanded = true;
+      navbarEl.style.transform = "translateY(0)";
+      navbarLogoEl.style.opacity = "1";
+      heroLogoImg.style.visibility = "hidden";
+      heroSectionEl.style.minHeight = "60vh";
+      if (heroGradient) heroGradient.style.opacity = "0.3";
+      if (ctaContent) {
+        ctaContent.style.opacity = "1";
+        ctaContent.style.pointerEvents = "";
+        ctaContent.removeAttribute("inert");
+      }
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = "0";
+        scrollIndicator.style.pointerEvents = "none";
+      }
+      unlockScroll();
+      removeFirstScrollListeners();
+      if (expandCallback) {
+        expandCallback();
+        expandCallback = null;
+      }
     }
 
     // Intercept first wheel/touch to trigger animation directly
@@ -701,12 +745,22 @@ const ecosystem = allLibs.slice(0, 3);
         expand();
       }
     }
+
+    // Fallback: keyboard/scrollbar scrolling bypasses wheel/touchmove,
+    // so finish the expand immediately once the page actually scrolls
+    function onScrollFallback() {
+      if (!isExpanded && !isAnimating && window.scrollY > 0) {
+        completeExpand();
+      }
+    }
     window.addEventListener("wheel", onFirstScroll, { passive: false });
     window.addEventListener("touchmove", onFirstScroll, { passive: false });
+    window.addEventListener("scroll", onScrollFallback, { passive: true });
 
     function removeFirstScrollListeners() {
       window.removeEventListener("wheel", onFirstScroll);
       window.removeEventListener("touchmove", onFirstScroll);
+      window.removeEventListener("scroll", onScrollFallback);
     }
 
     heroSection.addEventListener("click", () => {
@@ -742,6 +796,8 @@ const ecosystem = allLibs.slice(0, 3);
         });
       } else if (!isAnimating) {
         targetEl.scrollIntoView({ behavior: "smooth" });
+      } else {
+        pendingAnchor = targetEl;
       }
     });
   }
@@ -779,8 +835,15 @@ const ecosystem = allLibs.slice(0, 3);
           tabIndex === 0 ? "cso-plot" : tabIndex === 1 ? "rvea-plot" : null;
         if (plotId) {
           const plot = document.getElementById(plotId);
-          // @ts-ignore
-          if (plot) Plotly.Plots.resize(plot);
+          if (
+            plot &&
+            plot.getAttribute("data-ready") === "true" &&
+            // @ts-ignore
+            typeof Plotly !== "undefined"
+          ) {
+            // @ts-ignore
+            Plotly.Plots.resize(plot).catch(() => {});
+          }
         }
         startAnimation(tabIndex);
       });
@@ -798,8 +861,18 @@ const ecosystem = allLibs.slice(0, 3);
 
       const plotId = tabIndex === 0 ? "cso-plot" : "rvea-plot";
       const plot = document.getElementById(plotId);
-      // @ts-ignore
-      if (!plot || !plot.data) return;
+      if (
+        !plot ||
+        plot.getAttribute("data-ready") !== "true" ||
+        // @ts-ignore
+        typeof Plotly === "undefined"
+      ) {
+        // Plot not ready/failed: skip this tab so the carousel keeps moving
+        carouselTimer = setTimeout(() => {
+          if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+        }, BRAX_DURATION);
+        return;
+      }
 
       // @ts-ignore
       Plotly.animate(plot, ["0"], {
@@ -820,7 +893,14 @@ const ecosystem = allLibs.slice(0, 3);
             activateTab(nextTab);
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          // Animation failed: skip this tab so the carousel keeps moving
+          if (animationActive) {
+            carouselTimer = setTimeout(() => {
+              if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+            }, BRAX_DURATION);
+          }
+        });
     }
 
     function stopAnimation() {
@@ -832,7 +912,8 @@ const ecosystem = allLibs.slice(0, 3);
       [0, 1].forEach((idx) => {
         const plotId = idx === 0 ? "cso-plot" : "rvea-plot";
         const plot = document.getElementById(plotId);
-        if (plot) {
+        // @ts-ignore
+        if (plot && plot.data && typeof Plotly !== "undefined") {
           // @ts-ignore
           Plotly.animate(plot, [null], {
             frame: { duration: 0, redraw: false },
@@ -852,12 +933,17 @@ const ecosystem = allLibs.slice(0, 3);
     });
 
     // Wait for first plot to be ready, then start carousel
+    // Give up after ~6s (20 retries) if the plot never becomes ready
+    let waitRetries = 0;
     function waitAndStart() {
       const plot = document.getElementById("cso-plot");
       if (plot?.getAttribute("data-ready") === "true") {
         startAnimation(0);
-      } else {
+      } else if (++waitRetries < 20) {
         setTimeout(waitAndStart, 300);
+      } else {
+        // Gave up waiting: start anyway; the not-ready guard will skip ahead
+        startAnimation(0);
       }
     }
     waitAndStart();

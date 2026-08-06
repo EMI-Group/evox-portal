@@ -2,13 +2,14 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { type Locale, defaultLocale, loadTranslations, t } from "../i18n/utils";
+import { type Locale, defaultLocale, locales, loadTranslations, t, getLocalizedUrl } from "../i18n/utils";
 
 interface Props {
   title?: string;
   hideHeader?: boolean;
   hideFooter?: boolean;
   locale?: Locale;
+  noSEO?: boolean;
 }
 
 const {
@@ -16,9 +17,59 @@ const {
   hideHeader = false,
   hideFooter = false,
   locale = defaultLocale,
+  noSEO = false,
 } = Astro.props;
 
-const htmlLang = locale === "es-419" ? "es" : locale === "pt-br" ? "pt-BR" : locale;
+const htmlLang =
+  locale === "es-419" ? "es"
+  : locale === "pt-br" ? "pt-BR"
+  : locale === "zh-cn" ? "zh-CN"
+  : locale === "zh-tw" ? "zh-TW"
+  : locale;
+
+const tr = await loadTranslations(locale);
+const description = t(tr, "meta.description");
+
+// BCP-47 codes for hreflang attributes
+const hreflangCodes: Record<Locale, string> = {
+  "en": "en",
+  "zh-cn": "zh-CN",
+  "zh-tw": "zh-TW",
+  "ja": "ja",
+  "ko": "ko",
+  "fr": "fr",
+  "de": "de",
+  "it": "it",
+  "es": "es",
+  "es-419": "es-419",
+  "ru": "ru",
+  "pt": "pt",
+  "pt-br": "pt-BR",
+};
+
+// Open Graph locale codes (language_TERRITORY)
+const ogLocale: Record<Locale, string> = {
+  "en": "en_US",
+  "zh-cn": "zh_CN",
+  "zh-tw": "zh_TW",
+  "ja": "ja_JP",
+  "ko": "ko_KR",
+  "fr": "fr_FR",
+  "de": "de_DE",
+  "it": "it_IT",
+  "es": "es_ES",
+  "es-419": "es_LA",
+  "ru": "ru_RU",
+  "pt": "pt_PT",
+  "pt-br": "pt_BR",
+};
+
+const site = Astro.site ?? new URL("https://www.evox.group");
+const canonicalUrl = new URL(Astro.url.pathname, site);
+const localizedUrls = locales.map((loc) => ({
+  locale: loc,
+  url: new URL(getLocalizedUrl(Astro.url.pathname, loc), site),
+}));
 ---
 
 <!doctype html>
@@ -28,6 +79,19 @@ const htmlLang = locale === "es-419" ? "es" : locale === "pt-br" ? "pt-BR" : loc
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    {noSEO && <meta name="robots" content="noindex" />}
+    {!noSEO && <link rel="canonical" href={canonicalUrl} />}
+    {!noSEO && localizedUrls.map(({ locale: loc, url }) => (
+      <link rel="alternate" hreflang={hreflangCodes[loc]} href={url} />
+    ))}
+    {!noSEO && <link rel="alternate" hreflang="x-default" href={localizedUrls[0].url} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noSEO && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    <meta name="twitter:card" content="summary" />
     <title>{title}</title>
   </head>
 

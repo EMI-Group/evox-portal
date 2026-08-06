@@ -20,7 +20,7 @@ const tr = await loadTranslations(locale);
 const dateLocale = getDateLocale(locale);
 
 const { page } = Astro.props as { page: PaginatedPage<ReleaseArticle> };
-const title = t(tr, "releases.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, "releases.page")} ${page.currentPage}` : "" });
+const title = t(tr, "releases.pageTitle", { page: page.currentPage > 1 ? t(tr, "releases.pageTitlePage", { page: String(page.currentPage) }) : "" });
 ---
 
 <Layout title={title} locale={locale}>
@@ -65,7 +65,7 @@ const title = t(tr, "releases.pageTitle", { page: page.currentPage > 1 ? `- ${t(
                 {article.data.title}
               </h2>
               <p class="text-gray-600 text-lg leading-relaxed line-clamp-3 mb-8 flex-grow">
-                {article.data.summary || t(tr, "news.defaultSummary")}
+                {article.data.summary || t(tr, "releases.defaultSummary")}
               </p>
               <div class="mt-auto flex items-center text-teal-600 font-bold group-hover:gap-2 transition-all">
                 {t(tr, "releases.readMore")}
@@ -92,9 +92,7 @@ const title = t(tr, "releases.pageTitle", { page: page.currentPage > 1 ? `- ${t(
             </div>
             <div class="flex items-center gap-3">
               <span class="text-gray-500 font-medium mr-2">
-                {t(tr, "releases.page")}{" "}
-                <span class="text-gray-900 font-bold">{page.currentPage}</span>{" "}
-                {t(tr, "releases.of")} {page.lastPage}
+                {t(tr, "releases.pageInfo", { current: String(page.currentPage), total: String(page.lastPage) })}
               </span>
             </div>
             <div class="flex items-center gap-2">

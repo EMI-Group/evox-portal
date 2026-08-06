@@ -22,7 +22,7 @@ const tr = await loadTranslations(locale);
 const dateLocale = getDateLocale(locale);
 
 const { page } = Astro.props as { page: PaginatedPage<NewsArticle> };
-const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, "news.page")} ${page.currentPage}` : "" });
+const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? t(tr, "news.pageTitlePage", { page: String(page.currentPage) }) : "" });
 ---
 
 <Layout title={title} locale={locale}>
@@ -69,9 +69,7 @@ const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, 
             </div>
             <div class="flex items-center gap-3">
               <span class="text-gray-500 font-medium mr-2">
-                {t(tr, "news.page")}{" "}
-                <span class="text-gray-900 font-bold">{page.currentPage}</span>{" "}
-                {t(tr, "news.of")} {page.lastPage}
+                {t(tr, "news.pageInfo", { current: String(page.currentPage), total: String(page.lastPage) })}
               </span>
             </div>
             <div class="flex items-center gap-2">

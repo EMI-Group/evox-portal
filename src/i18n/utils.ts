@@ -155,7 +155,7 @@ export function findLocalizedArticle<T extends { id: string }>(
 
 /** Extract slug from a news ID (e.g. "evogp/en" → "evogp") */
 export function getNewsSlug(id: string): string {
-  const slash = id.indexOf("/");
+  const slash = id.lastIndexOf("/");
   return slash >= 0 ? id.slice(0, slash) : id;
 }
 
