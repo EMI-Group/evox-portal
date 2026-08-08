@@ -12,7 +12,7 @@ section: "developer"
 
 ## Module 소개
 
-[튜토리얼](../../tutorials)에서 EvoX의 기본 실행 과정을 언급했습니다:
+[튜토리얼](/ko/tutorials)에서 EvoX의 기본 실행 과정을 언급했습니다:
 
 <center><b>알고리즘 및 문제 초기화 -- 모니터 설정 -- 워크플로우 초기화 -- 워크플로우 실행</b></center>
 

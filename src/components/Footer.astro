@@ -139,7 +139,10 @@ const year = new Date().getFullYear();
     document.querySelectorAll("[data-copyright-year]").forEach(function (el) {
       var buildYear = el.getAttribute("data-copyright-year");
       if (buildYear && buildYear !== currentYear && el.textContent) {
-        el.textContent = el.textContent.replace(buildYear, currentYear);
+        // Replace every occurrence: in a year equal to the start year the
+        // build year appears twice ("© 2022-2022"), and a first-match
+        // replace would corrupt the range.
+        el.textContent = el.textContent.replaceAll(buildYear, currentYear);
       }
     });
   })();

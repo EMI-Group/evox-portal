@@ -16,6 +16,10 @@
   "nav.community": "Community",
   "nav.ecosystem": "Ecosystem",
   "nav.contact": "Contact Us",
+  "nav.primary": "Primary navigation",
+  "nav.pagination": "Pagination",
+  "nav.prevNext": "Previous and next",
+  "nav.openMenu": "Open menu",
 
   "hero.title.line1": "The Evolution Runtime",
   "hero.title.line2": "for Future AI Infrastructure",
@@ -42,6 +46,10 @@
   "examples.singleObj": "Single-objective Optimization",
   "examples.multiObj": "Multi-objective Optimization",
   "examples.neuro": "Neuroevolution",
+  "examples.title": "Code examples",
+  "examples.brax.title": "Brax Viewer",
+  "examples.brax.noWebGL": "3D preview is unavailable on this device or browser.",
+  "examples.brax.initFailed": "3D preview could not be initialized in this browser.",
 
   "ecosystem.title": "Ecosystem",
   "ecosystem.subtitle": "Feature Projects",

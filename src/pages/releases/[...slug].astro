@@ -20,7 +20,7 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<Layout title={article.data.title} locale={locale}>
+<Layout title={article.data.title} description={article.data.summary} locale={locale}>
   <div
     class="relative text-white py-20 md:py-28 overflow-hidden"
     style="background: rgb(22, 27, 48);"
@@ -39,6 +39,7 @@ const { Content } = await render(article);
       >
         {article.data.pubDate.toLocaleDateString(dateLocale, {
           year: "numeric", month: "long", day: "numeric",
+          timeZone: "UTC",
         })}
       </time>
     </div>

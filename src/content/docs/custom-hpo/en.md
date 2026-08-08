@@ -6,7 +6,7 @@ section: "developer"
 
 # Deploy HPO with Custom Algorithms
 
-In this chapter, we will focus on deploying HPO with custom algorithms, emphasizing the details rather than the overall workflow. A brief introduction to HPO deployment is provided in the [tutorial](../../tutorials/practical-examples), and prior reading is highly recommended.
+In this chapter, we will focus on deploying HPO with custom algorithms, emphasizing the details rather than the overall workflow. A brief introduction to HPO deployment is provided in the [tutorial](/tutorials/practical-examples), and prior reading is highly recommended.
 
 ## Making Algorithms Parallelizable
 

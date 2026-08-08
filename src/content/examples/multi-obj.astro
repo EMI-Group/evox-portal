@@ -45,6 +45,13 @@
       // @ts-ignore
       await Plotly.addFrames(rvea_plot, values);
       rvea_plot.setAttribute("data-ready", "true");
+      // If the panel became visible while frames were loading, the initial
+      // newPlot measured a hidden container and got the default size —
+      // resize now that the plot can actually be measured.
+      if (rvea_plot.offsetParent !== null) {
+        // @ts-ignore
+        Plotly.Plots.resize(rvea_plot).catch(() => {});
+      }
     };
     initPlot().catch((err) => {
       console.warn("Failed to render rvea plot:", err);

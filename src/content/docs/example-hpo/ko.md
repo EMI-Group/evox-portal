@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 다목적 문제(multi-objective problems)를 위한 'IGD' 및 'HV' 지표 계산과 단일 목적 문제(single-objective problems)를 위한 최소값 계산을 지원하는 `HPOFitnessMonitor`를 제공합니다.
 
-`HPOFitnessMonitor`는 HPO 문제를 위해 설계된 기본적인 모니터라는 점을 유의해야 합니다. [사용자 정의 알고리즘으로 HPO 배포하기](../custom-hpo)에 설명된 방법을 사용하여 유연하게 자신만의 맞춤형 모니터를 만들 수도 있습니다.
+`HPOFitnessMonitor`는 HPO 문제를 위해 설계된 기본적인 모니터라는 점을 유의해야 합니다. [사용자 정의 알고리즘으로 HPO 배포하기](/ko/docs/custom-hpo)에 설명된 방법을 사용하여 유연하게 자신만의 맞춤형 모니터를 만들 수도 있습니다.
 
 ## 간단한 예제
 
 여기서는 EvoX를 HPO에 사용하는 간단한 예제를 보여드리겠습니다. 구체적으로, Sphere 문제를 해결하기 위한 `PSO` 알고리즘의 하이퍼파라미터를 최적화하기 위해 또 다른 `PSO` 알고리즘을 사용할 것입니다.
 
-이 장에서는 HPO 배포에 대한 간략한 개요만 제공한다는 점을 참고해 주세요. 더 자세한 가이드는 [사용자 정의 알고리즘으로 HPO 배포하기](../custom-hpo)를 참조하시기 바랍니다.
+이 장에서는 HPO 배포에 대한 간략한 개요만 제공한다는 점을 참고해 주세요. 더 자세한 가이드는 [사용자 정의 알고리즘으로 HPO 배포하기](/ko/docs/custom-hpo)를 참조하시기 바랍니다.
 
 먼저 필요한 모듈을 가져오겠습니다.
 
