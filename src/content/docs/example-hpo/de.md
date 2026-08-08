@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 Wir stellen einen `HPOFitnessMonitor` zur Verfügung, der die Berechnung von 'IGD'- und 'HV'-Metriken für Probleme mit mehreren Zielen sowie den Minimalwert für Probleme mit einem Ziel unterstützt.
 
-Es ist wichtig zu beachten, dass der `HPOFitnessMonitor` ein grundlegender Monitor ist, der für HPO-Probleme entwickelt wurde. Sie können auch flexibel Ihren eigenen benutzerdefinierten Monitor erstellen, indem Sie den Ansatz verwenden, der in [HPO mit benutzerdefinierten Algorithmen bereitstellen](../custom-hpo) beschrieben ist.
+Es ist wichtig zu beachten, dass der `HPOFitnessMonitor` ein grundlegender Monitor ist, der für HPO-Probleme entwickelt wurde. Sie können auch flexibel Ihren eigenen benutzerdefinierten Monitor erstellen, indem Sie den Ansatz verwenden, der in [HPO mit benutzerdefinierten Algorithmen bereitstellen](/de/docs/custom-hpo) beschrieben ist.
 
 ## Ein einfaches Beispiel
 
 Hier zeigen wir ein einfaches Beispiel für die Verwendung von EvoX für HPO. Konkret werden wir den `PSO`-Algorithmus verwenden, um die Hyperparameter des `PSO`-Algorithmus zur Lösung des Sphere-Problems zu optimieren.
 
-Bitte beachten Sie, dass dieses Kapitel nur einen kurzen Überblick über die HPO-Bereitstellung bietet. Für eine detailliertere Anleitung lesen Sie bitte [HPO mit benutzerdefinierten Algorithmen bereitstellen](../custom-hpo).
+Bitte beachten Sie, dass dieses Kapitel nur einen kurzen Überblick über die HPO-Bereitstellung bietet. Für eine detailliertere Anleitung lesen Sie bitte [HPO mit benutzerdefinierten Algorithmen bereitstellen](/de/docs/custom-hpo).
 
 Lassen Sie uns zunächst die erforderlichen Module importieren.
 

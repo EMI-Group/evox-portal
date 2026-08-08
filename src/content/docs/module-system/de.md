@@ -12,7 +12,7 @@ Dieses Notebook stellt das Basismodul in EvoX vor: `ModuleBase`.
 
 ## Einführung in Module
 
-Im [Tutorial](../../tutorials) haben wir den grundlegenden Ablauf in EvoX erwähnt:
+Im [Tutorial](/de/tutorials) haben wir den grundlegenden Ablauf in EvoX erwähnt:
 
 <center><b>Einen Algorithmus und ein Problem initialisieren -- Einen Monitor einrichten -- Einen Workflow initialisieren -- Den Workflow ausführen</b></center>
 

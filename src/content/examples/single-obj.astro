@@ -3,7 +3,24 @@
 ---
 
 <div id="cso-plot" class="w-full h-full"></div>
-<script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8" is:inline></script>
+<script is:inline>
+  // Load Plotly only once: multiple components on the same page share this
+  // promise, so the CDN script is injected a single time and everyone awaits it.
+  window.__plotlyLoad =
+    window.__plotlyLoad ||
+    new Promise((resolve, reject) => {
+      if (window.Plotly) {
+        resolve(window.Plotly);
+        return;
+      }
+      const s = document.createElement("script");
+      s.src = "https://cdn.plot.ly/plotly-3.3.0.min.js";
+      s.charset = "utf-8";
+      s.onload = () => resolve(window.Plotly);
+      s.onerror = () => reject(new Error("Failed to load Plotly"));
+      document.head.appendChild(s);
+    });
+</script>
 
 <script>
   import { data, layout } from "./cso-data.js";
@@ -11,7 +28,15 @@
   const cso_plot = document.getElementById("cso-plot");
   if (cso_plot) {
     // @ts-ignore
-    Plotly.newPlot(cso_plot, data, layout, { responsive: true })
+    (window.__plotlyLoad || Promise.reject(new Error("Plotly loader not initialized")))
+      .then(() => {
+        // @ts-ignore
+        if (typeof Plotly === "undefined") {
+          throw new Error("Plotly is not defined");
+        }
+        // @ts-ignore
+        return Plotly.newPlot(cso_plot, data, layout, { responsive: true });
+      })
       .then(() => {
         let subdata = [];
         for (let i = 0; i < 80; i++) {
@@ -31,6 +56,10 @@
       })
       .then(() => {
         cso_plot.setAttribute("data-ready", "true");
+      })
+      .catch((err: unknown) => {
+        console.warn("Failed to render cso plot:", err instanceof Error ? err.message : err);
+        cso_plot.style.display = "none";
       });
   }
 </script>

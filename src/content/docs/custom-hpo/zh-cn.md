@@ -6,7 +6,7 @@ section: "developer"
 
 # 使用自定义算法部署 HPO
 
-在本章中，我们将重点介绍如何使用自定义算法部署 HPO，着重于细节而非整体工作流程。关于 HPO 部署的简要介绍已在 [教程](../../tutorials/practical-examples) 中提供，强烈建议您先阅读该教程。
+在本章中，我们将重点介绍如何使用自定义算法部署 HPO，着重于细节而非整体工作流程。关于 HPO 部署的简要介绍已在 [教程](/zh-cn/tutorials/practical-examples) 中提供，强烈建议您先阅读该教程。
 
 ## 使算法可并行化
 

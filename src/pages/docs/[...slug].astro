@@ -16,7 +16,10 @@ const locale: Locale = defaultLocale;
 const tr = await loadTranslations(locale);
 
 const { doc } = Astro.props;
-const { Content } = await render(doc);
+// The page already renders the title as its <h1>; drop the duplicated
+// top-level heading from the markdown body.
+const bodyWithoutH1 = doc.body?.replace(/^\s*# [^\n]*\n/, "");
+const { Content } = await render({ ...doc, body: bodyWithoutH1 });
 ---
 
 <Layout title={doc.data.title} locale={locale}>

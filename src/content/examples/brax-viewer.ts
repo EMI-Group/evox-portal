@@ -7,9 +7,21 @@ import braxData from "./brax-data.json";
 
 const braxDataString = JSON.stringify(braxData);
 
-export const braxViewerHtml = `
+export interface BraxViewerMessages {
+  /** BCP-47-ish language tag for the iframe document */
+  lang: string;
+  /** Shown when WebGL is unavailable */
+  noWebGL: string;
+  /** Shown when the viewer fails to load or initialize */
+  initFailed: string;
+}
+
+export function buildBraxViewerHtml(messages: BraxViewerMessages): string {
+  // Messages land inside single-quoted JS string literals in the iframe.
+  const js = (s: string) => JSON.stringify(s);
+  return `
 <!doctype html>
-<html lang="en">
+<html lang="${messages.lang}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +44,6 @@ export const braxViewerHtml = `
   <body>
     <div id="brax-viewer"></div>
     <script type="module">
-      import { Viewer } from "viewer";
       const system = ${braxDataString};
       const brax = document.getElementById("brax-viewer");
       const setFallback = (message) => {
@@ -54,21 +65,26 @@ export const braxViewerHtml = `
       };
       if (brax) {
         if (!hasWebGLSupport()) {
-          setFallback("3D preview is unavailable on this device or browser.");
+          setFallback(${js(messages.noWebGL)});
         } else {
           try {
-        if (system.geoms && system.geoms.world && system.geoms.world[0]) {
-          system.geoms.world[0].size = [0, 0, 40];
-        }
+            // Dynamic import so CDN/importmap failures are caught and show
+            // the fallback instead of a blank iframe (a static import would
+            // abort the whole module before any handler runs).
+            const { Viewer } = await import("viewer");
+            if (system.geoms && system.geoms.world && system.geoms.world[0]) {
+              system.geoms.world[0].size = [0, 0, 40];
+            }
             const viewer = new Viewer(brax, system);
             if (viewer.animator && viewer.animator.mixer) {
               viewer.animator.mixer.timeScale = 0.1;
             }
           } catch {
-            setFallback("3D preview could not be initialized in this browser.");
+            setFallback(${js(messages.initFailed)});
           }
         }
       }
     </script>
   </body>
 </html>`;
+}

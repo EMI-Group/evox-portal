@@ -20,7 +20,7 @@ const tr = await loadTranslations(locale);
 const dateLocale = getDateLocale(locale);
 
 const { page } = Astro.props as { page: PaginatedPage<NewsArticle> };
-const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, "news.page")} ${page.currentPage}` : "" });
+const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? t(tr, "news.pageTitlePage", { page: String(page.currentPage) }) : "" });
 ---
 
 <Layout title={title} locale={locale}>
@@ -58,6 +58,7 @@ const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, 
                 >
                   {article.data.pubDate.toLocaleDateString(dateLocale, {
                     year: "numeric", month: "long", day: "numeric",
+                    timeZone: "UTC",
                   })}
                 </time>
               </div>
@@ -78,7 +79,7 @@ const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, 
 
       {
         page.lastPage > 1 && (
-          <nav class="mt-20 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 pt-10 gap-8">
+          <nav aria-label={t(tr, "nav.pagination")} class="mt-20 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 pt-10 gap-8">
             <div class="flex items-center gap-2">
               {page.url.prev ? (
                 <a href={page.url.prev} class="flex items-center px-6 py-3 bg-white border border-gray-200 rounded-2xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-teal-300 transition-all shadow-sm">
@@ -92,9 +93,7 @@ const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? `- ${t(tr, 
             </div>
             <div class="flex items-center gap-3">
               <span class="text-gray-500 font-medium mr-2">
-                {t(tr, "news.page")}{" "}
-                <span class="text-gray-900 font-bold">{page.currentPage}</span>{" "}
-                {t(tr, "news.of")} {page.lastPage}
+                {t(tr, "news.pageInfo", { current: String(page.currentPage), total: String(page.lastPage) })}
               </span>
             </div>
             <div class="flex items-center gap-2">

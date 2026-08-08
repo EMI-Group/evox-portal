@@ -6,7 +6,7 @@ section: "developer"
 
 # 使用自定義演算法部署 HPO
 
-在本章中，我們將重點介紹如何使用自定義演算法部署 HPO，著重於細節而非整體工作流程。關於 HPO 部署的簡要介紹已在 [教學](../../tutorials/practical-examples) 中提供，強烈建議您先閱讀該部分。
+在本章中，我們將重點介紹如何使用自定義演算法部署 HPO，著重於細節而非整體工作流程。關於 HPO 部署的簡要介紹已在 [教學](/zh-tw/tutorials/practical-examples) 中提供，強烈建議您先閱讀該部分。
 
 ## 使演算法可平行化
 

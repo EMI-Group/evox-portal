@@ -38,13 +38,13 @@ class ExampleAlgorithm(Algorithm):
 
 我们提供了一个 `HPOFitnessMonitor`，支持计算多目标问题的 'IGD' 和 'HV' 指标，以及单目标问题的最小值。
 
-需要注意的是，`HPOFitnessMonitor` 是一个为 HPO 问题设计的基础监控器。您也可以参考 [使用自定义算法部署 HPO](../custom-hpo) 中概述的方法，灵活地创建自定义监控器。
+需要注意的是，`HPOFitnessMonitor` 是一个为 HPO 问题设计的基础监控器。您也可以参考 [使用自定义算法部署 HPO](/zh-cn/docs/custom-hpo) 中概述的方法，灵活地创建自定义监控器。
 
 ## 一个简单的例子
 
 在这里，我们将演示一个使用 EvoX 进行 HPO 的简单示例。具体来说，我们将使用 `PSO` 算法来优化用于求解 Sphere 问题的 `PSO` 算法的超参数。
 
-请注意，本章仅提供 HPO 部署的简要概述。有关更详细的指南，请参阅 [使用自定义算法部署 HPO](../custom-hpo)。
+请注意，本章仅提供 HPO 部署的简要概述。有关更详细的指南，请参阅 [使用自定义算法部署 HPO](/zh-cn/docs/custom-hpo)。
 
 首先，让我们导入必要的模块。
 

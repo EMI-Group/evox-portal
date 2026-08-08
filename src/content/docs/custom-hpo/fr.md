@@ -6,7 +6,7 @@ section: "developer"
 
 # Déployer l'HPO avec des algorithmes personnalisés
 
-Dans ce chapitre, nous nous concentrerons sur le déploiement de l'HPO avec des algorithmes personnalisés, en mettant l'accent sur les détails plutôt que sur le flux de travail global. Une brève introduction au déploiement de l'HPO est fournie dans le [tutoriel](../../tutorials/practical-examples), et sa lecture préalable est vivement recommandée.
+Dans ce chapitre, nous nous concentrerons sur le déploiement de l'HPO avec des algorithmes personnalisés, en mettant l'accent sur les détails plutôt que sur le flux de travail global. Une brève introduction au déploiement de l'HPO est fournie dans le [tutoriel](/fr/tutorials/practical-examples), et sa lecture préalable est vivement recommandée.
 
 ## Rendre les algorithmes parallélisables
 

@@ -10,6 +10,8 @@ const isVercelDeployment = process.env.VERCEL === "1" || process.env.VERCEL === 
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://www.evox.group",
+
   devToolbar: { enabled: false },
 
   vite: {

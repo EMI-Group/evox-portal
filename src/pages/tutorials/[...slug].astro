@@ -16,7 +16,10 @@ const locale: Locale = defaultLocale;
 const tr = await loadTranslations(locale);
 
 const { tutorial } = Astro.props;
-const { Content } = await render(tutorial);
+// The page already renders the title as its <h1>; drop the duplicated
+// top-level heading from the markdown body.
+const bodyWithoutH1 = tutorial.body?.replace(/^\s*# [^\n]*\n/, "");
+const { Content } = await render({ ...tutorial, body: bodyWithoutH1 });
 
 const allTutorials = await getCollection("tutorials");
 const tutorials = getLocalizedArticles(allTutorials, locale);
@@ -37,7 +40,7 @@ const next = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
     <div class="prose prose-lg prose-teal max-w-none news-content">
       <Content />
     </div>
-    <nav class="mt-16 pt-8 border-t border-gray-100 flex justify-between items-center">
+    <nav aria-label={t(tr, "nav.prevNext")} class="mt-16 pt-8 border-t border-gray-100 flex justify-between items-center">
       {prev ? (
         <a href={getLocalizedUrl(`/tutorials/${prev.slug}`, locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
           <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span>

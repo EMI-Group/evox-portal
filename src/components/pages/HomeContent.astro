@@ -53,7 +53,7 @@ const ecosystem = allLibs.slice(0, 3);
   <!-- ========== Navbar (starts at bottom, flies to top) ========== -->
   <div
     id="navbar"
-    class="fixed left-0 right-0 top-0 transition-transform duration-700 ease-out"
+    class="fixed left-0 right-0 top-0"
     style="z-index: 50; transform: translateY(100vh);"
   >
     <Header animated locale={locale} />
@@ -62,7 +62,7 @@ const ecosystem = allLibs.slice(0, 3);
   <!-- ========== Scroll Indicator ========== -->
   <div
     id="scroll-indicator"
-    class="fixed bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-500 scroll-bounce cursor-pointer transition-opacity duration-300"
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-gray-500 scroll-bounce cursor-pointer"
     style="z-index: 35;"
   >
     <span class="text-sm mb-2">{t(tr, "hero.scroll")}</span>
@@ -85,7 +85,7 @@ const ecosystem = allLibs.slice(0, 3);
     style="min-height: 100vh; background: rgb(22, 27, 48); z-index: 10;"
   >
     <div
-      class="absolute inset-0 transition-opacity duration-700"
+      class="absolute inset-0"
       id="hero-gradient"
       style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.5) 0%, transparent 60%);"
     >
@@ -104,7 +104,8 @@ const ecosystem = allLibs.slice(0, 3);
         id="hero-title"
         class="text-4xl md:text-6xl font-bold text-white mb-5 transition-opacity duration-700 mx-auto max-w-full"
       >
-        {t(tr, "hero.title")}
+        <span class="block">{t(tr, "hero.title.line1")}</span>
+        <span class="block">{t(tr, "hero.title.line2")}</span>
       </h1>
       <p
         id="hero-subtitle"
@@ -116,8 +117,9 @@ const ecosystem = allLibs.slice(0, 3);
       <!-- CTA Content (appears when expanded) -->
       <div
         id="cta-content"
-        class="mt-8 transition-opacity duration-700"
-        style="opacity: 0;"
+        class="mt-8"
+        style="opacity: 0; pointer-events: none;"
+        inert
       >
         <p class="text-lg text-blue-400 mb-10">
           {t(tr, "hero.cta.tagline")}
@@ -168,13 +170,17 @@ const ecosystem = allLibs.slice(0, 3);
                         year: "numeric",
                         month: "long",
                         day: "numeric",
+                        timeZone: "UTC",
                       })}
                     </p>
                     <h3 class="text-lg font-bold text-gray-900 mb-3">
                       {post.data.title}
                     </h3>
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {post.data.summary || t(tr, "news.defaultSummary")}
+                      {post.data.summary ||
+                        (section === "releases"
+                          ? t(tr, "releases.defaultSummary")
+                          : t(tr, "news.defaultSummary"))}
                     </p>
                     <a
                       href={getLocalizedUrl(`/${section}/${post.slug}`, locale)}
@@ -247,7 +253,7 @@ const ecosystem = allLibs.slice(0, 3);
                 <div class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm">
                   <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
                 </div>
-                <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-teal-600 group-hover:text-teal-700 font-extrabold">{t(tr, "community.qq.title")}</span></h4>
+                <h3 class="text-2xl font-bold text-gray-900">EvoX <span class="text-teal-600 group-hover:text-teal-700 font-extrabold">{t(tr, "community.qq.title")}</span></h3>
               </div>
               <p class="text-gray-600 text-lg leading-relaxed">{t(tr, "community.qq.desc")}</p>
             </a>
@@ -256,7 +262,7 @@ const ecosystem = allLibs.slice(0, 3);
                 <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm">
                   <Icon name="simple-icons:discord" class="h-6 w-6" />
                 </div>
-                <h4 class="text-2xl font-bold text-gray-900">EvoX <span class="text-indigo-600 group-hover:text-indigo-700 font-extrabold">{t(tr, "community.discord.title")}</span></h4>
+                <h3 class="text-2xl font-bold text-gray-900">EvoX <span class="text-indigo-600 group-hover:text-indigo-700 font-extrabold">{t(tr, "community.discord.title")}</span></h3>
               </div>
               <p class="text-gray-600 text-lg leading-relaxed">{t(tr, "community.discord.desc")}</p>
             </a>
@@ -268,10 +274,14 @@ const ecosystem = allLibs.slice(0, 3);
       <div class="bg-white py-16">
         <div class="max-w-[1280px] mx-auto px-4">
           <!-- Tab Bar -->
-          <div class="flex flex-col sm:flex-row sm:justify-between gap-3 mb-8 pt-4 sm:items-end sm:min-h-[5rem]">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-3 mb-8 pt-4 sm:items-end sm:min-h-[5rem]" role="tablist" aria-label={t(tr, "examples.title")}>
             <button
               class="example-tab active flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="0"
+              role="tab"
+              id="example-tab-0"
+              aria-controls="example-panel-0"
+              aria-selected="true"
             >
               <img src="/arrow_1.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.singleObj")}
@@ -279,6 +289,10 @@ const ecosystem = allLibs.slice(0, 3);
             <button
               class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="1"
+              role="tab"
+              id="example-tab-1"
+              aria-controls="example-panel-1"
+              aria-selected="false"
             >
               <img src="/arrow_2.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.multiObj")}
@@ -286,6 +300,10 @@ const ecosystem = allLibs.slice(0, 3);
             <button
               class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
               data-tab="2"
+              role="tab"
+              id="example-tab-2"
+              aria-controls="example-panel-2"
+              aria-selected="false"
             >
               <img src="/arrow_3.png" alt="" class="h-5 sm:h-6 tab-icon" />
               {t(tr, "examples.neuro")}
@@ -293,7 +311,7 @@ const ecosystem = allLibs.slice(0, 3);
           </div>
 
           <!-- Tab Panels -->
-          <div class="example-panel" data-panel="0">
+          <div class="example-panel" data-panel="0" role="tabpanel" id="example-panel-0" aria-labelledby="example-tab-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
                 class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
@@ -312,7 +330,7 @@ const ecosystem = allLibs.slice(0, 3);
               </div>
             </div>
           </div>
-          <div class="example-panel hidden" data-panel="1">
+          <div class="example-panel hidden" data-panel="1" role="tabpanel" id="example-panel-1" aria-labelledby="example-tab-1">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
                 class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
@@ -331,7 +349,7 @@ const ecosystem = allLibs.slice(0, 3);
               </div>
             </div>
           </div>
-          <div class="example-panel hidden" data-panel="2">
+          <div class="example-panel hidden" data-panel="2" role="tabpanel" id="example-panel-2" aria-labelledby="example-tab-2">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div
                 class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
@@ -346,7 +364,7 @@ const ecosystem = allLibs.slice(0, 3);
               <div
                 class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
               >
-                <Neuroevolution />
+                <Neuroevolution locale={locale} />
               </div>
             </div>
           </div>
@@ -360,9 +378,9 @@ const ecosystem = allLibs.slice(0, 3);
             <h2 class="text-3xl font-bold text-gray-900 mb-2">
               {t(tr, "ecosystem.title")}
             </h2>
-            <h5 class="text-teal-600 font-medium mb-4">
+            <h3 class="text-teal-600 font-medium mb-4">
               {t(tr, "ecosystem.subtitle")}
-            </h5>
+            </h3>
             <p class="text-xl text-gray-600">{t(tr, "ecosystem.desc")}</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -374,7 +392,7 @@ const ecosystem = allLibs.slice(0, 3);
                       {item.data.title}
                     </h4>
                     <p class="text-gray-600 text-sm leading-relaxed">
-                      {item.data.description}
+                      {t(tr, `libs.desc.${item.data.id}`)}
                     </p>
                   </div>
                 </a>
@@ -401,6 +419,12 @@ const ecosystem = allLibs.slice(0, 3);
 <style>
   .scroll-bounce {
     animation: float 2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-bounce {
+      animation: none;
+    }
   }
 
   @keyframes float {
@@ -544,6 +568,11 @@ const ecosystem = allLibs.slice(0, 3);
     let isExpanded = false;
     let isAnimating = false;
     const DURATION = 1200;
+    // Users who prefer reduced motion get the expanded state instantly,
+    // without the flight animation or the scroll lock.
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     function preventScroll(e: Event) {
       e.preventDefault();
@@ -564,8 +593,15 @@ const ecosystem = allLibs.slice(0, 3);
     }
 
     let expandCallback: (() => void) | null = null;
+    let pendingAnchor: HTMLElement | null = null;
 
     function expand(onDone?: () => void) {
+      if (reduceMotion) {
+        // Skip the flight animation and the scroll lock entirely
+        completeExpand();
+        if (onDone) onDone();
+        return;
+      }
       if (isExpanded || isAnimating) {
         if (isExpanded && !isAnimating && onDone) onDone();
         return;
@@ -582,8 +618,9 @@ const ecosystem = allLibs.slice(0, 3);
       const logoW = logoRect.width;
       const logoH = logoRect.height;
 
-      // Measure navbar height and logo end position
-      navbarEl.style.transition = "none";
+      // Measure navbar height and logo end position. The navbar is moved by
+      // rAF below, so it must have no CSS transform transition — otherwise
+      // the rendered position would lag the calculated one every frame.
       navbarEl.style.transform = "translateY(0)";
       navbarEl.offsetHeight;
       const navLogoRect = navbarLogoEl.getBoundingClientRect();
@@ -593,7 +630,6 @@ const ecosystem = allLibs.slice(0, 3);
       const logoEndH = navLogoRect.height;
       navbarEl.style.transform = `translateY(${window.innerHeight}px)`;
       navbarEl.offsetHeight;
-      navbarEl.style.transition = "";
 
       // Clone logo for flying
       const flyLogo = heroLogoImg.cloneNode(true) as HTMLImageElement;
@@ -658,9 +694,17 @@ const ecosystem = allLibs.slice(0, 3);
           heroSectionEl.style.minHeight = `${heroMinH}vh`;
           if (heroGradient)
             heroGradient.style.opacity = `${1 - 0.7 * progressAfterContact}`;
-          if (ctaContent) ctaContent.style.opacity = `${progressAfterContact}`;
-          if (scrollIndicator)
+          if (ctaContent) {
+            ctaContent.style.opacity = `${progressAfterContact}`;
+            if (progressAfterContact >= 1) {
+              ctaContent.style.pointerEvents = "";
+              ctaContent.removeAttribute("inert");
+            }
+          }
+          if (scrollIndicator) {
             scrollIndicator.style.opacity = `${1 - progressAfterContact}`;
+            scrollIndicator.style.pointerEvents = "none";
+          }
         }
 
         if (rawT < 1) {
@@ -673,25 +717,56 @@ const ecosystem = allLibs.slice(0, 3);
           flyLogo.style.top = `${logoEndY}px`;
           flyLogo.style.width = `${logoEndW}px`;
           flyLogo.style.height = `${logoEndH}px`;
-          // Wait one frame so the browser renders everything in place,
-          // THEN swap flyLogo → navbarLogo after a short delay
+          // The animation is visually done — release the scroll lock and
+          // listeners now instead of holding the page hostage. Only the
+          // flyLogo → navbarLogo handoff waits for a frame to settle.
+          isAnimating = false;
+          unlockScroll();
+          removeFirstScrollListeners();
           requestAnimationFrame(() => {
             setTimeout(() => {
               navbarLogoEl.style.opacity = "1";
               flyLogo.remove();
-              isAnimating = false;
-              unlockScroll();
-              removeFirstScrollListeners();
               if (expandCallback) {
                 expandCallback();
                 expandCallback = null;
               }
-            }, 1500);
+              if (pendingAnchor) {
+                pendingAnchor.scrollIntoView({ behavior: "smooth" });
+                pendingAnchor = null;
+              }
+            }, 50);
           });
         }
       }
 
       requestAnimationFrame(animate);
+    }
+
+    // Skip the flight animation and jump straight to the expanded final state
+    function completeExpand() {
+      if (isExpanded || isAnimating) return;
+      isExpanded = true;
+      navbarEl.style.transform = "translateY(0)";
+      navbarLogoEl.style.opacity = "1";
+      heroLogoImg.style.visibility = "hidden";
+      heroSectionEl.style.minHeight = "60vh";
+      if (heroGradient) heroGradient.style.opacity = "0.3";
+      if (ctaContent) {
+        ctaContent.style.opacity = "1";
+        ctaContent.style.pointerEvents = "";
+        ctaContent.removeAttribute("inert");
+      }
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = "0";
+        scrollIndicator.style.pointerEvents = "none";
+      }
+      unlockScroll();
+      removeFirstScrollListeners();
+      if (expandCallback) {
+        expandCallback();
+        expandCallback = null;
+      }
     }
 
     // Intercept first wheel/touch to trigger animation directly
@@ -701,12 +776,22 @@ const ecosystem = allLibs.slice(0, 3);
         expand();
       }
     }
+
+    // Fallback: keyboard/scrollbar scrolling bypasses wheel/touchmove,
+    // so finish the expand immediately once the page actually scrolls
+    function onScrollFallback() {
+      if (!isExpanded && !isAnimating && window.scrollY > 0) {
+        completeExpand();
+      }
+    }
     window.addEventListener("wheel", onFirstScroll, { passive: false });
     window.addEventListener("touchmove", onFirstScroll, { passive: false });
+    window.addEventListener("scroll", onScrollFallback, { passive: true });
 
     function removeFirstScrollListeners() {
       window.removeEventListener("wheel", onFirstScroll);
       window.removeEventListener("touchmove", onFirstScroll);
+      window.removeEventListener("scroll", onScrollFallback);
     }
 
     heroSection.addEventListener("click", () => {
@@ -742,6 +827,8 @@ const ecosystem = allLibs.slice(0, 3);
         });
       } else if (!isAnimating) {
         targetEl.scrollIntoView({ behavior: "smooth" });
+      } else {
+        pendingAnchor = targetEl;
       }
     });
   }
@@ -755,14 +842,25 @@ const ecosystem = allLibs.slice(0, 3);
     const totalTabs = 3;
     let currentTab = 0;
     let carouselTimer: ReturnType<typeof setTimeout> | null = null;
+    let pendingRaf: number | null = null;
     let animationActive = false;
     const BRAX_DURATION = 16000;
 
     function activateTab(tabIndex: number) {
       stopAnimation();
+      // Cancel a rAF queued by a previous activateTab that has not fired
+      // yet — otherwise it would start an animation on a now-hidden panel.
+      if (pendingRaf !== null) {
+        cancelAnimationFrame(pendingRaf);
+        pendingRaf = null;
+      }
 
-      tabs.forEach((t) => t.classList.remove("active"));
+      tabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
       tabs[tabIndex]?.classList.add("active");
+      tabs[tabIndex]?.setAttribute("aria-selected", "true");
 
       panels.forEach((p) => {
         if ((p as HTMLElement).dataset.panel === tabIndex + "") {
@@ -774,13 +872,21 @@ const ecosystem = allLibs.slice(0, 3);
 
       currentTab = tabIndex;
 
-      requestAnimationFrame(() => {
+      pendingRaf = requestAnimationFrame(() => {
+        pendingRaf = null;
         const plotId =
           tabIndex === 0 ? "cso-plot" : tabIndex === 1 ? "rvea-plot" : null;
         if (plotId) {
           const plot = document.getElementById(plotId);
-          // @ts-ignore
-          if (plot) Plotly.Plots.resize(plot);
+          if (
+            plot &&
+            plot.getAttribute("data-ready") === "true" &&
+            // @ts-ignore
+            typeof Plotly !== "undefined"
+          ) {
+            // @ts-ignore
+            Plotly.Plots.resize(plot).catch(() => {});
+          }
         }
         startAnimation(tabIndex);
       });
@@ -790,6 +896,20 @@ const ecosystem = allLibs.slice(0, 3);
       animationActive = true;
 
       if (tabIndex === 2) {
+        // The Brax iframe is lazy and only starts loading/initializing the
+        // viewer when its panel becomes visible. Don't count down against a
+        // blank panel — wait for the load event (which module top-level
+        // await delays until the viewer is constructed), polling so a
+        // missed event cannot wedge the carousel.
+        const iframe = document.querySelector<HTMLIFrameElement>(
+          '[data-panel="2"] iframe',
+        );
+        if (iframe && iframe.dataset.ready !== "true") {
+          carouselTimer = setTimeout(() => {
+            if (currentTab === 2 && animationActive) startAnimation(2);
+          }, 500);
+          return;
+        }
         carouselTimer = setTimeout(() => {
           if (currentTab === 2) activateTab(0);
         }, BRAX_DURATION);
@@ -798,8 +918,18 @@ const ecosystem = allLibs.slice(0, 3);
 
       const plotId = tabIndex === 0 ? "cso-plot" : "rvea-plot";
       const plot = document.getElementById(plotId);
-      // @ts-ignore
-      if (!plot || !plot.data) return;
+      if (
+        !plot ||
+        plot.getAttribute("data-ready") !== "true" ||
+        // @ts-ignore
+        typeof Plotly === "undefined"
+      ) {
+        // Plot not ready/failed: skip this tab so the carousel keeps moving
+        carouselTimer = setTimeout(() => {
+          if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+        }, BRAX_DURATION);
+        return;
+      }
 
       // @ts-ignore
       Plotly.animate(plot, ["0"], {
@@ -820,7 +950,14 @@ const ecosystem = allLibs.slice(0, 3);
             activateTab(nextTab);
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          // Animation failed: skip this tab so the carousel keeps moving
+          if (animationActive) {
+            carouselTimer = setTimeout(() => {
+              if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+            }, BRAX_DURATION);
+          }
+        });
     }
 
     function stopAnimation() {
@@ -832,7 +969,8 @@ const ecosystem = allLibs.slice(0, 3);
       [0, 1].forEach((idx) => {
         const plotId = idx === 0 ? "cso-plot" : "rvea-plot";
         const plot = document.getElementById(plotId);
-        if (plot) {
+        // @ts-ignore
+        if (plot && plot.data && typeof Plotly !== "undefined") {
           // @ts-ignore
           Plotly.animate(plot, [null], {
             frame: { duration: 0, redraw: false },
@@ -842,22 +980,58 @@ const ecosystem = allLibs.slice(0, 3);
       });
     }
 
-    tabs.forEach((tab) => {
+    tabs.forEach((tab, i) => {
       tab.addEventListener("click", () => {
         const target = parseInt((tab as HTMLElement).dataset.tab || "0", 10);
         if (target !== currentTab) {
           activateTab(target);
         }
       });
+      // APG tab pattern: Left/Right (and Home/End) move between tabs
+      tab.addEventListener("keydown", (event) => {
+        const key = (event as KeyboardEvent).key;
+        let target: number | null = null;
+        if (key === "ArrowRight") target = (i + 1) % totalTabs;
+        else if (key === "ArrowLeft") target = (i - 1 + totalTabs) % totalTabs;
+        else if (key === "Home") target = 0;
+        else if (key === "End") target = totalTabs - 1;
+        if (target === null) return;
+        event.preventDefault();
+        (tabs[target] as HTMLElement).focus();
+        if (target !== currentTab) activateTab(target);
+      });
     });
 
+    // Mark the Brax iframe ready once it finishes loading (module top-level
+    // await delays the load event until the viewer is constructed).
+    document
+      .querySelector<HTMLIFrameElement>('[data-panel="2"] iframe')
+      ?.addEventListener(
+        "load",
+        (event) => {
+          (event.currentTarget as HTMLIFrameElement).dataset.ready = "true";
+        },
+        { once: true },
+      );
+
     // Wait for first plot to be ready, then start carousel
+    // Give up after ~6s (20 retries) if the plot never becomes ready
+    let waitRetries = 0;
     function waitAndStart() {
       const plot = document.getElementById("cso-plot");
       if (plot?.getAttribute("data-ready") === "true") {
-        startAnimation(0);
-      } else {
+        // Only auto-start if the user is still on the first tab and the
+        // carousel is not already running
+        if (currentTab === 0 && !animationActive) {
+          startAnimation(0);
+        }
+      } else if (++waitRetries < 20) {
         setTimeout(waitAndStart, 300);
+      } else {
+        // Gave up waiting: start anyway; the not-ready guard will skip ahead
+        if (currentTab === 0 && !animationActive) {
+          startAnimation(0);
+        }
       }
     }
     waitAndStart();

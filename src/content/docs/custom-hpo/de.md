@@ -6,7 +6,7 @@ section: "developer"
 
 # HPO mit benutzerdefinierten Algorithmen einsetzen
 
-In diesem Kapitel konzentrieren wir uns auf den Einsatz von HPO mit benutzerdefinierten Algorithmen, wobei der Schwerpunkt eher auf den Details als auf dem gesamten Workflow liegt. Eine kurze Einführung in den HPO-Einsatz finden Sie im [Tutorial](../../tutorials/practical-examples), und die vorherige Lektüre wird dringend empfohlen.
+In diesem Kapitel konzentrieren wir uns auf den Einsatz von HPO mit benutzerdefinierten Algorithmen, wobei der Schwerpunkt eher auf den Details als auf dem gesamten Workflow liegt. Eine kurze Einführung in den HPO-Einsatz finden Sie im [Tutorial](/de/tutorials/practical-examples), und die vorherige Lektüre wird dringend empfohlen.
 
 ## Algorithmen parallelisierbar machen
 

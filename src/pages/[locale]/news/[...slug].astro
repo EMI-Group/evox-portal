@@ -23,13 +23,13 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<Layout title={article.data.title} locale={locale}>
+<Layout title={article.data.title} description={article.data.summary} locale={locale}>
   <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
     <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">{article.data.title}</h1>
       <time datetime={article.data.pubDate.toISOString()} class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-gray-300 text-sm font-medium">
-        {article.data.pubDate.toLocaleDateString(dateLocale, { year: "numeric", month: "long", day: "numeric" })}
+        {article.data.pubDate.toLocaleDateString(dateLocale, { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}
       </time>
     </div>
   </div>

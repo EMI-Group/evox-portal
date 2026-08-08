@@ -65,7 +65,9 @@ export function t(translations: Record<string, string>, key: string, params?: Re
   let value = translations[key] ?? (en as Record<string, string>)[key] ?? key;
   if (params) {
     for (const [k, v] of Object.entries(params)) {
-      value = value.replace(`{${k}}`, v);
+      // replaceAll covers repeated placeholders; a function replacement
+      // keeps "$&"-style sequences in the value from being interpreted.
+      value = value.replaceAll(`{${k}}`, () => v);
     }
   }
   return value;
@@ -94,6 +96,10 @@ export function getLocalizedUrl(pathname: string, targetLocale: Locale): string 
   // Add target locale prefix (unless it's the default)
   if (targetLocale === defaultLocale) {
     return stripped;
+  }
+  // Site-wide links use no trailing slash; "/ja/" would break that convention.
+  if (stripped === "/") {
+    return `/${targetLocale}`;
   }
   return `/${targetLocale}${stripped}`;
 }
@@ -155,7 +161,7 @@ export function findLocalizedArticle<T extends { id: string }>(
 
 /** Extract slug from a news ID (e.g. "evogp/en" → "evogp") */
 export function getNewsSlug(id: string): string {
-  const slash = id.indexOf("/");
+  const slash = id.lastIndexOf("/");
   return slash >= 0 ? id.slice(0, slash) : id;
 }
 

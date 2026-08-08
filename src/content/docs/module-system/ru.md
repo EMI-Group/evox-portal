@@ -12,7 +12,7 @@ section: "developer"
 
 ## Введение в Module
 
-В [руководстве](../../tutorials) мы упоминали основной процесс запуска в EvoX:
+В [руководстве](/ru/tutorials) мы упоминали основной процесс запуска в EvoX:
 
 <center><b>Инициализация Algorithm и Problem — Настройка Monitor — Инициализация Workflow — Запуск Workflow</b></center>
 
