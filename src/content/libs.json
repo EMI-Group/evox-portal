@@ -70,5 +70,11 @@
     "title": "EvoCmo",
     "description": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
     "url": "https://github.com/785509490/EvoCmo"
+  },
+  {
+    "id": "autopso",
+    "title": "AutoPSO",
+    "description": "A meta-framework for automated Particle Swarm Optimization that automatically constructs PSO variants through black-box optimization on GPUs.",
+    "url": "https://github.com/EMI-Group/autopso"
   }
 ]

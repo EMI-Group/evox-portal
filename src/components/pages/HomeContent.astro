@@ -248,7 +248,7 @@ const ecosystem = allLibs.slice(0, 3);
             <p class="text-xl text-gray-600">{t(tr, "community.desc")}</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <a href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=_9aIGJT9OSyG6Zxi_8owHw5-Kpih8--g&authKey=0J4q%2FdbCjeH3p12Y9qlIavA8vdK3g5FIPJ%2BwpO9M3UkNnEwZCSuw9WiRMO4zNe7d&noverify=0&group_code=297969717" target="_blank" rel="noopener noreferrer" class="group block p-8 bg-white rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <button type="button" data-qq-qr-open class="group block p-8 bg-white rounded-3xl border border-gray-100 hover:border-teal-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left cursor-pointer">
               <div class="flex items-center gap-4 mb-5">
                 <div class="p-3 bg-teal-100 rounded-xl text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-sm">
                   <Icon name="simple-icons:tencentqq" class="h-6 w-6" />
@@ -256,7 +256,7 @@ const ecosystem = allLibs.slice(0, 3);
                 <h3 class="text-2xl font-bold text-gray-900">EvoX <span class="text-teal-600 group-hover:text-teal-700 font-extrabold">{t(tr, "community.qq.title")}</span></h3>
               </div>
               <p class="text-gray-600 text-lg leading-relaxed">{t(tr, "community.qq.desc")}</p>
-            </a>
+            </button>
             <a href="https://discord.com/invite/Vbtgcpy7G4" target="_blank" rel="noopener noreferrer" class="group block p-8 bg-white rounded-3xl border border-gray-100 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div class="flex items-center gap-4 mb-5">
                 <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm">
@@ -567,7 +567,6 @@ const ecosystem = allLibs.slice(0, 3);
 
     let isExpanded = false;
     let isAnimating = false;
-    const DURATION = 1200;
     // Users who prefer reduced motion get the expanded state instantly,
     // without the flight animation or the scroll lock.
     const reduceMotion = window.matchMedia(
@@ -588,8 +587,26 @@ const ecosystem = allLibs.slice(0, 3);
       window.removeEventListener("touchmove", preventScroll);
     }
 
-    function easeOut(t: number) {
-      return 1 - (1 - t) * (1 - t);
+    function smooth(t: number) {
+      return t * t * (3 - 2 * t);
+    }
+    // Cubic Hermite segment: s ∈ [0,1], seg = duration, m0/m1 = end velocities
+    function hermite(
+      s: number,
+      seg: number,
+      u0: number,
+      u1: number,
+      m0: number,
+      m1: number,
+    ) {
+      const s2 = s * s;
+      const s3 = s2 * s;
+      return (
+        (2 * s3 - 3 * s2 + 1) * u0 +
+        (s3 - 2 * s2 + s) * seg * m0 +
+        (-2 * s3 + 3 * s2) * u1 +
+        (s3 - s2) * seg * m1
+      );
     }
 
     let expandCallback: (() => void) | null = null;
@@ -639,72 +656,93 @@ const ecosystem = allLibs.slice(0, 3);
       document.body.appendChild(flyLogo);
       heroLogoImg.style.visibility = "hidden";
 
+      // Choreography, all driven by the navbar's rising top edge:
+      // 1. The navbar rises from the bottom until its top edge touches the
+      //    hero logo's bottom edge (contactY) — the logo waits in place.
+      // 2. They then rise together at the same speed, the logo's bottom
+      //    glued to the navbar's top edge, while the logo shrinks and moves
+      //    left; both complete exactly when the logo reaches its final spot
+      //    (dockY = logoEndY + logoEndH).
+      // 3. The navbar rises one more logo-height to its final position while
+      //    the logo stays parked, then the flyLogo hands off to navbarLogo.
+      const vh = window.innerHeight;
+      const contactY = logoStartY + logoH;
+      const dockY = logoEndY + logoEndH;
+      // Distance-proportional durations: the pre-contact rise averages about
+      // twice the speed of the post-contact carry. The two segments share the
+      // same velocity at the contact instant (junctionV), so the deceleration
+      // is continuous and no speed switch is perceptible.
+      const riseMs = Math.min(Math.max((vh - contactY) / 0.5, 500), 2000);
+      const carryMs = Math.min(Math.max(contactY / 0.25, 1400), 3600);
+      const durationMs = riseMs + carryMs;
+      const junctionV = (1.5 * contactY) / carryMs;
+
       const startTime = performance.now();
 
       function animate(now: number) {
         const elapsed = now - startTime;
-        const rawT = Math.min(elapsed / DURATION, 1);
-        const t = easeOut(rawT);
+        const rawT = Math.min(elapsed / durationMs, 1);
 
-        // Navbar flies from bottom to top
-        const navbarY = window.innerHeight * (1 - t);
+        // Distance risen so far: brisk Hermite segment until contact, gentle
+        // segment after; both meet at junctionV, so velocity is continuous
+        const risen =
+          elapsed < riseMs
+            ? hermite(elapsed / riseMs, riseMs, 0, vh - contactY, 0, junctionV)
+            : hermite(
+                (elapsed - riseMs) / carryMs,
+                carryMs,
+                vh - contactY,
+                vh,
+                junctionV,
+                0,
+              );
+        const navbarY = vh - risen;
         navbarEl.style.transform = `translateY(${navbarY}px)`;
 
-        // Use calculated position directly
-        const navTopY = navbarY;
-        const logoBottomIfStill = logoStartY + logoH;
-        const contacted = navTopY < logoBottomIfStill;
+        // Post-contact progress for the surrounding elements (hero collapse,
+        // CTA fade-in, gradient, scroll indicator), spanning phases 2 and 3
+        const pAll = Math.min(Math.max((contactY - navbarY) / contactY, 0), 1);
 
-        if (!contacted) {
+        heroSectionEl.style.minHeight = `${100 - 40 * pAll}vh`;
+        if (heroGradient) heroGradient.style.opacity = `${1 - 0.7 * pAll}`;
+        if (ctaContent) {
+          ctaContent.style.opacity = `${pAll}`;
+          if (pAll >= 1) {
+            ctaContent.style.pointerEvents = "";
+            ctaContent.removeAttribute("inert");
+          }
+        }
+        if (scrollIndicator) {
+          scrollIndicator.style.opacity = `${1 - pAll}`;
+          if (pAll > 0) scrollIndicator.style.pointerEvents = "none";
+        }
+
+        if (navbarY >= contactY) {
+          // Phase 1: the logo waits at its hero spot until the navbar's top
+          // edge reaches its bottom edge
           flyLogo.style.left = `${logoStartX}px`;
           flyLogo.style.top = `${logoStartY}px`;
           flyLogo.style.width = `${logoW}px`;
           flyLogo.style.height = `${logoH}px`;
-
-          heroSectionEl.style.minHeight = "100vh";
-          if (heroGradient) heroGradient.style.opacity = "1";
-          if (ctaContent) ctaContent.style.opacity = "0";
-          if (scrollIndicator) scrollIndicator.style.opacity = "1";
-        } else {
-          // Progress since contact: 0 at contact, 1 when logo reaches its final position
-          const contactY = logoBottomIfStill;
-          const doneY = logoEndY + logoEndH;
-          const totalTravel = contactY - doneY;
-          const progressAfterContact = Math.min(
-            (contactY - navTopY) / totalTravel,
-            1,
-          );
-
-          const p = Math.min(progressAfterContact, 1);
+        } else if (navbarY >= dockY) {
+          // Phase 2: the logo rides the navbar's top edge (bottom glued to
+          // it) while shrinking and sliding left — position and size both
+          // complete exactly when the logo reaches its final spot
+          const p = smooth((contactY - navbarY) / (contactY - dockY));
           const curW = logoW + (logoEndW - logoW) * p;
           const curH = logoH + (logoEndH - logoH) * p;
           const curX = logoStartX + (logoEndX - logoStartX) * p;
-          // Logo bottom sticks to navbar top early on,
-          // but transitions to final Y (inside navbar) as p approaches 1
-          const ridingTop = navTopY - curH;
-          const logoTop = ridingTop + (logoEndY - ridingTop) * p * p;
-
           flyLogo.style.left = `${curX}px`;
-          flyLogo.style.top = `${logoTop}px`;
+          flyLogo.style.top = `${navbarY - curH}px`;
           flyLogo.style.width = `${curW}px`;
           flyLogo.style.height = `${curH}px`;
-
-          // Other elements animate only after contact
-          const heroMinH = 100 - 40 * progressAfterContact;
-          heroSectionEl.style.minHeight = `${heroMinH}vh`;
-          if (heroGradient)
-            heroGradient.style.opacity = `${1 - 0.7 * progressAfterContact}`;
-          if (ctaContent) {
-            ctaContent.style.opacity = `${progressAfterContact}`;
-            if (progressAfterContact >= 1) {
-              ctaContent.style.pointerEvents = "";
-              ctaContent.removeAttribute("inert");
-            }
-          }
-          if (scrollIndicator) {
-            scrollIndicator.style.opacity = `${1 - progressAfterContact}`;
-            scrollIndicator.style.pointerEvents = "none";
-          }
+        } else {
+          // Phase 3: the logo is parked at its final spot while the navbar
+          // rises the last logo-height underneath it
+          flyLogo.style.left = `${logoEndX}px`;
+          flyLogo.style.top = `${logoEndY}px`;
+          flyLogo.style.width = `${logoEndW}px`;
+          flyLogo.style.height = `${logoEndH}px`;
         }
 
         if (rawT < 1) {
@@ -1035,5 +1073,38 @@ const ecosystem = allLibs.slice(0, 3);
       }
     }
     waitAndStart();
+  });
+</script>
+
+<div id="qq-qr-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={t(tr, "community.qq.title")}>
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-qq-qr-close></div>
+  <div class="relative bg-white rounded-3xl p-6 md:p-8 shadow-2xl max-w-sm w-full text-center">
+    <button type="button" data-qq-qr-close aria-label={t(tr, "community.qq.close")} class="absolute top-3 right-3 p-2 text-gray-400 hover:text-gray-700 transition-colors cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <img src="/images/qq-group-qr.png" alt={t(tr, "community.qq.title")} width="610" height="610" class="w-full h-auto rounded-xl" loading="lazy" />
+    <p class="mt-4 text-lg font-bold text-gray-900">QQ: 297969717</p>
+    <p class="mt-1 text-gray-600">{t(tr, "community.qq.scan")}</p>
+  </div>
+</div>
+<script>
+  const qqQrModal = document.getElementById("qq-qr-modal");
+  const closeQqQrModal = () => {
+    qqQrModal?.classList.add("hidden");
+    qqQrModal?.classList.remove("flex");
+  };
+  document.querySelectorAll("[data-qq-qr-open]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      qqQrModal?.classList.remove("hidden");
+      qqQrModal?.classList.add("flex");
+    });
+  });
+  qqQrModal?.querySelectorAll("[data-qq-qr-close]").forEach((el) => {
+    el.addEventListener("click", closeQqQrModal);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeQqQrModal();
   });
 </script>

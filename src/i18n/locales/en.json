@@ -60,6 +60,8 @@
   "community.desc": "Join the EvoX developer community to contribute, learn, and get your questions answered.",
   "community.qq.title": "QQ Group",
   "community.qq.desc": "Browse and join the QQ group for discussions",
+  "community.qq.scan": "Scan the QR code with QQ to join the group",
+  "community.qq.close": "Close",
   "community.discord.title": "Discord",
   "community.discord.desc": "Browse and join discussions with Discord",
   "community.pageTitle": "Community | EvoX",
@@ -92,6 +94,7 @@
   "libs.desc.evogo": "A fully data-driven framework for black-box optimization, replacing manual heuristic operators by learning search behaviors from historical data.",
   "libs.desc.evonas": "A framework for neural architecture search, implemented with PyTorch. It supports supernet training, evolutionary multi-objective optimization, and seamless integration with modern computer vision training pipelines.",
   "libs.desc.evocmo": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
+  "libs.desc.autopso": "A meta-framework for automated Particle Swarm Optimization that automatically constructs PSO variants through black-box optimization on GPUs.",
 
   "news.pageTitle": "News{page} | EvoX",
   "news.pageTitlePage": " - Page {page}",
