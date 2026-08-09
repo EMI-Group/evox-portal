@@ -63,7 +63,7 @@
   "runtime.hero.badge": "开源 · GPU 加速",
   "runtime.hero.subtitle": "GPU 加速的进化计算框架",
   "runtime.hero.desc": "EvoX Runtime 是一个分布式、GPU 加速的可扩展进化计算框架——50+ 单目标与多目标优化算法、神经进化与进化强化学习，全面兼容 PyTorch。",
-  "genesis.pageTitle": "EvoX 天演·启元 — 递归智能体系统",
+  "genesis.pageTitle": "天演·启元 — 递归智能体系统",
   "genesis.hero.badge": "开源 · AGPL-3.0",
   "genesis.hero.subtitle": "递归智能体系统",
   "genesis.hero.desc": "天演·启元可以将任意项目——从一片空白到数百万行代码——递归分解并推进至完成。每个智能体都在独立、沙箱隔离的 Git worktree 中工作,并行执行无限扩展。从第一个想法到交付软件,全程自治。",

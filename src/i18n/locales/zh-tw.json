@@ -63,7 +63,7 @@
   "runtime.hero.badge": "開源 · GPU 加速",
   "runtime.hero.subtitle": "GPU 加速的進化計算框架",
   "runtime.hero.desc": "EvoX Runtime 是一個分散式、GPU 加速的可擴展進化計算框架——50+ 單目標與多目標最佳化演算法、神經進化與進化強化學習，全面相容 PyTorch。",
-  "genesis.pageTitle": "EvoX 天演·启元 — 遞歸智慧體系統",
+  "genesis.pageTitle": "天演·启元 — 遞歸智慧體系統",
   "genesis.hero.badge": "開源 · AGPL-3.0",
   "genesis.hero.subtitle": "遞歸智慧體系統",
   "genesis.hero.desc": "天演·启元可以將任意專案——從一片空白到數百萬行程式碼——遞歸分解並推進至完成。每個智慧體都在獨立、沙箱隔離的 Git worktree 中工作,並行執行無限擴展。從第一個想法到交付軟體,全程自治。",
