@@ -1,0 +1,209 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+
+const kicker = "text-xs font-semibold tracking-[0.2em] text-teal-600 uppercase";
+---
+
+<Layout title={t(tr, "genesis.pageTitle")} description={t(tr, "genesis.hero.desc")} locale={locale}>
+  <!-- Hero (site-brand dark, same style as Runtime / Community pages) -->
+  <div
+    class="relative text-white py-20 md:py-28 overflow-hidden"
+    style="background: rgb(22, 27, 48);"
+  >
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"
+    >
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-6">
+        {t(tr, "genesis.hero.badge")}
+      </p>
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+        {locale === "zh-cn" || locale === "zh-tw" ? "EvoX 天演·启元" : "EvoX Genesis"}
+      </h1>
+      <p class="text-xl md:text-2xl font-semibold text-gray-200 mb-6">
+        {t(tr, "genesis.hero.subtitle")}
+      </p>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        {t(tr, "genesis.hero.desc")}
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-4">
+        <a
+          href="https://genesis.evox.group/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-teal-600 hover:bg-teal-500 text-white font-semibold px-8 py-3 rounded-full transition-colors"
+        >
+          {t(tr, "genesis.hero.cta")}
+        </a>
+        <a
+          href="https://github.com/EMI-Group/genesis"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 font-semibold text-white hover:text-teal-400 transition-colors"
+        >
+          {t(tr, "genesis.hero.github")} <span>&rarr;</span>
+        </a>
+      </div>
+      <p class="text-sm text-gray-500">macOS · Linux · Windows</p>
+    </div>
+  </div>
+
+  <!-- The Model -->
+  <section id="genesis-model" class="bg-gray-50 py-16 md:py-24 px-6 scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <p class:list={[kicker, "mb-4"]}>
+        {t(tr, "genesis.model.kicker")}
+      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {t(tr, "genesis.model.title")}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mb-12 leading-relaxed">
+        {t(tr, "genesis.model.desc")}
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class:list={[kicker, "mb-3"]}>
+            {t(tr, "genesis.model.space.kicker")}
+          </p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.model.space.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {t(tr, "genesis.model.space.desc")}
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class:list={[kicker, "mb-3"]}>
+            {t(tr, "genesis.model.time.kicker")}
+          </p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.model.time.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {t(tr, "genesis.model.time.desc")}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two Phases -->
+  <section id="genesis-phases" class="bg-white border-t border-gray-100 py-16 md:py-24 px-6 scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <p class:list={[kicker, "mb-4"]}>Two Phases</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+        {t(tr, "genesis.phases.title")}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+          <p class:list={[kicker, "mb-3"]}>Phase 01</p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.phases.g.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {t(tr, "genesis.phases.g.desc")}
+          </p>
+          <a
+            href="https://genesis.evox.group/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-teal-600 hover:text-teal-700 transition-colors"
+          >
+            {t(tr, "genesis.phases.guide")} <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+          <p class:list={[kicker, "mb-3"]}>Phase 02</p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.phases.e.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {t(tr, "genesis.phases.e.desc")}
+          </p>
+          <a
+            href="https://genesis.evox.group/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-teal-600 hover:text-teal-700 transition-colors"
+          >
+            {t(tr, "genesis.phases.guide")} <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Genesis -->
+  <section id="genesis-why" class="bg-gray-50 border-t border-gray-100 py-16 md:py-24 px-6 scroll-mt-24">
+    <div class="max-w-4xl mx-auto">
+      <p class:list={[kicker, "mb-10"]}>
+        {t(tr, "genesis.why.kicker")}
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.why.scale.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {t(tr, "genesis.why.scale.desc")}
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.why.evolve.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {t(tr, "genesis.why.evolve.desc")}
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            {t(tr, "genesis.why.sandbox.title")}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {t(tr, "genesis.why.sandbox.desc")}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner (site-brand dark) -->
+  <section
+    id="genesis-get"
+    class="relative text-white text-center py-20 md:py-24 px-6 overflow-hidden scroll-mt-24"
+    style="background: rgb(22, 27, 48);"
+  >
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"
+    >
+    </div>
+    <div class="relative z-10">
+      <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-3">
+        {t(tr, "genesis.cta.title")}
+      </h2>
+      <p class="text-xl text-gray-300 mb-10">
+        {t(tr, "genesis.cta.subtitle")}
+      </p>
+      <a
+        href="https://genesis.evox.group/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold px-10 py-4 rounded-full transition-colors"
+      >
+        {t(tr, "genesis.cta.button")} <span>&rarr;</span>
+      </a>
+    </div>
+  </section>
+</Layout>

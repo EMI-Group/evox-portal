@@ -1,0 +1,373 @@
+---
+import { Code } from "astro:components";
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+
+import codeSingleObj from "../../content/examples/single-obj.py?raw";
+import codeMultiObj from "../../content/examples/multi-obj.py?raw";
+import codeNeuro from "../../content/examples/neuroevolution.py?raw";
+
+import SingleObj from "../../content/examples/single-obj.astro";
+import MultiObj from "../../content/examples/multi-obj.astro";
+import Neuroevolution from "../../content/examples/neuroevolution.astro";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+---
+
+<!-- Code Examples (Tabbed) -->
+<div class="bg-white py-16">
+  <div class="max-w-[1280px] mx-auto px-4">
+    <!-- Tab Bar -->
+    <div class="flex flex-col sm:flex-row sm:justify-between gap-3 mb-8 pt-4 sm:items-end sm:min-h-[5rem]" role="tablist" aria-label={t(tr, "examples.title")}>
+      <button
+        class="example-tab active flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
+        data-tab="0"
+        role="tab"
+        id="example-tab-0"
+        aria-controls="example-panel-0"
+        aria-selected="true"
+      >
+        <img src="/arrow_1.png" alt="" class="h-5 sm:h-6 tab-icon" />
+        {t(tr, "examples.singleObj")}
+      </button>
+      <button
+        class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
+        data-tab="1"
+        role="tab"
+        id="example-tab-1"
+        aria-controls="example-panel-1"
+        aria-selected="false"
+      >
+        <img src="/arrow_2.png" alt="" class="h-5 sm:h-6 tab-icon" />
+        {t(tr, "examples.multiObj")}
+      </button>
+      <button
+        class="example-tab flex flex-col items-center gap-2 px-4 sm:px-6 py-2 sm:py-0 cursor-pointer w-full sm:w-auto max-w-full"
+        data-tab="2"
+        role="tab"
+        id="example-tab-2"
+        aria-controls="example-panel-2"
+        aria-selected="false"
+      >
+        <img src="/arrow_3.png" alt="" class="h-5 sm:h-6 tab-icon" />
+        {t(tr, "examples.neuro")}
+      </button>
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="example-panel" data-panel="0" role="tabpanel" id="example-panel-0" aria-labelledby="example-tab-0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+        >
+          <Code
+            code={codeSingleObj}
+            lang="python"
+            theme="github-dark"
+            class="p-4 md:p-6 min-h-full"
+          />
+        </div>
+        <div
+          class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
+        >
+          <SingleObj />
+        </div>
+      </div>
+    </div>
+    <div class="example-panel hidden" data-panel="1" role="tabpanel" id="example-panel-1" aria-labelledby="example-tab-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+        >
+          <Code
+            code={codeMultiObj}
+            lang="python"
+            theme="github-dark"
+            class="p-4 md:p-6 min-h-full"
+          />
+        </div>
+        <div
+          class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
+        >
+          <MultiObj />
+        </div>
+      </div>
+    </div>
+    <div class="example-panel hidden" data-panel="2" role="tabpanel" id="example-panel-2" aria-labelledby="example-tab-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+        >
+          <Code
+            code={codeNeuro}
+            lang="python"
+            theme="github-dark"
+            class="p-4 md:p-6 min-h-full"
+          />
+        </div>
+        <div
+          class="h-[28rem] bg-white rounded-lg border border-gray-200 overflow-hidden relative"
+        >
+          <Neuroevolution locale={locale} />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Example tabs */
+  .example-tab {
+    color: #9ca3af;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    transition:
+      color 0.3s ease,
+      font-size 0.3s ease;
+  }
+  .example-tab .tab-icon {
+    opacity: 0.25;
+    filter: grayscale(100%);
+    transition:
+      opacity 0.3s ease,
+      filter 0.3s ease,
+      transform 0.3s ease;
+  }
+  .example-tab:hover {
+    color: #374151;
+  }
+  .example-tab:hover .tab-icon {
+    opacity: 0.6;
+    filter: grayscale(50%);
+  }
+  .example-tab.active {
+    color: #0f172a;
+    font-size: 1.5rem;
+  }
+  .example-tab.active .tab-icon {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  @media (max-width: 640px) {
+    .example-tab {
+      font-size: 1rem;
+    }
+
+    .example-tab.active {
+      font-size: 1.125rem;
+    }
+  }
+</style>
+
+<script>
+  // --- Tab carousel + animation control for code examples ---
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".example-tab");
+    const panels = document.querySelectorAll(".example-panel");
+    const totalTabs = 3;
+    let currentTab = 0;
+    let carouselTimer: ReturnType<typeof setTimeout> | null = null;
+    let pendingRaf: number | null = null;
+    let animationActive = false;
+    const BRAX_DURATION = 16000;
+
+    function activateTab(tabIndex: number) {
+      stopAnimation();
+      // Cancel a rAF queued by a previous activateTab that has not fired
+      // yet — otherwise it would start an animation on a now-hidden panel.
+      if (pendingRaf !== null) {
+        cancelAnimationFrame(pendingRaf);
+        pendingRaf = null;
+      }
+
+      tabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tabs[tabIndex]?.classList.add("active");
+      tabs[tabIndex]?.setAttribute("aria-selected", "true");
+
+      panels.forEach((p) => {
+        if ((p as HTMLElement).dataset.panel === tabIndex + "") {
+          p.classList.remove("hidden");
+        } else {
+          p.classList.add("hidden");
+        }
+      });
+
+      currentTab = tabIndex;
+
+      pendingRaf = requestAnimationFrame(() => {
+        pendingRaf = null;
+        const plotId =
+          tabIndex === 0 ? "cso-plot" : tabIndex === 1 ? "rvea-plot" : null;
+        if (plotId) {
+          const plot = document.getElementById(plotId);
+          if (
+            plot &&
+            plot.getAttribute("data-ready") === "true" &&
+            // @ts-ignore
+            typeof Plotly !== "undefined"
+          ) {
+            // @ts-ignore
+            Plotly.Plots.resize(plot).catch(() => {});
+          }
+        }
+        startAnimation(tabIndex);
+      });
+    }
+
+    function startAnimation(tabIndex: number) {
+      animationActive = true;
+
+      if (tabIndex === 2) {
+        // The Brax iframe is lazy and only starts loading/initializing the
+        // viewer when its panel becomes visible. Don't count down against a
+        // blank panel — wait for the load event (which module top-level
+        // await delays until the viewer is constructed), polling so a
+        // missed event cannot wedge the carousel.
+        const iframe = document.querySelector<HTMLIFrameElement>(
+          '[data-panel="2"] iframe',
+        );
+        if (iframe && iframe.dataset.ready !== "true") {
+          carouselTimer = setTimeout(() => {
+            if (currentTab === 2 && animationActive) startAnimation(2);
+          }, 500);
+          return;
+        }
+        carouselTimer = setTimeout(() => {
+          if (currentTab === 2) activateTab(0);
+        }, BRAX_DURATION);
+        return;
+      }
+
+      const plotId = tabIndex === 0 ? "cso-plot" : "rvea-plot";
+      const plot = document.getElementById(plotId);
+      if (
+        !plot ||
+        plot.getAttribute("data-ready") !== "true" ||
+        // @ts-ignore
+        typeof Plotly === "undefined"
+      ) {
+        // Plot not ready/failed: skip this tab so the carousel keeps moving
+        carouselTimer = setTimeout(() => {
+          if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+        }, BRAX_DURATION);
+        return;
+      }
+
+      // @ts-ignore
+      Plotly.animate(plot, ["0"], {
+        frame: { duration: 0, redraw: true },
+        transition: { duration: 0 },
+        mode: "immediate",
+      })
+        .then(() => {
+          // @ts-ignore
+          return Plotly.animate(plot, null, {
+            frame: { duration: 200, redraw: false },
+            transition: { duration: 200 },
+          });
+        })
+        .then(() => {
+          if (currentTab === tabIndex && animationActive) {
+            const nextTab = (tabIndex + 1) % totalTabs;
+            activateTab(nextTab);
+          }
+        })
+        .catch(() => {
+          // Animation failed: skip this tab so the carousel keeps moving
+          if (animationActive) {
+            carouselTimer = setTimeout(() => {
+              if (currentTab === tabIndex) activateTab((tabIndex + 1) % totalTabs);
+            }, BRAX_DURATION);
+          }
+        });
+    }
+
+    function stopAnimation() {
+      animationActive = false;
+      if (carouselTimer) {
+        clearTimeout(carouselTimer);
+        carouselTimer = null;
+      }
+      [0, 1].forEach((idx) => {
+        const plotId = idx === 0 ? "cso-plot" : "rvea-plot";
+        const plot = document.getElementById(plotId);
+        // @ts-ignore
+        if (plot && plot.data && typeof Plotly !== "undefined") {
+          // @ts-ignore
+          Plotly.animate(plot, [null], {
+            frame: { duration: 0, redraw: false },
+            mode: "immediate",
+          }).catch(() => {});
+        }
+      });
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => {
+        const target = parseInt((tab as HTMLElement).dataset.tab || "0", 10);
+        if (target !== currentTab) {
+          activateTab(target);
+        }
+      });
+      // APG tab pattern: Left/Right (and Home/End) move between tabs
+      tab.addEventListener("keydown", (event) => {
+        const key = (event as KeyboardEvent).key;
+        let target: number | null = null;
+        if (key === "ArrowRight") target = (i + 1) % totalTabs;
+        else if (key === "ArrowLeft") target = (i - 1 + totalTabs) % totalTabs;
+        else if (key === "Home") target = 0;
+        else if (key === "End") target = totalTabs - 1;
+        if (target === null) return;
+        event.preventDefault();
+        (tabs[target] as HTMLElement).focus();
+        if (target !== currentTab) activateTab(target);
+      });
+    });
+
+    // Mark the Brax iframe ready once it finishes loading (module top-level
+    // await delays the load event until the viewer is constructed).
+    document
+      .querySelector<HTMLIFrameElement>('[data-panel="2"] iframe')
+      ?.addEventListener(
+        "load",
+        (event) => {
+          (event.currentTarget as HTMLIFrameElement).dataset.ready = "true";
+        },
+        { once: true },
+      );
+
+    // Wait for first plot to be ready, then start carousel
+    // Give up after ~6s (20 retries) if the plot never becomes ready
+    let waitRetries = 0;
+    function waitAndStart() {
+      const plot = document.getElementById("cso-plot");
+      if (plot?.getAttribute("data-ready") === "true") {
+        // Only auto-start if the user is still on the first tab and the
+        // carousel is not already running
+        if (currentTab === 0 && !animationActive) {
+          startAnimation(0);
+        }
+      } else if (++waitRetries < 20) {
+        setTimeout(waitAndStart, 300);
+      } else {
+        // Gave up waiting: start anyway; the not-ready guard will skip ahead
+        if (currentTab === 0 && !animationActive) {
+          startAnimation(0);
+        }
+      }
+    }
+    waitAndStart();
+  });
+</script>

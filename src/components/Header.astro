@@ -17,14 +17,30 @@ const tr = await loadTranslations(locale);
 // pathname (which always ends with "/") so switcher links match them.
 const currentPath = (localePath ?? Astro.url.pathname).replace(/\/$/, "") || "/";
 
-const navLinks = [
+const navLinks: {
+  label: string;
+  href?: string;
+  badge?: string;
+  dropdown?: { label: string; desc: string; href: string }[];
+}[] = [
   {
-    label: t(tr, "nav.tutorials"),
-    href: getLocalizedUrl("/tutorials", locale),
+    label: t(tr, "nav.genesis"),
+    href: getLocalizedUrl("/genesis", locale),
+    badge: t(tr, "nav.genesis.badge"),
   },
   {
-    label: t(tr, "nav.docs"),
+    label: "Runtime",
     dropdown: [
+      {
+        label: t(tr, "nav.runtime.overview"),
+        desc: t(tr, "nav.runtime.overview.desc"),
+        href: getLocalizedUrl("/runtime", locale),
+      },
+      {
+        label: t(tr, "nav.tutorials"),
+        desc: t(tr, "footer.tutorials.desc"),
+        href: getLocalizedUrl("/tutorials", locale),
+      },
       {
         label: t(tr, "nav.docs.guide"),
         desc: t(tr, "nav.docs.guide.desc"),
@@ -127,9 +143,14 @@ const navLinks = [
                   href={link.href}
                   target={link.href?.startsWith("http") ? "_blank" : undefined}
                   rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                  class="text-sm font-medium hover:text-teal-400 transition-colors"
+                  class="relative text-sm font-medium hover:text-teal-400 transition-colors"
                 >
                   {link.label}
+                  {link.badge && (
+                    <span class="absolute left-full -top-2 -ml-4 inline-flex items-center rounded-full bg-red-500 px-1 py-px text-[9px] font-bold leading-tight text-white">
+                      {link.badge}
+                    </span>
+                  )}
                 </a>
               )}
 
@@ -241,9 +262,14 @@ const navLinks = [
                     href={link.href}
                     target={link.href?.startsWith("http") ? "_blank" : undefined}
                     rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                    class="block px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10"
+                    class="relative block px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10"
                   >
                     {link.label}
+                    {link.badge && (
+                      <span class="absolute -top-0.5 ml-1 inline-flex items-center rounded-full bg-red-500 px-1 py-px text-[9px] font-bold leading-tight text-white">
+                        {link.badge}
+                      </span>
+                    )}
                   </a>
                 )
               ))

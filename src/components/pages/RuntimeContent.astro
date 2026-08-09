@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+import RuntimeExamples from "./RuntimeExamples.astro";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+---
+
+<Layout title={t(tr, "runtime.pageTitle")} description={t(tr, "runtime.hero.desc")} locale={locale}>
+  <!-- Hero (site-brand dark, same style as Community / Ecosystem pages) -->
+  <div
+    class="relative text-white py-20 md:py-28 overflow-hidden"
+    style="background: rgb(22, 27, 48);"
+  >
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"
+    >
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-6">
+        {t(tr, "runtime.hero.badge")}
+      </p>
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+        EvoX Runtime
+      </h1>
+      <p class="text-xl md:text-2xl font-semibold text-gray-200 mb-6">
+        {t(tr, "runtime.hero.subtitle")}
+      </p>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        {t(tr, "runtime.hero.desc")}
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+        <a
+          href="https://github.com/EMI-Group/evox"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 font-semibold text-white hover:text-teal-400 transition-colors"
+        >
+          {t(tr, "genesis.hero.github")} <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live examples: single-/multi-objective optimization, neuroevolution -->
+  <RuntimeExamples locale={locale} />
+</Layout>
