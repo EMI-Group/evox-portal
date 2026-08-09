@@ -1,43 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl, getLocalizedArticles } from "../../i18n/utils";
+// Redirect stub: docs moved to https://runtime.evox.group.
+// Slugs are hardcoded (getStaticPaths runs in an isolated scope, so they
+// must come from an import) because the content collection was removed.
+import { docSlugs } from "../../utils/movedSlugs";
 
-export async function getStaticPaths() {
-  const allDocs = await getCollection("docs");
-  const docs = getLocalizedArticles(allDocs, defaultLocale);
-  return docs.map((doc) => ({
-    params: { slug: doc.slug },
-    props: { doc },
+export function getStaticPaths() {
+  return docSlugs.map((slug) => ({
+    params: { slug },
   }));
 }
 
-const locale: Locale = defaultLocale;
-const tr = await loadTranslations(locale);
-
-const { doc } = Astro.props;
-// The page already renders the title as its <h1>; drop the duplicated
-// top-level heading from the markdown body.
-const bodyWithoutH1 = doc.body?.replace(/^\s*# [^\n]*\n/, "");
-const { Content } = await render({ ...doc, body: bodyWithoutH1 });
+return Astro.redirect(`https://runtime.evox.group/docs/${Astro.params.slug}`);
 ---
-
-<Layout title={doc.data.title} locale={locale}>
-  <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">{doc.data.title}</h1>
-    </div>
-  </div>
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white">
-    <div class="prose prose-lg prose-teal max-w-none news-content">
-      <Content />
-    </div>
-    <div class="mt-16 pt-8 border-t border-gray-100">
-      <a href={getLocalizedUrl("/docs", locale)} class="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium transition-colors group">
-        <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span>
-        {t(tr, "docs.backToDocs")}
-      </a>
-    </div>
-  </article>
-</Layout>

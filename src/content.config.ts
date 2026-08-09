@@ -18,23 +18,6 @@ const releases = defineCollection({
     schema: articleSchema,
 });
 
-const tutorials = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/tutorials" }),
-    schema: z.object({
-        title: z.string(),
-        order: z.number(),
-    }),
-});
-
-const docs = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/docs" }),
-    schema: z.object({
-        title: z.string(),
-        order: z.number(),
-        section: z.string(),
-    }),
-});
-
 const libs = defineCollection({
     loader: file("./src/content/libs.json"),
     schema: z.object({
@@ -45,4 +28,4 @@ const libs = defineCollection({
     })
 });
 
-export const collections = { news, releases, tutorials, docs, libs };
+export const collections = { news, releases, libs };

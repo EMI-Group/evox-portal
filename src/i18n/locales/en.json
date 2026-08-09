@@ -117,6 +117,10 @@
   "releases.pageInfo": "Page {current} of {total}",
   "releases.backToReleases": "Back to Releases",
 
+  "nav.runtime": "Runtime",
+  "runtime.heroTitle": "The Evolution Runtime",
+  "runtime.heroDesc": "Optimization examples, tutorials, and documentation for EvoX, all in one place.",
+  "runtime.metaDescription": "Explore EvoX optimization examples, step-by-step tutorials, and comprehensive documentation on the Runtime page.",
   "tutorials.pageTitle": "Tutorials | EvoX",
   "tutorials.heroTitle": "Tutorials",
   "tutorials.heroDesc": "Step-by-step guides to get started with EvoX and master evolutionary computation.",

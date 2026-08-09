@@ -122,6 +122,10 @@ const localizedUrls = locales.map((loc) => ({
   /* Smooth Scrolling */
   html {
     scroll-behavior: smooth;
+    /* Always reserve the scrollbar gutter, so hiding/restoring the
+       scrollbar (e.g. the homepage hero animation's scroll lock) never
+       shifts the layout horizontally */
+    scrollbar-gutter: stable;
   }
   html, body {
     overflow-x: hidden;
