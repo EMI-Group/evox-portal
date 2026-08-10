@@ -22,7 +22,7 @@ The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-c
 
 ## Design Decisions
 - **Content-first with article-first layout** (commit 18a23c5): each article is a directory with one `.md` per locale, enabling `getLocalizedArticles`/`findLocalizedArticle` English-driven enumeration with per-locale fallback.
-- **`prefixDefaultLocale: false`** ⇒ dual mirrored page trees (top-level English + `[locale]/`) that must be kept in sync manually — see `src/pages/CONTEXT.md`.
+- **`prefixDefaultLocale: false`** ⇒ dual mirrored page trees (top-level English + `[locale]/`) that must be kept in sync manually — see `docs/agent-context/src-pages/CONTEXT.md`.
 - Site design history: v3.0 redesign (commit 03c14b3) with animated navbar (View Transitions API, rAF-driven fly-in), later additions: Runtime/Genesis landing pages (8991303), QQ-group QR modal (6f50b78), Genesis nav tab now links externally to genesis.evox.group (e173eda — no `/genesis` route exists).
 
 ## Known Issues
