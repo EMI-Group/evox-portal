@@ -75,7 +75,7 @@ slug/paginated routes to generate per-locale combinations.
 - The 404 page is English-only with hardcoded copy — other locales fall back to it.
 
 ## Routing Table
-- `[locale]/` → Localized mirror tree for all 12 non-default locales (see its own CONTEXT.md)
+- `[locale]/` → Localized mirror tree for all 12 non-default locales (see `../src-pages-locale/CONTEXT.md`)
 - `../i18n/utils.ts` → Locale helpers (`getLocalizedUrl`, `getLocaleFromUrl`, `getLocalizedArticles`, `getLocalizedNews`, `loadTranslations`, `t`, `locales`, `defaultLocale`) — sibling, read-only, escalate writes to `../`
 - `../content.config.ts` → Content collections (news, releases, tutorials, docs, libs) consumed by `getStaticPaths` — sibling, read-only
 - `../types/pagination.ts` → `PaginateFunction` / `PaginatedPage` types — sibling, read-only
