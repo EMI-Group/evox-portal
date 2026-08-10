@@ -41,11 +41,11 @@ const ecosystem = allLibs.slice(0, 3);
 ---
 
 <Layout title={t(tr, "site.title")} hideHeader hideFooter locale={locale}>
-  <!-- ========== Navbar (starts at bottom, flies to top) ========== -->
+  <!-- ========== Navbar (starts above the viewport, flies down into place) ========== -->
   <div
     id="navbar"
     class="fixed left-0 right-0 top-0"
-    style="z-index: 50; transform: translateY(100vh);"
+    style="z-index: 50; transform: translateY(-100%);"
   >
     <Header animated locale={locale} />
   </div>
@@ -383,24 +383,6 @@ const ecosystem = allLibs.slice(0, 3);
     function smooth(t: number) {
       return t * t * (3 - 2 * t);
     }
-    // Cubic Hermite segment: s ∈ [0,1], seg = duration, m0/m1 = end velocities
-    function hermite(
-      s: number,
-      seg: number,
-      u0: number,
-      u1: number,
-      m0: number,
-      m1: number,
-    ) {
-      const s2 = s * s;
-      const s3 = s2 * s;
-      return (
-        (2 * s3 - 3 * s2 + 1) * u0 +
-        (s3 - 2 * s2 + s) * seg * m0 +
-        (-2 * s3 + 3 * s2) * u1 +
-        (s3 - s2) * seg * m1
-      );
-    }
 
     let expandCallback: (() => void) | null = null;
     let pendingAnchor: HTMLElement | null = null;
@@ -438,8 +420,9 @@ const ecosystem = allLibs.slice(0, 3);
       const logoEndY = navLogoRect.top;
       const logoEndW = navLogoRect.width;
       const logoEndH = navLogoRect.height;
-      navbarEl.style.transform = `translateY(${window.innerHeight}px)`;
+      navbarEl.style.transform = "translateY(-100%)";
       navbarEl.offsetHeight;
+      const navbarH = navbarEl.offsetHeight;
 
       // Clone logo for flying
       const flyLogo = heroLogoImg.cloneNode(true) as HTMLImageElement;
@@ -449,26 +432,24 @@ const ecosystem = allLibs.slice(0, 3);
       document.body.appendChild(flyLogo);
       heroLogoImg.style.visibility = "hidden";
 
-      // Choreography, all driven by the navbar's rising top edge:
-      // 1. The navbar rises from the bottom until its top edge touches the
-      //    hero logo's bottom edge (contactY) — the logo waits in place.
-      // 2. They then rise together at the same speed, the logo's bottom
-      //    glued to the navbar's top edge, while the logo shrinks and moves
-      //    left; both complete exactly when the logo reaches its final spot
-      //    (dockY = logoEndY + logoEndH).
-      // 3. The navbar rises one more logo-height to its final position while
-      //    the logo stays parked, then the flyLogo hands off to navbarLogo.
-      const vh = window.innerHeight;
-      const contactY = logoStartY + logoH;
-      const dockY = logoEndY + logoEndH;
-      // Distance-proportional durations: the pre-contact rise averages about
-      // twice the speed of the post-contact carry. The two segments share the
-      // same velocity at the contact instant (junctionV), so the deceleration
-      // is continuous and no speed switch is perceptible.
-      const riseMs = Math.min(Math.max((vh - contactY) / 0.5, 500), 2000);
-      const carryMs = Math.min(Math.max(contactY / 0.25, 1400), 3600);
-      const durationMs = riseMs + carryMs;
-      const junctionV = (1.5 * contactY) / carryMs;
+      // Choreography (decoupled):
+      // 1. The navbar slides down from above the viewport (translateY(-100%))
+      //    into place (translateY(0)) over a short, snappy duration.
+      // 2. Meanwhile the flyLogo morphs independently from the hero spot to
+      //    its final spot inside the navbar over a longer, eased duration.
+      // 3. Both run on the same timeline (the navbar simply arrives first and
+      //    waits), then the flyLogo hands off to the navbar logo.
+      // Durations are distance-proportional so the overall feel stays
+      // comparable to the old bottom-rise (~0.5–5.6 s total). The flight
+      // duration uses the absolute vertical delta — if expand() runs while
+      // the page is scrolled (hero logo partially or fully off-screen) the
+      // morph still animates cleanly from the measured start spot.
+      const slideMs = Math.min(Math.max(navbarH / 0.5, 250), 600);
+      const flyMs = Math.min(
+        Math.max(Math.abs(logoEndY - logoStartY) / 0.25, 1400),
+        3600,
+      );
+      const durationMs = flyMs;
 
       const startTime = performance.now();
 
@@ -476,25 +457,21 @@ const ecosystem = allLibs.slice(0, 3);
         const elapsed = now - startTime;
         const rawT = Math.min(elapsed / durationMs, 1);
 
-        // Distance risen so far: brisk Hermite segment until contact, gentle
-        // segment after; both meet at junctionV, so velocity is continuous
-        const risen =
-          elapsed < riseMs
-            ? hermite(elapsed / riseMs, riseMs, 0, vh - contactY, 0, junctionV)
-            : hermite(
-                (elapsed - riseMs) / carryMs,
-                carryMs,
-                vh - contactY,
-                vh,
-                junctionV,
-                0,
-              );
-        const navbarY = vh - risen;
-        navbarEl.style.transform = `translateY(${navbarY}px)`;
+        // Navbar: slides down from above the viewport into its final place
+        const slideP = Math.min(elapsed / slideMs, 1);
+        navbarEl.style.transform = `translateY(${
+          -navbarH * (1 - smooth(slideP))
+        }px)`;
 
-        // Post-contact progress for the surrounding elements (hero collapse,
-        // CTA fade-in, gradient, scroll indicator), spanning phases 2 and 3
-        const pAll = Math.min(Math.max((contactY - navbarY) / contactY, 0), 1);
+        // flyLogo: eased morph from the hero spot to its final navbar spot.
+        // The same eased progress drives the surrounding elements (hero
+        // collapse, CTA fade-in, gradient, scroll indicator), so they all
+        // finish exactly when the logo lands.
+        const pAll = smooth(rawT);
+        flyLogo.style.left = `${logoStartX + (logoEndX - logoStartX) * pAll}px`;
+        flyLogo.style.top = `${logoStartY + (logoEndY - logoStartY) * pAll}px`;
+        flyLogo.style.width = `${logoW + (logoEndW - logoW) * pAll}px`;
+        flyLogo.style.height = `${logoH + (logoEndH - logoH) * pAll}px`;
 
         heroSectionEl.style.minHeight = `${100 - 40 * pAll}vh`;
         if (heroGradient) heroGradient.style.opacity = `${1 - 0.7 * pAll}`;
@@ -508,34 +485,6 @@ const ecosystem = allLibs.slice(0, 3);
         if (scrollIndicator) {
           scrollIndicator.style.opacity = `${1 - pAll}`;
           if (pAll > 0) scrollIndicator.style.pointerEvents = "none";
-        }
-
-        if (navbarY >= contactY) {
-          // Phase 1: the logo waits at its hero spot until the navbar's top
-          // edge reaches its bottom edge
-          flyLogo.style.left = `${logoStartX}px`;
-          flyLogo.style.top = `${logoStartY}px`;
-          flyLogo.style.width = `${logoW}px`;
-          flyLogo.style.height = `${logoH}px`;
-        } else if (navbarY >= dockY) {
-          // Phase 2: the logo rides the navbar's top edge (bottom glued to
-          // it) while shrinking and sliding left — position and size both
-          // complete exactly when the logo reaches its final spot
-          const p = smooth((contactY - navbarY) / (contactY - dockY));
-          const curW = logoW + (logoEndW - logoW) * p;
-          const curH = logoH + (logoEndH - logoH) * p;
-          const curX = logoStartX + (logoEndX - logoStartX) * p;
-          flyLogo.style.left = `${curX}px`;
-          flyLogo.style.top = `${navbarY - curH}px`;
-          flyLogo.style.width = `${curW}px`;
-          flyLogo.style.height = `${curH}px`;
-        } else {
-          // Phase 3: the logo is parked at its final spot while the navbar
-          // rises the last logo-height underneath it
-          flyLogo.style.left = `${logoEndX}px`;
-          flyLogo.style.top = `${logoEndY}px`;
-          flyLogo.style.width = `${logoEndW}px`;
-          flyLogo.style.height = `${logoEndH}px`;
         }
 
         if (rawT < 1) {
