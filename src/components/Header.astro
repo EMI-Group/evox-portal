@@ -96,7 +96,7 @@ const navLinks: {
       <div class="flex-shrink-0">
         <a
           href={getLocalizedUrl("/", locale)}
-          class="flex items-center"
+          class="flex items-center gap-1"
           aria-label="EvoX"
           id={sticky ? "nav-logo-group" : undefined}
           style={
@@ -117,7 +117,11 @@ const navLinks: {
             class="h-10"
             data-logo-mark
             id={sticky ? "nav-logo" : undefined}
-            style={animated ? "opacity: 0;" : undefined}
+            style={
+              animated
+                ? "opacity: 0; transition: opacity 0.15s ease-out;"
+                : undefined
+            }
           />
         </a>
       </div>

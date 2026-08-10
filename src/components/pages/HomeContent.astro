@@ -380,8 +380,11 @@ const ecosystem = allLibs.slice(0, 3);
       window.removeEventListener("touchmove", preventScroll);
     }
 
-    function smooth(t: number) {
-      return t * t * (3 - 2 * t);
+    // Ease-out cubic: fast start, soft landing (~cubic-bezier(0.215, 0.61, 0.355, 1)).
+    // Applied to both the navbar slide and the logo flight so the motion
+    // reads as one natural gesture instead of a slow-fast-slow float.
+    function easeOutCubic(t: number) {
+      return 1 - Math.pow(1 - t, 3);
     }
 
     let expandCallback: (() => void) | null = null;
@@ -424,13 +427,23 @@ const ecosystem = allLibs.slice(0, 3);
       navbarEl.offsetHeight;
       const navbarH = navbarEl.offsetHeight;
 
-      // Clone logo for flying
+      // Clone logo for flying. The clone pins the hero logo's exact size and
+      // position ONCE (fixed, transform-origin 0 0) and is then morphed with
+      // a pure translate + uniform-scale transform every frame — the browser
+      // composites it without per-frame layout work. The hero logo and the
+      // navbar mark are the same /logo.svg with only different heights, so a
+      // uniform scale maps every point of the start rect exactly onto the end
+      // rect (no snap when the logo lands).
       const flyLogo = heroLogoImg.cloneNode(true) as HTMLImageElement;
       flyLogo.id = "";
       flyLogo.className = "";
-      flyLogo.style.cssText = `position:fixed;left:${logoStartX}px;top:${logoStartY}px;width:${logoW}px;height:${logoH}px;z-index:60;pointer-events:none;margin:0;padding:0;`;
+      flyLogo.style.cssText = `position:fixed;left:${logoStartX}px;top:${logoStartY}px;width:${logoW}px;height:${logoH}px;transform-origin:0 0;will-change:transform;z-index:60;pointer-events:none;margin:0;padding:0;`;
       document.body.appendChild(flyLogo);
       heroLogoImg.style.visibility = "hidden";
+
+      const flyDx = logoEndX - logoStartX;
+      const flyDy = logoEndY - logoStartY;
+      const flyScale = logoW > 0 ? logoEndW / logoW : 1;
 
       // Choreography (decoupled):
       // 1. The navbar slides down from above the viewport (translateY(-100%))
@@ -460,18 +473,17 @@ const ecosystem = allLibs.slice(0, 3);
         // Navbar: slides down from above the viewport into its final place
         const slideP = Math.min(elapsed / slideMs, 1);
         navbarEl.style.transform = `translateY(${
-          -navbarH * (1 - smooth(slideP))
+          -navbarH * (1 - easeOutCubic(slideP))
         }px)`;
 
-        // flyLogo: eased morph from the hero spot to its final navbar spot.
-        // The same eased progress drives the surrounding elements (hero
-        // collapse, CTA fade-in, gradient, scroll indicator), so they all
-        // finish exactly when the logo lands.
-        const pAll = smooth(rawT);
-        flyLogo.style.left = `${logoStartX + (logoEndX - logoStartX) * pAll}px`;
-        flyLogo.style.top = `${logoStartY + (logoEndY - logoStartY) * pAll}px`;
-        flyLogo.style.width = `${logoW + (logoEndW - logoW) * pAll}px`;
-        flyLogo.style.height = `${logoH + (logoEndH - logoH) * pAll}px`;
+        // flyLogo: eased transform morph from the hero spot to its final
+        // navbar spot — only `transform` changes per frame (translate +
+        // uniform scale), never left/top/width/height. The same eased
+        // progress drives the surrounding elements (hero collapse, CTA
+        // fade-in, gradient, scroll indicator), so they all finish exactly
+        // when the logo lands.
+        const pAll = easeOutCubic(rawT);
+        flyLogo.style.transform = `translate(${flyDx * pAll}px, ${flyDy * pAll}px) scale(${1 + (flyScale - 1) * pAll})`;
 
         heroSectionEl.style.minHeight = `${100 - 40 * pAll}vh`;
         if (heroGradient) heroGradient.style.opacity = `${1 - 0.7 * pAll}`;
@@ -492,11 +504,9 @@ const ecosystem = allLibs.slice(0, 3);
         } else {
           // Ensure navbar is at final position
           navbarEl.style.transform = "translateY(0)";
-          // Place flyLogo exactly at navbarLogo position
-          flyLogo.style.left = `${logoEndX}px`;
-          flyLogo.style.top = `${logoEndY}px`;
-          flyLogo.style.width = `${logoEndW}px`;
-          flyLogo.style.height = `${logoEndH}px`;
+          // Pin the flyLogo to the exact end rect — at pAll = 1 the transform
+          // already equals translate(dx, dy) scale(S), so this is pixel-exact.
+          flyLogo.style.transform = `translate(${flyDx}px, ${flyDy}px) scale(${flyScale})`;
           // The animation is visually done — release the scroll lock and
           // listeners now instead of holding the page hostage. Only the
           // flyLogo → navbarLogo handoff waits for a frame to settle.
