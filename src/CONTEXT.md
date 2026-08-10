@@ -27,6 +27,7 @@ All source code for the **EvoX Portal**: an Astro 6 static, content-first market
 - Tailwind v4 CSS-first configuration via `@tailwindcss/vite` plugin in `astro.config.mjs`; icons via `astro-icon` (Heroicons + Simple Icons).
 
 ## Known Issues
+- **No CONTEXT.md under `src/pages/` — ever** (moved to `docs/agent-context/` in 74800d8): Astro 6 treats every `.md` in `src/pages/` as a page route, so a `CONTEXT.md` there breaks `pnpm build` (`src/pages/[locale]/CONTEXT.md` errors with "getStaticPaths() required"; `src/pages/CONTEXT.md` would deploy a stray `/CONTEXT` page). If you ever see one reappear, move it out and fix the build.
 - **README.md at repo root is outdated** (references Astro 5 and a `blogs/` + `libs.json` structure that no longer matches the article-first layout).
 - Content gotchas (UTF-8 BOM in evogm/evogp news files, `iStratDE` vs `istratde` case mismatch, mixed `./relative` vs `/_static/` image references) — see `content/CONTEXT.md`.
 - `Layout.astro` `pt-br`/`zh-tw` htmlLang mapping and hreflang/OG locale maps must stay consistent with `i18n/utils.ts` locale lists (three places define locale metadata).
