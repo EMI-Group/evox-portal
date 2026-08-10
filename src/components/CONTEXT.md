@@ -36,7 +36,7 @@ Shared site chrome (Header, Footer) plus page-body content components. Header/Fo
 No dedicated component tests in this repo (static site). Verify per-locale rendering by building with all 13 locales (`npm run build`); manually check: header dropdowns (hover/click/keyboard/Escape), language switcher links + query/hash preservation, hero animation (wheel/touch/click/keyboard, reduced-motion), QQ modal (open/close/Escape), example tab carousel (auto-advance, click, arrow keys, plot-not-ready fallback).
 
 ## Routing Table
-- `pages/` → Page-body content components (HomeContent, RuntimeContent, RuntimeExamples) — detailed docs in `pages/CONTEXT.md`.
+- `pages/` → Page-body content components (HomeContent, RuntimeContent, RuntimeExamples) — detailed docs in `docs/agent-context/src-pages/CONTEXT.md`.
 - `../layouts/Layout.astro` → Renders Header/Footer around a slot; `hideHeader`/`hideFooter` props (sibling — read-only, escalate writes to parent `src/`).
 - `../i18n/utils.ts` → `loadTranslations`, `t`, `getLocalizedUrl`, `localeNames`, `getLocalizedNews/Articles`, `getDateLocale` (sibling — read-only, escalate writes to parent `src/`).
 - `../content/examples/` → Interactive example components + raw `.py` sources consumed by RuntimeExamples (sibling — read-only, escalate writes to parent `src/`).
