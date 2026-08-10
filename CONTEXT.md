@@ -26,6 +26,7 @@ The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-c
 - Site design history: v3.0 redesign (commit 03c14b3) with animated navbar (View Transitions API, rAF-driven fly-in), later additions: Runtime/Genesis landing pages (8991303), QQ-group QR modal (6f50b78), Genesis nav tab now links externally to genesis.evox.group (e173eda — no `/genesis` route exists).
 
 ## Known Issues
+- **Never create CONTEXT.md files under `src/pages/`** (or any `.md` there that is not a real page): Astro 6 treats every `.md` in `src/pages/` as a route. `src/pages/[locale]/CONTEXT.md` hard-breaks `pnpm build` with a "getStaticPaths() required" error, and `src/pages/CONTEXT.md` would deploy a stray `/CONTEXT` page. The pages-subtree agent docs were relocated to `docs/agent-context/` (commit 74800d8) — keep them there.
 - `README.md` project-structure section is stale relative to the actual `src/` layout.
 - Locale metadata (htmlLang/hreflang/OG maps) is duplicated in `src/layouts/Layout.astro` and `src/i18n/utils.ts` — keep in sync.
 - Some non-English locale values are byte-identical to English (mostly intentional brand names; a few genuine gaps — see `src/i18n/CONTEXT.md`).
