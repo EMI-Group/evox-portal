@@ -57,7 +57,7 @@
   "community.qq.close": "Fermer",
   "nav.genesis": "Genesis",
   "nav.genesis.badge": "NEW",
-  "nav.runtime.overview": "Aperçu de Runtime",
+  "nav.runtime.overview": "Aperçu",
   "nav.runtime.overview.desc": "Aperçu du produit et exemples en direct",
   "runtime.pageTitle": "EvoX Runtime — Calcul évolutionnaire accéléré par GPU",
   "runtime.hero.badge": "Open Source · Accéléré par GPU",

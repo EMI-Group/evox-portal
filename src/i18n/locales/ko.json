@@ -57,7 +57,7 @@
   "community.qq.close": "닫기",
   "nav.genesis": "Genesis",
   "nav.genesis.badge": "NEW",
-  "nav.runtime.overview": "Runtime 개요",
+  "nav.runtime.overview": "개요",
   "nav.runtime.overview.desc": "제품 개요 및 라이브 예제",
   "runtime.pageTitle": "EvoX Runtime — GPU 가속 진화 연산 프레임워크",
   "runtime.hero.badge": "오픈 소스 · GPU 가속",

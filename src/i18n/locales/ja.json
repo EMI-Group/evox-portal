@@ -57,7 +57,7 @@
   "community.qq.close": "閉じる",
   "nav.genesis": "Genesis",
   "nav.genesis.badge": "NEW",
-  "nav.runtime.overview": "Runtime 概要",
+  "nav.runtime.overview": "概要",
   "nav.runtime.overview.desc": "製品概要とライブデモ",
   "runtime.pageTitle": "EvoX Runtime — GPU 加速進化計算フレームワーク",
   "runtime.hero.badge": "オープンソース · GPU 加速",

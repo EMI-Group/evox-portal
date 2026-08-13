@@ -57,7 +57,7 @@
   "community.qq.close": "关闭",
   "nav.genesis": "天演·启元",
   "nav.genesis.badge": "NEW",
-  "nav.runtime.overview": "Runtime 概览",
+  "nav.runtime.overview": "概览",
   "nav.runtime.overview.desc": "产品介绍与示例",
   "runtime.pageTitle": "EvoX Runtime — GPU 加速的进化计算框架",
   "runtime.hero.badge": "开源 · GPU 加速",
