@@ -14,7 +14,11 @@ EvoX Genesis不再依赖持续存在的Agent来维持长程开发，而是让软
 
 从空仓库出发，系统在123.4小时内构建出**248,989行C编译器**，经历1,019个Agent episode，模型token成本仅为**44.38美元**。
 
+<center>
+
 ## 长程编程，边界正在出现
+
+</center>
 
 Coding Agent的工作时间，已经从一次短任务延伸到数十小时。
 
@@ -34,7 +38,11 @@ Anthropic则用16个Claude Agent，经过近2,000个sessions、约两周和接�
 
 如果真正需要持续的，是它所在的软件世界呢？
 
+<center>
+
 ## 123.4小时，25万行
+
+</center>
 
 我们让EvoX Genesis从一个实现为空的仓库开始。
 
@@ -48,11 +56,23 @@ Anthropic则用16个Claude Agent，经过近2,000个sessions、约两周和接�
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _图1：C 编译器实验结果图 /代码规模、运行时间、Agent episodes、成本与测试结果_
+
+</center>
+
+<center>
 
 _（使用DeepSeek V4 Flash模型）_
 
+</center>
+
+<center>
+
 ## 不让 Agent 持续，让软件世界持续
+
+</center>
 
 复杂软件的生命，天然比一次Agent会话更长。
 
@@ -86,9 +106,17 @@ EvoX Genesis将软件组织成一个不断递归展开的软件世界：
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _图2：Persistent Recursive World 概念图 / Agent 出生、行动、消失；软件世界持续展开_
 
+</center>
+
+<center>
+
 ## 模型可以换，软件世界继续
+
+</center>
 
 这种连续性甚至不要求始终使用同一个模型。
 
@@ -100,9 +128,17 @@ _图2：Persistent Recursive World 概念图 / Agent 出生、行动、消失；
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _图3：GLM 5.2 → DeepSeek V4 Flash 的跨模型延续实验_
 
+</center>
+
+<center>
+
 ## 从无到有，也可以继承历史
+
+</center>
 
 从零构建只是软件生命周期的一端；
 
@@ -118,9 +154,17 @@ EvoX Genesis将其重构为对应的Rust crates，模型token成本约**10.6美�
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _图4：MESA Fortran → Rust，13 个模块、139,414 行代码、10.6美元_
 
+</center>
+
+<center>
+
 ## 成本优势，也会随时间积累
+
+</center>
 
 长程软件开发并不意味着成本持续线性增长。
 
@@ -130,7 +174,11 @@ _图4：MESA Fortran → Rust，13 个模块、139,414 行代码、10.6美元_
 
 这是一种随时间积累的工程复利。
 
+<center>
+
 ## EvoX Genesis 已经开源
+
+</center>
 
 项目已经开源，并提供Windows、macOS和 Linux安装版本。
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **Agent 会离开，软件世界继续发展**
 
 **EvoX Genesis，天演·启元**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>QQ交流群｜</strong>演化机器智能</center>
 
 参考：
 

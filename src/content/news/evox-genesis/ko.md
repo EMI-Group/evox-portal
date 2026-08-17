@@ -14,7 +14,11 @@ EvoX Genesis는 더 이상 지속적으로 존재하는 agent에 의존해 장�
 
 빈 저장소에서 출발한 이 시스템은 123.4시간 동안 1,019개의 agent episode에 걸쳐 **248,989줄짜리 C 컴파일러**를 구축했으며, 모델 token 비용은 단 **44.38달러**였습니다.
 
+<center>
+
 ## 장기 코딩: 경계는 계속 확장되고 있습니다
+
+</center>
 
 코딩 agent의 작업 시간은 한 번의 짧은 작업에서 수십 시간 단위로 늘어났습니다.
 
@@ -34,7 +38,11 @@ Anthropic은 16개의 Claude agent를 사용해, 약 2,000개의 세션과 약 2
 
 정작 지속되어야 하는 것이, agent가 살아 있는 소프트웨어 세계라면 어떨까요?
 
+<center>
+
 ## 123.4시간, 25만 줄
+
+</center>
 
 우리는 EvoX Genesis가 구현이 완전히 비어 있는 저장소에서 시작하게 했습니다.
 
@@ -48,11 +56,23 @@ Anthropic은 16개의 Claude agent를 사용해, 약 2,000개의 세션과 약 2
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _그림 1: C 컴파일러 실험 결과 / 코드 규모, 실행 시간, agent episode 수, 비용, 테스트 결과_
+
+</center>
+
+<center>
 
 _(DeepSeek V4 Flash 모델 사용)_
 
+</center>
+
+<center>
+
 ## agent를 계속 살려두지 말고, 소프트웨어 세계를 살려두세요
+
+</center>
 
 복잡한 소프트웨어의 수명은 본질적으로 단일 agent 세션보다 깁니다.
 
@@ -86,9 +106,17 @@ agent, 역할, 워크플로를 미리 설계할 필요도, 완전한 작업 트�
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _그림 2: Persistent Recursive World 개념도 / agent는 태어나고, 행동하고, 사라집니다; 소프트웨어 세계는 계속 전개됩니다_
 
+</center>
+
+<center>
+
 ## 모델은 바뀌어도, 소프트웨어 세계는 계속됩니다
+
+</center>
 
 이러한 연속성은 처음부터 끝까지 같은 모델을 사용할 것을 요구하지 않습니다.
 
@@ -100,9 +128,17 @@ _그림 2: Persistent Recursive World 개념도 / agent는 태어나고, 행동�
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _그림 3: 모델 간 이어가기 실험, GLM 5.2 → DeepSeek V4 Flash_
 
+</center>
+
+<center>
+
 ## 처음부터 시작하거나, 역사를 이어받거나
+
+</center>
 
 완전히 처음부터 구축하는 것은 소프트웨어 생명주기의 한쪽 끝일 뿐입니다;
 
@@ -118,9 +154,17 @@ EvoX Genesis는 이를 대응하는 Rust crates로 리팩터링했으며, 모델
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _그림 4: MESA Fortran → Rust, 13개 모듈, 139,414줄의 코드, 10.6달러_
 
+</center>
+
+<center>
+
 ## 비용 이점은 시간이 지날수록 복리로 쌓입니다
+
+</center>
 
 장기 소프트웨어 개발이 비용이 계속 선형적으로 늘어난다는 것을 의미하지는 않습니다.
 
@@ -130,7 +174,11 @@ EvoX Genesis에서는 검증된 코드, 구조, 개발 역사가 계속 축적�
 
 이것이 시간이 지나며 축적되는 엔지니어링 복리입니다.
 
+<center>
+
 ## EvoX Genesis가 오픈소스로 공개되었습니다
+
+</center>
 
 프로젝트는 오픈소스로 공개되었으며, Windows, macOS, Linux용 설치 패키지를 제공합니다.
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **Agent는 떠나지만, 소프트웨어 세계는 계속 진화합니다**
 
 **EvoX Genesis**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>QQ 그룹｜</strong>Evolutionary Machine Intelligence</center>
 
 참고 자료:
 

@@ -14,7 +14,11 @@ EvoX Genesis 不再依賴持續存在的 Agent 來維持長程開發，而是讓
 
 從空白儲存庫出發，系統在 123.4 小時內建構出**248,989 行的 C 編譯器**，歷經 1,019 個 Agent episode，模型 token 成本僅為**44.38 美元**。
 
+<center>
+
 ## 長程 Coding：邊界不斷推進
+
+</center>
 
 Coding Agent 的工作時間，已經從單次的短任務，延長到數十小時。
 
@@ -34,7 +38,11 @@ Anthropic 則動用 16 個 Claude Agent，歷經近 2,000 個 session、約兩�
 
 如果真正需要持續存在的，是它所身處的軟體世界呢？
 
+<center>
+
 ## 123.4 小時，25 萬行
+
+</center>
 
 我們讓 EvoX Genesis 從一個實作為空的儲存庫開始。
 
@@ -48,11 +56,23 @@ Anthropic 則動用 16 個 Claude Agent，歷經近 2,000 個 session、約兩�
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _圖1：C 編譯器實驗結果 / 程式碼規模、執行時間、Agent episodes、成本與測試結果_
+
+</center>
+
+<center>
 
 _（使用 DeepSeek V4 Flash 模型）_
 
+</center>
+
+<center>
+
 ## 不是讓 Agent 持續存活，而是讓軟體世界持續存活
+
+</center>
 
 複雜軟體的生命，天生就比單次 Agent 工作階段更長。
 
@@ -86,9 +106,17 @@ EvoX Genesis 將軟體組織成一個不斷遞迴展開的軟體世界：
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _圖2：Persistent Recursive World 概念圖 / Agent 誕生、行動、消失；軟體世界持續展開_
 
+</center>
+
+<center>
+
 ## 模型可以替換，軟體世界繼續
+
+</center>
 
 這種連續性甚至不要求從頭到尾使用同一個模型。
 
@@ -100,9 +128,17 @@ _圖2：Persistent Recursive World 概念圖 / Agent 誕生、行動、消失；
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _圖3：GLM 5.2 → DeepSeek V4 Flash 的跨模型接續實驗_
 
+</center>
+
+<center>
+
 ## 從無到有，或繼承歷史
+
+</center>
 
 從零打造只是軟體生命週期的一端；
 
@@ -118,9 +154,17 @@ EvoX Genesis 將它們重構為對應的 Rust crates，模型 token 成本約**1
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _圖4：MESA Fortran → Rust，13 個模組、139,414 行程式碼、10.6 美元_
 
+</center>
+
+<center>
+
 ## 成本優勢，也會隨時間複利累積
+
+</center>
 
 長程軟體開發並不意味著成本會持續線性增長。
 
@@ -130,7 +174,11 @@ _圖4：MESA Fortran → Rust，13 個模組、139,414 行程式碼、10.6 美�
 
 這是一種隨時間不斷累積的工程複利。
 
+<center>
+
 ## EvoX Genesis 現已開源
+
+</center>
 
 專案已開放原始碼，並提供 Windows、macOS 與 Linux 的安裝包。
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **Agent 會離開，軟體世界持續演化**
 
 **EvoX Genesis，天演·啟元**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>QQ交流群組｜</strong>演化機器智能</center>
 
 參考文獻：
 

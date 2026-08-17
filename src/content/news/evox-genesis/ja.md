@@ -14,7 +14,11 @@ EvoX Genesisは、長期にわたる開発を維持するために永続的なag
 
 空のリポジトリから出発し、システムは123.4時間、1,019回のagentエピソードを経て**248,989行のC compiler**を構築し、モデルのtokenコストはわずか**44.38ドル**でした。
 
+<center>
+
 ## ロングホライズン・コーディング：境界は拡大し続ける
+
+</center>
 
 コーディングagentの稼働時間は、単発の短いタスクから数時間単位へと拡大してきました。
 
@@ -34,7 +38,11 @@ Anthropicは16体のClaude agentを使い、約2,000回のセッション、約2
 
 本当に永続すべきなのは、agentが生きているソフトウェア世界そのものではないでしょうか。
 
+<center>
+
 ## 123.4時間、25万行
+
+</center>
 
 私たちはEvoX Genesisを、実装が空のリポジトリからスタートさせました。
 
@@ -48,11 +56,23 @@ Anthropicは16体のClaude agentを使い、約2,000回のセッション、約2
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _図1：C compilerの実験結果／コード規模、実行時間、agentエピソード数、コスト、テスト結果_
+
+</center>
+
+<center>
 
 _（DeepSeek V4 Flashモデル使用）_
 
+</center>
+
+<center>
+
 ## agentを生かし続けるのではなく、ソフトウェア世界を生かし続ける
+
+</center>
 
 複雑なソフトウェアの寿命は、当然ながら単一のagentセッションより長くなります。
 
@@ -86,9 +106,17 @@ agent、役割、ワークフローを事前に設計する必要も、完全な
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _図2：Persistent Recursive Worldの概念／agentは生まれ、行動し、消えていく。ソフトウェア世界は展開を続ける_
 
+</center>
+
+<center>
+
 ## モデルは交換できる。ソフトウェア世界は続く
+
+</center>
 
 この連続性は、同じモデルを最後まで使い続けることすら要求しません。
 
@@ -100,9 +128,17 @@ _図2：Persistent Recursive Worldの概念／agentは生まれ、行動し、�
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _図3：モデルをまたぐ継続実験、GLM 5.2 → DeepSeek V4 Flash_
 
+</center>
+
+<center>
+
 ## ゼロから作るか、歴史を継承するか
+
+</center>
 
 ゼロからの構築は、ソフトウェアライフサイクルの一端にすぎません。
 
@@ -118,9 +154,17 @@ EvoX Genesisはこれらを対応するRustクレートへとリファクタリ�
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _図4：MESA Fortran → Rust、13モジュール、139,414行のコード、10.6ドル_
 
+</center>
+
+<center>
+
 ## コスト面の優位性は時間とともに複利的に積み重なる
+
+</center>
 
 長期間のソフトウェア開発だからといって、コストが線形に増え続けるわけではありません。
 
@@ -130,7 +174,11 @@ EvoX Genesisでは、検証済みのコード、構造、開発履歴が蓄積�
 
 これは、時間とともに積み重なるエンジニアリングの複利です。
 
+<center>
+
 ## EvoX Genesisがオープンソース化
+
+</center>
 
 プロジェクトはオープンソースで、Windows、macOS、Linux向けのインストールパッケージが提供されています。
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **agentは去っても、ソフトウェア世界は進化し続ける**
 
 **EvoX Genesis**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>QQグループ｜</strong>演化机器智能</center>
 
 参考文献：
 

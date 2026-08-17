@@ -14,7 +14,11 @@ O EvoX Genesis já não depende de um agente persistente para sustentar o desenv
 
 Partindo de um repositório vazio, o sistema construiu um **compilador de C com 248 989 linhas** em 123,4 horas, ao longo de 1 019 episódios de agente, com um custo em tokens do modelo de apenas **44,38 dólares**.
 
+<center>
+
 ## Programação de Longo Prazo: A Fronteira Continua a Deslocar-se
+
+</center>
 
 O tempo de trabalho dos agentes de programação cresceu de tarefas curtas e pontuais para dezenas de horas.
 
@@ -34,7 +38,11 @@ modelos mais fortes, contextos mais longos, memória mais persistente, mais agen
 
 E se o que verdadeiramente precisa de persistir for o mundo do software em que ele vive?
 
+<center>
+
 ## 123,4 Horas, 250 Mil Linhas
+
+</center>
 
 Deixámos o EvoX Genesis começar a partir de um repositório com uma implementação vazia.
 
@@ -48,11 +56,23 @@ Não havia ali nenhum compilador existente à espera de ser completado — **com
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _Figura 1: Resultados da experiência com o compilador de C / dimensão do código, tempo de execução, episódios de agente, custo e resultados dos testes_
+
+</center>
+
+<center>
 
 _(a utilizar o modelo DeepSeek V4 Flash)_
 
+</center>
+
+<center>
+
 ## Não Mantenha o Agente Vivo — Mantenha Vivo o Mundo do Software
+
+</center>
 
 A vida do software complexo é naturalmente mais longa do que uma única sessão de agente.
 
@@ -86,9 +106,17 @@ a forma como as tarefas são decompostas, como os agentes são gerados, como a r
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _Figura 2: O conceito de Persistent Recursive World / os agentes nascem, atuam e desaparecem; o mundo do software continua a desdobrar-se_
 
+</center>
+
+<center>
+
 ## Os Modelos Podem Ser Substituídos; o Mundo do Software Continua
+
+</center>
 
 Esta continuidade nem sequer exige a utilização do mesmo modelo do início ao fim.
 
@@ -100,9 +128,17 @@ Os modelos podem ser substituídos, os agentes podem ser substituídos — o mun
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _Figura 3: A experiência de continuação entre modelos, GLM 5.2 → DeepSeek V4 Flash_
 
+</center>
+
+<center>
+
 ## Do Zero, ou Herdando o Histórico
+
+</center>
 
 Construir do zero é apenas uma das pontas do ciclo de vida do software;
 
@@ -118,9 +154,17 @@ Um mundo de software pode ser criado do nada, ou pode herdar o histórico e cont
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _Figura 4: MESA Fortran → Rust, 13 módulos, 139 414 linhas de código, 10,6 dólares_
 
+</center>
+
+<center>
+
 ## As Vantagens de Custo Composto-se ao Longo do Tempo
+
+</center>
 
 O desenvolvimento de software de longo prazo não significa que os custos cresçam linearmente.
 
@@ -130,7 +174,11 @@ No EvoX Genesis, o código verificado, a estrutura e o histórico de desenvolvim
 
 Isto é juro composto de engenharia que se acumula ao longo do tempo.
 
+<center>
+
 ## O EvoX Genesis É Agora de Código Aberto
+
+</center>
 
 O projeto é de código aberto, com pacotes de instalação disponíveis para Windows, macOS e Linux.
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **Os agentes partem; o mundo do software continua a evoluir**
 
 **EvoX Genesis**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>Grupo de QQ｜</strong>Evolutionary Machine Intelligence</center>
 
 Referências:
 

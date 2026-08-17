@@ -14,7 +14,11 @@ EvoX Genesis no longer relies on a persistent agent to sustain long-horizon deve
 
 Starting from an empty repository, the system built a **248,989-line C compiler** in 123.4 hours, across 1,019 agent episodes, with a model token cost of just **$44.38**.
 
+<center>
+
 ## Long-Horizon Coding: The Boundary Keeps Moving
+
+</center>
 
 The working time of coding agents has grown from single short tasks to tens of hours.
 
@@ -34,7 +38,11 @@ stronger models, longer contexts, more persistent memory, more agents.
 
 What if what truly needs to persist is the software world it lives in?
 
+<center>
+
 ## 123.4 Hours, 250K Lines
+
+</center>
 
 We let EvoX Genesis start from a repository with an empty implementation.
 
@@ -48,11 +56,23 @@ No existing compiler was waiting there to be completed — **it started from zer
 
 ![image2.png](./evox-genesis-2.png)
 
+<center>
+
 _Figure 1: C compiler experiment results / code size, running time, agent episodes, cost, and test results_
+
+</center>
+
+<center>
 
 _(using the DeepSeek V4 Flash model)_
 
+</center>
+
+<center>
+
 ## Don't Keep the Agent Alive — Keep the Software World Alive
+
+</center>
 
 The life of complex software is naturally longer than a single agent session.
 
@@ -86,9 +106,17 @@ how tasks are decomposed, how agents are generated, how recursion unfolds, and h
 
 ![image3.png](./evox-genesis-3.png)
 
+<center>
+
 _Figure 2: The Persistent Recursive World concept / agents are born, act, and disappear; the software world keeps unfolding_
 
+</center>
+
+<center>
+
 ## Models Can Be Swapped; the Software World Continues
+
+</center>
 
 This continuity does not even require using the same model throughout.
 
@@ -100,9 +128,17 @@ Models can be replaced, agents can be replaced — the software world continues.
 
 ![image4.png](./evox-genesis-4.png)
 
+<center>
+
 _Figure 3: The cross-model continuation experiment, GLM 5.2 → DeepSeek V4 Flash_
 
+</center>
+
+<center>
+
 ## From Scratch, or Inheriting History
+
+</center>
 
 Building from zero is only one end of a software lifecycle;
 
@@ -118,9 +154,17 @@ A software world can be created from nothing, or it can inherit history and keep
 
 ![image5.png](./evox-genesis-5.png)
 
+<center>
+
 _Figure 4: MESA Fortran → Rust, 13 modules, 139,414 lines of code, $10.6_
 
+</center>
+
+<center>
+
 ## Cost Advantages Compound Over Time
+
+</center>
 
 Long-horizon software development does not mean that costs keep growing linearly.
 
@@ -130,7 +174,11 @@ As the system keeps running, the reusable development state grows richer, redund
 
 This is engineering compound interest that accumulates over time.
 
+<center>
+
 ## EvoX Genesis Is Now Open Source
+
+</center>
 
 The project is open source, with installation packages available for Windows, macOS, and Linux.
 
@@ -156,11 +204,17 @@ https://github.com/EMI-Group/genesis
 
 ![image7.png](./evox-genesis-7.png)
 
+<center>
+
 **Agents leave; the software world keeps evolving**
 
 **EvoX Genesis**
 
+</center>
+
 ![image8.png](./evox-genesis-8.png)
+
+<center><strong>QQ Group｜</strong>Evolutionary Machine Intelligence</center>
 
 References:
 
