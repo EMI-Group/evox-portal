@@ -154,9 +154,13 @@ https://github.com/EMI-Group/genesis
 
 ![image6.png](./evox-genesis-6.png)
 
+![image7.png](./evox-genesis-7.png)
+
 **Os agentes partem; o mundo do software continua a evoluir**
 
 **EvoX Genesis**
+
+![image8.png](./evox-genesis-8.png)
 
 Referências:
 

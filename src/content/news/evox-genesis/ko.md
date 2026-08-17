@@ -154,9 +154,13 @@ https://github.com/EMI-Group/genesis
 
 ![image6.png](./evox-genesis-6.png)
 
+![image7.png](./evox-genesis-7.png)
+
 **Agent는 떠나지만, 소프트웨어 세계는 계속 진화합니다**
 
 **EvoX Genesis**
+
+![image8.png](./evox-genesis-8.png)
 
 참고 자료:
 

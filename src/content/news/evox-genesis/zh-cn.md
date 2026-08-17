@@ -154,9 +154,13 @@ https://github.com/EMI-Group/genesis
 
 ![image6.png](./evox-genesis-6.png)
 
+![image7.png](./evox-genesis-7.png)
+
 **Agent 会离开，软件世界继续发展**
 
 **EvoX Genesis，天演·启元**
+
+![image8.png](./evox-genesis-8.png)
 
 参考：
 
