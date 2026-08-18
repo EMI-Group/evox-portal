@@ -1,14 +1,14 @@
 ---
-title: "EvoX Genesis: A Recursive Evolutionary AI System That Built a 250K-Line C Compiler from Scratch"
+title: "EvoX Genesis: A Recursive AI System for Long-Horizon Autonomous Software Evolution That Built a 250K-Line C Compiler from Scratch"
 pubDate: 2026-08-17
-summary: "The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released EvoX Genesis, a recursive evolutionary AI system. Rather than relying on a persistent agent to sustain long-horizon development, it lets the software world itself keep evolving: starting from an empty repository, the system built a 248,989-line C compiler in 123.4 hours, with a total model token cost of just $44.38."
+summary: "The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released EvoX Genesis, a recursive AI system for long-horizon autonomous software evolution. Rather than relying on a persistent agent to sustain long-horizon development, it lets the software world itself keep evolving: starting from an empty repository, the system built a 248,989-line C compiler in 123.4 hours, with a total model token cost of just $44.38."
 ---
 
-# EvoX Genesis: A Recursive Evolutionary AI System That Built a 250K-Line C Compiler from Scratch
+# EvoX Genesis: A Recursive AI System for Long-Horizon Autonomous Software Evolution That Built a 250K-Line C Compiler from Scratch
 
 ![image1.png](./evox-genesis-1.png)
 
-The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released **EvoX Genesis**, a recursive evolutionary AI system.
+The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released **EvoX Genesis**, a recursive AI system for long-horizon autonomous software evolution.
 
 EvoX Genesis no longer relies on a persistent agent to sustain long-horizon development. Instead, it lets the software world itself keep evolving.
 
@@ -94,7 +94,7 @@ What persists is the code, the structure, the constraints, the verification resu
 
 **Agent does not persist. Its validated consequences do.**
 
-This is the recursive autonomous evolution of EvoX Genesis. For users, it also means one very simple thing:
+This is how EvoX Genesis sustains long-horizon autonomous software evolution. For users, it also means one very simple thing:
 
 **You don't build agents — you only describe what you want the software to become.**
 
