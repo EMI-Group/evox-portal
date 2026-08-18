@@ -1,14 +1,14 @@
 ---
-title: "EvoX Genesis: Um Sistema de IA Evolutivo Recursivo que Construiu do Zero um Compilador C de 250 Mil Linhas"
+title: "EvoX Genesis: Um Sistema de IA Recursivo para a Evolução Autônoma de Software a Longo Prazo, que Construiu do Zero um Compilador C de 250 Mil Linhas"
 pubDate: 2026-08-17
-summary: "A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o EvoX Genesis, um sistema de IA evolutivo recursivo. Em vez de depender de um agente persistente para sustentar o desenvolvimento de longo prazo, ele deixa o próprio mundo do software continuar evoluindo: partindo de um repositório vazio, o sistema construiu um compilador C de 248.989 linhas em 123,4 horas, com um custo total de tokens do modelo de apenas US$ 44,38."
+summary: "A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o EvoX Genesis, um sistema de IA recursivo para a evolução autônoma de software a longo prazo. Em vez de depender de um agente persistente para sustentar o desenvolvimento de longo prazo, ele deixa o próprio mundo do software continuar evoluindo: partindo de um repositório vazio, o sistema construiu um compilador C de 248.989 linhas em 123,4 horas, com um custo total de tokens do modelo de apenas US$ 44,38."
 ---
 
-# EvoX Genesis: Um Sistema de IA Evolutivo Recursivo que Construiu do Zero um Compilador C de 250 Mil Linhas
+# EvoX Genesis: Um Sistema de IA Recursivo para a Evolução Autônoma de Software a Longo Prazo, que Construiu do Zero um Compilador C de 250 Mil Linhas
 
 ![image1.png](./evox-genesis-1.png)
 
-A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o **EvoX Genesis**, um sistema de IA evolutivo recursivo.
+A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o **EvoX Genesis**, um sistema de IA recursivo para a evolução autônoma de software a longo prazo.
 
 O EvoX Genesis não depende mais de um agente persistente para sustentar o desenvolvimento de longo prazo. Em vez disso, ele deixa o próprio mundo do software continuar evoluindo.
 
@@ -94,7 +94,7 @@ O que persiste é o código, a estrutura, as restrições, os resultados da veri
 
 **O agente não persiste. As suas consequências validadas persistem.**
 
-Esta é a evolução autônoma recursiva do EvoX Genesis. Para os usuários, isso também significa algo muito simples:
+É assim que o EvoX Genesis sustenta a evolução autônoma de software a longo prazo. Para os usuários, isso também significa algo muito simples:
 
 **Você não constrói agentes — você apenas descreve o que quer que o software se torne.**
 
