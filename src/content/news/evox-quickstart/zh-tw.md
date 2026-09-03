@@ -76,7 +76,7 @@ summary: "一份初學者教程，教您如何在 10 分鐘內使用 EvoX 開始
 
 本教程由 **Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng** 和 **Xinyao Li** 撰寫。**Beichen Huang** 負責教程的整理、編輯和線上發布。
 
-我們衷心感謝 EvoX 社群的每一位成員。正是我們的共同努力，讓 EvoX 能夠不斷進化。
+我們衷心感謝 EvoX 社群的每一位成員。正是我們的共同努力，讓 EvoX 能夠不斷演化。
 
 ## 開源程式碼 / 社群資源
 
