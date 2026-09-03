@@ -23,6 +23,7 @@ Five collections; the schema below is authoritative (zod-validated):
 - **All 4 markdown collections currently have all 13 locales per topic — no gaps.** (Verified: every topic dir contains exactly 13 `.md` files.)
 - Non-en files are genuine translations (title/summary/frontmatter translated, e.g. zh-cn news titles differ from en), not machine placeholders. `pubDate`/`order`/`section` are kept identical across locales.
 - Fallback behavior (in `src/i18n/utils.ts`): `getLocalizedArticles`/`findLocalizedArticle`/`getLocalizedNews`/`findLocalizedNews` pick the entry with id `${slug}/${locale}`, else fall back to `${slug}/en`. Missing locale files are therefore safe — English is shown.
+- **Terminology — "evolution" is 演化, never 进化/進化** (site-owner policy; Chinese copy only): zh-cn/zh-tw prose, frontmatter `title`/`summary`, and Chinese text in figures (e.g. SVG chart labels) must use 演化 — 进化计算→演化计算, 神经进化→神经演化, 差分进化→差分演化, etc. Does NOT apply to Japanese: ja.md files legitimately use 進化 (進化計算, 進化型) and must keep it. Do not localize the product name "EvoX Runtime"; generic 运行时 (运行时间/在运行时/运行时性能) is out of scope of this policy.
 
 ## Images & Assets
 - **news/**: 83 images total, embedded per-article (e.g. `news/evogp/evogp-1.jpg` … `evogp-8.jpg`), shared by all locale files, referenced with **relative paths**: `![1.png](./evogp-1.jpg "1.png")`. Exception: `news/evorl/` is text-only (0 images).
