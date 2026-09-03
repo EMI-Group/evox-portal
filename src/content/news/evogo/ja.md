@@ -121,6 +121,6 @@ EvoGO が焦点を当てているのは、従来の進化最適化パイプラ�
 - **上流プロジェクト（EvoX）：**  
   https://github.com/EMI-Group/evox
 - **QQグループ：** `297969717`
-- **WeChat公式アカウント：** 进化智能（Evolutionary Machine Intelligence）
+- **WeChat公式アカウント：** 演化智能（Evolutionary Machine Intelligence）
 
 EvoGO は EvoX フレームワークの上に構築されています。EvoX に興味がある場合は、EvoX の公式アカウントの記事（https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ）で詳細を確認することをお勧めします。
