@@ -107,7 +107,7 @@ EvoX 為 Windows 10/11 (64-bit) 提供了一個 [快速安裝腳本](/_static/wi
    pip install evox[vis,neuroevolution]
    ```
 
-   這將安裝視覺化模組和神經進化依賴項（如 Brax）。您也可以選擇單獨的額外組件，如 `vis` 或 `neuroevolution`。
+   這將安裝視覺化模組和神經演化依賴項（如 Brax）。您也可以選擇單獨的額外組件，如 `vis` 或 `neuroevolution`。
 
 #### 容器安裝 (Docker, Podman)
 

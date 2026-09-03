@@ -70,7 +70,7 @@ initial_fitness = problem.evaluate(initial_pop)
 创建自定义算法稍微复杂一些，因为它涉及初始化、生成新解和选择。要创建一个新算法，请继承 `evox.core.Algorithm` 并至少实现：
 
 - `__init__`：用于初始化。
-- `step`：主要的进化步骤逻辑。
+- `step`：主要的演化步骤逻辑。
 
 下面是在 EvoX 中实现粒子群优化 (PSO) 算法的示例：
 
@@ -258,11 +258,11 @@ EvoX 旨在轻松与外部工具集成。
 
 ### 5.3.2 强化学习集成
 
-使用 EvoX 进化神经网络策略：
+使用 EvoX 演化神经网络策略：
 
 1. 使用 `BraxProblem` 封装 RL 环境。
 2. 使用 `ParamsAndVector` 展平策略网络。
-3. 使用 GA 或 CMA-ES 等进化算法进行优化。
+3. 使用 GA 或 CMA-ES 等演化算法进行优化。
 4. 直接部署优化后的策略或使用 RL 进行微调。
 
 EvoX 支持批量环境模拟，以充分利用 GPU/CPU 算力。

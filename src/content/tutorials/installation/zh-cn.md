@@ -106,7 +106,7 @@ EvoX 为 Windows 10/11 (64-bit) 提供了一个 [快速安装脚本](/_static/wi
    pip install evox[vis,neuroevolution]
    ```
 
-   这将安装可视化模块和神经进化依赖项（如 Brax）。您也可以选择单独的扩展，如 `vis` 或 `neuroevolution`。
+   这将安装可视化模块和神经演化依赖项（如 Brax）。您也可以选择单独的扩展，如 `vis` 或 `neuroevolution`。
 
 #### 容器安装 (Docker, Podman)
 
