@@ -6,7 +6,7 @@ section: "misc"
 
 # 从 MATLAB 迁移到 PyTorch 和 EvoX
 
-本文档旨在指导 MATLAB 用户转向使用 PyTorch 和 EvoX 进行进化计算。我们将重点介绍 MATLAB 和 PyTorch 在语法、数据结构和工作流程方面的核心差异。然后，我们将通过 MATLAB 和 PyTorch 中的粒子群优化 (PSO) 示例来说明这些差异。
+本文档旨在指导 MATLAB 用户转向使用 PyTorch 和 EvoX 进行演化计算。我们将重点介绍 MATLAB 和 PyTorch 在语法、数据结构和工作流程方面的核心差异。然后，我们将通过 MATLAB 和 PyTorch 中的粒子群优化 (PSO) 示例来说明这些差异。
 
 ## 语法差异
 
@@ -92,7 +92,7 @@ section: "misc"
 - 在行尾使用 `\` 表示下一行应被视为同一行。
 - 如果多行代码位于括号内，则不需要特定的行尾符号。
 
-## 如何通过 EvoX 编写进化计算算法？
+## 如何通过 EvoX 编写演化计算算法？
 
 ### MATLAB
 

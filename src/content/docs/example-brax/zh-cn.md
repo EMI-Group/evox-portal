@@ -6,7 +6,7 @@ section: "examples"
 
 # 在 EvoX 中求解 Brax 问题
 
-EvoX 深度结合 Brax 进行神经进化研究。
+EvoX 深度结合 Brax 进行神经演化研究。
 这里我们将展示一个在 EvoX 中求解 Brax 问题的示例。
 
 ```python
@@ -84,7 +84,7 @@ model = SimpleMLP().to(device)
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-有了适配器，我们就可以着手进行这项神经进化任务了。
+有了适配器，我们就可以着手进行这项神经演化任务了。
 
 ## 设置运行流程
 

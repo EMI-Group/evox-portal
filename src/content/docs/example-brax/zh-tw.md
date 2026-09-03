@@ -6,7 +6,7 @@ section: "examples"
 
 # 在 EvoX 中解決 Brax 問題
 
-EvoX 透過 Brax 深入探索神經進化（Neuroevolution）。
+EvoX 透過 Brax 深入探索神經演化（Neuroevolution）。
 在此，我們將展示如何在 EvoX 中解決 Brax 問題的範例。
 
 ```python
@@ -84,7 +84,7 @@ model = SimpleMLP().to(device)
 adapter = ParamsAndVector(dummy_model=model)
 ```
 
-有了適配器，我們就可以開始執行這項神經進化任務。
+有了適配器，我們就可以開始執行這項神經演化任務。
 
 ## 設定執行流程
 
