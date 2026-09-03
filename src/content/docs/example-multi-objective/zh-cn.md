@@ -6,7 +6,7 @@ section: "examples"
 
 # 多目标算法
 
-在本 Notebook 中，我们将使用参考向量引导进化算法 (**RVEA**) 来寻找 **DTLZ2** 问题的最优解。
+在本 Notebook 中，我们将使用参考向量引导演化算法 (**RVEA**) 来寻找 **DTLZ2** 问题的最优解。
 
 ```python
 import time
