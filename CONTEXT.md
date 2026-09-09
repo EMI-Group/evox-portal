@@ -4,7 +4,7 @@
 The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-computation project (EMI-Group). It is a content-first **Astro 6** static site with **Tailwind CSS v4**, **astro-icon**, and full **i18n across 13 locales** (en, zh-cn, zh-tw, ja, ko, fr, de, it, es, es-419, ru, pt, pt-br), deployed to **Vercel** at https://www.evox.group. Content is managed via Astro Content Collections (docs, news, releases, tutorials, ecosystem libs) in an article-first, per-locale-file layout.
 
 ## API Surface
-- `package.json` — `name: evox-portal`, scripts: `dev`, `build`, `preview`, `astro`. Dependencies: astro ^6, @astrojs/vercel, tailwindcss ^4 + @tailwindcss/vite + @tailwindcss/typography, astro-icon, @vercel/analytics, sharp; devDeps: @iconify-json/heroicons, @iconify-json/simple-icons, playwright. Package manager pinned to **pnpm@10.28.0**.
+- `package.json` — `name: evox-portal`, scripts: `dev`, `build`, `preview`, `astro`. Dependencies: astro ^7.3, @astrojs/vercel ^11, tailwindcss ^4.3 + @tailwindcss/vite ^4.3 + @tailwindcss/typography ^0.5, astro-icon ^1.2, @vercel/analytics ^2, sharp ^0.35; devDeps: @iconify-json/heroicons ^1.2, @iconify-json/simple-icons ^1.2, playwright ^1.63. Package manager pinned to **pnpm@10.28.0**.
 - `astro.config.mjs` — Site config: `site: https://www.evox.group`; i18n with `defaultLocale: "en"` and `prefixDefaultLocale: false` (English URLs have no locale prefix; 12 other locales use `/{locale}/` prefixes, incl. es-419 and pt-br with explicit codes); Vercel adapter with `webAnalytics` enabled only when `VERCEL` env var is set; devToolbar disabled; `@tailwindcss/vite` plugin; `astro-icon` integration.
 - `tsconfig.json` — extends `astro/tsconfigs/strict`, includes `**/*`.
 - `pnpm-workspace.yaml` — onlyBuiltDependencies: esbuild, sharp. `pnpm-lock.yaml` is the single lockfile (package-lock.json was removed in commit 6beadd1).
@@ -31,6 +31,8 @@ The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-c
 - Locale metadata (htmlLang/hreflang/OG maps) is duplicated in `src/layouts/Layout.astro` and `src/i18n/utils.ts` — keep in sync.
 - Some non-English locale values are byte-identical to English (mostly intentional brand names; a few genuine gaps — see `src/i18n/CONTEXT.md`).
 - Content edge cases (UTF-8 BOM in some news files, `iStratDE`/`istratde` case mismatch) — see `src/content/CONTEXT.md`.
+- `pnpm build` logs a non-fatal `[WARN] [astro-icon] Failed to load icons from "src/icons": ENOENT` — astro-icon 1.2.0+ surfaces missing-`src/icons` errors instead of swallowing them, and this site intentionally ships no local icons (all icons come from the iconify sets); the warning is cosmetic and safe to ignore.
+- `@vercel/analytics` is a direct dependency but is never imported in `src/` — Vercel Web Analytics is injected by the `@astrojs/vercel` adapter's `webAnalytics` option instead; keep the dep only if a manual injection script is added later.
 
 ## Test Strategy
 No automated test suite (playwright is present but unused). Verification relies on `pnpm build` (content-schema + JSON parse errors), per-locale manual spot checks, and the i18n key-parity check in `src/i18n/CONTEXT.md`.

@@ -10,18 +10,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^10.0.1",
-    "@tailwindcss/vite": "^4.2.1",
-    "@vercel/analytics": "^1.6.1",
-    "astro": "^6.0.5",
-    "astro-icon": "^1.1.5",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.2.1"
+    "@astrojs/vercel": "^11.0.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^7.3.2",
+    "astro-icon": "^1.2.0",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.74",
-    "@tailwindcss/typography": "^0.5.19",
-    "playwright": "^1.58.2"
+    "@iconify-json/simple-icons": "^1.2.95",
+    "@tailwindcss/typography": "^0.5.20",
+    "playwright": "^1.63.0"
   }
 }
