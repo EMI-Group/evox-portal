@@ -8,7 +8,7 @@ Five collections; the schema below is authoritative (zod-validated):
 
 | Collection | Loader | Schema | Topics | Locale files |
 |---|---|---|---|---|
-| `news` | glob `**/*.md` over `./src/content/news` | `title`, `pubDate` (coerced date), `summary?` | 9 | 13 each (117) |
+| `news` | glob `**/*.md` over `./src/content/news` | `title`, `pubDate` (coerced date), `summary?` | 11 | 13 each (143) |
 | `releases` | glob over `./src/content/releases` | `title`, `pubDate`, `summary?` | 9 | 13 each (117) |
 | `tutorials` | glob over `./src/content/tutorials` | `title`, `order` (number) | 7 | 13 each (91) |
 | `docs` | glob over `./src/content/docs` | `title`, `order` (number), `section` (string) | 18 | 13 each (234) |
