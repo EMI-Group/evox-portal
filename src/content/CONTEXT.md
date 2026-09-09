@@ -9,7 +9,7 @@ Five collections; the schema below is authoritative (zod-validated):
 | Collection | Loader | Schema | Topics | Locale files |
 |---|---|---|---|---|
 | `news` | glob `**/*.md` over `./src/content/news` | `title`, `pubDate` (coerced date), `summary?` | 9 | 13 each (117) |
-| `releases` | glob over `./src/content/releases` | `title`, `pubDate`, `summary?` | 8 | 13 each (104) |
+| `releases` | glob over `./src/content/releases` | `title`, `pubDate`, `summary?` | 9 | 13 each (117) |
 | `tutorials` | glob over `./src/content/tutorials` | `title`, `order` (number) | 7 | 13 each (91) |
 | `docs` | glob over `./src/content/docs` | `title`, `order` (number), `section` (string) | 18 | 13 each (234) |
 | `libs` | `file("./src/content/libs.json")` | `id`, `title`, `description`, `url` | 13 entries in JSON | n/a |
