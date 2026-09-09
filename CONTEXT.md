@@ -1,7 +1,7 @@
 # EvoX Portal (Repository Root)
 
 ## Intent
-The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-computation project (EMI-Group). It is a content-first **Astro 6** static site with **Tailwind CSS v4**, **astro-icon**, and full **i18n across 13 locales** (en, zh-cn, zh-tw, ja, ko, fr, de, it, es, es-419, ru, pt, pt-br), deployed to **Vercel** at https://www.evox.group. Content is managed via Astro Content Collections (docs, news, releases, tutorials, ecosystem libs) in an article-first, per-locale-file layout.
+The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-computation project (EMI-Group). It is a content-first **Astro** static site with **Tailwind CSS v4**, **astro-icon**, and full **i18n across 13 locales** (en, zh-cn, zh-tw, ja, ko, fr, de, it, es, es-419, ru, pt, pt-br), deployed to **Vercel** at https://www.evox.group. Content is managed via Astro Content Collections (docs, news, releases, tutorials, ecosystem libs) in an article-first, per-locale-file layout.
 
 ## API Surface
 - `package.json` — `name: evox-portal`, scripts: `dev`, `build`, `preview`, `astro`. Dependencies: astro ^7.3, @astrojs/vercel ^11, tailwindcss ^4.3 + @tailwindcss/vite ^4.3 + @tailwindcss/typography ^0.5, astro-icon ^1.2, @vercel/analytics ^2, sharp ^0.35; devDeps: @iconify-json/heroicons ^1.2, @iconify-json/simple-icons ^1.2, playwright ^1.63. Package manager pinned to **pnpm@10.28.0**.
