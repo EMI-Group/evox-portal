@@ -62,4 +62,4 @@ No automated tests exist for this module. Verification is manual:
 - Run `npm run build` to catch JSON parse errors; note `loadTranslations` masks missing files at runtime, so a build warning is the only signal.
 
 ## Status
-Complete and stable. All 13 locales ship with identical 175-key sets; utils.ts API is mature and widely consumed. Historical commits touching this module: `497ff71` (v3.0.2-alpha full i18n), `e225987` (translation improvement pass), `eafe9fb` (audit fixes), `0b94422` (dropped EvoX prefix from Genesis name in zh locales), `8991303` (Runtime/Genesis pages + nav restructure, added `runtime.*`, `genesis.*` keys).
+Complete and stable. All 13 locales ship with identical 176-key sets; utils.ts API is mature and widely consumed. Historical commits touching this module: `497ff71` (v3.0.2-alpha full i18n), `e225987` (translation improvement pass), `eafe9fb` (audit fixes), `0b94422` (dropped EvoX prefix from Genesis name in zh locales), `8991303` (Runtime/Genesis pages + nav restructure, added `runtime.*`, `genesis.*` keys).
