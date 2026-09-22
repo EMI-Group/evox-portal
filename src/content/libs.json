@@ -30,6 +30,12 @@
     "url": "https://github.com/EMI-Group/evomo"
   },
   {
+    "id": "evococo",
+    "title": "EvoCoCo",
+    "description": "A multi-agent framework for semantics-guided automatic tensorization of evolutionary multiobjective optimization (EMO) software.",
+    "url": "https://github.com/EMI-Group/evococo"
+  },
+  {
     "id": "tensorneat",
     "title": "TensorNEAT",
     "description": "A JAX-based library for NeuroEvolution of Augmenting Topologies (NEAT) algorithms.",
