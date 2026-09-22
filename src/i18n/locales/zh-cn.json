@@ -129,6 +129,7 @@
   "libs.desc.evonas": "一个基于 PyTorch 实现的神经架构搜索框架。它支持超网训练、演化多目标优化，并能无缝集成到现代计算机视觉训练管线中。",
   "libs.desc.evocmo": "一个完全张量化、支持GPU加速的多种群演化算法，用于高效求解受限多目标优化问题（CMOPs）。",
   "libs.desc.autopso": "自动化粒子群优化元框架，通过在 GPU 上进行黑箱优化自动构建 PSO 变体。",
+  "libs.desc.evococo": "一个多智能体框架，用于对演化多目标优化 (EMO) 软件进行语义引导的自动张量化。",
   "news.pageTitle": "新闻{page} | EvoX",
   "news.pageTitlePage": " - 第 {page} 页",
   "news.heroTitle": "最新新闻",

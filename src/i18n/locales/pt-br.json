@@ -129,6 +129,7 @@
   "libs.desc.evonas": "Um framework para busca de arquitetura neural, implementado com PyTorch. Suporta treinamento de super-rede, otimização multiobjetivo evolutiva e integração contínua com pipelines modernos de treinamento de visão computacional.",
   "libs.desc.evocmo": "Um algoritmo evolutivo de múltiplas populações totalmente tensorizado e acelerado por GPU para resolver de forma eficiente problemas de otimização multiobjetivo com restrições (CMOPs).",
   "libs.desc.autopso": "Um meta-framework para otimização automática por enxame de partículas que constrói automaticamente variantes de PSO por meio de otimização de caixa-preta em GPUs.",
+  "libs.desc.evococo": "Um framework multi-agente para a tensorização automática guiada pela semântica de software de otimização multiobjetivo evolutiva (EMO).",
   "news.pageTitle": "Notícias{page} | EvoX",
   "news.pageTitlePage": " - Página {page}",
   "news.heroTitle": "Últimas Notícias",
