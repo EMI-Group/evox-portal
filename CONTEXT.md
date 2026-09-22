@@ -15,7 +15,7 @@ The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-c
 
 ## Constraints
 - **pnpm only** (packageManager pinned; don't introduce npm/yarn lockfiles).
-- **English-first**: en.md is the source of truth for content; en.json is the source of truth for UI strings; all locale files must keep full key parity (175 keys). Content fallback to English is automatic.
+- **English-first**: en.md is the source of truth for content; en.json is the source of truth for UI strings; all locale files must keep full key parity (176 keys). Content fallback to English is automatic.
 - **No hardcoded UI strings** in components/pages — use `loadTranslations()` + `t()` from `src/i18n/utils.ts`.
 - **No trailing slashes** in internal links; en URLs unprefixed, others `/{locale}/...`.
 - Agent language rule (`.agents/rules/language.md`): code, comments, and string literals must be in English even if the user speaks another language.
