@@ -15,7 +15,7 @@ Five collections; the schema below is authoritative (zod-validated):
 | `libs` | `file("./src/content/libs.json")` | `id`, `title`, `description`, `url` | 13 entries in JSON | n/a |
 
 - `docs` sections in use: `developer` (5 topics), `examples` (6), `install` (2), `misc` (4), `experimental` (1). `tutorials` orders are 1–7.
-- `libs.json` is an array of `{id, title, description, url}`; ids: evox, evogit, evogp, evorl, evomo, tensorneat, metade, evoxbench, istratde, evogo, evonas, evocmo, autopso.
+- `libs.json` is an array of `{id, title, description, url}`; ids: evox, evogit, evogp, evorl, evomo, evococo, tensorneat, metade, evoxbench, istratde, evogo, evonas, evocmo, autopso.
 
 ## Locale / Filename Conventions
 - 13 locales: `en, zh-cn, zh-tw, ja, ko, fr, de, it, es, es-419, ru, pt, pt-br` (mirrors `src/i18n/utils.ts` `locales`).
@@ -53,7 +53,7 @@ Five collections; the schema below is authoritative (zod-validated):
 - `news/` → News collection, 9 topics, schema `{title, pubDate, summary?}`, per-article images
 - `releases/` → Release notes, 8 topics, schema `{title, pubDate, summary?}`, 5 with screenshots
 - `tutorials/` → Tutorial collection, 7 topics, schema `{title, order}`
-- `libs.json` → Libraries collection data (file() loader, 13 entries)
+- `libs.json` → Libraries collection data (file() loader, 14 entries)
 - `examples/` → Static runtime-example assets for the RuntimeExamples page (not a collection; sibling of content collections — read-only, escalate writes to parent)
 - `../content.config.ts` → Collection schemas/loaders (sibling — read-only, escalate writes to parent)
 - `../i18n/utils.ts` → Locale fallback helpers used to resolve `slug/locale` → `slug/en` (sibling — read-only, escalate writes to parent)
