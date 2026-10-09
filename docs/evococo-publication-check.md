@@ -38,4 +38,4 @@ Source: the Chinese and English website HTML fragments under `C:\Users\developer
 ## Rollout (completed)
 
 1. First push: `en.md`, `zh-cn.md`, `zh-tw.md`, the eight PNGs, and this document — deployed and confirmed live at `https://www.evox.group/news/evococo` within ~10s of the push.
-2. Second push: the remaining ten locale files after the review above.
+2. Second push: the remaining ten locale files after the review above — all 13 routes confirmed live (HTTP 200) at `https://www.evox.group/{locale}/news/evococo`.
