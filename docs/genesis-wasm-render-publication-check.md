@@ -1,6 +1,8 @@
 # Genesis WASM Render publication preparation
 
-**Withdrawal requested on 2026-10-14 at 12:01 Asia/Shanghai.** The owner asked to retract this publication. All 13 locales and drawing assets have been moved from the live content collection to `drafts/news/genesis-wasm-render/`, retaining the manuscript for future editing. The earlier `/news/evox-genesis` article is unaffected. The publication history below is retained for traceability; it is not an instruction to republish.
+**Withdrawn on 2026-10-14; production removal verified at 12:03:52 Asia/Shanghai.** The owner requested withdrawal at 12:01. All 13 locales and drawing assets have been moved from the live content collection to `drafts/news/genesis-wasm-render/`, retaining the manuscript for future editing. The earlier `/news/evox-genesis` article is unaffected. The publication history below is retained for traceability; it is not an instruction to republish.
+
+Withdrawal commit: `775be6d683074fe7253783eec01a18d592ac6696`, pushed to `prod` at approximately 12:02:52. [Vercel withdrawal deployment](https://vercel.com/zaberlabs-projects/evox-portal/FtjJ48xMrRPq3WdQ1xPuMWyWxb4d) reports success. All 13 public article routes return HTTP 404; each locale's home/news entry is absent; all 13 historical Genesis article routes still return HTTP 200. The withdrawal build passes with 716 pages. Unrelated `.zcode/` files remain untouched.
 
 Prepared on 2026-10-14. The scheduled release run started after **2026-10-14 at 11:30 Asia/Shanghai (03:30 UTC)**, as requested by the site owner. The local preview was not the public website; no push was made before the scheduled time. Publication and production verification are complete, as recorded below.
 
