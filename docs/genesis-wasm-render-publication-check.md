@@ -1,5 +1,7 @@
 # Genesis WASM Render publication preparation
 
+**Withdrawal requested on 2026-10-14 at 12:01 Asia/Shanghai.** The owner asked to retract this publication. All 13 locales and drawing assets have been moved from the live content collection to `drafts/news/genesis-wasm-render/`, retaining the manuscript for future editing. The earlier `/news/evox-genesis` article is unaffected. The publication history below is retained for traceability; it is not an instruction to republish.
+
 Prepared on 2026-10-14. The scheduled release run started after **2026-10-14 at 11:30 Asia/Shanghai (03:30 UTC)**, as requested by the site owner. The local preview was not the public website; no push was made before the scheduled time. Publication and production verification are complete, as recorded below.
 
 ## Content and routes
