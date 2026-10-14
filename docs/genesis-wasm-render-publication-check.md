@@ -1,6 +1,6 @@
 # Genesis WASM Render publication preparation
 
-Prepared on 2026-10-14. Publication is scheduled for **2026-10-14 at 11:30 Asia/Shanghai (03:30 UTC)**, as requested by the site owner. The local preview is not the public website. No publication push has been made during preparation.
+Prepared on 2026-10-14. The scheduled release run started after **2026-10-14 at 11:30 Asia/Shanghai (03:30 UTC)**, as requested by the site owner. The local preview was not the public website; no push was made before the scheduled time. Publication and production verification are complete, as recorded below.
 
 ## Content and routes
 
@@ -67,3 +67,12 @@ Before the scheduled release, verified the live remote `origin/prod` head is `df
 At 11:30 Asia/Shanghai on 2026-10-14, publish the article directory (13 locale files, Chinese and English PNGs, English SVG, rendering script, and brand SVG) and this preparation record through the existing `prod` branch / Vercel workflow. Preserve unrelated working-tree files, including `.zcode/`. Do not push this article before the scheduled time.
 
 After pushing, verify the production deployment and the Chinese and English article pages, image, home/news links, and remaining locale routes. Update this record with the actual publication commit, time, and observed live verification results. If deployment fails or requires user action, report that outcome instead of claiming publication.
+
+## Publication completed
+
+- Release commit: `00feb2a08b92dfbe990730d67583178d3a129eb1` (`Publish Genesis WASM Render news in 13 locales`).
+- The scheduled run began at 11:30. Final staged-file checks found trailing whitespace in the generated SVG and an extra blank line at the end of the rendering script. These were cleaned without altering the image or article content. The push to `origin/prod` completed at approximately **11:31:58 Asia/Shanghai** on 2026-10-14.
+- Vercel reports `success` for this release commit: [production deployment](https://vercel.com/zaberlabs-projects/evox-portal/AXEzznj5pX1xqKHtDUFwRXxRRbQo).
+- Live verification completed at **11:34:12 Asia/Shanghai**: all 13 article routes returned HTTP 200, displayed the latest title, date, explicit WebGL2.0 100% result, and four intended bold spans. Both localized image assets returned HTTP 200. Simplified and Traditional Chinese use the Chinese figure; the other 11 locales use the English figure. Each locale's home page and news listing link to the new article.
+- Public pages: [Simplified Chinese](https://www.evox.group/zh-cn/news/genesis-wasm-render), [English](https://www.evox.group/news/genesis-wasm-render).
+- The release contains only the article directory and this publication record. Unrelated `.zcode/` files were left untouched and uncommitted.
