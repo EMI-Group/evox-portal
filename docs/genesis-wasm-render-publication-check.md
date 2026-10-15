@@ -1,8 +1,15 @@
 # Genesis WASM Render publication preparation
 
-## Current status: republication authorized on 2026-10-15
+## Current status: republished on 2026-10-15, live verification complete
 
-The owner subsequently instructed: "尝试连接并发布吧". This authorizes publication of the prepared final manuscript and both image versions with publication date `2026-10-15`. A connected GitHub API tree-write attempt returned HTTP 403 and did not update any branch. Native Git connectivity was restored by using the existing system proxy, `http://127.0.0.1:7890`, as a per-command option; no global settings were changed. Remote-head and push dry-run checks now pass. The final release uses native Git and the existing `prod` / Vercel pipeline. Live verification will follow before publication is reported complete.
+The owner subsequently instructed: "尝试连接并发布吧". This authorized publication of the prepared final manuscript and both image versions with publication date `2026-10-15`. A connected GitHub API tree-write attempt returned HTTP 403 and did not update any branch. Native Git connectivity was restored by using the existing system proxy, `http://127.0.0.1:7890`, as a per-command option; no global settings were changed. Remote-head and push dry-run checks passed. The final release used native Git and the existing `prod` / Vercel pipeline.
+
+- Republication commit: `41f36422521678f8adbb21f2e4b89f3ca6cd5c5d` (`Republish Genesis WASM Render news on October 15`). Push completed at approximately **10:45:18 Asia/Shanghai** on 2026-10-15.
+- [Vercel republication deployment](https://vercel.com/zaberlabs-projects/evox-portal/BtShVWLP3jgrVwEHMDjnWAMr9KQE) reports `success`.
+- Live verification completed at **10:46:10 Asia/Shanghai**. All 13 article pages and their image assets return HTTP 200. All pages display the approved title, `2026-10-15` date, explicit WebGL2.0 100% result, four bold spans, and appropriate Chinese/English image. Each locale's home page and news listing link to the article.
+- Archived drafts and unrelated `.zcode/` files were preserved. No timed automation was created.
+
+The following preparation, withdrawal, and initial-publication notes are historical; the current status is the successful republication above.
 
 On 2026-10-15, the owner requested renewed publication preparation and explicitly instructed that the website must go live only after a further command. The last approved manuscript and both image versions have been copied from `drafts/news/genesis-wasm-render/` into the local `src/content/news/genesis-wasm-render/` directory. The archived drafts remain unchanged. All 13 local publication dates provisionally read `2026-10-15`; align them with the actual publication date when the owner gives the release command.
 
