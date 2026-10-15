@@ -1,5 +1,23 @@
 # Genesis WASM Render publication preparation
 
+## Current status: republication authorized on 2026-10-15
+
+The owner subsequently instructed: "尝试连接并发布吧". This authorizes publication of the prepared final manuscript and both image versions with publication date `2026-10-15`. A connected GitHub API tree-write attempt returned HTTP 403 and did not update any branch. Native Git connectivity was restored by using the existing system proxy, `http://127.0.0.1:7890`, as a per-command option; no global settings were changed. Remote-head and push dry-run checks now pass. The final release uses native Git and the existing `prod` / Vercel pipeline. Live verification will follow before publication is reported complete.
+
+On 2026-10-15, the owner requested renewed publication preparation and explicitly instructed that the website must go live only after a further command. The last approved manuscript and both image versions have been copied from `drafts/news/genesis-wasm-render/` into the local `src/content/news/genesis-wasm-render/` directory. The archived drafts remain unchanged. All 13 local publication dates provisionally read `2026-10-15`; align them with the actual publication date when the owner gives the release command.
+
+Do not commit or push these preparation changes to `prod` before that instruction. Do not create or restore a timed publication automation. The prior one-time automation was deleted after the first release. The dates, publication procedure, and deployment results below describe the previous release and withdrawal only.
+
+Renewed preparation checks on 2026-10-15:
+
+- All 13 locale files match the last approved archived drafts exactly except for the provisional date. Chinese locales retain the Chinese figure; the other 11 retain the English figure. Both PNG SHA-256 values still match the previously verified originals.
+- Local production build passes: 729 pages. All 13 generated article pages pass title/date, heading/emphasis, image selection/existence, and home/news entry checks.
+- Local preview is running at `http://127.0.0.1:4321/zh-cn/news/genesis-wasm-render`. This is not the public website.
+- Public English and Simplified Chinese article routes remain HTTP 404 and their news listing entries remain absent.
+- The connected GitHub API confirms `prod` still points to `0dea28259664756bea6e3776209e06057fdc24b2`, matching local HEAD, and repository push permission is available. The current production commit's Vercel status remains `success`.
+- Native Git transport checks encountered a connection reset and timeout, including an HTTP/1.1 retry; no successful new dry-run is claimed. Recheck the transport when publication is authorized. The GitHub connector remains accessible.
+- No commit, publication push, or new automation was created during renewed preparation. Only the local article copy and this record have changed; archived drafts and unrelated `.zcode/` files are untouched.
+
 **Withdrawn on 2026-10-14; production removal verified at 12:03:52 Asia/Shanghai.** The owner requested withdrawal at 12:01. All 13 locales and drawing assets have been moved from the live content collection to `drafts/news/genesis-wasm-render/`, retaining the manuscript for future editing. The earlier `/news/evox-genesis` article is unaffected. The publication history below is retained for traceability; it is not an instruction to republish.
 
 Withdrawal commit: `775be6d683074fe7253783eec01a18d592ac6696`, pushed to `prod` at approximately 12:02:52. [Vercel withdrawal deployment](https://vercel.com/zaberlabs-projects/evox-portal/FtjJ48xMrRPq3WdQ1xPuMWyWxb4d) reports success. All 13 public article routes return HTTP 404; each locale's home/news entry is absent; all 13 historical Genesis article routes still return HTTP 200. The withdrawal build passes with 716 pages. Unrelated `.zcode/` files remain untouched.
