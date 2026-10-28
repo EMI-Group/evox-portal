@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+import { Icon } from "astro-icon/components";
+import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl } from "../../i18n/utils";
 import RuntimeExamples from "./RuntimeExamples.astro";
 
 interface Props {
@@ -18,31 +19,39 @@ const tr = await loadTranslations(locale);
     style="background: rgb(22, 27, 48);"
   >
     <div
-      class="absolute inset-0"
+      class="absolute inset-0 page-hero-backdrop"
       style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"
     >
     </div>
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-      <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase mb-6">
+      <p class="text-xs font-semibold tracking-[0.2em] text-teal-400/90 uppercase mb-6">
         {t(tr, "runtime.hero.badge")}
       </p>
-      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4 text-balance">
         EvoX Runtime
       </h1>
-      <p class="text-xl md:text-2xl font-semibold text-gray-200 mb-6">
+      <p class="text-xl md:text-2xl font-semibold text-gray-200 mb-6 text-balance">
         {t(tr, "runtime.hero.subtitle")}
       </p>
-      <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      <p class="text-lg text-slate-300/80 max-w-2xl mx-auto mb-10 leading-relaxed text-pretty">
         {t(tr, "runtime.hero.desc")}
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a
+          href={getLocalizedUrl("/docs", locale)}
+          class="group inline-flex items-center gap-2 h-11 px-5 rounded-full text-[0.9375rem] font-semibold text-slate-900 bg-gradient-to-br from-sky-200 to-teal-300 shadow-[0_8px_28px_-10px_rgba(45,212,191,0.7)] hover:-translate-y-px transition-all focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-teal-300"
+        >
+          {t(tr, "nav.docs")}
+          <Icon name="heroicons:arrow-right-20-solid" class="w-4 h-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </a>
         <a
           href="https://github.com/EMI-Group/evox"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 font-semibold text-white hover:text-teal-400 transition-colors"
+          class="inline-flex items-center gap-2 h-11 px-5 rounded-full text-[0.9375rem] font-semibold text-slate-200 bg-white/[0.04] ring-1 ring-inset ring-white/15 hover:bg-white/10 hover:text-white hover:ring-white/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-teal-300"
         >
-          {t(tr, "genesis.hero.github")} <span>&rarr;</span>
+          <Icon name="simple-icons:github" class="w-4 h-4" aria-hidden="true" />
+          {t(tr, "genesis.hero.github")}
         </a>
       </div>
     </div>

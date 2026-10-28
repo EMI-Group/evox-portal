@@ -17,6 +17,11 @@ const tr = await loadTranslations(locale);
 // pathname (which always ends with "/") so switcher links match them.
 const currentPath = (localePath ?? Astro.url.pathname).replace(/\/$/, "") || "/";
 
+// Primary navigation per the 2026.10 homepage brief:
+// EvoX | Ecosystem | Blog | Docs | GitHub | Language.
+// Genesis is surfaced on the homepage and the Ecosystem page instead of the
+// nav; Community lives at the bottom of the Ecosystem page; Contact Us is in
+// the footer; Runtime details sit under Docs.
 const navLinks: {
   label: string;
   href?: string;
@@ -24,34 +29,8 @@ const navLinks: {
   dropdown?: { label: string; desc: string; href: string }[];
 }[] = [
   {
-    label: t(tr, "nav.genesis"),
-    href: "https://genesis.evox.group/",
-    badge: t(tr, "nav.genesis.badge"),
-  },
-  {
-    label: "Runtime",
-    dropdown: [
-      {
-        label: t(tr, "nav.runtime.overview"),
-        desc: t(tr, "nav.runtime.overview.desc"),
-        href: getLocalizedUrl("/runtime", locale),
-      },
-      {
-        label: t(tr, "nav.tutorials"),
-        desc: t(tr, "footer.tutorials.desc"),
-        href: getLocalizedUrl("/tutorials", locale),
-      },
-      {
-        label: t(tr, "nav.docs.guide"),
-        desc: t(tr, "nav.docs.guide.desc"),
-        href: getLocalizedUrl("/docs", locale),
-      },
-      {
-        label: t(tr, "nav.docs.api"),
-        desc: t(tr, "nav.docs.api.desc"),
-        href: "https://evox.readthedocs.io/en/latest/apidocs/index.html",
-      },
-    ],
+    label: t(tr, "nav.ecosystem"),
+    href: getLocalizedUrl("/libs", locale),
   },
   {
     label: t(tr, "nav.blog"),
@@ -69,16 +48,29 @@ const navLinks: {
     ],
   },
   {
-    label: t(tr, "nav.community"),
-    href: getLocalizedUrl("/community", locale),
-  },
-  {
-    label: t(tr, "nav.ecosystem"),
-    href: getLocalizedUrl("/libs", locale),
-  },
-  {
-    label: t(tr, "nav.contact"),
-    href: "https://chengran.tech/",
+    label: t(tr, "nav.docs"),
+    dropdown: [
+      {
+        label: t(tr, "nav.docs.guide"),
+        desc: t(tr, "nav.docs.guide.desc"),
+        href: getLocalizedUrl("/docs", locale),
+      },
+      {
+        label: t(tr, "nav.tutorials"),
+        desc: t(tr, "footer.tutorials.desc"),
+        href: getLocalizedUrl("/tutorials", locale),
+      },
+      {
+        label: t(tr, "nav.docs.api"),
+        desc: t(tr, "nav.docs.api.desc"),
+        href: "https://evox.readthedocs.io/en/latest/apidocs/index.html",
+      },
+      {
+        label: t(tr, "nav.docs.runtime"),
+        desc: t(tr, "nav.runtime.overview.desc"),
+        href: getLocalizedUrl("/runtime", locale),
+      },
+    ],
   },
 ];
 ---
@@ -185,6 +177,17 @@ const navLinks: {
           ))
         }
 
+        {/* GitHub */}
+        <a
+          href="https://github.com/EMI-Group"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1.5 text-sm font-medium hover:text-teal-400 transition-colors"
+        >
+          <Icon name="simple-icons:github" class="w-4 h-4" />
+          {t(tr, "nav.github")}
+        </a>
+
         {/* Language Switcher */}
         <div class="relative group" data-dropdown>
           <button
@@ -220,17 +223,6 @@ const navLinks: {
             </div>
           </div>
         </div>
-
-        {/* GitHub */}
-        <a
-          href="https://github.com/EMI-Group"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          class="text-gray-300 hover:text-teal-400 transition-colors"
-        >
-          <Icon name="simple-icons:github" class="w-7 h-7" />
-        </a>
       </nav>
 
       <details class="relative md:hidden">
@@ -279,7 +271,17 @@ const navLinks: {
               ))
             }
 
-            <details class="border-t border-white/10 mt-1">
+            <a
+              href="https://github.com/EMI-Group"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10 border-t border-white/10 mt-1"
+            >
+              <Icon name="simple-icons:github" class="w-5 h-5" />
+              {t(tr, "nav.github")}
+            </a>
+
+            <details class="border-t border-white/10">
               <summary class="list-none flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-100 cursor-pointer hover:bg-white/10">
                 {localeNames[locale]}
                 <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4" />
@@ -301,16 +303,6 @@ const navLinks: {
                 ))}
               </div>
             </details>
-
-            <a
-              href="https://github.com/EMI-Group"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10 border-t border-white/10"
-            >
-              <Icon name="simple-icons:github" class="w-5 h-5" />
-              GitHub
-            </a>
           </nav>
         </div>
       </details>

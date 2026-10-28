@@ -1,2 +1,37 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* Shared decoration for dark page heroes (Ecosystem, News, Releases, Docs,
+   Tutorials, Runtime, Community): a faint grid plus slowly drifting brand
+   glows, matching the homepage hero. Applied to the hero's existing
+   radial-gradient layer, so markup stays a single class. */
+.page-hero-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 15%, transparent 72%);
+}
+.page-hero-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(34rem 22rem at 18% 12%, rgba(59, 130, 246, 0.22), transparent 70%),
+    radial-gradient(30rem 20rem at 85% 92%, rgba(20, 184, 166, 0.18), transparent 70%);
+  animation: page-hero-drift 24s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes page-hero-drift {
+  to {
+    transform: translate(4%, 3%) scale(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-backdrop::after {
+    animation: none;
+  }
+}

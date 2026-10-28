@@ -1,0 +1,181 @@
+---
+// Shared body of the Ecosystem page (`/libs` and `/{locale}/libs`).
+// Per the 2026.10 brief: Genesis is shown as the Featured Project at the top,
+// and the Community section (formerly a top-level nav entry) sits at the
+// bottom of this page under `#community`.
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import genesisResultImage from "../../content/news/evox-genesis/evox-genesis-1.png";
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+
+const allLibs = await getCollection("libs");
+const GENESIS_URL = "https://genesis.evox.group/";
+
+// Core framework first, then the rest alphabetically (getCollection order is by id).
+const libs = [...allLibs].sort((a, b) => {
+  if (a.data.id === "evox") return -1;
+  if (b.data.id === "evox") return 1;
+  return a.data.title.localeCompare(b.data.title, "en", { sensitivity: "base" });
+});
+// "https://github.com/EMI-Group/evogp" -> "EMI-Group/evogp"
+const repoPath = (url: string) => url.replace(/^https?:\/\/(www\.)?github\.com\//, "").replace(/\/$/, "");
+---
+
+<Layout title={t(tr, "libs.pageTitle")} locale={locale}>
+  <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
+    <div class="absolute inset-0 page-hero-backdrop" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 text-balance">{t(tr, "libs.heroTitle")}</h1>
+      <p class="text-lg md:text-xl text-slate-300/80 max-w-2xl mx-auto text-balance">{t(tr, "libs.heroDesc")}</p>
+    </div>
+  </div>
+
+  <div class="bg-slate-50 py-16 md:py-24">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Featured Project: Genesis -->
+      <a
+        href={GENESIS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group grid grid-cols-1 md:grid-cols-2 bg-white rounded-3xl overflow-hidden ring-1 ring-teal-200 shadow-lg shadow-teal-900/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 mb-10 lg:mb-14"
+      >
+        <div class="bg-[#f7f7f6] overflow-hidden flex items-center">
+          <Image
+            src={genesisResultImage}
+            alt=""
+            widths={[480, 900]}
+            sizes="(min-width: 768px) 640px, 100vw"
+            class="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+        </div>
+        <div class="p-8 lg:p-10 flex flex-col">
+          <span class="inline-flex w-fit items-center gap-1 rounded-full bg-teal-600 px-3 py-1 text-xs font-semibold text-white">
+            <Icon name="heroicons:sparkles" class="w-3.5 h-3.5" aria-hidden="true" />
+            {t(tr, "libs.featured.kicker")}
+          </span>
+          <h2 class="mt-4 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 group-hover:text-teal-700 transition-colors">{t(tr, "explore.genesis.title")}</h2>
+          <p class="mt-3 text-gray-600 leading-relaxed line-clamp-4 flex-grow text-pretty">{t(tr, "genesis.hero.desc")}</p>
+          <div class="mt-6 inline-flex items-center gap-1 text-teal-700 font-semibold">
+            {t(tr, "genesis.hero.cta")}
+            <Icon name="heroicons:arrow-up-right-20-solid" class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+          </div>
+        </div>
+      </a>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {libs.map((item) => (
+          <a
+            href={item.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative flex flex-col rounded-2xl bg-white p-6 ring-1 ring-gray-200/80 hover:ring-teal-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgba(15,23,42,0.25)] transition-all duration-300"
+          >
+            <div class="flex items-center gap-4">
+              <span class="shrink-0 grid place-items-center w-11 h-11 rounded-xl bg-slate-100 text-slate-700 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300">
+                <Icon name="simple-icons:github" class="w-5 h-5" aria-hidden="true" />
+              </span>
+              <h2 class="flex-grow min-w-0 text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors truncate">{item.data.title}</h2>
+              <Icon
+                name="heroicons:arrow-up-right-20-solid"
+                class="shrink-0 w-5 h-5 text-gray-300 transition-all duration-300 group-hover:text-teal-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                aria-hidden="true"
+              />
+            </div>
+            <p class="mt-4 text-gray-600 leading-relaxed line-clamp-3 flex-grow text-pretty">{t(tr, `libs.desc.${item.data.id}`)}</p>
+            <span class="mt-5 pt-4 border-t border-gray-100 text-xs font-medium text-gray-400 truncate">
+              {repoPath(item.data.url)}
+            </span>
+          </a>
+        ))}
+      </div>
+      {allLibs.length === 0 && (
+        <div class="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
+          <p class="text-gray-500 text-lg">{t(tr, "libs.empty")}</p>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Community (moved here from the primary nav) -->
+  <section id="community" class="bg-white py-16 md:py-24 border-t border-gray-200 scroll-mt-24">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 mb-3 text-balance">{t(tr, "community.title")}</h2>
+        <p class="text-lg text-gray-600 text-pretty">{t(tr, "community.desc")}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+        <button
+          type="button"
+          data-qq-qr-open
+          class="group flex items-start gap-5 rounded-2xl p-6 md:p-7 bg-white ring-1 ring-gray-200 hover:ring-teal-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgba(15,23,42,0.25)] transition-all duration-300 text-left cursor-pointer"
+        >
+          <span class="shrink-0 grid place-items-center w-12 h-12 rounded-xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+            <Icon name="simple-icons:tencentqq" class="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span class="flex-grow min-w-0">
+            <span class="block text-lg font-bold text-gray-900">{t(tr, "community.qq.title")}</span>
+            <span class="mt-1 block text-gray-600">{t(tr, "community.qq.desc")}</span>
+          </span>
+          <Icon name="heroicons:qr-code" class="shrink-0 w-5 h-5 text-gray-300 group-hover:text-teal-600 transition-colors" aria-hidden="true" />
+        </button>
+        <a
+          href="https://discord.com/invite/Vbtgcpy7G4"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-start gap-5 rounded-2xl p-6 md:p-7 bg-white ring-1 ring-gray-200 hover:ring-indigo-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-18px_rgba(15,23,42,0.25)] transition-all duration-300"
+        >
+          <span class="shrink-0 grid place-items-center w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+            <Icon name="simple-icons:discord" class="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span class="flex-grow min-w-0">
+            <span class="block text-lg font-bold text-gray-900">{t(tr, "community.discord.title")}</span>
+            <span class="mt-1 block text-gray-600">{t(tr, "community.discord.desc")}</span>
+          </span>
+          <Icon name="heroicons:arrow-up-right-20-solid" class="shrink-0 w-5 h-5 text-gray-300 group-hover:text-indigo-600 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="qq-qr-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={t(tr, "community.qq.title")}>
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-qq-qr-close></div>
+    <div class="relative bg-white rounded-3xl p-6 md:p-8 shadow-2xl max-w-sm w-full text-center">
+      <button type="button" data-qq-qr-close aria-label={t(tr, "community.qq.close")} class="absolute top-3 right-3 p-2 text-gray-400 hover:text-gray-700 transition-colors cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <img src="/images/qq-group-qr.png" alt={t(tr, "community.qq.title")} width="610" height="610" class="w-full h-auto rounded-xl" loading="lazy" />
+      <p class="mt-4 text-lg font-bold text-gray-900">QQ: 297969717</p>
+      <p class="mt-1 text-gray-600">{t(tr, "community.qq.scan")}</p>
+    </div>
+  </div>
+  <script>
+    const qqQrModal = document.getElementById("qq-qr-modal");
+    const closeQqQrModal = () => {
+      qqQrModal?.classList.add("hidden");
+      qqQrModal?.classList.remove("flex");
+    };
+    document.querySelectorAll("[data-qq-qr-open]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        qqQrModal?.classList.remove("hidden");
+        qqQrModal?.classList.add("flex");
+      });
+    });
+    qqQrModal?.querySelectorAll("[data-qq-qr-close]").forEach((el) => {
+      el.addEventListener("click", closeQqQrModal);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeQqQrModal();
+    });
+  </script>
+</Layout>

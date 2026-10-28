@@ -32,7 +32,7 @@ Centralized internationalization for the EvoX Portal (Astro 6 static site). Two 
 **Consumers** (all import from `../../i18n/utils` or deeper): `src/layouts/Layout.astro`, `src/components/Header.astro`, `src/components/Footer.astro`, `src/components/pages/{HomeContent,RuntimeContent,RuntimeExamples}.astro`, pages under `src/pages/` (docs, tutorials, news, releases, libs, community, runtime — both root-level and `[locale]`-prefixed variants), and `src/content/examples/neuroevolution.astro`.
 
 ## Constraints
-- **Key sets must stay identical across all 13 locale files.** Verified at time of writing: every file has exactly 176 flat dot-namespaced keys with zero missing/extra keys. Adding a key to `en.json` without adding it to the others is invisible (English fallback masks it) but leaves other locales silently untranslated.
+- **Key sets must stay identical across all 13 locale files.** Verified at time of writing: every file has exactly 235 flat dot-namespaced keys with zero missing/extra keys. Adding a key to `en.json` without adding it to the others is invisible (English fallback masks it) but leaves other locales silently untranslated.
 - `en.json` is the source of truth: new keys are added there first.
 - `lang.*` keys (13 of them) hold native language names and are intentionally identical across all files — do not "translate" them.
 - Key naming: flat, dot-separated groups — `site.` (1), `meta.` (1), `nav.` (22), `hero.` (6), `news.` (12), `features.` (10), `examples.` (7), `footer.` (10), `lang.` (13), `community.` (9), `docs.` (9), `ecosystem.` (4), `genesis.` (35), `libs.` (19), `releases.` (10), `runtime.` (4), `tutorials.` (4).
@@ -62,4 +62,4 @@ No automated tests exist for this module. Verification is manual:
 - Run `npm run build` to catch JSON parse errors; note `loadTranslations` masks missing files at runtime, so a build warning is the only signal.
 
 ## Status
-Complete and stable. All 13 locales ship with identical 176-key sets; utils.ts API is mature and widely consumed. Historical commits touching this module: `497ff71` (v3.0.2-alpha full i18n), `e225987` (translation improvement pass), `eafe9fb` (audit fixes), `0b94422` (dropped EvoX prefix from Genesis name in zh locales), `8991303` (Runtime/Genesis pages + nav restructure, added `runtime.*`, `genesis.*` keys).
+Complete and stable. All 13 locales ship with identical 235-key sets; utils.ts API is mature and widely consumed. Historical commits touching this module: `497ff71` (v3.0.2-alpha full i18n), `e225987` (translation improvement pass), `eafe9fb` (audit fixes), `0b94422` (dropped EvoX prefix from Genesis name in zh locales), `8991303` (Runtime/Genesis pages + nav restructure, added `runtime.*`, `genesis.*` keys).

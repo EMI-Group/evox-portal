@@ -37,3 +37,16 @@ Stable. GenesisContent.astro deleted (e173eda); no pending work known.
 
 ## See Also
 Commit 8991303 "add Runtime and Genesis landing pages, restructure nav and homepage" created this directory (RuntimeExamples moved out of the homepage; HomeContent slimmed by ~425 lines). Commit e173eda removed GenesisContent and its routes.
+
+## 2026.10 Homepage Redesign
+- `HomeContent.astro` follows the 2026.10 design brief: Hero (vision) → The Power of Evolution (animated branch/filter/converge SVG) → Evolution Across AI Paradigms (2 × 2 project cards) → Computing Without Boundaries (platform tiles + two published speedup figures) → Explore EvoX + compact Latest News → Footer. Ecosystem/Community blocks were removed from the homepage.
+- Motion: `.reveal` elements fade in via IntersectionObserver (only when `html.js-reveal` is set by an inline script); the hero has a paused-off-screen canvas particle field; all looping animations are disabled under `prefers-reduced-motion`.
+- Hero has no kicker label (removed by request). `#cta-content` holds two buttons — `hero.cta.button` → `/docs` and `nav.github` → EMI-Group GitHub (`.hero-btn-primary` / `.hero-btn-ghost`) — above the `hero.cta.tagline` line.
+- The evolution loop is a fixed 5-column `.loop-track` grid (+ a repeat marker), so steps never wrap onto a second row in long locales; only labels wrap. Without JS the `#evo-figure` paths/nodes render fully drawn. **The figure intentionally has no Generate/Execute/Evaluate/Select/Improve labels** — its 4 visual stages (branch → filter → converge → extend) don't map 1:1 to the 5 steps (review feedback); keep the step names only in the loop track.
+- Hardware tiles include **Vulkan** (`computing.status.compiler` = "Supported via EvoX Compiler"): `evoxc` → IREE Vulkan-SPIRV compiles to any Vulkan GPU, incl. mobile/edge ARM Mali and Qualcomm Adreno (confirmed by the team; see https://github.com/EMI-Group/evoxc). Vulkan is vendor-neutral — not an Intel-specific path. Grid is `sm:grid-cols-4 lg:grid-cols-7`.
+- Typography: headings use `text-wrap: balance`, `#content-body p` uses `text-wrap: pretty` (progressive enhancement). Speedup stat bars are decorative and always full width — don't encode fake proportions there.
+- Dark hardware tiles and stat cards carry `.spotlight` (pointer-follow glow via `--mx/--my`, set by `initSpotlight()` for fine pointers only). Latest News cards show a Release/News pill (reuses `nav.blog.releases` / `nav.blog.news`).
+- Ecosystem page: 1280px container, 3-column compact library cards (GitHub repo path footer), core `evox` sorted first then alphabetical. Runtime hero has Docs (primary) + GitHub buttons; `runtime.hero.desc` says **30+** algorithms to match the README/homepage (core package count).
+- All dark subpage heroes share `.page-hero-backdrop` (global.css: grid + drifting glows) on their existing radial-gradient layer.
+- Hardware status labels must reflect validated scope only (Huawei Ascend = project-level validation, not full-framework support).
+- `EcosystemContent.astro` is the shared body of `/libs` and `/{locale}/libs`: Genesis Featured Project card, library grid, and the Community section (`#community`, QQ QR modal + Discord).

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 678" width="100%" role="img" aria-labelledby="arch-title arch-desc">
+  <title id="arch-title">EvoX Ecosystem Architecture</title>
+  <desc id="arch-desc">Four layers. Applications: Generative AI, Agentic AI, Physical AI, AI for Science, Optimization. EvoX Libraries grouped by application: EvoGM, EvoNAS, EvoXBench; Genesis, EvoGit; EvoRL, TensorNEAT; EvoGO; EvoX, EvoMO, EvoGP, MetaDE, iStratDE, AutoPSO, EvoCmo, EvoCoCo. Compiler and Runtime: the EvoX Compiler (evoxc) with EvoXIR graphs, graph transforms and StableHLO export to numpy, IREE, XLA and TVM backends, alongside the PyTorch and JAX framework runtimes. Hardware: CPU, NVIDIA CUDA, AMD ROCm, Vulkan GPUs including ARM Mali and Qualcomm Adreno, Apple Silicon, Huawei Ascend and clusters.</desc>
+  <style>
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .outer-bg { fill: #ffffff; stroke: #e2e8f0; }
+    .layer-box { fill: #f8fafc; stroke: #e2e8f0; }
+    .app-chip { fill: #f0fdfa; stroke: #99f6e4; }
+    .lib-col { fill: #ffffff; stroke: #e2e8f0; }
+    .lib-chip { fill: #f8fafc; stroke: #e2e8f0; }
+    .runtime-box { fill: #fffafa; stroke: #dc2626; }
+    .sub-box { fill: #ffffff; stroke: #e2e8f0; }
+    .note-box { fill: #f8fafc; stroke: #cbd5e1; }
+    .title-text { fill: #0f172a; font-size: 16px; font-weight: 700; }
+    .runtime-title { fill: #b91c1c; font-size: 16px; font-weight: 700; }
+    .chip-text { fill: #0f766e; font-size: 13.5px; font-weight: 700; }
+    .lib-text { fill: #1e293b; font-size: 12.5px; font-weight: 600; }
+    .sub-title { fill: #0f172a; font-size: 14px; font-weight: 700; }
+    .meta-text { fill: #64748b; font-size: 13px; font-weight: 500; }
+    .sub-meta { fill: #64748b; font-size: 12.5px; font-weight: 500; }
+    .note-text { fill: #64748b; font-size: 12.5px; font-weight: 500; }
+    .arrow-stroke { stroke: #94a3b8; }
+
+    @media (prefers-color-scheme: dark) {
+      .outer-bg { fill: #0f172a; stroke: #1e293b; }
+      .layer-box { fill: #1e293b; stroke: #334155; }
+      .app-chip { fill: #0f2e2c; stroke: #115e59; }
+      .lib-col { fill: #0f172a; stroke: #334155; }
+      .lib-chip { fill: #1e293b; stroke: #334155; }
+      .runtime-box { fill: #181826; stroke: #ef4444; }
+      .sub-box { fill: #0f172a; stroke: #334155; }
+      .note-box { fill: #162032; stroke: #334155; }
+      .title-text { fill: #f8fafc; }
+      .runtime-title { fill: #f87171; }
+      .chip-text { fill: #5eead4; }
+      .lib-text { fill: #e2e8f0; }
+      .sub-title { fill: #f1f5f9; }
+      .meta-text, .sub-meta, .note-text { fill: #94a3b8; }
+      .arrow-stroke { stroke: #64748b; }
+    }
+  </style>
+
+  <rect class="outer-bg" x="4" y="4" width="872" height="670" rx="16" stroke-width="1.5" />
+
+  <!-- Column grid shared by layers 1 and 2: four 130px columns + one 208px column (Optimization has the most projects). -->
+
+  <!-- 1. Applications -->
+  <rect class="layer-box" x="32" y="28" width="816" height="96" rx="10" stroke-width="1.25" />
+  <text class="font-sans title-text" x="440" y="54" text-anchor="middle">Applications</text>
+  <g class="font-sans" text-anchor="middle">
+    <rect class="app-chip" x="52" y="70" width="130" height="38" rx="8" stroke-width="1" />
+    <text class="chip-text" x="117" y="94">Generative AI</text>
+    <rect class="app-chip" x="194" y="70" width="130" height="38" rx="8" stroke-width="1" />
+    <text class="chip-text" x="259" y="94">Agentic AI</text>
+    <rect class="app-chip" x="336" y="70" width="130" height="38" rx="8" stroke-width="1" />
+    <text class="chip-text" x="401" y="94">Physical AI</text>
+    <rect class="app-chip" x="478" y="70" width="130" height="38" rx="8" stroke-width="1" />
+    <text class="chip-text" x="543" y="94">AI for Science</text>
+    <rect class="app-chip" x="620" y="70" width="208" height="38" rx="8" stroke-width="1" />
+    <text class="chip-text" x="724" y="94">Optimization</text>
+  </g>
+
+  <g class="arrow-stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="440" y1="128" x2="440" y2="142" /><polyline points="434,137 440,143 446,137" />
+  </g>
+
+  <!-- 2. EvoX Libraries: one chip per project, vertically centred in its column -->
+  <rect class="layer-box" x="32" y="148" width="816" height="210" rx="10" stroke-width="1.25" />
+  <text class="font-sans title-text" x="440" y="176" text-anchor="middle">EvoX Libraries</text>
+  <g class="font-sans" text-anchor="middle">
+    <!-- Generative AI -->
+    <rect class="lib-col" x="52" y="190" width="130" height="152" rx="8" stroke-width="1" />
+    <rect class="lib-chip" x="64" y="219" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="117" y="236">EvoGM</text>
+    <rect class="lib-chip" x="64" y="253" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="117" y="270">EvoNAS</text>
+    <rect class="lib-chip" x="64" y="287" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="117" y="304">EvoXBench</text>
+
+    <!-- Agentic AI -->
+    <rect class="lib-col" x="194" y="190" width="130" height="152" rx="8" stroke-width="1" />
+    <rect class="lib-chip" x="206" y="236" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="259" y="253">Genesis</text>
+    <rect class="lib-chip" x="206" y="270" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="259" y="287">EvoGit</text>
+
+    <!-- Physical AI -->
+    <rect class="lib-col" x="336" y="190" width="130" height="152" rx="8" stroke-width="1" />
+    <rect class="lib-chip" x="348" y="236" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="401" y="253">EvoRL</text>
+    <rect class="lib-chip" x="348" y="270" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="401" y="287">TensorNEAT</text>
+
+    <!-- AI for Science -->
+    <rect class="lib-col" x="478" y="190" width="130" height="152" rx="8" stroke-width="1" />
+    <rect class="lib-chip" x="490" y="253" width="106" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="543" y="270">EvoGO</text>
+
+    <!-- Optimization: 2 × 4 -->
+    <rect class="lib-col" x="620" y="190" width="208" height="152" rx="8" stroke-width="1" />
+    <rect class="lib-chip" x="632" y="202" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="676" y="219">EvoX</text>
+    <rect class="lib-chip" x="632" y="236" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="676" y="253">EvoMO</text>
+    <rect class="lib-chip" x="632" y="270" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="676" y="287">EvoGP</text>
+    <rect class="lib-chip" x="632" y="304" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="676" y="321">MetaDE</text>
+    <rect class="lib-chip" x="728" y="202" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="772" y="219">iStratDE</text>
+    <rect class="lib-chip" x="728" y="236" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="772" y="253">AutoPSO</text>
+    <rect class="lib-chip" x="728" y="270" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="772" y="287">EvoCmo</text>
+    <rect class="lib-chip" x="728" y="304" width="88" height="26" rx="6" stroke-width="1" />
+    <text class="lib-text" x="772" y="321">EvoCoCo</text>
+  </g>
+
+  <g class="arrow-stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="440" y1="362" x2="440" y2="376" /><polyline points="434,371 440,377 446,371" />
+  </g>
+
+  <!-- 3. Compiler & Runtime -->
+  <rect class="runtime-box" x="32" y="384" width="816" height="132" rx="12" stroke-width="1.75" />
+  <text class="font-sans runtime-title" x="440" y="410" text-anchor="middle">Compiler &amp; Runtime</text>
+
+  <rect class="sub-box" x="52" y="424" width="500" height="76" rx="8" stroke-width="1" />
+  <text class="font-sans sub-title" x="70" y="448">EvoX Compiler (evoxc)</text>
+  <text class="font-sans sub-meta" x="70" y="468">Explicit tensor graph (EvoXIR)  ·  vmap / grad transforms  ·  StableHLO</text>
+  <text class="font-sans sub-meta" x="70" y="487">Backends: numpy interpreter  ·  IREE  ·  XLA (PJRT)  ·  TVM</text>
+
+  <rect class="sub-box" x="564" y="424" width="264" height="76" rx="8" stroke-width="1" />
+  <text class="font-sans sub-title" x="582" y="448">Framework Runtimes</text>
+  <text class="font-sans sub-meta" x="582" y="468">PyTorch  ·  JAX</text>
+  <text class="font-sans sub-meta" x="582" y="487">used by current projects</text>
+
+  <g class="arrow-stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="440" y1="520" x2="440" y2="534" /><polyline points="434,529 440,535 446,529" />
+  </g>
+
+  <!-- 4. Hardware -->
+  <rect class="layer-box" x="32" y="542" width="816" height="72" rx="10" stroke-width="1.25" />
+  <text class="font-sans title-text" x="440" y="570" text-anchor="middle">Heterogeneous Hardware</text>
+  <text class="font-sans meta-text" x="440" y="594" text-anchor="middle">CPU  ·  NVIDIA CUDA  ·  AMD ROCm  ·  Vulkan (ARM Mali · Adreno)  ·  Apple Silicon  ·  Huawei Ascend  ·  Clusters</text>
+
+  <!-- Scope note -->
+  <rect class="note-box" x="32" y="628" width="816" height="32" rx="8" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text class="font-sans note-text" x="440" y="649" text-anchor="middle">Projects are independent repositories; each states which runtime / compiler path and hardware it supports.</text>
+</svg>

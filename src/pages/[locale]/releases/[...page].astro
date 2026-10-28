@@ -27,7 +27,7 @@ const title = t(tr, "releases.pageTitle", { page: page.currentPage > 1 ? t(tr, "
 
 <Layout title={title} locale={locale}>
   <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 page-hero-backdrop" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
     <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 text-center">
       <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">{t(tr, "releases.heroTitle")}</h1>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto">{t(tr, "releases.heroDesc")}</p>

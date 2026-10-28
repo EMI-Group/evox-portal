@@ -9,6 +9,16 @@ interface Props {
 const { locale = defaultLocale } = Astro.props;
 const tr = await loadTranslations(locale);
 const year = new Date().getFullYear();
+
+const footerLinks: { label: string; href: string }[] = [
+  { label: t(tr, "nav.ecosystem"), href: getLocalizedUrl("/libs", locale) },
+  { label: t(tr, "nav.blog.news"), href: getLocalizedUrl("/news", locale) },
+  { label: t(tr, "nav.blog.releases"), href: getLocalizedUrl("/releases", locale) },
+  { label: t(tr, "nav.docs"), href: getLocalizedUrl("/docs", locale) },
+  { label: t(tr, "nav.community"), href: getLocalizedUrl("/libs", locale) + "#community" },
+  { label: t(tr, "nav.github"), href: "https://github.com/EMI-Group" },
+  { label: t(tr, "nav.contact"), href: "https://chengran.tech/" },
+];
 ---
 
 <footer class="pt-16 pb-8 border-t border-gray-800" style="background: rgb(22, 27, 48);">
@@ -92,7 +102,25 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <div class="text-center">
+      {/* Secondary links; Contact Us lives here instead of the primary nav. */}
+      <nav>
+        <ul class="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 text-sm">
+          {footerLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                class="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="text-center border-t border-gray-800 pt-6">
         <p class="text-sm text-gray-500" data-copyright-year={year}>
           {t(tr, "footer.copyright", { year: String(year) })}
         </p>

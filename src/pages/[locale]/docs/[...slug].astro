@@ -27,7 +27,7 @@ const { Content } = await render({ ...doc, body: bodyWithoutH1 });
 
 <Layout title={doc.data.title} locale={locale}>
   <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 page-hero-backdrop" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">{doc.data.title}</h1>
     </div>
