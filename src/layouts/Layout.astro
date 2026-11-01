@@ -10,7 +10,6 @@ interface Props {
   hideHeader?: boolean;
   hideFooter?: boolean;
   fullBleed?: boolean;
-  homeIntro?: boolean;
   locale?: Locale;
   noSEO?: boolean;
   localePath?: string;
@@ -22,7 +21,6 @@ const {
   hideHeader = false,
   hideFooter = false,
   fullBleed = false,
-  homeIntro = false,
   locale = defaultLocale,
   noSEO = false,
   localePath,
@@ -120,7 +118,7 @@ const localizedUrls = locales.map((loc) => ({
   </head>
 
   <body class="antialiased min-h-screen flex flex-col">
-    {!hideHeader && <Header locale={locale} localePath={localePath} brandPosition={homeIntro ? "right" : "left"} />}
+    {!hideHeader && <Header locale={locale} localePath={localePath} />}
 
     <main class:list={["site-main flex-grow w-full", { "site-main-padded": !hideHeader && !fullBleed }]}>
       <slot />

@@ -2,7 +2,7 @@
 
 The homepage adopts the Genesis Showcase reference's monochrome surfaces, generous spacing, large Instrument Sans typography, restrained red accents, and corner chapter navigation. A one-shot full-viewport EVOX opening leads into EvoX's purpose, evolution, AI applications, hardware support, resources, and recent updates. SVG diagrams explain evolution and the four application areas.
 
-`HomeIntro.astro` displays the full vector BrandWordmark in a fixed opening overlay; its translated cue links to the existing hero at `#home`. One downward wheel gesture, click/tap anywhere in the opening, upward one-finger swipe, or PageDown/ArrowDown/Space/End press starts a 1050ms native Web Animations flight. The actual displayed logo shrinks and moves to the upper-right header wordmark while the curtain fades away. Source and destination are measured once, the native scrollbar remains in place to keep the target stable, and the header target stays hidden until the flying logo arrives. The shared 64px header fades in during entry; the chapter rail appears on completion.
+`HomeIntro.astro` displays the full vector BrandWordmark in a fixed opening overlay; its translated cue links to the existing hero at `#home`. One downward wheel gesture, click/tap anywhere in the opening, upward one-finger swipe, or PageDown/ArrowDown/Space/End press starts a 1050ms native Web Animations flight. The actual displayed logo shrinks and moves to the upper-left header wordmark while the curtain fades away. Source and destination are measured once, the native scrollbar remains in place to keep the target stable, and the header target stays hidden until the flying logo arrives. The shared 64px header fades in during entry; the chapter rail appears on completion.
 
 The opening appears once per document. Completion hides the overlay, restores temporarily inert content and chrome, and removes the temporary input listeners. It leaves no scrolling placeholder, so scrolling up or following `#top` returns to the normal homepage and cannot replay the opening. `#top` belongs to the homepage wrapper; `#home` belongs to the hero. Keyboard entry moves focus to the hero title. Escape, interruption handlers, and a 1.6-second safety timeout ensure that entry always releases input. Deep links and restored scroll positions bypass the overlay. Reduced-motion preferences enter instantly and disable cue, header, and optional reveal motion. Without JavaScript, an in-flow opening, a normal `#home` cue, and visible navigation keep the page usable. Other routes show the header immediately. The chapter rail appears at viewport widths of at least 1280px; cards and content rows adapt for mobile.
 
@@ -24,7 +24,7 @@ Dark is the default theme. The header toggle switches to light and saves `evox-t
 
 `src/components/BrandMark.astro` ports the author's public [Genesis implementation](https://github.com/EMI-Group/genesis/commit/bbb8c454965df48acad79b9aa90b151693617244) from `feat/brand-mark-theme-sweep` (not merged into Genesis main at the time of integration). It preserves the 18 SVG paths, precomputed 23ms delays, 150ms easing, dark/light fills, and constant red diagonal. Explore and footer use the mark directly. It needs no component JavaScript and remains visible without JavaScript; reduced-motion preferences disable the sweep.
 
-`src/components/BrandWordmark.astro` combines the EVO letter paths supplied by the user in `新版本evox-svg.zip` with that animated X. The supplied source is preserved at `src/assets/brand/evox-wordmark-source.svg`. The component preserves the lettering's gradient and the full wordmark's source proportions, uses unique SVG gradient IDs, and responds to the shared dark/light theme. The opening, homepage hero, and header share this same vector component, so the full opening logo can scale into the header precisely. Parent elements provide accessible names; the SVG is decorative. `Layout` exposes `homeIntro?: boolean` (default false), which selects Header's `brandPosition="right"` for the homepage. Header's default brand position remains left on other routes.
+`src/components/BrandWordmark.astro` combines the EVO letter paths supplied by the user in `新版本evox-svg.zip` with that animated X. The supplied source is preserved at `src/assets/brand/evox-wordmark-source.svg`. The component preserves the lettering's gradient and the full wordmark's source proportions, uses unique SVG gradient IDs, and responds to the shared dark/light theme. The opening, homepage hero, and header share this same vector component, so the full opening logo can scale into the header precisely. Parent elements provide accessible names; the SVG is decorative. The shared header brand remains in the upper-left corner on all routes. Its `[data-intro-logo]` wrapper supplies the measured flight destination, so the opening follows the current responsive header geometry without a separate positioning prop.
 
 ### Development server
 
@@ -36,6 +36,12 @@ pnpm dev --host 127.0.0.1
 ```
 
 Open the URL printed by Astro. English is `/`; other locales use prefixes such as `/zh-cn`, `/ja`, and `/pt-br`. To check production output, run `pnpm build`, then `pnpm preview --host 127.0.0.1`.
+
+### Portable HTML preview
+
+Run `pnpm export:preview` to build the site and run `scripts/export-preview.mjs`. It writes independent Chinese (`evox-preview.html`) and English (`evox-preview-en.html`) previews to the ignored `dist-preview/` directory. Use `pnpm export:preview <directory>` to choose another output directory.
+
+Each HTML embeds its CSS, scripts, fonts, images, and original licensing, retaining the homepage animations and theme switch. Recipients can open either file directly without installing dependencies or running a server. In-page anchors stay local; documentation, article, and non-current-locale links point to `https://www.evox.group`.
 
 ## Validation and release status
 

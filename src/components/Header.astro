@@ -8,10 +8,9 @@ interface Props {
   animated?: boolean;
   locale?: Locale;
   localePath?: string;
-  brandPosition?: "left" | "right";
 }
 
-const { locale = defaultLocale, localePath, brandPosition = "left" } = Astro.props;
+const { locale = defaultLocale, localePath } = Astro.props;
 const tr = await loadTranslations(locale);
 const currentPath = (localePath ?? Astro.url.pathname).replace(/\/$/, "") || "/";
 const navLinks: { label: string; href?: string; dropdown?: { label: string; desc: string; href: string }[] }[] = [
@@ -35,13 +34,11 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
 ];
 ---
 
-<header class:list={["site-header", { "site-header-brand-right": brandPosition === "right" }]}>
+<header class="site-header">
   <div class="header-inner">
-    {brandPosition === "left" && (
-      <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
-        <span class="header-mark" data-intro-logo><BrandWordmark /></span>
-      </a>
-    )}
+    <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
+      <span class="header-mark" data-intro-logo><BrandWordmark /></span>
+    </a>
 
     <nav class="desktop-nav" aria-label={t(tr, "nav.primary")}>
       {navLinks.map((link) => link.dropdown ? (
@@ -110,11 +107,6 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
         </div>
       </details>
     </div>
-    {brandPosition === "right" && (
-      <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
-        <span class="header-mark" data-intro-logo><BrandWordmark /></span>
-      </a>
-    )}
   </div>
 </header>
 
@@ -124,9 +116,6 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .site-brand { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; }
   .header-mark { display: flex; flex-shrink: 0; width: 112px; }
   .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: 30px; margin-left: auto; }
-  .site-header-brand-right .site-brand { order: 3; }
-  .site-header-brand-right .desktop-nav { margin-left: 0; margin-right: auto; }
-  .site-header-brand-right .header-actions { order: 2; }
   .nav-link { display: flex; align-items: center; gap: 6px; padding: 21px 0; font-size: 12px; font-weight: 500; color: var(--site-muted); white-space: nowrap; transition: color .2s; cursor: pointer; }
   .nav-link:hover, details[open] > .nav-link { color: var(--site-ink); }
   summary { list-style: none; }
@@ -239,7 +228,10 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   });
 
   document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]").forEach((link) => {
-    link.href += window.location.search + window.location.hash;
+    const destination = new URL(link.href);
+    destination.search = window.location.search;
+    if (window.location.hash) destination.hash = window.location.hash;
+    link.href = destination.href;
   });
 
   const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
