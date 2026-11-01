@@ -1,305 +1,108 @@
 ---
 import { Icon } from "astro-icon/components";
+import BrandWordmark from "./BrandWordmark.astro";
 import { type Locale, defaultLocale, locales, localeNames, loadTranslations, t, getLocalizedUrl } from "../i18n/utils";
 
 interface Props {
   sticky?: boolean;
   animated?: boolean;
   locale?: Locale;
-  // Path the language switcher should link from; defaults to the real URL.
-  // Pages without per-locale equivalents (e.g. 404) pass a fixed path.
   localePath?: string;
+  brandPosition?: "left" | "right";
 }
 
-const { sticky = false, animated = false, locale = defaultLocale, localePath } = Astro.props;
+const { locale = defaultLocale, localePath, brandPosition = "left" } = Astro.props;
 const tr = await loadTranslations(locale);
-// Internal links site-wide use no trailing slash; normalize the build-time
-// pathname (which always ends with "/") so switcher links match them.
 const currentPath = (localePath ?? Astro.url.pathname).replace(/\/$/, "") || "/";
-
-// Primary navigation per the 2026.10 homepage brief:
-// EvoX | Ecosystem | Blog | Docs | GitHub | Language.
-// Genesis is surfaced on the homepage and the Ecosystem page instead of the
-// nav; Community lives at the bottom of the Ecosystem page; Contact Us is in
-// the footer; Runtime details sit under Docs.
-const navLinks: {
-  label: string;
-  href?: string;
-  badge?: string;
-  dropdown?: { label: string; desc: string; href: string }[];
-}[] = [
-  {
-    label: t(tr, "nav.ecosystem"),
-    href: getLocalizedUrl("/libs", locale),
-  },
+const navLinks: { label: string; href?: string; dropdown?: { label: string; desc: string; href: string }[] }[] = [
+  { label: t(tr, "nav.ecosystem"), href: getLocalizedUrl("/libs", locale) },
   {
     label: t(tr, "nav.blog"),
     dropdown: [
-      {
-        label: t(tr, "nav.blog.news"),
-        desc: t(tr, "nav.blog.news.desc"),
-        href: getLocalizedUrl("/news", locale),
-      },
-      {
-        label: t(tr, "nav.blog.releases"),
-        desc: t(tr, "nav.blog.releases.desc"),
-        href: getLocalizedUrl("/releases", locale),
-      },
+      { label: t(tr, "nav.blog.news"), desc: t(tr, "nav.blog.news.desc"), href: getLocalizedUrl("/news", locale) },
+      { label: t(tr, "nav.blog.releases"), desc: t(tr, "nav.blog.releases.desc"), href: getLocalizedUrl("/releases", locale) },
     ],
   },
   {
     label: t(tr, "nav.docs"),
     dropdown: [
-      {
-        label: t(tr, "nav.docs.guide"),
-        desc: t(tr, "nav.docs.guide.desc"),
-        href: getLocalizedUrl("/docs", locale),
-      },
-      {
-        label: t(tr, "nav.tutorials"),
-        desc: t(tr, "footer.tutorials.desc"),
-        href: getLocalizedUrl("/tutorials", locale),
-      },
-      {
-        label: t(tr, "nav.docs.api"),
-        desc: t(tr, "nav.docs.api.desc"),
-        href: "https://evox.readthedocs.io/en/latest/apidocs/index.html",
-      },
-      {
-        label: t(tr, "nav.docs.runtime"),
-        desc: t(tr, "nav.runtime.overview.desc"),
-        href: getLocalizedUrl("/runtime", locale),
-      },
+      { label: t(tr, "nav.docs.guide"), desc: t(tr, "nav.docs.guide.desc"), href: getLocalizedUrl("/docs", locale) },
+      { label: t(tr, "nav.tutorials"), desc: t(tr, "footer.tutorials.desc"), href: getLocalizedUrl("/tutorials", locale) },
+      { label: t(tr, "nav.docs.api"), desc: t(tr, "nav.docs.api.desc"), href: "https://evox.readthedocs.io/en/latest/apidocs/index.html" },
+      { label: t(tr, "nav.docs.runtime"), desc: t(tr, "nav.runtime.overview.desc"), href: getLocalizedUrl("/runtime", locale) },
     ],
   },
 ];
 ---
 
-<header
-  class:list={[
-    "w-full border-b border-gray-800 text-white transition-all duration-300",
-    !animated && "z-50",
-    !animated && (sticky ? "sticky top-0" : "fixed top-0"),
-  ]}
-  style="background: rgb(22, 27, 48);"
->
-  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
-      <div class="flex-shrink-0">
-        <a
-          href={getLocalizedUrl("/", locale)}
-          class="flex items-center gap-1"
-          aria-label="EvoX"
-          id={sticky ? "nav-logo-group" : undefined}
-          style={
-            sticky
-              ? "opacity: 0; transition: opacity 0.15s;"
-              : undefined
-          }
-        >
-          <img
-            src="/logo_text.png"
-            alt="EVO"
-            class="h-8"
-            style="filter: brightness(0) invert(1);"
-          />
-          <img
-            src="/logo.svg"
-            alt="EvoX mark"
-            class="h-10"
-            data-logo-mark
-            id={sticky ? "nav-logo" : undefined}
-            style={
-              animated
-                ? "opacity: 0; transition: opacity 0.15s ease-out;"
-                : undefined
-            }
-          />
-        </a>
-      </div>
+<header class:list={["site-header", { "site-header-brand-right": brandPosition === "right" }]}>
+  <div class="header-inner">
+    {brandPosition === "left" && (
+      <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
+        <span class="header-mark" data-intro-logo><BrandWordmark /></span>
+      </a>
+    )}
 
-      <nav class="hidden md:flex space-x-8 items-center" aria-label={t(tr, "nav.primary")}>
-        {
-          navLinks.map((link) => (
-            <div class="relative group" data-dropdown>
-              {link.dropdown ? (
-                <button
-                  class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-sm cursor-pointer"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {link.label}
-                  <Icon
-                    name="heroicons:chevron-down-20-solid"
-                    class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 group-[.dropdown-open]:rotate-180"
-                  />
-                </button>
-              ) : (
-                <a
-                  href={link.href}
-                  target={link.href?.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                  class="relative text-sm font-medium hover:text-teal-400 transition-colors"
-                >
-                  {link.label}
-                  {link.badge && (
-                    <span class="absolute left-full -top-2 -ml-4 inline-flex items-center rounded-full bg-red-500 px-1 py-px text-[9px] font-bold leading-tight text-white">
-                      {link.badge}
-                    </span>
-                  )}
-                </a>
-              )}
-
-              {link.dropdown && (
-                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible group-[.dropdown-open]:opacity-100 group-[.dropdown-open]:visible transition-all duration-200 transform origin-top" data-dropdown-menu>
-                  <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10">
-                    <div class="py-2">
-                      {link.dropdown.map((item) => (
-                        <a
-                          href={item.href}
-                          target={item.href.startsWith("#") ? undefined : (item.href.startsWith("http") ? "_blank" : undefined)}
-                          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          class="block px-4 py-3 hover:bg-white/10 transition-colors group/item"
-                        >
-                          <p class="text-sm font-bold text-gray-100 group-hover/item:text-teal-400">
-                            {item.label}
-                          </p>
-                          <p class="mt-1 text-xs text-gray-400 line-clamp-2">
-                            {item.desc}
-                          </p>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))
-        }
-
-        {/* GitHub */}
-        <a
-          href="https://github.com/EMI-Group"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-1.5 text-sm font-medium hover:text-teal-400 transition-colors"
-        >
-          <Icon name="simple-icons:github" class="w-4 h-4" />
-          {t(tr, "nav.github")}
-        </a>
-
-        {/* Language Switcher */}
-        <div class="relative group" data-dropdown>
-          <button
-            class="flex items-center gap-1 py-2 text-sm font-medium hover:text-teal-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-sm cursor-pointer"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <Icon name="heroicons:language-20-solid" class="w-4 h-4" />
-            {localeNames[locale]}
-            <Icon
-              name="heroicons:chevron-down-20-solid"
-              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 group-[.dropdown-open]:rotate-180"
-            />
-          </button>
-          <div class="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible group-[.dropdown-open]:opacity-100 group-[.dropdown-open]:visible transition-all duration-200 transform origin-top" data-dropdown-menu>
-            <div class="bg-[rgb(22,27,48)] rounded-lg shadow-xl overflow-hidden ring-1 ring-white/10 max-h-80 overflow-y-auto">
-              <div class="py-2">
-                {locales.map((loc) => (
-                  <a
-                    href={getLocalizedUrl(currentPath, loc)}
-                    data-locale-link
-                    class:list={[
-                      "block px-4 py-2 text-sm transition-colors",
-                      loc === locale
-                        ? "text-teal-400 font-bold"
-                        : "text-gray-300 hover:bg-white/10 hover:text-white",
-                    ]}
-                  >
-                    {localeNames[loc]}
-                  </a>
-                ))}
-              </div>
-            </div>
+    <nav class="desktop-nav" aria-label={t(tr, "nav.primary")}>
+      {navLinks.map((link) => link.dropdown ? (
+        <details class="nav-dropdown" data-desktop-dropdown>
+          <summary class="nav-link" aria-expanded="false">
+            {link.label}<Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" />
+          </summary>
+          <div class="dropdown-panel">
+            {link.dropdown.map((item) => (
+              <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                <span class="dropdown-label">{item.label}</span>
+                <span class="dropdown-description">{item.desc}</span>
+              </a>
+            ))}
           </div>
-        </div>
-      </nav>
-
-      <details class="relative md:hidden">
-        <summary class="list-none text-gray-300 hover:text-white p-2 cursor-pointer">
-          <span class="sr-only">{t(tr, "nav.openMenu")}</span>
-          <Icon name="heroicons:ellipsis-horizontal-20-solid" class="h-6 w-6" />
+        </details>
+      ) : <a href={link.href} class="nav-link">{link.label}</a>)}
+      <a href="https://github.com/EMI-Group" target="_blank" rel="noopener noreferrer" class="nav-link github-link">
+        <Icon name="simple-icons:github" class="nav-icon" />{t(tr, "nav.github")}
+      </a>
+      <details class="nav-dropdown language-dropdown" data-desktop-dropdown>
+        <summary class="nav-link" aria-expanded="false">
+          <Icon name="heroicons:language-20-solid" class="nav-icon" />
+          <span>{localeNames[locale]}</span><Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" />
         </summary>
-        <div class="absolute right-0 top-full mt-2 w-[min(88vw,20rem)] bg-[rgb(22,27,48)] rounded-lg shadow-xl ring-1 ring-white/10 overflow-hidden z-50">
-          <nav class="py-2" aria-label={t(tr, "nav.primary")}>
-            {
-              navLinks.map((link) => (
-                link.dropdown ? (
-                  <details class="border-b border-white/5 last:border-b-0">
-                    <summary class="list-none flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-100 cursor-pointer hover:bg-white/10">
-                      {link.label}
-                      <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4" />
-                    </summary>
-                    <div class="pb-2">
-                      {link.dropdown.map((item) => (
-                        <a
-                          href={item.href}
-                          target={item.href.startsWith("http") ? "_blank" : undefined}
-                          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white"
-                        >
-                          {item.label}
-                        </a>
-                      ))}
-                    </div>
-                  </details>
-                ) : (
-                  <a
-                    href={link.href}
-                    target={link.href?.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                    class="relative block px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10"
-                  >
-                    {link.label}
-                    {link.badge && (
-                      <span class="absolute -top-0.5 ml-1 inline-flex items-center rounded-full bg-red-500 px-1 py-px text-[9px] font-bold leading-tight text-white">
-                        {link.badge}
-                      </span>
-                    )}
-                  </a>
-                )
-              ))
-            }
+        <div class="dropdown-panel language-panel">
+          {locales.map((loc) => (
+            <a href={getLocalizedUrl(currentPath, loc)} data-locale-link lang={loc} aria-current={loc === locale ? "true" : undefined}>{localeNames[loc]}</a>
+          ))}
+        </div>
+      </details>
+    </nav>
 
-            <a
-              href="https://github.com/EMI-Group"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-100 hover:bg-white/10 border-t border-white/10 mt-1"
-            >
-              <Icon name="simple-icons:github" class="w-5 h-5" />
-              {t(tr, "nav.github")}
-            </a>
-
-            <details class="border-t border-white/10">
-              <summary class="list-none flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-100 cursor-pointer hover:bg-white/10">
-                {localeNames[locale]}
-                <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4" />
-              </summary>
-              <div class="max-h-64 overflow-y-auto pb-2">
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-label={t(tr, "theme.toggle")} title={t(tr, "theme.toggle")} data-theme-toggle aria-pressed="true">
+        <Icon name="heroicons:sun-20-solid" class="theme-sun" />
+        <Icon name="heroicons:moon-20-solid" class="theme-moon" />
+      </button>
+      <details class="mobile-menu" data-mobile-menu>
+        <summary class="mobile-toggle" aria-label={t(tr, "nav.openMenu")} aria-expanded="false">
+          <Icon name="heroicons:bars-3-20-solid" class="mobile-open-icon" />
+          <Icon name="heroicons:x-mark-20-solid" class="mobile-close-icon" />
+        </summary>
+        <div class="mobile-panel">
+          <nav aria-label={t(tr, "nav.primary")}>
+            {navLinks.map((link) => link.dropdown ? (
+              <details class="mobile-section">
+                <summary>{link.label}<Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" /></summary>
+                <div class="mobile-submenu">
+                  {link.dropdown.map((item) => (
+                    <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}>{item.label}</a>
+                  ))}
+                </div>
+              </details>
+            ) : <a href={link.href} class="mobile-link">{link.label}</a>)}
+            <a href="https://github.com/EMI-Group" target="_blank" rel="noopener noreferrer" class="mobile-link">{t(tr, "nav.github")}</a>
+            <details class="mobile-section">
+              <summary>{localeNames[locale]}<Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" /></summary>
+              <div class="mobile-submenu mobile-languages">
                 {locales.map((loc) => (
-                  <a
-                    href={getLocalizedUrl(currentPath, loc)}
-                    data-locale-link
-                    class:list={[
-                      "block px-6 py-2 text-sm transition-colors",
-                      loc === locale
-                        ? "text-teal-400 font-bold"
-                        : "text-gray-300 hover:bg-white/10 hover:text-white",
-                    ]}
-                  >
-                    {localeNames[loc]}
-                  </a>
+                  <a href={getLocalizedUrl(currentPath, loc)} data-locale-link lang={loc} aria-current={loc === locale ? "true" : undefined}>{localeNames[loc]}</a>
                 ))}
               </div>
             </details>
@@ -307,208 +110,153 @@ const navLinks: {
         </div>
       </details>
     </div>
+    {brandPosition === "right" && (
+      <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
+        <span class="header-mark" data-intro-logo><BrandWordmark /></span>
+      </a>
+    )}
   </div>
 </header>
 
 <style>
-  /* JS adds .dropdown-suppressed to a just-closed dropdown so group-hover
-     and group-focus-within cannot re-show its menu while the pointer still
-     hovers it or focus returns to its trigger. */
-  [data-dropdown].dropdown-suppressed [data-dropdown-menu] {
-    opacity: 0 !important;
-    visibility: hidden !important;
+  .site-header { position: fixed; inset: 0 0 auto; z-index: 100; height: 64px; background: color-mix(in srgb, var(--site-bg) 88%, transparent); border-bottom: 1px solid var(--site-line); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .header-inner { width: min(100% - 64px, 1216px); height: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 36px; }
+  .site-brand { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; }
+  .header-mark { display: flex; flex-shrink: 0; width: 112px; }
+  .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: 30px; margin-left: auto; }
+  .site-header-brand-right .site-brand { order: 3; }
+  .site-header-brand-right .desktop-nav { margin-left: 0; margin-right: auto; }
+  .site-header-brand-right .header-actions { order: 2; }
+  .nav-link { display: flex; align-items: center; gap: 6px; padding: 21px 0; font-size: 12px; font-weight: 500; color: var(--site-muted); white-space: nowrap; transition: color .2s; cursor: pointer; }
+  .nav-link:hover, details[open] > .nav-link { color: var(--site-ink); }
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  .nav-icon { width: 15px; height: 15px; }
+  .nav-chevron { width: 13px; height: 13px; transition: transform .2s; }
+  details[open] > summary .nav-chevron { transform: rotate(180deg); }
+  .nav-dropdown { position: relative; }
+  .dropdown-panel { position: absolute; top: calc(100% - 1px); left: -24px; width: 286px; padding: 8px; border: 1px solid var(--site-line); border-radius: 16px; background: var(--site-bg); box-shadow: 0 12px 40px #0003; }
+  .dropdown-panel a { display: block; padding: 12px 14px; border-radius: 9px; transition: background .2s; }
+  .dropdown-panel a:hover, .dropdown-panel a:focus-visible { background: var(--site-alt); }
+  .dropdown-label { display: block; color: var(--site-ink); font-size: 13px; font-weight: 600; }
+  .dropdown-description { display: block; color: var(--site-muted); font-size: 12px; line-height: 1.45; margin-top: 4px; }
+  .language-panel { right: -10px; left: auto; width: 190px; max-height: min(70vh, 420px); overflow-y: auto; }
+  .language-panel a { font-size: 13px; color: var(--site-muted); padding-block: 9px; }
+  a[aria-current="true"] { color: var(--site-accent); font-weight: 600; }
+  .header-actions { display: flex; align-items: center; gap: 14px; }
+  .theme-toggle, .mobile-toggle { width: 32px; height: 32px; border: 1px solid var(--site-line); border-radius: 50%; display: grid; place-items: center; color: var(--site-muted); cursor: pointer; background: transparent; transition: color .2s, background .2s; }
+  .theme-toggle:hover, .mobile-toggle:hover { background: var(--site-alt); color: var(--site-ink); }
+  .theme-toggle svg { width: 15px; height: 15px; }
+  .theme-moon { display: none; }
+  :global([data-theme="light"]) .theme-sun { display: none; }
+  :global([data-theme="light"]) .theme-moon { display: block; }
+  .mobile-menu { display: none; }
+  .mobile-toggle svg { width: 18px; height: 18px; }
+  .mobile-close-icon, .mobile-menu[open] .mobile-open-icon { display: none; }
+  .mobile-menu[open] .mobile-close-icon { display: block; }
+  .mobile-panel { position: absolute; inset: 63px 0 auto; padding: 16px 24px 24px; background: var(--site-bg); border-bottom: 1px solid var(--site-line); max-height: calc(100dvh - 64px); overflow-y: auto; box-shadow: 0 18px 28px #0002; }
+  .mobile-link, .mobile-section > summary { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 15px; color: var(--site-ink); border-bottom: 1px solid var(--site-line); cursor: pointer; }
+  .mobile-submenu { display: grid; gap: 0; padding: 6px 0 12px; }
+  .mobile-submenu a { padding: 10px 16px; font-size: 14px; color: var(--site-muted); }
+  .mobile-submenu a:hover { color: var(--site-ink); }
+  .mobile-languages { grid-template-columns: 1fr 1fr; }
+  .mobile-languages a[aria-current="true"] { color: var(--site-accent); }
+  @media (max-width: 860px) {
+    .header-inner { width: calc(100% - 40px); gap: 18px; }
+    .desktop-nav { display: none; }
+    .mobile-menu { display: block; }
   }
 </style>
 
 <script>
-  // Desktop dropdowns: CSS group-hover handles hover; JS is the single source
-  // of truth for click/focus state — it manages the dropdown-open class,
-  // aria-expanded, and blurs focused elements on close so that
-  // group-focus-within cannot keep a closed dropdown open. A just-closed
-  // dropdown gets dropdown-suppressed so group-hover/group-focus-within
-  // cannot re-show it until the pointer leaves or focus moves on.
-  const dropdowns = document.querySelectorAll<HTMLElement>("[data-dropdown]");
+  const desktopMenus = document.querySelectorAll<HTMLDetailsElement>("[data-desktop-dropdown]");
+  const mobileMenu = document.querySelector<HTMLDetailsElement>("[data-mobile-menu]");
+  const closeDesktopMenus = (except?: HTMLDetailsElement) => {
+    desktopMenus.forEach((menu) => { if (menu !== except) menu.open = false; });
+  };
 
-  function isDropdownOpen(dropdown: HTMLElement) {
-    if (dropdown.classList.contains("dropdown-open")) return true;
-    // A suppressed menu is hidden even when :focus-within matches (e.g.
-    // after Escape returned focus to the trigger), so it counts as closed.
-    if (dropdown.classList.contains("dropdown-suppressed")) return false;
-    return dropdown.matches(":focus-within");
-  }
-
-  function openDropdown(dropdown: HTMLElement, button: HTMLButtonElement) {
-    unsuppressDropdown(dropdown);
-    dropdown.classList.add("dropdown-open");
-    button.setAttribute("aria-expanded", "true");
-  }
-
-  function closeDropdown(dropdown: HTMLElement) {
-    dropdown.classList.remove("dropdown-open");
-    dropdown.querySelector("button")?.setAttribute("aria-expanded", "false");
-    // Blur any focused element inside so group-focus-within releases the menu
-    const active = document.activeElement;
-    if (active instanceof HTMLElement && dropdown.contains(active)) {
-      active.blur();
-    }
-  }
-
-  function closeAllDropdowns(except?: HTMLElement) {
-    dropdowns.forEach((dropdown) => {
-      if (dropdown !== except) closeDropdown(dropdown);
+  desktopMenus.forEach((menu) => {
+    const trigger = menu.querySelector("summary");
+    let pinned = false;
+    trigger?.addEventListener("click", (event) => {
+      event.preventDefault();
+      closeDesktopMenus(menu);
+      pinned = !pinned;
+      menu.open = pinned;
     });
-  }
-
-  // Suppression hides the menu via CSS; also mark it inert so its links
-  // cannot be reached by Tab or clicked during the 200ms fade transition.
-  function suppressDropdown(dropdown: HTMLElement) {
-    dropdown.classList.add("dropdown-suppressed");
-    dropdown.querySelector("[data-dropdown-menu]")?.setAttribute("inert", "");
-  }
-
-  function unsuppressDropdown(dropdown: HTMLElement) {
-    dropdown.classList.remove("dropdown-suppressed");
-    dropdown.querySelector("[data-dropdown-menu]")?.removeAttribute("inert");
-  }
-
-  dropdowns.forEach((dropdown) => {
-    const button = dropdown.querySelector("button");
-    if (!button) return;
-
-    // Capture the open state before the activation moves focus. At
-    // pointerdown focus has not moved yet, so isDropdownOpen reflects the
-    // pre-click state; on keyboard activation focus is already on the
-    // button (:focus-within always matches), so only the pinned
-    // dropdown-open class counts as "open".
-    let openBeforeClick = false;
-    button.addEventListener("pointerdown", () => {
-      openBeforeClick = isDropdownOpen(dropdown);
-    });
-    button.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        openBeforeClick = dropdown.classList.contains("dropdown-open");
+    trigger?.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        closeDesktopMenus(menu);
+        menu.open = true;
+        pinned = true;
+        menu.querySelector("a")?.focus();
       }
     });
-
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-      if (openBeforeClick) {
-        closeDropdown(dropdown);
-        if (dropdown.matches(":hover")) {
-          // Only suppress when the pointer still hovers this dropdown
-          // (otherwise group-hover would re-show the menu at once).
-          suppressDropdown(dropdown);
-        } else {
-          // Keyboard activation: closeDropdown blurred the button, which
-          // would strand focus on <body>. Return it to the trigger (like
-          // Escape does); suppression keeps group-focus-within from
-          // re-showing the menu until focus moves on.
-          suppressDropdown(dropdown);
-          button.focus();
-        }
-      } else {
-        // Exclude this dropdown so closeDropdown cannot blur the button
-        // that just received focus.
-        closeAllDropdowns(dropdown);
-        openDropdown(dropdown, button);
-      }
+    menu.addEventListener("toggle", () => {
+      trigger?.setAttribute("aria-expanded", String(menu.open));
+      if (!menu.open) pinned = false;
+      if (menu.open) closeDesktopMenus(menu);
     });
-
-    // Menubar behavior: while a dropdown is pinned open via click, hovering
-    // another dropdown closes the pinned one.
-    dropdown.addEventListener("pointerenter", () => {
-      dropdowns.forEach((other) => {
-        if (other !== dropdown && other.classList.contains("dropdown-open")) {
-          closeDropdown(other);
-        }
-      });
-      // Hover opens the menu via group-hover; keep aria-expanded in sync.
-      // A suppressed menu stays hidden (and inert), so it stays false.
-      if (!dropdown.classList.contains("dropdown-suppressed")) {
-        button.setAttribute("aria-expanded", "true");
-      }
+    menu.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") { closeDesktopMenus(menu); menu.open = true; }
     });
-
-    dropdown.addEventListener("mouseleave", () => {
-      // Keep suppression while focus is still inside (e.g. Escape returned
-      // focus to the trigger): clearing it here would let group-focus-within
-      // re-show the menu on a mere pointer swipe.
-      if (!dropdown.contains(document.activeElement)) {
-        unsuppressDropdown(dropdown);
-        // The pointer left and focus is outside: neither group-hover nor
-        // group-focus-within shows the menu anymore. A click-pinned menu
-        // (dropdown-open) stays open and keeps aria-expanded=true.
-        if (!dropdown.classList.contains("dropdown-open")) {
-          button.setAttribute("aria-expanded", "false");
-        }
-      }
+    menu.addEventListener("pointerleave", () => {
+      if (!menu.contains(document.activeElement)) menu.open = false;
     });
-    dropdown.addEventListener("focusout", (event) => {
-      if (
-        !(event.relatedTarget instanceof Node) ||
-        !dropdown.contains(event.relatedTarget)
-      ) {
-        unsuppressDropdown(dropdown);
-        // Focus left a dropdown that is not pinned open: group-focus-within
-        // no longer matches. If the pointer still hovers, group-hover keeps
-        // the menu visible, so aria-expanded must stay true.
-        if (
-          !dropdown.classList.contains("dropdown-open") &&
-          !dropdown.matches(":hover")
-        ) {
-          button.setAttribute("aria-expanded", "false");
-        }
-      }
-    });
-    // Keyboard users open the menu via focus-within; keep aria-expanded in
-    // sync. A suppressed menu stays hidden (and inert), so it stays false.
-    dropdown.addEventListener("focusin", () => {
-      if (!dropdown.classList.contains("dropdown-suppressed")) {
-        button.setAttribute("aria-expanded", "true");
-      }
+    menu.addEventListener("focusout", (event) => {
+      if (!(event.relatedTarget instanceof Node) || !menu.contains(event.relatedTarget)) menu.open = false;
     });
   });
+
+  mobileMenu?.addEventListener("toggle", () => {
+    mobileMenu.querySelector("summary")?.setAttribute("aria-expanded", String(mobileMenu.open));
+  });
+  mobileMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { mobileMenu.open = false; }));
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Node)) return;
-    dropdowns.forEach((dropdown) => {
-      if (!dropdown.contains(event.target as Node)) closeDropdown(dropdown);
-    });
+    desktopMenus.forEach((menu) => { if (!menu.contains(event.target as Node)) menu.open = false; });
+    if (mobileMenu && !mobileMenu.contains(event.target)) mobileMenu.open = false;
   });
-
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-    dropdowns.forEach((dropdown) => {
-      // Menus can also be open purely via :hover (no focus, no pinned
-      // class); those are not covered by isDropdownOpen.
-      const hoverOpen =
-        dropdown.matches(":hover") &&
-        !dropdown.classList.contains("dropdown-suppressed");
-      if (!isDropdownOpen(dropdown) && !hoverOpen) return;
-      // Return focus to the trigger button; suppression keeps the menu
-      // closed even though focus-within now matches again.
-      const hadFocusInside = dropdown.contains(document.activeElement);
-      closeDropdown(dropdown);
-      if (hadFocusInside) {
-        suppressDropdown(dropdown);
-        dropdown.querySelector("button")?.focus();
-      } else if (dropdown.matches(":hover")) {
-        // Safari/Firefox do not focus buttons on click, so focus may be
-        // outside while the pointer still hovers: suppress group-hover
-        // from re-showing the menu until the pointer leaves.
-        suppressDropdown(dropdown);
-      }
-    });
+    const activeDesktopMenu = [...desktopMenus].find((menu) => menu.open);
+    if (activeDesktopMenu) {
+      activeDesktopMenu.open = false;
+      activeDesktopMenu.querySelector("summary")?.focus();
+      event.preventDefault();
+    }
+    if (mobileMenu?.open) {
+      mobileMenu.open = false;
+      mobileMenu.querySelector("summary")?.focus();
+      event.preventDefault();
+    }
+  });
+  window.matchMedia("(min-width: 861px)").addEventListener("change", (event) => {
+    if (event.matches && mobileMenu) mobileMenu.open = false;
+    if (!event.matches) closeDesktopMenus();
   });
 
-  // Preserve query string and hash when switching locales; in a static build
-  // they are only known on the client.
-  const urlSuffix = window.location.search + window.location.hash;
-  if (urlSuffix) {
-    document
-      .querySelectorAll<HTMLAnchorElement>("a[data-locale-link]")
-      .forEach((link) => {
-        link.href += urlSuffix;
-      });
-  }
+  document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]").forEach((link) => {
+    link.href += window.location.search + window.location.hash;
+  });
+
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+  const syncThemeButtons = () => themeButtons.forEach((button) => {
+    button.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
+  });
+  syncThemeButtons();
+  themeButtons.forEach((button) => button.addEventListener("click", () => {
+    const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("evox-theme", theme); } catch { /* Theme switching still works when storage is unavailable. */ }
+    syncThemeButtons();
+  }));
+  window.addEventListener("storage", (event) => {
+    if (event.key === "evox-theme") {
+      document.documentElement.dataset.theme = event.newValue === "light" ? "light" : "dark";
+      syncThemeButtons();
+    }
+  });
 </script>

@@ -9,6 +9,8 @@ interface Props {
   description?: string;
   hideHeader?: boolean;
   hideFooter?: boolean;
+  fullBleed?: boolean;
+  homeIntro?: boolean;
   locale?: Locale;
   noSEO?: boolean;
   localePath?: string;
@@ -19,6 +21,8 @@ const {
   description,
   hideHeader = false,
   hideFooter = false,
+  fullBleed = false,
+  homeIntro = false,
   locale = defaultLocale,
   noSEO = false,
   localePath,
@@ -84,10 +88,18 @@ const localizedUrls = locales.map((loc) => ({
 ---
 
 <!doctype html>
-<html lang={htmlLang}>
+<html lang={htmlLang} data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("evox-theme") === "light" ? "light" : "dark";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+    <link rel="preload" href="/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={metaDescription} />
@@ -107,23 +119,13 @@ const localizedUrls = locales.map((loc) => ({
     <title>{pageTitle}</title>
   </head>
 
-  <body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
-    {!hideHeader && <Header locale={locale} localePath={localePath} />}
+  <body class="antialiased min-h-screen flex flex-col">
+    {!hideHeader && <Header locale={locale} localePath={localePath} brandPosition={homeIntro ? "right" : "left"} />}
 
-    <main class:list={["flex-grow w-full", { "pt-20": !hideHeader }]}>
+    <main class:list={["site-main flex-grow w-full", { "site-main-padded": !hideHeader && !fullBleed }]}>
       <slot />
     </main>
 
     {!hideFooter && <Footer locale={locale} />}
   </body>
 </html>
-
-<style is:global>
-  /* Smooth Scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-  html, body {
-    overflow-x: hidden;
-  }
-</style>

@@ -1,4 +1,5 @@
 {
+  "theme.toggle": "색상 테마 전환",
   "site.title": "EvoX - 진화형 AI 시스템을 위한 인프라",
   "meta.description": "EvoX는 진화형 AI 시스템을 위한 오픈소스 인프라로, 이기종 하드웨어에서 지능이 디지털과 물리 세계를 넘나들며 적응하고, 창조하고, 진화할 수 있게 합니다.",
   "nav.github": "GitHub",

@@ -1,0 +1,54 @@
+---
+import GenerativeArt from "./art/GenerativeArt.astro";
+import AgenticArt from "./art/AgenticArt.astro";
+import PhysicalArt from "./art/PhysicalArt.astro";
+import ScienceArt from "./art/ScienceArt.astro";
+
+interface Props {
+  kind: "generative" | "agentic" | "physical" | "science";
+}
+
+const { kind } = Astro.props;
+// Keep each illustration independent while sharing one flat illustration palette.
+const illustrations = {
+  generative: GenerativeArt,
+  agentic: AgenticArt,
+  physical: PhysicalArt,
+  science: ScienceArt,
+};
+const Illustration = illustrations[kind];
+---
+
+<div class={`application-art application-art--${kind}`}>
+  <Illustration />
+</div>
+
+<style>
+  .application-art {
+    --art-ink: var(--site-ink);
+    --art-line: color-mix(in srgb, var(--site-ink) 48%, var(--site-alt));
+    --art-guide: color-mix(in srgb, var(--site-ink) 14%, var(--site-alt));
+    --art-fill: color-mix(in srgb, var(--site-ink) 5%, var(--site-alt));
+    --art-surface: var(--site-alt);
+    --art-accent: var(--site-accent, #c8383c);
+    --art-accent-soft: color-mix(in srgb, var(--site-accent) 8%, var(--site-alt));
+    width: 100%;
+    aspect-ratio: 12 / 7;
+  }
+
+  :global(html[data-theme="dark"]) .application-art {
+    --art-line: color-mix(in srgb, var(--site-ink) 65%, var(--site-alt));
+    --art-accent: color-mix(in srgb, var(--site-accent) 82%, #fff);
+  }
+
+  .application-art :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .application-art :global(svg :is(path, rect, circle, ellipse, line, polyline)) {
+    vector-effect: non-scaling-stroke;
+  }
+</style>

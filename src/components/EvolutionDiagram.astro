@@ -1,0 +1,146 @@
+---
+// A decorative population tree: candidates branch, converge, and evolve.
+// The surrounding section supplies the accessible explanation.
+type Point = { x: number; y: number; selected?: boolean; terminal?: boolean };
+
+const generations: Point[][] = [
+  [{ x: 48, y: 150, selected: true }],
+  [
+    { x: 198, y: 54 },
+    { x: 198, y: 102 },
+    { x: 198, y: 150, selected: true },
+    { x: 198, y: 198 },
+    { x: 198, y: 246 },
+  ],
+  [
+    { x: 358, y: 30 },
+    { x: 358, y: 78 },
+    { x: 358, y: 126, selected: true },
+    { x: 358, y: 174 },
+    { x: 358, y: 222 },
+    { x: 358, y: 270 },
+  ],
+  [
+    { x: 518, y: 66 },
+    { x: 518, y: 126, selected: true },
+    { x: 518, y: 186 },
+    { x: 518, y: 246 },
+  ],
+  [
+    { x: 678, y: 54 },
+    { x: 678, y: 102 },
+    { x: 678, y: 150, selected: true },
+    { x: 678, y: 198 },
+    { x: 678, y: 246 },
+  ],
+  [
+    { x: 852, y: 78, terminal: true },
+    { x: 852, y: 150, selected: true, terminal: true },
+    { x: 852, y: 222, terminal: true },
+  ],
+];
+
+// Each pair connects node indices in two consecutive generations.
+const connections = [
+  [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+  [[0, 0], [0, 1], [1, 1], [1, 2], [2, 2], [2, 3], [3, 3], [3, 4], [4, 4], [4, 5]],
+  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2], [4, 3], [5, 3]],
+  [[0, 0], [0, 1], [1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3], [3, 4]],
+  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2]],
+];
+
+const branches = connections.flatMap((pairs, generation) =>
+  pairs.map(([source, target]) => {
+    const from = generations[generation][source];
+    const to = generations[generation + 1][target];
+    const midpoint = (from.x + to.x) / 2;
+    return {
+      selected: Boolean(from.selected && to.selected),
+      // Leave small gaps at node centers so the rings remain hollow.
+      path: `M ${from.x + 5} ${from.y} C ${midpoint} ${from.y}, ${midpoint} ${to.y}, ${to.x - 5} ${to.y}`,
+    };
+  }),
+);
+---
+
+<div class="evolution-diagram">
+  <svg viewBox="0 0 900 300" fill="none" aria-hidden="true" focusable="false">
+    <g class="population-branches">
+      {branches.filter((branch) => !branch.selected).map((branch) => <path d={branch.path} />)}
+    </g>
+    <g class="selected-branches">
+      {branches.filter((branch) => branch.selected).map((branch) => <path d={branch.path} />)}
+    </g>
+    <g class="population-nodes">
+      {generations.flat().map((point) => (
+        <circle
+          class:list={{ selected: point.selected, terminal: point.terminal }}
+          cx={point.x}
+          cy={point.y}
+          r={point.selected && point.terminal ? 6 : 4}
+        />
+      ))}
+    </g>
+    <circle class="terminal-ring" cx="852" cy="150" r="14" />
+  </svg>
+</div>
+
+<style>
+  .evolution-diagram {
+    width: 100%;
+    color: var(--site-muted, #7d7d7a);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  path,
+  circle {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .population-branches {
+    stroke: color-mix(in srgb, var(--site-ink, #242424) 22%, var(--site-line, #d7d5cf));
+    stroke-width: 1;
+    opacity: 0.8;
+  }
+
+  .selected-branches {
+    stroke: var(--site-accent, #c8383c);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .population-nodes circle {
+    stroke: var(--site-muted, #7d7d7a);
+    stroke-width: 1.15;
+    opacity: 0.75;
+  }
+
+  .population-nodes .selected {
+    stroke: var(--site-accent, #c8383c);
+    stroke-width: 1.7;
+    opacity: 1;
+  }
+
+  .population-nodes .terminal.selected {
+    fill: var(--site-accent, #c8383c);
+  }
+
+  .terminal-ring {
+    stroke: var(--site-accent, #c8383c);
+    stroke-width: 1;
+    opacity: 0.26;
+  }
+
+  /* Keep every generation legible while allowing the tree to scale on mobile. */
+  @media (max-width: 640px) {
+    .population-branches {
+      opacity: 1;
+    }
+  }
+</style>

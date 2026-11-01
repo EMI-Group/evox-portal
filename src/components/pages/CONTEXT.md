@@ -1,52 +1,41 @@
 # src/components/pages/
 
 ## Intent
-Page-body components for EvoX Portal's landing pages — one component per landing page. Thin route files in `src/pages/` (and `src/pages/[locale]/`) render these with a `locale` prop (`<HomeContent />` on `/`, `<RuntimeContent />` on `/runtime`). Default-locale routes pass no props; the component falls back to `defaultLocale` ("en").
+Shared landing-page bodies for the English and localized route trees. Each accepts `locale?: Locale`, defaults to English, and loads translations. Thin route files render HomeContent at `/`, RuntimeContent at `/runtime`, and EcosystemContent at `/libs`, with locale-prefixed equivalents.
 
 ## API Surface
-All components: `interface Props { locale?: Locale }`, `const tr = await loadTranslations(locale)`.
+- **HomeContent.astro** — Uses `<Layout fullBleed homeIntro>` with Layout's shared Header and Footer as siblings of main. `fullBleed` omits standard header padding so the homepage controls its spacing; `homeIntro` places the header brand on the right for the opening handoff. HomeIntro's one-shot full-viewport EVOX overlay sits above the normal content: EvoX hero and Docs/GitHub actions; evolution diagram and five-step loop; four AI paradigm cards; hardware support and two sourced measurements; resource links; latest release and two latest news articles. The opening, hero, and header use BrandWordmark's supplied vector EVO lettering and original animated X. Data comes from localized Astro collections, with UTC dates and translated summary fallbacks. Genesis links externally to `https://genesis.evox.group/`.
+- **EcosystemContent.astro** — Standard Layout chrome, featured Genesis, libraries sorted with EvoX first, and Community at `#community`. QQ opens an accessible QR dialog; Discord links externally.
+- **RuntimeContent.astro** — Standard Layout chrome, Runtime hero, Docs/GitHub links, and RuntimeExamples. Its legacy navy inline background is adapted by global theme styles.
+- **RuntimeExamples.astro** — Three tabs (`examples.singleObj/multiObj/neuro`) pair Python code using the GitHub Dark theme with interactive examples. Scripts provide timed auto-advance, Plotly readiness guards and resize, lazy Brax readiness polling, and Arrow/Home/End keyboard navigation.
 
-- **HomeContent.astro** (650 lines) — Homepage body. Renders `<Layout title={t(tr,"site.title")} hideHeader hideFooter locale>` and manages its own chrome: `<Header animated locale>` inside `#navbar` (fixed, starts `translateY(-100%)` — fully above the viewport, scroll-independent) + `<Footer locale>`. Sections: hero (split title `hero.title.line1/2`, logo, `#cta-content`), Latest News (latest release + 2 latest news via `getCollection("news"/"releases")` + `getLocalizedNews`/`getLocalizedArticles`, dates via `getDateLocale`/`toLocaleDateString` with `timeZone:"UTC"`, summary fallback keys `news.defaultSummary`/`releases.defaultSummary`), Ecosystem (first 3 `getCollection("libs")`, desc via `` t(tr, `libs.desc.${id}`) ``, links `item.data.url` external), Community (QQ QR modal + Discord link). Inline `<script>`: hero fly-in animation (rAF, top-entry: navbar slides down from above the viewport while a cloned flyLogo morphs from the hero spot to the navbar spot on a `smooth()` timeline; `pAll = smooth(rawT)` drives logo morph + hero collapse/CTA fade/gradient; flyLogo handoff to `img[data-logo-mark]`), scroll lock via non-passive wheel/touchmove `preventDefault`, `history.scrollRestoration = "manual"`, anchor-link (`a[href^='#']`) interception, QQ modal toggle (`data-qq-qr-open`/`data-qq-qr-close`, Escape, `/images/qq-group-qr.png`).
-- **RuntimeContent.astro** (53 lines) — `/runtime` hero + delegate. `<Layout title={t(tr,"runtime.pageTitle")} description={t(tr,"runtime.hero.desc")} locale>`, dark hero (keys `runtime.hero.badge/subtitle/desc`), GitHub link, then `<RuntimeExamples locale={locale}>`.
-- **RuntimeExamples.astro** (373 lines) — Tabbed live examples. 3 tabs (`examples.singleObj/multiObj/neuro`) with `/arrow_1.png`…`/arrow_3.png`; each panel = `astro:components` `<Code code={...py?raw} lang="python" theme="github-dark">` + interactive component from `src/content/examples/` (`single-obj.astro`, `multi-obj.astro`, `neuroevolution.astro` — only neuroevolution takes `locale`). Inline `<script>`: auto-advancing carousel (~16 s/tab, `BRAX_DURATION`), Plotly animation on `#cso-plot`/`#rvea-plot` (guards: `data-ready="true"` + global `Plotly`), Brax iframe readiness polling (500 ms), initial wait-and-start poll (20 × 300 ms ≈ 6 s then give up), APG arrow/Home/End keyboard tab nav.
+## Homepage Design and Interaction
+- The Showcase-inspired design uses shared theme tokens, monochrome surfaces, red accents, fine borders, and SVG components `../EvolutionDiagram.astro` and `../ParadigmArt.astro`.
+- `../HomeIntro.astro` shows the full BrandWordmark in a fixed opening overlay. One downward wheel gesture, click/tap, upward one-finger swipe, or PageDown/ArrowDown/Space/End press triggers a 1050ms native Web Animations transform of the actual logo into the upper-right header wordmark. The curtain fades away behind it. Source and destination are measured once, the target stays hidden until handoff, and scrollbar geometry remains stable. Completion hides the overlay permanently for the document, restores temporarily inert sections and chrome, and removes input guards. Escape and a 1.6-second safety timeout also release the transition. Keyboard entry focuses the hero title; reduced motion enters instantly. The overlay occupies no scrolling space, so the top after entry is the normal homepage.
+- The content container is at most 1040px wide. Sections use 88–144px vertical padding. The hero's vector wordmark is `min(68vw, 520px)` wide, or `min(82vw, 360px)` up to 600px. Statements scale from 27–44px, section headings from 37–64px, and descriptive copy is 18px. Up to 600px wide the statement is 28px and description 16px.
+- Application cards use two columns, then one on narrow screens. Hardware uses seven columns, four below 850px, and two below 600px. Resources and news collapse to a single content column on mobile.
+- Native anchors target `#top` on the homepage wrapper, `#home` on the hero, then `#evolution`, `#applications`, `#computing`, `#explore`, and `#news`. Returning to `#top` after entry never reopens the overlay. The hero uses `data-chapter-id="top"` for the rail's first branch. The corner chapter rail is visible after the opening only at viewport widths of at least 1280px; its active branch follows scroll position using a passive listener and requestAnimationFrame.
+- Optional reveals use IntersectionObserver. Initially visible content is never hidden; content stays readable without JavaScript or IntersectionObserver. Reduced-motion settings show content without reveal motion. After the one-shot logo handoff, scrolling is native. Initial deep links, nonzero restored scroll positions, and browser page restoration skip entry. There is no content-height collapse or persistent input lock. Without JavaScript, the opening remains in flow with a normal `#home` cue and visible navigation.
 
 ## Constraints
-- i18n: `loadTranslations(locale)` + `t(tr, "key")` only; no hardcoded UI strings. Documented deviations: "EvoX Runtime" H1 in RuntimeContent.astro, "QQ: 297969717" in HomeContent.astro, alt texts.
-- Internal links via `getLocalizedUrl(path, locale)` (HomeContent News/Ecosystem "see all").
-- External links: `target="_blank" rel="noopener noreferrer"` (GitHub, Discord, ecosystem cards).
-- Scoped `<style>`/`<script>` per component; no shared page-level JS.
+- Use translated UI copy and locale-aware internal URLs without trailing slashes. Preserve hardware-support qualifications; Ascend and Vulkan labels describe different validated scopes.
+- External new-tab links require `rel="noopener noreferrer"`.
+- HomeContent owns scoped styles and uses `--site-*` tokens directly. Other landing pages receive adaptations under `.site-main-padded`; test both themes after changing utilities.
+- Keep the fixed Header visible immediately on other routes. HomeIntro owns the homepage opening's Header and chapter-rail visibility; Header's legacy `animated` prop does not control it.
 
-## Known Issues
-- Homepage scroll is locked (wheel/touchmove prevented) until the hero fly-in completes; first wheel/touch/click triggers expand; reduced-motion users get instant `completeExpand()`. Anchor-link scrolls are deferred until expansion finishes (`pendingAnchor`). `#cta-content` is `inert` + `pointer-events:none` until expanded (removed mid-animation at `pAll >= 1`).
-- "EvoX Runtime" H1 is hardcoded (not localized); also the Runtime GitHub link reuses `t(tr, "genesis.hero.github")` — a cross-key reuse left over from the deleted Genesis page (GenesisContent.astro was removed in commit e173eda; Genesis is now an external link).
-- RuntimeExamples depends on browser globals: Plotly (loaded by example components) and the lazy Brax iframe. If plot/iframe never becomes ready the carousel skips ahead (guards + poll timeouts). `Plotly.Plots.resize` is called on tab activation.
-- Carousel animations continue even when the tab is hidden (only guarded by `animationActive`/`currentTab` checks) — panels are `display:none` when inactive.
+## Known Issues and Dependencies
+- RuntimeContent's product-name H1 is an intentional literal; its GitHub link reuses `genesis.hero.github`.
+- Plotly and Brax depend on browser/network capabilities. Preserve readiness guards and polling timeouts; the carousel may skip unavailable panels. Runtime animations are independent of homepage reveals.
+- The QQ modal lives in EcosystemContent, not on the homepage.
 
-## Design Decisions
-- **Navbar fly-in enters from the TOP of the viewport** (commit 525b43a): `#navbar` starts at `translateY(-100%)` (fully above the screen; `position: fixed; top: 0` makes this scroll-independent) and slides down into place. This replaced the v3.0.1 bottom-rise (commit a99662c) where the navbar rose from `translateY(100vh)` carrying the hero logo on its top edge. The choreography is now decoupled: navbar slide (`slideMs = clamp(navbarH/0.5, 250, 600)`) + independent flyLogo morph from hero spot to navbar spot (`flyMs = clamp(|logoEndY - logoStartY|/0.25, 1400, 3600)`), both on a `smooth()` (smoothstep) timeline; `pAll = smooth(rawT)` drives the logo morph AND the hero collapse/CTA fade/gradient/scroll-indicator fades so everything completes exactly when the logo lands. The old `hermite()` helper and the rise/carry velocity-junction math were removed — don't reintroduce bottom-rise without a design decision.
-- **Degenerate scrolled case**: durations use `Math.abs` on the vertical delta and clamped ranges, so `expand()` triggered with the hero logo off-screen (e.g., restored scroll position) animates cleanly with no NaN/negative durations, and the navbar always ends at `translateY(0)`.
+## Verification
+Run `pnpm build`, then inspect desktop/mobile homepages in both themes, anchors, the chapter rail at 1280px and above, reduced-motion behavior, translated content, and linked articles. Check flight alignment, repeated wheel input, keyboard focus, normal scrolling after entry, and returning to `#top` without replay. Check standard content pages for paired background/text colors and hover contrast. The redesign build generated 729 pages; the `ui` review branch does not change production without a separate merge/deployment.
 
 ## Routing Table
-- `../../content/examples/` → Interactive example components (`single-obj.astro`, `multi-obj.astro`, `neuroevolution.astro`), raw `.py` sources imported via `?raw`, Plotly data (`cso-data.js`, `rvea-frames.json`, …) and Brax viewer (`brax-viewer.ts`, `brax-data.json`). Sibling dependency — READ-only from here; escalate writes to parent.
-- `../pages/` and `../pages/[locale]/` → Thin route files (`index.astro`, `runtime/index.astro`) that render these components. Sibling — READ-only from here; escalate writes to parent.
-- `../Header.astro`, `../Footer.astro` → Chrome components consumed by HomeContent (Header `animated` variant + `data-logo-mark` logo required by the fly-in script). Sibling — READ-only from here.
-- `../../i18n/utils.ts` → `loadTranslations`, `t`, `getLocalizedUrl`, `getDateLocale`, `getLocalizedNews`, `getLocalizedArticles`, `Locale`, `defaultLocale`. Sibling — READ-only from here.
-
-## Status
-Stable. GenesisContent.astro deleted (e173eda); no pending work known.
-
-## See Also
-Commit 8991303 "add Runtime and Genesis landing pages, restructure nav and homepage" created this directory (RuntimeExamples moved out of the homepage; HomeContent slimmed by ~425 lines). Commit e173eda removed GenesisContent and its routes.
-
-## 2026.10 Homepage Redesign
-- `HomeContent.astro` follows the 2026.10 design brief: Hero (vision) → The Power of Evolution (animated branch/filter/converge SVG) → Evolution Across AI Paradigms (2 × 2 project cards) → Computing Without Boundaries (platform tiles + two published speedup figures) → Explore EvoX + compact Latest News → Footer. Ecosystem/Community blocks were removed from the homepage.
-- Motion: `.reveal` elements fade in via IntersectionObserver (only when `html.js-reveal` is set by an inline script); the hero has a paused-off-screen canvas particle field; all looping animations are disabled under `prefers-reduced-motion`.
-- Hero has no kicker label (removed by request). `#cta-content` holds two buttons — `hero.cta.button` → `/docs` and `nav.github` → EMI-Group GitHub (`.hero-btn-primary` / `.hero-btn-ghost`) — above the `hero.cta.tagline` line.
-- The evolution loop is a fixed 5-column `.loop-track` grid (+ a repeat marker), so steps never wrap onto a second row in long locales; only labels wrap. Without JS the `#evo-figure` paths/nodes render fully drawn. **The figure intentionally has no Generate/Execute/Evaluate/Select/Improve labels** — its 4 visual stages (branch → filter → converge → extend) don't map 1:1 to the 5 steps (review feedback); keep the step names only in the loop track.
-- Hardware tiles include **Vulkan** (`computing.status.compiler` = "Supported via EvoX Compiler"): `evoxc` → IREE Vulkan-SPIRV compiles to any Vulkan GPU, incl. mobile/edge ARM Mali and Qualcomm Adreno (confirmed by the team; see https://github.com/EMI-Group/evoxc). Vulkan is vendor-neutral — not an Intel-specific path. Grid is `sm:grid-cols-4 lg:grid-cols-7`.
-- Typography: headings use `text-wrap: balance`, `#content-body p` uses `text-wrap: pretty` (progressive enhancement). Speedup stat bars are decorative and always full width — don't encode fake proportions there.
-- Dark hardware tiles and stat cards carry `.spotlight` (pointer-follow glow via `--mx/--my`, set by `initSpotlight()` for fine pointers only). Latest News cards show a Release/News pill (reuses `nav.blog.releases` / `nav.blog.news`).
-- Ecosystem page: 1280px container, 3-column compact library cards (GitHub repo path footer), core `evox` sorted first then alphabetical. Runtime hero has Docs (primary) + GitHub buttons; `runtime.hero.desc` says **30+** algorithms to match the README/homepage (core package count).
-- All dark subpage heroes share `.page-hero-backdrop` (global.css: grid + drifting glows) on their existing radial-gradient layer.
-- Hardware status labels must reflect validated scope only (Huawei Ascend = project-level validation, not full-framework support).
-- `EcosystemContent.astro` is the shared body of `/libs` and `/{locale}/libs`: Genesis Featured Project card, library grid, and the Community section (`#community`, QQ QR modal + Discord).
+- `../../pages/` and `../../pages/[locale]/` → Thin routes; their documentation lives in `../../../docs/agent-context/`.
+- `../HomeIntro.astro` → One-shot full-viewport overlay and native flying-logo handoff.
+- `../BrandWordmark.astro` → Supplied EVO vector letters combined with the animated X.
+- `../EvolutionDiagram.astro`, `../ParadigmArt.astro` → Homepage SVG visuals.
+- `../../content/` → Localized news/releases, library data, and interactive examples.
+- `../../i18n/` → UI translations and locale-aware collection helpers.
+- `../../layouts/Layout.astro`, `../../styles/global.css` → Metadata, theme initialization, chrome, and tokens.

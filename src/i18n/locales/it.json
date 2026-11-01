@@ -1,4 +1,5 @@
 {
+  "theme.toggle": "Cambia tema colore",
   "site.title": "EvoX - L'infrastruttura per i sistemi di AI evolutiva",
   "meta.description": "EvoX è un'infrastruttura open-source per i sistemi di AI evolutiva, che consente all'intelligenza di adattarsi, creare ed evolvere nel mondo digitale e in quello fisico, su hardware eterogeneo.",
   "nav.github": "GitHub",
