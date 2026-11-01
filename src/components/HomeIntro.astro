@@ -1,0 +1,200 @@
+---
+import BrandWordmark from "./BrandWordmark.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props { scrollLabel: string; }
+const { scrollLabel } = Astro.props;
+---
+
+<script is:inline>
+  // Deep links and restored positions open directly on the requested content.
+  document.documentElement.dataset.homeIntro =
+    (!location.hash || location.hash === "#top") && window.scrollY < 2 ? "active" : "complete";
+</script>
+
+<home-intro class="home-intro" aria-label="EvoX">
+  <div class="intro-curtain" aria-hidden="true"></div>
+  <div class="intro-stage">
+    <div class="intro-brand" role="img" aria-label="EvoX"><BrandWordmark /></div>
+    <a class="intro-scroll" href="#home">
+      <span>{scrollLabel}</span>
+      <Icon name="heroicons:chevron-down-20-solid" aria-hidden="true" />
+    </a>
+  </div>
+</home-intro>
+
+<style>
+  .home-intro {
+    display: block; position: relative; height: 100svh; min-height: 420px;
+    color: var(--site-ink);
+  }
+  :global(html[data-home-intro]) .home-intro { position: fixed; inset: 0; z-index: 110; min-height: 0; }
+  .home-intro[hidden], :global(html[data-home-intro="complete"]) .home-intro { display: none; }
+  .intro-curtain { position: absolute; inset: 0; background: var(--site-bg); }
+  .intro-stage { height: 100%; display: grid; place-items: center; position: relative; cursor: pointer; }
+  .intro-brand { width: min(76vw, 940px); transform-origin: 0 0; }
+  .intro-scroll {
+    position: absolute; bottom: max(34px, env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    padding: 12px 24px; color: var(--site-muted); font-size: 11px; letter-spacing: .08em;
+  }
+  .intro-scroll svg { width: 18px; height: 18px; animation: intro-nudge 2s ease-in-out infinite; }
+  .intro-scroll:hover { color: var(--site-accent); }
+  .intro-scroll:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 3px; border-radius: 4px; }
+  @keyframes intro-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+  :global(html:has(home-intro) .site-header) { transition: opacity .45s ease; }
+  :global(html[data-home-intro="active"] .site-header) { opacity: 0; visibility: hidden; pointer-events: none; }
+  :global(html[data-home-intro="active"] .chapter-map),
+  :global(html[data-home-intro="entering"] .chapter-map) { opacity: 0; visibility: hidden; }
+  :global(html[data-home-intro="active"] [data-intro-logo]),
+  :global(html[data-home-intro="entering"] [data-intro-logo]) { visibility: hidden; }
+  @media (max-width: 600px) { .intro-brand { width: 84vw; } }
+  @media (prefers-reduced-motion: reduce) {
+    .intro-scroll svg { animation: none; }
+    :global(html:has(home-intro) .site-header) { transition: none; }
+  }
+</style>
+
+<script>
+  class HomeIntroElement extends HTMLElement {
+    private phase: "active" | "entering" | "complete" = "active";
+    private animations: Animation[] = [];
+    private guard: AbortController | null = null;
+    private preference: MediaQueryList | null = null;
+    private inertElements = new Map<HTMLElement, boolean>();
+    private timer = 0;
+    private touch: { x: number; y: number } | null = null;
+    private focusLanding = false;
+
+    connectedCallback() {
+      if (this.phase === "complete" || document.documentElement.dataset.homeIntro === "complete" || window.scrollY > 1) {
+        this.finish();
+        return;
+      }
+      this.guard = new AbortController();
+      const { signal } = this.guard;
+      this.preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+      this.preference.addEventListener("change", this.onPreferenceChange, { signal });
+      const siblings = this.parentElement?.querySelectorAll<HTMLElement>(":scope > section, :scope > nav") ?? [];
+      const chrome = document.querySelectorAll<HTMLElement>(".site-header, .site-footer");
+      [...siblings, ...chrome].forEach((element) => {
+        this.inertElements.set(element, element.inert);
+        element.inert = true;
+      });
+      window.addEventListener("wheel", this.onWheel, { passive: false, signal });
+      window.addEventListener("touchstart", this.onTouchStart, { passive: true, signal });
+      window.addEventListener("touchmove", this.onTouchMove, { passive: false, signal });
+      window.addEventListener("touchend", this.clearTouch, { passive: true, signal });
+      window.addEventListener("touchcancel", this.clearTouch, { passive: true, signal });
+      window.addEventListener("keydown", this.onKeyDown, { signal });
+      this.addEventListener("click", this.onClick, { signal });
+      window.addEventListener("scroll", this.onScroll, { passive: true, signal });
+      window.addEventListener("resize", this.onResize, { passive: true, signal });
+      window.addEventListener("pageshow", this.onPageShow, { signal });
+      window.addEventListener("hashchange", this.onHashChange, { signal });
+      document.addEventListener("visibilitychange", this.onVisibilityChange, { signal });
+    }
+
+    disconnectedCallback() {
+      this.focusLanding = false;
+      this.finish();
+      delete document.documentElement.dataset.homeIntro;
+    }
+
+    private enter(keyboard = false) {
+      if (this.phase !== "active") return;
+      this.focusLanding = keyboard || this.contains(document.activeElement);
+      const brand = this.querySelector<HTMLElement>(".intro-brand");
+      const target = document.querySelector<HTMLElement>("[data-intro-logo]");
+      if (!brand || !target || this.preference?.matches || typeof brand.animate !== "function") {
+        this.finish();
+        return;
+      }
+      // Measure once. The hidden header retains its final geometry, and the
+      // scrollbar stays in place so the destination cannot shift during flight.
+      const source = brand.getBoundingClientRect();
+      const destination = target.getBoundingClientRect();
+      if (!source.width || !destination.width) { this.finish(); return; }
+      this.phase = "entering";
+      Object.assign(brand.style, {
+        position: "fixed", left: `${source.left}px`, top: `${source.top}px`,
+        width: `${source.width}px`, height: `${source.height}px`, willChange: "transform",
+      });
+      document.documentElement.dataset.homeIntro = "entering";
+      this.timer = window.setTimeout(() => this.finish(), 1600);
+      try {
+        const flight = brand.animate([
+          { transform: "translate3d(0, 0, 0) scale(1)" },
+          { transform: `translate3d(${destination.left - source.left}px, ${destination.top - source.top}px, 0) scale(${destination.width / source.width})` },
+        ], { duration: 1050, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" });
+        this.animations.push(flight);
+        const curtain = this.querySelector<HTMLElement>(".intro-curtain");
+        const cue = this.querySelector<HTMLElement>(".intro-scroll");
+        if (curtain) this.animations.push(curtain.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 150, fill: "forwards" }));
+        if (cue) this.animations.push(cue.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" }));
+        flight.finished.then(() => this.finish(), () => this.finish());
+      } catch {
+        this.finish();
+      }
+    }
+
+    private finish() {
+      if (this.phase === "complete") return;
+      const focus = this.focusLanding || this.contains(document.activeElement);
+      this.phase = "complete";
+      this.hidden = true;
+      document.documentElement.dataset.homeIntro = "complete";
+      window.clearTimeout(this.timer);
+      this.guard?.abort();
+      this.guard = null;
+      this.animations.forEach((animation) => animation.cancel());
+      this.animations = [];
+      this.inertElements.forEach((wasInert, element) => { element.inert = wasInert; });
+      this.inertElements.clear();
+      this.touch = null;
+      this.focusLanding = false;
+      if (focus && this.isConnected) {
+        const title = document.getElementById("hero-title");
+        title?.setAttribute("tabindex", "-1");
+        title?.focus({ preventScroll: true });
+      }
+    }
+
+    private onWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      if (this.phase === "entering" || event.deltaY > 0) {
+        event.preventDefault();
+        this.enter();
+      }
+    };
+    private onClick = (event: MouseEvent) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey || event.defaultPrevented) return;
+      event.preventDefault();
+      this.enter(event.detail === 0);
+    };
+    private onTouchStart = (event: TouchEvent) => {
+      this.touch = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+    };
+    private clearTouch = () => { this.touch = null; };
+    private onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length !== 1 || !this.touch) { this.clearTouch(); return; }
+      const dy = this.touch.y - event.touches[0].clientY;
+      const dx = this.touch.x - event.touches[0].clientX;
+      if (Math.abs(dx) >= Math.abs(dy)) return;
+      if (this.phase === "entering" || dy > 6) { event.preventDefault(); this.enter(); }
+    };
+    private onKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      if (event.key === "Escape") { this.focusLanding = true; this.finish(); return; }
+      if (["ArrowDown", "PageDown", " ", "End"].includes(event.key)) { event.preventDefault(); this.enter(true); }
+    };
+    private onPreferenceChange = () => { if (this.phase === "entering" && this.preference?.matches) this.finish(); };
+    private onScroll = () => { if (window.scrollY > 1) this.finish(); };
+    private onResize = () => { if (this.phase === "entering") this.finish(); };
+    private onPageShow = (event: PageTransitionEvent) => { if (event.persisted || window.scrollY > 1) this.finish(); };
+    private onHashChange = () => { if (location.hash && location.hash !== "#top") this.finish(); };
+    private onVisibilityChange = () => { if (document.hidden && this.phase === "entering") this.finish(); };
+  }
+
+  if (!customElements.get("home-intro")) customElements.define("home-intro", HomeIntroElement);
+</script>

@@ -1,4 +1,5 @@
 {
+  "theme.toggle": "Farbschema umschalten",
   "site.title": "EvoX - Die Infrastruktur für evolutionäre KI-Systeme",
   "meta.description": "EvoX ist eine Open-Source-Infrastruktur für evolutionäre KI-Systeme, die es Intelligenz ermöglicht, sich in digitalen und physischen Welten auf heterogener Hardware anzupassen, zu erschaffen und weiterzuentwickeln.",
   "nav.github": "GitHub",

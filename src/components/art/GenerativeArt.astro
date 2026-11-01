@@ -1,0 +1,110 @@
+---
+const sourceCells = [0, 1, 2, 3];
+const mergedCells = [0, 1, 2, 3, 4, 5];
+const sources = [
+  { y: 37, selected: [1, 6, 10] },
+  { y: 115, selected: [4, 5, 9] },
+  { y: 193, selected: [2, 7, 11] },
+];
+const selectedWeights = [2, 8, 9, 14, 15, 21, 22, 28];
+---
+
+<svg class="generative-art" viewBox="0 0 480 280" fill="none" aria-hidden="true" focusable="false">
+  {/* Three expert matrices feed a shared selection point and a merged model. */}
+  <g class="guide">
+    <path d="M244 35v76m0 58v76" stroke-dasharray="2 6" />
+    <path d="M304 63h122M304 217h122" />
+    <path d="M308 60v6m114-6v6m-114 148v6m114-6v6" />
+  </g>
+  <g class="connection">
+    <path d="M131 62h23c39 0 30 78 76 78" />
+    <path d="M131 218h23c39 0 30-78 76-78" />
+    <path d="M131 140h99m28 0h48" />
+  </g>
+  <path class="selected-line" d="M131 140h99m28 0h48" />
+  <path class="selected-line" d="m301 136 5 4-5 4" />
+  <g class="flow-pulses">
+    <path class="flow-pulse" pathLength="100" style="--pulse-delay:.55s" d="M131 62h23c39 0 30 78 76 78" />
+    <path class="flow-pulse" pathLength="100" style="--pulse-delay:1.3s" d="M131 140h99" />
+    <path class="flow-pulse" pathLength="100" style="--pulse-delay:2.05s" d="M131 218h23c39 0 30-78 76-78" />
+    <path class="flow-pulse" pathLength="100" style="--pulse-delay:3.4s" d="M258 140h48" />
+  </g>
+
+  {sources.map((source, model) => (
+    <g>
+      <path class="bracket" d={`M64 ${source.y - 5}h-6v60h6M124 ${source.y - 5}h6v60h-6`} />
+      {sourceCells.map((row) => sourceCells.map((column) => {
+        const selected = source.selected.includes(row * 4 + column);
+        const opacity = selected ? 0.65 + model * 0.12 : 0.11 + ((row * 3 + column + model) % 4) * 0.12;
+        return (
+          <rect class:list={{ "source-weight": selected }}
+            style={selected ? `--weight-opacity:${opacity};--weight-delay:${model * .75 + row * .06}s` : undefined}
+            x={69 + column * 13} y={source.y + row * 13} width="10" height="10" rx="1.2"
+            fill={selected ? "var(--art-accent)" : "var(--art-ink)"}
+            opacity={opacity} />
+        );
+      }))}
+      <circle cx="146" cy={source.y + 25} r="2.5" fill="var(--art-surface)" stroke="var(--art-line)" />
+    </g>
+  ))}
+
+  <circle cx="244" cy="140" r="14" fill="var(--art-accent-soft)" stroke="var(--art-accent)" stroke-width="1.3" />
+  <path d="M239 140h10m-5-5v10" stroke="var(--art-accent)" stroke-width="1.2" stroke-linecap="round" />
+  <path class="bracket result-bracket" d="M314 82h-6v116h6m108-116h6v116h-6" />
+  {mergedCells.map((row) => mergedCells.map((column) => {
+    const selected = selectedWeights.includes(row * 6 + column);
+    const opacity = selected ? 0.95 : 0.13 + ((row + column * 2) % 5) * 0.12;
+    return (
+      <rect class="result-weight"
+        style={`--weight-opacity:${opacity};--weight-flash:${Math.min(1, opacity + .24)};--weight-delay:${4.5 + column * .09 + row * .025}s`}
+        x={319 + column * 17} y={92 + row * 17} width="12" height="12" rx="1.2"
+        fill={selected ? "var(--art-accent)" : "var(--art-ink)"}
+        opacity={opacity} />
+    );
+  }))}
+  <g class="guide" stroke-linecap="round">
+    <path d="M348 232h34" />
+    <path d="M348 230v4m17-4v4m17-4v4" />
+  </g>
+  <path d="M356 232h18" stroke="var(--art-accent)" stroke-width="1.3" stroke-linecap="round" />
+</svg>
+
+<style>
+  .generative-art { --merge-cycle: 7.2s; stroke-linejoin: round; }
+  .guide { stroke: var(--art-guide); stroke-width: .8; }
+  .connection { stroke: var(--art-line); stroke-width: 1.05; }
+  .selected-line { stroke: var(--art-accent); stroke-width: 1.35; stroke-linecap: round; }
+  .bracket { stroke: var(--art-line); stroke-width: 1.05; stroke-linecap: round; }
+  .result-bracket { stroke: var(--art-ink); stroke-opacity: .72; stroke-width: 1.25; }
+  .source-weight { animation: generative-select var(--merge-cycle) ease-in-out var(--weight-delay) infinite; }
+  .flow-pulse {
+    stroke: var(--art-accent);
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-dasharray: 8 108;
+    stroke-dashoffset: 8;
+    opacity: 0;
+    animation: generative-flow var(--merge-cycle) linear var(--pulse-delay) infinite;
+  }
+  .result-weight { animation: generative-result var(--merge-cycle) ease-in-out var(--weight-delay) infinite; }
+
+  /* A shared cycle selects each expert, routes its contribution, then resolves the output. */
+  @keyframes generative-select {
+    0%, 16%, 100% { opacity: var(--weight-opacity); }
+    5%, 9% { opacity: 1; }
+  }
+  @keyframes generative-flow {
+    0% { stroke-dashoffset: 8; opacity: 0; }
+    2% { opacity: .95; }
+    15% { opacity: .95; }
+    18% { stroke-dashoffset: -100; opacity: 0; }
+    100% { stroke-dashoffset: -100; opacity: 0; }
+  }
+  @keyframes generative-result {
+    0%, 19%, 100% { opacity: var(--weight-opacity); }
+    6%, 9% { opacity: var(--weight-flash); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .source-weight, .flow-pulse, .result-weight { animation: none; }
+  }
+</style>

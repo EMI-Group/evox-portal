@@ -1,16 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
+import BrandMark from "./BrandMark.astro";
 import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl } from "../i18n/utils";
 
-interface Props {
-  locale?: Locale;
-}
-
+interface Props { locale?: Locale; }
 const { locale = defaultLocale } = Astro.props;
 const tr = await loadTranslations(locale);
 const year = new Date().getFullYear();
-
-const footerLinks: { label: string; href: string }[] = [
+const footerLinks = [
   { label: t(tr, "nav.ecosystem"), href: getLocalizedUrl("/libs", locale) },
   { label: t(tr, "nav.blog.news"), href: getLocalizedUrl("/news", locale) },
   { label: t(tr, "nav.blog.releases"), href: getLocalizedUrl("/releases", locale) },
@@ -19,115 +16,64 @@ const footerLinks: { label: string; href: string }[] = [
   { label: t(tr, "nav.github"), href: "https://github.com/EMI-Group" },
   { label: t(tr, "nav.contact"), href: "https://chengran.tech/" },
 ];
+const socials = [
+  { label: "Facebook", icon: "simple-icons:facebook", href: "https://www.facebook.com/share/1Bspargk4W" },
+  { label: "X", icon: "simple-icons:x", href: "https://x.com/EvoX__Group" },
+  { label: "Zhihu", icon: "simple-icons:zhihu", href: "https://www.zhihu.com/people/liang-zhen-yu-13-4" },
+  { label: "Product Hunt", icon: "simple-icons:producthunt", href: "https://www.producthunt.com/@evox__group" },
+  { label: "Reddit", icon: "simple-icons:reddit", href: "https://www.reddit.com/user/EvoX_Group/" },
+];
 ---
 
-<footer class="pt-16 pb-8 border-t border-gray-800" style="background: rgb(22, 27, 48);">
-  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col gap-8">
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-        <a
-          href={getLocalizedUrl("/", locale)}
-          class="opacity-80 hover:opacity-100 transition-opacity flex-shrink-0 flex items-center"
-        >
-          <img
-            src="/logo_text.png"
-            alt="EVO"
-            class="h-8"
-            style="filter: brightness(0) invert(1);"
-          />
-          <img
-            src="/logo.svg"
-            alt="EvoX mark"
-            class="h-10"
-            style="filter: brightness(0) invert(1);"
-          />
-        </a>
-
-        <ul class="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 md:gap-10">
-          <li>
-            <a
-              href="https://www.facebook.com/share/1Bspargk4W"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-500 hover:text-[#1877F2] transition-colors"
-              aria-label="Facebook"
-            >
-              <Icon name="simple-icons:facebook" class="w-10 h-10" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://x.com/EvoX__Group"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-500 hover:text-white transition-colors"
-              aria-label="X"
-            >
-              <Icon name="simple-icons:x" class="w-10 h-10" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.zhihu.com/people/liang-zhen-yu-13-4"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-500 hover:text-[#0084FF] transition-colors"
-              aria-label="Zhihu"
-            >
-              <Icon name="simple-icons:zhihu" class="w-10 h-10" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.producthunt.com/@evox__group"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-500 hover:text-[#DA552F] transition-colors"
-              aria-label="Product Hunt"
-            >
-              <Icon name="simple-icons:producthunt" class="w-10 h-10" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.reddit.com/user/EvoX_Group/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-500 hover:text-[#FF4500] transition-colors"
-              aria-label="Reddit"
-            >
-              <Icon name="simple-icons:reddit" class="w-10 h-10" />
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      {/* Secondary links; Contact Us lives here instead of the primary nav. */}
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href={getLocalizedUrl("/", locale)} class="footer-brand" aria-label="EvoX">
+        <img src="/logo_text.png" alt="" class="brand-word" width="65" height="24" />
+        <BrandMark />
+      </a>
       <nav>
-        <ul class="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 text-sm">
+        <ul class="footer-links">
           {footerLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                class="text-gray-400 hover:text-teal-400 transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
+            <li><a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label}</a></li>
           ))}
         </ul>
       </nav>
-
-      <div class="text-center border-t border-gray-800 pt-6">
-        <p class="text-sm text-gray-500" data-copyright-year={year}>
-          {t(tr, "footer.copyright", { year: String(year) })}
-        </p>
-      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-copyright-year={year}>{t(tr, "footer.copyright", { year: String(year) })}</p>
+      <ul class="social-links">
+        {socials.map((social) => (
+          <li><a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}><Icon name={social.icon} /></a></li>
+        ))}
+      </ul>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer { background: var(--site-bg); color: var(--site-muted); border-top: 1px solid var(--site-line); padding: 54px 0 28px; }
+  .footer-inner { width: min(100% - 64px, 1216px); margin: auto; }
+  .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-bottom: 38px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; }
+  .brand-word { width: 59px; height: auto; filter: var(--site-logo-filter); }
+  .footer-links, .social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 27px; list-style: none; padding: 0; margin: 0; }
+  .footer-links { font-size: 12px; justify-content: flex-end; }
+  .footer-links a, .social-links a { transition: color .2s; }
+  .footer-links a:hover, .social-links a:hover { color: var(--site-ink); }
+  .footer-bottom { padding-top: 24px; border-top: 1px solid var(--site-line); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .footer-bottom p { margin: 0; font-size: 11px; line-height: 1.7; }
+  .social-links { gap: 20px; }
+  .social-links a { display: flex; padding: 4px; }
+  .social-links svg { width: 15px; height: 15px; }
+  @media (max-width: 760px) {
+    .site-footer { padding-top: 38px; }
+    .footer-inner { width: calc(100% - 40px); }
+    .footer-top { align-items: flex-start; flex-direction: column; gap: 26px; padding-bottom: 28px; }
+    .footer-links { justify-content: flex-start; gap: 14px 22px; }
+    .footer-bottom { align-items: flex-start; flex-direction: column-reverse; gap: 20px; }
+  }
+</style>
 
 <script is:inline>
   (function () {
@@ -135,9 +81,6 @@ const footerLinks: { label: string; href: string }[] = [
     document.querySelectorAll("[data-copyright-year]").forEach(function (el) {
       var buildYear = el.getAttribute("data-copyright-year");
       if (buildYear && buildYear !== currentYear && el.textContent) {
-        // Replace every occurrence: in a year equal to the start year the
-        // build year appears twice ("© 2022-2022"), and a first-match
-        // replace would corrupt the range.
         el.textContent = el.textContent.replaceAll(buildYear, currentYear);
       }
     });
