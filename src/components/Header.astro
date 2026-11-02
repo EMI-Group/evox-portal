@@ -222,7 +222,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
       event.preventDefault();
     }
   });
-  window.matchMedia("(min-width: 861px)").addEventListener("change", (event) => {
+  window.matchMedia("(min-width: 1001px)").addEventListener("change", (event) => {
     if (event.matches && mobileMenu) mobileMenu.open = false;
     if (!event.matches) closeDesktopMenus();
   });

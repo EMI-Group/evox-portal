@@ -15,6 +15,7 @@ The **EvoX Portal** is the landing/marketing website for the EvoX evolutionary-c
 - `public/` — Static assets served at site root: favicon.svg/png, logos, `_static/` figures referenced by docs/tutorials markdown, `images/articles/` release screenshots, `images/og-image.png`, `images/qq-group-qr.png`.
 
 ## Constraints
+- **Generated translations**: never edit or include changes under `priv/gettext/`; those files are generated automatically. Discard task-produced changes there before committing, while preserving unrelated work. See `.agents/rules/generated-files.md`.
 - **pnpm only** (packageManager pinned; don't introduce npm/yarn lockfiles).
 - **English-first**: en.md is the source of truth for content; en.json is the source of truth for UI strings; all locale files must keep full key parity (238 keys, including `theme.toggle`). Content fallback to English is automatic.
 - **No hardcoded UI strings** in components/pages — use `loadTranslations()` + `t()` from `src/i18n/utils.ts`.
