@@ -45,15 +45,6 @@ const latestArticles = [
 const GENESIS_URL = "https://genesis.evox.group/";
 const GITHUB_URL = "https://github.com/EMI-Group";
 
-// 02 · The Power of Evolution — the loop shown under the intro copy.
-const evolutionSteps = [
-  "evolution.step.generate",
-  "evolution.step.execute",
-  "evolution.step.evaluate",
-  "evolution.step.select",
-  "evolution.step.improve",
-];
-
 // 03 · Evolution Across AI Paradigms — compact 2 × 2 cards, each backed by a
 // real EvoX project. The card artwork is chosen by `key` in the markup.
 const paradigms: {
@@ -168,25 +159,16 @@ const chapters = [
     </section>
 
     <section class="section section-alt chapter" id="evolution" aria-labelledby="evolution-title">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow"><span>01</span>{t(tr, "evolution.kicker")}</p>
-          <h2 id="evolution-title">{t(tr, "evolution.title")}</h2>
-          <p class="section-description">{t(tr, "evolution.desc")}</p>
+      <div class="container evolution-container">
+        <div class="evolution-panel reveal">
+          <EvolutionDiagram locale={locale}>
+            <div slot="copy" class="section-heading">
+              <p class="eyebrow"><span>01</span>{t(tr, "evolution.kicker")}</p>
+              <h2 id="evolution-title">{t(tr, "evolution.title")}</h2>
+              <p class="section-description">{t(tr, "evolution.desc")}</p>
+            </div>
+          </EvolutionDiagram>
         </div>
-        <figure class="evolution-panel reveal" aria-label={t(tr, "evolution.figure")}>
-          <EvolutionDiagram />
-        </figure>
-        <ol class="evolution-loop reveal">
-          {evolutionSteps.map((key, i) => (
-            <li>
-              <span class="step-index">{String(i + 1).padStart(2, "0")}</span>
-              <span>{t(tr, key)}</span>
-              {i < 4 && <span class="step-arrow" aria-hidden="true">→</span>}
-              {i === 4 && <Icon name="heroicons:arrow-path-20-solid" class="step-arrow" aria-hidden="true" />}
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
 
@@ -368,11 +350,8 @@ const chapters = [
   .eyebrow > span { color: var(--site-accent); font-family: ui-monospace, monospace; font-size: 15px; }
   h2 { font-size: clamp(37px, 5.5vw, 64px); font-weight: 500; line-height: 1.07; letter-spacing: -.045em; text-wrap: balance; margin: 0; max-width: 840px; }
   .section-description { font-size: 27px; line-height: 1.7; color: var(--site-muted); max-width: 720px; margin: 26px 0 0; text-wrap: pretty; }
-  .evolution-panel { margin: 55px 0 0; padding: 30px 28px; border-radius: 24px; background: var(--site-bg); }
-  .evolution-loop { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 30px 0 0; }
-  .evolution-loop li { display: flex; gap: 12px; align-items: baseline; position: relative; padding: 16px 20px 16px 0; border-top: 1px solid var(--site-line); font-size: 21px; font-weight: 500; }
-  .step-index { font-family: ui-monospace, monospace; color: var(--site-muted); font-size: 15px; }
-  .step-arrow { position: absolute; right: 14px; top: 18px; font-size: 16.5px; color: var(--site-muted); width: 13px; height: 13px; }
+  .evolution-container { max-width: 1280px; }
+  .evolution-panel { margin: 0; }
   .paradigm-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
   .paradigm-card { min-width: 0; display: flex; flex-direction: column; padding: 27px 32px 30px; border: 1px solid transparent; border-radius: 24px; background: var(--site-alt); transition: border-color .25s, transform .25s; }
   .paradigm-card:hover { border-color: var(--site-line); transform: translateY(-4px); }
@@ -474,8 +453,6 @@ const chapters = [
     .platforms { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .platforms li { padding: 26px 8px; }
     .paradigm-card { padding: 22px; }
-    .evolution-loop li { gap: 7px; padding-right: 22px; font-size: 18px; }
-    .step-arrow { right: 6px; }
   }
   @media (max-width: 600px) {
     .container { width: calc(100% - 40px); }
@@ -483,10 +460,7 @@ const chapters = [
     .paradigm-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 36px; }
     .paradigm-card { padding: 24px; }
     .paradigm-art { margin: 10px 0 22px; }
-    .evolution-panel { padding: 22px 10px; margin-top: 36px; border-radius: 16px; }
-    .evolution-loop { gap: 6px; margin-top: 20px; }
-    .evolution-loop li { display: flex; flex-direction: column; gap: 8px; font-size: 16.5px; line-height: 1.4; padding-right: 0; overflow-wrap: anywhere; }
-    .step-arrow { display: none; }
+    .evolution-container { width: calc(100% - 40px); }
     .platforms { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 36px; }
     .platforms li:last-child { grid-column: 1 / -1; }
     .platforms h3 { font-size: 19.5px; }

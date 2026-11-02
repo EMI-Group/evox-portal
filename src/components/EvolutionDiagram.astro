@@ -1,146 +1,114 @@
 ---
-// A decorative population tree: candidates branch, converge, and evolve.
-// The surrounding section supplies the accessible explanation.
-type Point = { x: number; y: number; selected?: boolean; terminal?: boolean };
+import { type Locale, defaultLocale, loadTranslations, t } from "../i18n/utils";
 
-const generations: Point[][] = [
-  [{ x: 48, y: 150, selected: true }],
-  [
-    { x: 198, y: 54 },
-    { x: 198, y: 102 },
-    { x: 198, y: 150, selected: true },
-    { x: 198, y: 198 },
-    { x: 198, y: 246 },
-  ],
-  [
-    { x: 358, y: 30 },
-    { x: 358, y: 78 },
-    { x: 358, y: 126, selected: true },
-    { x: 358, y: 174 },
-    { x: 358, y: 222 },
-    { x: 358, y: 270 },
-  ],
-  [
-    { x: 518, y: 66 },
-    { x: 518, y: 126, selected: true },
-    { x: 518, y: 186 },
-    { x: 518, y: 246 },
-  ],
-  [
-    { x: 678, y: 54 },
-    { x: 678, y: 102 },
-    { x: 678, y: 150, selected: true },
-    { x: 678, y: 198 },
-    { x: 678, y: 246 },
-  ],
-  [
-    { x: 852, y: 78, terminal: true },
-    { x: 852, y: 150, selected: true, terminal: true },
-    { x: 852, y: 222, terminal: true },
-  ],
-];
+interface Props {
+  locale?: Locale;
+}
 
-// Each pair connects node indices in two consecutive generations.
-const connections = [
-  [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
-  [[0, 0], [0, 1], [1, 1], [1, 2], [2, 2], [2, 3], [3, 3], [3, 4], [4, 4], [4, 5]],
-  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2], [4, 3], [5, 3]],
-  [[0, 0], [0, 1], [1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3], [3, 4]],
-  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2]],
-];
-
-const branches = connections.flatMap((pairs, generation) =>
-  pairs.map(([source, target]) => {
-    const from = generations[generation][source];
-    const to = generations[generation + 1][target];
-    const midpoint = (from.x + to.x) / 2;
-    return {
-      selected: Boolean(from.selected && to.selected),
-      // Leave small gaps at node centers so the rings remain hollow.
-      path: `M ${from.x + 5} ${from.y} C ${midpoint} ${from.y}, ${midpoint} ${to.y}, ${to.x - 5} ${to.y}`,
-    };
-  }),
-);
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+const stageKeys = ["generate", "execute", "evaluate", "select", "improve"];
+const fallbackCandidates = Array.from({ length: 18 }, (_, index) => {
+  const angle = -Math.PI / 2 + index * Math.PI * 2 / 18;
+  const radius = 145 + 10 * Math.sin(index * 2.39996323);
+  return { x: 235 + radius * Math.cos(angle), y: 235 + radius * Math.sin(angle), selected: index % 6 === 0 };
+});
 ---
 
-<div class="evolution-diagram">
-  <svg viewBox="0 0 900 300" fill="none" aria-hidden="true" focusable="false">
-    <g class="population-branches">
-      {branches.filter((branch) => !branch.selected).map((branch) => <path d={branch.path} />)}
-    </g>
-    <g class="selected-branches">
-      {branches.filter((branch) => branch.selected).map((branch) => <path d={branch.path} />)}
-    </g>
-    <g class="population-nodes">
-      {generations.flat().map((point) => (
-        <circle
-          class:list={{ selected: point.selected, terminal: point.terminal }}
-          cx={point.x}
-          cy={point.y}
-          r={point.selected && point.terminal ? 6 : 4}
-        />
+<div
+  class="evox-evolution"
+  data-evolution-ring
+  data-play-label={t(tr, "evolution.animation.play")}
+  data-pause-label={t(tr, "evolution.animation.pause")}
+  data-status-template={t(tr, "evolution.animation.status")}
+>
+  <div class="evx-copy">
+    <slot name="copy" />
+    <div class="evx-steps" role="group" aria-label={t(tr, "evolution.animation.stages")}>
+      {stageKeys.map((key, index) => (
+        <button class:list={["evx-step", {"is-active": index === 0}]} data-stage={index} aria-pressed={index === 0 ? "true" : "false"} type="button" disabled>
+          <span class="evx-number">{String(index + 1).padStart(2, "0")}</span>
+          <span class="evx-name">{t(tr, "evolution.step." + key)}</span>
+        </button>
       ))}
-    </g>
-    <circle class="terminal-ring" cx="852" cy="150" r="14" />
-  </svg>
+    </div>
+    <p class="evx-accessible" data-status aria-live="off">{t(tr, "evolution.animation.disclaimer")}</p>
+  </div>
+  <div class="evx-visual">
+    <canvas class="evx-canvas" role="img" aria-label={t(tr, "evolution.figure")} />
+    <svg class="evx-fallback" viewBox="0 0 470 470" fill="none" aria-hidden="true" focusable="false">
+      <circle cx="235" cy="235" r="216" stroke="#85838a" stroke-opacity=".16" />
+      <circle cx="235" cy="235" r="198" stroke="#85838a" stroke-opacity=".20" />
+      <circle cx="235" cy="235" r="165" stroke="#85838a" stroke-opacity=".14" />
+      <circle cx="235" cy="235" r="123" stroke="#85838a" stroke-opacity=".18" />
+      <circle cx="235" cy="235" r="207" stroke="#e65361" stroke-opacity=".55" stroke-dasharray="248 12" transform="rotate(-90 235 235)" />
+      {fallbackCandidates.map(({x, y, selected}) => (
+        <g opacity={selected ? 1 : .28}>
+          <circle cx={x} cy={y} r="6" stroke={selected ? "#e65361" : "#b5b5be"} />
+          <circle cx={x} cy={y} r="3" fill={selected ? "#ff9da6" : "#ececf2"} />
+        </g>
+      ))}
+    </svg>
+    <div class="evx-controls" role="group" aria-label={t(tr, "evolution.animation.playback")}>
+      <button class="evx-control" data-action="play" type="button" disabled aria-label={t(tr, "evolution.animation.play")} title={t(tr, "evolution.animation.play")}>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 4.7L19 12 8 19.3z" /></svg>
+      </button>
+      <button class="evx-control" data-action="reset" type="button" disabled aria-label={t(tr, "evolution.animation.restart")} title={t(tr, "evolution.animation.restart")}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.8 7.3M4 4v6h6" /></svg>
+      </button>
+    </div>
+  </div>
 </div>
 
+<script>
+  import { mountEvolutionRings } from "./art/evolutionRing.js";
+  mountEvolutionRings();
+</script>
+
 <style>
-  .evolution-diagram {
-    width: 100%;
-    color: var(--site-muted, #7d7d7a);
-  }
 
-  svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
+  /* The component is independent of the surrounding page. */
+  .evox-evolution {--evx-red:#e65361;--evx-bright:#ff8c94;--evx-text:var(--site-ink);--evx-muted:var(--site-muted);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(36px,5vw,80px);width:100%;max-width:none;margin-inline:auto;color:var(--evx-text)}
+  .evox-evolution,.evox-evolution * {box-sizing:border-box}
+  .evx-copy {min-width:0}
+  .evx-steps {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.4vw,20px);margin-top:clamp(36px,4vw,60px)}
+  .evx-step {appearance:none;position:relative;min-width:0;border:0;padding:18px 0 2px;background:transparent;color:var(--site-muted);font:inherit;text-align:left;cursor:pointer}
+  .evx-step::before,.evx-step::after {content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--site-line)}
+  .evx-step::after {right:auto;width:100%;height:2px;transform:scaleX(var(--progress,0));transform-origin:left;background:var(--evx-red)}
+  .evx-step.is-active::after {box-shadow:0 0 11px #e6536144}
+  .evx-step.is-complete::after {background:#793840}
+  .evx-number {display:block;margin-bottom:12px;color:var(--site-muted);font:13px/1 var(--site-mono);font-variant-numeric:tabular-nums}
+  .evx-name {display:block;color:var(--site-muted);font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+  .evx-step.is-active .evx-number,.evx-step.is-active .evx-name {color:var(--site-link)}
+  .evx-step:hover .evx-name {color:var(--site-ink)}
+  .evx-step:focus-visible,.evx-control:focus-visible {outline:2px solid var(--site-link);outline-offset:5px}
+  .evx-visual {position:relative;background:#060607;border:1px solid #303034;border-radius:22px;overflow:hidden;isolation:isolate}
+  .evx-canvas {width:100%;height:510px;display:block}
+  .evx-controls {position:absolute;right:20px;top:19px;display:flex;gap:8px;z-index:2}
+  .evx-control {display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid #303035;border-radius:50%;background:#111114;color:#8f8b93;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+  .evx-control:hover {color:#faf5f6;border-color:#805058;background:#1c1317}
+  .evx-control:focus-visible,.evx-step:focus-visible {outline:2px solid #ff8c94;outline-offset:5px}
+  .evx-control svg {width:14px;height:14px;display:block}
+  .evx-accessible {position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);overflow-wrap:anywhere;border:0}
+  @media (max-width:800px) {
+    .evox-evolution {grid-template-columns:minmax(0,1fr);gap:36px}
+    .evx-steps {gap:clamp(8px,2.5vw,16px);margin-top:28px}
+    .evx-step {padding-top:14px}
+    .evx-number {font-size:11px;margin-bottom:10px}
+    .evx-name {font-size:14px}
+    .evx-visual {border-radius:19px}
+    .evx-canvas {height:clamp(260px,92vw,400px)}
+    .evx-controls {top:13px;right:13px;gap:7px}
+    .evx-control {width:29px;height:29px}
+    .evx-control svg {width:13px;height:13px}
   }
+  @media (prefers-reduced-motion:reduce) {.evx-control {transition:none}}
+  .evx-fallback {position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+  .evx-canvas {opacity:0}
+  .evx-controls {visibility:hidden}
+  [data-ready="true"] .evx-canvas {opacity:1}
+  [data-ready="true"] .evx-fallback {display:none}
+  [data-ready="true"] .evx-controls {visibility:visible}
+  .evx-step:disabled {cursor:default}
 
-  path,
-  circle {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .population-branches {
-    stroke: color-mix(in srgb, var(--site-ink, #242424) 22%, var(--site-line, #d7d5cf));
-    stroke-width: 1;
-    opacity: 0.8;
-  }
-
-  .selected-branches {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1.8;
-    stroke-linecap: round;
-  }
-
-  .population-nodes circle {
-    stroke: var(--site-muted, #7d7d7a);
-    stroke-width: 1.15;
-    opacity: 0.75;
-  }
-
-  .population-nodes .selected {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1.7;
-    opacity: 1;
-  }
-
-  .population-nodes .terminal.selected {
-    fill: var(--site-accent, #c8383c);
-  }
-
-  .terminal-ring {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1;
-    opacity: 0.26;
-  }
-
-  /* Keep every generation legible while allowing the tree to scale on mobile. */
-  @media (max-width: 640px) {
-    .population-branches {
-      opacity: 1;
-    }
-  }
 </style>
