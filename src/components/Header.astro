@@ -150,7 +150,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .mobile-submenu a:hover { color: var(--site-ink); }
   .mobile-languages { grid-template-columns: 1fr 1fr; }
   .mobile-languages a[aria-current="true"] { color: var(--site-accent); }
-  @media (max-width: 860px) {
+  @media (max-width: 1000px) {
     .header-inner { width: calc(100% - 40px); gap: 18px; }
     .desktop-nav { display: none; }
     .mobile-menu { display: block; }
@@ -222,7 +222,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
       event.preventDefault();
     }
   });
-  window.matchMedia("(min-width: 861px)").addEventListener("change", (event) => {
+  window.matchMedia("(min-width: 1001px)").addEventListener("change", (event) => {
     if (event.matches && mobileMenu) mobileMenu.open = false;
     if (!event.matches) closeDesktopMenus();
   });

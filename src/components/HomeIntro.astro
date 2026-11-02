@@ -7,9 +7,9 @@ const { scrollLabel } = Astro.props;
 ---
 
 <script is:inline>
-  // Deep links and restored positions open directly on the requested content.
+  // Mobile, deep links, and restored positions open directly on the content.
   document.documentElement.dataset.homeIntro =
-    (!location.hash || location.hash === "#top") && window.scrollY < 2 ? "active" : "complete";
+    !window.matchMedia("(max-width: 1000px)").matches && (!location.hash || location.hash === "#top") && window.scrollY < 2 ? "active" : "complete";
 </script>
 
 <home-intro class="home-intro" aria-label="EvoX">
@@ -75,6 +75,8 @@ const { scrollLabel } = Astro.props;
       const { signal } = this.guard;
       this.preference = window.matchMedia("(prefers-reduced-motion: reduce)");
       this.preference.addEventListener("change", this.onPreferenceChange, { signal });
+      const mobile = window.matchMedia("(max-width: 1000px)");
+      mobile.addEventListener("change", (event) => { if (event.matches) this.finish(); }, { signal });
       const siblings = this.parentElement?.querySelectorAll<HTMLElement>(":scope > section, :scope > nav") ?? [];
       const chrome = document.querySelectorAll<HTMLElement>(".site-header, .site-footer");
       [...siblings, ...chrome].forEach((element) => {

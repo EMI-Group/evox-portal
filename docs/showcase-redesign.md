@@ -45,8 +45,10 @@ Each HTML embeds its CSS, scripts, fonts, images, and original licensing, retain
 
 ## Validation and release status
 
+The current responsive layout skips the opening at widths up to 1000px and shows a text-led hero with vertical actions. The shared header uses the same breakpoint for both its CSS and menu cleanup. The evolution chapter pairs localized copy and five selectable cycle stages on the left with the animated, fixed-orientation candidate ring on the right; mobile layouts stack the copy above the animation. News precedes Explore, which highlights Genesis beside the remaining resource links.
+
 - Production build passed and generated 729 pages.
-- All 13 locale JSON files parse and have the same 237 keys.
+- All 13 locale JSON files parse and have the same 245 keys.
 - Homepage translation keys and linked article paths were checked against locale files and content collections.
 - Browser acceptance checks cover desktop/mobile layouts, both themes, navigation and language switching, anchor links, reduced-motion behavior, and contrast on existing content routes.
 
