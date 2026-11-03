@@ -224,9 +224,9 @@ const chapters = [
         <ParallelDiagram locale={locale} />
         <ul class="platforms reveal">
           {platforms.map((platform) => (
-            <li title={t(tr, platform.status)}>
+            <li>
               <Icon name={platform.icon} class="platform-icon" aria-hidden="true" />
-              <h3>{t(tr, `computing.platform.${platform.key}`)}</h3>
+              <span class="sr-only">{t(tr, `computing.platform.${platform.key}`)}</span>
               <span class="sr-only">{t(tr, platform.status)}</span>
             </li>
           ))}
@@ -341,8 +341,7 @@ const chapters = [
   .project-link > span { color: var(--site-accent); }
   .platforms { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
   .platforms li { padding: 28px 8px; text-align: center; }
-  .platform-icon { width: 29px; height: 29px; margin: 0 auto 23px; color: var(--site-ink); }
-  .platforms h3 { font-size: 14px; letter-spacing: 0; line-height: 1.45; }
+  .platform-icon { width: 29px; height: 29px; margin: 0 auto; color: var(--site-ink); }
   .explore-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 80px; align-items: stretch; }
   .explore-feature { display: flex; flex-direction: column; gap: 52px; min-width: 0; }
   .resource-list { min-width: 0; }
@@ -435,7 +434,6 @@ const chapters = [
     .paradigm-art { margin: 10px 0 22px; }
     .platforms { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 36px; }
     .platforms li:last-child { grid-column: 1 / -1; }
-    .platforms h3 { font-size: 14px;  line-height: 1.45;  letter-spacing: 0; }
     .explore-layout { grid-template-columns: 1fr; gap: 38px; }
     .explore-feature { gap: 28px; }
     .resource-row { gap: 10px; }
