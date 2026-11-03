@@ -26,21 +26,50 @@ PDF-руководство на китайском языке:
 
 Откройте терминал и создайте чистое окружение Python:
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 Вы также можете использовать любой удобный вам инструмент для создания чистого окружения Python.
 
 ## Шаг 2: Установка PyTorch и EvoX
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 Проверьте доступность GPU:
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## Шаг 3: Запуск вашего первого эволюционного алгоритма
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 Что это дает? С помощью стандартного интерфейса объединяются алгоритм (PSO), задача (Ackley) и монитор (EvalMonitor). EvoX берет на себя весь параллелизм, ускорение и мониторинг!
 
@@ -48,7 +77,9 @@ PDF-руководство на китайском языке:
 
 Достаточно всего одной строки:
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,11 +89,11 @@ PDF-руководство на китайском языке:
 
 Если «простого запуска Ackley» недостаточно, вы можете:
 
-· Заменить PSO на GA, DE, CMA-ES, NSGA-II, RVEA...
-· Заменить Ackley на Rastrigin, Griewank, CEC2022
-· Перейти к многокритериальной задаче, установив `n_objs >= 2`
-· Реализовать собственную логику с помощью `MyProblem` и `MyAlgorithm`
-· Подключиться к моделям PyTorch или средам обучения с подкреплением (Gym, Brax, MuJoCo Playground)
+- Заменить PSO на GA, DE, CMA-ES, NSGA-II, RVEA...
+- Заменить Ackley на Rastrigin, Griewank, CEC2022
+- Перейти к многокритериальной задаче, установив `n_objs >= 2`
+- Реализовать собственную логику с помощью `MyProblem` и `MyAlgorithm`
+- Подключиться к моделям PyTorch или средам обучения с подкреплением (Gym, Brax, MuJoCo Playground)
 
 Будь то настройка гиперпараметров, поиск архитектуры, нейроэволюция или оптимизация стратегий управления — EvoX с легкостью справится со всем.
 
@@ -70,36 +101,13 @@ PDF-руководство на китайском языке:
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## Благодарности
 
 Это руководство было написано **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** и **Xinyao Li**. **Beichen Huang** отвечал за сборку, редактирование и онлайн-публикацию руководства.
 
 Мы искренне благодарим каждого участника сообщества EvoX. Именно наши совместные усилия позволяют EvoX продолжать развиваться.
 
-## Исходный код / Ресурсы сообщества
+## Ресурсы
 
-Статья:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Основной проект (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-Группа QQ: 297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-Группа QQ | Evolving Machine Intelligence
-
-EvoMO построен на базе фреймворка EvoX. Если вы хотите узнать больше об EvoX, ознакомьтесь с официальной статьей об EvoX 1.0, опубликованной в нашем публичном аккаунте WeChat.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Документация](https://evox.readthedocs.io/en/latest/)

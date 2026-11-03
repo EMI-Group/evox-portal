@@ -110,24 +110,8 @@ A medida que la evaluación masiva de candidatos en GPU se convierta gradualment
 
 AutoPSO × EvoX: impulsar la transición de la computación evolutiva de la era manual a la era automática.
 
-## Código abierto / Recursos de la comunidad
+## Recursos
 
-**Artículo:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**Proyecto precursor (EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**Grupo de QQ:**
-
-297969717
-
-![](./autopso-6.png)
-
-*Código QR del grupo de la comunidad QQ de EvoX.*
+- [Artículo de investigación](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

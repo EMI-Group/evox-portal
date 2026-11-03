@@ -12,7 +12,7 @@ Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, and Ran Cheng, IEEEシニアメン�
 
 この制限に対処するため、EvoXチームはテンソル化手法を用いてGPU上でEMOアルゴリズムを並列化することを提案しました。この手法を活用し、彼らはいくつかのGPUアクセラレーション対応EMOアルゴリズムの設計と実装に成功しました。さらに、チームはBrax物理エンジン上に構築された**多目的ロボット制御のためのベンチマークスイート**である **「MoRobtrol」** を開発し、GPUアクセラレーションされたEMOアルゴリズムの性能を体系的に評価することを目指しました。
 
-これらの研究成果に基づき、EvoXチームは高性能なGPUアクセラレーション対応EMOアルゴリズムライブラリである **EvoMO** をリリースしました。対応するソースコードはGitHubで公開されています: [https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
+これらの研究成果に基づき、EvoXチームは高性能なGPUアクセラレーション対応EMOアルゴリズムライブラリである **EvoMO** をリリースしました。対応するソースコードはGitHubで公開されています: [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
 ## テンソル化手法
 
@@ -105,24 +105,8 @@ GPUアクセラレーション対応EMOアルゴリズムの実用的な性能�
 ## 結論と今後の展望
 本研究では、計算効率とスケーラビリティの観点から、従来のCPUベースのEMOアルゴリズムの限界に対処するためのテンソル化表現手法を提案しました。このアプローチは、NSGA-III、MOEA/D、HypEなどのいくつかの代表的なアルゴリズムに適用され、解の品質を維持しながらGPU上で大幅な性能向上を達成しました。その実用性を検証するために、チームは物理シミュレーション環境におけるロボット制御タスクを多目的最適化問題として再定式化した、多目的ロボット制御ベンチマークスイートであるMoRobtrolも開発しました。結果は、身体性知能（Embodied Intelligence）のような計算集約的なシナリオにおけるテンソル化アルゴリズムの可能性を示しています。テンソル化手法はアルゴリズムの効率を大幅に向上させましたが、さらなる強化の余地は残されています。今後の方向性としては、非劣ソートなどのコア演算子の改善、マルチGPUシステム向けの新しいテンソル化操作の設計、および大規模最適化問題での性能をさらに高めるための大規模データとディープラーニング技術の統合が含まれます。
 
-## オープンソースコード / コミュニティリソース
+## 関連資料
 
-論文:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上流プロジェクト (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQグループ: 297969717
-
-![](./emo-12.png)
-
-EvoMOはEvoXフレームワーク上に構築されています。EvoXについてさらに詳しく知りたい方は、私たちのWeChat公式アカウントで公開されているEvoX 1.0に関する公式記事をぜひご覧ください。
-
-![1744939468669.png](./evox-1-1-1-1.png)
+- [論文](https://arxiv.org/abs/2503.20286)
+- [GitHub](https://github.com/EMI-Group/evomo)
+- [EvoX](https://github.com/EMI-Group/evox)

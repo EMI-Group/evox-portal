@@ -1,10 +1,8 @@
-﻿---
+---
 title: "EvoGM：无需重新训练，通过群体演化实现大模型自主合并"
 pubDate: 2026-06-28
 summary: "EvoX 团队联合鹏城实验室提出生成式演化模型合并框架 EvoGM，将合并系数搜索转化为可学习的生成式优化问题，在不重新训练大模型的前提下实现自主模型合并。"
 ---
-
-# EvoGM：无需重新训练，通过群体演化实现大模型自主合并
 
 ![image1.png](./evogm-1.png)
 
@@ -38,7 +36,7 @@ summary: "EvoX 团队联合鹏城实验室提出生成式演化模型合并框�
 
 ![image2.png](./evogm-2.png)
 
-为解决上述问题，我们提出了 EvoGM（Evolutionary Generative Merging），代码已开源：https://github.com/JiangTao97/evogm。
+为解决上述问题，我们提出了 EvoGM（Evolutionary Generative Merging），代码已开源：https://github.com/JiangTao97/evogm 。
 
 EvoGM 的核心思想是：将候选合并配置组织为种群，并把合并系数的搜索过程转化为生成式学习问题。
 
@@ -141,16 +139,8 @@ EvoGM 将这一思想落到大模型合并场景中。在这里，候选解不�
 
 随着开源生态中专家模型、LoRA 模型和任务模型越来越多，未来的关键问题可能不只是"如何训练一个新模型"，而是"如何高效组合已有模型能力"。EvoGM 提供了一种新的答案：在不重新训练参与合并的大模型的前提下，通过生成式演化学习利用有限验证反馈，自主完成候选种群构建、合并方案生成、评估选择和专家基底更新。简单来说，EvoGM 让模型合并从"凭经验调系数"走向"让合并策略自己学习和演化"。这也意味着，大模型能力复用可能进入一个新的阶段：不是每遇到一个新任务都重新训练一个模型，而是让已有专家模型通过群体演化与自主合并，持续组合出更适合新任务的模型。
 
-## 开源代码 / 社区
+## 相关资源
 
-📄 论文：
-https://arxiv.org/pdf/2605.29295
-🔗 GitHub：
-
-https://github.com/JiangTao97/evogm
-🔼 上游项目（EvoX）：
-
-https://github.com/EMI-Group/evox
-🌐 QQ交流群：297969717
-
-![image8.png](./evogm-8.png)
+- [研究论文](https://arxiv.org/abs/2605.29295)
+- [GitHub](https://github.com/JiangTao97/evogm)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -12,7 +12,7 @@ Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, 및 Ran Cheng, Senior Member, IEEE
 
 이러한 한계를 해결하기 위해 EvoX 팀은 텐서화(tensorization) 방법론을 통해 GPU에서 EMO 알고리즘을 병렬화할 것을 제안했습니다. 이 방법을 활용하여 팀은 여러 GPU 가속 EMO 알고리즘을 성공적으로 설계하고 구현했습니다. 또한, 팀은 Brax 물리 엔진을 기반으로 구축된 **다목적 로봇 제어를 위한 벤치마크 제품군**인 **"MoRobtrol"**을 개발하여 GPU 가속 EMO 알고리즘의 성능을 체계적으로 평가하는 것을 목표로 하고 있습니다.
 
-이러한 연구 성과를 바탕으로 EvoX 팀은 고성능 GPU 가속 EMO 알고리즘 라이브러리인 **EvoMO**를 출시했습니다. 해당 소스 코드는 GitHub에 공개되어 있습니다: [https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
+이러한 연구 성과를 바탕으로 EvoX 팀은 고성능 GPU 가속 EMO 알고리즘 라이브러리인 **EvoMO**를 출시했습니다. 해당 소스 코드는 GitHub에 공개되어 있습니다: [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
 ## 텐서화(Tensorization) 방법론
 
@@ -105,24 +105,8 @@ GPU 가속 EMO 알고리즘의 실제 성능을 종합적으로 평가하기 위
 ## 결론 및 향후 연구
 이 연구는 계산 효율성과 확장성 측면에서 기존 CPU 기반 EMO 알고리즘의 한계를 해결하기 위해 텐서화된 표현 방법론을 제안합니다. 이 접근 방식은 NSGA-III, MOEA/D, HypE를 포함한 여러 대표적인 알고리즘에 적용되어 해의 품질을 유지하면서 GPU에서 상당한 성능 향상을 달성했습니다. 실제 적용 가능성을 검증하기 위해 팀은 물리 시뮬레이션 환경의 로봇 제어 작업을 다목적 최적화 문제로 재구성한 다목적 로봇 제어 벤치마크 제품군인 MoRobtrol도 개발했습니다. 결과는 체화된 지능(embodied intelligence)과 같이 계산 집약적인 시나리오에서 텐서화된 알고리즘의 잠재력을 보여줍니다. 텐서화 방법이 알고리즘 효율성을 크게 향상시켰지만, 여전히 개선의 여지가 있습니다. 향후 방향에는 비지배 정렬과 같은 핵심 연산자 개선, 멀티 GPU 시스템을 위한 새로운 텐서화 연산 설계, 대규모 최적화 문제에서의 성능을 더욱 향상시키기 위한 대규모 데이터 및 딥러닝 기술의 통합이 포함됩니다.
 
-## 오픈 소스 코드 / 커뮤니티 리소스
+## 관련 자료
 
-논문:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-업스트림 프로젝트 (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 그룹: 297969717
-
-![](./emo-12.png)
-
-EvoMO는 EvoX 프레임워크를 기반으로 구축되었습니다. EvoX에 대해 더 알고 싶으시다면, 자세한 내용을 위해 WeChat 공식 계정에 게시된 EvoX 1.0 공식 기사를 확인해 주시기 바랍니다.
-
-![1744939468669.png](./evox-1-1-1-1.png)
+- [연구 논문](https://arxiv.org/abs/2503.20286)
+- [GitHub](https://github.com/EMI-Group/evomo)
+- [EvoX](https://github.com/EMI-Group/evox)

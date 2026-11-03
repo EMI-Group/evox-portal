@@ -16,3 +16,8 @@ summary: "새로운 기능: Workflow가 이제 opt_direction 리스트를 허용
 - 여러 추가 인수가 있을 때의 `use_state` 수정.
 
 **전체 변경 로그**: [v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## 관련 자료
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [문서](https://evox.readthedocs.io/en/latest/)

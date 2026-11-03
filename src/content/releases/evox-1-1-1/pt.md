@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "Correções de erros para a captura de grafos do torch.compile, quebras de grafos no use_state e fugas no BatchedTensor."
 ---
 
-**O que mudou**
+## O que mudou
 
-**Esta versão secundária inclui principalmente correções de erros e melhorias:**
-
+Esta versão secundária inclui principalmente correções de erros e melhorias.
 - Corrigido um problema em que o `torch.compile` não capturava corretamente o `workflow.step`.
 
 - Corrigido um problema em que o `use_state` causava uma quebra de grafo.
@@ -28,16 +27,7 @@ summary: "Correções de erros para a captura de grafos do torch.compile, quebra
 
 - Várias pequenas correções e melhorias.
 
-**Código Open-Source e Comunidade**
+## Recursos
 
-**Artigo**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Projeto Upstream (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Grupo QQ**: 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  Grupo QQ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentação](https://evox.readthedocs.io/en/latest/)

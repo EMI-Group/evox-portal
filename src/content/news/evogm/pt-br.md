@@ -1,10 +1,8 @@
-﻿---
+---
 title: "EvoGM: fusão autônoma de modelos de grande escala por meio de evolução populacional sem retreinamento"
 pubDate: 2026-06-28
 summary: "A equipe EvoX, em colaboração com o Laboratório Peng Cheng, apresenta o EvoGM, um framework de fusão evolutiva generativa de modelos que transforma a busca de coeficientes de fusão em um problema de otimização generativa aprendível, permitindo a fusão autônoma de modelos sem retreinar os modelos de grande escala participantes."
 ---
-
-# EvoGM: fusão autônoma de modelos de grande escala por meio de evolução populacional sem retreinamento
 
 ![image1.png](./evogm-1.png)
 
@@ -142,18 +140,8 @@ De EvoGO a EvoGM, em essência passa-se de «aprender a otimizar candidatos» a 
 
 À medida que aumentam os modelos especialistas, modelos LoRA e modelos de tarefa no ecossistema open source, a questão-chave do futuro pode não ser apenas «como treinar um novo modelo», mas «como combinar eficientemente as capacidades de modelos existentes». O EvoGM oferece uma nova resposta: sem retreinar os modelos de grande escala participantes na fusão, aprende por meio de evolução generativa a partir de feedback limitado de validação e completa de forma autônoma a construção da população candidata, a geração de esquemas de fusão, a avaliação e seleção, e a atualização da base de especialistas. Em resumo, o EvoGM leva a fusão de modelos de «ajustar coeficientes por experiência» para «deixar que a estratégia de fusão aprenda e evolua por si mesma». Isso também significa que a reutilização de capacidades de modelos de grande escala pode entrar em uma nova fase: não retreinar um modelo sempre que surge uma nova tarefa, mas deixar que os modelos especialistas existentes combinem continuamente, por meio de evolução populacional e fusão autônoma, modelos mais adequados para novas tarefas.
 
-## Código aberto / Comunidade
+## Recursos
 
-📄 Paper:
-https://arxiv.org/pdf/2605.29295
-🔗 GitHub:
-
-https://github.com/JiangTao97/evogm
-🔼 Projeto upstream (EvoX):
-
-https://github.com/EMI-Group/evox
-🌐 Grupo QQ:
-
-297969717
-
-![image8.png](./evogm-8.png)
+- [Artigo científico](https://arxiv.org/abs/2605.29295)
+- [GitHub](https://github.com/JiangTao97/evogm)
+- [EvoX](https://github.com/EMI-Group/evox)

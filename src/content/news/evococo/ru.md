@@ -98,18 +98,8 @@ EvoCoCo важен и тем, как он переосмысляет преоб�
 
 Язык программирования — лишь один способ выразить алгоритм, а аппаратура — лишь один способ выполнить вычисление. Через языки и аппаратуру должен переноситься не код в его форме, а структура, стоящая за вычислением.
 
-## Открытый код и ресурсы сообщества
+## Ресурсы
 
-Статья: [https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub: [https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-Основной проект (EvoX): [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQ-группа: 297969717
-
-![QR-код сообщества QQ](./qq_group_qr.png)
-
-QQ-группа | Evolutionary Machine Intelligence
-
-[![EvoX: ускоренные на GPU эволюционные вычисления, PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [Научная статья](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

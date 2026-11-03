@@ -110,24 +110,8 @@ AutoPSO освобождает исследователей от повторя�
 
 AutoPSO × EvoX: помочь эволюционным вычислениям совершить переход из ручной эпохи в автоматическую.
 
-## Открытый исходный код / Ресурсы сообщества
+## Ресурсы
 
-**Статья:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**Вышестоящий проект (EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**QQ-группа:**
-
-297969717
-
-![](./autopso-6.png)
-
-*QR-код QQ-группы сообщества EvoX.*
+- [Научная статья](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

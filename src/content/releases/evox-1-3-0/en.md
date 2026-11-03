@@ -16,3 +16,8 @@ summary: "New feature: Workflow now accepts a list of opt_direction. Plus severa
 - Fix `use_state` when there are multiple additional arguments.
 
 **Full Changelog**: [v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## Resources
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

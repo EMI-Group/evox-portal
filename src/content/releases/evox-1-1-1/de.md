@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "Fehlerbehebungen für die torch.compile Graph-Erfassung, use_state Graph-Unterbrechungen und BatchedTensor-Lecks."
 ---
 
-**Was sich geändert hat**
+## Was sich geändert hat
 
-**Dieses Minor-Release enthält hauptsächlich Fehlerbehebungen und Verbesserungen:**
-
+Dieses Minor-Release enthält hauptsächlich Fehlerbehebungen und Verbesserungen.
 - Ein Problem wurde behoben, bei dem `torch.compile` `workflow.step` nicht korrekt erfasste.
 
 - Ein Problem wurde behoben, bei dem `use_state` zu einer Graph-Unterbrechung führte.
@@ -28,16 +27,7 @@ summary: "Fehlerbehebungen für die torch.compile Graph-Erfassung, use_state Gra
 
 - Verschiedene kleine Fehlerbehebungen und Verbesserungen.
 
-**Open-Source-Code und Community**
+## Ressourcen
 
-**Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Upstream-Projekt (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**QQ-Gruppe**: 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  QQ-Gruppe | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Dokumentation](https://evox.readthedocs.io/en/latest/)

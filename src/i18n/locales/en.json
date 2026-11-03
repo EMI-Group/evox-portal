@@ -2,7 +2,6 @@
   "theme.toggle": "Toggle color theme",
   "site.title": "EvoX - The Infrastructure for Evolutionary AI Systems",
   "meta.description": "EvoX is open-source infrastructure for evolutionary AI systems, enabling intelligence to adapt, create, and evolve across digital and physical worlds on heterogeneous hardware.",
-
   "nav.github": "GitHub",
   "nav.docs.runtime": "Runtime Overview",
   "nav.tutorials": "Tutorials",
@@ -29,17 +28,18 @@
   "hero.cta.tagline": "EvoX is All You Need",
   "hero.cta.button": "Get Started",
   "hero.scroll": "Scroll Down",
-
   "evolution.kicker": "Why Evolution",
   "evolution.title": "The Power of Evolution",
   "evolution.desc": "Evolution is nature's most proven way to create intelligence. EvoX brings that loop to AI: generate many candidates, test them for real, keep what works, and build on it — so capability compounds through experiment instead of hand-tuning.",
-  "evolution.figure": "Computation paths that branch, are filtered, converge, and keep extending",
+  "evolution.figure": "An animated evolution cycle: generate, execute, evaluate, select, and improve.",
+  "evolution.pause": "Pause animation",
+  "evolution.play": "Play animation",
+  "evolution.restart": "Restart animation",
   "evolution.step.generate": "Generate",
   "evolution.step.execute": "Execute",
   "evolution.step.evaluate": "Evaluate",
   "evolution.step.select": "Select",
   "evolution.step.improve": "Improve",
-
   "paradigms.kicker": "Applications",
   "paradigms.title": "Evolution Across AI Paradigms",
   "paradigms.desc": "From models to agents, robots, and scientific discovery — one evolutionary loop, applied wherever intelligence needs to adapt.",
@@ -56,10 +56,9 @@
   "paradigms.science.title": "AI for Science",
   "paradigms.science.desc": "Data-driven black-box optimization for scientific and engineering design, validated on supercritical airfoils.",
   "paradigms.science.project": "EvoGO · Supercritical airfoil design",
-
   "computing.kicker": "Hardware",
   "computing.title": "Computing Without Boundaries",
-  "computing.subtitle": "From a laptop to a GPU server, the same EvoX code runs tensorized across heterogeneous hardware.",
+  "computing.subtitle": "Turn batches of complex tasks into tensor computation.",
   "computing.platform.nvidia": "NVIDIA GPU",
   "computing.platform.amd": "AMD GPU",
   "computing.platform.vulkan": "Vulkan",
@@ -73,13 +72,12 @@
   "computing.status.mps": "Supported via MPS",
   "computing.status.experimental": "Experimental",
   "computing.status.project": "Project-level validation",
-  "computing.stat1.value": "80.2×",
-  "computing.stat1.label": "Median GPU-over-CPU speedup across 276 algorithm comparisons as problem dimensionality scales",
-  "computing.stat2.value": "Up to 1,113×",
-  "computing.stat2.label": "Peak GPU speedup of tensorized multiobjective algorithms over their CPU counterparts",
-  "computing.source": "Read the study",
-  "computing.note": "Status reflects the validated scope. Huawei Ascend results come from specific project validations and do not imply full-framework compatibility.",
-
+  "computing.diagram.tasks": "Batched complex tasks",
+  "computing.diagram.hardware": "Heterogeneous computing",
+  "computing.diagram.title": "Tensor-based parallel computing",
+  "computing.diagram.workflow": "EvoX · Tensorization",
+  "computing.diagram.accelerator": "Accelerator",
+  "explore.kicker": "Resources",
   "explore.title": "Explore EvoX",
   "explore.genesis.title": "Genesis",
   "explore.genesis.badge": "Featured Project",
@@ -90,13 +88,10 @@
   "explore.docs.desc": "Guides, tutorials, and API reference",
   "explore.github.title": "GitHub",
   "explore.github.desc": "Star, fork, and contribute to the source",
-
   "libs.featured.kicker": "Featured Project",
-
   "news.title": "Latest News",
   "news.viewAll": "View All News",
   "news.defaultSummary": "Click to read more details about this article.",
-
   "features.title": "<< Key Features >>",
   "features.perf.title": "Ultra Performance",
   "features.perf.item1": "Supports acceleration on heterogeneous hardware (CPUs & GPUs), achieving over <b>100x</b> speedups.",
@@ -107,7 +102,6 @@
   "features.easy.title": "Easy-to-Use Design",
   "features.easy.item1": "Fully compatible with EvoX ecosystem with a tailored programming model.",
   "features.easy.item2": "Effortless setup with one-click installation.",
-
   "examples.singleObj": "Single-objective Optimization",
   "examples.multiObj": "Multi-objective Optimization",
   "examples.neuro": "Neuroevolution",
@@ -115,12 +109,10 @@
   "examples.brax.title": "Brax Viewer",
   "examples.brax.noWebGL": "3D preview is unavailable on this device or browser.",
   "examples.brax.initFailed": "3D preview could not be initialized in this browser.",
-
   "ecosystem.title": "Ecosystem",
   "ecosystem.subtitle": "Feature Projects",
   "ecosystem.desc": "Explore a rich ecosystem of libraries, tools, and more to support development.",
   "ecosystem.seeAll": "See all Projects",
-
   "community.title": "Community",
   "community.desc": "Join the EvoX developer community to contribute, learn, and get your questions answered.",
   "community.qq.title": "QQ Group",
@@ -173,7 +165,6 @@
   "community.discord.title": "Discord",
   "community.discord.desc": "Browse and join discussions with Discord",
   "community.pageTitle": "Community | EvoX",
-
   "footer.docs.title": "Docs",
   "footer.docs.desc": "Access comprehensive developer documentation for EvoX",
   "footer.docs.link": "View Docs",
@@ -184,7 +175,6 @@
   "footer.resources.desc": "Find development resources and get your questions answered",
   "footer.resources.link": "View Resources",
   "footer.copyright": "© 2022-{year} EvoX Team, All Rights Reserved.",
-
   "libs.pageTitle": "EvoX Ecosystem - Libraries and Tools",
   "libs.heroTitle": "EvoX Ecosystem",
   "libs.heroDesc": "A collection of libraries, tools, and projects designed to accelerate computation and optimization research.",
@@ -204,7 +194,6 @@
   "libs.desc.evocmo": "A fully tensorized, GPU-accelerated multi-population evolutionary algorithm for efficiently solving constrained multi-objective optimization problems (CMOPs).",
   "libs.desc.autopso": "A meta-framework for automated Particle Swarm Optimization that automatically constructs PSO variants through black-box optimization on GPUs.",
   "libs.desc.evococo": "A multi-agent framework for semantics-guided automatic tensorization of evolutionary multiobjective optimization (EMO) software.",
-
   "news.pageTitle": "News{page} | EvoX",
   "news.pageTitlePage": " - Page {page}",
   "news.heroTitle": "Latest News",
@@ -214,7 +203,6 @@
   "news.next": "Next",
   "news.pageInfo": "Page {current} of {total}",
   "news.backToNews": "Back to News",
-
   "releases.defaultSummary": "Click to read more details about this release.",
   "releases.pageTitle": "Releases{page} | EvoX",
   "releases.pageTitlePage": " - Page {page}",
@@ -225,12 +213,10 @@
   "releases.next": "Next",
   "releases.pageInfo": "Page {current} of {total}",
   "releases.backToReleases": "Back to Releases",
-
   "tutorials.pageTitle": "Tutorials | EvoX",
   "tutorials.heroTitle": "Tutorials",
   "tutorials.heroDesc": "Step-by-step guides to get started with EvoX and master evolutionary computation.",
   "tutorials.backToList": "Back to Tutorials",
-
   "docs.pageTitle": "Documentation | EvoX",
   "docs.heroTitle": "Documentation",
   "docs.heroDesc": "Comprehensive guides, developer resources, and examples for EvoX.",
@@ -240,7 +226,6 @@
   "docs.section.experimental": "Experimental",
   "docs.section.examples": "Examples",
   "docs.section.misc": "Miscellaneous",
-
   "lang.en": "English",
   "lang.zh-cn": "简体中文",
   "lang.zh-tw": "繁體中文",
@@ -253,5 +238,21 @@
   "lang.es-419": "Español (Latinoamérica)",
   "lang.ru": "Русский",
   "lang.pt": "Português",
-  "lang.pt-br": "Português (Brasil)"
+  "lang.pt-br": "Português (Brasil)",
+  "blog.contents": "Contents",
+  "blog.top": "Back to top",
+  "blog.paper": "Paper title and authors",
+  "blog.topics": "Topics",
+  "error.title": "Page not found",
+  "error.description": "The page you are looking for does not exist or has moved.",
+  "error.home": "Back to home",
+  "sample.label": "Blog · Design preview",
+  "sample.choose": "Choose a preview article",
+  "sample.original": "View published article",
+  "examples.plot.generation": "Generation",
+  "examples.plot.min": "Minimum",
+  "examples.plot.max": "Maximum",
+  "examples.plot.median": "Median",
+  "examples.plot.front": "Pareto front",
+  "examples.plot.population": "Population"
 }

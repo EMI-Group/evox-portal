@@ -16,3 +16,8 @@ summary: "Nouvelle fonctionnalité : le Workflow accepte désormais une liste de
 - Correction de `use_state` lorsqu'il y a plusieurs arguments supplémentaires.
 
 **Journal des modifications complet** : [v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## Ressources
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

@@ -4,8 +4,6 @@ pubDate: 2026-03-16
 summary: "Il team di EvoX presenta iStratDE, un metodo di evoluzione differenziale accelerato su GPU che assegna strategie fisse a livello individuale, consentendo una ricerca parallela su larga scala senza comunicazione, con prestazioni empiriche solide e garanzie teoriche di convergenza."
 ---
 
-## iStratDE: GPU Computing x Popolazioni Ultra-Grandi Sbloccano il Pieno Potenziale dell'Evoluzione Differenziale
-
 ![](./istratde-1.png)
 
 L'Evoluzione Differenziale (DE) è estremamente sensibile alla scelta della strategia. La maggior parte delle varianti esistenti di DE persegue prestazioni migliori attraverso meccanismi adattivi o strutture di controllo sempre più sofisticate. Tuttavia, mentre l'adattamento dinamico è stato ampiamente studiato, i vantaggi strutturali della **diversità statica delle strategie** hanno ricevuto molta meno attenzione.
@@ -147,19 +145,8 @@ I risultati mostrano che iStratDE può competere con — e in alcuni contesti su
 
 Questo paradigma minimalista decentralizzato apre una nuova direzione per la progettazione di algoritmi evoluzionistici. Invece di affidarsi a elaborate coordinazioni centralizzate, dimostra come individui indipendenti con comportamenti di ricerca diversificati possano generare collettivamente dinamiche di ottimizzazione intelligenti e scalabili.
 
-## Codice Open Source / Risorse della Community
+## Risorse
 
-**Articolo:**
-https://arxiv.org/abs/2602.01147
-
-**GitHub:**
-https://github.com/EMI-Group/istratde
-
-**Progetto a Monte (EvoX):**
-https://github.com/EMI-Group/evox
-
-**Gruppo QQ:**
-297969717
-
-![](./istratde-9.png)
-*Codice QR per il gruppo della community EvoX su QQ.*
+- [Articolo scientifico](https://arxiv.org/abs/2602.01147)
+- [GitHub](https://github.com/EMI-Group/istratde)
+- [EvoX](https://github.com/EMI-Group/evox)

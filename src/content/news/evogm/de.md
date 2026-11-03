@@ -1,10 +1,8 @@
-﻿---
+---
 title: "EvoGM: autonome Modellfusion durch Populationsentwicklung ohne erneutes Training"
 pubDate: 2026-06-28
 summary: "Das EvoX-Team in Zusammenarbeit mit dem Peng Cheng Laboratory stellt EvoGM vor, ein generatives evolutionäres Modellfusion-Framework, das die Suche nach Fusionskoeffizienten in ein lernbares generatives Optimierungsproblem umwandelt und autonome Modellfusion ermöglicht, ohne die beteiligten großen Modelle erneut zu trainieren."
 ---
-
-# EvoGM: autonome Modellfusion durch Populationsentwicklung ohne erneutes Training
 
 ![image1.png](./evogm-1.png)
 
@@ -142,16 +140,8 @@ Von EvoGO zu EvoGM ist es im Wesentlichen der Übergang von „lernen, wie Kandi
 
 Mit dem kontinuierlichen Wachstum von Expertenmodellen, LoRA-Modellen und Aufgabenmodellen im Open-Source-Ökosystem könnte die zentrale Frage der Zukunft nicht mehr „wie ein neues Modell trainiert wird“ lauten, sondern „wie Fähigkeiten vorhandener Modelle effizient kombiniert werden“. EvoGM bietet eine neue Antwort: Ohne die an der Fusion beteiligten großen Modelle erneut zu trainieren, nutzt es generatives evolutionäres Lernen, um begrenztes Validierungsfeedback zu verwerten und autonom Kandidatenpopulation-Konstruktion, Fusionplan-Generierung, Bewertungsselektion und Expertenbasis-Aktualisierung zu vollenden. Kurz gesagt: EvoGM bringt Modellfusion von „Koeffizienten nach Erfahrung anpassen“ zu „Fusionstrategie selbst lernen und evolvieren lassen“. Dies bedeutet auch, dass die Wiederverwendung von Fähigkeiten großer Modelle in eine neue Phase eintreten könnte: Statt für jede neue Aufgabe ein Modell erneut zu trainieren, können vorhandene Expertenmodelle durch Populationsentwicklung und autonome Fusion kontinuierlich Modelle kombinieren, die besser für neue Aufgaben geeignet sind.
 
-## Open-Source-Code / Community
+## Ressourcen
 
-📄 Paper:
-https://arxiv.org/pdf/2605.29295
-🔗 GitHub:
-
-https://github.com/JiangTao97/evogm
-🔼 Upstream-Projekt (EvoX):
-
-https://github.com/EMI-Group/evox
-🌐 QQ-Gruppe: 297969717
-
-![image8.png](./evogm-8.png)
+- [Forschungsarbeit](https://arxiv.org/abs/2605.29295)
+- [GitHub](https://github.com/JiangTao97/evogm)
+- [EvoX](https://github.com/EMI-Group/evox)

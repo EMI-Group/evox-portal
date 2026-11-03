@@ -4,8 +4,7 @@ pubDate: 2025-03-16
 summary: "Corrections de bugs pour la capture de graphe torch.compile, les ruptures de graphe use_state et les fuites de BatchedTensor."
 ---
 
-**Ce qui a changé**
-
+## Ce qui a changé
 **Cette version mineure comprend principalement des corrections de bugs et des améliorations :**
 
 - Correction d'un problème où `torch.compile` ne capturait pas correctement `workflow.step`.
@@ -28,16 +27,7 @@ summary: "Corrections de bugs pour la capture de graphe torch.compile, les ruptu
 
 - Diverses petites corrections et améliorations.
 
-**Code Open-Source et Communauté**
+## Ressources
 
-**Article** : [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub** : [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Projet en amont (EvoX)** : [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Groupe QQ** : 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  Groupe QQ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

@@ -9,3 +9,8 @@ summary: "EvoX v1.4.0은 버그 수정, 호환성 개선, 프레임워크 전반
 지난 10개월 동안 우리가 무엇을 하고 있었는지 궁금하셨다면: 우리는 방대한 코드베이스(100k+ LOC)를 안정적으로 탐색하고, 이해하고, 수정하고, 구축할 수 있는 AI 에이전트 시스템인 [**`EvoX Genesis`**](https://github.com/EMI-Group/genesis)를 만들어 왔습니다. Genesis는 현재 EvoX의 다음 장을 이끌며, 전례 없는 속도와 규모로 개발을 가속화할 수 있게 해 줍니다. 이 워크플로우의 첫 번째 주요 성과는 곧 `etl-refactor` 브랜치를 통해 공개될 예정입니다 — 계속 지켜봐 주세요! 🚀
 
 **전체 변경 로그**: [https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0](https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0)
+
+## 관련 자료
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [문서](https://evox.readthedocs.io/en/latest/)

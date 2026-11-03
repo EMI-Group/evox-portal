@@ -1,73 +1,22 @@
 ---
 title: "EvoX 1.1 リリース: torch.compile (TorchDynamo) を搭載"
 pubDate: 2025-03-01
-summary: "EvoX 1.1 では、TorchScript に代わり torch.compile (TorchDynamo) が完全に統合され、互換性とパフォーマンスが向上しました。"
+summary: "EvoX 1.1 は TorchScript を torch.compile に置き換え、TorchDynamo によって Python 実行中に計算グラフを取得します。"
 ---
 
-**EvoX 1.1** のリリースをお知らせできることを嬉しく思います。今回のアップデートでは、バックエンドコンパイラとして **torch.compile (TorchDynamo) の完全統合** を導入しました！これにより、従来の TorchScript アプローチが置き換えられ、EvoX は **より使いやすく、広範な Python エコシステムとの高い互換性** を持つようになりました。
+## コンパイル基盤の更新
 
-**torch.compile** を活用することで、EvoX は実行時に計算グラフを動的にキャプチャし、手動でのトレース作業を不要にしながら、パフォーマンスを自動的に最適化します。
+EvoX 1.1 は TorchScript を `torch.compile` に置き換え、TorchDynamo によって Python 実行中に計算グラフを取得します。
 
-**新機能について**
+## ワークフローのコンパイル
 
-**torch.compile: よりスマートで柔軟なコンパイル**
+ワークフローのステップをコンパイルし、対応するテンソル演算を PyTorch コンパイラでまとめて最適化します。
 
-EvoX 1.1 では、新しいコンパイルバックエンドとして **torch.compile** を全面的に採用しました。従来のトレースベースのアプローチとは異なり、**内部で TorchDynamo を使用する** torch.compile は、Python の実行に介入し、計算グラフを動的に抽出してリアルタイムで最適化します。
+## 互換性
 
-具体的には以下の通りです：
+グラフ取得は使用する演算と制御フローに依存します。未対応のコードではグラフが分割される場合があり、すべての Python ライブラリ呼び出しがコンパイルされるわけではありません。
 
-- **手動トレースは不要** -- **torch.compile(workflow.step)** を呼び出すだけで、あとは EvoX が処理します。
+## 関連資料
 
-- **シームレスな Python 互換性** -- ネイティブの Python 関数や、NumPy、SciPy などの外部ライブラリとも連携します。
-
-- **パフォーマンスの向上** -- 最適化された計算グラフにより、**実行速度が向上し、ハードウェアの使用効率が改善** されます。
-
-- **将来を見据えた設計** -- PyTorch のロードマップに準拠しており、長期的な互換性とパフォーマンスの向上が保証されます。
-
-**なぜ TorchScript から torch.compile へ移行するのか？**
-
-初期のバージョンでは、EvoX は **トレースベースの手法** に依存していました：
-
-- **Pre-1.0.0** では、計算グラフの抽出に **JAX tracing** を使用していました。
-
-- **v1.0.0** では **TorchScript** に切り替え、PyTorch との統合を強化しました。
-
-しかし、これらの手法にはいくつかの欠点がありました：
-
-- **使用が複雑** -- ユーザーは手動でグラフをトレースし、複雑なデバッグを行う必要がありました。
-
-- **互換性の制限** -- 動的なワークフローや非 PyTorch 関数の扱いに苦労しました。
-
-- **柔軟性の欠如** -- ループや条件分岐、その他の Python 構文が正しくキャプチャされないことがありました。
-
-torch.compile と **TorchDynamo** により、**これらの問題は解消されました**。EvoX は動的に最適化を行うようになり、**ユーザーの追加作業なしで** より幅広いワークフローをサポートします。
-
-**EvoX 1.1 がもたらす利便性**
-
-- **トレースの手間が不要** -- すべてがバックグラウンドで処理されるため、コードがよりクリーンでメンテナンスしやすくなります。
-
-- **既存の Python コードで動作** -- 互換性のためにワークフローを修正する必要はありません。
-
-- **実行速度とスケーリングの向上** -- GPU や TPU に対する PyTorch の最新の最適化の恩恵を受けられます。
-
-- **将来への対応** -- PyTorch の長期的な進化に追随し、継続的なパフォーマンス向上を確保します。
-
-**今すぐ EvoX 1.1 にアップグレードしましょう！**
-
-EvoX 1.1 が正式にリリースされました！今すぐアップグレードして、**よりスマートで高速、かつ直感的な** 計算ワークフローを体験してください。
-
-**EvoX 1.1 を入手**: [GitHub](https://github.com/EMI-Group/EvoX)
-
-ご質問やフィードバックがありますか？ GitHub で Issue を作成するか、コミュニティディスカッションにご参加ください。**計算知能の限界を共に押し広げましょう！**
-
-**ソースコード / コミュニティ / ドキュメント**
-
-論文: [https://arxiv.org/abs/2301.12457](https://arxiv.org/abs/2301.12457 "https://arxiv.org/abs/2301.12457")
-
-GitHub: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-ドキュメント: [https://evox.readthedocs.io/en/latest/](https://evox.readthedocs.io/en/latest/ "https://evox.readthedocs.io/en/latest/")
-
-QQ グループ: 297969717
-
-![4.png](./evox-1-1-0-1.png)
+- [GitHub](https://github.com/EMI-Group/evox)
+- [ドキュメント](https://evox.readthedocs.io/en/latest/)

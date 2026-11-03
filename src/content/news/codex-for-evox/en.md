@@ -1,10 +1,8 @@
 ---
-title: "Codex for EvoX: Design Algorithms, Migrate Code, and Run Reproducible Experiments Through Conversation"
+title: "Codex × EvoX: Algorithm Development and Reproducible Experiments"
 pubDate: 2026-08-08
 summary: "Evolutionary computation is stepping into the AI-native era. With Codex as a representative AI coding agent, EvoX turns natural-language intent into runnable evolutionary-computation workflows—covering problem modelling, algorithm migration, backpropagation-free neuroevolution, and GPU tensorization."
 ---
-
-# Codex for EvoX: Design Algorithms, Migrate Code, and Run Reproducible Experiments Through Conversation
 
 Evolutionary computation is stepping into the AI-native era.
 

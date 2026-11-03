@@ -98,18 +98,8 @@ A EvoCoCo é também significativa pela forma como reformula a conversão de có
 
 Uma linguagem de programação é uma maneira de expressar um algoritmo, e o hardware é uma maneira de executar um cálculo. O que deve sobreviver à migração entre linguagens e hardware é a estrutura subjacente a esse cálculo.
 
-## Código aberto e recursos da comunidade
+## Recursos
 
-Artigo: [https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub: [https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-Projeto upstream (EvoX): [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-Grupo QQ: 297969717
-
-![Código QR da comunidade QQ](./qq_group_qr.png)
-
-Grupo QQ | Evolutionary Machine Intelligence
-
-[![EvoX: computação evolutiva acelerada por GPU, PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [Artigo científico](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

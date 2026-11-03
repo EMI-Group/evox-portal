@@ -110,24 +110,8 @@ O significado da AutoPSO vai além da obtenção de uma variante de PSO mais pod
 
 AutoPSO × EvoX: capacitar a computação evolutiva na transição da era manual para a era automática.
 
-## Código open source / Recursos da comunidade
+## Recursos
 
-**Paper:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**Projeto upstream (EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**Grupo do QQ:**
-
-297969717
-
-![](./autopso-6.png)
-
-*QR code do grupo da comunidade QQ do EvoX.*
+- [Artigo científico](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

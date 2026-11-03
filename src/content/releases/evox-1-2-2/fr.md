@@ -11,3 +11,8 @@ Il s'agit d'une version mineure axée uniquement sur des corrections de bugs :
 - Diverses corrections dans la documentation.
 
 **Journal complet des modifications** : [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## Ressources
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

@@ -1,0 +1,7 @@
+---
+import BlogArticle from "./BlogArticle.astro";
+import type { Locale } from "../../i18n/utils";
+import type { BlogSampleSlug } from "./blog-samples";
+interface Props { locale: Locale; slug?: BlogSampleSlug }
+---
+<BlogArticle {...Astro.props} preview />

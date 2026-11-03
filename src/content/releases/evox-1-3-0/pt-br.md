@@ -16,3 +16,8 @@ summary: "Novo recurso: Workflow agora aceita uma lista de opt_direction. Além 
 - Correção de `use_state` quando há múltiplos argumentos adicionais.
 
 **Changelog Completo**: [v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## Recursos
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentação](https://evox.readthedocs.io/en/latest/)

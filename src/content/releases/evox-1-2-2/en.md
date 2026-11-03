@@ -11,3 +11,8 @@ This is a minor release focused solely on bug fixes:
 - Various fixes in the documentation.
 
 **Full Changelog**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## Resources
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

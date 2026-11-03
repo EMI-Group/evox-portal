@@ -10,6 +10,10 @@ const { scrollLabel } = Astro.props;
   // Deep links and restored positions open directly on the requested content.
   document.documentElement.dataset.homeIntro =
     (!location.hash || location.hash === "#top") && window.scrollY < 2 ? "active" : "complete";
+  // A failed module download must never leave a curtain over the homepage.
+  window.setTimeout(() => {
+    if (!customElements.get("home-intro")) document.documentElement.dataset.homeIntro = "complete";
+  }, 4000);
 </script>
 
 <home-intro class="home-intro" aria-label="EvoX">
@@ -25,30 +29,30 @@ const { scrollLabel } = Astro.props;
 
 <style>
   .home-intro {
-    display: block; position: relative; height: 100svh; min-height: 420px;
+    display: none; height: 100svh;
     color: var(--site-ink);
   }
-  :global(html[data-home-intro]) .home-intro { position: fixed; inset: 0; z-index: 110; min-height: 0; }
+  :global(html[data-home-intro]) .home-intro { display: block; position: fixed; inset: 0; z-index: 110; }
   .home-intro[hidden], :global(html[data-home-intro="complete"]) .home-intro { display: none; }
   .intro-curtain { position: absolute; inset: 0; background: var(--site-bg); }
   .intro-stage { height: 100%; display: grid; place-items: center; position: relative; cursor: pointer; }
-  .intro-brand { width: min(76vw, 940px); transform-origin: 0 0; }
+  .intro-brand { width: min(68vw, 760px); transform-origin: 0 0; }
   .intro-scroll {
     position: absolute; bottom: max(34px, env(safe-area-inset-bottom));
     display: flex; flex-direction: column; align-items: center; gap: 14px;
-    padding: 12px 24px; color: var(--site-muted); font-size: 11px; letter-spacing: .08em;
+    padding: 12px 24px; color: var(--site-muted); font-size: 13px; letter-spacing: .04em;
   }
   .intro-scroll svg { width: 18px; height: 18px; animation: intro-nudge 2s ease-in-out infinite; }
   .intro-scroll:hover { color: var(--site-accent); }
   .intro-scroll:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 3px; border-radius: 4px; }
   @keyframes intro-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-  :global(html:has(home-intro) .site-header) { transition: opacity .45s ease; }
+  :global(html[data-home-intro="entering"] .site-header) { transition: opacity .5s ease .4s; }
   :global(html[data-home-intro="active"] .site-header) { opacity: 0; visibility: hidden; pointer-events: none; }
   :global(html[data-home-intro="active"] .chapter-map),
   :global(html[data-home-intro="entering"] .chapter-map) { opacity: 0; visibility: hidden; }
   :global(html[data-home-intro="active"] [data-intro-logo]),
   :global(html[data-home-intro="entering"] [data-intro-logo]) { visibility: hidden; }
-  @media (max-width: 600px) { .intro-brand { width: 84vw; } }
+  @media (max-width: 600px) { .intro-brand { width: 80vw; } }
   @media (prefers-reduced-motion: reduce) {
     .intro-scroll svg { animation: none; }
     :global(html:has(home-intro) .site-header) { transition: none; }
@@ -126,12 +130,20 @@ const { scrollLabel } = Astro.props;
         const flight = brand.animate([
           { transform: "translate3d(0, 0, 0) scale(1)" },
           { transform: `translate3d(${destination.left - source.left}px, ${destination.top - source.top}px, 0) scale(${destination.width / source.width})` },
-        ], { duration: 1050, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "forwards" });
+        ], { duration: 1100, easing: "cubic-bezier(.65, 0, .2, 1)", fill: "forwards" });
         this.animations.push(flight);
         const curtain = this.querySelector<HTMLElement>(".intro-curtain");
         const cue = this.querySelector<HTMLElement>(".intro-scroll");
-        if (curtain) this.animations.push(curtain.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 150, fill: "forwards" }));
+        if (curtain) this.animations.push(curtain.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 650, delay: 280, easing: "ease-in-out", fill: "forwards" }));
         if (cue) this.animations.push(cue.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: "forwards" }));
+        // Reveal the existing layout in reading order, finishing before handoff.
+        const content = document.querySelectorAll<HTMLElement>(".hero-heading, .hero-support, .news-section > .container");
+        content.forEach((element, index) => {
+          this.animations.push(element.animate([
+            { opacity: 0, transform: "translateY(14px)" },
+            { opacity: 1, transform: "translateY(0)" },
+          ], { duration: 500, delay: 380 + index * 65, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "both" }));
+        });
         flight.finished.then(() => this.finish(), () => this.finish());
       } catch {
         this.finish();

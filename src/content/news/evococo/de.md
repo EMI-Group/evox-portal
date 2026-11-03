@@ -98,18 +98,8 @@ Bedeutsam an EvoCoCo ist auch, wie es Codeumwandlung neu rahmt. Der Fokus versch
 
 Eine Programmiersprache ist eine Art, einen Algorithmus auszudrücken, und Hardware ist eine Art, Berechnung auszuführen. Was über Sprachen und Hardware hinweg wandern muss, ist nicht die Form des Codes, sondern die Struktur hinter der Berechnung.
 
-## Open Source und Community
+## Ressourcen
 
-Paper: [https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub: [https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-Upstream-Projekt (EvoX): [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQ-Gruppe: 297969717
-
-![QR-Code der QQ-Community](./qq_group_qr.png)
-
-QQ-Gruppe | Evolutionary Machine Intelligence
-
-[![EvoX: GPU-beschleunigte evolutionäre Berechnung, PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [Forschungsarbeit](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -98,18 +98,8 @@ EvoCoCoが重要なのは、コード変換の見方そのものを変えた点�
 
 プログラミング言語はアルゴリズムの一つの表現であり、ハードウェアは計算の一つの担い手です。言語とハードウェアをまたいで移行すべきなのは、コードの形式ではなく、その計算の背後にある構造です。
 
-## オープンソースとコミュニティ
+## 関連資料
 
-論文：[https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub：[https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-上流プロジェクト（EvoX）：[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQグループ：297969717
-
-![QQコミュニティのQRコード](./qq_group_qr.png)
-
-QQグループ｜Evolutionary Machine Intelligence
-
-[![EvoX：GPU高速化された進化計算、PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [論文](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

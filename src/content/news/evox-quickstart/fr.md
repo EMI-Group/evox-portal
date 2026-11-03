@@ -26,21 +26,50 @@ Ensuite, nous vous guiderons à travers l'ensemble du processus, de l'installati
 
 Ouvrez votre terminal et créez un environnement Python propre :
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 Vous pouvez également utiliser votre outil préféré pour créer un environnement Python propre.
 
 ## Étape 2 : Installer PyTorch et EvoX
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 Vérifiez si le GPU est disponible :
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## Étape 3 : Exécutez votre premier algorithme évolutif
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 Que fait ceci ? Il compose un algorithme (PSO), un problème (Ackley) et un moniteur (EvalMonitor) via une interface standard. EvoX s'occupe de tout le parallélisme, de l'accélération et du monitoring !
 
@@ -48,7 +77,9 @@ Que fait ceci ? Il compose un algorithme (PSO), un problème (Ackley) et un moni
 
 Une seule ligne suffit :
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ Voyez-vous cette courbe descendante ? C'est la **trajectoire par laquelle votre 
 
 Si « juste exécuter un Ackley » ne vous satisfait pas, vous pouvez :
 
-· Remplacer PSO par GA, DE, CMA-ES, NSGA-II, RVEA...
+- Remplacer PSO par GA, DE, CMA-ES, NSGA-II, RVEA...
  · Remplacer Ackley par Rastrigin, Griewank, CEC2022
  · Passer à un problème multi-objectifs en définissant n_objs >= 2
  · Implémenter votre propre logique avec MyProblem et MyAlgorithm
@@ -70,36 +101,13 @@ Qu'il s'agisse de réglage d'hyperparamètres, de recherche d'architecture, de n
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## Remerciements
 
 Ce tutoriel a été écrit par **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** et **Xinyao Li**. **Beichen Huang** était responsable de la compilation, de l'édition et de la mise en ligne du tutoriel.
 
 Nous remercions sincèrement chaque membre de la communauté EvoX. Ce sont nos efforts conjoints qui ont permis à EvoX de continuer à évoluer.
 
-## Code Open Source / Ressources communautaires
+## Ressources
 
-Papier :
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub :
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Projet en amont (EvoX) :
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-Groupe QQ : 297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-Groupe QQ | Evolving Machine Intelligence
-
-EvoMO est construit sur le framework EvoX. Si vous souhaitez en savoir plus sur EvoX, n'hésitez pas à consulter l'article officiel sur EvoX 1.0 publié sur notre compte public WeChat pour plus de détails.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

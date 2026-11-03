@@ -4,8 +4,6 @@ pubDate: 2026-08-17
 summary: "香港理工大学データサイエンス・人工知能学科のEvoXチームは、長期の自律的なソフトウェア進化のための再帰的AIシステム「EvoX Genesis」をリリースしました。永続的なagentに依存して長期開発を維持するのではなく、ソフトウェア世界そのものを進化させ続けます。空のリポジトリから出発し、システムは123.4時間で248,989行のC compilerを構築しました。モデルのtokenコスト総額はわずか44.38ドルです。"
 ---
 
-# EvoX Genesis：長期の自律的なソフトウェア進化のための再帰的AIシステム、ゼロから25万行のC compilerを構築
-
 ![image1.png](./evox-genesis-1.png)
 
 香港理工大学データサイエンス・人工知能学科のEvoXチームは、長期の自律的なソフトウェア進化のための再帰的AIシステム**EvoX Genesis**をリリースしました。
@@ -14,11 +12,7 @@ EvoX Genesisは、長期開発を維持するために永続的なagentに依存
 
 空のリポジトリから出発し、システムは1,019回のagentエピソードを経て、123.4時間で**248,989行のC compiler**を構築しました。モデルのtokenコストはわずか**44.38ドル**です。
 
-<center>
-
 ## ロングホライズン・コーディング：境界は動き続ける
-
-</center>
 
 コーディングagentの稼働時間は、単発の短いタスクから数十時間へと延伸しています。
 
@@ -38,11 +32,7 @@ Anthropicは16個のClaude agentを使い、約2,000回のセッション、約2
 
 本当に存続すべきは、agentが棲むソフトウェア世界の方ではないか？
 
-<center>
-
 ## 123.4時間、25万行
-
-</center>
 
 私たちはEvoX Genesisを、実装が空のリポジトリから始めさせました。
 
@@ -56,23 +46,11 @@ Anthropicは16個のClaude agentを使い、約2,000回のセッション、約2
 
 ![image2.png](./evox-genesis-2.png)
 
-<center>
-
 _図1：C compilerの実験結果 / コード規模、稼働時間、agentエピソード、コスト、テスト結果_
-
-</center>
-
-<center>
 
 _（DeepSeek V4 Flashモデルを使用）_
 
-</center>
-
-<center>
-
 ## agentを存続させない——ソフトウェア世界を存続させる
-
-</center>
 
 複雑なソフトウェアの寿命は、単一のagentセッションよりも自然に長くなります。
 
@@ -106,17 +84,9 @@ agent、役割、ワークフローを事前に設計する必要も、完全な
 
 ![image3.png](./evox-genesis-3.png)
 
-<center>
-
 _図2：Persistent Recursive Worldの概念図 / agentは生まれ、行動し、消える；ソフトウェア世界は展開し続ける_
 
-</center>
-
-<center>
-
 ## モデルは交代できる、ソフトウェア世界は続く
-
-</center>
 
 この連続性は、同じモデルを使い続けることすら要求しません。
 
@@ -128,17 +98,9 @@ _図2：Persistent Recursive Worldの概念図 / agentは生まれ、行動し�
 
 ![image4.png](./evox-genesis-4.png)
 
-<center>
-
 _図3：GLM 5.2 → DeepSeek V4 Flashのクロスモデル継続実験_
 
-</center>
-
-<center>
-
 ## ゼロからも、歴史を継いでからも
-
-</center>
 
 ゼロからの構築は、ソフトウェアライフサイクルの一端にすぎません；
 
@@ -154,31 +116,13 @@ EvoX Genesisはそれらを対応するRust cratesへリファクタリングし
 
 ![image5.png](./evox-genesis-5.png)
 
-<center>
-
 _図4：MESA Fortran → Rust、13モジュール、139,414行のコード、10.6ドル_
-
-</center>
-
-<center>
 
 ## コスト優位は時間とともに複利で積み上がる
 
-</center>
-
-長期のソフトウェア開発は、コストが線形に増え続けることを意味しません。
-
 EvoX Genesisでは、検証済みのコード、構造、開発履歴が蓄積され続け、次のラウンドの作業の基盤になります。後続のagentはプロジェクト全体をゼロから再理解する必要がなく、既存の情報の多くはそのままキャッシュして再利用でき、キャッシュヒット率は最大97.4%に達します。
 
-システムが動き続けるほど、再利用可能な開発状態は豊かになり、冗長な計算は減り、開発の単価はむしろ下がっていきます。
-
-これは時間とともに積み上がるエンジニアリングの複利です。
-
-<center>
-
 ## EvoX Genesisはオープンソース化されました
-
-</center>
 
 プロジェクトはオープンソースで、Windows、macOS、Linux向けのインストールパッケージが提供されています。
 
@@ -200,21 +144,11 @@ https://github.com/EMI-Group/genesis
 
 🌐 QQグループ：297969717
 
-![image6.png](./evox-genesis-6.png)
-
 ![image7.png](./evox-genesis-7.png)
-
-<center>
 
 **agentは去り、ソフトウェア世界は進化し続ける**
 
 **EvoX Genesis**
-
-</center>
-
-![image8.png](./evox-genesis-8.png)
-
-<center><strong>QQグループ｜</strong>Evolutionary Machine Intelligence</center>
 
 参考：
 

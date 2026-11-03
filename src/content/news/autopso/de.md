@@ -110,24 +110,8 @@ Da die GPU-gestützte Massenevaluierung von Kandidaten allmählich zur Norm in d
 
 AutoPSO × EvoX: Die evolutionäre Berechnung vom manuellen Zeitalter ins automatische Zeitalter führen.
 
-## Open-Source-Code / Community-Ressourcen
+## Ressourcen
 
-**Paper:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**Upstream-Projekt (EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**QQ-Gruppe:**
-
-297969717
-
-![](./autopso-6.png)
-
-*QR-Code der EvoX-QQ-Community-Gruppe.*
+- [Forschungsarbeit](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

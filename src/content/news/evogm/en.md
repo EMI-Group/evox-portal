@@ -1,10 +1,8 @@
-﻿---
+---
 title: "EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining"
 pubDate: 2026-06-28
 summary: "The EvoX team, in collaboration with Peng Cheng Laboratory, proposes EvoGM, a generative evolutionary model merging framework that reformulates coefficient search as a learnable generative optimization problem, enabling autonomous model merging without retraining large models."
 ---
-
-# EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining
 
 ![image1.png](./evogm-1.png)
 
@@ -142,16 +140,8 @@ From EvoGO to EvoGM, the progression is essentially from "learning how to optimi
 
 As expert models, LoRA models, and task-specific models proliferate in the open-source ecosystem, the key question of the future may no longer be "how to train a new model," but "how to efficiently combine existing model capabilities." EvoGM offers a new answer: without retraining the participating large models, it leverages generative evolutionary learning with limited validation feedback to autonomously complete candidate population construction, merging configuration generation, evaluation and selection, and expert-base updates. In short, EvoGM moves model merging from "tuning coefficients by experience" to "letting merging strategies learn and evolve on their own." This also suggests that large model capability reuse may enter a new phase: rather than retraining a model for every new task, existing expert models can continuously combine into models better suited to new tasks through population evolution and autonomous merging.
 
-## Open Source / Community
+## Resources
 
-📄 Paper:
-https://arxiv.org/pdf/2605.29295
-🔗 GitHub:
-
-https://github.com/JiangTao97/evogm
-🔼 Upstream Project (EvoX):
-
-https://github.com/EMI-Group/evox
-🌐 QQ Group: 297969717
-
-![image8.png](./evogm-8.png)
+- [Research paper](https://arxiv.org/abs/2605.29295)
+- [GitHub](https://github.com/JiangTao97/evogm)
+- [EvoX](https://github.com/EMI-Group/evox)

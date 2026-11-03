@@ -63,3 +63,6 @@ No automated tests exist for this module. Verification is manual:
 
 ## Status
 Complete and stable. All 13 locales ship with identical 235-key sets; utils.ts API is mature and widely consumed. Historical commits touching this module: `497ff71` (v3.0.2-alpha full i18n), `e225987` (translation improvement pass), `eafe9fb` (audit fixes), `0b94422` (dropped EvoX prefix from Genesis name in zh locales), `8991303` (Runtime/Genesis pages + nav restructure, added `runtime.*`, `genesis.*` keys).
+
+## Coverage update (2026-11-03)
+All 13 dictionaries have 256 matching keys with matching interpolation placeholders. Preview, 404, interactive chart labels, and evolution assistive text use localized strings. Brand names, API identifiers, and mathematical notation intentionally retain their established spelling. A full static build contains 62 equivalent routes per locale (806 pages).

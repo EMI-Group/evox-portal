@@ -16,3 +16,8 @@ summary: "新特性：Workflow 现在接受 opt_direction 列表。此外还有�
 - 修复存在多个额外参数时的 `use_state` 问题。
 
 **完整变更日志**：[v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## 相关资源
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文档](https://evox.readthedocs.io/en/latest/)

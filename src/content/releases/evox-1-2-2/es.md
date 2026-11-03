@@ -11,3 +11,8 @@ Esta es una versión menor centrada exclusivamente en la corrección de errores:
 - Varias correcciones en la documentación.
 
 **Changelog completo**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## Recursos
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentación](https://evox.readthedocs.io/en/latest/)

@@ -12,7 +12,7 @@ Mit der stetig steigenden Nachfrage nach komplexen Optimierungslösungen in Bere
 
 Um diese Einschränkung zu beheben, schlug das EvoX-Team vor, EMO-Algorithmen mittels der Tensorisierungsmethodik auf GPUs zu parallelisieren. Unter Nutzung dieser Methode haben sie erfolgreich mehrere GPU-beschleunigte EMO-Algorithmen entworfen und implementiert. Darüber hinaus entwickelte das Team **"MoRobtrol"**, eine **Benchmark-Suite für mehrkriterielle Robotersteuerung**, die auf der Brax-Physik-Engine aufbaut und darauf abzielt, die Leistung von GPU-beschleunigten EMO-Algorithmen systematisch zu bewerten.
 
-Basierend auf diesen Forschungsfortschritten hat das EvoX-Team **EvoMO** veröffentlicht, eine leistungsstarke Bibliothek für GPU-beschleunigte EMO-Algorithmen. Der entsprechende Quellcode ist öffentlich auf GitHub verfügbar: [https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
+Basierend auf diesen Forschungsfortschritten hat das EvoX-Team **EvoMO** veröffentlicht, eine leistungsstarke Bibliothek für GPU-beschleunigte EMO-Algorithmen. Der entsprechende Quellcode ist öffentlich auf GitHub verfügbar: [https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
 ## Methodik der Tensorisierung
 
@@ -105,24 +105,8 @@ Die Experimente verglichen die Leistung von TensorNSGA-III, TensorMOEA/D, Tensor
 ## Fazit und zukünftige Arbeit
 Diese Studie schlägt eine Methodik der tensorisierten Darstellung vor, um die Einschränkungen traditioneller CPU-basierter EMO-Algorithmen in Bezug auf Recheneffizienz und Skalierbarkeit zu beheben. Der Ansatz wurde auf mehrere repräsentative Algorithmen angewendet, darunter NSGA-III, MOEA/D und HypE, und erzielte signifikante Leistungsverbesserungen auf GPUs bei gleichzeitiger Beibehaltung der Lösungsqualität. Um die praktische Anwendbarkeit zu validieren, entwickelte das Team auch MoRobtrol, eine Benchmark-Suite für mehrkriterielle Robotersteuerung, die Aufgaben der Robotersteuerung in physikalischen Simulationsumgebungen als mehrkriterielle Optimierungsprobleme neu formuliert. Die Ergebnisse demonstrieren das Potenzial tensorisierter Algorithmen in rechenintensiven Szenarien wie der verkörperten Intelligenz (Embodied Intelligence). Obwohl die Tensorisierungsmethode die algorithmische Effizienz erheblich verbessert hat, bleibt Raum für weitere Verbesserungen. Zukünftige Richtungen umfassen die Verbesserung von Kernoperatoren wie der nicht-dominierten Sortierung, das Design neuer tensorisierter Operationen für Multi-GPU-Systeme und die Integration von groß angelegten Daten und Deep-Learning-Techniken, um die Leistung bei groß angelegten Optimierungsproblemen weiter zu steigern.
 
-## Open-Source-Code / Community-Ressourcen
+## Ressourcen
 
-Paper:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Upstream-Projekt (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ-Gruppe: 297969717
-
-![](./emo-12.png)
-
-EvoMO baut auf dem EvoX-Framework auf. Wenn Sie mehr über EvoX erfahren möchten, schauen Sie sich gerne den offiziellen Artikel zu EvoX 1.0 an, der auf unserem öffentlichen WeChat-Account veröffentlicht wurde, um weitere Details zu erfahren.
-
-![1744939468669.png](./evox-1-1-1-1.png)
+- [Forschungsarbeit](https://arxiv.org/abs/2503.20286)
+- [GitHub](https://github.com/EMI-Group/evomo)
+- [EvoX](https://github.com/EMI-Group/evox)

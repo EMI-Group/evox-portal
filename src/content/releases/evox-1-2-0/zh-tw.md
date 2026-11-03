@@ -8,8 +8,7 @@ summary: "新功能包括 final_step()、Mujoco Playground 環境、使用者教
 
 **此次更新增強了框架在關鍵模組上的靈活性與效能**。
 
-**亮點：**
-
+## 亮點
 -  新增 `final_step()` 並更新了 `hpo_wrapper` 和 `std_workflow`，以實現更流暢的執行工作流程。
 
 -  引入了「Mujoco Playground」—— 一個用於強化學習實驗的新環境。
@@ -20,8 +19,7 @@ summary: "新功能包括 final_step()、Mujoco Playground 環境、使用者教
 
 -  各種錯誤修復和文件更新，以提高穩定性和清晰度。
 
-**相關 Pull Requests：**
-
+## 相關 Pull Requests
 - MOEAs 的 Docstring 更新 —— [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
 
 - `hpo_wrapper.py` 中的 `vmap` 修復 —— [#232](https://github.com/EMI-Group/evox/pull/232) (@starquakee)
@@ -40,22 +38,7 @@ summary: "新功能包括 final_step()、Mujoco Playground 環境、使用者教
 
 **完整變更日誌**：[v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
 
-**開源程式碼 / 社群資源**
+## 相關資源
 
-論文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上游專案 (EvoX)：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 群：297969717
-
-![圖片11.png](./evox-1-2-0-1.png)
-
-QQ 群 | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文件](https://evox.readthedocs.io/en/latest/)

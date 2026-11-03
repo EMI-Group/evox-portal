@@ -16,3 +16,8 @@ summary: "Новая функция: Workflow теперь принимает с
 - Исправлена работа `use_state` при наличии нескольких дополнительных аргументов.
 
 **Полный список изменений**: [v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## Ресурсы
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Документация](https://evox.readthedocs.io/en/latest/)

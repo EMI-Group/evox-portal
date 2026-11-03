@@ -26,21 +26,50 @@ Als Nächstes führen wir Sie in nur 10 Minuten durch den gesamten Prozess von d
 
 Öffnen Sie Ihr Terminal und erstellen Sie eine saubere Python-Umgebung:
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 Sie können auch Ihr bevorzugtes Tool verwenden, um eine saubere Python-Umgebung zu erstellen.
 
 ## Schritt 2: Installation von PyTorch und EvoX
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 Überprüfen Sie, ob die GPU verfügbar ist:
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## Schritt 3: Führen Sie Ihren ersten evolutionären Algorithmus aus
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 Was bewirkt das? Es stellt einen Algorithmus (PSO), ein Problem (Ackley) und einen Monitor (EvalMonitor) über eine Standardschnittstelle zusammen. EvoX kümmert sich um die gesamte Parallelisierung, Beschleunigung und Überwachung!
 
@@ -48,7 +77,9 @@ Was bewirkt das? Es stellt einen Algorithmus (PSO), ein Problem (Ackley) und ein
 
 Nur eine Zeile reicht aus:
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ Sehen Sie diese absteigende Kurve? Das ist die **Trajektorie, auf der sich Ihr e
 
 Wenn „nur einen Ackley auszuführen“ nicht befriedigend ist, können Sie:
 
-· PSO gegen GA, DE, CMA-ES, NSGA-II, RVEA austauschen...
+- PSO gegen GA, DE, CMA-ES, NSGA-II, RVEA austauschen...
  · Ackley gegen Rastrigin, Griewank, CEC2022 austauschen
  · Zu einem mehrzieligen Problem wechseln, indem Sie n_objs >= 2 setzen
  · Ihre eigene Logik mit MyProblem und MyAlgorithm implementieren
@@ -70,36 +101,13 @@ Ob Hyperparameter-Tuning, Architektursuche, Neuroevolution oder Optimierung von 
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## Danksagung
 
 Dieses Tutorial wurde von **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** und **Xinyao Li** verfasst. **Beichen Huang** war für die Zusammenstellung, Bearbeitung und Online-Veröffentlichung des Tutorials verantwortlich.
 
 Wir danken jedem Mitglied der EvoX-Community aufrichtig. Es sind unsere gemeinsamen Anstrengungen, die es EvoX ermöglicht haben, sich weiterzuentwickeln.
 
-## Open Source Code / Community-Ressourcen
+## Ressourcen
 
-Paper:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Upstream-Projekt (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ-Gruppe: 297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-QQ-Gruppe | Evolving Machine Intelligence
-
-EvoMO baut auf dem EvoX-Framework auf. Wenn Sie daran interessiert sind, mehr über EvoX zu erfahren, schauen Sie sich gerne den offiziellen Artikel zu EvoX 1.0 an, der auf unserem öffentlichen WeChat-Konto veröffentlicht wurde, um weitere Details zu erhalten.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Dokumentation](https://evox.readthedocs.io/en/latest/)

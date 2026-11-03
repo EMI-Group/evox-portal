@@ -8,8 +8,7 @@ summary: "Nouvelles fonctionnalités incluant final_step(), l'environnement Mujo
 
 **Cette mise à jour améliore la flexibilité et les performances du framework à travers des modules clés**.
 
-**Points forts :**
-
+## Points forts
 -  Ajout de `final_step()` et mise à jour de `hpo_wrapper` et `std_workflow` pour des flux d'exécution plus fluides.
 
 -  Introduction du « Mujoco Playground » -- un nouvel environnement pour les expériences d'apprentissage par renforcement.
@@ -20,8 +19,7 @@ summary: "Nouvelles fonctionnalités incluant final_step(), l'environnement Mujo
 
 -  Diverses corrections de bugs et mises à jour de la documentation pour une meilleure stabilité et clarté.
 
-**Pull Requests associées :**
-
+## Pull Requests associées
 - Mises à jour des docstrings pour les MOEA -- [#230](https://github.com/EMI-Group/evox/pull/230) (@Zhenyu2Liang)
 
 - Correction de `vmap` dans `hpo_wrapper.py` -- [#232](https://github.com/EMI-Group/evox/pull/232) (@starquakee)
@@ -40,22 +38,7 @@ summary: "Nouvelles fonctionnalités incluant final_step(), l'environnement Mujo
 
 **Journal des modifications complet** : [v1.1.2...v1.2.0](https://github.com/EMI-Group/evox/compare/v1.1.2...v1.2.0)
 
-**Code Open Source / Ressources communautaires**
+## Ressources
 
-Article :
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub :
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Projet en amont (EvoX) :
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-Groupe QQ : 297969717
-
-![Image 11.png](./evox-1-2-0-1.png)
-
-Groupe QQ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

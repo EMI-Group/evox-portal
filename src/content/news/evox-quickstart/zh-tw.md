@@ -26,21 +26,50 @@ summary: "一份初學者教程，教您如何在 10 分鐘內使用 EvoX 開始
 
 打開您的終端機並建立一個乾淨的 Python 環境：
 
-![代碼片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 您也可以使用您偏好的工具來建立一個乾淨的 Python 環境。
 
 ## 第二步：安裝 PyTorch 和 EvoX
 
-![代碼片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 檢查 GPU 是否可用：
 
-![代碼片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## 第三步：運行您的第一個演化演算法
 
-**![代碼片段4.png](./quickstart-4.png)![圖片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 這是做什麼的？它透過標準介面組合了一個演算法（PSO）、一個問題（Ackley）和一個監控器（EvalMonitor）。EvoX 負責所有的並行化、加速和監控！
 
@@ -48,7 +77,9 @@ summary: "一份初學者教程，教您如何在 10 分鐘內使用 EvoX 開始
 
 只需要一行程式碼：
 
-![代碼片段5.png](./quickstart-6.png "代碼片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ summary: "一份初學者教程，教您如何在 10 分鐘內使用 EvoX 開始
 
 如果「僅僅運行一個 Ackley」不能滿足您，您可以：
 
-· 將 PSO 替換為 GA, DE, CMA-ES, NSGA-II, RVEA...
+- 將 PSO 替換為 GA, DE, CMA-ES, NSGA-II, RVEA...
  · 將 Ackley 替換為 Rastrigin, Griewank, CEC2022
  · 透過設置 n_objs >= 2 切換到多目標問題
  · 使用 MyProblem 和 MyAlgorithm 實現您自己的邏輯
@@ -70,36 +101,13 @@ summary: "一份初學者教程，教您如何在 10 分鐘內使用 EvoX 開始
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## 致謝
 
 本教程由 **Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng** 和 **Xinyao Li** 撰寫。**Beichen Huang** 負責教程的整理、編輯和線上發布。
 
 我們衷心感謝 EvoX 社群的每一位成員。正是我們的共同努力，讓 EvoX 能夠不斷演化。
 
-## 開源程式碼 / 社群資源
+## 相關資源
 
-論文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上游專案 (EvoX)：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 群：297969717
-
-![圖片11.png](./evox-1-1-0-1.png)
-
-QQ 群 | 演化機器智能 (Evolving Machine Intelligence)
-
-EvoMO 是基於 EvoX 框架構建的。如果您有興趣了解更多關於 EvoX 的資訊，歡迎查看我們微信公眾號上發布的關於 EvoX 1.0 的官方文章以獲取更多詳情。
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文件](https://evox.readthedocs.io/en/latest/)

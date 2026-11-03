@@ -4,8 +4,6 @@ pubDate: 2026-08-17
 summary: "L'équipe EvoX du Département de Science des Données et Intelligence Artificielle de la Hong Kong Polytechnic University a publié EvoX Genesis, un système d'IA récursif pour l'évolution autonome des logiciels sur le long terme. Au lieu de s'appuyer sur un agent persistant pour maintenir un développement de longue durée, il laisse le monde du logiciel évoluer par lui-même : à partir d'un dépôt vide, le système a construit un compilateur C de 248 989 lignes en 123,4 heures, pour un coût total en tokens de modèle de seulement 44,38 $."
 ---
 
-# EvoX Genesis : un système d'IA récursif pour l'évolution autonome des logiciels sur le long terme, qui a construit un compilateur C de 250 000 lignes à partir de zéro
-
 ![image1.png](./evox-genesis-1.png)
 
 L'équipe EvoX du Département de Science des Données et Intelligence Artificielle de la Hong Kong Polytechnic University a publié **EvoX Genesis**, un système d'IA récursif pour l'évolution autonome des logiciels sur le long terme.
@@ -14,11 +12,7 @@ EvoX Genesis ne repose plus sur un agent persistant pour soutenir un développem
 
 À partir d'un dépôt vide, le système a construit un **compilateur C de 248 989 lignes** en 123,4 heures, à travers 1 019 épisodes d'agent, pour un coût en tokens de modèle de seulement **44,38 $**.
 
-<center>
-
 ## Le codage sur le long terme : une frontière qui recule sans cesse
-
-</center>
 
 Le temps de travail des agents de codage est passé de courtes tâches ponctuelles à plusieurs dizaines d'heures.
 
@@ -38,11 +32,7 @@ des modèles plus puissants, des contextes plus longs, une mémoire plus persist
 
 Et si ce qui devait vraiment persister, c'était le monde du logiciel dans lequel il vit ?
 
-<center>
-
 ## 123,4 heures, 250 000 lignes
-
-</center>
 
 Nous avons laissé EvoX Genesis partir d'un dépôt à l'implémentation vide.
 
@@ -56,23 +46,11 @@ Aucun compilateur existant n'attendait d'être complété — **il est parti de 
 
 ![image2.png](./evox-genesis-2.png)
 
-<center>
-
 _Figure 1 : résultats de l'expérience du compilateur C / taille du code, temps d'exécution, épisodes d'agent, coût et résultats de tests_
-
-</center>
-
-<center>
 
 _(avec le modèle DeepSeek V4 Flash)_
 
-</center>
-
-<center>
-
 ## Ne pas maintenir l'agent en vie — maintenir le monde du logiciel en vie
-
-</center>
 
 La vie d'un logiciel complexe est naturellement plus longue qu'une session d'agent.
 
@@ -106,17 +84,9 @@ la décomposition des tâches, la génération des agents, le déploiement de la
 
 ![image3.png](./evox-genesis-3.png)
 
-<center>
-
 _Figure 2 : le concept de Persistent Recursive World / les agents naissent, agissent et disparaissent ; le monde logiciel continue de se déployer_
 
-</center>
-
-<center>
-
 ## Les modèles peuvent changer ; le monde du logiciel continue
-
-</center>
 
 Cette continuité n'exige même pas d'utiliser le même modèle du début à la fin.
 
@@ -128,17 +98,9 @@ Les modèles peuvent être remplacés, les agents peuvent être remplacés — l
 
 ![image4.png](./evox-genesis-4.png)
 
-<center>
-
 _Figure 3 : l'expérience de continuation entre modèles, GLM 5.2 → DeepSeek V4 Flash_
 
-</center>
-
-<center>
-
 ## Partir de zéro, ou hériter de l'histoire
-
-</center>
 
 Construire à partir de zéro n'est qu'un bout du cycle de vie d'un logiciel ;
 
@@ -154,17 +116,9 @@ Un monde logiciel peut être créé à partir de rien, ou hériter de l'histoire
 
 ![image5.png](./evox-genesis-5.png)
 
-<center>
-
 _Figure 4 : MESA Fortran → Rust, 13 modules, 139 414 lignes de code, 10,6 $_
 
-</center>
-
-<center>
-
 ## Les avantages de coût se composent dans le temps
-
-</center>
 
 Le développement logiciel de longue durée ne signifie pas que les coûts croissent linéairement.
 
@@ -174,11 +128,7 @@ Dans EvoX Genesis, le code vérifié, la structure et l'historique de développe
 
 Ce sont des intérêts composés d'ingénierie qui s'accumulent avec le temps.
 
-<center>
-
 ## EvoX Genesis est désormais open source
-
-</center>
 
 Le projet est open source, avec des packages d'installation disponibles pour Windows, macOS et Linux.
 
@@ -200,21 +150,11 @@ https://github.com/EMI-Group/genesis
 
 🌐 Groupe QQ : 297969717
 
-![image6.png](./evox-genesis-6.png)
-
 ![image7.png](./evox-genesis-7.png)
-
-<center>
 
 **Les agents s'en vont ; le monde du logiciel continue d'évoluer**
 
 **EvoX Genesis**
-
-</center>
-
-![image8.png](./evox-genesis-8.png)
-
-<center><strong>Groupe QQ｜</strong>Evolutionary Machine Intelligence</center>
 
 Références :
 

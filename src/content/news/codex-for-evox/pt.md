@@ -1,10 +1,8 @@
 ---
-title: "Codex para o EvoX: conceber algoritmos, migrar código e executar experiências reprodutíveis através de conversa"
+title: "Codex × EvoX: desenvolvimento de algoritmos e experiências reproduzíveis"
 pubDate: 2026-08-08
 summary: "A computação evolutiva está a entrar na era nativa de IA. Com o Codex como representante dos agentes de IA para programação, o EvoX transforma intenções em linguagem natural em fluxos de trabalho de computação evolutiva executáveis — abrangendo modelação de problemas, migração de algoritmos, neuroevolução sem retropropagação e tensorização em GPU."
 ---
-
-# Codex para o EvoX: conceber algoritmos, migrar código e executar experiências reprodutíveis através de conversa
 
 A computação evolutiva está a entrar na era nativa de IA.
 

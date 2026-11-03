@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "Исправления ошибок захвата графа torch.compile, разрывов графа use_state и утечек BatchedTensor."
 ---
 
-**Что изменилось**
+## Что изменилось
 
-**Этот минорный релиз в основном включает исправления ошибок и улучшения:**
-
+Этот минорный релиз в основном включает исправления ошибок и улучшения.
 - Исправлена проблема, из-за которой `torch.compile` некорректно захватывал `workflow.step`.
 
 - Исправлена проблема, при которой `use_state` приводил к разрыву графа.
@@ -28,16 +27,7 @@ summary: "Исправления ошибок захвата графа torch.co
 
 - Различные мелкие исправления и улучшения.
 
-**Исходный код и сообщество**
+## Ресурсы
 
-**Статья**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Основной проект (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Группа QQ**: 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  Группа QQ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Документация](https://evox.readthedocs.io/en/latest/)

@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "torch.compileのグラフキャプチャ、use_stateによるグラフの中断、およびBatchedTensorのリークに関するバグ修正。"
 ---
 
-**変更点**
+## 変更点
 
-**このマイナーリリースには、主にバグ修正と改善が含まれています：**
-
+このマイナーリリースには、主にバグ修正と改善が含まれています.
 - `torch.compile`が`workflow.step`を正しくキャプチャしない問題を修正しました。
 
 - `use_state`がグラフの中断（graph break）を引き起こす問題を修正しました。
@@ -28,16 +27,7 @@ summary: "torch.compileのグラフキャプチャ、use_stateによるグラフ
 
 - その他、様々な小さな修正と改善を行いました。
 
-**オープンソースコードとコミュニティ**
+## 関連資料
 
-**論文**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**アップストリームプロジェクト (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**QQグループ**: 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  QQグループ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [ドキュメント](https://evox.readthedocs.io/en/latest/)

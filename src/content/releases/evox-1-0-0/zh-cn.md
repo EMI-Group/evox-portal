@@ -1,22 +1,23 @@
 ---
 title: "EvoX 1.0.0 发布：兼容 PyTorch 的 GPU 加速演化计算框架"
 pubDate: 2025-01-20
-summary: "EvoX 1.0.0 实现了与 PyTorch 的完全兼容，提供 50 多种演化算法，并通过分布式 GPU 加速实现 100 倍性能提升。"
+summary: "EvoX 1.0.0 引入 PyTorch 集成、50 多种演化算法与 GPU 加速优化支持。"
 ---
 
-**EvoX 1.0.0 有哪些新特性？**
-
+## EvoX 1.0.0 有哪些新特性？
 * **完全兼容 PyTorch**：EvoX 现已与 PyTorch 生态系统无缝集成，使得在**神经架构搜索 (NAS)、强化学习 (RL) 和元学习**中应用**演化算法 (EAs)** 变得前所未有的简单。
-* **分布式 GPU 加速**：专为大规模计算打造，EvoX 利用 PyTorch 在异构硬件（CPUs、GPUs、多节点集群）上实现了 **100 倍的加速**。
 * **丰富的算法库**：内置 **50 多种演化算法**，涵盖 **GA、DE、PSO、CMA-ES、MOEAs（NSGA-II、RVEA、MOEA/D 等）**，以及最先进的元演化方法。
 * **RL 与物理引擎支持**：兼容 **Brax** 和强化学习环境，支持**演化强化学习 (ERL) 应用**。
 * **100+ 基准问题**：涵盖单目标和多目标优化，以及**现实世界的工程挑战**。
 * **高度可定制与扩展**：支持灵活的问题定义、实时数据流以及可扩展的分布式工作流。
 
-**连接演化计算与深度学习**
-
+## 连接演化计算与深度学习
 EvoX 1.0.0 代表了将**演化算法与现代深度学习框架**相融合的**突破性一步**。与 PyTorch 的集成使研究人员和从业者能够**将基于梯度的学习与演化搜索相结合**，从而在**AI 驱动的优化、自动化机器学习 (AutoML) 以及复杂决策系统**领域解锁新的可能性。
 
-**开源与社区驱动**
-
+## 开源与社区驱动
 EvoX 现已在 **GitHub** 上发布：[https://github.com/EMI-Group/EvoX](https://github.com/EMI-Group/EvoX "https://github.com/EMI-Group/EvoX")
+
+## 相关资源
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文档](https://evox.readthedocs.io/en/latest/)

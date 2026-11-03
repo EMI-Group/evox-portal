@@ -1,15 +1,10 @@
 ---
-title: "EvoGO: Computación en GPU × Aprendizaje Generativo → Un nuevo paradigma para algoritmos evolutivos con convergencia en 10 generaciones"
+title: "EvoGO: aprender a generar mejores soluciones a partir de la experiencia de búsqueda"
 pubDate: 2026-04-05
 summary: "EvoGO es un marco de optimización evolutiva totalmente basado en datos que aprende cómo generar mejores soluciones a partir de la experiencia de búsqueda pasada y logra un rendimiento rápido y sólido en tareas complejas de alta dimensión."
 ---
 
-
-# EvoGO: Computación en GPU × Aprendizaje Generativo → Un nuevo paradigma para algoritmos evolutivos con convergencia en 10 generaciones
-
 ![image1](./image1.png)
-
-En los últimos años, los métodos de optimización evolutiva basados en datos han logrado avances notables. Desde los algoritmos evolutivos asistidos por sustitutos (surrogates) hasta los algoritmos evolutivos generativos, la optimización evolutiva ha pasado gradualmente de los paradigmas tradicionales basados en operadores fijos a los basados en el aprendizaje. Sin embargo, la naturaleza basada en datos de los métodos existentes sigue siendo incompleta en tres aspectos importantes. En primer lugar, la coordinación entre el mecanismo generativo y el proceso evolutivo aún depende a menudo de reglas heurísticas diseñadas manualmente. En segundo lugar, los objetivos de entrenamiento de los modelos generativos suelen heredarse de tareas de generación de propósito general y no están suficientemente alineados con los objetivos de optimización. En tercer lugar, las muestras en línea extremadamente limitadas pero muy valiosas disponibles en la optimización de caja negra aún no se han organizado sistemáticamente en una experiencia de optimización que se pueda aprender y transferir. Para abordar estos problemas, el equipo de EvoX propuso la Optimización Generativa Evolutiva (EvoGO), que organiza todo el proceso de optimización en tres etapas unificadas: preparación de datos, entrenamiento del modelo y generación de la población. El objetivo es permitir que los algoritmos de optimización aprendan directamente la ley de mejora de pasar de soluciones inferiores a superiores a partir de datos históricos. Los resultados experimentales muestran que EvoGO demuestra ventajas estables en tres categorías de tareas —optimización numérica, control clásico y control robótico de alta dimensión— abarcando 25 pruebas de referencia (benchmarks) y escalas de problemas que van desde 10 hasta 1000 dimensiones, y convergiendo en la mayoría de las tareas a gran escala en aproximadamente 10 generaciones. En tareas complejas, al combinarse con la inferencia paralela en GPU, EvoGO también muestra ventajas prácticas significativas en el tiempo de ejecución; cuando CMA-ES alcanza su rendimiento convergente, EvoGO puede lograr el mismo rendimiento de forma hasta 134 veces más rápida. Estos resultados indican que la optimización evolutiva totalmente basada en datos no solo puede lograr resultados competitivos en las pruebas de referencia estándar, sino que también abre nuevas posibilidades para un marco generativo unificado con el fin de resolver problemas complejos de optimización de caja negra de alta dimensión.
 
 ## El problema: La optimización basada en datos aún no ha dado el paso definitivo
 
@@ -83,45 +78,12 @@ Para abordar este problema, el equipo de EvoX construyó un proceso de diseño i
 
 Utilizando solo 500 muestras históricas de perfiles alares, el método logra una precisión de predicción superior al 99,5% en tres indicadores aerodinámicos clave —relación sustentación-resistencia, coeficiente de sustentación y ángulo de ataque en crucero—, y la tasa de calificación de los perfiles alares generados automáticamente supera el 95%. Estos resultados indican que los métodos de optimización evolutiva totalmente basados en datos, como EvoGO, no solo pueden tener un buen rendimiento en las pruebas de referencia estándar, sino que también están comenzando a demostrar la capacidad de proporcionar un soporte de diseño efectivo para problemas de ingeniería reales.
 
-## Profundizando la visión: De la física a la filosofía, reinterpretando EvoGO
-
-### Perspectiva física: Del ensayo y error desordenado a la evolución ordenada
-
-Desde una perspectiva física, la optimización de caja negra puede entenderse como un proceso de búsqueda gradual de un estado más estable dentro de un campo de potencial real pero de observación incompleta. Para el optimizador, la función objetivo y su panorama de aptitud (fitness landscape) existen objetivamente en todo momento, pero en el momento inicial el sistema solo puede obtener conocimiento local a través de un muestreo y evaluación limitados. Por tanto, la búsqueda conlleva inherentemente una alta incertidumbre.
-
-La optimización evolutiva tradicional depende en gran medida de la perturbación local y del ensayo y error aleatorio. Aunque puede acercarse gradualmente a mejores regiones a través del muestreo repetido y la selección, el proceso de búsqueda sigue manifestándose principalmente como una exploración local de alta entropía, y la experiencia histórica es difícil de acumular sistemáticamente. Lo que distingue a EvoGO es que organiza aún más las muestras históricas en una base de información que codifica dirección y estructura. El modelo sustituto proporciona una comprensión aproximada del panorama local del objetivo; el emparejamiento de soluciones superiores e inferiores extrae información direccional sobre cómo pasar de regiones peores a mejores; y el bucle formado por la generación directa y las restricciones inversas permite que este proceso de actualización direccional se despliegue de forma continua mientras se mantiene estable.
-
-En términos físicos, EvoGO se parece más a un proceso en el que la estructura ordenada se forma gradualmente bajo la guía de un campo de potencial efectivo. Lo que hace no es simplemente acelerar la búsqueda, sino reducir gradualmente la incertidumbre de la búsqueda bajo una observabilidad limitada, transformando la actualización de la población de un ensayo y error desordenado a un flujo evolutivo organizado. La velocidad es solo el resultado; el cambio más profundo es que la experiencia histórica comienza a transformarse en información estructural que se puede acumular, transmitir y reutilizar.
-
-### Perspectiva filosófica: Del "El Tao da origen a todas las cosas" a la generación de leyes
-
-Desde una perspectiva filosófica, lo que es aún más digno de destacar de EvoGO es que encarna un proceso generativo que pasa de la experiencia al orden, y de lo local a lo global. Este proceso puede resumirse a través de la frase clásica: **"El Tao da origen al Uno, el Uno da origen al Dos, el Dos da origen al Tres, y el Tres da origen a todas las cosas."**
-
-El **"Tao"** corresponde a la verdadera ley del problema en cuestión, que existe objetivamente pero que no se puede captar por completo. En la optimización, la solución óptima no está prescrita subjetivamente por el algoritmo; por el contrario, siempre está latente dentro de la función objetivo real y su panorama de aptitud. Lo que puede hacer el algoritmo no es crear el Tao, sino acercarse continuamente a él.
-
-El **"Uno"** corresponde a la estructura unificada que se extrae de la experiencia desordenada. Inicialmente, las muestras históricas no son más que rastros dispersos de búsqueda; no constituyen automáticamente conocimiento. Solo cuando estas muestras se ordenan, filtran y organizan, la experiencia comienza a pasar del desorden a un todo que se puede aprender. Este es el significado de "dar origen al Uno".
-
-El **"Dos"** corresponde a la diferenciación: al surgimiento de la dirección. La división entre soluciones superiores e inferiores no representa meramente la distinción entre lo bueno y lo malo; más importante aún, marca la primera vez que el sistema adquiere un sentido de dirección a partir de la experiencia. Sin esta diferenciación, la experiencia simplemente se acumula; con ella, la experiencia adquiere tensión evolutiva.
-
-El **"Tres"** corresponde al cierre: a la generación de relaciones. Cuando el conocimiento objetivo, la progresión hacia adelante y la restricción hacia atrás forman conjuntamente un sistema autoconsistente, la optimización ya no es un collage de operaciones locales, sino que comienza a tomar forma como un mecanismo integral capaz de automantenimiento y autocorrección. En este punto, el método adquiere verdaderamente la capacidad de generar continuamente nuevas soluciones.
-
-**"Todas las cosas"** corresponden entonces a las nuevas poblaciones y las nuevas soluciones candidatas que surgen continuamente sobre este orden generativo. No se producen a ciegas, sino que surgen continuamente bajo la dirección, estructura y restricciones de bucle cerrado ya formadas. Precisamente por esta razón, lo que EvoGO avanza no es meramente la capacidad de "encontrar mejores soluciones más rápido", sino una nueva capacidad para que la optimización evolutiva genere leyes a partir de la experiencia, y luego genere soluciones continuamente a partir de esas leyes.
-
-El significado filosófico de EvoGO no radica en simplemente sustituir a los operadores tradicionales. Más bien, radica en mostrar más claramente que la optimización no tiene que avanzarse solo a través de reglas preescritas; a través de la acumulación, diferenciación y organización de la experiencia, puede formar gradualmente su propio orden generativo.
-
 ## Conclusión y perspectivas
 
 En lo que se centra EvoGO no es solo en una mejora local del proceso de optimización evolutiva tradicional, sino en una reconstrucción más fundamental de cómo ocurre la optimización en sí misma. Al organizar la optimización en las tres etapas unificadas de preparación de datos, entrenamiento del modelo y generación de la población, y al introducir la construcción direccional de datos basada en el emparejamiento superior-inferior, una arquitectura generativa emparejada guiada por un sustituto y un mecanismo de generación de población paralela, EvoGO demuestra ventajas estables tanto en rendimiento como en eficiencia en las pruebas de referencia estándar. Al mismo tiempo, también ha validado su potencial para problemas de ingeniería reales y complejos a través del diseño de optimización del ala supercrítica de aviones de pasajeros de fuselaje ancho de próxima generación. A un nivel más alto, la importancia de este trabajo radica en demostrar que la optimización evolutiva no tiene que permanecer necesariamente confinada a reglas heurísticas especificadas manualmente. El proceso de optimización en sí mismo puede destilarse progresivamente de la experiencia histórica como una ley que se puede aprender.
 
-## Código abierto / Comunidad
+## Recursos
 
-- **Artículo científico:**  
-  https://arxiv.org/abs/2602.01147
-- **GitHub:**  
-  https://github.com/EMI-Group/evogo
-- **Proyecto original (EvoX):**  
-  https://github.com/EMI-Group/evox
-- **Grupo QQ:** `297969717`
-- **Cuenta oficial de WeChat:** Evolutionary Machine Intelligence
-
-EvoGO se basa en el marco EvoX. Si estás interesado en EvoX, te invitamos a consultar los artículos (https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ) en la cuenta pública de EvoX para obtener más detalles.
+- [Artículo de investigación](https://arxiv.org/abs/2508.00380)
+- [GitHub](https://github.com/EMI-Group/evogo)
+- [EvoX](https://github.com/EMI-Group/evox)

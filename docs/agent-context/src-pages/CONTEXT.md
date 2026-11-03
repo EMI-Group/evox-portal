@@ -33,7 +33,7 @@ URL segment to detect the locale.
 |---|---|---|
 | `/` | `index.astro` | Home; thin wrapper around `components/pages/HomeContent.astro` |
 | `/{locale}/` | `[locale]/index.astro` | Home for each non-default locale; passes `locale` prop to HomeContent |
-| `/404` | `404.astro` | Static 404; English-only, `noSEO`, `localePath="/"`, no locale mirror |
+| `/404` | `404.astro` | Shared NotFoundContent; `noSEO`; mirrors all 13 locales. The host fallback redirects locale-prefixed missing URLs to their localized 404 page. |
 | `/docs` | `docs/index.astro` | Docs listing grouped by `data.section` (labels via `docs.section.<key>`), sorted by `data.order` |
 | `/docs/<slug>` | `docs/[...slug].astro` | Doc article; paths via `getLocalizedArticles(allDocs, defaultLocale)` |
 | `/news`, `/news/2`, ... | `news/[...page].astro` | Paginated news listing (10/page, pubDate desc). NO separate `index.astro` — paginate emits the base page itself |
@@ -86,3 +86,6 @@ slug/paginated routes to generate per-locale combinations.
 Stable. Last structural change: commit 8991303 (Runtime + Genesis landing pages,
 nav restructure); i18n completed in commit 497ff71 (v3.0.2-alpha). The
 dual-tree routing pattern has not changed since.
+
+## Locale coverage audit (2026-11-03)
+All 62 route identities, including Blog previews and 404, exist in all 13 locales. Blog preview routes use the shared locale model; their language switcher preserves the preview route. Published news, releases, docs, and tutorials contain 47 complete translation groups.

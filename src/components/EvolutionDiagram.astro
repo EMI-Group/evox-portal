@@ -1,146 +1,389 @@
 ---
-// A decorative population tree: candidates branch, converge, and evolve.
-// The surrounding section supplies the accessible explanation.
-type Point = { x: number; y: number; selected?: boolean; terminal?: boolean };
-
-const generations: Point[][] = [
-  [{ x: 48, y: 150, selected: true }],
-  [
-    { x: 198, y: 54 },
-    { x: 198, y: 102 },
-    { x: 198, y: 150, selected: true },
-    { x: 198, y: 198 },
-    { x: 198, y: 246 },
-  ],
-  [
-    { x: 358, y: 30 },
-    { x: 358, y: 78 },
-    { x: 358, y: 126, selected: true },
-    { x: 358, y: 174 },
-    { x: 358, y: 222 },
-    { x: 358, y: 270 },
-  ],
-  [
-    { x: 518, y: 66 },
-    { x: 518, y: 126, selected: true },
-    { x: 518, y: 186 },
-    { x: 518, y: 246 },
-  ],
-  [
-    { x: 678, y: 54 },
-    { x: 678, y: 102 },
-    { x: 678, y: 150, selected: true },
-    { x: 678, y: 198 },
-    { x: 678, y: 246 },
-  ],
-  [
-    { x: 852, y: 78, terminal: true },
-    { x: 852, y: 150, selected: true, terminal: true },
-    { x: 852, y: 222, terminal: true },
-  ],
-];
-
-// Each pair connects node indices in two consecutive generations.
-const connections = [
-  [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
-  [[0, 0], [0, 1], [1, 1], [1, 2], [2, 2], [2, 3], [3, 3], [3, 4], [4, 4], [4, 5]],
-  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2], [4, 3], [5, 3]],
-  [[0, 0], [0, 1], [1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3], [3, 4]],
-  [[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2]],
-];
-
-const branches = connections.flatMap((pairs, generation) =>
-  pairs.map(([source, target]) => {
-    const from = generations[generation][source];
-    const to = generations[generation + 1][target];
-    const midpoint = (from.x + to.x) / 2;
-    return {
-      selected: Boolean(from.selected && to.selected),
-      // Leave small gaps at node centers so the rings remain hollow.
-      path: `M ${from.x + 5} ${from.y} C ${midpoint} ${from.y}, ${midpoint} ${to.y}, ${to.x - 5} ${to.y}`,
-    };
-  }),
-);
+interface Props {
+  steps: string[];
+  description: string;
+  pauseLabel: string;
+  playLabel: string;
+  restartLabel: string;
+}
+const { steps, description, pauseLabel, playLabel, restartLabel } = Astro.props;
 ---
 
-<div class="evolution-diagram">
-  <svg viewBox="0 0 900 300" fill="none" aria-hidden="true" focusable="false">
-    <g class="population-branches">
-      {branches.filter((branch) => !branch.selected).map((branch) => <path d={branch.path} />)}
-    </g>
-    <g class="selected-branches">
-      {branches.filter((branch) => branch.selected).map((branch) => <path d={branch.path} />)}
-    </g>
-    <g class="population-nodes">
-      {generations.flat().map((point) => (
-        <circle
-          class:list={{ selected: point.selected, terminal: point.terminal }}
-          cx={point.x}
-          cy={point.y}
-          r={point.selected && point.terminal ? 6 : 4}
-        />
-      ))}
-    </g>
-    <circle class="terminal-ring" cx="852" cy="150" r="14" />
-  </svg>
-</div>
+<section class="evox-evolution" id="evox-evolution" aria-label={description} data-pause-label={pauseLabel} data-play-label={playLabel}>
+  <div class="evx-visual">
+    <canvas class="evx-canvas" role="img" aria-label={description}></canvas>
+    <div class="evx-controls" role="group" aria-label={description}>
+      <button class="evx-control" data-action="play" type="button" aria-label={pauseLabel} title={pauseLabel}>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+      </button>
+      <button class="evx-control" data-action="reset" type="button" aria-label={restartLabel} title={restartLabel}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.8 7.3M4 4v6h6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="evx-steps" role="group" aria-label={description}>
+    <button class="evx-step is-active" data-stage="0" aria-pressed="true" type="button"><span class="evx-number">01</span><span class="evx-name">{steps[0]}</span></button>
+    <button class="evx-step" data-stage="1" aria-pressed="false" type="button"><span class="evx-number">02</span><span class="evx-name">{steps[1]}</span></button>
+    <button class="evx-step" data-stage="2" aria-pressed="false" type="button"><span class="evx-number">03</span><span class="evx-name">{steps[2]}</span></button>
+    <button class="evx-step" data-stage="3" aria-pressed="false" type="button"><span class="evx-number">04</span><span class="evx-name">{steps[3]}</span></button>
+    <button class="evx-step" data-stage="4" aria-pressed="false" type="button"><span class="evx-number">05</span><span class="evx-name">{steps[4]}</span></button>
+  </div>
+  <p class="evx-accessible" data-status aria-live="off">{description}</p>
+</section>
 
 <style>
-  .evolution-diagram {
-    width: 100%;
-    color: var(--site-muted, #7d7d7a);
-  }
 
-  svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
+  /* The component is independent of the surrounding page. */
+  .evox-evolution {--evx-red:#e65361;--evx-bright:#ff8c94;--evx-text:#f0eeef;--evx-muted:#85838a;width:100%;max-width:940px;color:var(--site-ink)}
+  .evx-visual {position:relative;background:#060607;border:1px solid #303034;border-radius:22px;overflow:hidden;isolation:isolate}
+  .evx-canvas {width:100%;height:auto;aspect-ratio:1;display:block}
+  .evx-controls {position:absolute;right:20px;top:19px;display:flex;gap:8px;z-index:2}
+  .evx-control {display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid #303035;border-radius:50%;background:#111114;color:#8f8b93;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+  .evx-control:hover {color:#faf5f6;border-color:#805058;background:#1c1317}
+  .evx-control:focus-visible,.evx-step:focus-visible {outline:2px solid #ff8c94;outline-offset:5px}
+  .evx-control svg {width:14px;height:14px;display:block}
+  .evx-steps {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:22px}
+  .evx-step {appearance:none;position:relative;border:0;background:transparent;color:var(--site-muted);text-align:left;padding:19px 0 2px;cursor:pointer;font:inherit;min-width:0}
+  .evx-step::before,.evx-step::after {content:"";height:1px;position:absolute;left:0;right:0;top:0;background:#414045}
+  .evx-step::after {height:2px;right:auto;width:100%;transform:scaleX(var(--progress,0));transform-origin:left;background:var(--evx-red)}
+  .evx-step.is-active::after {box-shadow:0 0 11px #e6536144}
+  .evx-step.is-complete::after {background:#793840}
+  .evx-number {display:block;font-size:13px;line-height:1;letter-spacing:.06em;color:#85838a;font-variant-numeric:tabular-nums;margin-bottom:14px}
+  .evx-name {display:block;font-size:15px;line-height:1.25;font-weight:450;letter-spacing:-.025em;overflow-wrap:anywhere}
+  .evx-step.is-active .evx-number {color:var(--evx-bright)}
+  .evx-step.is-active .evx-name {color:var(--site-ink)}
+  .evx-step:hover .evx-name {color:var(--site-ink)}
+  .evx-accessible {position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (max-width:640px) {
+    .evx-visual {border-radius:19px}
+    .evx-canvas {height:auto;aspect-ratio:1}
+    .evx-controls {top:13px;right:13px;gap:7px}
+    .evx-control {width:29px;height:29px}
+    .evx-control svg {width:13px;height:13px}
+    .evx-steps {gap:10px;margin-top:21px}
+    .evx-step {padding-top:16px}
+    .evx-number {font-size:12px;margin-bottom:12px}
+    .evx-name {font-size:clamp(12px,3.4vw,15px);letter-spacing:-.035em}
   }
-
-  path,
-  circle {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .population-branches {
-    stroke: color-mix(in srgb, var(--site-ink, #242424) 22%, var(--site-line, #d7d5cf));
-    stroke-width: 1;
-    opacity: 0.8;
-  }
-
-  .selected-branches {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1.8;
-    stroke-linecap: round;
-  }
-
-  .population-nodes circle {
-    stroke: var(--site-muted, #7d7d7a);
-    stroke-width: 1.15;
-    opacity: 0.75;
-  }
-
-  .population-nodes .selected {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1.7;
-    opacity: 1;
-  }
-
-  .population-nodes .terminal.selected {
-    fill: var(--site-accent, #c8383c);
-  }
-
-  .terminal-ring {
-    stroke: var(--site-accent, #c8383c);
-    stroke-width: 1;
-    opacity: 0.26;
-  }
-
-  /* Keep every generation legible while allowing the tree to scale on mobile. */
-  @media (max-width: 640px) {
-    .population-branches {
-      opacity: 1;
-    }
-  }
+  @media (prefers-reduced-motion:reduce) {.evx-control {transition:none}}
 </style>
+
+<script is:inline>
+
+/* EvoX evolution loop. Plain Canvas 2D + JavaScript; no network or library dependency.
+   This is an illustrative, deterministic toy evolutionary algorithm, not EvoX benchmark data.
+   18 candidates -> evaluate a synthetic objective -> retain 3 elites -> mutate offspring.
+   The same selected individuals persist across generations. The ring itself does not rotate. */
+(() => {
+  'use strict';
+  const TAU = Math.PI*2;
+  const COUNT = 18, KEEP = 3;
+  const DURATIONS = [2400,2000,2100,2100,2400];
+  const STARTS = [0];
+  DURATIONS.forEach(v=>STARTS.push(STARTS[STARTS.length-1]+v));
+  const CYCLE = STARTS[5];
+  const NAMES = ['Generate','Execute','Evaluate','Select','Improve'];
+  const RED = [232,81,98], BRIGHT = [255,157,166], GREY = [181,181,190];
+  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+  const mix=(a,b,t)=>a+(b-a)*t;
+  const smooth=t=>{t=clamp(t);return t*t*(3-2*t)};
+  const ease=t=>1-Math.pow(1-clamp(t),3);
+  const color=(rgb,a=1)=>`rgba(${rgb.map(v=>Math.round(v)).join(',')},${clamp(a)})`;
+  const blend=(a,b,t)=>a.map((v,i)=>mix(v,b[i],t));
+  const polar=(r,a)=>({x:r*Math.cos(a),y:r*Math.sin(a)});
+    function rng(seed) {let a=seed>>>0;return ()=>{a|=0;a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296}}
+  function shortAngle(a,b) {let d=(b-a+Math.PI)%TAU;if(d<0)d+=TAU;return d-Math.PI}
+  function score(x,y) {return 1/(1+2*(.55*x*x+1.1*y*y+.07*(Math.sin(x*4)**2+Math.sin(y*4)**2)))}
+  function target(slot) {return {a:-Math.PI/2+slot*TAU/COUNT,r:145+10*Math.sin(slot*2.39996323)}}
+  function budPose(item) {const source=target(item.parent*6),rank=item.slot%6;return {a:source.a+(rank-3)*.043,r:source.r-10-Math.abs(rank-3)*2}}
+  function moving(a,b,t,curve=0) {return {a:a.a+shortAngle(a.a,b.a)*t,r:mix(a.r,b.r,t)+Math.sin(Math.PI*t)*curve}}
+  class EvoXEvolution {
+    constructor(root) {
+      if(!root) throw new Error('An EvoX component root is required.');
+      this.root=root;this.canvas=root.querySelector('canvas');
+      this.ctx=this.canvas.getContext('2d',{alpha:false});
+      if(!this.ctx) throw new Error('Canvas 2D is not supported in this browser.');
+      this.steps=[...root.querySelectorAll('[data-stage]')];
+      this.playButton=root.querySelector('[data-action="play"]');
+      this.resetButton=root.querySelector('[data-action="reset"]');
+      this.status=root.querySelector('[data-status]');
+      this.generations=[];this.time=0;this.playing=false;this.visible=true;this.destroyed=false;
+      this.frameId=null;this.lastTime=null;this.lastStage=-1;this.lastGen=-1;
+      this.abort=new AbortController();const signal=this.abort.signal;
+      this.media=matchMedia('(prefers-reduced-motion: reduce)');
+      this.motion=this.media.matches;
+      this.loop=this.loop.bind(this);this.resize=this.resize.bind(this);
+      this.playButton.addEventListener('click',()=>this.playing?this.pause():this.play(),{signal});
+      this.resetButton.addEventListener('click',()=>{const play=this.playing;this.seek(0);if(play)this.play()},{signal});
+      this.steps.forEach((b,i)=>b.addEventListener('click',()=>{
+        const playing=this.playing;
+        this.seek(Math.floor(this.time/CYCLE)*CYCLE+STARTS[i]+DURATIONS[i]*.52);
+        if(playing)this.play();
+      },{signal}));
+      document.addEventListener('visibilitychange',()=>this.schedule(),{signal});
+      this.media.addEventListener('change',e=>{this.motion=e.matches;if(e.matches)this.pause()},{signal});
+      this.resizeObserver=new ResizeObserver(this.resize);this.resizeObserver.observe(this.canvas);
+      this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.schedule()},{threshold:0});
+      this.intersectionObserver.observe(this.root);
+      this.generation(0);this.resize();
+      if(this.motion)this.seek(STARTS[3]+DURATIONS[3]*.75);else this.play();
+    }
+    generation(g) {
+      if(this.generations[g])return this.generations[g];
+      for(let k=this.generations.length;k<=g;k++) {
+        const random=rng(24771+k*7013),items=[];
+        if(k===0) {
+          for(let i=0;i<COUNT;i++) {
+            const x=random()*2-1,y=random()*2-1;
+            items.push({id:`0:${i}`,slot:i,x,y,fitness:score(x,y),trait:random()*TAU,seed:random(),parent:-1,retained:false});
+          }
+        } else {
+          const prev=this.generations[k-1],parents=prev.winners.map(i=>prev.items[i]);
+          for(let i=0;i<COUNT;i++) {
+            const pi=Math.floor(i/6),parent=parents[pi];
+            if(i%6===0)items.push({...parent,slot:i,parent:pi,retained:true});
+            else {
+              const sigma=.31*Math.pow(.91,Math.min(k,8))+.055;
+              const normal=()=>Math.sqrt(-2*Math.log(Math.max(random(),.00001)))*Math.cos(TAU*random());
+              const x=clamp(parent.x+normal()*sigma,-1.2,1.2),y=clamp(parent.y+normal()*sigma,-1.2,1.2);
+              items.push({id:`${k}:${i}`,slot:i,x,y,fitness:score(x,y),trait:parent.trait+(random()-.5)*.7,seed:random(),parent:pi,retained:false});
+            }
+          }
+        }
+        const winners=items.map((_,i)=>i).sort((a,b)=>items[b].fitness-items[a].fitness).slice(0,KEEP);
+        this.generations.push({items,winners,best:items[winners[0]].fitness});
+      }
+      return this.generations[g];
+    }
+    resize() {
+      if(this.destroyed)return;
+      const r=this.canvas.getBoundingClientRect();this.w=r.width;this.h=r.height;
+      if(!this.w||!this.h)return;
+      this.dpr=Math.min(devicePixelRatio||1,2);
+      this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);
+      this.scale=Math.min((this.w-32)/470,(this.h-38)/470);
+      this.render();
+    }
+    readTime() {
+      const gen=Math.floor(this.time/CYCLE),inCycle=this.time-gen*CYCLE;
+      let stage=4;for(let i=0;i<5;i++)if(inCycle<STARTS[i+1]){stage=i;break}
+      return {gen,stage,p:clamp((inCycle-STARTS[stage])/DURATIONS[stage]),inCycle};
+    }
+    ring(r,a,b,stroke,width=1,alpha=1) {
+      if(alpha<=0||b-a<.0001)return;
+      const c=this.ctx;c.beginPath();c.arc(0,0,r,a,b);c.strokeStyle=typeof stroke==='string'?stroke:color(stroke,alpha);c.lineWidth=width;c.lineCap='round';c.stroke();
+    }
+    dot(x,y,r,fill,alpha=1) {
+      if(r<=0||alpha<=0)return;
+      const c=this.ctx;c.beginPath();c.arc(x,y,r,0,TAU);c.fillStyle=typeof fill==='string'?fill:color(fill,alpha);c.fill();
+    }
+    halo(x,y,r,rgb,alpha) {
+      if(alpha<=.001)return;
+      const c=this.ctx,g=c.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,color(rgb,alpha));g.addColorStop(.25,color(rgb,alpha*.5));g.addColorStop(1,color(rgb,0));
+      c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);
+    }
+    updateUi(state) {
+      const {gen,stage,p}=state;
+      if(stage!==this.lastStage||gen!==this.lastGen) {
+        this.steps.forEach((b,i)=>{b.classList.toggle('is-active',i===stage);b.classList.toggle('is-complete',i<stage);b.setAttribute('aria-pressed',String(i===stage))});
+        this.status.textContent=this.steps[stage].querySelector('.evx-name').textContent;
+        this.lastStage=stage;this.lastGen=gen;
+      }
+      this.steps.forEach((b,i)=>b.style.setProperty('--progress',i<stage?'1':i===stage?String(p):'0'));
+    }
+    drawFramework(state) {
+      const {stage,p}=state,c=this.ctx;
+      // Fixed geometry: five stationary waypoints, no mechanically rotating wheel.
+      this.ring(216,0,TAU,[125,125,137],.7,.16);
+      this.ring(198,0,TAU,[129,126,137],.7,.20);
+      this.ring(165,0,TAU,[140,135,146],.6,.14);
+      this.ring(123,0,TAU,[121,117,128],.7,.18);
+      for(let i=0;i<60;i++) {
+        const a=-Math.PI/2+i*TAU/60,isMajor=i%12===0;
+        const t=polar(221,a),q=polar(isMajor?226:223,a);
+        c.beginPath();c.moveTo(t.x,t.y);c.lineTo(q.x,q.y);c.lineWidth=.8;c.strokeStyle=color(GREY,isMajor?.3:.11);c.stroke();
+      }
+      const span=TAU/5;
+      for(let i=0;i<5;i++) {
+        const a=-Math.PI/2+i*span,gap=.056;
+        this.ring(207,a+gap,a+span-gap,[144,140,151],1,.49);
+        if(i<stage)this.ring(207,a+gap,a+span-gap,RED,1.35,.53);
+        if(i===stage) {
+          const end=a+gap+(span-gap*2)*smooth(p);
+          this.ring(207,a+gap,end,RED,2,.94);
+          const tip=polar(207,end);this.halo(tip.x,tip.y,14,RED,.28);this.dot(tip.x,tip.y,1.7,BRIGHT,.98);
+          const sweepStart=Math.max(a+gap,end-.2);
+          this.ring(207,sweepStart,end,BRIGHT,1.5,.8);
+        }
+        // Tiny directional chevrons, independent of node animation.
+        const arrow=polar(207,a+span*.5),direction=a+span*.5+Math.PI/2;
+        c.save();c.translate(arrow.x,arrow.y);c.rotate(direction);
+        c.beginPath();c.moveTo(-2.5,-2.8);c.lineTo(.5,0);c.lineTo(-2.5,2.8);
+        c.strokeStyle=color(i<=stage?RED:GREY,i===stage?.8:.28);c.lineWidth=1;c.stroke();c.restore();
+        const at=polar(207,a),active=i===stage;
+        if(active)this.halo(at.x,at.y,24,RED,.28+.06*Math.sin(p*Math.PI));
+        this.dot(at.x,at.y,9.8,[6,6,7]);
+        c.beginPath();c.arc(at.x,at.y,active?9.4:7,0,TAU);c.lineWidth=active?1.5:1;
+        c.strokeStyle=color(active?BRIGHT:i<stage?RED:GREY,active?1:i<stage?.6:.46);c.stroke();
+        this.dot(at.x,at.y,active?4.2:2.7,active?BRIGHT:i<stage?RED:GREY,active?1:.66);
+      }
+      // Empty center: no labels, counter, logo, or misleading 'capability' meter.
+    }
+    pose(item,state,pop) {
+      const {gen,stage,p}=state,t=target(item.slot),winner=pop.winners.indexOf(item.slot);
+      let pos=t,alpha=1,scale=1,red=item.retained?.72:0,scan=0,fitness=0;
+      if(stage===0) {
+        if(item.retained) {
+          const settle=smooth(p/.85);
+          red=mix(1,.72,settle);scale=mix(1.12,1,settle);
+        } else {
+          const group=gen===0?Math.floor(item.slot/6):item.parent;
+          const source=gen===0?{...target(group*6),r:target(group*6).r-5}:budPose(item);
+          const rank=item.slot%6;
+          const progress=ease((p-.045-rank*.047)/.59);
+          pos=moving(source,t,progress,-14);
+          alpha=gen===0?smooth((p-.045-rank*.047)/.13):mix(.5,1,progress);
+          scale=mix(.32,1,progress);
+        }
+      } else if(stage===1) {
+        scan=(.16+.84*Math.sin(p*TAU*1.3+item.seed*TAU)**4)*Math.sin(Math.PI*p);
+      } else if(stage===2) {
+        const reveal=smooth((p-item.slot*.011)/.52);
+        fitness=reveal;
+        alpha=mix(1,.4+.6*item.fitness,reveal);
+        scale=mix(1,.8+.35*item.fitness,reveal);
+      } else if(stage===3) {
+        const select=smooth((p-.06)/.63);
+        fitness=1-select;
+        const evaluatedAlpha=.4+.6*item.fitness,evaluatedScale=.8+.35*item.fitness;
+        if(winner>=0){red=mix(red,1,select);alpha=mix(evaluatedAlpha,1,select);scale=mix(evaluatedScale,1.12,select);scan=.24*Math.sin(Math.PI*select)}
+        else {alpha=(1-smooth((p-.06-item.slot*.009)/.62))*evaluatedAlpha;pos={a:t.a,r:t.r+12*select};scale=evaluatedScale*(1-.3*select)}
+      } else {
+        if(winner<0){alpha=0;scale=.5}
+        else {
+          red=1;scale=1.12;
+          const arrive=smooth((p-.02)/.63);
+          pos=moving(t,target(winner*6),arrive,-12);
+        }
+      }
+      return {...pos,alpha,scale,red,scan,fitness,winner};
+    }
+    drawCandidate(item,pose,state,alphaOverride=null) {
+      const c=this.ctx,{p,stage}=state;
+      const {a,r,scale,red,scan,fitness}=pose;
+      const alpha=alphaOverride===null?pose.alpha:alphaOverride;
+      if(alpha<.002)return;
+      const q=polar(r,a),rgb=blend(GREY,RED,red),core=blend([236,236,242],BRIGHT,red);
+      if(red>.02)this.halo(q.x,q.y,20,RED,alpha*red*.40);
+      if(scan>.01)this.halo(q.x,q.y,17,[225,221,229],alpha*scan*.45);
+      c.save();c.translate(q.x,q.y);c.scale(scale,scale);
+      // A tiny inherited two-bead signature makes parent/offspring resemblance visible.
+      const trait=item.trait;
+      for(let j=0;j<2;j++) {
+        const aa=trait+j*(2.6+item.x*.14),rr=10.2+(j===0?item.y:item.x)*.8;
+        const bead=polar(rr,aa);
+        c.beginPath();c.moveTo(bead.x*.6,bead.y*.6);c.lineTo(bead.x*.89,bead.y*.89);
+        c.strokeStyle=color(rgb,alpha*.32);c.lineWidth=.8;c.stroke();
+        this.dot(bead.x,bead.y,1.35,rgb,alpha*.72);
+      }
+      c.beginPath();c.arc(0,0,6.0,0,TAU);c.fillStyle=color([12,11,15],alpha);c.fill();
+      c.lineWidth=red>.7?1.3:1;c.strokeStyle=color(rgb,alpha*(.7+.3*scan));c.stroke();
+      this.dot(-.35,-.45,3.0+scan*.7,core,alpha*(.88+.12*scan));
+      if(stage===1) {
+        const angle=item.trait+p*TAU*1.5;
+        c.beginPath();c.arc(0,0,14.2,angle,angle+Math.PI*.72);c.lineWidth=1;
+        c.strokeStyle=color(GREY,alpha*Math.sin(Math.PI*p)*.6);c.stroke();
+      }
+      if(fitness>.001) {
+        c.beginPath();c.arc(0,0,15.2,-Math.PI/2,Math.PI*1.5);c.lineWidth=1.2;c.strokeStyle=color(GREY,alpha*fitness*.11);c.stroke();
+        c.beginPath();c.arc(0,0,15.2,-Math.PI/2,-Math.PI/2+TAU*item.fitness*fitness);c.strokeStyle=color(red>.5?BRIGHT:GREY,alpha*fitness*.83);c.stroke();
+      }
+      c.restore();
+    }
+    drawTests(state) {
+      const {stage,p}=state;if(stage!==1&&stage!==2)return;
+      const fade=Math.sin(Math.PI*p),angle=-Math.PI/2+TAU*p;
+      const q=polar(175,angle);
+      for(let i=0;i<25;i++) {
+        const a=angle-i*.007;
+        this.ring(175,a-.005,a+.002,stage===1?GREY:RED,stage===1?1.4:1.1,fade*(1-i/25)*.55);
+      }
+      this.halo(q.x,q.y,12,stage===1?GREY:RED,fade*.17);
+      this.dot(q.x,q.y,1.6,stage===1?GREY:BRIGHT,fade*.85);
+    }
+    drawInheritance(state,pop) {
+      const {stage,p}=state;
+      if(stage!==4&&stage!==0)return;
+      for(let j=0;j<3;j++) {
+        const t=target(j*6),q=polar(t.r,t.a);
+        const strength=stage===4?smooth((p-.63)/.13):1-smooth(p/.30);
+        if(strength>.001) {
+          const ripple=stage===4?clamp((p-.64)/.36):clamp(p/.3);
+          const c=this.ctx;c.beginPath();c.arc(q.x,q.y,12+16*ripple,0,TAU);c.lineWidth=.8;
+          c.strokeStyle=color(RED,strength*(1-ripple)*.32);c.stroke();
+        }
+      }
+      // Visible offspring buds at the end of Improve persist into the next Generate.
+      // No connecting branches: just local reproduction and curved redistribution.
+      if(stage===4) {
+        const next=this.generation(state.gen+1),begin=smooth((p-.76)/.24);
+        next.items.filter(v=>!v.retained).forEach(item=>{
+          const pose={...budPose(item),alpha:begin*.5,scale:.32,red:0,scan:0,fitness:0};
+          this.drawCandidate(item,pose,state);
+        });
+      }
+    }
+    render() {
+      if(this.destroyed||!this.w||!this.h)return;
+      const c=this.ctx,s=this.readTime(),pop=this.generation(s.gen);this.updateUi(s);
+      c.setTransform(this.dpr,0,0,this.dpr,0,0);c.fillStyle='#060607';c.fillRect(0,0,this.w,this.h);
+      c.save();c.translate(this.w/2,this.h/2+4);c.scale(this.scale,this.scale);
+      // The faint halo belongs to the annulus. The center stays genuinely empty.
+      const wash=c.createRadialGradient(0,0,98,0,0,230);
+      wash.addColorStop(0,'rgba(116,30,45,0)');wash.addColorStop(.44,'rgba(116,30,45,.045)');wash.addColorStop(1,'rgba(116,30,45,0)');
+      c.fillStyle=wash;c.fillRect(-235,-235,470,470);
+      this.drawFramework(s);this.drawTests(s);
+      // Tiny neutral pinpoints define the population band, not a starfield.
+      for(let i=0;i<36;i++) {
+        const a=-Math.PI/2+i*TAU/36,q=polar(109,a);
+        this.dot(q.x,q.y,i%3===0?.8:.45,GREY,i%3===0?.17:.10);
+      }
+      this.drawInheritance(s,pop);
+      for(const item of pop.items)this.drawCandidate(item,this.pose(item,s,pop),s);
+      c.restore();
+    }
+    schedule() {
+      if(this.frameId!==null){cancelAnimationFrame(this.frameId);this.frameId=null}
+      this.lastTime=null;
+      if(!this.destroyed&&this.playing&&this.visible&&!document.hidden)this.frameId=requestAnimationFrame(this.loop);
+    }
+    loop(now) {
+      this.frameId=null;
+      if(this.destroyed||!this.playing||!this.visible||document.hidden)return;
+      if(this.lastTime!==null)this.time+=Math.min(now-this.lastTime,120);
+      this.lastTime=now;this.render();this.frameId=requestAnimationFrame(this.loop);
+    }
+    updateButton() {
+      const label=this.playing?this.root.dataset.pauseLabel:this.root.dataset.playLabel;this.playButton.setAttribute('aria-label',label);this.playButton.title=label;
+      this.playButton.querySelector('svg').innerHTML=this.playing?'<path d="M7 5h3v14H7zM14 5h3v14h-3z"/>':'<path d="M8 4.7L19 12 8 19.3z"/>';
+    }
+    play() {if(this.destroyed)return;this.playing=true;this.updateButton();this.schedule()}
+    pause() {this.playing=false;this.updateButton();this.schedule()}
+    seek(milliseconds) {
+      if(!Number.isFinite(milliseconds)||milliseconds<0)throw new RangeError('seek() requires non-negative milliseconds.');
+      this.pause();this.time=milliseconds;this.render();return this.getState();
+    }
+    getState() {
+      const state=this.readTime(),pop=this.generation(state.gen);
+      return {milliseconds:this.time,generation:state.gen+1,stage:NAMES[state.stage],stageIndex:state.stage,progress:state.p,playing:this.playing,
+        population:pop.items.map(p=>({id:p.id,slot:p.slot,fitness:p.fitness,retained:p.retained})),
+        selected:pop.winners.map(i=>pop.items[i].id),best:pop.best,cycleMilliseconds:CYCLE};
+    }
+    destroy() {this.pause();this.destroyed=true;this.abort.abort();this.resizeObserver.disconnect();this.intersectionObserver.disconnect()}
+  }
+  window.EvoXEvolution=EvoXEvolution;
+  window.evoxLoop=new EvoXEvolution(document.getElementById('evox-evolution'));
+})();
+
+</script>

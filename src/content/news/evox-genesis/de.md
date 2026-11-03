@@ -4,8 +4,6 @@ pubDate: 2026-08-17
 summary: "Das EvoX-Team des Departements für Datenwissenschaft und Künstliche Intelligenz der Hong Kong Polytechnic University hat EvoX Genesis veröffentlicht, ein rekursives KI-System für langfristige autonome Software-Evolution. Statt sich auf einen persistenten Agenten zu verlassen, der langfristige Entwicklung aufrechterhält, lässt es die Softwarewelt selbst weiter evolvieren: Ausgehend von einem leeren Repository hat das System in 123,4 Stunden einen C-Compiler mit 248.989 Zeilen gebaut, bei Modell-Token-Kosten von nur 44,38 $."
 ---
 
-# EvoX Genesis: Ein rekursives KI-System für langfristige autonome Software-Evolution, das einen 250.000-Zeilen-C-Compiler von Grund auf gebaut hat
-
 ![image1.png](./evox-genesis-1.png)
 
 Das EvoX-Team des Departements für Datenwissenschaft und Künstliche Intelligenz der Hong Kong Polytechnic University hat **EvoX Genesis** veröffentlicht, ein rekursives KI-System für langfristige autonome Software-Evolution.
@@ -14,11 +12,7 @@ EvoX Genesis verlässt sich nicht mehr auf einen persistenten Agenten, um langfr
 
 Ausgehend von einem leeren Repository hat das System über 1.019 Agenten-Episoden hinweg in 123,4 Stunden einen **C-Compiler mit 248.989 Zeilen** gebaut, bei Modell-Token-Kosten von nur **44,38 $**.
 
-<center>
-
 ## Long-Horizon-Coding: Die Grenze verschiebt sich weiter
-
-</center>
 
 Die Arbeitszeit von Coding-Agenten hat sich von einzelnen kurzen Aufgaben auf Dutzende Stunden ausgedehnt.
 
@@ -38,11 +32,7 @@ stärkere Modelle, längere Kontexte, dauerhaftere Erinnerung, mehr Agenten.
 
 Was, wenn das, was wirklich persistieren muss, die Softwarewelt ist, in der er lebt?
 
-<center>
-
 ## 123,4 Stunden, 250K Zeilen
-
-</center>
 
 Wir ließen EvoX Genesis mit einem Repository ohne Implementierung starten.
 
@@ -56,23 +46,11 @@ Kein fertiger Compiler wartete dort auf Vervollständigung — **er startete bei
 
 ![image2.png](./evox-genesis-2.png)
 
-<center>
-
 _Abbildung 1: Ergebnisse des C-Compiler-Experiments / Codegröße, Laufzeit, Agenten-Episoden, Kosten und Testergebnisse_
-
-</center>
-
-<center>
 
 _(mit dem Modell DeepSeek V4 Flash)_
 
-</center>
-
-<center>
-
 ## Den Agenten am Leben halten? Nein — die Softwarewelt am Leben halten
-
-</center>
 
 Das Leben komplexer Software ist von Natur aus länger als eine einzelne Agenten-Session.
 
@@ -106,17 +84,9 @@ wie Aufgaben zerlegt, Agenten erzeugt, Rekursion entfaltet und Ergebnisse verifi
 
 ![image3.png](./evox-genesis-3.png)
 
-<center>
-
 _Abbildung 2: Das Konzept der Persistent Recursive World / Agenten entstehen, handeln und verschwinden; die Softwarewelt entfaltet sich weiter_
 
-</center>
-
-<center>
-
 ## Modelle sind austauschbar; die Softwarewelt geht weiter
-
-</center>
 
 Diese Kontinuität erfordert nicht einmal, durchgehend dasselbe Modell zu verwenden.
 
@@ -128,17 +98,9 @@ Modelle lassen sich austauschen, Agenten lassen sich austauschen — die Softwar
 
 ![image4.png](./evox-genesis-4.png)
 
-<center>
-
 _Abbildung 3: Das Modellwechsel-Experiment, GLM 5.2 → DeepSeek V4 Flash_
 
-</center>
-
-<center>
-
 ## Von Grund auf oder Geschichte erben
-
-</center>
 
 Von null zu bauen ist nur ein Ende des Lebenszyklus einer Software;
 
@@ -154,17 +116,9 @@ Eine Softwarewelt kann aus dem Nichts entstehen oder Geschichte erben und sich w
 
 ![image5.png](./evox-genesis-5.png)
 
-<center>
-
 _Abbildung 4: MESA Fortran → Rust, 13 Module, 139.414 Zeilen Code, 10,6 $_
 
-</center>
-
-<center>
-
 ## Kostenvorteile verzinsen sich über die Zeit
-
-</center>
 
 Langfristige Softwareentwicklung bedeutet nicht, dass die Kosten linear weiterwachsen.
 
@@ -174,11 +128,7 @@ Je länger das System läuft, desto reicher wird der wiederverwendbare Entwicklu
 
 Das ist technischer Zinseszins, der sich über die Zeit ansammelt.
 
-<center>
-
 ## EvoX Genesis ist jetzt Open Source
-
-</center>
 
 Das Projekt ist Open Source, mit Installationspaketen für Windows, macOS und Linux.
 
@@ -200,21 +150,11 @@ https://github.com/EMI-Group/genesis
 
 🌐 QQ-Gruppe: 297969717
 
-![image6.png](./evox-genesis-6.png)
-
 ![image7.png](./evox-genesis-7.png)
-
-<center>
 
 **Agenten gehen; die Softwarewelt evolviert weiter**
 
 **EvoX Genesis**
-
-</center>
-
-![image8.png](./evox-genesis-8.png)
-
-<center><strong>QQ-Gruppe｜</strong>Evolutionary Machine Intelligence</center>
 
 Referenzen:
 

@@ -110,24 +110,8 @@ L'importance d'AutoPSO va au-delà de l'obtention d'une variante de PSO plus pui
 
 AutoPSO × EvoX : donner au calcul évolutionnaire les moyens de passer de l'ère manuelle à l'ère automatique.
 
-## Code open source / Ressources communautaires
+## Ressources
 
-**Article :**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub :**
-
-https://github.com/EMI-Group/autopso
-
-**Projet amont (EvoX) :**
-
-https://github.com/EMI-Group/evox
-
-**Groupe QQ :**
-
-297969717
-
-![](./autopso-6.png)
-
-*Code QR du groupe communautaire QQ d'EvoX.*
+- [Article scientifique](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

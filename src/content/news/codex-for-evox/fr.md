@@ -1,10 +1,8 @@
 ---
-title: "Codex pour EvoX : Concevoir des algorithmes, migrer du code et exécuter des expériences reproductibles par la conversation"
+title: "Codex × EvoX : développement d’algorithmes et expériences reproductibles"
 pubDate: 2026-08-08
 summary: "Le calcul évolutionnaire entre dans l'ère native de l'IA. Avec Codex comme agent de codage IA représentatif, EvoX transforme une intention en langage naturel en workflows de calcul évolutionnaire exécutables — couvrant la modélisation de problèmes, la migration d'algorithmes, la neuroévolution sans rétropropagation et la tensorisation GPU."
 ---
-
-# Codex pour EvoX : Concevoir des algorithmes, migrer du code et exécuter des expériences reproductibles par la conversation
 
 Le calcul évolutionnaire entre dans l'ère native de l'IA.
 

@@ -50,7 +50,7 @@ A equipe de pesquisa propôs primeiro um framework de algoritmo DE parametrizado
 
 Arquitetura MetaDE
 
-O MetaDE adota uma estrutura de duas camadas, compreendendo **um evolver** (camada superior) e **múltiplos executores** (camada inferior). O evolver é uma DE (ou potencialmente outro algoritmo evolucionário), responsável por otimizar os parâmetros da PDE. Cada indivíduo ![spacer.gif](./metade-6.gif) `x_i` na população do evolver corresponde a uma configuração de parâmetros única `θ_i`. Essas configurações são passadas para a PDE para instanciar diferentes variantes de DE, cada uma gerenciada por um executor que roda de forma independente na tarefa de otimização dada. Cada executor retorna seu melhor valor de fitness `y^*` para o evolver, que atribui esse valor de fitness `y_i` ao indivíduo correspondente `x_i`.
+O MetaDE adota uma estrutura de duas camadas, compreendendo **um evolver** (camada superior) e **múltiplos executores** (camada inferior). O evolver é uma DE (ou potencialmente outro algoritmo evolucionário), responsável por otimizar os parâmetros da PDE. Cada indivíduo  `x_i` na população do evolver corresponde a uma configuração de parâmetros única `θ_i`. Essas configurações são passadas para a PDE para instanciar diferentes variantes de DE, cada uma gerenciada por um executor que roda de forma independente na tarefa de otimização dada. Cada executor retorna seu melhor valor de fitness `y^*` para o evolver, que atribui esse valor de fitness `y_i` ao indivíduo correspondente `x_i`.
 
 ## Desempenho Experimental
 
@@ -147,24 +147,8 @@ Como mostrado na figura, o MetaDE demonstra um desempenho forte em tarefas de co
 
 O MetaDE é uma abordagem meta-evolucionária inovadora que não apenas se destaca na resolução de tarefas de otimização, mas também ajusta e refina autonomamente suas próprias estratégias. Capitalizando os pontos fortes da Evolução Diferencial, o MetaDE exibe um forte potencial na configuração adaptativa de parâmetros e na evolução de estratégias. Resultados experimentais mostram uma robustez superior em uma gama de testes de benchmark, e sua aplicabilidade no mundo real é sublinhada pelo sucesso em tarefas de controle de robôs via aprendizado por reforço evolucionário. Um desafio central envolve manter um equilíbrio ideal entre generalização e especialização — garantindo que o algoritmo possa se adaptar a diversas tarefas enquanto também otimiza efetivamente para problemas específicos. Esta pesquisa oferece novas perspectivas para algoritmos evolucionários auto-adaptativos e pode estimular novos avanços na meta-evolução para sistemas complexos.
 
-## Código de Código Aberto e Comunidade
+## Recursos
 
-**Artigo**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Projeto Upstream (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Grupo QQ**: 297969717
-
-![image.png](./metade-3.png "image.png")
-
-Grupo QQ | Evolving Machine Intelligence
-
-O MetaDE é construído sobre o framework EvoX. Se você estiver interessado no EvoX, confira o artigo sobre o EvoX 1.0 para mais detalhes.
-
-![image.png](./metade-1.png)
-
-([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
-
-![image.png](./metade-14.png "image.png")
+- [Artigo científico](https://arxiv.org/abs/2502.10470)
+- [GitHub](https://github.com/EMI-Group/metade)
+- [EvoX](https://github.com/EMI-Group/evox)

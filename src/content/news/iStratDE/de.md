@@ -4,8 +4,6 @@ pubDate: 2026-03-16
 summary: "Das EvoX-Team stellt iStratDE vor, eine GPU-beschleunigte Methode der Differentiellen Evolution, die auf Individuen-Ebene feste Strategien zuweist und so eine kommunikationsfreie, massiv parallele Suche mit starker empirischer Leistung und theoretischen Konvergenzgarantien ermöglicht."
 ---
 
-## iStratDE: GPU-Computing x ultragroße Populationen erschließen das volle Potenzial der Differentiellen Evolution
-
 ![](./istratde-1.png)
 
 Differentielle Evolution (DE) reagiert äußerst empfindlich auf die Strategiewahl. Die meisten bestehenden DE-Varianten streben nach besserer Leistung durch adaptive Mechanismen oder zunehmend komplexe Kontrollstrukturen. Während dynamische Anpassung intensiv erforscht wurde, hat die strukturellen Vorteile **statischer Strategiediversität** bisher weit weniger Aufmerksamkeit erhalten.
@@ -147,19 +145,8 @@ Die Ergebnisse zeigen, dass iStratDE mit führenden adaptiven DE-Varianten konku
 
 Dieses dezentrale minimalistische Paradigma eröffnet eine neue Richtung für das Design evolutionärer Algorithmen. Anstatt auf aufwändige zentralisierte Koordination zu setzen, zeigt es, wie unabhängige Individuen mit vielfältigem Suchverhalten gemeinsam intelligente und skalierbare Optimierungsdynamiken erzeugen können.
 
-## Open-Source-Code / Community-Ressourcen
+## Ressourcen
 
-**Paper:**
-https://arxiv.org/abs/2602.01147
-
-**GitHub:**
-https://github.com/EMI-Group/istratde
-
-**Upstream-Projekt (EvoX):**
-https://github.com/EMI-Group/evox
-
-**QQ-Gruppe:**
-297969717
-
-![](./istratde-9.png)
-*QR-Code für die EvoX-QQ-Community-Gruppe.*
+- [Forschungsarbeit](https://arxiv.org/abs/2602.01147)
+- [GitHub](https://github.com/EMI-Group/istratde)
+- [EvoX](https://github.com/EMI-Group/evox)

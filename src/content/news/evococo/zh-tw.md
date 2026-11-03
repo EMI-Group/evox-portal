@@ -98,18 +98,8 @@ EvoCoCo更值得關注的，是它改變了程式碼遷移所關注的問題。�
 
 程式語言只是演算法的一種表達，硬體也只是計算的一種載體。真正需要跨越語言與硬體遷移的，不是程式碼的形式，而是計算背後的結構。
 
-## 開源與社群
+## 相關資源
 
-論文：[https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-程式碼倉庫：[https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-上游專案（EvoX）：[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQ 交流群： 297969717
-
-![QQ交流群二維碼](./qq_group_qr.png)
-
-QQ交流群｜演化機器智慧
-
-[![EvoX：GPU加速的演化計算，PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [研究論文](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

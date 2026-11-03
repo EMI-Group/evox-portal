@@ -110,24 +110,8 @@ GPUベースの大規模な候補評価が研究の常態へと徐々になれ�
 
 AutoPSO×EvoX——進化計算を手作業の時代から自動化の時代へと後押しします。
 
-## オープンソースコード / コミュニティリソース
+## 関連資料
 
-**論文：**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub：**
-
-https://github.com/EMI-Group/autopso
-
-**上流プロジェクト（EvoX）：**
-
-https://github.com/EMI-Group/evox
-
-**QQグループ：**
-
-297969717
-
-![](./autopso-6.png)
-
-*EvoX QQコミュニティグループのQRコード。*
+- [論文](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

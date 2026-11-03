@@ -110,24 +110,8 @@ AutoPSO的意義不止於得到一個更強的PSO變體。它展示出平行計�
 
 AutoPSO×EvoX，助力演化計算從手動時代邁向自動時代。
 
-## 開源程式碼 / 社群資源
+## 相關資源
 
-**論文：**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub：**
-
-https://github.com/EMI-Group/autopso
-
-**上游專案（EvoX）：**
-
-https://github.com/EMI-Group/evox
-
-**QQ交流群：**
-
-297969717
-
-![](./autopso-6.png)
-
-*EvoX QQ社群群組QR Code。*
+- [研究論文](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

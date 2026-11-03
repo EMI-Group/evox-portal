@@ -110,24 +110,8 @@ GPU 기반의 대규모 후보 평가가 연구의 표준으로 자리 잡아 �
 
 AutoPSO × EvoX——진화 계산이 수동의 시대에서 자동의 시대로 나아가도록 힘을 실어줍니다.
 
-## 오픈소스 코드 / 커뮤니티 자료
+## 관련 자료
 
-**논문:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**상위 프로젝트(EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**QQ 그룹:**
-
-297969717
-
-![](./autopso-6.png)
-
-*EvoX QQ 커뮤니티 그룹 QR 코드.*
+- [연구 논문](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

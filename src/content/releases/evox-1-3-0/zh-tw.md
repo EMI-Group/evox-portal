@@ -16,3 +16,8 @@ summary: "新功能：Workflow 現在支援 `opt_direction` 列表。此外還�
 - 修復存在多個額外參數時 `use_state` 的問題。
 
 **完整變更日誌**：[v1.2.2...v1.3.0](https://github.com/EMI-Group/evox/compare/v1.2.2...v1.3.0)
+
+## 相關資源
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文件](https://evox.readthedocs.io/en/latest/)

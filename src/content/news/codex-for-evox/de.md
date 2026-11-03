@@ -1,10 +1,8 @@
 ---
-title: "Codex für EvoX: Algorithmen entwerfen, Code migrieren und reproduzierbare Experimente durch Konversation durchführen"
+title: "Codex × EvoX: Algorithmenentwicklung und reproduzierbare Experimente"
 pubDate: 2026-08-08
 summary: "Evolutionäre Berechnung tritt in die KI-native Ära ein. Mit Codex als repräsentativem KI-Coding-Agenten wandelt EvoX Absichten in natürlicher Sprache in ausführbare Workflows der evolutionären Berechnung um — einschließlich Problemmodellierung, Algorithmusmigration, neuroevolution ohne Backpropagation und GPU-Tensorisierung."
 ---
-
-# Codex für EvoX: Algorithmen entwerfen, Code migrieren und reproduzierbare Experimente durch Konversation durchführen
 
 Evolutionäre Berechnung tritt in die KI-native Ära ein.
 

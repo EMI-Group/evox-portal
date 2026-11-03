@@ -4,8 +4,6 @@ pubDate: 2026-03-16
 summary: "EvoX 团队提出 iStratDE，一种 GPU 加速的差分演化方法。该方法在个体层面分配固定策略，实现无通信的大规模并行搜索，兼具优异的实验性能与理论收敛保证。"
 ---
 
-## iStratDE：GPU 计算 x 超大种群，释放差分演化的全部潜力
-
 ![](./istratde-1.png)
 
 差分演化（DE）对策略选择高度敏感。现有的大多数 DE 变体通过自适应机制或日益复杂的控制结构来追求更优性能。然而，尽管动态自适应已被广泛研究，**静态策略多样性**所带来的结构性优势却鲜有关注。
@@ -147,19 +145,8 @@ iStratDE 是对算法本质的一次回归。它没有堆叠日益复杂的自�
 
 这种去中心化的极简范式为演化算法设计开辟了新方向。它表明，无需依赖精密的集中式协调，拥有多样搜索行为的独立个体也能够共同产生智能且可扩展的优化动态。
 
-## 开源代码 / 社区资源
+## 相关资源
 
-**论文：**
-https://arxiv.org/abs/2602.01147
-
-**GitHub：**
-https://github.com/EMI-Group/istratde
-
-**上游项目（EvoX）：**
-https://github.com/EMI-Group/evox
-
-**QQ 群：**
-297969717
-
-![](./istratde-9.png)
-*EvoX QQ 社区群二维码。*
+- [研究论文](https://arxiv.org/abs/2602.01147)
+- [GitHub](https://github.com/EMI-Group/istratde)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -1,0 +1,35 @@
+---
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+interface Props { kind: "generative" | "physical" | "science" | "agentic"; locale?: Locale; }
+const { kind, locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+---
+<div class="evolution-scene" data-kind={kind}>
+  <canvas class="scene-canvas" role="img" aria-label={`${t(tr, `paradigms.${kind}.title`)} · ${t(tr, "evolution.figure")}`}></canvas>
+  <svg class="scene-fallback" viewBox="0 0 480 280" fill="none" aria-hidden="true">
+    <path d="M90 140H390" stroke="#655663" stroke-width="1"/>
+    {[90,240,390].map((x,i) => <g transform={`translate(${x} 140)`}>
+      {kind === "agentic" ? <><rect x="-42" y="-30" width="84" height="60" rx="4" stroke="#777580"/><path d="M-30-16h30M-30-2h56M-30 8h44M-30 18h50" stroke={i===2?"#df8297":"#777580"}/></> : kind === "generative" ? <>{Array.from({length:16},(_,j)=><rect x={-22+j%4*12} y={-22+Math.floor(j/4)*12} width="8" height="8" fill={i===2 ? "#df8297" : "#777580"}/>)}</> : kind === "physical" ? <><path d="M-22-22H22V-12H-22ZM-18-12L-28 4L-20 23M18-12L28 4L20 23" stroke={i===2 ? "#e65361" : "#aaa3b4"}/></> : <path d="M-45 0Q-30-23 45 4Q-25 16-45 0Z" stroke={i===2 ? "#e65361" : "#aaa3b4"}/>}
+    </g>)}
+  </svg>
+  <div class="scene-controls">
+    <button type="button" data-action="pause" data-play={t(tr,"evolution.play")} data-pause={t(tr,"evolution.pause")} aria-label={t(tr,"evolution.pause")} aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="pause-icon" d="M5 4v8M11 4v8"/><path class="play-icon" d="m5 3 7 5-7 5Z"/></svg></button>
+    <button type="button" data-action="restart" aria-label={t(tr,"evolution.restart")}><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6a5.3 5.3 0 1 1 .8 5M3 2v4h4"/></svg></button>
+  </div>
+</div>
+<style>
+  .evolution-scene { position:relative; width:100%; aspect-ratio:12/7; }
+  .scene-canvas { display:block; width:100%; height:100%; opacity:0; }
+  .scene-fallback { position:absolute; inset:0; width:100%; height:100%; }
+  [data-ready] .scene-canvas { opacity:1; }[data-ready] .scene-fallback { display:none; }
+  .scene-controls { position:absolute; top:10px; right:12px; display:none; gap:5px; z-index:4; }
+  [data-ready] .scene-controls { display:flex; }
+  .scene-controls button { display:grid; place-items:center; width:27px; height:27px; padding:0; border:1px solid #303035; border-radius:50%; color:#8f8b93; background:#111114; cursor:pointer; }
+  .scene-controls button:hover { color:#faf5f6; border-color:#805058; }.scene-controls button:focus-visible { outline:2px solid #ff8c94; outline-offset:3px; }
+  .scene-controls button svg { width:12px!important; height:12px!important; transform:none!important; fill:none; stroke:currentColor; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+  .play-icon,[data-user-paused] .pause-icon { display:none; }[data-user-paused] .play-icon { display:block; }
+</style>
+<script>
+  import { mountEvolutionScenes } from "./evolution-scenes";
+  mountEvolutionScenes();
+</script>

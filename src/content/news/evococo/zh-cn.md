@@ -98,18 +98,8 @@ EvoCoCo更值得关注的，是它改变了代码迁移所关注的问题。它�
 
 程序语言只是算法的一种表达，硬件也只是计算的一种载体。真正需要跨越语言与硬件迁移的，不是代码的形式，而是计算背后的结构。
 
-## 开源与社区
+## 相关资源
 
-论文：[https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-代码仓库：[https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-上游项目（EvoX）：[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQ 交流群： 297969717
-
-![QQ交流群二维码](./qq_group_qr.png)
-
-QQ交流群｜演化机器智能
-
-[![EvoX：GPU加速的演化计算，PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [研究论文](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -4,8 +4,6 @@ pubDate: 2026-08-17
 summary: "홍콩이공대학교 데이터과학 및 인공지능학과의 EvoX 팀이 장기 자율 소프트웨어 진화를 위한 재귀적 AI 시스템인 EvoX Genesis를 공개했습니다. 지속적으로 존재하는 agent에 의존해 장기 개발을 유지하는 대신, 소프트웨어 세계 자체가 계속 진화하도록 합니다. 빈 저장소에서 출발하여 시스템은 123.4시간 만에 248,989줄짜리 C 컴파일러를 구축했으며, 총 모델 token 비용은 단 44.38달러였습니다."
 ---
 
-# EvoX Genesis: 장기 자율 소프트웨어 진화를 위한 재귀적 AI 시스템, 25만 줄 C 컴파일러를 처음부터 구축
-
 ![image1.png](./evox-genesis-1.png)
 
 홍콩이공대학교 데이터과학 및 인공지능학과의 EvoX 팀이 장기 자율 소프트웨어 진화를 위한 재귀적 AI 시스템인 **EvoX Genesis**를 공개했습니다.
@@ -14,11 +12,7 @@ EvoX Genesis는 장기 개발을 유지하기 위해 지속적으로 존재하�
 
 빈 저장소에서 출발하여 시스템은 1,019개의 agent 에피소드를 거쳐 123.4시간 만에 **248,989줄의 C 컴파일러**를 구축했으며, 모델 token 비용은 단 **44.38달러**였습니다.
 
-<center>
-
 ## 롱호라이즌 코딩: 경계는 계속 움직인다
-
-</center>
 
 코딩 agent의 작업 시간은 한 번의 짧은 작업에서 수십 시간으로 확장되었습니다.
 
@@ -38,11 +32,7 @@ Anthropic은 16개의 Claude agent를 사용해 약 2,000개 세션, 약 2주, �
 
 정말로 지속되어야 하는 것은, agent가 살고 있는 소프트웨어 세계가 아닐까?
 
-<center>
-
 ## 123.4시간, 25만 줄
-
-</center>
 
 우리는 EvoX Genesis가 구현이 비어 있는 저장소에서 시작하게 했습니다.
 
@@ -56,23 +46,11 @@ Anthropic은 16개의 Claude agent를 사용해 약 2,000개 세션, 약 2주, �
 
 ![image2.png](./evox-genesis-2.png)
 
-<center>
-
 _그림 1: C 컴파일러 실험 결과 / 코드 규모, 실행 시간, agent 에피소드, 비용 및 테스트 결과_
-
-</center>
-
-<center>
 
 _(DeepSeek V4 Flash 모델 사용)_
 
-</center>
-
-<center>
-
 ## agent를 지속시키지 말고, 소프트웨어 세계를 지속시켜라
-
-</center>
 
 복잡한 소프트웨어의 수명은 단일 agent 세션보다 본질적으로 깁니다.
 
@@ -106,17 +84,9 @@ agent, 역할, 워크플로를 미리 설계할 필요도, 완전한 작업 트�
 
 ![image3.png](./evox-genesis-3.png)
 
-<center>
-
 _그림 2: Persistent Recursive World 개념도 / agent는 태어나고, 행동하고, 사라진다; 소프트웨어 세계는 계속 전개된다_
 
-</center>
-
-<center>
-
 ## 모델은 바꿀 수 있고, 소프트웨어 세계는 계속된다
-
-</center>
 
 이러한 연속성은 같은 모델을 끝까지 사용할 것도 요구하지 않습니다.
 
@@ -128,17 +98,9 @@ _그림 2: Persistent Recursive World 개념도 / agent는 태어나고, 행동�
 
 ![image4.png](./evox-genesis-4.png)
 
-<center>
-
 _그림 3: GLM 5.2 → DeepSeek V4 Flash 교차 모델 연속 실험_
 
-</center>
-
-<center>
-
 ## 처음부터, 혹은 역사를 이어받아
-
-</center>
 
 제로부터 구축하는 것은 소프트웨어 라이프사이클의 한쪽 끝일 뿐이고,
 
@@ -154,31 +116,13 @@ EvoX Genesis는 이를 대응하는 Rust crates로 리팩터링했습니다. 모
 
 ![image5.png](./evox-genesis-5.png)
 
-<center>
-
 _그림 4: MESA Fortran → Rust, 13개 모듈, 139,414줄 코드, 10.6달러_
-
-</center>
-
-<center>
 
 ## 비용 우위도 시간이 지나면 복리로 쌓인다
 
-</center>
-
-장기 소프트웨어 개발이 비용이 선형적으로 계속 증가한다는 뜻은 아닙니다.
-
 EvoX Genesis에서는 검증된 코드, 구조, 개발 역사가 계속 축적되어 다음 작업의 기반이 됩니다. 후속 agent는 전체 프로젝트를 처음부터 다시 이해할 필요가 없고, 기존 정보의 상당 부분은 그대로 캐시하여 재사용할 수 있으며, 캐시 적중률은 최대 97.4%에 달합니다.
 
-시스템이 계속 실행될수록 재사용 가능한 개발 상태는 풍부해지고, 중복 계산은 줄어들며, 개발의 단위 비용은 오히려 시간이 지날수록 점차 내려갑니다.
-
-이것은 시간이 지날수록 쌓이는 엔지니어링 복리입니다.
-
-<center>
-
 ## EvoX Genesis가 오픈소스로 공개되었습니다
-
-</center>
 
 프로젝트는 오픈소스로 공개되었으며, Windows, macOS, Linux용 설치 패키지를 제공합니다.
 
@@ -200,21 +144,11 @@ https://github.com/EMI-Group/genesis
 
 🌐 QQ 그룹: 297969717
 
-![image6.png](./evox-genesis-6.png)
-
 ![image7.png](./evox-genesis-7.png)
-
-<center>
 
 **agent는 떠나도, 소프트웨어 세계는 계속 진화합니다**
 
 **EvoX Genesis**
-
-</center>
-
-![image8.png](./evox-genesis-8.png)
-
-<center><strong>QQ 그룹｜</strong>Evolutionary Machine Intelligence</center>
 
 참고:
 

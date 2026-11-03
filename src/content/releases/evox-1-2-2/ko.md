@@ -11,3 +11,8 @@ summary: "DE 알고리즘 수정 및 문서 개선을 포함한 버그 수정에
 - 문서의 여러 부분을 수정했습니다.
 
 **전체 변경 내역**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## 관련 자료
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [문서](https://evox.readthedocs.io/en/latest/)

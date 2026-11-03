@@ -1,10 +1,8 @@
-﻿---
+---
 title: "EvoGM：無需重新訓練，透過群體演化實現大模型自主合併"
 pubDate: 2026-06-28
 summary: "EvoX 團隊聯合鵬城實驗室提出生成式演化模型合併框架 EvoGM，將合併係數搜尋轉化為可學習的生成式優化問題，在不重新訓練大模型的前提下實現自主模型合併。"
 ---
-
-# EvoGM：無需重新訓練，透過群體演化實現大模型自主合併
 
 ![image1.png](./evogm-1.png)
 
@@ -38,7 +36,7 @@ summary: "EvoX 團隊聯合鵬城實驗室提出生成式演化模型合併框�
 
 ![image2.png](./evogm-2.png)
 
-為解決上述問題，我們提出了 EvoGM（Evolutionary Generative Merging），程式碼已開源：https://github.com/JiangTao97/evogm。
+為解決上述問題，我們提出了 EvoGM（Evolutionary Generative Merging），程式碼已開源：https://github.com/JiangTao97/evogm 。
 
 EvoGM 的核心思想是：將候選合併配置組織為種群，並把合併係數的搜尋過程轉化為生成式學習問題。
 
@@ -141,16 +139,8 @@ EvoGM 將這一思想落到大模型合併場景中。在這裡，候選解不�
 
 隨著開源生態中專家模型、LoRA 模型和任務模型越來越多，未來的關鍵問題可能不只是「如何訓練一個新模型」，而是「如何高效組合已有模型能力」。EvoGM 提供了一種新的答案：在不重新訓練參與合併的大模型的前提下，透過生成式演化學習利用有限驗證回饋，自主完成候選種群建構、合併方案生成、評估選擇和專家基底更新。簡單來說，EvoGM 讓模型合併從「憑經驗調係數」走向「讓合併策略自己學習和演化」。這也意味著，大模型能力複用可能進入一個新的階段：不是每遇到一個新任務都重新訓練一個模型，而是讓已有專家模型透過群體演化與自主合併，持續組合出更適合新任務的模型。
 
-## 開源程式碼 / 社群
+## 相關資源
 
-📄 論文：
-https://arxiv.org/pdf/2605.29295
-🔗 GitHub：
-
-https://github.com/JiangTao97/evogm
-🔼 上游專案（EvoX）：
-
-https://github.com/EMI-Group/evox
-🌐 QQ 交流群：297969717
-
-![image8.png](./evogm-8.png)
+- [研究論文](https://arxiv.org/abs/2605.29295)
+- [GitHub](https://github.com/JiangTao97/evogm)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -1,15 +1,10 @@
 ---
-title: "EvoGO: GPU Compute × Generative Learning → A New Paradigm for Evolutionary Algorithms with 10-Generation Convergence"
+title: "EvoGO: Learning to Generate Better Solutions from Search Experience"
 pubDate: 2026-04-05
 summary: "EvoGO is a fully data-driven evolutionary optimization framework that learns how to generate better solutions from past search experience and achieves fast, strong performance on complex high-dimensional tasks."
 ---
 
-
-# EvoGO: GPU Compute × Generative Learning → A New Paradigm for Evolutionary Algorithms with 10-Generation Convergence
-
 ![image1](./image1.png)
-
-In recent years, data-driven evolutionary optimization methods have made remarkable progress. From surrogate-assisted evolutionary algorithms to generative evolutionary algorithms, evolutionary optimization has been gradually shifting from traditional fixed-operator-driven paradigms toward learning-driven ones. However, the data-driven nature of existing methods remains incomplete in three important respects. First, coordination between the generative mechanism and the evolutionary process still often depends on manually designed heuristic rules. Second, the training objectives of generative models are usually inherited from general-purpose generation tasks and are not sufficiently aligned with optimization objectives. Third, the extremely limited yet highly valuable online samples available in black-box optimization have not yet been systematically organized into learnable and transferable optimization experience. To address these issues, the EvoX team proposed Evolutionary Generative Optimization (EvoGO), which organizes the entire optimization process into three unified stages: data preparation, model training, and population generation. The aim is to enable optimization algorithms to directly learn the improvement law of moving from inferior solutions to superior ones from historical data. Experimental results show that EvoGO demonstrates stable advantages across three categories of tasks—numerical optimization, classical control, and high-dimensional robotic control—covering 25 benchmark tests and problem scales ranging from 10 to 1000 dimensions, and converging on most large-scale tasks in roughly 10 generations. In complex tasks, when combined with GPU-parallel inference, EvoGO also shows significant practical runtime advantages; when CMA-ES reaches its converged performance, EvoGO can achieve the same performance up to 134× faster. These results indicate that fully data-driven evolutionary optimization can not only achieve competitive results on standard benchmark tests, but also opens up new possibilities for a unified generative framework for solving complex high-dimensional black-box optimization problems.
 
 ## Predicament: Data-Driven Optimization Has Still Not Taken the Final Step
 
@@ -57,8 +52,6 @@ This is especially evident in the high-dimensional robotic control environment H
 
 To verify the necessity of the core components in EvoGO’s “fully data-driven” design, the research team conducted systematic ablations centered on the paired generative architecture, the surrogate-guidance mechanism, and the optimization-oriented objective design. Five variants were constructed: a single-generator version, a no-surrogate version, an adversarial-objective version, an MLP-surrogate version, and a heuristic-surrogate version.
 
-
-
 The experimental results show that the paired generative architecture, the surrogate-guidance mechanism, and the optimization-oriented objective design are all crucial to EvoGO’s effectiveness. Removing the pseudo-inverse generator leads to noticeably worse convergence stability and reduced population diversity, indicating that the paired structure formed by forward generation and inverse constraints is necessary for maintaining training stability and avoiding mode collapse. Removing the surrogate model, or replacing the original optimization objective with a general adversarial objective, also causes significant performance degradation, showing that surrogate guidance and objective alignment are central to the method’s advantage. Replacing the Gaussian process with a multilayer perceptron or heuristic rules still leaves the method functional, but with a slight overall decline, indicating that EvoGO does not depend on a specific surrogate form, although explicit uncertainty modeling is more beneficial for performance. Overall, EvoGO’s performance gains do not come from any single module, but from the synergy among the paired generative architecture, the surrogate-guidance mechanism, and the optimization-oriented objective design.
 
 ### 3. Behavior Visualization: Revealing a Data-Driven Dynamic Process
@@ -85,45 +78,12 @@ To address this problem, the EvoX team built an integrated design pipeline based
 
 Using only 500 historical airfoil samples, the method achieves more than 99.5% prediction accuracy on three key aerodynamic indicators—lift-to-drag ratio, lift coefficient, and cruise angle of attack—and the qualification rate of automatically generated airfoils exceeds 95%. These results indicate that fully data-driven evolutionary optimization methods such as EvoGO can not only perform well on standard benchmark tests, but are also beginning to demonstrate the ability to provide effective design support for real engineering problems.
 
-## Deepening the View: From Physics to Philosophy, Reinterpreting EvoGO
-
-### Physical Perspective: From Disorderly Trial-and-Error to Ordered Evolution
-
-From a physical perspective, black-box optimization can be understood as a process of gradually searching for a more stable state within a real but incompletely observable potential field. For the optimizer, the objective function and its fitness landscape objectively exist at all times, but at the initial moment the system can only gain local knowledge through limited sampling and evaluation. Search therefore naturally carries high uncertainty.
-
-Traditional evolutionary optimization relies more on local perturbation and random trial-and-error. Although it can gradually approach better regions through repeated sampling and selection, the search process still largely manifests as high-entropy local exploration, and historical experience is difficult to accumulate systematically. What distinguishes EvoGO is that it further organizes historical samples into an information basis that encodes direction and structure. The surrogate model provides an approximate understanding of the local objective landscape; the pairing of superior and inferior solutions extracts directional information about moving from poorer regions toward better ones; and the loop formed by forward generation and inverse constraints allows this directional updating process to unfold continuously while remaining stable.
-
-In physical terms, EvoGO is more like a process in which ordered structure gradually forms under the guidance of an effective potential field. What it does is not merely accelerate search, but gradually reduce search uncertainty under limited observability, transforming population updating from disorderly trial-and-error into organized evolutionary flow. Speed is only the result; the deeper change is that historical experience begins to be transformed into structural information that can be accumulated, transmitted, and reused.
-
-### Philosophical Perspective: From “The Dao Gives Rise to All Things” to the Generation of Laws
-
-From a philosophical perspective, what is even more worth emphasizing about EvoGO is that it embodies a generative process moving from experience to order, and from the local to the whole. This process may be summarized through the classical phrase: **“The Dao gives rise to One, One gives rise to Two, Two gives rise to Three, and Three gives rise to all things.”**
-
-The **“Dao”** corresponds to the objectively existing but not fully graspable true law of the target problem. In optimization, the optimal solution is not subjectively prescribed by the algorithm; rather, it is always latent within the real objective function and its fitness landscape. What the algorithm can do is not to create the Dao, but only to continually approach it.
-
-The **“One”** corresponds to the unified structure extracted from messy experience. Historical samples are initially nothing more than scattered traces of search; they do not automatically constitute knowledge. Only when these samples are sorted, filtered, and organized does experience begin to move from disorder into a learnable whole. This is the meaning of “giving rise to One.”
-
-The **“Two”** corresponds to differentiation—to the emergence of direction. The division between superior and inferior solutions does not merely represent the distinction between good and bad; more importantly, it marks the first time the system acquires a sense of direction from experience. Without this differentiation, experience is merely accumulated; with it, experience acquires evolutionary tension.
-
-The **“Three”** corresponds to closure—to the generation of relationships. When objective cognition, forward progression, and backward constraint jointly form a self-consistent system, optimization is no longer a collage of local operations, but begins to take shape as an integral mechanism capable of self-maintenance and self-correction. At this point, the method truly gains the ability to continuously generate new solutions.
-
-The **“all things”** then correspond to the new populations and new candidate solutions that continuously emerge on top of this generative order. They are not produced blindly, but arise continuously under already-formed direction, structure, and closed-loop constraints. Precisely for this reason, what EvoGO advances is not merely the ability to “find better solutions faster,” but a new capacity for evolutionary optimization to generate laws from experience, and then continuously generate solutions from those laws.
-
-The philosophical significance of EvoGO does not lie in simply replacing traditional operators. Rather, it lies in showing more clearly that optimization need not be advanced only through pre-written rules; through the accumulation, differentiation, and organization of experience, it can gradually form its own generative order.
-
 ## Conclusion and Outlook
 
 What EvoGO focuses on is not merely a local improvement to the traditional evolutionary optimization pipeline, but a more fundamental reconstruction of how optimization itself happens. By organizing optimization into the three unified stages of data preparation, model training, and population generation, and by introducing directional data construction based on superior–inferior pairing, a surrogate-guided paired generative architecture, and a parallel population generation mechanism, EvoGO demonstrates stable advantages in both performance and efficiency on standard benchmark tests. At the same time, it has also validated its potential for real complex engineering problems through next-generation wide-body airliner supercritical wing optimization design. At a higher level, the significance of this work lies in showing that evolutionary optimization does not necessarily have to remain confined to manually specified heuristic rules. The optimization process itself may be progressively distilled from historical experience as a learnable law.
 
-## Open-Source Code / Community
+## Resources
 
-- **Paper:**  
-  https://arxiv.org/abs/2602.01147
-- **GitHub:**  
-  https://github.com/EMI-Group/evogo
-- **Upstream Project (EvoX):**  
-  https://github.com/EMI-Group/evox
-- **QQ Group:** `297969717`
-- **WeChat Official Account:** Evolutionary Machine Intelligence
-
-EvoGO is built on top of the EvoX framework. If you are interested in EvoX, you are welcome to check the articles (https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ) on the EvoX public account for more details.
+- [Research paper](https://arxiv.org/abs/2508.00380)
+- [GitHub](https://github.com/EMI-Group/evogo)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -112,11 +112,11 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
 
 <style>
   .site-header { position: fixed; inset: 0 0 auto; z-index: 100; height: 64px; background: color-mix(in srgb, var(--site-bg) 88%, transparent); border-bottom: 1px solid var(--site-line); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-  .header-inner { width: min(100% - 64px, 1216px); height: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 36px; }
+  .header-inner { width: min(100% - 64px, 1216px); height: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
   .site-brand { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; }
-  .header-mark { display: flex; flex-shrink: 0; width: 112px; }
-  .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: 30px; margin-left: auto; }
-  .nav-link { display: flex; align-items: center; gap: 6px; padding: 21px 0; font-size: 12px; font-weight: 500; color: var(--site-muted); white-space: nowrap; transition: color .2s; cursor: pointer; }
+  .header-mark { display: flex; flex-shrink: 0; width: 120px; }
+  .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: 26px; margin-left: auto; }
+  .nav-link { display: flex; align-items: center; gap: 6px; padding: 20px 0; font-size: 14px; font-weight: 500; color: var(--site-muted); white-space: nowrap; transition: color .2s; cursor: pointer;  line-height: 24px; }
   .nav-link:hover, details[open] > .nav-link { color: var(--site-ink); }
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
@@ -127,15 +127,15 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .dropdown-panel { position: absolute; top: calc(100% - 1px); left: -24px; width: 286px; padding: 8px; border: 1px solid var(--site-line); border-radius: 16px; background: var(--site-bg); box-shadow: 0 12px 40px #0003; }
   .dropdown-panel a { display: block; padding: 12px 14px; border-radius: 9px; transition: background .2s; }
   .dropdown-panel a:hover, .dropdown-panel a:focus-visible { background: var(--site-alt); }
-  .dropdown-label { display: block; color: var(--site-ink); font-size: 13px; font-weight: 600; }
-  .dropdown-description { display: block; color: var(--site-muted); font-size: 12px; line-height: 1.45; margin-top: 4px; }
+  .dropdown-label { display: block; color: var(--site-ink); font-size: 15px; font-weight: 600;  line-height: 1.5; }
+  .dropdown-description { display: block; color: var(--site-muted); font-size: 13px; line-height: 1.6; margin-top: 4px; }
   .language-panel { right: -10px; left: auto; width: 190px; max-height: min(70vh, 420px); overflow-y: auto; }
-  .language-panel a { font-size: 13px; color: var(--site-muted); padding-block: 9px; }
+  .language-panel a { font-size: 14px; color: var(--site-muted); padding-block: 9px; }
   a[aria-current="true"] { color: var(--site-accent); font-weight: 600; }
   .header-actions { display: flex; align-items: center; gap: 14px; }
-  .theme-toggle, .mobile-toggle { width: 32px; height: 32px; border: 1px solid var(--site-line); border-radius: 50%; display: grid; place-items: center; color: var(--site-muted); cursor: pointer; background: transparent; transition: color .2s, background .2s; }
+  .theme-toggle, .mobile-toggle { width: 40px; height: 40px; border: 1px solid var(--site-line); border-radius: 50%; display: grid; place-items: center; color: var(--site-muted); cursor: pointer; background: transparent; transition: color .2s, background .2s; }
   .theme-toggle:hover, .mobile-toggle:hover { background: var(--site-alt); color: var(--site-ink); }
-  .theme-toggle svg { width: 15px; height: 15px; }
+  .theme-toggle svg { width: 18px; height: 18px; }
   .theme-moon { display: none; }
   :global([data-theme="light"]) .theme-sun { display: none; }
   :global([data-theme="light"]) .theme-moon { display: block; }
@@ -144,15 +144,15 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .mobile-close-icon, .mobile-menu[open] .mobile-open-icon { display: none; }
   .mobile-menu[open] .mobile-close-icon { display: block; }
   .mobile-panel { position: absolute; inset: 63px 0 auto; padding: 16px 24px 24px; background: var(--site-bg); border-bottom: 1px solid var(--site-line); max-height: calc(100dvh - 64px); overflow-y: auto; box-shadow: 0 18px 28px #0002; }
-  .mobile-link, .mobile-section > summary { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 15px; color: var(--site-ink); border-bottom: 1px solid var(--site-line); cursor: pointer; }
+  .mobile-link, .mobile-section > summary { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 16px; color: var(--site-ink); border-bottom: 1px solid var(--site-line); cursor: pointer; }
   .mobile-submenu { display: grid; gap: 0; padding: 6px 0 12px; }
-  .mobile-submenu a { padding: 10px 16px; font-size: 14px; color: var(--site-muted); }
+  .mobile-submenu a { padding: 10px 16px; font-size: 15px; color: var(--site-muted);  line-height: 1.5; }
   .mobile-submenu a:hover { color: var(--site-ink); }
   .mobile-languages { grid-template-columns: 1fr 1fr; }
   .mobile-languages a[aria-current="true"] { color: var(--site-accent); }
-  @media (max-width: 860px) {
-    .header-inner { width: calc(100% - 40px); gap: 18px; }
-    .desktop-nav { display: none; }
+  @media (max-width: 1023px) {
+    .header-inner { width: calc(100% - 40px); gap: 28px; }
+    .desktop-nav { display: none;  gap: 26px; }
     .mobile-menu { display: block; }
   }
 </style>
@@ -222,7 +222,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
       event.preventDefault();
     }
   });
-  window.matchMedia("(min-width: 861px)").addEventListener("change", (event) => {
+  window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
     if (event.matches && mobileMenu) mobileMenu.open = false;
     if (!event.matches) closeDesktopMenus();
   });

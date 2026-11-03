@@ -98,18 +98,8 @@ EvoCoCo est aussi significatif par la façon dont il repense la conversion de co
 
 Un langage de programmation est une manière d'exprimer un algorithme, et un matériel une manière d'exécuter un calcul. Ce qui doit survivre à la migration entre langages et matériels, c'est la structure qui sous-tend ce calcul.
 
-## Code open source et ressources communautaires
+## Ressources
 
-Article : [https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub : [https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-Projet en amont (EvoX) : [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-Groupe QQ : 297969717
-
-![QR code de la communauté QQ](./qq_group_qr.png)
-
-Groupe QQ | Evolutionary Machine Intelligence
-
-[![EvoX : calcul évolutionnaire accéléré par GPU, PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [Article scientifique](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

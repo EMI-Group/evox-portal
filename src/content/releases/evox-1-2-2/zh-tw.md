@@ -11,3 +11,8 @@ summary: "這是一個專注於錯誤修復的小版本更新，包括 DE 演算
 - 文檔的多項修復。
 
 **完整變更日誌**：[v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## 相關資源
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文件](https://evox.readthedocs.io/en/latest/)

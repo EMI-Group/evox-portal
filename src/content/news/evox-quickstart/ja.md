@@ -26,21 +26,50 @@ QQグループに参加して入手してください：297969717
 
 ターミナルを開き、クリーンなPython環境を作成します：
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 お好みのツールを使用して、クリーンなPython環境を作成することもできます。
 
 ## ステップ2：PyTorchとEvoXのインストール
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 GPUが利用可能かどうかを確認します：
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## ステップ3：最初の進化的アルゴリズムの実行
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 これは一体何をしているのでしょうか？標準インターフェースを介して、アルゴリズム（PSO）、問題（Ackley）、およびモニター（EvalMonitor）を構成しています。EvoXが並列化、高速化、モニタリングのすべてを処理します！
 
@@ -48,7 +77,9 @@ GPUが利用可能かどうかを確認します：
 
 たった1行で十分です：
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ GPUが利用可能かどうかを確認します：
 
 「単にAckleyを実行する」だけでは満足できない場合は、以下のようなことができます：
 
-· PSOをGA、DE、CMA-ES、NSGA-II、RVEAなどに交換する
+- PSOをGA、DE、CMA-ES、NSGA-II、RVEAなどに交換する
  · AckleyをRastrigin、Griewank、CEC2022などに交換する
  · `n_objs >= 2` に設定して多目的問題に切り替える
  · `MyProblem` や `MyAlgorithm` で独自のロジックを実装する
@@ -70,36 +101,13 @@ GPUが利用可能かどうかを確認します：
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## 謝辞
 
 このチュートリアルは、**Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng**、**Xinyao Li**によって執筆されました。**Beichen Huang**がチュートリアルの整理、編集、オンライン公開を担当しました。
 
 EvoXコミュニティのすべてのメンバーに心から感謝します。EvoXが進化し続けることができるのは、私たちの共同の努力のおかげです。
 
-## オープンソースコード / コミュニティリソース
+## 関連資料
 
-論文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-アップストリームプロジェクト（EvoX）：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQグループ：297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-QQグループ | Evolving Machine Intelligence
-
-EvoMOはEvoXフレームワーク上に構築されています。EvoXについてさらに詳しく知りたい場合は、WeChat公式アカウントで公開されているEvoX 1.0に関する公式記事をご覧ください。
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [ドキュメント](https://evox.readthedocs.io/en/latest/)

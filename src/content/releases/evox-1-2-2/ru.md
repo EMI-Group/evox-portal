@@ -11,3 +11,8 @@ summary: "Минорный релиз, сосредоточенный на ис�
 - Различные исправления в документации.
 
 **Полный список изменений**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## Ресурсы
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Документация](https://evox.readthedocs.io/en/latest/)

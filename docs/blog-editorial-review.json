@@ -1,0 +1,38 @@
+{
+  "scope": "13 news articles and 9 release notes; 13 locales; source/Chinese editorial review plus cross-locale structural cleanup. This is an editorial review, not an independent replication of reported experiments.",
+  "date": "2026-11-03",
+  "sources": [
+    "https://github.com/EMI-Group/evorl",
+    "https://github.com/pytorch/pytorch/blob/main/docs/source/user_guide/torch_compiler/torch.compiler_troubleshooting.md",
+    "https://arxiv.org/abs/2602.01147"
+  ],
+  "reviews": {
+    "autopso": "Retained method, experiments and captions; removed QR/caption and compacted resource links.",
+    "codex-for-evox": "Reframed title as a demonstrated development workflow in all locales; fixed Chinese duplicated wording and arbitrary-code phrasing; retained reproducibility context and operation screenshots.",
+    "evococo": "Retained technical narrative, data and experiment figures; removed QQ and upstream promotion; standardized resource links.",
+    "evogm": "Removed repeated H1 and QR; normalized paper/code links and captions; retained seen/unseen-task scope.",
+    "evogo": "Reframed headline, removed repeated opening abstract and physics/philosophy detour across locales; retained methods, benchmarks and wing-design evidence.",
+    "evogp": "Converted visual bold labels to semantic sections; standardized figure captions and resources; removed QR.",
+    "evorl": "Rewrote all translations to describe evolutionary/RL composition and modular experiments; removed unsupported financial-use, universal improvement and environment-gradient claims.",
+    "evox-genesis": "Removed centered wrappers, platform promo and QR; retained application UI and result figures; removed unsupported declining-unit-cost projection while preserving cache result.",
+    "evox-quickstart": "Transcribed five code images to code blocks and removed the duplicate sixth image; preserved original tutorial API/example commands without claiming execution; corrected copied EvoMO resources and removed promo/QR.",
+    "genesis-wasm-render": "Retained challenge description, reported test counts, differing comparison durations and implementation resources; applied shared typography.",
+    "gpu-accelerated-emo": "Corrected EMl-Group typo; removed QR/upstream promo; preserved method diagrams, including the technically relevant evox-1-1-2-1.png asset.",
+    "istratde": "Removed repeated heading and QR; preserved fixed-strategy construction, reachability qualification and experimental sections; paper title moved into disclosure.",
+    "metade": "Fixed accidental indented prose, inline spacer and malformed emphasis; simplified meta-evolution explanation in English/Chinese; removed promo/QR and compacted resources.",
+    "evox-1-0-0": "Removed unqualified 100x statement and rewrote summary in all locales; retained algorithm and PyTorch features.",
+    "evox-1-1-0": "Rewrote all locales around compiler change and workflow compilation; corrected universal Python/library compatibility promise.",
+    "evox-1-1-1": "Normalized headings and nested wording; corrected copied MetaDE resources; removed QR.",
+    "evox-1-1-2": "Preserved changelog and initial distributed-support scope; corrected copied MetaDE resources and removed QR.",
+    "evox-1-2-0": "Preserved release features and contributor/PR references; normalized headings; corrected footer copied from EvoMO and removed QR.",
+    "evox-1-2-1": "Preserved feature and bug-fix details; nested utility examples; corrected copied footer and removed QR.",
+    "evox-1-2-2": "Preserved concise fixes and changelog; shared short-article layout without a redundant one-entry TOC.",
+    "evox-1-3-0": "Preserved feature and fix sections and changelog; shared article typography and resources.",
+    "evox-1-4-0": "Preserved historical maintenance announcement, Genesis context and changelog; shared short-article layout."
+  },
+  "validation": {
+    "build": "739 pages built successfully",
+    "articles": 286,
+    "structuralErrors": []
+  }
+}

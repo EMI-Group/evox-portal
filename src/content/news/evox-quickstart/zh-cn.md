@@ -26,21 +26,50 @@ summary: "一份新手教程，带您在 10 分钟内上手使用 EvoX 进行 GP
 
 打开终端并创建一个干净的 Python 环境：
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 您也可以使用您喜欢的工具来创建一个干净的 Python 环境。
 
 ## 第二步：安装 PyTorch 和 EvoX
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 检查 GPU 是否可用：
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## 第三步：运行您的第一个演化算法
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 这是做什么的？它通过标准接口组合了一个算法（PSO）、一个问题（Ackley）和一个监控器（EvalMonitor）。EvoX 负责所有的并行化、加速和监控！
 
@@ -48,7 +77,9 @@ summary: "一份新手教程，带您在 10 分钟内上手使用 EvoX 进行 GP
 
 只需要一行代码：
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ summary: "一份新手教程，带您在 10 分钟内上手使用 EvoX 进行 GP
 
 如果“仅仅运行一个 Ackley”不能满足您，您可以：
 
-· 将 PSO 替换为 GA, DE, CMA-ES, NSGA-II, RVEA...
+- 将 PSO 替换为 GA, DE, CMA-ES, NSGA-II, RVEA...
  · 将 Ackley 替换为 Rastrigin, Griewank, CEC2022
  · 通过设置 n_objs >= 2 切换到多目标问题
  · 使用 MyProblem 和 MyAlgorithm 实现您自己的逻辑
@@ -70,36 +101,13 @@ summary: "一份新手教程，带您在 10 分钟内上手使用 EvoX 进行 GP
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## 致谢
 
 本教程由 **Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng** 和 **Xinyao Li** 编写。**Beichen Huang** 负责教程的整理、编辑和在线发布。
 
 我们衷心感谢 EvoX 社区的每一位成员。正是我们的共同努力，让 EvoX 能够不断演化。
 
-## 开源代码 / 社区资源
+## 相关资源
 
-论文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上游项目 (EvoX)：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 群：297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-QQ 群 | 演化机器智能
-
-EvoMO 构建于 EvoX 框架之上。如果您有兴趣了解更多关于 EvoX 的信息，欢迎查看我们在微信公众号上发布的关于 EvoX 1.0 的官方文章以获取更多详情。
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文档](https://evox.readthedocs.io/en/latest/)

@@ -1,8 +1,11 @@
 ---
-
+import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
+interface Props { locale?: Locale }
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
 ---
 
-<div id="rvea-plot" class="w-full h-full"></div>
+<div id="rvea-plot" data-generation={t(tr, "examples.plot.generation")}  data-min={t(tr, "examples.plot.min")}  data-max={t(tr, "examples.plot.max")}  data-median={t(tr, "examples.plot.median")}  data-front={t(tr, "examples.plot.front")}  data-population={t(tr, "examples.plot.population")}  class="w-full h-full"></div>
 
 <script is:inline>
   // Load Plotly only once: multiple components on the same page share this
@@ -29,7 +32,11 @@
 
   const rvea_plot = document.getElementById("rvea-plot");
   if (rvea_plot) {
-    const data = [coordinate, splashed];
+    const localizedLayout = structuredClone(layout);
+    localizedLayout.sliders.forEach(slider => {
+      slider.currentvalue.prefix = `${rvea_plot.dataset.generation}: `;
+    });
+    const data = [{ ...coordinate, name: rvea_plot.dataset.front }, { ...splashed, name: rvea_plot.dataset.population }];
     const initPlot = async () => {
       // @ts-ignore
       await (window.__plotlyLoad || Promise.reject(new Error("Plotly loader not initialized")));
@@ -38,10 +45,13 @@
         throw new Error("Plotly is not defined");
       }
       // @ts-ignore
-      await Plotly.newPlot(rvea_plot, data, layout, { responsive: true });
+      await Plotly.newPlot(rvea_plot, data, localizedLayout, { responsive: true });
       const values = await fetch(framesUrl).then((v) => v.json());
       // @ts-ignore
-      values.forEach((it) => (it.data[0] = coordinate));
+      values.forEach((it) => {
+        it.data[0] = data[0];
+        if (it.data[1]) it.data[1].name = rvea_plot.dataset.population;
+      });
       // @ts-ignore
       await Plotly.addFrames(rvea_plot, values);
       rvea_plot.setAttribute("data-ready", "true");

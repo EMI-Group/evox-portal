@@ -11,3 +11,8 @@ Dies ist ein kleineres Release, das sich ausschließlich auf Fehlerbehebungen ko
 - Verschiedene Korrekturen in der Dokumentation.
 
 **Vollständiges Änderungsprotokoll**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## Ressourcen
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Dokumentation](https://evox.readthedocs.io/en/latest/)

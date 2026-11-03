@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "Bug fixes for torch.compile graph capture, use_state graph breaks, and BatchedTensor leaks."
 ---
 
-**What's Changed**
+## What's Changed
 
-**This minor release primarily includes bug fixes and improvements:**
-
+This minor release primarily includes bug fixes and improvements.
 - Fixed an issue where `torch.compile` did not properly capture `workflow.step`.
 
 - Fixed an issue where `use_state` leads to a graph break.
@@ -18,7 +17,7 @@ summary: "Bug fixes for torch.compile graph capture, use_state graph breaks, and
 
 - Introduced a new wrapper, `evox.compile`, to work around certain limitations with `torch.compile` and `torch.vmap`.
 
-- Resolved various `BatchedTensor`-related issues:- Fixed a bug where vmapping a workflow with EvalMonitor could cause BatchedTensor leaks.
+- Resolved various `BatchedTensor`-related issues: fixed a bug where vmapping a workflow with EvalMonitor could cause BatchedTensor leaks.
 
 - Fixed an issue preventing HPOProblem from working with BraxProblem.
 
@@ -28,16 +27,7 @@ summary: "Bug fixes for torch.compile graph capture, use_state graph breaks, and
 
 - Various small fixes and improvements.
 
-**Open-Source Code and Community**
+## Resources
 
-**Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Upstream Project (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**QQ Group**: 297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  QQ Group | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

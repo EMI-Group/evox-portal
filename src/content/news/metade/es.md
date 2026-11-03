@@ -50,7 +50,7 @@ El equipo de investigación propuso primero un framework de algoritmo DE paramet
 
 Arquitectura MetaDE
 
-MetaDE adopta una estructura de dos capas, que comprende **un evolucionador** (capa superior) y **múltiples ejecutores** (capa inferior). El evolucionador es una DE (o potencialmente otro algoritmo evolutivo), responsable de optimizar los parámetros de la PDE. Cada individuo![spacer.gif](./metade-6.gif) x_i en la población del evolucionador corresponde a una configuración de parámetros única θ_i. Estas configuraciones se pasan a la PDE para instanciar diferentes variantes de DE, cada una gestionada por un ejecutor que se ejecuta de forma independiente en la tarea de optimización dada. Cada ejecutor devuelve su mejor valor de fitness y^* al evolucionador, que asigna ese valor de fitness y_i al individuo correspondiente x_i.
+MetaDE adopta una estructura de dos capas, que comprende **un evolucionador** (capa superior) y **múltiples ejecutores** (capa inferior). El evolucionador es una DE (o potencialmente otro algoritmo evolutivo), responsable de optimizar los parámetros de la PDE. Cada individuo x_i en la población del evolucionador corresponde a una configuración de parámetros única θ_i. Estas configuraciones se pasan a la PDE para instanciar diferentes variantes de DE, cada una gestionada por un ejecutor que se ejecuta de forma independiente en la tarea de optimización dada. Cada ejecutor devuelve su mejor valor de fitness y^* al evolucionador, que asigna ese valor de fitness y_i al individuo correspondiente x_i.
 
 ## Rendimiento Experimental
 
@@ -119,7 +119,7 @@ El equipo de investigación registró además **el número de evaluaciones de fu
 
 FEs alcanzadas por cada algoritmo en 60 segundos
 
-Bajo el mismo framework EvoX con computación paralela acelerada por GPU, MetaDE alcanzó en promedio FEs de nivel **10****⁹**, mientras que las variantes tradicionales de DE solo alcanzaron alrededor de ***10^6*** FEs. Esta ventaja surge del enfoque parametrizado de MetaDE, que realiza **evaluaciones paralelas a gran escala** de individuos, lo que permite una **utilización más eficiente de los recursos de hardware.** En consecuencia, el algoritmo explora más soluciones dentro de la misma ventana de tiempo, mejorando tanto la calidad de la solución como la estabilidad.
+Bajo el mismo framework EvoX con computación paralela acelerada por GPU, MetaDE alcanzó en promedio FEs de nivel **10⁹**, mientras que las variantes tradicionales de DE solo alcanzaron alrededor de ***10^6*** FEs. Esta ventaja surge del enfoque parametrizado de MetaDE, que realiza **evaluaciones paralelas a gran escala** de individuos, lo que permite una **utilización más eficiente de los recursos de hardware.** En consecuencia, el algoritmo explora más soluciones dentro de la misma ventana de tiempo, mejorando tanto la calidad de la solución como la estabilidad.
 
 ## Aprendizaje por Refuerzo Evolutivo: Tareas de control de robots
 
@@ -147,24 +147,8 @@ Como se muestra en la figura, MetaDE demuestra un sólido rendimiento en las tar
 
 MetaDE es un enfoque de metaevolución innovador que no solo destaca en la resolución de tareas de optimización, sino que también ajusta y perfecciona de forma autónoma sus propias estrategias. Capitalizando las fortalezas de la Evolución Diferencial, MetaDE exhibe un gran potencial en la configuración adaptativa de parámetros y la evolución de estrategias. Los resultados experimentales muestran una robustez superior en una gama de pruebas de benchmark, y su aplicabilidad en el mundo real se ve subrayada por el éxito en las tareas de control de robots a través del aprendizaje por refuerzo evolutivo. Un desafío central consiste en mantener un equilibrio óptimo entre la generalización y la especialización, asegurando que el algoritmo pueda adaptarse a diversas tareas y al mismo tiempo optimizar eficazmente para problemas específicos. Esta investigación ofrece nuevas perspectivas para los algoritmos evolutivos autoadaptativos y puede impulsar nuevos avances en la metaevolución para sistemas complejos.
 
-## Código de código abierto y comunidad
+## Recursos
 
-**Artículo**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Proyecto original (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Grupo de QQ**: 297969717
-
-![image.png](./metade-3.png "image.png")
-
-Grupo de QQ | Evolving Machine Intelligence
-
-MetaDE está construido sobre el framework EvoX. Si está interesado en EvoX, consulte el artículo sobre EvoX 1.0 para obtener más detalles.
-
-![image.png](./metade-1.png)
-
-([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
-
-![image.png](./metade-14.png "image.png")
+- [Artículo de investigación](https://arxiv.org/abs/2502.10470)
+- [GitHub](https://github.com/EMI-Group/metade)
+- [EvoX](https://github.com/EMI-Group/evox)

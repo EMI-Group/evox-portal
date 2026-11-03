@@ -26,14 +26,14 @@ Grâce à cette approche méta-évolutionnaire récursive, MetaDE obtient plusie
 
 **1. Réglage Automatisé des Paramètres**
 
-     Le processus laborieux de réglage manuel est éliminé. L'algorithme apprend lui-même comment ajuster ses hyperparamètres, réduisant l'intervention humaine et améliorant l'efficacité.
+Le processus laborieux de réglage manuel est éliminé. L'algorithme apprend lui-même comment ajuster ses hyperparamètres, réduisant l'intervention humaine et améliorant l'efficacité.
 
 **2. Adaptabilité Améliorée**
 
-     MetaDE réagit dynamiquement aux caractéristiques et conditions changeantes du problème, modifiant les stratégies en temps réel pour améliorer les performances. Cela augmente considérablement la flexibilité de l'algorithme.
+MetaDE réagit dynamiquement aux caractéristiques et conditions changeantes du problème, modifiant les stratégies en temps réel pour améliorer les performances. Cela augmente considérablement la flexibilité de l'algorithme.
 
 **3. Recherche Efficace**
-      En tirant parti du parallélisme inhérent, MetaDE accélère grandement les recherches dans les problèmes d'optimisation à grande échelle. Il fournit des solutions réalisables à des problèmes complexes et de haute dimension dans des délais raisonnables.
+En tirant parti du parallélisme inhérent, MetaDE accélère grandement les recherches dans les problèmes d'optimisation à grande échelle. Il fournit des solutions réalisables à des problèmes complexes et de haute dimension dans des délais raisonnables.
 
 ## Implémentation Algorithmique
 
@@ -49,7 +49,7 @@ L'équipe de recherche a d'abord proposé un cadre d'algorithme DE paramétré (
 
 Architecture MetaDE
 
-MetaDE adopte une structure à deux couches, comprenant **un évolueur** (couche supérieure) et **plusieurs exécuteurs** (couche inférieure). L'évolueur est un DE (ou potentiellement un autre algorithme évolutionnaire), responsable de l'optimisation des paramètres du PDE. Chaque individu ![spacer.gif](./metade-6.gif) x_i dans la population de l'évolueur correspond à une configuration de paramètres unique θ_i. Ces configurations sont transmises au PDE pour instancier différentes variantes de DE, chacune gérée par un exécuteur qui s'exécute indépendamment sur la tâche d'optimisation donnée. Chaque exécuteur renvoie sa meilleure valeur de fitness y^* à l'évolueur, qui attribue cette valeur de fitness y_i à l'individu correspondant x_i.
+MetaDE adopte une structure à deux couches, comprenant **un évolueur** (couche supérieure) et **plusieurs exécuteurs** (couche inférieure). L'évolueur est un DE (ou potentiellement un autre algorithme évolutionnaire), responsable de l'optimisation des paramètres du PDE. Chaque individu  x_i dans la population de l'évolueur correspond à une configuration de paramètres unique θ_i. Ces configurations sont transmises au PDE pour instancier différentes variantes de DE, chacune gérée par un exécuteur qui s'exécute indépendamment sur la tâche d'optimisation donnée. Chaque exécuteur renvoie sa meilleure valeur de fitness y^* à l'évolueur, qui attribue cette valeur de fitness y_i à l'individu correspondant x_i.
 
 ## Performance Expérimentale
 
@@ -118,9 +118,9 @@ L'équipe de recherche a également enregistré **le nombre d'évaluations de fo
 
 ![图片2.png](./metade-11.png)
 
-           FEs Atteintes par Chaque Algorithme en 60 Secondes
+FEs Atteintes par Chaque Algorithme en 60 Secondes
 
-Sous le même framework EvoX avec calcul parallèle accéléré par GPU, MetaDE a atteint en moyenne des FEs de l'ordre de **10****⁹**, tandis que les variantes DE traditionnelles n'atteignaient qu'environ ***10^6*** FEs. Cet avantage découle de l'approche paramétrée de MetaDE, qui effectue des **évaluations parallèles à grande échelle** des individus, permettant une **utilisation plus efficace des ressources matérielles.** Par conséquent, l'algorithme explore plus de solutions dans la même fenêtre de temps, améliorant à la fois la qualité et la stabilité de la solution.
+Sous le même framework EvoX avec calcul parallèle accéléré par GPU, MetaDE a atteint en moyenne des FEs de l'ordre de **10⁹**, tandis que les variantes DE traditionnelles n'atteignaient qu'environ ***10^6*** FEs. Cet avantage découle de l'approche paramétrée de MetaDE, qui effectue des **évaluations parallèles à grande échelle** des individus, permettant une **utilisation plus efficace des ressources matérielles.** Par conséquent, l'algorithme explore plus de solutions dans la même fenêtre de temps, améliorant à la fois la qualité et la stabilité de la solution.
 
 ## Apprentissage par Renforcement Évolutionnaire : Tâches de Contrôle de Robots
 
@@ -148,24 +148,8 @@ Comme le montre la figure, MetaDE démontre de solides performances dans les tâ
 
 MetaDE est une approche de méta-évolution innovante qui excelle non seulement dans la résolution de tâches d'optimisation, mais qui règle et affine également de manière autonome ses propres stratégies. En capitalisant sur les forces de l'Évolution Différentielle, MetaDE présente un fort potentiel dans la configuration adaptative des paramètres et l'évolution des stratégies. Les résultats expérimentaux montrent une robustesse supérieure dans une gamme de tests de benchmark, et son applicabilité dans le monde réel est soulignée par le succès dans les tâches de contrôle de robots via l'apprentissage par renforcement évolutionnaire. Un défi central consiste à maintenir un équilibre optimal entre généralisation et spécialisation — s'assurer que l'algorithme peut s'adapter à diverses tâches tout en optimisant efficacement pour des problèmes spécifiques. Cette recherche offre de nouvelles perspectives pour les algorithmes évolutionnaires auto-adaptatifs et pourrait stimuler de nouvelles avancées dans la méta-évolution pour les systèmes complexes.
 
-## Code Open Source et Communauté
+## Ressources
 
-**Article** : [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub** : [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Projet Amont (EvoX)** : [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Groupe QQ** : 297969717
-
-![image.png](./metade-3.png "image.png")
-
-  Groupe QQ | Evolving Machine Intelligence
-
-MetaDE est construit sur le framework EvoX. Si vous êtes intéressé par EvoX, veuillez consulter l'article sur EvoX 1.0 pour plus de détails.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
-
-![image.png](./metade-14.png "image.png")
+- [Article scientifique](https://arxiv.org/abs/2502.10470)
+- [GitHub](https://github.com/EMI-Group/metade)
+- [EvoX](https://github.com/EMI-Group/evox)

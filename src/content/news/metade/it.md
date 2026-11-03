@@ -12,8 +12,6 @@ Nel campo del calcolo evolutivo, le prestazioni degli algoritmi sono spesso sign
 
 Il concetto di "meta-evoluzione" è stato introdotto già nel secolo scorso, con l'obiettivo di utilizzare gli stessi algoritmi evolutivi per ottimizzare le configurazioni degli iperparametri di questi algoritmi. Sebbene la meta-evoluzione esista da molti anni, la sua applicazione pratica è stata limitata dalle elevate esigenze computazionali. I recenti progressi nel calcolo GPU hanno alleviato questi vincoli, fornendo un forte supporto hardware per gli algoritmi evolutivi. In particolare, l'introduzione del framework EvoX distribuito è accelerato da GPU ha notevolmente facilitato lo sviluppo di algoritmi evolutivi basati su GPU. In questo contesto, il nostro team di ricerca ha proposto un nuovo approccio meta-evolutivo che sfrutta DE per evolvere i propri iperparametri e strategie, offrendo così una nuova via per risolvere il problema di lunga data della regolazione dei parametri negli algoritmi evolutivi.
 
-
-
 ## Cos'e la meta-evoluzione?
 
 L'idea centrale della meta-evoluzione può essere riassunta come "**usare un algoritmo evolutivo per evolvere se stesso**" (Evolving an Evolutionary Algorithm by an Evolutionary Algorithm). Questo concetto trascende i metodi tradizionali di calcolo evolutivo, non solo impiegando algoritmi evolutivi per cercare soluzioni ottimali a un problema, ma anche adattando gli iperparametri e le strategie degli algoritmi attraverso i propri processi evolutivi.
@@ -28,14 +26,14 @@ Attraverso questo approccio meta-evolutivo ricorsivo, MetaDE raggiunge diversi b
 
 **1. Regolazione automatica dei parametri**
 
-     Il laborioso processo di regolazione manuale viene eliminato. L'algoritmo stesso impara come regolare i propri iperparametri, riducendo l'intervento umano e migliorando l'efficienza.
+Il laborioso processo di regolazione manuale viene eliminato. L'algoritmo stesso impara come regolare i propri iperparametri, riducendo l'intervento umano e migliorando l'efficienza.
 
 **2. Adattabilita migliorata**
 
-     MetaDE risponde dinamicamente alle caratteristiche e condizioni mutevoli del problema, modificando le strategie in tempo reale per migliorare le prestazioni. Questo aumenta significativamente la flessibilità dell'algoritmo.
+MetaDE risponde dinamicamente alle caratteristiche e condizioni mutevoli del problema, modificando le strategie in tempo reale per migliorare le prestazioni. Questo aumenta significativamente la flessibilità dell'algoritmo.
 
 **3. Ricerca efficiente**
-      Sfruttando il parallelismo intrinseco, MetaDE accelera notevolmente le ricerche nei problemi di ottimizzazione su larga scala. Fornisce soluzioni fattibili a problemi complessi ad alta dimensionalità entro tempi ragionevoli.
+Sfruttando il parallelismo intrinseco, MetaDE accelera notevolmente le ricerche nei problemi di ottimizzazione su larga scala. Fornisce soluzioni fattibili a problemi complessi ad alta dimensionalità entro tempi ragionevoli.
 
 ## Implementazione algoritmica
 
@@ -51,9 +49,7 @@ Il team di ricerca ha prima proposto un framework algoritmico DE parametrizzato 
 
 Architettura MetaDE
 
-MetaDE adotta una struttura a due livelli, composta da **un evolver** (livello superiore) e **molteplici esecutori** (livello inferiore). L'evolver e un DE (o potenzialmente un altro algoritmo evolutivo), responsabile dell'ottimizzazione dei parametri di PDE. Ogni individuo![spacer.gif](./metade-6.gif) x_i nella popolazione dell'evolver corrisponde a una configurazione di parametri unica θ_i. Queste configurazioni vengono passate al PDE per istanziare diverse varianti di DE, ciascuna gestita da un esecutore che opera indipendentemente sul compito di ottimizzazione dato. Ogni esecutore restituisce il suo miglior valore di fitness y^* all'evolver, che assegna quel valore di fitness y_i all'individuo corrispondente x_i.
-
-
+MetaDE adotta una struttura a due livelli, composta da **un evolver** (livello superiore) e **molteplici esecutori** (livello inferiore). L'evolver e un DE (o potenzialmente un altro algoritmo evolutivo), responsabile dell'ottimizzazione dei parametri di PDE. Ogni individuo x_i nella popolazione dell'evolver corrisponde a una configurazione di parametri unica θ_i. Queste configurazioni vengono passate al PDE per istanziare diverse varianti di DE, ciascuna gestita da un esecutore che opera indipendentemente sul compito di ottimizzazione dato. Ogni esecutore restituisce il suo miglior valore di fitness y^* all'evolver, che assegna quel valore di fitness y_i all'individuo corrispondente x_i.
 
 ## Prestazioni sperimentali
 
@@ -70,8 +66,6 @@ Per valutare in modo completo l'efficacia di MetaDE, il team di ricerca ha esegu
 
 ### Compiti di controllo robotico
  Applicazione di MetaDE a compiti di controllo robotico in un ambiente della piattaforma Brax per validarne l'utilità pratica.
-
-
 
 ## Benchmark CEC2022: confronto con le principali varianti di DE
 
@@ -94,8 +88,6 @@ Risultati di ottimizzazione CEC2022 a 10D
 Risultati di ottimizzazione CEC2022 a 20D
 
 MetaDE raggiunge generalmente una convergenza più rapida e stabile nella maggior parte delle funzioni di test. Il suo DE parametrizzato (PDE) accoppiato con l'ottimizzazione del livello superiore consente un adattamento dinamico a diversi spazi problematici, migliorando la robustezza complessiva e le prestazioni di ricerca.
-
-
 
 ## Confronto con i quattro migliori algoritmi CEC2022 (con FE identiche)
 
@@ -120,19 +112,15 @@ Confronto degli algoritmi della competizione CEC2022 a 20D (stesse FE)
 
 MetaDE dimostra costantemente prestazioni elevate, specialmente su problemi complessi che richiedono una convergenza robusta. Grazie al suo **meccanismo auto-adattivo**, MetaDE regola efficacemente la sua strategia per diversi paesaggi di ricerca, migliorando così l'efficienza di ricerca e la capacità di ottimizzazione globale. Questi risultati indicano che MetaDE non solo supera le principali varianti di DE, ma mostra anche una forte competitività rispetto agli algoritmi di punta delle competizioni.
 
-
-
 ## Efficienza computazionale: FE entro un tempo fisso (60 secondi)
 
 Il team di ricerca ha inoltre registrato **il numero di valutazioni della funzione (FE) completate dai diversi algoritmi nello stesso tempo di esecuzione fisso (60 secondi)**.
 
 ![图片2.png](./metade-11.png)
 
-           FE raggiunte da ciascun algoritmo in 60 secondi
+FE raggiunte da ciascun algoritmo in 60 secondi
 
-Con lo stesso framework EvoX e il calcolo parallelo accelerato da GPU, MetaDE ha raggiunto in media FE di livello **10****⁹**, mentre le varianti tradizionali di DE hanno raggiunto solo circa ***10^6*** FE. Questo vantaggio deriva dall'approccio parametrizzato di MetaDE, che conduce **valutazioni parallele su larga scala** degli individui, consentendo un **utilizzo più efficiente delle risorse hardware.** Di conseguenza, l'algoritmo esplora più soluzioni nella stessa finestra temporale, migliorando sia la qualità delle soluzioni che la stabilità.
-
-
+Con lo stesso framework EvoX e il calcolo parallelo accelerato da GPU, MetaDE ha raggiunto in media FE di livello **10⁹**, mentre le varianti tradizionali di DE hanno raggiunto solo circa ***10^6*** FE. Questo vantaggio deriva dall'approccio parametrizzato di MetaDE, che conduce **valutazioni parallele su larga scala** degli individui, consentendo un **utilizzo più efficiente delle risorse hardware.** Di conseguenza, l'algoritmo esplora più soluzioni nella stessa finestra temporale, migliorando sia la qualità delle soluzioni che la stabilità.
 
 ## Reinforcement Learning evolutivo: compiti di controllo robotico
 
@@ -156,32 +144,12 @@ Curve di convergenza per tre ambienti Brax
 
 Come mostrato nella figura, MetaDE dimostra prestazioni elevate nei compiti di controllo robotico basati su Brax, raggiungendo i migliori risultati nel compito Swimmer e risultati quasi ottimali in Hopper e Reacher. Il suo principale vantaggio risiede nell'alta qualità della popolazione iniziale, che consente una rapida convergenza nelle fasi iniziali e produce soluzioni di alta qualità. Questi risultati suggeriscono che MetaDE può **ottimizzare efficientemente le policy delle reti neurali**, rendendolo **adatto ai compiti di controllo robotico con simulazioni fisiche complesse** e **offrendo un ampio potenziale per applicazioni pratiche**.
 
-
-
 ## Conclusioni e direzioni future
 
 MetaDE e un approccio meta-evolutivo innovativo che non solo eccelle nella risoluzione di compiti di ottimizzazione, ma regola e perfeziona autonomamente le proprie strategie. Capitalizzando i punti di forza di Differential Evolution, MetaDE mostra un forte potenziale nella configurazione adattiva dei parametri e nell'evoluzione delle strategie. I risultati sperimentali mostrano una robustezza superiore in una serie di test benchmark, e la sua applicabilità nel mondo reale e sottolineata dal successo nei compiti di controllo robotico tramite il reinforcement learning evolutivo. Una sfida centrale riguarda il mantenimento di un equilibrio ottimale tra generalizzazione e specializzazione -- assicurando che l'algoritmo possa adattarsi a compiti diversificati ottimizzando al contempo efficacemente per problemi specifici. Questa ricerca offre nuove prospettive per gli algoritmi evolutivi auto-adattivi e potrebbe stimolare ulteriori progressi nella meta-evoluzione per sistemi complessi.
 
+## Risorse
 
-
-## Codice open source e comunità
-
-**Paper**: [https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**: [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**Progetto upstream (EvoX)**: [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**Gruppo QQ**: 297969717
-
-![image.png](./metade-3.png "image.png")
-
-  Gruppo QQ | Evolving Machine Intelligence
-
-MetaDE è costruito sul framework EvoX. Se sei interessato a EvoX, consulta l'articolo su EvoX 1.0 per maggiori dettagli.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
-
-![image.png](./metade-14.png "image.png")
+- [Articolo scientifico](https://arxiv.org/abs/2502.10470)
+- [GitHub](https://github.com/EMI-Group/metade)
+- [EvoX](https://github.com/EMI-Group/evox)

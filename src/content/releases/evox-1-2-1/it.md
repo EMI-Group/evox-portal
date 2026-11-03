@@ -6,12 +6,10 @@ summary: "Miglioramenti di stabilità, nuove funzioni benchmark (Ellipsoid, Grie
 
 Questo è un rilascio minore focalizzato sul miglioramento della stabilità e sulla correzione di bug, con alcuni miglioramenti alla qualità d'uso.
 
-**Nuove funzionalità**
-
+## Nuove funzionalità
 Nuove funzioni benchmark: aggiunte funzioni numeriche mono-obiettivo: `Ellipsoid` e `Griewank`.
 
-**Correzioni di bug**
-
+## Correzioni di bug
 * Corretto un problema in cui `StdWorkflow` non funzionava con algoritmi che ereditano da altri algoritmi.
 
 * Corretto un bug nella funzione `latin_hypercube_sampling_standard`.
@@ -20,34 +18,18 @@ Nuove funzioni benchmark: aggiunte funzioni numeriche mono-obiettivo: `Ellipsoid
 
 * Corretto un problema in cui `PSO` non utilizzava correttamente il dispositivo predefinito in alcuni casi.
 
-**Refactoring e manutenzione**
-
+## Refactoring e manutenzione
 * Riesportate le utility di uso comune al livello superiore per comodità, ad esempio:
 
-* `evox.compile` al posto di `evox.core.compile`
+  * `evox.compile` al posto di `evox.core.compile`
 
-* `evox.vmap` al posto di `evox.core.vmap`.
+  * `evox.vmap` al posto di `evox.core.vmap`.
 
 * Rimosso codice deprecato o ridondante.
 
 Changelog completo: [https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1](https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1 "https://github.com/EMI-Group/evox/compare/v1.2.0...v1.2.1")
 
-**Codice open source / Risorse della comunità**
+## Risorse
 
-Paper:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-Progetto upstream (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-Gruppo QQ: 297969717
-
-![图片11.png](./evox-1-2-1-1.png)
-
-Gruppo QQ | Evolving Machine Intelligence
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentazione](https://evox.readthedocs.io/en/latest/)

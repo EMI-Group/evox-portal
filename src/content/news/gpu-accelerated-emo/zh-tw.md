@@ -12,7 +12,7 @@ Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, and Ran Cheng, IEEE 資深會員
 
 為了解決這一限制，EvoX 團隊提出透過張量化（tensorization）方法在 GPU 上平行化 EMO 演算法。利用這種方法，他們成功設計並實作了多種 GPU 加速的 EMO 演算法。此外，團隊還開發了 **「MoRobtrol」**，這是一個基於 Brax 物理引擎構建的 **多目標機器人控制基準測試套件**，旨在系統性地評估 GPU 加速 EMO 演算法的效能。
 
-基於這些研究進展，EvoX 團隊發布了 **EvoMO**，這是一個高效能 GPU 加速 EMO 演算法函式庫。相應的原始碼已在 GitHub 上公開：[https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
+基於這些研究進展，EvoX 團隊發布了 **EvoMO**，這是一個高效能 GPU 加速 EMO 演算法函式庫。相應的原始碼已在 GitHub 上公開：[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
 ## 張量化方法論
 
@@ -105,24 +105,8 @@ EMO 演算法運算的張量化對於提升計算效率至關重要，可分為�
 ## 結論與未來工作
 本研究提出了一種張量化表示方法，以解決傳統基於 CPU 的 EMO 演算法在計算效率和可擴展性方面的限制。該方法已應用於多種代表性演算法，包括 NSGA-III、MOEA/D 和 HypE，在 GPU 上實現了顯著的效能提升，同時保持了解的品質。為了驗證其實際應用性，團隊還開發了 MoRobtrol，這是一個多目標機器人控制基準測試套件，將物理模擬環境中的機器人控制任務重新表述為多目標最佳化問題。結果證明了張量化演算法在具身智慧（embodied intelligence）等計算密集型場景中的潛力。儘管張量化方法已大幅提升了演算法效率，但仍有進一步增強的空間。未來的方向包括改進核心運算子（如非支配排序）、設計適用於多 GPU 系統的新型張量化運算，以及整合大規模資料和深度學習技術，以進一步提升在大規模最佳化問題上的效能。
 
-## 開源程式碼 / 社群資源
+## 相關資源
 
-論文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上游專案 (EvoX)：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 群：297969717
-
-![](./emo-12.png)
-
-EvoMO 建立在 EvoX 框架之上。如果您有興趣深入了解 EvoX，歡迎查看我們微信公眾號上發布的關於 EvoX 1.0 的官方文章以獲取更多詳情。
-
-![1744939468669.png](./evox-1-1-1-1.png)
+- [研究論文](https://arxiv.org/abs/2503.20286)
+- [GitHub](https://github.com/EMI-Group/evomo)
+- [EvoX](https://github.com/EMI-Group/evox)

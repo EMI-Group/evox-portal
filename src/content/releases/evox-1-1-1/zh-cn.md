@@ -4,10 +4,9 @@ pubDate: 2025-03-16
 summary: "修复了 torch.compile 图捕获、use_state 图中断以及 BatchedTensor 泄漏等问题。"
 ---
 
-**变更内容**
+## 变更内容
 
-**本次小版本发布主要包含错误修复和改进：**
-
+本次小版本发布主要包含错误修复和改进.
 - 修复了 `torch.compile` 无法正确捕获 `workflow.step` 的问题。
 
 - 修复了 `use_state` 导致图中断（graph break）的问题。
@@ -28,16 +27,7 @@ summary: "修复了 torch.compile 图捕获、use_state 图中断以及 BatchedT
 
 - 各种小的修复和改进。
 
-**开源代码与社区**
+## 相关资源
 
-**论文**：[https://arxiv.org/abs/2502.10470](https://arxiv.org/abs/2502.10470 "https://arxiv.org/abs/2502.10470")
-
-**GitHub**：[https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade")
-
-**上游项目 (EvoX)**：[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-**QQ 群**：297969717
-
-![image.png](./evox-1-1-1-1.png)
-
-  QQ 群 | 演化机器智能
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文档](https://evox.readthedocs.io/en/latest/)

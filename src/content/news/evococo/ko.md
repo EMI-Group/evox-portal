@@ -98,18 +98,8 @@ EvoCoCo가 주목받을 만한 또 다른 점은 코드 변환을 바라보는 �
 
 프로그래밍 언어는 알고리즘을 표현하는 한 가지 방식이고 하드웨어는 계산을 수행하는 한 가지 수단일 뿐입니다. 언어와 하드웨어를 가로질러 이전되어야 할 것은 코드의 형식이 아니라 계산 이면의 구조입니다.
 
-## 오픈소스와 커뮤니티
+## 관련 자료
 
-논문: [https://arxiv.org/abs/2609.02387](https://arxiv.org/abs/2609.02387)
-
-GitHub: [https://github.com/EMI-Group/evococo](https://github.com/EMI-Group/evococo)
-
-상위 프로젝트(EvoX): [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
-
-QQ 그룹: 297969717
-
-![QQ 커뮤니티 QR 코드](./qq_group_qr.png)
-
-QQ 그룹 | Evolutionary Machine Intelligence
-
-[![EvoX: GPU 가속 진화 계산, PyTorch/JAX](./promo_upstream.png)](https://github.com/EMI-Group/evox)
+- [연구 논문](https://arxiv.org/abs/2609.02387)
+- [GitHub](https://github.com/EMI-Group/evococo)
+- [EvoX](https://github.com/EMI-Group/evox)

@@ -1,0 +1,12 @@
+---
+import BlogSample from "../../../components/pages/BlogSample.astro";
+import { blogSamples } from "../../../components/pages/blog-samples";
+
+export function getStaticPaths() {
+  return blogSamples.filter(entry => entry.slug !== "evococo").map(entry => ({
+    params: { sample: entry.slug }, props: { slug: entry.slug },
+  }));
+}
+const { slug } = Astro.props;
+---
+<BlogSample locale="en" slug={slug} />

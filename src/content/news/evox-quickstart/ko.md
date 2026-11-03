@@ -26,21 +26,50 @@ QQ 그룹에 가입하여 받으실 수 있습니다: 297969717
 
 터미널을 열고 깨끗한 Python 환경을 생성하세요:
 
-![代码片段1.png](./quickstart-1.png)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 선호하는 도구를 사용하여 깨끗한 Python 환경을 생성할 수도 있습니다.
 
 ## 2단계: PyTorch 및 EvoX 설치
 
-![代码片段2.png](./quickstart-2.png)
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install "evox[vis]"
+```
 
 GPU를 사용할 수 있는지 확인하세요:
 
-![代码片段3.png](./quickstart-3.png)
+```python
+import torch
+print(torch.cuda.is_available())
+```
 
 ## 3단계: 첫 번째 진화 알고리즘 실행
 
-**![代码片段4.png](./quickstart-4.png)![图片2.4.png](./quickstart-5.png)**
+```python
+from evox.algorithms import PSO
+from evox.problems.numerical import Ackley
+from evox.workflows import StdWorkflow, EvalMonitor
+import torch
+
+algorithm = PSO(
+    pop_size=50,
+    lb=-32 * torch.ones(2),
+    ub=32 * torch.ones(2),
+)
+problem = Ackley()
+monitor = EvalMonitor()
+workflow = StdWorkflow(algorithm, problem, monitor)
+
+workflow.init_step()
+for _ in range(100):
+    workflow.step()
+
+print("Best fitness:", float(monitor.get_best_fitness()))
+```
 
 이것은 무엇을 하는 것일까요? 표준 인터페이스를 통해 알고리즘(PSO), 문제(Ackley), 모니터(EvalMonitor)를 구성합니다. EvoX가 모든 병렬 처리, 가속 및 모니터링을 처리합니다!
 
@@ -48,7 +77,9 @@ GPU를 사용할 수 있는지 확인하세요:
 
 단 한 줄이면 충분합니다:
 
-![代码片段5.png](./quickstart-6.png "代码片段5.png")
+```python
+monitor.plot()
+```
 
 ![monitor_output.png](./quickstart-7.png)
 
@@ -58,7 +89,7 @@ GPU를 사용할 수 있는지 확인하세요:
 
 "단지 Ackley를 실행하는 것"으로 만족스럽지 않다면, 다음을 시도해 볼 수 있습니다:
 
-· PSO를 GA, DE, CMA-ES, NSGA-II, RVEA 등으로 교체
+- PSO를 GA, DE, CMA-ES, NSGA-II, RVEA 등으로 교체
  · Ackley를 Rastrigin, Griewank, CEC2022로 교체
  · `n_objs >= 2`로 설정하여 다목적(multi-objective) 문제로 전환
  · `MyProblem`과 `MyAlgorithm`으로 나만의 로직 구현
@@ -70,36 +101,13 @@ GPU를 사용할 수 있는지 확인하세요:
 
 ![表格-英文.png](./quickstart-8.png "表格-英文.png")
 
-
-
 ## 감사의 글
 
 이 튜토리얼은 **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng**, **Xinyao Li**가 작성했습니다. **Beichen Huang**이 튜토리얼의 정리, 편집 및 온라인 배포를 담당했습니다.
 
 EvoX 커뮤니티의 모든 구성원에게 진심으로 감사드립니다. EvoX가 계속 진화할 수 있었던 것은 우리 모두의 노력 덕분입니다.
 
-## 오픈 소스 코드 / 커뮤니티 리소스
+## 관련 자료
 
-논문:
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub:
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-업스트림 프로젝트 (EvoX):
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 그룹: 297969717
-
-![图片11.png](./evox-1-1-0-1.png)
-
-QQ 그룹 | Evolving Machine Intelligence
-
-EvoMO는 EvoX 프레임워크를 기반으로 구축되었습니다. EvoX에 대해 더 알고 싶으시다면, WeChat 공식 계정에 게시된 EvoX 1.0 공식 기사를 확인하여 자세한 내용을 알아보세요.
-
-![image.png](./metade-1.png)
-
- ([https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ](https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ "https://mp.weixin.qq.com/s/uT6qSqiWiqevPRRTAVIusQ"))
+- [GitHub](https://github.com/EMI-Group/evox)
+- [문서](https://evox.readthedocs.io/en/latest/)

@@ -12,7 +12,7 @@ Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, 和 Ran Cheng, IEEE 高级会员
 
 为了解决这一局限性，EvoX 团队提出通过张量化方法在 GPU 上并行化 EMO 算法。利用这种方法，他们成功设计并实现了多种 GPU 加速的 EMO 算法。此外，团队还开发了 **"MoRobtrol"**，这是一个基于 Brax 物理引擎构建的**多目标机器人控制基准测试套件**，旨在系统地评估 GPU 加速 EMO 算法的性能。
 
-基于这些研究进展，EvoX 团队发布了 **EvoMO**，这是一个高性能 GPU 加速 EMO 算法库。相应的源代码已在 GitHub 上公开：[https://github.com/EMl-Group/evomo](https://github.com/EMl-Group/evomo "https://github.com/EMl-Group/evomo")
+基于这些研究进展，EvoX 团队发布了 **EvoMO**，这是一个高性能 GPU 加速 EMO 算法库。相应的源代码已在 GitHub 上公开：[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
 
 ## 张量化方法论
 
@@ -34,7 +34,7 @@ EMO 算法操作的张量化对于提高计算效率至关重要，可以分为�
 
 ![1744808523688.png](./emo-2.png "1744808523688.png")
 
-图 1：Pareto 支配检测的传统实现与基于张量的实现对比。
+*图 1：Pareto 支配检测的传统实现与基于张量的实现对比。*
 
 从更深层次来看，张量化非常适合 GPU 加速，因为 GPU 拥有大量的并行核心，其单指令多线程 (SIMT) 架构与张量计算天然契合，特别是在矩阵运算方面表现出色。NVIDIA 的 Tensor Cores 等专用硬件进一步提高了张量操作的吞吐量。通常，具有高并行性、包含独立计算任务且条件分支最少的算法更适合张量化。对于像 MOEA/D 这样涉及顺序依赖的算法，其固有结构对直接张量化构成了挑战。然而，通过结构重构和关键计算的解耦，仍然可以实现有效的并行加速。
 
@@ -46,19 +46,19 @@ EMO 算法操作的张量化对于提高计算效率至关重要，可以分为�
 
 ![c49f81629ea49fd3e8fe2f9427ce1891.png](./emo-3.png "c49f81629ea49fd3e8fe2f9427ce1891.png")
 
-图 2：MOEA/D 伪代码
+*图 2：MOEA/D 伪代码*
 
 为了解决传统 MOEA/D 中的顺序依赖问题，团队在环境选择的内部循环中引入了张量化表示方法。通过解耦交叉变异、适应度评估、理想点更新和邻域更新，这些组件被视为独立的操作。这使得所有个体的并行处理成为可能，从而构建了张量化的 MOEA/D 算法，称为 TensorMOEA/D。在该算法中，环境选择分为两个主要阶段：比较与种群更新，以及精英解选择。这两个阶段主要通过两次应用 `vmap` 操作来实现张量化。详细过程如图 3 所示。
 
 ![24f60f0c0a55d4815b28e85bf10bc355.png](./emo-4.png)![4.PNG](./evox-1-1-2-1.png "4.PNG")
 
-图 3：TensorMOEA/D 算法中环境选择的概述。**左**：算法伪代码。**右**：模块 (1) 和模块 (2) 的张量数据流。右图的上半部分显示了模块 (1) 和 (2) 的整体张量数据流，而下半部分展示了批量计算张量数据流，其中模块 (1) 在左侧，模块 (2) 在右侧。
+*图 3：TensorMOEA/D 算法中环境选择的概述。**左**：算法伪代码。**右**：模块 (1) 和模块 (2) 的张量数据流。右图的上半部分显示了模块 (1) 和 (2) 的整体张量数据流，而下半部分展示了批量计算张量数据流，其中模块 (1) 在左侧，模块 (2) 在右侧。*
 
 为了更全面地理解张量化在 EMO 算法中的价值，可以从三个角度进行总结。首先，张量化实现了从数学公式到高效代码的直接转换，缩小了算法设计与实现之间的差距。例如，图 4 展示了张量化非支配排序过程如何直接从伪代码转换为 Python 代码。其次，张量化通过将种群级操作统一为单一的张量表示，显著简化了代码结构。这减少了对循环和条件语句的依赖，从而提高了代码的可读性和可维护性。第三，张量化增强了算法的可复现性。其结构化表示有助于进行对比测试和结果的一致复现。
 
 ![1744807171462.png](./emo-5.png "1744807171462.png")
 
-图 4：张量化非支配排序从伪代码（左）到 Python 代码（右）的无缝转换。
+*图 4：张量化非支配排序从伪代码（左）到 Python 代码（右）的无缝转换。*
 
 ## 性能展示
 
@@ -68,7 +68,7 @@ EMO 算法操作的张量化对于提高计算效率至关重要，可以分为�
 
 **![36383417f51840724b46fc3a25d15253.png](./emo-6.png)**
 
-图 5：NSGA-III、MOEA/D 和 HypE 及其张量化版本在 CPU 和 GPU 平台上针对不同种群大小和问题维度的加速性能对比。
+*图 5：NSGA-III、MOEA/D 和 HypE 及其张量化版本在 CPU 和 GPU 平台上针对不同种群大小和问题维度的加速性能对比。*
 
 实验结果表明，与非张量化的 CPU 版本相比，TensorNSGA-III、TensorMOEA/D 和 TensorHypE 在 GPU 上实现了显著更高的执行速度。随着种群大小和问题维度的增加，观察到的最大加速比高达 **1113 倍**。张量化算法在处理大规模计算任务时表现出色的可扩展性和稳定性——其运行时间仅略有增加，同时保持了一贯的高性能。这些发现凸显了张量化在多目标优化 GPU 加速方面的巨大优势。
 
@@ -90,39 +90,23 @@ EMO 算法操作的张量化对于提高计算效率至关重要，可以分为�
 
 ![3da7407b1ee4385f9d28267cf384d971.png](./emo-9.png)
 
-图 6：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoHalfcheetah (390D)、MoHopper (243D) 和 MoWalker2d (390D)。*注*：所有指标的值越高表示性能越好。
+*图 6：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoHalfcheetah (390D)、MoHopper (243D) 和 MoWalker2d (390D)。*注*：所有指标的值越高表示性能越好。*
 
 ![7ddbafa50c86ebe34795ab541836b20f.png](./emo-10.png)
 
-图 7：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoPusher (503D)、MoHumanoid (4209D) 和 MoHumanoid-s (4209D)。*注*：所有指标的值越高表示性能越好。
+*图 7：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoPusher (503D)、MoHumanoid (4209D) 和 MoHumanoid-s (4209D)。*注*：所有指标的值越高表示性能越好。*
 
 ![7931f527c89a8c0a748209ad96fb9af8.png](./emo-11.png)
 
-图 8：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoSwimmer (178D)、MoIDP (161D) 和 MoReacher (226D)。*注*：所有指标的值越高表示性能越好。
+*图 8：TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在不同问题上的性能对比（HV、EU 和最终结果可视化）：MoSwimmer (178D)、MoIDP (161D) 和 MoReacher (226D)。*注*：所有指标的值越高表示性能越好。*
 
 实验对比了 TensorNSGA-III、TensorMOEA/D、TensorHypE、TensorRVEA 和随机搜索 (RS) 在 MoRobtrol 基准测试中的性能。结果显示，TensorRVEA 取得了最佳的整体性能，获得了最高的 HV 值，并在多个环境中展示了良好的解多样性。TensorMOEA/D 在大规模任务中表现出很强的适应性，特别是在解的偏好一致性方面表现出色。TensorNSGA-III 和 TensorHypE 表现相似，在多个任务上具有竞争力。总体而言，基于分解的张量化算法在解决大规模和复杂问题方面表现出卓越的优势。
 
 ## 结论与未来工作
 本研究提出了一种张量化表示方法，以解决传统基于 CPU 的 EMO 算法在计算效率和可扩展性方面的局限性。该方法已应用于包括 NSGA-III、MOEA/D 和 HypE 在内的几种代表性算法，在 GPU 上实现了显著的性能提升，同时保持了解的质量。为了验证其实际适用性，团队还开发了 MoRobtrol，这是一个多目标机器人控制基准测试套件，将物理仿真环境中的机器人控制任务重新表述为多目标优化问题。结果证明了张量化算法在具身智能等计算密集型场景中的潜力。尽管张量化方法已大幅提高了算法效率，但仍有进一步提升的空间。未来的方向包括改进非支配排序等核心算子，设计适用于多 GPU 系统的新型张量化操作，以及整合大规模数据和深度学习技术以进一步提高在大规模优化问题上的性能。
 
-## 开源代码 / 社区资源
+## 相关资源
 
-论文：
-
-[https://arxiv.org/abs/2503.20286](https://arxiv.org/abs/2503.20286 "https://arxiv.org/abs/2503.20286")
-
-GitHub：
-
-[https://github.com/EMI-Group/evomo](https://github.com/EMI-Group/evomo "https://github.com/EMI-Group/evomo")
-
-上游项目 (EvoX)：
-
-[https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox "https://github.com/EMI-Group/evox")
-
-QQ 群：297969717
-
-![](./emo-12.png)
-
-EvoMO 基于 EvoX 框架构建。如果您有兴趣了解更多关于 EvoX 的信息，欢迎查看我们在微信公众号上发布的关于 EvoX 1.0 的官方文章以获取更多详情。
-
-![1744939468669.png](./evox-1-1-1-1.png)
+- [研究论文](https://arxiv.org/abs/2503.20286)
+- [GitHub](https://github.com/EMI-Group/evomo)
+- [EvoX](https://github.com/EMI-Group/evox)

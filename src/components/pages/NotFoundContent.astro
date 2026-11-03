@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { type Locale, defaultLocale, loadTranslations, t, getLocalizedUrl } from "../../i18n/utils";
+interface Props { locale?: Locale }
+const { locale = defaultLocale } = Astro.props;
+const tr = await loadTranslations(locale);
+---
+<Layout title={`${t(tr, "error.title")} | EvoX`} locale={locale} noSEO localePath="/404">
+  <section class="not-found">
+    <p class="error-code">404</p>
+    <h1>{t(tr, "error.title")}</h1>
+    <p class="error-description">{t(tr, "error.description")}</p>
+    <a href={getLocalizedUrl("/", locale)}>{t(tr, "error.home")} →</a>
+  </section>
+</Layout>
+<style>
+  .not-found { min-height: 65svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 72px 24px; }
+  .error-code { color: var(--site-accent); font-size: clamp(72px, 12vw, 128px); font-weight: 500; line-height: 1; margin: 0 0 24px; }
+  h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 500; margin: 0 0 16px; }
+  .error-description { color: var(--site-muted); max-width: 520px; line-height: 1.8; margin: 0; }
+  a { display: inline-block; margin-top: 32px; color: var(--site-link); text-underline-offset: 5px; }
+</style>

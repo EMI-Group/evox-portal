@@ -11,3 +11,8 @@ summary: "DEアルゴリズムの修正やドキュメントの改善など、�
 - ドキュメントに関する様々な修正を行いました。
 
 **完全な変更ログ**: [v1.2.1...v1.2.2](https://github.com/EMI-Group/evox/compare/v1.2.1...v1.2.2)
+
+## 関連資料
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [ドキュメント](https://evox.readthedocs.io/en/latest/)

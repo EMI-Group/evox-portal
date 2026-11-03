@@ -9,3 +9,8 @@ summary: "EvoX v1.4.0 est une version de maintenance axée sur les corrections d
 Si vous vous demandiez ce qui nous a occupés ces 10 derniers mois : nous avons développé [**`EvoX Genesis`**](https://github.com/EMI-Group/genesis), un système d'agents IA capable de naviguer, de comprendre, de modifier et de construire de manière fiable des bases de code massives (100k+ LOC). Genesis alimente activement le prochain chapitre d'EvoX et nous permet d'accélérer le développement à une vitesse et une échelle sans précédent. Vous pourrez bientôt suivre les premiers grands fruits de ce workflow via notre branche `etl-refactor` — restez à l'écoute ! 🚀
 
 **Journal des modifications complet** : [https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0](https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0)
+
+## Ressources
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [Documentation](https://evox.readthedocs.io/en/latest/)

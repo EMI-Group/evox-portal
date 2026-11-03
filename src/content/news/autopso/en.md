@@ -110,24 +110,8 @@ As large-scale GPU-based candidate evaluation gradually becomes the norm in rese
 
 AutoPSO × EvoX: empowering evolutionary computation to transition from the manual era to the automatic era.
 
-## Open Source Code / Community Resources
+## Resources
 
-**Paper:**
-
-https://arxiv.org/abs/2608.07539
-
-**GitHub:**
-
-https://github.com/EMI-Group/autopso
-
-**Upstream Project (EvoX):**
-
-https://github.com/EMI-Group/evox
-
-**QQ Group:**
-
-297969717
-
-![](./autopso-6.png)
-
-*QR code for the EvoX QQ community group.*
+- [Research paper](https://arxiv.org/abs/2608.07539)
+- [GitHub](https://github.com/EMI-Group/autopso)
+- [EvoX](https://github.com/EMI-Group/evox)

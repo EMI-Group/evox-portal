@@ -9,3 +9,8 @@ summary: "EvoX v1.4.0 是一个维护性发布版本，专注于框架整体的�
 如果你想知道过去 10 个月我们在忙什么：我们一直在构建 [**`EvoX Genesis`**](https://github.com/EMI-Group/genesis)，一个能够可靠地浏览、理解、修改并构建大规模代码库（100k+ LOC）的 AI 智能体系统。Genesis 正在为 EvoX 的下一个篇章注入动力，使我们能够以前所未有的速度和规模加速开发。这一工作流的第一批重要成果即将通过我们的 `etl-refactor` 分支落地 — 敬请期待！🚀
 
 **完整变更日志**：[https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0](https://github.com/EMI-Group/evox/compare/v1.3.0...v1.4.0)
+
+## 相关资源
+
+- [GitHub](https://github.com/EMI-Group/evox)
+- [文档](https://evox.readthedocs.io/en/latest/)
