@@ -2,6 +2,7 @@
   "theme.toggle": "Alternar tema de cores",
   "site.title": "EvoX - A infraestrutura para sistemas de IA evolutiva",
   "meta.description": "O EvoX é uma infraestrutura de código aberto para sistemas de IA evolutiva, que permite à inteligência adaptar-se, criar e evoluir nos mundos digital e físico, em hardware heterogéneo.",
+  "nav.home": "Início",
   "nav.github": "GitHub",
   "nav.docs.runtime": "Visão geral do Runtime",
   "nav.tutorials": "Tutoriais",

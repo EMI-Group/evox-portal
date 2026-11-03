@@ -2,6 +2,7 @@
   "theme.toggle": "Toggle color theme",
   "site.title": "EvoX - The Infrastructure for Evolutionary AI Systems",
   "meta.description": "EvoX is open-source infrastructure for evolutionary AI systems, enabling intelligence to adapt, create, and evolve across digital and physical worlds on heterogeneous hardware.",
+  "nav.home": "Home",
   "nav.github": "GitHub",
   "nav.docs.runtime": "Runtime Overview",
   "nav.tutorials": "Tutorials",

@@ -2,6 +2,7 @@
   "theme.toggle": "切换颜色主题",
   "site.title": "EvoX - 面向演化式 AI 系统的基础设施",
   "meta.description": "EvoX 是面向演化式 AI 系统的开源基础设施，让智能在异构硬件上跨越数字与物理世界，持续适应、创造与演化。",
+  "nav.home": "首页",
   "nav.github": "GitHub",
   "nav.docs.runtime": "Runtime 概览",
   "nav.tutorials": "教程",
