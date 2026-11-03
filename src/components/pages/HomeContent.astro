@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import HomeIntro from "../HomeIntro.astro";
 import EvolutionDiagram from "../EvolutionDiagram.astro";
 import ParadigmArt from "../ParadigmArt.astro";
 import ParallelDiagram from "../ParallelDiagram.astro";
@@ -118,7 +117,6 @@ const chapters = [
 
 <Layout title={t(tr, "site.title")} fullBleed locale={locale}>
   <div class="evox-home" id="top">
-    <HomeIntro scrollLabel={t(tr, "hero.scroll")} />
     <section class="hero chapter" id="home" data-chapter-id="top" aria-labelledby="hero-title">
       <div class="container hero-content">
         <div class="hero-heading">
