@@ -29,7 +29,7 @@ const headline = titleParts?.[2] || article.data.title;
 const headlineLines = locale === "zh-cn" ? headline.split(slug === "codex-for-evox" ? /(?<=、)/ : /(?<=，)/) : [headline];
 ---
 
-<Layout title={article.data.title} description={article.data.summary} locale={locale} localePath={preview ? blogSamplePath(slug) : originalPath} noSEO={preview}>
+<Layout title={article.data.title} description={article.data.summary} articlePublishedTime={article.data.pubDate.toISOString()} locale={locale} localePath={preview ? blogSamplePath(slug) : originalPath} noSEO={preview}>
   <div class="blog-sample" id="article-top" data-sample={slug} data-paper={Boolean(paperBanner)}>
     {preview && <><div class="sample-bar">
       <span><i aria-hidden="true"></i>{t(tr, "sample.label")}</span>

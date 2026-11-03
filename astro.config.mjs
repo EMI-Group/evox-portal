@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import icon from "astro-icon";
+import sitemap from "@astrojs/sitemap";
 
 import vercel from "@astrojs/vercel";
 
@@ -31,7 +32,14 @@ export default defineConfig({
     },
   },
 
-  integrations: [icon()],
+  integrations: [icon(), sitemap({
+    // Preview and error pages remain crawlable so their noindex can be read.
+    filter: (page) => !/(?:^|\/)(?:preview|404)(?:\/|$)/.test(new URL(page).pathname),
+    serialize: (item) => ({
+      ...item,
+      url: new URL(item.url).pathname === "/" ? item.url : item.url.replace(/\/$/, ""),
+    }),
+  })],
   adapter: vercel({
     webAnalytics: {
       enabled: isVercelDeployment,

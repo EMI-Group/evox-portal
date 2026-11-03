@@ -13,6 +13,7 @@ interface Props {
   locale?: Locale;
   noSEO?: boolean;
   localePath?: string;
+  articlePublishedTime?: string;
 }
 
 const {
@@ -24,10 +25,11 @@ const {
   locale = defaultLocale,
   noSEO = false,
   localePath,
+  articlePublishedTime,
 } = Astro.props;
 
 const htmlLang =
-  locale === "es-419" ? "es"
+  locale === "es-419" ? "es-419"
   : locale === "pt-br" ? "pt-BR"
   : locale === "zh-cn" ? "zh-CN"
   : locale === "zh-tw" ? "zh-TW"
@@ -83,6 +85,33 @@ const localizedUrls = locales.map((loc) => ({
   locale: loc,
   url: new URL(getLocalizedUrl(pathname, loc), site),
 }));
+const organizationId = new URL("/#organization", site).href;
+const isHome = pathname === getLocalizedUrl("/", locale);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization", "@id": organizationId,
+      name: "EvoX Team", url: site.href,
+      logo: new URL("/favicon.png", site).href,
+      sameAs: ["https://github.com/EMI-Group"],
+    },
+    ...(isHome ? [{
+      "@type": "WebSite", "@id": `${canonicalUrl.href}#website`,
+      name: "EvoX", url: canonicalUrl.href, description: metaDescription,
+      inLanguage: htmlLang, publisher: { "@id": organizationId },
+    }] : []),
+    ...(articlePublishedTime ? [{
+      "@type": "BlogPosting", "@id": `${canonicalUrl.href}#article`,
+      headline: pageTitle, description: metaDescription,
+      datePublished: articlePublishedTime, inLanguage: htmlLang,
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl.href },
+      publisher: { "@id": organizationId },
+    }] : []),
+  ],
+};
+// Escaping angle brackets prevents content from terminating the script element.
+const structuredJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -103,6 +132,8 @@ const localizedUrls = locales.map((loc) => ({
     <meta name="description" content={metaDescription} />
     {noSEO && <meta name="robots" content="noindex" />}
     {!noSEO && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    {!noSEO && <script type="application/ld+json" is:inline set:html={structuredJson} />}
     {!noSEO && localizedUrls.map(({ locale: loc, url }) => (
       <link rel="alternate" hreflang={hreflangCodes[loc]} href={url} />
     ))}
@@ -110,10 +141,15 @@ const localizedUrls = locales.map((loc) => ({
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={metaDescription} />
     {!noSEO && <meta property="og:url" content={canonicalUrl} />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={articlePublishedTime && !noSEO ? "article" : "website"} />
+    <meta property="og:site_name" content="EvoX" />
+    {!noSEO && articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
     <meta property="og:locale" content={ogLocale[locale]} />
     <meta property="og:image" content={new URL("/images/og-image.png", site)} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={new URL("/images/og-image.png", site)} />
     <title>{pageTitle}</title>
   </head>
 

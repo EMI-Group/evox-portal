@@ -89,3 +89,6 @@ dual-tree routing pattern has not changed since.
 
 ## Locale coverage audit (2026-11-03)
 All 62 route identities, including Blog previews and 404, exist in all 13 locales. Blog preview routes use the shared locale model; their language switcher preserves the preview route. Published news, releases, docs, and tutorials contain 47 complete translation groups.
+
+## Search metadata
+`robots.txt.ts` is a single site-wide static endpoint advertising `/sitemap-index.xml`; it has no locale mirror. The sitemap integration includes canonical production routes and excludes all preview and 404 paths. Those excluded routes remain crawlable to expose their existing noindex tags. Layout emits Organization metadata on indexable pages, WebSite metadata on each locale homepage, and BlogPosting plus article Open Graph metadata when passed `articlePublishedTime`. Article dates come from content frontmatter; author names and modification dates are not inferred. Column/listing descriptions reuse their localized visible introductions.

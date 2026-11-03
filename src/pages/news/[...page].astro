@@ -23,7 +23,7 @@ const { page } = Astro.props as { page: PaginatedPage<NewsArticle> };
 const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? t(tr, "news.pageTitlePage", { page: String(page.currentPage) }) : "" });
 ---
 
-<Layout title={title} locale={locale}>
+<Layout title={title} description={t(tr, "news.heroDesc")} locale={locale}>
   <div
     class="relative text-white py-20 md:py-28 overflow-hidden"
     style="background: rgb(22, 27, 48);"

@@ -11,7 +11,7 @@ const tutorials = getLocalizedArticles(allTutorials, locale);
 const sorted = tutorials.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title={t(tr, "tutorials.pageTitle")} locale={locale}>
+<Layout title={t(tr, "tutorials.pageTitle")} description={t(tr, "tutorials.heroDesc")} locale={locale}>
   <div class="relative text-white py-20 md:py-28 overflow-hidden" style="background: rgb(22, 27, 48);">
     <div class="absolute inset-0 page-hero-backdrop" style="background: radial-gradient(ellipse at center, rgba(60, 70, 110, 0.4) 0%, transparent 60%);"></div>
     <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 text-center">
