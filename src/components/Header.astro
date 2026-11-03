@@ -60,6 +60,9 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
       <a href="https://github.com/EMI-Group" target="_blank" rel="noopener noreferrer" class="nav-link github-link">
         <Icon name="simple-icons:github" class="nav-icon" />{t(tr, "nav.github")}
       </a>
+      <a href="https://chengran.tech/" target="_blank" rel="noopener noreferrer" class="contact-button">
+        {t(tr, "nav.contact")}
+      </a>
       <details class="nav-dropdown language-dropdown" data-desktop-dropdown>
         <summary class="nav-link" aria-expanded="false">
           <Icon name="heroicons:language-20-solid" class="nav-icon" />
@@ -104,6 +107,9 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
                 ))}
               </div>
             </details>
+            <a href="https://chengran.tech/" target="_blank" rel="noopener noreferrer" class="contact-button mobile-contact">
+              {t(tr, "nav.contact")}
+            </a>
           </nav>
         </div>
       </details>
@@ -119,6 +125,10 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .desktop-nav { display: flex; align-items: center; justify-content: flex-end; gap: 26px; margin-left: auto; }
   .nav-link { display: flex; align-items: center; gap: 6px; padding: 20px 0; font-size: 14px; font-weight: 500; color: var(--site-muted); white-space: nowrap; transition: color .2s; cursor: pointer;  line-height: 24px; }
   .nav-link:hover, details[open] > .nav-link { color: var(--site-ink); }
+  .contact-button { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 6px 16px; border: 1px solid var(--site-line); border-radius: 999px; color: var(--site-ink); font-size: 14px; font-weight: 500; line-height: 24px; white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
+  .contact-button:hover { color: var(--site-accent); border-color: var(--site-accent); background: var(--site-alt); }
+  .contact-button:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 4px; }
+  .mobile-contact { display: flex; width: 100%; min-height: 44px; margin-top: 20px; }
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
   .nav-icon { width: 15px; height: 15px; }
@@ -151,6 +161,9 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .mobile-submenu a:hover { color: var(--site-ink); }
   .mobile-languages { grid-template-columns: 1fr 1fr; }
   .mobile-languages a[aria-current="true"] { color: var(--site-accent); }
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .desktop-nav { gap: 20px; }
+  }
   @media (max-width: 1023px) {
     .header-inner { width: calc(100% - 40px); gap: 28px; }
     .desktop-nav { display: none;  gap: 26px; }
