@@ -1,0 +1,24 @@
+{
+  "checkedOn": "2026-11-03",
+  "article": "evox-compiler",
+  "locales": 13,
+  "release": "v0.1.0",
+  "releaseUrl": "https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0",
+  "publishedAtUTC": "2026-10-29T07:27:54Z",
+  "publishedAtShanghai": "2026-10-29T15:27:54+08:00",
+  "pubDate": "2026-10-29",
+  "dateBasis": "First public GitHub Release published_at, not tag commit date or latest patch release.",
+  "contentSource": "https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md",
+  "scope": "Standalone product launch news, separate from Genesis evidence case. Version-pinned installation and documentation.",
+  "validation": {
+    "build": "910 pages built",
+    "pagesAndDatesChecked": 13,
+    "newsListingsChecked": 13,
+    "desktopMobileOverflow": "None",
+    "screenshots": [
+      "dist/qa-compiler/1440.png",
+      "dist/qa-compiler/390.png"
+    ]
+  },
+  "deployment": "Not deployed"
+}

@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-03",
+  "publicationDate": "2026-11-03",
+  "status": "Prepared in local working tree; not deployed",
+  "articles": [
+    "genesis-compiler-continuation",
+    "genesis-mesa",
+    "genesis-evoxc"
+  ],
+  "locales": [
+    "en",
+    "zh-cn",
+    "zh-tw",
+    "ja",
+    "ko",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "es-419",
+    "ru",
+    "pt",
+    "pt-br"
+  ],
+  "sources": [
+    "https://genesis.evox.group/evidence/evidence.json",
+    "https://genesis.evox.group/evidence/compiler-continuation/",
+    "https://genesis.evox.group/evidence/mesa/",
+    "https://genesis.evox.group/evidence/evoxc/",
+    "https://github.com/EMI-Group/genesis-demo-jcc",
+    "https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md",
+    "https://github.com/EMI-Group/evoxc/blob/main/README.md"
+  ],
+  "editorialDecisions": [
+    "Retrospective publication date is distinct from evidence-record dates.",
+    "Continuation uses the reported retained LLVM SingleSource set, not the entire LLVM test suite. Default-branch README evaluation is a different snapshot.",
+    "MESA covers thirteen modules, not the full stellar evolution system. Evidence median speedups and README end-to-end proxy result are separately attributed.",
+    "Evoxc uses the October 28 evidence snapshot. Current README counts have advanced. Tracked text lines include tests, benchmark data and documentation.",
+    "All three preserve source-reported status. No benchmark was independently rerun for this editorial task."
+  ],
+  "validation": {
+    "markdownFiles": 39,
+    "build": "Installed Astro CLI build passed: 897 pages. pnpm wrapper stopped before build while attempting an automatic dependency install.",
+    "routesChecked": 39,
+    "localizedNewsListingsChecked": 13,
+    "metricParity": "Passed for all 39 articles",
+    "layout": "Six Chinese desktop-light/mobile-dark screenshots captured; MESA desktop and evoxc mobile visually inspected. No horizontal overflow in six checks.",
+    "titleCheck": "Passed after accounting for existing article template title splitting and colon removal."
+  }
+}

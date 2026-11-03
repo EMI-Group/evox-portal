@@ -1,0 +1,29 @@
+---
+title: "EvoX Compiler v0.1.0: grafos tensoriales explícitos y varios backends"
+pubDate: 2026-10-29
+summary: "La primera versión de EvoX Compiler aporta a Python grafos inspeccionables, transformaciones componibles y rutas NumPy, IREE, XLA y TVM."
+---
+
+**EvoX Compiler (evoxc) v0.1.0 se publicó el 29 de octubre de 2026.** Es un compilador y runtime Python para grafos tensoriales, dirigido a desarrolladores que desean inspeccionar, transformar, guardar y ejecutar el propio programa. Tiene licencia Apache-2.0 y requiere Python 3.11 o posterior.
+
+## Un programa que puede inspeccionar
+
+evoxc expone cada etapa mediante `trace → lower → compile → load → run`. El frontend representa los cálculos en EvoXIR y exporta StableHLO para compiladores externos, que optimizan y generan código. Los grafos y artefactos intermedios siguen disponibles para inspección y almacenamiento.
+
+Las transformaciones incluyen `vmap`, `grad`, `jvp` y `vjp`. Para búsqueda de arquitecturas neuronales, programación genética y síntesis de algoritmos, `batch_functions` combina candidatos con especificaciones de entrada/salida coincidentes en un grafo. La caché explícita de compilación ayuda en tareas que generan programas estáticos repetidamente.
+
+## Cuatro rutas de ejecución
+
+NumPy es la única dependencia obligatoria y ofrece el intérprete CPU predeterminado. Los adaptadores opcionales conectan el grafo con IREE, XLA mediante un plugin PJRT aportado por el usuario y TVM. Backend y dispositivo se eligen explícitamente; la cobertura depende del adaptador. La versión documenta Vulkan en Mesa lavapipe y ROCm en TVM solo durante la compilación.
+
+El README informa de **7,511 pruebas superadas, 77 omitidas, 4 fallos esperados y 0 fallos** en las suites del núcleo y de `evoxc_hf`, con IREE, TVM y torch instalados. Son resultados del proyecto para esa configuración. El repositorio atribuye a EvoX Genesis la producción del código, las pruebas y la documentación.
+
+## Primeros pasos
+
+Instale esta versión con el comando siguiente. Los adaptadores opcionales se documentan en el README de la versión; la integración HuggingFace se distribuye por separado como `evoxc-hf`.
+
+```bash
+pip install evoxc==0.1.0
+```
+
+[GitHub Release v0.1.0](https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0) · [README v0.1.0](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md) · [GitHub](https://github.com/EMI-Group/evoxc)
