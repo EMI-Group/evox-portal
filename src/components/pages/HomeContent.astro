@@ -224,9 +224,11 @@ const chapters = [
         <ParallelDiagram locale={locale} />
         <ul class="platforms reveal">
           {platforms.map((platform) => (
-            <li>
-              <Icon name={platform.icon} class="platform-icon" aria-hidden="true" />
-              <span class="sr-only">{t(tr, `computing.platform.${platform.key}`)}</span>
+            <li data-platform={platform.key}>
+              <span class="platform-mark" aria-hidden="true">
+                <Icon name={platform.icon} class="platform-icon" />
+              </span>
+              <span class="platform-name">{t(tr, `computing.platform.${platform.key}`)}</span>
               <span class="sr-only">{t(tr, platform.status)}</span>
             </li>
           ))}
@@ -339,9 +341,13 @@ const chapters = [
   .card-copy > p { color: var(--site-muted); font-size: 16px; line-height: 1.7; margin: 15px 0 26px; flex: 1; }
   .project-link { font-size: 14px; border-top: 1px solid var(--site-line); padding-top: 21px; display: flex; justify-content: space-between; gap: 12px;  line-height: 1.6; }
   .project-link > span { color: var(--site-accent); }
-  .platforms { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
-  .platforms li { padding: 28px 8px; text-align: center; }
-  .platform-icon { width: 29px; height: 29px; margin: 0 auto; color: var(--site-ink); }
+  .platforms { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; }
+  .platforms li { min-width: 0; padding: 24px 4px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  .platform-mark { height: 64px; width: 100%; display: flex; align-items: center; justify-content: center; }
+  .platform-icon { width: 48px; height: 48px; flex-shrink: 0; color: var(--site-ink); }
+  .platforms [data-platform="amd"] .platform-icon,
+  .platforms [data-platform="vulkan"] .platform-icon { width: 88px; height: 88px; }
+  .platform-name { color: var(--site-muted); font-size: 14px; font-weight: 500; line-height: 1.5; letter-spacing: .015em; text-wrap: balance; overflow-wrap: anywhere; }
   .explore-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 80px; align-items: stretch; }
   .explore-feature { display: flex; flex-direction: column; gap: 52px; min-width: 0; }
   .resource-list { min-width: 0; }
