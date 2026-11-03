@@ -1,0 +1,13 @@
+---
+title: "Notas de la versión EvoX v1.0.1"
+pubDate: 2025-01-20
+summary: "Correcciones del instalador de Windows, de la selección de vectores base en DE y de SHADE con poblaciones grandes."
+---
+
+**EvoX v1.0.1** es una versión de mantenimiento con tres correcciones:
+
+- Actualizado el script de instalación de Windows `win-install.bat` ([#204](https://github.com/EMI-Group/evox/pull/204)).
+- Corregida la selección de vectores base en DE, ODE y JaDE para que sea realmente aleatoria ([#205](https://github.com/EMI-Group/evox/pull/205)).
+- Corregido un acceso fuera de los límites del array en SHADE cuando `pop_size > 100` ([#206](https://github.com/EMI-Group/evox/pull/206)).
+
+**Publicación**: [v1.0.1](https://github.com/EMI-Group/evox/releases/tag/v1.0.1) · **Historial completo**: [v1.0.0...v1.0.1](https://github.com/EMI-Group/evox/compare/v1.0.0...v1.0.1)

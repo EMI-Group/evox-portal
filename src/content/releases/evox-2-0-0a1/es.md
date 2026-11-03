@@ -1,0 +1,54 @@
+---
+title: "EvoX v2.0.0a1: reescrito sobre EvoX Compiler"
+pubDate: 2026-10-30
+summary: "Una alfa experimental con una nueva API funcional y un compilador de grafos de tensores explícitos. La serie estable 1.x sigue recomendada para producción."
+---
+
+**EvoX v2.0.0a1** es la primera alfa de una reescritura completa basada en [EvoX Compiler (`evoxc`)](https://github.com/EMI-Group/evoxc).
+
+> **Versión preliminar experimental:** la nueva API es incompatible con 1.x y no permite una actualización directa. Para producción sigue recomendada la serie estable 1.x. Probad la alfa en un entorno separado.
+
+## Un proceso de compilación explícito
+
+EvoX Compiler permite inspeccionar y transformar los grafos de tensores, separando trazado, transformaciones, bajada de nivel, compilación y ejecución. Ofrece transformaciones combinables como `vectorize`/`vmap`, `grad`, `jvp`, `vjp` y `batch_functions`, con backends NumPy, IREE, TVM y XLA/PJRT. StableHLO proporciona una frontera común de bajada de nivel para los backends compilados.
+
+EvoX 2.0 ya no depende de PyTorch ni de JAX. NumPy es la única dependencia de ejecución obligatoria de EvoX Compiler; los backends compilados son opcionales.
+
+## Nueva API funcional
+
+- Los algoritmos utilizan `init(config, key)` y `step(config, state, evaluate)`.
+- Los problemas utilizan `evaluate(config, state, candidates)`.
+- Las configuraciones son inmutables, el estado tensorial es explícito y la aleatoriedad utiliza claves PRNG reproducibles.
+- `StdWorkflow` traza un paso evolutivo, lo compila con el backend elegido y ejecuta el bucle de optimización.
+
+## Incluido en esta alfa
+
+- **32 clases de algoritmos** y **15 operadores evolutivos**.
+- Pruebas numéricas básicas, DTLZ, CEC2022 y neuroevolución virtual.
+- Métricas GD, IGD e hipervolumen; visualización con Plotly y trazas `.exv`.
+- Optimización de hiperparámetros en el host y descubrimiento de extensiones mediante `evox_ext`.
+
+La publicación original informa de **552 pruebas superadas en el backend NumPy**. Esto no demuestra una cobertura equivalente de los backends compilados o las GPU.
+
+## Instalación
+
+Requiere **Python 3.11+**. En un entorno separado, elegid una opción de instalación:
+
+```bash
+pip install --pre "evox==2.0.0a1"
+```
+
+Para añadir soporte opcional de compiladores:
+
+```bash
+pip install --pre "evox[iree]==2.0.0a1"
+pip install --pre "evox[compilers]==2.0.0a1"
+```
+
+## Limitaciones actuales
+
+Los flujos distribuidos, Brax/MuJoCo, la integración de redes neuronales PyTorch y los kernels Triton aún no se han portado. Los backends compilados y la ejecución GPU siguen siendo experimentales; algunos operadores y patrones de control no son compatibles con todos los backends. La monitorización, la visualización, las métricas y HPO se ejecutan actualmente fuera de los grafos compilados. Las API pueden cambiar durante las versiones preliminares.
+
+Podéis enviar informes de errores, resultados de pruebas de rendimiento y comentarios sobre la API en [GitHub Issues](https://github.com/EMI-Group/evox/issues).
+
+**Publicación**: [v2.0.0a1](https://github.com/EMI-Group/evox/releases/tag/v2.0.0a1)
