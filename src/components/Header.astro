@@ -14,7 +14,7 @@ const { locale = defaultLocale, localePath } = Astro.props;
 const tr = await loadTranslations(locale);
 const currentPath = (localePath ?? Astro.url.pathname).replace(/\/$/, "") || "/";
 const navLinks: { label: string; href?: string; dropdown?: { label: string; desc: string; href: string }[] }[] = [
-  { label: t(tr, "nav.home"), href: `${getLocalizedUrl("/", locale)}#home` },
+  { label: t(tr, "nav.home"), href: getLocalizedUrl("/", locale) },
   { label: t(tr, "nav.ecosystem"), href: getLocalizedUrl("/libs", locale) },
   {
     label: t(tr, "nav.blog"),
