@@ -14,10 +14,10 @@ VirtualES passa `(center, seeds, sigma)` ao fluxo de trabalho. VirtualProblem av
 
 ## Escopo da implementação
 
-As perturbações gaussianas completas substituem a anterior formulação LoRA de baixo posto. VirtualProblem oferece suporte a redes `nn.Sequential` com camadas lineares e funções de ativação especificadas. Não é um avaliador universal de arquiteturas arbitrárias; a interface documentada não oferece suporte a o wrapper HPO. O percurso virtual também ignora a avaliação distribuída e as transformações das soluções.
+As perturbações gaussianas completas substituem a anterior formulação LoRA de baixo posto. VirtualProblem oferece suporte a redes `nn.Sequential` com camadas lineares e funções de ativação especificadas. Não é um avaliador universal de arquiteturas arbitrárias; a interface documentada não oferece suporte ao wrapper HPO. O percurso virtual também ignora a avaliação distribuída e as transformações das soluções.
 
 ## Por que importa a representação
 
-O contributo é uma ligação diferente entre busca por populações e execução. Permite investigar compromissos de memória sem armazenar previamente todos os pesos candidatos. O pico de memória e o taxa de processamento dependem da arquitetura, população, lotes e hardware; estas alterações não demonstram uma aceleração universal. Para o EvoX, representam um passo concreto para uma exploração evolutiva computacionalmente mais flexível.
+A contribuição é uma ligação diferente entre busca por populações e execução. Permite investigar compromissos de memória sem armazenar previamente todos os pesos candidatos. O pico de memória e a taxa de processamento dependem da arquitetura, população, lotes e hardware; estas alterações não demonstram uma aceleração universal. Para o EvoX, representam um passo concreto para uma exploração evolutiva computacionalmente mais flexível.
 
 [1](https://github.com/EMI-Group/evox/commit/d8c0964fd71c3d6171ae83bd0c1483f742b310a6) · [2](https://github.com/EMI-Group/evox/commit/c6bde1e47df9617cd934053c7f6c69e40068e921) · [3](https://github.com/EMI-Group/evox/commit/f4f2fd1067f184c000b7f1a94ff0ee6395c6e697) · [4](https://github.com/EMI-Group/evox/commit/97971618740d35845740320e7db973d3a3f671ef)

@@ -20,6 +20,6 @@ Em uma alteração de API, serviço, cliente e biblioteca podem ser revistos nos
 
 ## Uma base para sistemas maiores
 
-O marco diz respeito à organização do trabalho tanto quanto à sua geração. Genesis coordena contribuições entre repositórios, preservando os pontos onde o usuário os inspeciona e aceita. Estende a evolução de software do EvoX a sistemas com partes mantidas independentemente, cujas versões aceitas são a base do desenvolvimento seguinte.
+O marco diz respeito à organização do trabalho tanto quanto à sua geração. Genesis coordena contribuições entre repositórios, preservando os pontos onde o usuário as inspeciona e aceita. Estende a evolução de software do EvoX a sistemas com partes mantidas independentemente, cujas versões aceitas são a base do desenvolvimento seguinte.
 
 [1](https://github.com/EMI-Group/genesis/releases/tag/v0.11.4) · [2](https://github.com/EMI-Group/genesis/releases/tag/v0.13.0) · [3](https://github.com/EMI-Group/genesis/releases/tag/v0.13.4)

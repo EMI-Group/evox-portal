@@ -1,0 +1,272 @@
+{
+  "reviewDate": "2026-11-07",
+  "scope": "Eight newly authored historical news features, each independently merged with 13 locales. Dates follow milestone dates as requested, not the editorial preparation date. Release dates use the upstream release/changelog calendar date.",
+  "counts": {
+    "articles": 8,
+    "localesPerArticle": 13,
+    "localizedFiles": 104
+  },
+  "checks": [
+    "Matching source dates, links, inline code and section counts across all locales",
+    "No English-body fallback or Chinese evolution terminology violations",
+    "Production build and full generated-page SEO audit after each article",
+    "Portuguese-Brazil agreement and regional vocabulary proofread"
+  ],
+  "articles": [
+    {
+      "slug": "evox-virtual-populations",
+      "date": "2026-07-08",
+      "mergeCommit": {
+        "oid": "c5b3ebe9723c28855f8964a303a31b3983a15492"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/15",
+      "dateBasis": "Implementation and integration on July 7–8, 2026; archive date is the last day covered.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/evox/commit/d8c0964fd71c3d6171ae83bd0c1483f742b310a6",
+        "https://github.com/EMI-Group/evox/commit/c6bde1e47df9617cd934053c7f6c69e40068e921",
+        "https://github.com/EMI-Group/evox/commit/f4f2fd1067f184c000b7f1a94ff0ee6395c6e697",
+        "https://github.com/EMI-Group/evox/commit/97971618740d35845740320e7db973d3a3f671ef"
+      ],
+      "englishBodyWords": 303,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/evox-virtual-populations"
+    },
+    {
+      "slug": "genesis-context-continuity",
+      "date": "2026-10-29",
+      "mergeCommit": {
+        "oid": "de7e5a6c3f19e5005843e8f6137df153fe68d1d9"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/16",
+      "dateBasis": "Genesis v0.13.10 changelog date; covers v0.13.8–v0.13.10 only.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.8",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.9",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.10"
+      ],
+      "englishBodyWords": 297,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/genesis-context-continuity"
+    },
+    {
+      "slug": "genesis-multi-repository",
+      "date": "2026-09-26",
+      "mergeCommit": {
+        "oid": "6b04f43db48ea9a6d158a4f31857ccf470d5dbc3"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/17",
+      "dateBasis": "Genesis v0.13.4 changelog date; persistent companion-repository worktrees.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.11.4",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.0",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.4"
+      ],
+      "englishBodyWords": 296,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/genesis-multi-repository"
+    },
+    {
+      "slug": "genesis-persistent-server",
+      "date": "2026-11-02",
+      "mergeCommit": {
+        "oid": "14af284ef9fb6511905891106d46c86a395cef4d"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/18",
+      "dateBasis": "Genesis v0.14.0 changelog date; covers server work from v0.13.11 through v0.14.0.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.11",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.14.0"
+      ],
+      "englishBodyWords": 305,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/genesis-persistent-server"
+    },
+    {
+      "slug": "genesis-development-history",
+      "date": "2026-09-26",
+      "mergeCommit": {
+        "oid": "55d13bfeed85f199e273220072c7608d75d88d29"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/19",
+      "dateBasis": "Genesis v0.13.4 changelog date; covers commit-history changes through that release.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.2",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.3",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.4"
+      ],
+      "englishBodyWords": 286,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/genesis-development-history"
+    },
+    {
+      "slug": "evox-algorithm-correctness",
+      "date": "2026-10-30",
+      "mergeCommit": {
+        "oid": "3f86fb1ca1a223f8149e6f7848e56abb4870b4e8"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/20",
+      "dateBasis": "EvoX v1.4.1 official release date.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/evox/releases/tag/v1.4.1",
+        "https://github.com/EMI-Group/evox/commit/c92918a906eaf075cf885461acc031ee0eb223b3",
+        "https://github.com/EMI-Group/evox/commit/5e68f81f8b6d6ea0638a44a337efe2183ba47716",
+        "https://github.com/EMI-Group/evox/commit/bcde7d2a171c34722c37a3559813136f702640cb"
+      ],
+      "englishBodyWords": 305,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/evox-algorithm-correctness"
+    },
+    {
+      "slug": "evox-distributed-evaluation",
+      "date": "2025-04-23",
+      "mergeCommit": {
+        "oid": "890dd75800159db4c73d8812738561fa3f827e3a"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/21",
+      "dateBasis": "April 23, 2025 documentation commit; includes the earlier March implementation.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/evox/commit/388f0be9eb0ce01610a7ce60eb8050578a996dfb",
+        "https://github.com/EMI-Group/evox/commit/510452f70e30adeedebdaa4fc6e348a75d649643"
+      ],
+      "englishBodyWords": 305,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/evox-distributed-evaluation"
+    },
+    {
+      "slug": "genesis-tools-and-skills",
+      "date": "2026-09-26",
+      "mergeCommit": {
+        "oid": "db2824c434c8a5130ef180ebfc7a9e0b77b4b895"
+      },
+      "state": "MERGED",
+      "url": "https://github.com/EMI-Group/evox-portal/pull/22",
+      "dateBasis": "Genesis v0.13.4 changelog date; covers custom tools in v0.13.1 and worktree skill changes in v0.13.4.",
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.1",
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.13.4"
+      ],
+      "englishBodyWords": 317,
+      "chineseUrl": "https://www.evox.group/zh-cn/news/genesis-tools-and-skills"
+    }
+  ]
+}
