@@ -1,13 +1,13 @@
 {
   "scope": "Local production build; no deployment or search-engine indexing verification",
   "counts": {
-    "articles": 30,
+    "articles": 31,
     "byCollection": {
-      "news": 18,
+      "news": 19,
       "releases": 12
     },
     "locales": 13,
-    "pages": 390,
+    "pages": 403,
     "updatedPages": 221,
     "articleImages": 156,
     "previewPagesExcluded": 65
@@ -1012,6 +1012,105 @@
           "route": "/pt-br/news/evox-quickstart",
           "titleCharacters": 59,
           "descriptionCharacters": 135
+        }
+      ]
+    },
+    {
+      "article": "news/evox-virtual-populations",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evox-virtual-populations",
+          "titleCharacters": 75,
+          "descriptionCharacters": 160
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evox-virtual-populations",
+          "titleCharacters": 30,
+          "descriptionCharacters": 63
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evox-virtual-populations",
+          "titleCharacters": 30,
+          "descriptionCharacters": 63
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evox-virtual-populations",
+          "titleCharacters": 37,
+          "descriptionCharacters": 81
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evox-virtual-populations",
+          "titleCharacters": 42,
+          "descriptionCharacters": 83
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evox-virtual-populations",
+          "titleCharacters": 65,
+          "descriptionCharacters": 144
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evox-virtual-populations",
+          "titleCharacters": 76,
+          "descriptionCharacters": 134
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evox-virtual-populations",
+          "titleCharacters": 63,
+          "descriptionCharacters": 151
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evox-virtual-populations",
+          "titleCharacters": 65,
+          "descriptionCharacters": 151
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evox-virtual-populations",
+          "titleCharacters": 65,
+          "descriptionCharacters": 151
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evox-virtual-populations",
+          "titleCharacters": 56,
+          "descriptionCharacters": 141
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evox-virtual-populations",
+          "titleCharacters": 63,
+          "descriptionCharacters": 140
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evox-virtual-populations",
+          "titleCharacters": 65,
+          "descriptionCharacters": 140
         }
       ]
     },
