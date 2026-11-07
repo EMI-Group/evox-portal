@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "status": "Local working tree; not committed, pushed or deployed.",
+  "status": "Editorial audit snapshot; publication status is tracked in Git history and the associated pull request.",
   "positioning": "Infrastructure for evolutionary AI systems: generate, execute, evaluate, select and improve across digital and physical domains.",
   "positioningSources": [
     "src/i18n/locales/en.json",

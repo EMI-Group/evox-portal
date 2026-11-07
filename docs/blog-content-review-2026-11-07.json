@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "status": "Updated in local working tree; not committed, pushed or deployed.",
+  "status": "Editorial audit snapshot; publication status is tracked in Git history and the associated pull request.",
   "scope": {
     "newsReviewedExcludingEvoRL": 16,
     "releaseNotesReviewed": 12,
