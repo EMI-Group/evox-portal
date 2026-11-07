@@ -4,7 +4,7 @@ pubDate: 2026-11-02
 summary: "Da distribuição headless em 0.13.11 à continuidade após encerrar a sessão em 0.14.0, Genesis permite implementar dashboard e agentes de forma independente."
 ---
 
-Genesis 0.14.0, publicado em 2 de novembro de 2026, detecta o estado de lingering do systemd no inicialização do servidor e propõe ativá-lo. Prossegue a distribuição headless introduzida em 0.13.11 a 30 de outubro. O ciclo de vida do ambiente de execução pode assim ser gerenciado separadamente da sessão de desktop.
+Genesis 0.14.0, publicado em 2 de novembro de 2026, detecta o estado de lingering do systemd na inicialização do servidor e propõe ativá-lo. Prossegue a distribuição headless introduzida em 0.13.11 a 30 de outubro. O ciclo de vida do ambiente de execução pode assim ser gerenciado separadamente da sessão de desktop.
 
 ## Uma distribuição servidor com controles operacionais
 
@@ -16,7 +16,7 @@ São interfaces práticas para operar um processo persistente. O endpoint de sa�
 
 Em Linux com systemd, o lingering pode ser necessário para manter serviços de usuário após encerrar a sessão. A versão 0.14.0 verifica esta condição, configurável através de GENESIS_LINGER ou --no-linger. É uma função específica da plataforma, sem promessa de comportamento idêntico em todos os sistemas.
 
-A versão anterior também melhora o inicialização remoto: wrapper POSIX shell, tratamento de caminhos com espaços e causas de erro legíveis. As correções do modo servidor e o tempo de atividade exato facilitam o diagnóstico.
+A versão anterior também melhora a inicialização remota: wrapper POSIX shell, tratamento de caminhos com espaços e causas de erro legíveis. As correções do modo servidor e o tempo de atividade exato facilitam o diagnóstico.
 
 ## A implementação faz parte do desenvolvimento
 

@@ -4,7 +4,7 @@ pubDate: 2025-04-23
 summary: "O fluxo distribuído experimental do EvoX divide a avaliação dos candidatos e reúne a aptidão, alargando a busca para além de um dispositivo."
 ---
 
-Em 23 de abril de 2025, o EvoX acrescenta um guia experimental de fluxos multi-GPU e distribuídos, após a implementação de março. A questão é a escala: se avaliar candidatos domina o custo da experimento, como repartir o trabalho sem perder o retorno global necessário à busca?
+Em 23 de abril de 2025, o EvoX acrescenta um guia experimental de fluxos multi-GPU e distribuídos, após a implementação de março. A questão é a escala: se avaliar candidatos domina o custo do experimento, como repartir o trabalho sem perder o retorno global necessário à busca?
 
 ## Distribuir a avaliação e reunir o retorno
 
@@ -14,7 +14,7 @@ StdWorkflow recebe opções de execução distribuída. A população é dividid
 
 ## A reprodutibilidade faz parte da configuração
 
-O guia destaca a definição de sementes antes de operações Torch ou NumPy e descreve o inicialização com torch.distributed ou torchrun. A implementação isola o estado do gerador aleatório durante a avaliação. A inicialização coerente mantém estados de busca compatíveis ao avaliar candidatos diferentes.
+O guia destaca a definição de sementes antes de operações Torch ou NumPy e descreve a inicialização com torch.distributed ou torchrun. A implementação isola o estado do gerador aleatório durante a avaliação. A inicialização coerente mantém estados de busca compatíveis ao avaliar candidatos diferentes.
 
 Um comando de inicialização não completa a configuração. Grupos de processos, dispositivos, comunicação e comportamento do problema exigem validação. A função é explicitamente experimental e deve ser entendida nesse contexto.
 
