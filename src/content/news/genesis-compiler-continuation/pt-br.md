@@ -1,15 +1,40 @@
 ---
-title: "Genesis continua o desenvolvimento de um compilador após trocar de modelo"
+title: "Genesis: preservar o progresso do software entre mudanças de modelo"
 pubDate: 2026-11-03
-summary: "O caso de continuação do Genesis relata 1,820/1,820 testes LLVM SingleSource selecionados aprovados após a troca de GLM 5.2 por DeepSeek V4 Flash."
+updatedDate: 2026-11-07
+summary: "Uma passagem de compilador explora como código aceito, estrutura e registros de verificação sustentam o desenvolvimento quando o modelo muda."
 ---
 
-Um projeto pode continuar avançando quando muda o modelo de base? O registro Compiler Continuation, de 7 de setembro de 2026, descreve a retomada a partir do repositório aceito do compilador, sem transferir o contexto da conversa do Agent anterior.
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
 
-O registro relata a troca de **GLM 5.2 por DeepSeek V4 Flash**, com a profundidade de recursão aumentando de **4 para 8**. A continuação passou em **1,820/1,820 casos LLVM SingleSource mantidos para avaliação**. Trata-se de um conjunto definido, não de toda a suíte LLVM.
+Os sistemas de IA evolutiva precisam de preservar progressos úteis quando mudam os participantes. A passagem de compilador do Genesis examina esta necessidade: pode um novo modelo continuar a partir do projeto aceito, usando o código, as restrições e os testes como base para trabalho adicional?
 
-O código aceito e o histórico do projeto sustentam o trabalho seguinte: assim se manifesta a continuidade no Genesis. A criação do compilador e sua continuação compartilham um repositório e não devem ser contadas como projetos independentes.
+## Partir de um compilador existente
 
-Esta retrospectiva segue o registro Evidence. Os resultados são relatados pelo projeto, sem reprodução independente; o custo e o código adicionado na continuação não foram divulgados. O README da branch padrão descreve outra avaliação, cujos números não devem ser combinados com este resultado.
+O [registro Evidence de 7 de setembro de 2026](https://genesis.evox.group/evidence/compiler-continuation/) descreve a passagem de **GLM 5.2 para DeepSeek V4 Flash** na mesma linhagem aceita. O contexto da conversa anterior não foi transferido.
 
-[Genesis Evidence](https://genesis.evox.group/evidence/compiler-continuation/) · [GitHub](https://github.com/EMI-Group/genesis-demo-jcc)
+Continuavam disponíveis código, estrutura e histórico. Trata-se da continuação de um projeto, não da construção de um segundo compilador independente.
+
+## Preservar o sistema herdado
+
+Um compilador liga análise sintática, semântica, representações intermediárias e geração de código. Uma alteração local pode afetar outros módulos: acrescentar código exige integração e testes de regressão.
+
+O repositório jcc mostra implementação Rust, representação intermediária, limites funcionais e ferramentas de teste. O README descreve outro momento do desenvolvimento e não substitui o registro da continuação.
+
+## Resultados reportados
+
+A profundidade recursiva aumenta de **4 para 8**, com **1.820/1.820 casos LLVM SingleSource retidos aprovados** após a passagem. É o conjunto de avaliação definido, não toda a suite LLVM.
+
+A profundidade descreve a decomposição de tarefas, não diretamente a qualidade. Os testes fornecem evidência comportamental; a confiabilidade geral exigiria outras tarefas e repetições.
+
+## Interpretar a continuidade
+
+A lição prática é preservar o que um sucessor pode verificar: código, interfaces, restrições, alterações aceitas e procedimentos de avaliação. A memória da conversa pode ajudar sem ser o único suporte do progresso.
+
+Comece pela referência herdada e pela lista exata de testes. Registre revisão aprovada, exclusões e comandos antes de comparar melhorias posteriores.
+
+## Desenvolvimento que acumula resultados
+
+Formação e continuação compartilham [o mesmo repositório](https://github.com/EMI-Group/genesis-demo-jcc). Não são projetos independentes nem devem acumular testes com âmbitos diferentes. Código acrescentado e custo da continuação não foram reportados.
+
+Este caso relatado pelo projeto transforma a continuidade numa questão arquitetural: o que deve preservar um projeto para que outros agentes o ampliem? No EvoX, isto liga capacidades dos modelos ao desenvolvimento cumulativo de sistemas. O conjunto de testes mantido sustenta esta passagem; uma confiabilidade mais ampla exige avaliação adicional.

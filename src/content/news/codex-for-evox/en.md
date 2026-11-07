@@ -1,16 +1,17 @@
 ---
 title: "Codex × EvoX: Algorithm Development and Reproducible Experiments"
 pubDate: 2026-08-08
-summary: "Evolutionary computation is stepping into the AI-native era. With Codex as a representative AI coding agent, EvoX turns natural-language intent into runnable evolutionary-computation workflows—covering problem modelling, algorithm migration, backpropagation-free neuroevolution, and GPU tensorization."
+updatedDate: 2026-11-07
+summary: "AI coding agents connect research intent to EvoX's executable search workflows, linking problem definition, implementation and reproducible evaluation."
 ---
 
-Evolutionary computation is stepping into the AI-native era.
+For evolutionary AI, a research idea becomes useful when it can enter a repeatable cycle of execution and evaluation. The Codex–EvoX workflow connects natural-language intent to that cycle: the coding agent helps construct the experiment, while EvoX provides the interfaces and computation through which candidate solutions are tested.
 
 [EvoX](https://github.com/EMI-Group/evox) is a distributed, GPU-accelerated framework for scalable evolutionary computation. Through its unified `Algorithm`, `Problem`, and `Workflow` interfaces, EvoX brings population search, batched evaluation, experiment execution, and hardware acceleration into one cohesive computational architecture. It supports applications ranging from single- and multi-objective optimization to neuroevolution, reinforcement-learning environments, and complex system design.
 
 Since its open-source release, EvoX has continued to evolve around a clear mission:
 
-> **To build next-generation infrastructure for evolutionary computation, purpose-built for modern hardware and large-scale computing.**
+> **To build infrastructure for evolutionary AI systems, connecting candidate generation, execution, evaluation and improvement.**
 
 ## Prologue: Natural Language Becomes a New Entry Point for EvoX
 

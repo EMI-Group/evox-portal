@@ -1,113 +1,98 @@
 ---
-title: "EvoX 快速入门：只需 10 分钟即可运行 GPU 加速的演化计算"
+title: "EvoX 入门：构建第一个演化工作流"
 pubDate: 2025-04-30
-summary: "一份新手教程，带您在 10 分钟内上手使用 EvoX 进行 GPU 加速的演化计算。"
+updatedDate: 2026-11-07
+summary: "通过完整的 EvoX 1.4.1 实验，理解问题、种群、评价与执行如何组成可复用的演化工作流。"
 ---
 
-一方面，演化计算在现实世界的研究和工程中极其强大，但难以调用。另一方面，GPU 的能力日益强大，但难以在演化计算任务中发挥其威力。
+*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
 
-我们需要一个真正现代化的解决方案：原生 GPU 支持、模块化架构、清晰的接口、开箱即用以及可定制的扩展性。这就是 EvoX —— 面向未来的演化计算引擎。
+演化工作流把目标、候选解、评价和逐步改进连接起来。本教程用一个可运行的小实验介绍这套基础，使相同的组件边界能够进一步支撑不同的问题、算法和评价预算。
 
-为了帮助用户快速上手，EvoX 团队发布了《EvoX 新手教程》。该教程共包含 8 章，涵盖了从基础知识到高级实际应用的方方面面，一步步指导您如何在 GPU 上运行演化算法。
+本文完成一个小而完整的优化实验：使用 PSO 最小化二维 Ackley 函数，确认执行设备并绘制搜索历史。示例对应 **EvoX 1.4.1 与 PyTorch**，不适用于实验性的 2.x 编译器 API。小规模任务用于理解流程，不作为 GPU 性能基准。
 
-## 完整教程资源
+## 准备独立环境
 
-中文在线教程：
-
-[EvoX 新手教程 - EvoX 文档](https://evox.readthedocs.io/zh-cn/latest/tutorial/ "https://evox.readthedocs.io/zh-cn/latest/tutorial/")
-
-中文 PDF 教程：
-
-请加入 QQ 群获取：297969717
-
-接下来，我们将带您在短短 10 分钟内完成从安装到运行的全过程。
-
-## 第一步：环境设置
-
-打开终端并创建一个干净的 Python 环境：
+使用 Python 3.10 或更新版本。创建虚拟环境，再按终端类型激活。
 
 ```bash
 python -m venv .venv
+```
+
+macOS/Linux：
+
+```bash
 source .venv/bin/activate
 ```
 
-您也可以使用您喜欢的工具来创建一个干净的 Python 环境。
+Windows PowerShell：
 
-## 第二步：安装 PyTorch 和 EvoX
-
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-pip install "evox[vis]"
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-检查 GPU 是否可用：
+## 安装匹配的软件包
+
+根据操作系统与硬件，在 [PyTorch 官方安装页面](https://pytorch.org/get-started/locally/)选择安装命令。CUDA 软件包需要受支持的驱动，安装 EvoX 本身并不保证 GPU 可用。然后安装本文固定版本：
+
+```bash
+python -m pip install "evox[vis]==1.4.1"
+```
+
+## 运行完整实验
+
+将以下内容保存为 Python 脚本。代码在 CUDA 可用时选择 GPU，否则使用 CPU，打印实际设备，并将算法状态和监控放在所选设备上。固定随机种子有助于重复实验，但跨设备或软件版本仍可能得到不同结果。
 
 ```python
 import torch
-print(torch.cuda.is_available())
-```
-
-## 第三步：运行您的第一个演化算法
-
-```python
 from evox.algorithms import PSO
 from evox.problems.numerical import Ackley
 from evox.workflows import StdWorkflow, EvalMonitor
-import torch
+
+torch.manual_seed(42)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.set_default_device(device)
 
 algorithm = PSO(
     pop_size=50,
-    lb=-32 * torch.ones(2),
-    ub=32 * torch.ones(2),
+    lb=-32 * torch.ones(2, device=device),
+    ub=32 * torch.ones(2, device=device),
+    device=device,
 )
 problem = Ackley()
-monitor = EvalMonitor()
+monitor = EvalMonitor(device=device, history_device=device)
 workflow = StdWorkflow(algorithm, problem, monitor)
 
 workflow.init_step()
 for _ in range(100):
     workflow.step()
 
-print("Best fitness:", float(monitor.get_best_fitness()))
+print("Device:", device)
+print("Best fitness:", monitor.get_best_fitness().item())
 ```
 
-这是做什么的？它通过标准接口组合了一个算法（PSO）、一个问题（Ackley）和一个监控器（EvalMonitor）。EvoX 负责所有的并行化、加速和监控！
+## 理解并可视化结果
 
-## 第四步：绘制收敛曲线
+PSO 维护候选向量，Ackley 负责评价，StdWorkflow 连接组件，EvalMonitor 记录进展。适应度越小越好，理论最优值为原点处的零。最终数值具有随机性，本示例不承诺固定分数。
 
-只需要一行代码：
+搜索结束后，在同一进程中运行以下命令。安装步骤已包含可视化依赖。图片沿用原教程，用于说明曲线形式，不是该随机种子的保证输出。
 
 ```python
 monitor.plot()
 ```
 
-![monitor_output.png](./quickstart-7.png)
+![PSO convergence](./quickstart-7.png)
 
-看到那条下降的曲线了吗？那是**您的演化算法接近目标的轨迹**，也是**它探索未知世界的路径。**
+## 有目的地扩展实验
 
-## 第五步：尝试扩展
+逐次修改维度、种群规模或随机种子。自定义问题需要为每个候选解返回目标值。多目标优化还需匹配的算法、目标形状和监控配置，不能只修改一个参数。
 
-如果“仅仅运行一个 Ackley”不能满足您，您可以：
+计时时应区分编译、预热与稳定执行，对 CUDA 测量进行同步，并使用相同评价预算。小任务可能在 CPU 上更快；先跑通基线，再研究编译优化。
 
-- 将 PSO 替换为 GA, DE, CMA-ES, NSGA-II, RVEA...
- · 将 Ackley 替换为 Rastrigin, Griewank, CEC2022
- · 通过设置 n_objs >= 2 切换到多目标问题
- · 使用 MyProblem 和 MyAlgorithm 实现您自己的逻辑
- · 挂接到 PyTorch 模型或强化学习环境（Gym, Brax, MuJoCo Playground）
+## 教程资源与致谢
 
-无论是超参数调优、架构搜索、神经演化还是控制策略优化，EvoX 都能轻松应对。
+原教程由 Boqing Xu、Xinmeng Yu、Bowen Zheng 和 Xinyao Li 编写，Beichen Huang 整理、编辑并上线。下方保留原教程的概览图。
 
-## 为什么选择 EvoX？
+![EvoX overview](./quickstart-8.png)
 
-![表格-英文.png](./quickstart-8.png "表格-英文.png")
-
-## 致谢
-
-本教程由 **Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng** 和 **Xinyao Li** 编写。**Beichen Huang** 负责教程的整理、编辑和在线发布。
-
-我们衷心感谢 EvoX 社区的每一位成员。正是我们的共同努力，让 EvoX 能够不断演化。
-
-## 相关资源
-
-- [GitHub](https://github.com/EMI-Group/evox)
-- [文档](https://evox.readthedocs.io/en/latest/)
+本示例以[版本源码](https://github.com/EMI-Group/evox/tree/v1.4.1)为依据，更多教程见[文档](https://evox.readthedocs.io/en/latest/)。复制较新资料的 API 前，请先确认其对应版本。

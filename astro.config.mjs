@@ -6,8 +6,10 @@ import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 
 import vercel from "@astrojs/vercel";
+import { getArticleUpdateDates } from "./scripts/article-update-dates.mjs";
 
 const isVercelDeployment = process.env.VERCEL === "1" || process.env.VERCEL === "true";
+const articleUpdateDates = getArticleUpdateDates();
 
 // https://astro.build/config
 export default defineConfig({
@@ -38,6 +40,7 @@ export default defineConfig({
     serialize: (item) => ({
       ...item,
       url: new URL(item.url).pathname === "/" ? item.url : item.url.replace(/\/$/, ""),
+      lastmod: articleUpdateDates.get(new URL(item.url).pathname.replace(/\/$/, "")),
     }),
   })],
   adapter: vercel({

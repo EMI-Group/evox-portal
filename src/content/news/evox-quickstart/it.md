@@ -1,113 +1,98 @@
 ---
-title: "Avvio rapido EvoX: esegui il calcolo evolutivo accelerato da GPU in soli 10 minuti"
+title: "Introduzione a EvoX: il primo workflow evolutivo"
 pubDate: 2025-04-30
-summary: "Un tutorial per principianti per iniziare con il calcolo evolutivo accelerato da GPU usando EvoX in soli 10 minuti."
+updatedDate: 2026-11-07
+summary: "Un esperimento completo con EvoX 1.4.1 per capire come problemi, popolazioni, valutazione ed esecuzione formino un workflow riutilizzabile."
 ---
 
-Da un lato, il calcolo evolutivo è estremamente potente nella ricerca e nell'ingegneria del mondo reale, ma difficile da utilizzare. Dall'altro, le capacità delle GPU sono sempre più potenti, ma è difficile sfruttarne la potenza nei compiti di calcolo evolutivo.
+*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
 
-Abbiamo bisogno di una soluzione veramente moderna: supporto nativo per GPU, architettura modulare, interfacce chiare, utilizzabilita immediata e scalabilità personalizzabile. Questo e EvoX -- un motore di calcolo evolutivo per il futuro.
+Un workflow evolutivo collega un obiettivo a candidati, valutazioni e miglioramenti successivi. Questo tutorial presenta l'infrastruttura con un piccolo esperimento eseguibile, affinché gli stessi confini tra componenti possano poi sostenere problemi, algoritmi e budget di valutazione differenti.
 
-Per aiutare gli utenti a iniziare rapidamente, il team EvoX ha rilasciato il "Tutorial per principianti di EvoX". Il tutorial è composto da 8 capitoli, che coprono tutto dalle basi all'applicazione pratica avanzata, guidandoti passo dopo passo su come eseguire algoritmi evolutivi su una GPU.
+Il tutorial minimizza Ackley in due dimensioni con PSO, verifica il dispositivo e visualizza la cronologia. È per **EvoX 1.4.1 con PyTorch**, non per l’API sperimentale 2.x. Il piccolo problema serve a capire il workflow, non a misurare le prestazioni GPU.
 
-## Risorse complete del tutorial
+## Preparare un ambiente isolato
 
-Tutorial online in cinese:
-
-[EvoX Beginners Tutorial - EvoX Document](https://evox.readthedocs.io/zh-cn/latest/tutorial/ "https://evox.readthedocs.io/zh-cn/latest/tutorial/")
-
-Tutorial PDF in cinese:
-
-Unisciti al Gruppo QQ per ottenerlo: 297969717
-
-Ora ti guideremo attraverso l'intero processo, dall'installazione all'esecuzione, in soli 10 minuti.
-
-## Passo 1: Configurazione dell'ambiente
-
-Apri il terminale e crea un ambiente Python pulito:
+Utilizzi Python 3.10 o successivo. Crei un ambiente virtuale e lo attivi con il comando adatto alla shell.
 
 ```bash
 python -m venv .venv
+```
+
+Su macOS/Linux:
+
+```bash
 source .venv/bin/activate
 ```
 
-Puoi anche usare il tuo strumento preferito per creare un ambiente Python pulito.
+Su Windows PowerShell:
 
-## Passo 2: Installa PyTorch e EvoX
-
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-pip install "evox[vis]"
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-Verifica se la GPU è disponibile:
+## Installare i pacchetti corretti
+
+Scelga il comando per sistema e hardware nell’[installatore ufficiale PyTorch](https://pytorch.org/get-started/locally/). CUDA richiede un driver supportato; installare EvoX non garantisce la disponibilità della GPU. Installi poi la versione indicata:
+
+```bash
+python -m pip install "evox[vis]==1.4.1"
+```
+
+## Eseguire un esperimento completo
+
+Salvi il codice come script Python. Se disponibile seleziona CUDA, altrimenti CPU, mostra la scelta e mantiene stato e monitoraggio sul dispositivo. Un seme fisso aiuta a ripetere l’esperimento, ma dispositivi e versioni diversi possono produrre risultati diversi.
 
 ```python
 import torch
-print(torch.cuda.is_available())
-```
-
-## Passo 3: Esegui il tuo primo algoritmo evolutivo
-
-```python
 from evox.algorithms import PSO
 from evox.problems.numerical import Ackley
 from evox.workflows import StdWorkflow, EvalMonitor
-import torch
+
+torch.manual_seed(42)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.set_default_device(device)
 
 algorithm = PSO(
     pop_size=50,
-    lb=-32 * torch.ones(2),
-    ub=32 * torch.ones(2),
+    lb=-32 * torch.ones(2, device=device),
+    ub=32 * torch.ones(2, device=device),
+    device=device,
 )
 problem = Ackley()
-monitor = EvalMonitor()
+monitor = EvalMonitor(device=device, history_device=device)
 workflow = StdWorkflow(algorithm, problem, monitor)
 
 workflow.init_step()
 for _ in range(100):
     workflow.step()
 
-print("Best fitness:", float(monitor.get_best_fitness()))
+print("Device:", device)
+print("Best fitness:", monitor.get_best_fitness().item())
 ```
 
-Cosa fa questo codice? Compone un algoritmo (PSO), un problema (Ackley) e un monitor (EvalMonitor) tramite un'interfaccia standard. EvoX si occupa di tutto il parallelismo, l'accelerazione e il monitoraggio!
+## Comprendere e visualizzare il risultato
 
-## Passo 4: Traccia la curva di convergenza
+PSO mantiene i candidati, Ackley li valuta, StdWorkflow collega i componenti ed EvalMonitor registra i progressi. Valori inferiori sono migliori; l’ottimo teorico è zero nell’origine. Non è garantito un punteggio finale fisso.
 
-Basta una sola riga:
+Esegua il comando seguente dopo la ricerca nello stesso processo. Le dipendenze di visualizzazione sono incluse. L’immagine viene dal tutorial originale e non garantisce l’output di questo seme.
 
 ```python
 monitor.plot()
 ```
 
-![monitor_output.png](./quickstart-7.png)
+![PSO convergence](./quickstart-7.png)
 
-Vedi quella curva discendente? Quella e la **traiettoria con cui il tuo algoritmo evolutivo si avvicina all'obiettivo**, e **il percorso che compie per esplorare il mondo sconosciuto.**
+## Estendere l’esperimento con criterio
 
-## Passo 5: Prova ad estendere
+Modifichi una variabile alla volta: dimensione, popolazione o seme. Un problema personalizzato deve restituire un valore per candidato. Il multiobiettivo richiede anche algoritmo, forma dei risultati e monitor compatibili.
 
-Se "eseguire solo un Ackley" non ti soddisfa, puoi:
+Per i tempi, separi compilazione e riscaldamento dall’esecuzione stabile, sincronizzi CUDA e confronti lo stesso budget di valutazioni. Piccoli compiti possono essere più veloci su CPU. Esamini la compilazione dopo aver verificato la baseline.
 
-- Sostituire PSO con GA, DE, CMA-ES, NSGA-II, RVEA...
- · Sostituire Ackley con Rastrigin, Griewank, CEC2022
- · Passare a un problema multi-obiettivo impostando n_objs >= 2
- · Implementare la tua logica personalizzata con MyProblem e MyAlgorithm
- · Collegarti a modelli PyTorch o ambienti di reinforcement learning (Gym, Brax, MuJoCo Playground)
+## Risorse e ringraziamenti
 
-Che si tratti di regolazione degli iperparametri, ricerca di architetture, neuroevoluzione o ottimizzazione di strategie di controllo, EvoX gestisce tutto con facilita.
+Il tutorial originale è stato scritto da Boqing Xu, Xinmeng Yu, Bowen Zheng e Xinyao Li, e curato e pubblicato da Beichen Huang. La figura riepilogativa è mantenuta sotto.
 
-## Perché scegliere EvoX?
+![EvoX overview](./quickstart-8.png)
 
-![表格-英文.png](./quickstart-8.png "表格-英文.png")
-
-## Ringraziamenti
-
-Questo tutorial è stato scritto da **Boqing Xu**, **Xinmeng Yu**, **Bowen Zheng** e **Xinyao Li**. **Beichen Huang** è stato responsabile della raccolta, dell'editing e della pubblicazione online del tutorial.
-
-Ringraziamo sinceramente ogni membro della comunità EvoX. Sono i nostri sforzi congiunti che hanno permesso a EvoX di continuare a evolversi.
-
-## Risorse
-
-- [GitHub](https://github.com/EMI-Group/evox)
-- [Documentazione](https://evox.readthedocs.io/en/latest/)
+Per l’esempio usi il [codice versionato](https://github.com/EMI-Group/evox/tree/v1.4.1); per approfondire, la [documentazione](https://evox.readthedocs.io/en/latest/). Verifichi la versione prima di copiare API più recenti.

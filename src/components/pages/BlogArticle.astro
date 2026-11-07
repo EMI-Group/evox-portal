@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import type { ImageMetadata } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getLocalizedNews, getLocalizedArticles, getLocalizedUrl, getDateLocale, loadTranslations, t, type Locale } from "../../i18n/utils";
 import evococoBanner from "../../content/news/evococo/title_banner.png";
@@ -27,9 +28,21 @@ const originalUrl = getLocalizedUrl(originalPath, locale);
 const titleParts = article.data.title.match(/^([^:：]+)[:：]\s*([\s\S]+)$/);
 const headline = titleParts?.[2] || article.data.title;
 const headlineLines = locale === "zh-cn" ? headline.split(slug === "codex-for-evox" ? /(?<=、)/ : /(?<=，)/) : [headline];
+// Reuse an actual article figure when available; text-only articles keep
+// the site social card without claiming that logo is an article illustration.
+const articleImages = import.meta.glob<ImageMetadata>("../../content/{news,releases}/**/*.{png,jpg,jpeg,webp}", { eager: true, import: "default" });
+const firstImage = article.body?.match(/!\[[^\]]*\]\(\.\/([^\s)]+)/)?.[1];
+const imageKey = `../../content/${kind}/${article.id.replace(/\/[^/]+$/, "")}/${firstImage}`.toLowerCase();
+const contentImage = Object.entries(articleImages).find(([key]) => key.toLowerCase() === imageKey)?.[1];
+const articleImage = paperBanner?.src ?? contentImage?.src;
+const breadcrumbs = [
+  { name: "EvoX", url: getLocalizedUrl("/", locale) },
+  { name: t(tr, `nav.blog.${kind}`), url: getLocalizedUrl(`/${kind}`, locale) },
+  { name: article.data.title, url: originalUrl },
+];
 ---
 
-<Layout title={article.data.title} description={article.data.summary} articlePublishedTime={article.data.pubDate.toISOString()} locale={locale} localePath={preview ? blogSamplePath(slug) : originalPath} noSEO={preview}>
+<Layout title={article.data.title} description={article.data.summary} articlePublishedTime={article.data.pubDate.toISOString()} articleModifiedTime={article.data.updatedDate?.toISOString()} articleImage={articleImage} breadcrumbs={breadcrumbs} locale={locale} localePath={preview ? blogSamplePath(slug) : originalPath} noSEO={preview}>
   <div class="blog-sample" id="article-top" data-sample={slug} data-paper={Boolean(paperBanner)}>
     {preview && <><div class="sample-bar">
       <span><i aria-hidden="true"></i>{t(tr, "sample.label")}</span>
@@ -102,7 +115,8 @@ const headlineLines = locale === "zh-cn" ? headline.split(slug === "codex-for-ev
   .sample-prose { color: color-mix(in srgb, var(--site-ink) 82%, var(--site-bg)); font-size: 16px; line-height: 1.95; overflow-wrap: anywhere; }
   .sample-prose :global(p) { margin: 0 0 22px; }
   /* The paper title image is available in the source-details disclosure below. */
-  [data-paper="true"] .sample-prose > :global(p:first-of-type:has(img)) { display: none; }
+  [data-paper="true"] .sample-prose > :global(p:first-of-type:has(img)),
+  [data-paper="true"] .sample-prose > :global(p:first-of-type:has(> em:only-child) + p:has(> img)) { display: none; }
   .sample-prose > :global(h1:first-child) { display: none; }
   [data-paper="true"] .sample-prose > :global(h1:first-child + p:has(img) + h2) { margin-top: 0; padding-top: 0; border-top: 0; }
   .sample-prose :global(h2) { color: var(--site-ink); font-size: 26px; font-weight: 500; line-height: 1.5; letter-spacing: -.025em; margin: 58px 0 23px; padding-top: 29px; border-top: 1px solid var(--site-line); scroll-margin-top: 24px; text-wrap: pretty; }

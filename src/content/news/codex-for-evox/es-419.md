@@ -1,16 +1,17 @@
 ---
 title: "Codex × EvoX: desarrollo de algoritmos y experimentos reproducibles"
 pubDate: 2026-08-08
-summary: "La computación evolutiva está entrando en la era nativa de IA. Con Codex como agente de programación con IA representativo, EvoX convierte la intención en lenguaje natural en flujos de trabajo de computación evolutiva ejecutables, abarcando el modelado de problemas, la migración de código, la neuroevolución sin retropropagación y la tensorización en GPU."
+updatedDate: 2026-11-07
+summary: "Los agentes de programación conectan la intención de investigación con los flujos ejecutables de EvoX, desde definir el problema hasta evaluarlo de forma reproducible."
 ---
 
-La computación evolutiva está entrando en la era nativa de IA.
+En la IA evolutiva, una idea de investigación resulta útil cuando entra en un ciclo repetible de ejecución y evaluación. Codex y EvoX conectan la intención expresada en lenguaje natural con ese ciclo: el agente ayuda a construir el experimento y EvoX aporta las interfaces y el cálculo para comprobar las soluciones candidatas.
 
 [EvoX](https://github.com/EMI-Group/evox) es un framework distribuido y acelerado por GPU para computación evolutiva escalable. A través de sus interfaces unificadas `Algorithm`, `Problem` y `Workflow`, EvoX reúne la búsqueda por poblaciones, la evaluación por lotes, la ejecución de experimentos y la aceleración de hardware en una arquitectura computacional coherente. Soporta aplicaciones que van desde la optimización mono-objetivo y multi-objetivo hasta la neuroevolución, entornos de aprendizaje por refuerzo y el diseño de sistemas complejos.
 
 Desde su lanzamiento de código abierto, EvoX ha seguido evolucionando en torno a una misión clara:
 
-> **Construir infraestructura de nueva generación para la computación evolutiva, diseñada específicamente para el hardware moderno y la computación a gran escala.**
+> **Construir infraestructura para sistemas de IA evolutiva, conectando generación de candidatos, ejecución, evaluación y mejora.**
 
 ## Prólogo: El Lenguaje Natural se Convierte en un Nuevo Punto de Entrada para EvoX
 

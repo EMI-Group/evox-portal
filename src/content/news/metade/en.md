@@ -1,10 +1,13 @@
 ---
-title: "MetaDE: Evolving Differential Evolution by Differential Evolution"
+title: "MetaDE: Letting Search Strategies Evolve with the Task"
 pubDate: 2025-02-15
-summary: "MetaDE is a meta-evolutionary method that uses Differential Evolution to evolve its own hyperparameters and strategies, published in IEEE TEVC."
+updatedDate: 2026-11-07
+summary: "MetaDE adds an outer evolutionary loop around differential evolution, using EvoX's parallel computation to evaluate and improve search configurations."
 ---
 
-Differential Evolution (DE), one of the core algorithms in evolutionary computation, has been widely employed in black-box optimization problems due to its simplicity and high efficiency. Nevertheless, its performance is heavily dependent on the selection of hyperparameters and strategies, a persistent issue for researchers. To address this challenge, the EvoX team recently published a study in *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* entitled "MetaDE: Evolving Differential Evolution by Differential Evolution." As a meta-evolutionary method that leverages DE to evolve its own hyperparameters and strategies, MetaDE enables the dynamic adjustment of parameters and strategies while incorporating GPU-accelerated parallel computing. This design substantially improves computational efficiency alongside optimization performance. Experimental results demonstrate that MetaDE delivers outstanding performance on both the CEC2022 benchmark suite and robot control tasks. The source code for MetaDE is open sourced on GitHu b at [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade").
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+
+Adaptation can operate on the way a system searches as well as on the solutions it finds. MetaDE brings this idea into EvoX through two connected evolutionary levels: one solves the target problem, while the other evaluates which DE configurations make that search effective.
 
 ## Background
 
@@ -107,19 +110,11 @@ Under the same EvoX framework with GPU-accelerated parallel computation, MetaDE 
 
 ## Evolutionary Reinforcement Learning: Robot Control Tasks
 
-In Reinforcement Learning (RL), the efficiency and stability of policy optimization are crucial. Gradient-based methods such as PPO and SAC can suffer from gradient vanishing or exploding in high-dimensional environments. By contrast, Evolutionary Reinforcement Learning (EvoRL) circumvents these issues by using **gradient-free searches** to directly optimize policy parameters.
+MetaDE's robot-control experiment uses gradient-free search over neural-policy parameters. This particular method does not backpropagate through the policy objective. Evolutionary reinforcement learning is a broader family that also includes gradient-based and hybrid methods; it does not universally eliminate the difficulties faced by PPO or SAC.
 
 ![8.png](./metade-12.png "8.png")
 
-Evolutionary Reinforcement Learning Process
-
-Within the EvoRL framework, MetaDE:
-
-* **Automatically optimizes neural network parameters**, increasing the adaptability of policy models.
-* **Dynamically adjusts hyperparameters**, improving training stability.
-* **Leverages GPU acceleration** to speed up policy optimization.
-
-To evaluate MetaDE's performance on complex optimization tasks, we applied it to **robot control problems** using GPU-accelerated optimization in the **Brax simulation platform**. The study included three tasks--**Swimmer**, **Hopper**, and **Reacher**--each modeled by a three-layer fully connected neural network (MLP) with the objective of **maximizing the reward**. Notably, each MLP contains about **1,500 parameters**, creating a **1,500-dimensional optimization challenge** for evolutionary algorithms (EAs). This imposes stringent requirements on both search capability and computational efficiency.
+The experiments use Brax Swimmer, Hopper and Reacher with three-layer MLP policies of roughly 1,500 parameters. The inner search optimizes policy weights, while the outer search tunes the DE executor's parameters and strategies. These are simulated-control benchmarks; they do not establish real-robot deployment or a general improvement in RL training stability.
 
 ![9.png](./metade-13.png "9.png")
 
@@ -129,7 +124,7 @@ As shown in the figure, MetaDE demonstrates strong performance in Brax-based rob
 
 ## Conclusion and Future Directions
 
-MetaDE is an innovative meta-evolution approach that not only excels in solving optimization tasks but also autonomously tunes and refines its own strategies. Capitalizing on the strengths of Differential Evolution, MetaDE exhibits strong potential in adaptive parameter configuration and strategy evolution. Experimental results show superior robustness in a range of benchmark tests, and its real-world applicability is underscored by success in robot control tasks via evolutionary reinforcement learning. A core challenge involves maintaining an optimal balance between generalization and specialization--ensuring that the algorithm can adapt to diverse tasks while also optimizing effectively for specific problems. This research offers new perspectives for self-adaptive evolutionary algorithms and may spur further advances in meta-evolution for complex systems.
+MetaDE gives evolutionary AI a concrete mechanism for adapting its search process through feedback. Its contribution to EvoX is a reusable relationship between task optimization and configuration search, supported by batched evaluation. Extending that relationship to new applications requires defining meaningful feedback and accounting for the cost of both levels.
 
 ## Resources
 

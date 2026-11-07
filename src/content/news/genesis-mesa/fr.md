@@ -1,15 +1,44 @@
 ---
-title: "Genesis reconstruit 13 modules MESA en Rust"
+title: "Genesis et MESA : faire évoluer les logiciels du calcul scientifique"
 pubDate: 2026-11-03
-summary: "Le cas MESA de Genesis illustre la réécriture de logiciels scientifiques : 1,052 tests réussis et 10.64 dollars de frais de tokens déclarés."
+updatedDate: 2026-11-07
+summary: "La reconstruction en Rust de certains modules MESA relie développement agentique, préservation des connaissances et modernisation des logiciels scientifiques."
 ---
 
-La réécriture scientifique doit préserver le comportement numérique existant. Le dossier MESA du 7 septembre 2026 décrit la conversion de **13 modules Fortran en crates Rust**, avec l’implémentation d’origine comme référence.
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
-Il rapporte **139,414 lignes de Fortran → 89,946 lignes de Rust**, **1,052 tests réussis** et **10.64 dollars** de frais de tokens. Le dépôt décrit des tests de référence comparés aux sorties Fortran et signale 18 tests ignorés en plus des tests réussis.
+La découverte scientifique dépend de logiciels qui portent des méthodes numériques et des connaissances accumulées. La reconstruction de certains modules MESA par Genesis relie Agentic AI à cette base d'AI for Science : améliorer l'implémentation en utilisant le comportement numérique existant comme référence de ce qui doit être préservé.
 
-Les accélérations médianes de **1.55–6.87×** indiquées dans Evidence concernent des benchmarks, pas MESA dans son ensemble. Séparément, le tableau du README daté du 5 août rapporte **1.25×** pour la combustion à une zone, utilisée comme charge représentative de bout en bout. Ces instantanés et charges distincts ne doivent pas être confondus.
+## Un périmètre défini
 
-Le portage couvre les modules numériques et physiques sélectionnés, pas tout MESA ; les moteurs d’évolution stellaire et binaire sont hors périmètre. Il montre comment vérifier le comportement d’un code existant pour guider sa réécriture. Les résultats sont déclarés par le projet, sans reproduction indépendante ; les frais de tokens excluent le matériel.
+Le [dossier du 7 septembre 2026](https://genesis.evox.group/evidence/mesa/) couvre **13 modules**, de **139 414 lignes Fortran à 89 946 lignes Rust**. Ces tailles de snapshot ne correspondent pas au seul code de bibliothèque.
 
-[Genesis Evidence](https://genesis.evox.group/evidence/mesa/) · [GitHub](https://github.com/EMI-Group/genesis-demo-mesa-rs) · [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md)
+Le port comprend interpolation, solveurs, réseaux de réactions, équation d’état et opacité. Il ne remplace pas tout MESA : moteurs d’évolution stellaire et binaire et autres composants documentés restent hors périmètre.
+
+## Vérifier avant de chronométrer
+
+Chaque module correspond à une crate avec interfaces et contraintes documentées. Les tests de référence comparent les sorties Fortran ; les tests d’intégration vérifient les interactions.
+
+L’équivalence numérique exige une tolérance et une charge précises. Un scalaire identique peut masquer un chemin de résolution différent : le dépôt suit aussi les étapes d’intégration du proxy de combustion à une zone. Cela va au-delà d’une compilation réussie.
+
+## Validation rapportée
+
+Le dépôt annonce **1 052 tests réussis, zéro échec et 18 ignorés**. Les exclusions doivent rester visibles. Les **10,64 dollars US** du dossier couvrent uniquement les tokens ; modèle, épisodes et durée ne sont pas rapportés.
+
+Il s’agit de résultats du projet, sans reproduction indépendante. Ils concernent le port et les tests documentés, pas tous les workflows scientifiques MESA.
+
+## Séparer les benchmarks
+
+Evidence rapporte **1,55–6,87× de gain médian**. Le tableau du README daté du 5 août utilise des médianes de 15 exécutions et donne **1,25×** pour le proxy de combustion à une zone de bout en bout. Ne fusionnez pas ces relevés en accélération universelle.
+
+Comparez les mêmes charges, données, options de compilation et tolérances. Un noyau d’interpolation plus rapide ne donne pas automatiquement le même gain sur une simulation stellaire complète.
+
+## Une voie de modernisation des logiciels scientifiques
+
+Le [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md) précise outils, compilation, tests et pilotes de benchmark. Après préparation de l’environnement :
+
+```bash
+cargo test --workspace
+```
+
+Le [dépôt de reconstruction MESA](https://github.com/EMI-Group/genesis-demo-mesa-rs) montre comment le développement agentique peut prolonger des logiciels scientifiques ayant déjà une histoire. Pour EvoX, l'enjeu est de rendre cette infrastructure adaptable tout en conservant un comportement scientifique vérifiable. Dépasser les modules présentés exige une validation supplémentaire dans le domaine.

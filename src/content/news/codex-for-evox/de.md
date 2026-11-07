@@ -1,16 +1,17 @@
 ---
 title: "Codex × EvoX: Algorithmenentwicklung und reproduzierbare Experimente"
 pubDate: 2026-08-08
-summary: "Evolutionäre Berechnung tritt in die KI-native Ära ein. Mit Codex als repräsentativem KI-Coding-Agenten wandelt EvoX Absichten in natürlicher Sprache in ausführbare Workflows der evolutionären Berechnung um — einschließlich Problemmodellierung, Algorithmusmigration, neuroevolution ohne Backpropagation und GPU-Tensorisierung."
+updatedDate: 2026-11-07
+summary: "Programmieragenten verbinden Forschungsabsichten mit ausführbaren EvoX-Suchabläufen: von der Problemdefinition über die Implementierung bis zur reproduzierbaren Bewertung."
 ---
 
-Evolutionäre Berechnung tritt in die KI-native Ära ein.
+Für evolutionäre KI wird eine Forschungsidee nutzbar, wenn sie in einen wiederholbaren Ausführungs- und Bewertungszyklus gelangt. Codex und EvoX verbinden natürlichsprachliche Absichten mit diesem Zyklus: Der Agent hilft beim Aufbau des Experiments, EvoX stellt Schnittstellen und Rechenmöglichkeiten für die Prüfung der Kandidaten bereit.
 
 [EvoX](https://github.com/EMI-Group/evox) ist ein verteiltes, GPU-beschleunigtes Framework für skalierbare evolutionäre Berechnung. Über seine einheitlichen `Algorithm`-, `Problem`- und `Workflow`-Schnittstellen bringt EvoX Populationsuche, Batch-Auswertung, Experimentausführung und Hardwarebeschleunigung in eine kohärente Rechenarchitektur zusammen. Es unterstützt Anwendungen von Ein- und Mehrziel-Optimierung über Neuroevolution und Reinforcement-Learning-Umgebungen bis hin zum Entwurf komplexer Systeme.
 
 Seit seiner Open-Source-Veröffentlichung hat sich EvoX um eine klare Mission weiterentwickelt:
 
-> **Infrastruktur der nächsten Generation für evolutionäre Berechnung aufzubauen, speziell entwickelt für moderne Hardware und groß angelegte Berechnung.**
+> **Infrastruktur für evolutionäre KI-Systeme schaffen, die Kandidatenerzeugung, Ausführung, Bewertung und Verbesserung verbindet.**
 
 ## Prolog: Natürliche Sprache wird zu einem neuen Einstiegspunkt für EvoX
 

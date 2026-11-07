@@ -1,10 +1,15 @@
 ---
-title: "EvoGO: Learning to Generate Better Solutions from Search Experience"
+title: "EvoGO: Learning How to Search from Evaluation Feedback"
 pubDate: 2026-04-05
-summary: "EvoGO is a fully data-driven evolutionary optimization framework that learns how to generate better solutions from past search experience and achieves fast, strong performance on complex high-dimensional tasks."
+updatedDate: 2026-11-07
+summary: "EvoGO connects generative learning with evolutionary optimization, turning evaluated candidates into experience for proposing the next population."
 ---
 
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+
 ![image1](./image1.png)
+
+Scientific and engineering search repeatedly asks which experiment to run next. EvoGO studies a computational version of that question: can evaluations teach a generator how to improve its proposals? This connects EvoX's evolutionary AI direction to a search process that learns from the candidates it has already tested.
 
 ## Predicament: Data-Driven Optimization Has Still Not Taken the Final Step
 
@@ -62,25 +67,13 @@ To more intuitively analyze EvoGO’s search dynamics, the paper presents a visu
 
 The visualization results show that what EvoGO learns is not directionless random perturbation, but an update pattern that adapts with the search stage. In the early stage, the generated vectors are generally longer, indicating that the algorithm tends toward large-amplitude global exploration. As evolution proceeds, vector lengths gradually decrease and the generated regions continue to contract, showing that the search shifts toward finer local exploitation. At the same time, the vectors as a whole gather toward the optimal region, indicating that the forward generator has already extracted a practically meaningful search direction from historical samples. At the behavioral level, this phenomenon supports EvoGO’s central property: it learns not merely the distribution of candidate solutions, but the update law that moves from the current state toward a better state.
 
-## Application: Engineering Validation on a Wide-Body Airliner Supercritical Wing
+## From benchmarks to scientific workflows
 
-The successful delivery of the **C919** marks a crucial step for China in the development of domestically produced large aircraft. However, as a single-aisle narrow-body airliner, the C919 mainly serves short- and medium-haul routes, and breakthroughs in the wide-body airliner domain are still needed. To meet the development needs of the next generation of domestic wide-body aircraft, **supercritical wing design** has become a key issue in aerodynamic optimization, playing an important role in reducing cruise drag, improving fuel efficiency, and enhancing flight stability. Therefore, how to achieve efficient and reliable supercritical wing optimization has become a core technical challenge in China’s wide-body aircraft development process.
-
-![image8](./image8.png)
-
-As shown in the original article, by optimizing geometric features such as a longer chord, a flatter upper surface, and increased trailing-edge camber, a supercritical wing can regulate transonic pressure distribution, suppress shock-wave formation, reduce wave drag, and improve lift efficiency. However, its optimal design faces multiple challenges. On the one hand, under the high-Reynolds-number conditions of wide-body aircraft, the design must simultaneously satisfy strict aerodynamic constraints such as lift-to-drag ratio, lift coefficient, and cruise angle of attack, which imposes extremely high precision requirements on shape parameters. On the other hand, there is a strongly nonlinear coupling relationship between airfoil geometry and aerodynamic performance, which is difficult for traditional modeling methods to characterize accurately. In addition, the existing design process relies heavily on experience, repeated CFD simulations, and wind-tunnel experiments, leading to high computational cost, long development cycles, and difficulty in effectively approaching the global optimum in a high-dimensional design space.
-
-![image9](./image9.png)
-
-To address this problem, the EvoX team built an integrated design pipeline based on EvoGO, consisting of performance evaluation, airfoil generation, and candidate screening. Based on a small number of historical airfoil samples, the method constructs a performance evaluation model, an airfoil generation model, and a screening model, and continuously improves the airfoil design through iterative evolution. A surrogate model is used to accurately predict key metrics such as lift-to-drag ratio, lift coefficient, and cruise angle of attack. At the same time, a generative mechanism is introduced to replace traditional heuristic search, enabling efficient approximation of the optimum in a high-dimensional design space. Combined with a candidate screening strategy, this method can rapidly identify candidate airfoils that satisfy both physical constraints and aerodynamic performance requirements from a vast search space, thereby improving design efficiency.
-
-![image10](./image10.png)
-
-Using only 500 historical airfoil samples, the method achieves more than 99.5% prediction accuracy on three key aerodynamic indicators—lift-to-drag ratio, lift coefficient, and cruise angle of attack—and the qualification rate of automatically generated airfoils exceeds 95%. These results indicate that fully data-driven evolutionary optimization methods such as EvoGO can not only perform well on standard benchmark tests, but are also beginning to demonstrate the ability to provide effective design support for real engineering problems.
+Generative search could be explored for engineering design, but a benchmark result does not establish airfoil-design accuracy or aircraft deployment. An engineering evaluation would need a defined dataset, held-out cases, constraint checks and independent simulator or experimental validation. The linked EvoGO paper reports numerical, control and robotics benchmarks; it does not establish quantitative airfoil-design results.
 
 ## Conclusion and Outlook
 
-What EvoGO focuses on is not merely a local improvement to the traditional evolutionary optimization pipeline, but a more fundamental reconstruction of how optimization itself happens. By organizing optimization into the three unified stages of data preparation, model training, and population generation, and by introducing directional data construction based on superior–inferior pairing, a surrogate-guided paired generative architecture, and a parallel population generation mechanism, EvoGO demonstrates stable advantages in both performance and efficiency on standard benchmark tests. At the same time, it has also validated its potential for real complex engineering problems through next-generation wide-body airliner supercritical wing optimization design. At a higher level, the significance of this work lies in showing that evolutionary optimization does not necessarily have to remain confined to manually specified heuristic rules. The optimization process itself may be progressively distilled from historical experience as a learnable law.
+EvoGO contributes a learnable proposal mechanism to evolutionary AI systems. Its connection to AI for Science is the possibility of making costly evaluations inform future search, alongside parallel candidate generation. Realizing that possibility in a scientific domain requires domain-specific constraints, evaluation and validation; the reported benchmarks establish the starting point.
 
 ## Resources
 

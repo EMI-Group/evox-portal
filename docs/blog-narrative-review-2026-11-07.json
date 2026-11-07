@@ -1,0 +1,333 @@
+{
+  "date": "2026-11-07",
+  "status": "Editorial audit snapshot; publication status is tracked in Git history and the associated pull request.",
+  "positioning": "Infrastructure for evolutionary AI systems: generate, execute, evaluate, select and improve across digital and physical domains.",
+  "positioningSources": [
+    "src/i18n/locales/en.json",
+    "src/components/pages/HomeContent.astro",
+    "https://www.evox.group/",
+    "https://genesis.evox.group/"
+  ],
+  "editorialPrinciples": [
+    "Lead with the capability or research question, then explain mechanisms and evidence.",
+    "Explain each project’s distinct contribution to the ecosystem; do not imply that every project uses the same runtime or algorithm.",
+    "Separate the ecosystem vision from the scope demonstrated by an individual experiment.",
+    "Preserve concrete technical evidence, code, figures, original publication dates and source destinations.",
+    "Keep release notes useful as historical change records rather than turning maintenance updates into manifesto essays."
+  ],
+  "counts": {
+    "newsReviewed": 17,
+    "newsReframed": 17,
+    "releaseNotesReviewed": 12,
+    "releaseNotesRewritten": 0,
+    "locales": 13,
+    "newsFilesUpdated": 221,
+    "titlesChanged": 14,
+    "conclusionsRewritten": 9
+  },
+  "articles": [
+    {
+      "slug": "autopso",
+      "role": "Algorithm design as an evolutionary search problem.",
+      "titleBefore": "AutoPSO: GPU Computing Power × Meta-Evolution → Fully Automatic Particle Swarm Optimization",
+      "titleAfter": "AutoPSO: Evolving the Algorithms That Search",
+      "chineseTitle": "AutoPSO：让搜索算法本身参与演化",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "codex-for-evox",
+      "role": "Agent-assisted construction of executable, evaluated experiments; shared infrastructure mission.",
+      "titleBefore": "Codex × EvoX: Algorithm Development and Reproducible Experiments",
+      "titleAfter": "Codex × EvoX: Algorithm Development and Reproducible Experiments",
+      "chineseTitle": "Codex × EvoX：算法开发与可复现实验",
+      "changes": [
+        "summary",
+        "opening"
+      ]
+    },
+    {
+      "slug": "evococo",
+      "role": "Preserve algorithmic knowledge while changing its execution model.",
+      "titleBefore": "EvoCoCo: Automatic MATLAB-to-EvoX Code Conversion for GPU-Accelerated Multiobjective Optimization",
+      "titleAfter": "EvoCoCo: Bringing Algorithmic Knowledge into GPU Computing",
+      "chineseTitle": "EvoCoCo：让算法知识进入 GPU 计算体系",
+      "changes": [
+        "summary",
+        "opening",
+        "title"
+      ]
+    },
+    {
+      "slug": "evogm",
+      "role": "Capability reuse in Generative AI through learned model-merging proposals.",
+      "titleBefore": "EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining",
+      "titleAfter": "EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining",
+      "chineseTitle": "EvoGM：无需重新训练，通过群体演化实现大模型自主合并",
+      "changes": [
+        "summary",
+        "opening"
+      ]
+    },
+    {
+      "slug": "evogo",
+      "role": "Learnable search proposals as a research direction for AI for Science.",
+      "titleBefore": "EvoGO: Learning to Generate Better Solutions from Search Experience",
+      "titleAfter": "EvoGO: Learning How to Search from Evaluation Feedback",
+      "chineseTitle": "EvoGO：从评价反馈中学习如何搜索",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "evogp",
+      "role": "Structured programs as scalable evolutionary candidates.",
+      "titleBefore": "EvoGP: A GPU-Native Framework for Tree-Based Genetic Programming at 10^11 GPops/s",
+      "titleAfter": "EvoGP: Scaling the Search for Programs on GPUs",
+      "chineseTitle": "EvoGP：在 GPU 上扩展程序空间的演化搜索",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "evorl",
+      "role": "Population learning and simulation as an experimental foundation for Physical AI.",
+      "titleBefore": "EvoRL: Bringing Evolutionary Search and Reinforcement Learning Together on GPUs",
+      "titleAfter": "EvoRL: Bringing Evolutionary Search and Reinforcement Learning Together on GPUs",
+      "chineseTitle": "EvoRL：让演化搜索与强化学习在 GPU 上协同运行",
+      "changes": [
+        "summary",
+        "opening"
+      ]
+    },
+    {
+      "slug": "evox-compiler",
+      "role": "Representations, transformations and backend boundaries as computational infrastructure.",
+      "titleBefore": "EvoX Compiler v0.1.0: From Explicit Tensor Graphs to Multiple Backends",
+      "titleAfter": "EvoX Compiler v0.1.0: A Computational Foundation for Evolving Programs",
+      "chineseTitle": "EvoX Compiler v0.1.0：为程序演化构建计算基础",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "evox-genesis",
+      "role": "Agentic AI with a project that preserves accepted progress.",
+      "titleBefore": "EvoX Genesis: A Recursive AI System for Long-Horizon Autonomous Software Evolution That Built a 250K-Line C Compiler from Scratch",
+      "titleAfter": "EvoX Genesis: Building Software That Can Keep Evolving",
+      "chineseTitle": "EvoX Genesis：构建能够持续演化的软件",
+      "changes": [
+        "summary",
+        "opening",
+        "title"
+      ]
+    },
+    {
+      "slug": "evox-quickstart",
+      "role": "A runnable introduction to reusable evolutionary workflows.",
+      "titleBefore": "EvoX Quickstart: Run PSO, Verify the Device and Read the Result",
+      "titleAfter": "Getting Started with EvoX: Your First Evolutionary Workflow",
+      "chineseTitle": "EvoX 入门：构建第一个演化工作流",
+      "changes": [
+        "summary",
+        "opening",
+        "title"
+      ]
+    },
+    {
+      "slug": "genesis-compiler-continuation",
+      "role": "Continuity across model changes as an architectural capability.",
+      "titleBefore": "Genesis Compiler Continuation: What Survives a Model Handoff?",
+      "titleAfter": "Genesis: Carrying Software Progress Across Model Changes",
+      "chineseTitle": "Genesis：让软件进展跨越模型更替",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "genesis-evoxc",
+      "role": "AI-assisted development contributing to the computational infrastructure itself.",
+      "titleBefore": "Building EvoX Compiler with Genesis: Architecture, Verification and Continued Development",
+      "titleAfter": "Genesis Builds EvoX Compiler: AI Developing Evolutionary Infrastructure",
+      "chineseTitle": "Genesis 构建 EvoX Compiler：让 AI 参与演化基础设施的开发",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "genesis-mesa",
+      "role": "Scientific-software preservation and modernization through agentic development.",
+      "titleBefore": "Genesis and MESA: Rebuilding Scientific Modules While Checking Numerical Behavior",
+      "titleAfter": "Genesis and MESA: Evolving the Software Behind Scientific Computing",
+      "chineseTitle": "Genesis 与 MESA：让科学计算的软件基础持续演化",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "genesis-wasm-render",
+      "role": "Integration of local contributions into a coherent software system.",
+      "titleBefore": "Genesis WASM Render: Conformance Results and the Limits of a Software Renderer",
+      "titleAfter": "Genesis WASM Render: From Local Code Generation to System Construction",
+      "chineseTitle": "Genesis WASM Render：从局部代码生成走向系统构建",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion",
+        "section framing"
+      ]
+    },
+    {
+      "slug": "gpu-accelerated-emo",
+      "role": "Multiobjective alternatives and trade-offs as a reusable computational capability.",
+      "titleBefore": "GPU-Accelerated Evolutionary Multiobjective Optimization",
+      "titleAfter": "EvoMO: Making Multiobjective Trade-offs Computable at Scale",
+      "chineseTitle": "EvoMO：让多目标权衡进入大规模计算",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion"
+      ]
+    },
+    {
+      "slug": "iStratDE",
+      "role": "Persistent behavioral diversity as a parallel-search design principle.",
+      "titleBefore": "iStratDE: GPU Computing x Ultra-Large Populations Unlock the Full Potential of Differential Evolution",
+      "titleAfter": "iStratDE: Population Diversity as a Principle for Parallel Search",
+      "chineseTitle": "iStratDE：以种群多样性组织并行搜索",
+      "changes": [
+        "summary",
+        "opening",
+        "title"
+      ]
+    },
+    {
+      "slug": "metade",
+      "role": "Feedback-driven adaptation of the search configuration itself.",
+      "titleBefore": "MetaDE: Evolving Differential Evolution by Differential Evolution",
+      "titleAfter": "MetaDE: Letting Search Strategies Evolve with the Task",
+      "chineseTitle": "MetaDE：让搜索策略随任务共同演化",
+      "changes": [
+        "summary",
+        "opening",
+        "title",
+        "conclusion"
+      ]
+    }
+  ],
+  "releaseNotes": [
+    {
+      "slug": "evox-1-0-0",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-0-1",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-1-0",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-1-1",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-1-2",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-2-0",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-2-1",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-2-2",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-3-0",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-4-0",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-1-4-1",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    },
+    {
+      "slug": "evox-2-0-0a1",
+      "decision": "Retain historical feature/fix/compatibility narrative; it communicates the evolution and maintenance of the computational foundation."
+    }
+  ],
+  "validation": {
+    "translationParityAndPreservationErrors": [],
+    "checks": [
+      "13 locales per article",
+      "code blocks unchanged and synchronized",
+      "image references unchanged",
+      "source destination sets preserved",
+      "original publication dates retained",
+      "Chinese evolution terminology",
+      "local build and generated SEO audit"
+    ],
+    "build": "pnpm build passed: 910 pages",
+    "seo": {
+      "pages": 377,
+      "updatedPages": 221,
+      "errors": []
+    },
+    "browser": {
+      "checks": 18,
+      "viewports": [
+        1440,
+        390
+      ],
+      "errors": [],
+      "screenshots": [
+        "D:\\Temp\\User\\evox-narrative-autopso-1440.png",
+        "D:\\Temp\\User\\evox-narrative-genesis-evoxc-390.png"
+      ],
+      "visualReview": "Desktop AutoPSO and mobile Genesis EvoX Compiler inspected; headings, summaries, revision notes and reading layout fit without horizontal overflow."
+    },
+    "diffCheck": "git diff --check passed"
+  },
+  "notes": [
+    "The existing English UI-string change remains untouched.",
+    "Source URL comparisons normalize sentence-ending punctuation in raw URLs.",
+    "The paper-banner hiding rule also handles a preceding revision note, preserving the original article layout."
+  ]
+}

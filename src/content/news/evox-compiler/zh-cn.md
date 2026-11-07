@@ -1,29 +1,46 @@
 ---
-title: "EvoX Compiler v0.1.0 发布：显式计算图，多后端执行"
+title: "EvoX Compiler v0.1.0：为程序演化构建计算基础"
 pubDate: 2026-10-29
-summary: "EvoX Compiler 首个版本为 Python 带来可检查的计算图、可组合的图变换，以及 NumPy、IREE、XLA 和 TVM 执行路径。"
+updatedDate: 2026-11-07
+summary: "EvoX Compiler 分离程序表示、图变换与执行，为跨程序种群、跨后端的实验提供计算基础。"
 ---
 
-**EvoX Compiler（evoxc）v0.1.0 于 2026 年 10 月 29 日发布。** 这是一套 Python 张量图编译器与运行时，面向希望直接检查、变换、保存和执行程序本身的开发者。项目采用 Apache-2.0 许可证，要求 Python 3.11 或更高版本。
+*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
 
-## 让计算过程成为可检查的程序
+EvoX 的演化式 AI 愿景，需要计算系统能够承载不断变化的候选对象，其中也包括结构不同的程序。EvoX Compiler 面向这一基础：显式计算图让程序在执行前可被检查和变换，后端接口则把受支持的计算连接到不同执行系统。
 
-evoxc 通过 `trace → lower → compile → load → run` 显式开放各个阶段。前端以 EvoXIR 表达计算，并导出 StableHLO 交给外部编译器完成优化与代码生成。中间计算图和编译产物可以保留下来，供检查与持久化存储。
+数值程序的价值不仅在于最终输出。研究者还可能需要检查计算图、变换程序、比较执行后端，或保存编译产物。2026 年 10 月 29 日发布的 **EvoX Compiler（evoxc）v0.1.0** 将这些中间阶段显式呈现。它是基于 Python 的张量图前端与运行时，采用 Apache-2.0 许可，要求 Python 3.11 或更新版本。
 
-图变换包括 `vmap`、`grad`、`jvp` 和 `vjp`。针对神经架构搜索、遗传编程与算法合成，`batch_functions` 可将输入输出规格一致的候选程序合并为一个计算图；显式编译缓存则服务于反复生成静态程序的工作负载。
+## 从程序定义到可执行对象
 
-## 四种执行路径
+处理流程是 `trace → lower → compile → load → run`：追踪阶段根据程序定义和输入规格构建 EvoXIR 图；表示转换阶段准备后端表示；编译生成产物；加载将产物绑定到执行设备；运行阶段提供实际数据。每一步都有可检查的对象。
 
-NumPy 是唯一必需依赖，并提供默认 CPU 解释执行路径。可选适配器将计算图连接至 IREE、通过用户提供的 PJRT 插件接入的 XLA，以及 TVM。后端和设备由开发者显式选择，算子与硬件覆盖范围取决于适配器。发布文档中的 Vulkan 验证使用 Mesa lavapipe，TVM 的 ROCm 支持仅验证到编译阶段。
+这种分离有助于定位问题：计算图无效、算子无法转换和设备不匹配，是不同层面的问题。图与受支持的编译产物也可以保存。优化、调度与代码生成由外部编译器负责，evoxc 提供前端与阶段间的接口约定。
 
-发布版 README 报告，在安装 IREE、TVM 和 torch 的配置下，核心与 `evoxc_hf` 两套测试共 **7,511 项通过、77 项跳过、4 项预期失败、0 项失败**。这是项目方在该配置下报告的结果。仓库同时注明，其代码、测试和文档均使用 EvoX Genesis 产出。
+## 图变换为什么与演化计算有关？
 
-## 开始使用
+`vmap`、`grad`、`jvp`、`vjp` 等变换生成新的图，可以在执行前组合。对于程序空间搜索，`batch_functions` 能将输入输出规格匹配的候选函数组合成一个种群计算图。
 
-可使用下方命令安装该发布版本。可选编译器适配器的配置见对应版本 README；HuggingFace 集成以 `evoxc-hf` 独立分发。
+这适用于遗传编程、神经架构搜索和算法合成：候选对象可能是不同程序，而不只是不同参数向量。合并有机会减少重复编译与调用开销，但收益取决于程序结构和后端，并非任何种群都会自动加速。
+
+## 如何选择执行路径？
+
+NumPy 是唯一必需依赖，提供参考 CPU 解释器。可选适配器连接 IREE、通过用户提供的 PJRT 插件使用的 XLA，以及通过 StableHLO 前端接入的 TVM。后端可用，不等于算子与硬件覆盖完全一致。
+
+版本 README 记录的 Vulkan 验证使用 Mesa lavapipe 软件设备，TVM ROCm 只完成了编译验证。GPU 输入和设备放置需要显式处理；将 CPU 图迁移到其他目标前，应先核对适配器的算子支持范围。
+
+## 从参考后端开始
+
+安装固定版本，运行 README 的 CPU 示例，检查图结构，再选择编译后端：
 
 ```bash
 pip install evoxc==0.1.0
 ```
 
-[GitHub Release v0.1.0](https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0) · [README v0.1.0](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md) · [GitHub](https://github.com/EMI-Group/evoxc)
+HuggingFace 集成以独立的 `evoxc-hf` 包发布。EvoX Compiler 与 EvoX 优化库是不同软件包，两者的版本号也不能混用。
+
+## 计算基础中的验证能力
+
+版本 README 报告，在其记录的环境中，核心与集成测试共 **7,511 项通过、77 项跳过、4 项预期失败**，没有失败项。这描述的是特定配置，并不代表所有硬件都已验证。仓库声明其代码、测试和文档由 Genesis 辅助生成。
+
+API 与支持矩阵见[版本 README](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md)，发布产物见[版本记录](https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0)，后续开发见 [GitHub](https://github.com/EMI-Group/evoxc)。

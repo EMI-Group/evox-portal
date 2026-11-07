@@ -1,14 +1,17 @@
 ---
-title: "AutoPSO: Poder de processamento GPU × Metaevolução → Otimização por enxame de partículas totalmente automática"
+title: "AutoPSO: fazer evoluir os algoritmos de pesquisa"
 pubDate: 2026-08-25
-summary: "A AutoPSO, proposta pela equipe EvoX e publicada na IEEE TEVC, codifica de forma uniforme a configuração de parâmetros, os mecanismos de aprendizado e a estrutura do enxame do PSO em um espaço evolutivo pesquisável, e por meio de metaevolução busca automaticamente a variante de PSO ótima para um determinado problema-alvo."
+updatedDate: 2026-11-07
+summary: "A AutoPSO transforma o desenho de otimização por enxame de partículas (PSO) num espaço pesquisável e mostra como a avaliação paralela do EvoX apoia a evolução dos métodos de otimização."
 ---
+
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
 
 ![](./autopso-hero.png)
 
-O desenvolvimento da otimização por enxame de partículas (PSO) tem sido, em essência, uma história de contínuo "projeto manual". Ao longo das últimas décadas, os pesquisadores propuseram uma vasta gama de melhorias relativas a pesos de inércia, estratégias de aprendizado, topologias de enxame, estruturas de subpopulações e outros componentes, formando gradualmente um amplo espaço de projeto algorítmico em torno do PSO. Porém, quanto maior o espaço, mais difícil a escolha. Diante de uma tarefa de otimização específica — quais parâmetros selecionar, quais mecanismos de aprendizado adotar, como organizar o enxame de partículas — essas decisões de projeto fortemente acopladas continuam, até hoje, fortemente dependentes da experiência dos pesquisadores e de tentativa e erro. O PSO tornou-se cada vez mais rico, mas também cada vez mais difícil de "escolher corretamente". E se o próprio ato de "escolher um PSO" também fosse delegado à evolução algorítmica?
+Um sistema de IA evolutiva deve decidir o que procurar e como procurar. A AutoPSO integra a segunda questão no ciclo de otimização: parâmetros, regras de aprendizagem e organização do enxame tornam-se configurações candidatas que podem ser avaliadas e melhoradas para uma tarefa.
 
-O framework **AutoPSO**, proposto pela equipe EvoX, codifica de forma uniforme a configuração de parâmetros, os mecanismos de aprendizado e a estrutura do enxame do PSO em um espaço evolutivo pesquisável, e busca automaticamente, por meio de **metaevolução**, a variante de PSO ótima adaptada a um determinado problema-alvo. Esse framework não apenas otimiza a solução do problema, mas também, em um nível superior, otimiza automaticamente "qual PSO usar para resolvê-lo".
+O framework **AutoPSO**, proposto pela equipe EvoX, codifica de forma uniforme a configuração de parâmetros, os mecanismos de aprendizado e a estrutura do enxame do PSO em um espaço evolutivo pesquisável, e busca automaticamente, por meio de **metaevolução**, uma variante de PSO adequada adaptada a um determinado problema-alvo. Esse framework não apenas otimiza a solução do problema, mas também, em um nível superior, otimiza automaticamente "qual PSO usar para resolvê-lo".
 
 A busca em larga escala da metaevolução depende de avaliações massivamente paralelas, e a computação tensorizada, o processamento em lote e o paralelismo de GPU do EvoX resolvem justamente esse gargalo — milhares de variantes candidatas podem evoluir simultaneamente, tornando viável na prática a busca em nível meta que antes era inviável em CPU.
 
@@ -58,7 +61,7 @@ Propor um framework de busca automática de estruturas algorítmicas não é par
 
 Em ambientes seriais tradicionais baseados em CPU, esses custos são proibitivos. Porém, esse tipo de computação é intrinsecamente paralelizável: os algoritmos candidatos podem ser avaliados simultaneamente e, dentro de cada algoritmo candidato, as atualizações das partículas também podem ser processadas em lote. A AutoPSO aproveita o EvoX para mapear a estrutura populacional da computação evolutiva na capacidade de processamento em lote das GPUs, permitindo que a busca de configurações do nível externo e a resolução do problema do nível interno avancem simultaneamente.
 
-Aqui, a aceleração por GPU não significa apenas encurtar o tempo de uma única execução; o mais importante é que ela aumenta substancialmente o número de projetos candidatos que podem ser comparados em um dado período. A metaevolução é essencialmente uma busca no espaço dos algoritmos, e a qualidade dessa busca depende diretamente de **quantos projetos candidatos de PSO foram avaliados**. Quanto mais completa a avaliação, maior a chance de encontrar uma configuração bem adequada ao problema atual.
+O processamento em lote na GPU permite comparar mais configurações PSO dentro de um orçamento temporal. A qualidade também depende dos componentes disponíveis, da confiabilidade das avaliações e da distribuição do orçamento. A AutoPSO procura uma configuração adequada à tarefa neste espaço; mais candidatos não garantem um algoritmo globalmente ótimo.
 
 O valor do EvoX está justamente em fornecer essa capacidade: ele organiza as atualizações das partículas e as avaliações de aptidão do nível interno, bem como a comparação de algoritmos candidatos do nível externo, em operações tensoriais na GPU, permitindo que milhares de projetos candidatos avancem de forma síncrona a cada iteração. Em outras palavras, o EvoX transforma a metaevolução de um processo de "tentativa e erro lenta" em uma "experimentação paralela em larga escala" — e é precisamente nessa base computacional que a AutoPSO se sustenta.
 
@@ -100,15 +103,7 @@ A AutoPSO liberta os pesquisadores do ajuste repetitivo de parâmetros e da tent
 
 ## De modificar algoritmos a construir sistemas que geram algoritmos
 
-O significado da AutoPSO vai além da obtenção de uma variante de PSO mais poderosa. Ela demonstra um novo paradigma para os algoritmos evolutivos na era da computação paralela:
-
-- **No passado, estudávamos "como projetar um algoritmo melhor";**
-
-- **agora, estudamos "como construir um sistema capaz de gerar, selecionar e melhorar algoritmos automaticamente".**
-
-À medida que a avaliação massiva de candidatos em GPU se torna gradualmente a norma na pesquisa, as fronteiras da computação evolutiva certamente mudarão de acordo: o hardware de computação paralela não é mais apenas uma plataforma que hospeda a execução de algoritmos, mas começa a participar da reformulação da forma como os algoritmos são projetados.
-
-AutoPSO × EvoX: capacitar a computação evolutiva na transição da era manual para a era automática.
+A AutoPSO mostra o papel do EvoX no desenho experimental de algoritmos. Os pesquisadores definem componentes úteis e avaliações confiáveis; a pesquisa por populações explora as combinações. O cálculo paralelo apoia assim a construção de algoritmos adequados à tarefa, fundamentada no desempenho medido.
 
 ## Recursos
 

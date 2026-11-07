@@ -1,113 +1,98 @@
 ---
-title: "EvoXクイックスタート：わずか10分でGPU加速による進化的計算を実行"
+title: "EvoX 入門：最初の進化的ワークフローを構築する"
 pubDate: 2025-04-30
-summary: "EvoXを使用して、わずか10分でGPU加速による進化的計算を始めるための初心者向けチュートリアルです。"
+updatedDate: 2026-11-07
+summary: "EvoX 1.4.1 の実験を実行し、問題、集団、評価、実行が再利用可能な進化的ワークフローをどう構成するかを学びます。"
 ---
 
-一方で、進化的計算は現実世界の研究や工学において非常に強力ですが、活用するのは困難です。他方で、GPUの能力はますます強力になっていますが、進化的計算タスクでその力を発揮させることは困難です。
+*2026年11月7日更新。過去の結果は元の記録日時に基づきます。*
 
-私たちには、真に現代的なソリューションが必要です。それは、ネイティブなGPUサポート、モジュラーアーキテクチャ、明確なインターフェース、すぐに使える利便性、そしてカスタマイズ可能なスケーラビリティです。これがEvoX、未来のための進化的計算エンジンです。
+進化的ワークフローは目標を候補、評価、継続的な改善につなぎます。このチュートリアルでは小さな実行可能な実験を通して基盤を理解します。同じ部品の境界を、後に別の問題、アルゴリズム、評価予算へ展開できます。
 
-ユーザーがすぐに始められるように、EvoXチームは「EvoX初心者向けチュートリアル」を公開しました。このチュートリアルは全8章で構成されており、基礎から高度な実践的応用までを網羅し、GPU上で進化的アルゴリズムを実行する方法をステップバイステップで案内します。
+PSO で二次元 Ackley 関数を最小化し、実行デバイスを確認して履歴を描画します。対象は **EvoX 1.4.1 と PyTorch**で、実験的な 2.x コンパイラ API ではありません。小規模な例は手順の理解用であり、GPU 性能のベンチマークではありません。
 
-## 完全なチュートリアルリソース
+## 独立した環境を準備する
 
-中国語オンラインチュートリアル：
-
-[EvoX Beginners Tutorial - EvoX Document](https://evox.readthedocs.io/zh-cn/latest/tutorial/ "https://evox.readthedocs.io/zh-cn/latest/tutorial/")
-
-中国語PDFチュートリアル：
-
-QQグループに参加して入手してください：297969717
-
-次に、インストールから実行までの全プロセスをわずか10分でご案内します。
-
-## ステップ1：環境セットアップ
-
-ターミナルを開き、クリーンなPython環境を作成します：
+Python 3.10 以降で仮想環境を作り、シェルに対応したコマンドで有効化します。
 
 ```bash
 python -m venv .venv
+```
+
+macOS/Linux：
+
+```bash
 source .venv/bin/activate
 ```
 
-お好みのツールを使用して、クリーンなPython環境を作成することもできます。
+Windows PowerShell：
 
-## ステップ2：PyTorchとEvoXのインストール
-
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-pip install "evox[vis]"
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-GPUが利用可能かどうかを確認します：
+## 適切なパッケージをインストールする
+
+OS とハードウェアに合うコマンドを [PyTorch 公式サイト](https://pytorch.org/get-started/locally/)で選びます。CUDA パッケージには対応ドライバが必要で、EvoX のインストールだけでは GPU 利用は保証されません。続いて対象バージョンを入れます。
+
+```bash
+python -m pip install "evox[vis]==1.4.1"
+```
+
+## 実験を実行する
+
+以下を Python スクリプトとして保存します。CUDA があれば GPU、それ以外は CPU を選び、実際のデバイスを表示します。状態と監視は同じデバイスに置きます。乱数シードの固定は再実行に役立ちますが、デバイスやバージョンが異なると結果も変わり得ます。
 
 ```python
 import torch
-print(torch.cuda.is_available())
-```
-
-## ステップ3：最初の進化的アルゴリズムの実行
-
-```python
 from evox.algorithms import PSO
 from evox.problems.numerical import Ackley
 from evox.workflows import StdWorkflow, EvalMonitor
-import torch
+
+torch.manual_seed(42)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.set_default_device(device)
 
 algorithm = PSO(
     pop_size=50,
-    lb=-32 * torch.ones(2),
-    ub=32 * torch.ones(2),
+    lb=-32 * torch.ones(2, device=device),
+    ub=32 * torch.ones(2, device=device),
+    device=device,
 )
 problem = Ackley()
-monitor = EvalMonitor()
+monitor = EvalMonitor(device=device, history_device=device)
 workflow = StdWorkflow(algorithm, problem, monitor)
 
 workflow.init_step()
 for _ in range(100):
     workflow.step()
 
-print("Best fitness:", float(monitor.get_best_fitness()))
+print("Device:", device)
+print("Best fitness:", monitor.get_best_fitness().item())
 ```
 
-これは一体何をしているのでしょうか？標準インターフェースを介して、アルゴリズム（PSO）、問題（Ackley）、およびモニター（EvalMonitor）を構成しています。EvoXが並列化、高速化、モニタリングのすべてを処理します！
+## 結果を理解して可視化する
 
-## ステップ4：収束曲線のプロット
+PSO が候補ベクトルを保持し、Ackley が評価、StdWorkflow が接続、EvalMonitor が記録を担当します。適応度は小さいほどよく、理論上の最適値は原点でゼロです。結果は確率的なので固定スコアは保証しません。
 
-たった1行で十分です：
+探索後、同じプロセスで次を実行します。可視化用依存関係はインストール済みです。画像は元の教材の参考例で、このシードの出力を保証するものではありません。
 
 ```python
 monitor.plot()
 ```
 
-![monitor_output.png](./quickstart-7.png)
+![PSO convergence](./quickstart-7.png)
 
-下降している曲線が見えますか？それは、**進化的アルゴリズムがターゲットに近づいている軌跡**であり、**未知の世界を探索するために辿った道筋**です。
+## 意図を持って実験を拡張する
 
-## ステップ5：拡張を試みる
+次元、集団サイズ、シードを一つずつ変更してください。独自問題は各候補に目的値を返します。多目的最適化には対応アルゴリズム、出力形状、監視設定も必要で、一つのパラメータ変更だけでは不十分です。
 
-「単にAckleyを実行する」だけでは満足できない場合は、以下のようなことができます：
+計時ではコンパイルとウォームアップを定常実行から分け、CUDA を同期し、同じ評価予算で比較します。小さな課題は CPU の方が速い場合があります。まず基準例を動かし、その後にコンパイルを検討してください。
 
-- PSOをGA、DE、CMA-ES、NSGA-II、RVEAなどに交換する
- · AckleyをRastrigin、Griewank、CEC2022などに交換する
- · `n_objs >= 2` に設定して多目的問題に切り替える
- · `MyProblem` や `MyAlgorithm` で独自のロジックを実装する
- · PyTorchモデルや強化学習環境（Gym、Brax、MuJoCo Playground）に接続する
+## 教材と謝辞
 
-ハイパーパラメータチューニング、アーキテクチャ探索、ニューロエボリューション、制御戦略の最適化など、EvoXはすべてを簡単に処理します。
+元の教材は Boqing Xu、Xinmeng Yu、Bowen Zheng、Xinyao Li が執筆し、Beichen Huang が編集・公開しました。概要図を以下に残しています。
 
-## なぜEvoXを選ぶのか？
+![EvoX overview](./quickstart-8.png)
 
-![表格-英文.png](./quickstart-8.png "表格-英文.png")
-
-## 謝辞
-
-このチュートリアルは、**Boqing Xu**、**Xinmeng Yu**、**Bowen Zheng**、**Xinyao Li**によって執筆されました。**Beichen Huang**がチュートリアルの整理、編集、オンライン公開を担当しました。
-
-EvoXコミュニティのすべてのメンバーに心から感謝します。EvoXが進化し続けることができるのは、私たちの共同の努力のおかげです。
-
-## 関連資料
-
-- [GitHub](https://github.com/EMI-Group/evox)
-- [ドキュメント](https://evox.readthedocs.io/en/latest/)
+この例には[バージョン固定のソース](https://github.com/EMI-Group/evox/tree/v1.4.1)、続きの学習には[ドキュメント](https://evox.readthedocs.io/en/latest/)を参照してください。新しい資料の API を使う前に対象バージョンを確認してください。

@@ -1,10 +1,15 @@
 ---
-title: "EvoX Genesis: Ein rekursives KI-System für langfristige autonome Software-Evolution, das einen 250.000-Zeilen-C-Compiler von Grund auf gebaut hat"
+title: "EvoX Genesis: Software entwickeln, die weiter evolvieren kann"
 pubDate: 2026-08-17
-summary: "Das EvoX-Team des Departements für Datenwissenschaft und Künstliche Intelligenz der Hong Kong Polytechnic University hat EvoX Genesis veröffentlicht, ein rekursives KI-System für langfristige autonome Software-Evolution. Statt sich auf einen persistenten Agenten zu verlassen, der langfristige Entwicklung aufrechterhält, lässt es die Softwarewelt selbst weiter evolvieren: Ausgehend von einem leeren Repository hat das System in 123,4 Stunden einen C-Compiler mit 248.989 Zeilen gebaut, bei Modell-Token-Kosten von nur 44,38 $."
+updatedDate: 2026-11-07
+summary: "Genesis erweitert EvoXs evolutionäre KI auf Software: Agenten schlagen Änderungen vor, Prüfungen wählen akzeptierte Arbeit aus, und das Projekt bewahrt den Fortschritt."
 ---
 
+*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+
 ![image1.png](./evox-genesis-1.png)
+
+Genesis überträgt EvoXs Vision auf Agentic AI: Das sich entwickelnde Softwareprojekt bleibt als Ergebnis vieler lokaler Beiträge bestehen. Codegenerierung, Ausführung, Review und Integration bilden einen Entwicklungszyklus. Akzeptierte Implementierungen und ihre Prüfergebnisse liefern die Grundlage für anschließende Arbeit.
 
 Das EvoX-Team des Departements für Datenwissenschaft und Künstliche Intelligenz der Hong Kong Polytechnic University hat **EvoX Genesis** veröffentlicht, ein rekursives KI-System für langfristige autonome Software-Evolution.
 

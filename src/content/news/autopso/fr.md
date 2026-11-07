@@ -1,14 +1,17 @@
 ---
-title: "AutoPSO : Puissance de calcul GPU × Méta-évolution → Optimisation par essaim de particules entièrement automatique"
+title: "AutoPSO : faire évoluer les algorithmes de recherche"
 pubDate: 2026-08-25
-summary: "AutoPSO, proposé par l'équipe EvoX et publié dans IEEE TEVC, encode de manière uniforme la configuration des paramètres, les mécanismes d'apprentissage et la structure de l'essaim du PSO dans un espace évolutionnaire interrogeable, puis recherche automatiquement, par méta-évolution, la variante de PSO optimale pour un problème cible donné."
+updatedDate: 2026-11-07
+summary: "AutoPSO transforme la conception de l’optimisation par essaim particulaire (PSO) en espace de recherche et montre comment l'évaluation parallèle d'EvoX soutient l'évolution des méthodes d'optimisation."
 ---
+
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
 ![](./autopso-hero.png)
 
-Le développement de l'optimisation par essaim de particules (PSO) a, en essence, été une histoire de « conception manuelle » continue. Au cours des dernières décennies, les chercheurs ont proposé une vaste gamme d'améliorations portant sur les poids d'inertie, les stratégies d'apprentissage, les topologies d'essaim, les structures de sous-populations et d'autres composantes, formant progressivement un vaste espace de conception algorithmique autour du PSO. Cependant, plus l'espace est grand, plus le choix est difficile. Face à une tâche d'optimisation spécifique, quels paramètres sélectionner, quels mécanismes d'apprentissage adopter, comment organiser l'essaim de particules — ces décisions de conception fortement couplées restent, à ce jour, largement dépendantes de l'expertise des chercheurs et d'essais répétés. Le PSO est devenu de plus en plus riche, mais il est aussi devenu de plus en plus difficile de « bien choisir ». Et si l'acte même de « choisir un PSO » était lui aussi délégué à l'évolution algorithmique ?
+Un système d'IA évolutionnaire doit décider quoi chercher et comment chercher. AutoPSO intègre cette seconde question à la boucle d'optimisation : paramètres, règles d'apprentissage et organisation de l'essaim deviennent des conceptions candidates à évaluer et améliorer pour une tâche.
 
-Le framework **AutoPSO**, proposé par l'équipe EvoX, encode de manière uniforme la configuration des paramètres, les mécanismes d'apprentissage et la structure de l'essaim du PSO dans un espace évolutionnaire interrogeable, et recherche automatiquement, via la **méta-évolution**, la variante de PSO optimale adaptée à un problème cible donné. Ce framework optimise non seulement la solution du problème, mais aussi, à un niveau supérieur, « quel PSO utiliser pour le résoudre ».
+Le framework **AutoPSO**, proposé par l'équipe EvoX, encode de manière uniforme la configuration des paramètres, les mécanismes d'apprentissage et la structure de l'essaim du PSO dans un espace évolutionnaire interrogeable, et recherche automatiquement, via la **méta-évolution**, une variante de PSO adaptée adaptée à un problème cible donné. Ce framework optimise non seulement la solution du problème, mais aussi, à un niveau supérieur, « quel PSO utiliser pour le résoudre ».
 
 La recherche à grande échelle en méta-évolution repose sur des évaluations massivement parallèles, et le calcul tensorisé, le traitement par lots et le parallélisme GPU d'EvoX résolvent précisément cette difficulté — des milliers de variantes candidates peuvent évoluer simultanément, rendant praticables des recherches au niveau méta jusque-là infaisables sur CPU.
 
@@ -58,7 +61,7 @@ Proposer un framework de recherche automatique de structures d'algorithmes n'est
 
 Dans les environnements série traditionnels basés sur CPU, de tels coûts sont prohibitifs. Cependant, ce type de calcul est intrinsèquement parallélisable : les algorithmes candidats peuvent être évalués simultanément, et au sein de chaque algorithme candidat, les mises à jour des particules peuvent également être traitées par lots. AutoPSO s'appuie sur EvoX pour projeter la structure des populations du calcul évolutionnaire sur la capacité de traitement par lots des GPU, permettant à la recherche de configurations de niveau externe et à la résolution du problème de niveau interne de progresser simultanément.
 
-Ici, l'accélération GPU ne se limite pas à raccourcir le temps d'une exécution unique ; plus important encore, elle augmente considérablement le nombre de conceptions candidates pouvant être comparées dans un délai donné. La méta-évolution est essentiellement une recherche dans l'espace des algorithmes, et la qualité de cette recherche dépend directement du **nombre de conceptions candidates de PSO ayant été évaluées**. Plus l'évaluation est approfondie, plus la probabilité de trouver une configuration bien adaptée au problème courant est élevée.
+Le traitement par lots sur GPU permet de comparer davantage de conceptions PSO dans un temps donné. La qualité dépend aussi des composants disponibles, de la fiabilité des évaluations et de l'allocation du budget. AutoPSO cherche une conception adaptée dans cet espace ; davantage de candidats ne garantit pas un algorithme globalement optimal.
 
 La valeur d'EvoX réside précisément dans cette capacité : il organise les mises à jour des particules de niveau interne et les évaluations de fitness, ainsi que la comparaison des algorithmes candidats de niveau externe, en opérations tensorielles sur GPU, permettant à des milliers de conceptions candidates d'avancer simultanément à chaque itération. Autrement dit, EvoX fait passer la méta-évolution d'un processus d'« essais et erreurs lent » à une « expérimentation parallèle à grande échelle » — et c'est précisément sur ce fondement computationnel qu'AutoPSO repose.
 
@@ -100,15 +103,7 @@ AutoPSO libère les chercheurs du réglage répétitif des paramètres et des es
 
 ## De la modification des algorithmes à la construction de systèmes qui génèrent des algorithmes
 
-L'importance d'AutoPSO va au-delà de l'obtention d'une variante de PSO plus puissante. Il démontre un nouveau paradigme pour les algorithmes évolutionnaires à l'ère du calcul parallèle :
-
-- **Autrefois, nous étudiions « comment concevoir un meilleur algorithme » ;**
-
-- **aujourd'hui, nous étudions « comment construire un système capable de générer, sélectionner et améliorer automatiquement des algorithmes ».**
-
-À mesure que l'évaluation massive de candidats sur GPU devient progressivement la norme en recherche, les frontières du calcul évolutionnaire sont vouées à changer en conséquence : le matériel de calcul parallèle n'est plus seulement une plateforme qui héberge l'exécution des algorithmes, il commence aussi à participer à la refonte de la manière dont les algorithmes sont conçus.
-
-AutoPSO × EvoX : donner au calcul évolutionnaire les moyens de passer de l'ère manuelle à l'ère automatique.
+AutoPSO illustre le rôle d'EvoX dans la conception expérimentale des algorithmes. Les chercheurs définissent des composants utiles et des évaluations fiables ; la recherche par populations explore leurs combinaisons. Le calcul parallèle soutient ainsi la construction d'algorithmes adaptés à une tâche, à partir de performances mesurées.
 
 ## Ressources
 

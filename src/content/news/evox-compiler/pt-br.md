@@ -1,29 +1,46 @@
 ---
-title: "EvoX Compiler v0.1.0: grafos tensoriais explícitos e vários backends"
+title: "EvoX Compiler v0.1.0: uma base computacional para programas em evolução"
 pubDate: 2026-10-29
-summary: "A primeira versão do EvoX Compiler traz ao Python grafos inspecionáveis, transformações combináveis e caminhos NumPy, IREE, XLA e TVM."
+updatedDate: 2026-11-07
+summary: "O EvoX Compiler separa representação, transformação e execução dos programas, fornecendo uma base para experimentos com populações e diferentes backends."
 ---
 
-**O EvoX Compiler (evoxc) v0.1.0 foi lançado em 29 de outubro de 2026.** É um compilador e runtime Python para grafos tensoriais, destinado a desenvolvedores que desejam inspecionar, transformar, salvar e executar o próprio programa. Tem licença Apache-2.0 e requer Python 3.11 ou posterior.
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
 
-## Um programa que pode inspecionar
+A visão de IA evolutiva do EvoX exige sistemas de cálculo que aceitem candidatos em mudança, incluindo programas com estruturas diferentes. O EvoX Compiler desenvolve essa base: grafos explícitos permitem inspecionar e transformar programas antes da execução, e as interfaces de backend ligam cálculos suportados a diferentes sistemas de execução.
 
-O evoxc expõe cada etapa por meio de `trace → lower → compile → load → run`. O frontend representa os cálculos em EvoXIR e exporta StableHLO para compiladores externos, que otimizam e geram código. Os grafos e artefatos intermediários ficam disponíveis para inspeção e persistência.
+Um programa numérico não se resume à saída: pode ser necessário inspecionar o grafo, transformá-lo, comparar backends ou guardar um artefato compilado. O **EvoX Compiler (evoxc) v0.1.0**, publicado em 29 de outubro de 2026, torna estas etapas explícitas. É um frontend e runtime Python para grafos tensoriais, com licença Apache-2.0 e requisito Python 3.11 ou posterior.
 
-As transformações incluem `vmap`, `grad`, `jvp` e `vjp`. Na busca de arquiteturas neurais, programação genética e síntese de algoritmos, `batch_functions` combina candidatos com especificações de entrada/saída correspondentes em um grafo. O cache explícito de compilação ajuda tarefas que geram programas estáticos repetidamente.
+## Da definição ao executável
 
-## Quatro caminhos de execução
+O fluxo é `trace → lower → compile → load → run`. O tracing constrói EvoXIR a partir da definição e das especificações de entrada; o lowering prepara a representação do backend; a compilação cria um artefato, carregado em um dispositivo e executado com dados. Cada etapa produz um objeto inspecionável.
 
-NumPy é a única dependência obrigatória e fornece o interpretador CPU padrão. Adaptadores opcionais conectam o grafo a IREE, XLA por um plugin PJRT fornecido pelo usuário e TVM. Backend e dispositivo são escolhas explícitas; a cobertura depende do adaptador. A versão documenta Vulkan em Mesa lavapipe e ROCm no TVM apenas na compilação.
+Assim se distinguem grafos inválidos, operações não suportadas e incompatibilidades de dispositivo. Grafos e artefatos compatíveis podem ser guardados. Compiladores externos otimizam, escalonam e geram código; o evoxc fornece o frontend e os contratos entre etapas.
 
-O README relata **7,511 testes aprovados, 77 ignorados, 4 falhas esperadas e 0 falhas** nas suítes do núcleo e de `evoxc_hf`, com IREE, TVM e torch instalados. São resultados do projeto para essa configuração. O repositório atribui ao EvoX Genesis a produção do código, testes e documentação.
+## Transformações para pesquisa evolutiva
 
-## Começar
+`vmap`, `grad`, `jvp` e `vjp` produzem grafos combináveis antes da execução. `batch_functions` reúne funções candidatas com especificações de entrada e saída correspondentes em um grafo populacional.
 
-Instale esta versão com o comando abaixo. Os adaptadores opcionais estão documentados no README da versão; a integração HuggingFace é distribuída separadamente como `evoxc-hf`.
+Na programação genética, pesquisa de arquiteturas e síntese de algoritmos, os candidatos podem ser programas diferentes. Agrupá-los pode reduzir compilações e chamadas repetidas, mas o benefício depende da estrutura e do backend; não é garantido.
+
+## Escolher o percurso de execução
+
+NumPy é a única dependência obrigatória e oferece o interpretador CPU de referência. Adaptadores opcionais ligam IREE, XLA através de um plugin PJRT fornecido pelo usuário e TVM através de StableHLO. A cobertura de operadores e hardware varia.
+
+O README da versão documenta Vulkan em Mesa lavapipe, um dispositivo de software, e TVM ROCm apenas na compilação. Entradas GPU e colocação são explícitas. Verifique os operadores compatíveis antes de transferir um grafo CPU.
+
+## Começar pela referência
+
+Instale a versão fixada, execute o exemplo CPU do README, inspecione o grafo e escolha depois um backend compilado:
 
 ```bash
 pip install evoxc==0.1.0
 ```
 
-[GitHub Release v0.1.0](https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0) · [README v0.1.0](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md) · [GitHub](https://github.com/EMI-Group/evoxc)
+A integração HuggingFace é o pacote separado `evoxc-hf`. Não confunda este compilador e as suas versões com o pacote de otimização EvoX.
+
+## Validação na base computacional
+
+O README reporta **7.511 testes aprovados, 77 omitidos e 4 falhas esperadas**, sem falhas, no ambiente documentado das suites principais e de integração. Isto não valida todo o hardware. O repositório atribui ao Genesis código, testes e documentação.
+
+Consulte o [README da versão](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md), a [publicação](https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0) e o [GitHub](https://github.com/EMI-Group/evoxc) para API, artefatos e desenvolvimento posterior.

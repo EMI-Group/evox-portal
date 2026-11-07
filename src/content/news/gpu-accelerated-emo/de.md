@@ -1,14 +1,17 @@
 ---
-title: "GPU-beschleunigte evolutionäre mehrkriterielle Optimierung"
+title: "EvoMO: Zielkonflikte in großem Maßstab untersuchen"
 pubDate: 2025-04-16
-summary: "Verbindung von evolutionärer mehrkriterieller Optimierung und GPU-Beschleunigung durch Tensorisierung, Einführung der EvoMO-Bibliothek."
+updatedDate: 2026-11-07
+summary: "EvoMO bringt tensorisierte Mehrzielsuche in EvoX, um konkurrierende Ziele über große Kandidatenpopulationen zu untersuchen."
 ---
+
+*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
 
 ## Verbindung von evolutionärer mehrkriterieller Optimierung und GPU-Beschleunigung durch Tensorisierung
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun und Ran Cheng, Senior Member, IEEE
 
-Mit der stetig steigenden Nachfrage nach komplexen Optimierungslösungen in Bereichen wie technischem Design und Energiemanagement haben Algorithmen der evolutionären mehrkriteriellen Optimierung (EMO) aufgrund ihrer robusten Fähigkeiten zur Lösung mehrkriterieller Probleme große Aufmerksamkeit erlangt. Da Optimierungsaufgaben jedoch an Umfang und Komplexität zunehmen, stoßen herkömmliche CPU-basierte EMO-Algorithmen auf erhebliche Leistungsengpässe.
+KI- und technische Systeme verfolgen häufig mehrere Ziele: Genauigkeit, Ressourcenverbrauch, Stabilität oder weitere Anforderungen. EvoXs evolutionäre Infrastruktur muss die Untersuchung dieser Zielkonflikte ermöglichen. EvoMO organisiert aufwendige Populationsvergleiche und Auswahl für GPUs neu und macht damit größere Mehrzielexperimente praktikabel.
 
 Um diese Einschränkung zu beheben, schlug das EvoX-Team vor, EMO-Algorithmen mittels der Tensorisierungsmethodik auf GPUs zu parallelisieren. Unter Nutzung dieser Methode haben sie erfolgreich mehrere GPU-beschleunigte EMO-Algorithmen entworfen und implementiert. Darüber hinaus entwickelte das Team **"MoRobtrol"**, eine **Benchmark-Suite für mehrkriterielle Robotersteuerung**, die auf der Brax-Physik-Engine aufbaut und darauf abzielt, die Leistung von GPU-beschleunigten EMO-Algorithmen systematisch zu bewerten.
 
@@ -103,7 +106,8 @@ Abb. 8: Vergleichende Leistung (HV, EU und Visualisierung der Endergebnisse) von
 Die Experimente verglichen die Leistung von TensorNSGA-III, TensorMOEA/D, TensorHypE, TensorRVEA und Random Search (RS) innerhalb des MoRobtrol-Benchmarks. Die Ergebnisse zeigen, dass TensorRVEA die beste Gesamtleistung erzielte, die höchsten HV-Werte erreichte und eine gute Lösungsvielfalt über mehrere Umgebungen hinweg demonstrierte. TensorMOEA/D zeigte eine starke Anpassungsfähigkeit bei groß angelegten Aufgaben und zeichnete sich besonders durch die Präferenzkonsistenz der Lösungen aus. TensorNSGA-III und TensorHypE zeigten eine ähnliche Leistung und waren bei mehreren Aufgaben wettbewerbsfähig. Insgesamt zeigten tensorisierte dekompositionsbasierte Algorithmen überlegene Vorteile bei der Lösung groß angelegter und komplexer Probleme.
 
 ## Fazit und zukünftige Arbeit
-Diese Studie schlägt eine Methodik der tensorisierten Darstellung vor, um die Einschränkungen traditioneller CPU-basierter EMO-Algorithmen in Bezug auf Recheneffizienz und Skalierbarkeit zu beheben. Der Ansatz wurde auf mehrere repräsentative Algorithmen angewendet, darunter NSGA-III, MOEA/D und HypE, und erzielte signifikante Leistungsverbesserungen auf GPUs bei gleichzeitiger Beibehaltung der Lösungsqualität. Um die praktische Anwendbarkeit zu validieren, entwickelte das Team auch MoRobtrol, eine Benchmark-Suite für mehrkriterielle Robotersteuerung, die Aufgaben der Robotersteuerung in physikalischen Simulationsumgebungen als mehrkriterielle Optimierungsprobleme neu formuliert. Die Ergebnisse demonstrieren das Potenzial tensorisierter Algorithmen in rechenintensiven Szenarien wie der verkörperten Intelligenz (Embodied Intelligence). Obwohl die Tensorisierungsmethode die algorithmische Effizienz erheblich verbessert hat, bleibt Raum für weitere Verbesserungen. Zukünftige Richtungen umfassen die Verbesserung von Kernoperatoren wie der nicht-dominierten Sortierung, das Design neuer tensorisierter Operationen für Multi-GPU-Systeme und die Integration von groß angelegten Daten und Deep-Learning-Techniken, um die Leistung bei groß angelegten Optimierungsproblemen weiter zu steigern.
+
+EvoMO ermöglicht, bei konkurrierenden Zielen nützliche Alternativen zu bewahren und zu vergleichen. Innerhalb von EvoX wird Mehrzielsuche damit zur wiederverwendbaren Fähigkeit für Optimierung und simulierte Steuerung. Paralleles Rechnen erweitert die bewertbaren Alternativen; Fachziele und Entscheidungskriterien bestimmen die relevanten Kompromisse.
 
 ## Ressourcen
 

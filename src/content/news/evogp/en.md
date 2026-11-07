@@ -1,12 +1,15 @@
 ---
-title: "EvoGP: A GPU-Native Framework for Tree-Based Genetic Programming at 10^11 GPops/s"
+title: "EvoGP: Scaling the Search for Programs on GPUs"
 pubDate: 2026-06-02
-summary: "EvoGP reorganizes tree representation, genetic operators, and parallel execution from the ground up, achieving peak throughput exceeding 10^11 GPops/s and up to 304× speedup over existing GPU implementations."
+updatedDate: 2026-11-07
+summary: "EvoGP makes structured program populations amenable to GPU computation, supporting evolutionary search for interpretable expressions and control policies."
 ---
+
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
 
 ![img](./evogp-1.jpg)
 
-Genetic programming is an evolutionary method that combines structural search with interpretability. It offers unique advantages in tasks such as symbolic regression, classification, and control—not only optimizing parameters, but also directly searching for and producing analyzable program expressions. However, due to the heterogeneity of individual structures and irregular execution paths, **most existing genetic programming implementations remain confined to CPU-based execution and have long struggled to truly adapt to GPUs.** This directly limits computational efficiency and makes it difficult to handle massive datasets or complex simulation environments in modern applications.
+Evolutionary AI can search over executable structures as well as parameter vectors. EvoGP develops this direction within the EvoX ecosystem by making tree-based programs computationally tractable as large populations. Irregular structures and execution paths make this a representation and scheduling problem as much as an algorithmic one.
 
 To address this challenge, **we propose the EvoGP framework, reorganizing tree representation, genetic operator logic, and parallel execution mechanisms from the ground up.** Experimental results show that **EvoGP achieves peak computational throughput exceeding 10^11 GPops/s, enabling rapid evaluation of populations of 500,000 individuals within one second—up to 304× faster than existing GPU implementations.** This milestone marks a definitive break from hardware adaptation barriers, ushering genetic programming into the era of GPU-accelerated high-performance computing.
 
@@ -45,7 +48,7 @@ When processing small to medium-sized datasets, the system adopts a hybrid paral
 ## Unifying High Performance and Usability
 The vitality of a high-performance computing framework lies not only in underlying speed, but also in ecosystem compatibility and ease of use. Many practical applications are deployed in Python-based ecosystems such as OpenAI Gym, MuJoCo, Brax, and Genesis. **While pursuing extreme GPU acceleration, EvoGP achieves seamless integration with existing development ecosystems by embedding custom high-performance CUDA compute kernels as custom operators within the PyTorch runtime.**
 
-Furthermore, to fully leverage GPU architecture advantages, **EvoGP adopts a fully GPU-resident model, ensuring population data and evaluation contexts are maintained entirely on the GPU—completely eliminating the costly host-device data transfer overhead common in traditional frameworks.** This zero-copy design philosophy enables EvoGP to naturally and efficiently integrate with modern GPU-accelerated reinforcement learning environments, providing end-to-end efficient parallel simulation capabilities as a complete system that balances extreme performance with high scalability.
+EvoGP can keep population tensors and compatible evaluation data on the GPU across evolutionary iterations, reducing repeated host-device transfers. Initial data loading, CPU-based objectives and exporting results may still require transfers. End-to-end acceleration therefore depends on the entire evaluation pipeline.
 
 ![img](./evogp-5.png)
 
@@ -65,7 +68,8 @@ Core benchmark tests show that EvoGP's peak throughput exceeds 10^11 GPops/s, de
 *Figure 6: Performance across different population scales. EvoGP makes larger population sizes practically usable within acceptable time and unlocks stronger search potential.*
 
 ## Conclusion
-**The EvoGP framework systematically answers the question of how genetic programming can effectively utilize modern GPU architectures.** It is not a simple patch to existing implementations, but achieves fundamental innovations in underlying design through tensorized representation, operator refactoring, and adaptive parallelism—completely opening the path for genetic programming to enter high-performance computing systems. **This work not only demonstrates the enduring vitality of classical evolutionary methods in the compute era, but also provides a highly scalable system-level solution for interpretable machine learning and autonomous agent decision-making—marking genetic programming's true entry into the GPU-accelerated era.**
+
+EvoGP broadens the objects that can participate in scalable evolutionary search: symbolic expressions and program policies can be generated, executed and selected as populations. Its infrastructure contribution lies in connecting those structured candidates to GPU computation. Throughput enables larger experiments; task-specific evaluation determines which programs are actually useful.
 
 ## Resources
 

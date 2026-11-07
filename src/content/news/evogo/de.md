@@ -1,10 +1,15 @@
 ---
-title: "EvoGO: Bessere Lösungen aus Sucherfahrung erzeugen"
+title: "EvoGO: Aus Bewertungen lernen, wie man sucht"
 pubDate: 2026-04-05
-summary: "EvoGO ist ein vollständig datengesteuertes evolutionäres Optimierungs-Framework, das lernt, wie man aus vergangenen Sucherfahrungen bessere Lösungen generiert, und bei komplexen hochdimensionalen Aufgaben eine schnelle, starke Leistung erzielt."
+updatedDate: 2026-11-07
+summary: "EvoGO verbindet generatives Lernen mit evolutionärer Optimierung und nutzt bewertete Kandidaten als Erfahrung für die nächste Population."
 ---
 
+*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+
 ![image1](./image1.png)
+
+Wissenschaftliche und technische Suche muss wiederholt entscheiden, welches Experiment als Nächstes sinnvoll ist. EvoGO untersucht diese Frage rechnerisch: Können Bewertungen einen Generator zu besseren Vorschlägen führen? Damit verbindet sich EvoXs evolutionäre KI mit einem Suchprozess, der aus bereits geprüften Kandidaten lernt.
 
 ## Das Dilemma: Die datengesteuerte Optimierung hat den letzten Schritt noch nicht getan
 
@@ -62,25 +67,13 @@ Um die Suchdynamik von EvoGO intuitiver zu analysieren, präsentiert das Papier 
 
 Die Visualisierungsergebnisse zeigen, dass das, was EvoGO lernt, keine richtungslose zufällige Störung ist, sondern ein Aktualisierungsmuster, das sich an die Suchphase anpasst. In der Frühphase sind die generierten Vektoren in der Regel länger, was darauf hindeutet, dass der Algorithmus zu einer globalen Exploration mit großer Amplitude tendiert. Im Verlauf der Evolution nehmen die Vektorlängen allmählich ab und die generierten Regionen ziehen sich weiter zusammen, was zeigt, dass sich die Suche zu einer feineren lokalen Ausbeutung (Exploitation) verlagert. Gleichzeitig sammeln sich die Vektoren insgesamt in Richtung der optimalen Region, was darauf hindeutet, dass der Vorwärtsgenerator bereits eine praktisch sinnvolle Suchrichtung aus historischen Proben extrahiert hat. Auf der Verhaltensebene stützt dieses Phänomen die zentrale Eigenschaft von EvoGO: Es lernt nicht nur die Verteilung von Kandidatenlösungen, sondern das Aktualisierungsgesetz, das vom aktuellen Zustand zu einem besseren Zustand führt.
 
-## Anwendung: Technische Validierung an einem superkritischen Flügel eines Großraumflugzeugs
+## Von Benchmarks zu wissenschaftlichen Workflows
 
-Die erfolgreiche Auslieferung der **C919** markiert für China einen entscheidenden Schritt bei der Entwicklung im Inland produzierter Großflugzeuge. Als Standardrumpfflugzeug (Narrow-Body) mit einem Gang bedient die C919 jedoch hauptsächlich Kurz- und Mittelstrecken, und Durchbrüche im Bereich der Großraumflugzeuge (Wide-Body) sind weiterhin erforderlich. Um die Entwicklungsanforderungen der nächsten Generation von inländischen Großraumflugzeugen zu erfüllen, ist das **Design superkritischer Flügel** zu einem Schlüsselthema der aerodynamischen Optimierung geworden und spielt eine wichtige Rolle bei der Reduzierung des Reisewiderstands, der Verbesserung der Treibstoffeffizienz und der Erhöhung der Flugstabilität. Daher ist die Frage, wie eine effiziente und zuverlässige Optimierung superkritischer Flügel erreicht werden kann, zu einer zentralen technischen Herausforderung im Entwicklungsprozess von Großraumflugzeugen in China geworden.
-
-![image8](./image8.png)
-
-Wie im Originalartikel gezeigt, kann ein superkritischer Flügel durch die Optimierung geometrischer Merkmale wie einer längeren Sehne (Chord), einer flacheren Oberseite und einer verstärkten Hinterkantenwölbung (Trailing-Edge Camber) die transsonische Druckverteilung regulieren, die Bildung von Stoßwellen unterdrücken, den Wellenwiderstand verringern und die Auftriebseffizienz verbessern. Das optimale Design steht jedoch vor mehreren Herausforderungen. Einerseits muss das Design unter den Bedingungen hoher Reynolds-Zahlen von Großraumflugzeugen gleichzeitig strenge aerodynamische Einschränkungen wie das Gleitverhältnis (Lift-to-Drag Ratio), den Auftriebskoeffizienten und den Reiseflug-Anstellwinkel erfüllen, was extrem hohe Präzisionsanforderungen an die Formparameter stellt. Andererseits besteht eine stark nichtlineare Kopplungsbeziehung zwischen der Profilgeometrie und der aerodynamischen Leistung, die mit traditionellen Modellierungsmethoden schwer genau zu charakterisieren ist. Darüber hinaus stützt sich der bestehende Designprozess stark auf Erfahrung, wiederholte CFD-Simulationen und Windkanalexperimente, was zu hohen Rechenkosten, langen Entwicklungszyklen und Schwierigkeiten führt, sich dem globalen Optimum in einem hochdimensionalen Designraum effektiv zu nähern.
-
-![image9](./image9.png)
-
-Um dieses Problem anzugehen, hat das EvoX-Team eine integrierte Design-Pipeline basierend auf EvoGO aufgebaut, bestehend aus Leistungsbewertung, Profilgenerierung (Airfoil Generation) und Kandidatenscreening. Basierend auf einer kleinen Anzahl historischer Profilproben konstruiert die Methode ein Leistungsbewertungsmodell, ein Profilgenerierungsmodell und ein Screening-Modell und verbessert das Profildesign durch iterative Evolution kontinuierlich. Ein Ersatzmodell wird verwendet, um Schlüsselkennzahlen wie das Gleitverhältnis, den Auftriebskoeffizienten und den Reiseflug-Anstellwinkel genau vorherzusagen. Gleichzeitig wird ein generativer Mechanismus eingeführt, um die traditionelle heuristische Suche zu ersetzen und eine effiziente Annäherung an das Optimum in einem hochdimensionalen Designraum zu ermöglichen. In Kombination mit einer Kandidatenscreening-Strategie kann diese Methode Kandidatenprofile, die sowohl physische Einschränkungen als auch aerodynamische Leistungsanforderungen erfüllen, schnell aus einem riesigen Suchraum identifizieren und so die Designeffizienz verbessern.
-
-![image10](./image10.png)
-
-Mit nur 500 historischen Profilproben erreicht die Methode eine Vorhersagegenauigkeit von mehr als 99,5 % bei drei aerodynamischen Schlüsselindikatoren – Gleitverhältnis, Auftriebskoeffizient und Reiseflug-Anstellwinkel – und die Qualifikationsrate automatisch generierter Profile übersteigt 95 %. Diese Ergebnisse zeigen, dass vollständig datengesteuerte evolutionäre Optimierungsmethoden wie EvoGO nicht nur bei Standard-Benchmark-Tests gute Ergebnisse erzielen können, sondern auch beginnen, ihre Fähigkeit unter Beweis zu stellen, effektive Designunterstützung für reale technische Probleme zu bieten.
+Generative Suche ist ein möglicher Ansatz für technische Entwurfsaufgaben. Benchmark-Ergebnisse belegen aber weder die Genauigkeit eines Tragflächenentwurfs noch einen Einsatz in Flugzeugen. Dafür wären definierte Daten, unabhängige Testfälle, Nebenbedingungsprüfungen und unabhängige Simulationen oder Experimente nötig. Das verlinkte EvoGO-Paper berichtet numerische, Regelungs- und Robotik-Benchmarks, keine Validierung der aerodynamischen Prozentangaben.
 
 ## Fazit und Ausblick
 
-Worauf sich EvoGO konzentriert, ist nicht nur eine lokale Verbesserung der traditionellen evolutionären Optimierungs-Pipeline, sondern eine grundlegendere Rekonstruktion dessen, wie Optimierung selbst abläuft. Durch die Organisation der Optimierung in die drei vereinigten Phasen der Datenvorbereitung, des Modelltrainings und der Populationsgenerierung sowie durch die Einführung einer gerichteten Datenkonstruktion basierend auf der Paarung von überlegen und unterlegen, einer Ersatzmodell-gesteuerten paarweisen generativen Architektur und einem parallelen Populationsgenerierungsmechanismus demonstriert EvoGO stabile Vorteile sowohl in der Leistung als auch in der Effizienz bei Standard-Benchmark-Tests. Gleichzeitig hat es auch sein Potenzial für reale komplexe technische Probleme durch das Optimierungsdesign für superkritische Flügel von Großraumflugzeugen der nächsten Generation validiert. Auf einer höheren Ebene liegt die Bedeutung dieser Arbeit darin, zu zeigen, dass evolutionäre Optimierung nicht zwangsläufig auf manuell festgelegte heuristische Regeln beschränkt bleiben muss. Der Optimierungsprozess selbst kann zunehmend als erlernbares Gesetz aus historischer Erfahrung destilliert werden.
+EvoGO liefert evolutionären KI-Systemen einen lernfähigen Vorschlagsmechanismus. Der Bezug zu AI for Science liegt darin, aufwendige Bewertungen für die weitere Suche zu nutzen und mit paralleler Kandidatenerzeugung zu verbinden. Wissenschaftliche Anwendungen benötigen fachspezifische Bedingungen, Bewertungen und Validierung; die berichteten Benchmarks bilden den Ausgangspunkt.
 
 ## Ressourcen
 

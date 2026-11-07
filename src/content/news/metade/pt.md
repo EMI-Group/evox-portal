@@ -1,10 +1,13 @@
 ---
-title: "MetaDE: Evoluindo a Evolução Diferencial através da Evolução Diferencial"
+title: "MetaDE: fazer evoluir as estratégias de pesquisa com a tarefa"
 pubDate: 2025-02-15
-summary: "O MetaDE é um método meta-evolutivo que utiliza a Evolução Diferencial para evoluir os seus próprios hiperparâmetros e estratégias, publicado na IEEE TEVC."
+updatedDate: 2026-11-07
+summary: "O MetaDE acrescenta um ciclo evolutivo externo à evolução diferencial, usando o cálculo paralelo do EvoX para avaliar e melhorar configurações de pesquisa."
 ---
 
-A Evolução Diferencial (DE), um dos algoritmos fundamentais na computação evolucionária, tem sido amplamente utilizada em problemas de otimização de caixa-preta devido à sua simplicidade e elevada eficiência. No entanto, o seu desempenho depende fortemente da seleção de hiperparâmetros e estratégias, um problema persistente para os investigadores. Para enfrentar este desafio, a equipa EvoX publicou recentemente um estudo na *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* intitulado "MetaDE: Evolving Differential Evolution by Differential Evolution". Como um método meta-evolutivo que tira partido da DE para evoluir os seus próprios hiperparâmetros e estratégias, o MetaDE permite o ajuste dinâmico de parâmetros e estratégias, incorporando simultaneamente computação paralela acelerada por GPU. Este design melhora substancialmente a eficiência computacional a par do desempenho da otimização. Os resultados experimentais demonstram que o MetaDE oferece um desempenho excecional tanto no conjunto de testes de referência CEC2022 como em tarefas de controlo de robôs. O código-fonte do MetaDE está disponível em código aberto no GitHub em [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade").
+*Atualizado a 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+
+A adaptação pode atuar sobre a forma de pesquisar, além das soluções encontradas. O MetaDE traz esta ideia para o EvoX com dois níveis evolutivos ligados: um resolve o problema-alvo e o outro avalia quais configurações DE tornam a pesquisa eficaz.
 
 ## Contexto
 
@@ -123,19 +126,11 @@ Sob a mesma framework EvoX com computação paralela acelerada por GPU, o MetaDE
 
 ## Aprendizagem por Reforço Evolucionária: Tarefas de Controlo de Robôs
 
-Na Aprendizagem por Reforço (RL), a eficiência e a estabilidade da otimização de políticas são cruciais. Métodos baseados em gradiente, como PPO e SAC, podem sofrer de desvanecimento ou explosão de gradiente em ambientes de alta dimensão. Em contraste, a Aprendizagem por Reforço Evolucionária (EvoRL) contorna estes problemas utilizando **pesquisas sem gradiente** para otimizar diretamente os parâmetros da política.
+A experiência de controlo robótico do MetaDE procura parâmetros de uma política neuronal sem gradientes nem retropropagação do objetivo da política. A aprendizagem por reforço evolutiva também inclui métodos com gradientes e híbridos; não elimina de forma geral as dificuldades do PPO ou do SAC.
 
 ![8.png](./metade-12.png "8.png")
 
-Processo de Aprendizagem por Reforço Evolucionária
-
-Dentro da framework EvoRL, o MetaDE:
-
-* **Otimiza automaticamente os parâmetros da rede neuronal**, aumentando a adaptabilidade dos modelos de política.
-* **Ajusta dinamicamente os hiperparâmetros**, melhorando a estabilidade do treino.
-* **Tira partido da aceleração por GPU** para acelerar a otimização da política.
-
-Para avaliar o desempenho do MetaDE em tarefas de otimização complexas, aplicámo-lo a **problemas de controlo de robôs** utilizando otimização acelerada por GPU na **plataforma de simulação Brax**. O estudo incluiu três tarefas — **Swimmer**, **Hopper** e **Reacher** — cada uma modelada por uma rede neuronal totalmente ligada (MLP) de três camadas com o objetivo de **maximizar a recompensa**. Notavelmente, cada MLP contém cerca de **1.500 parâmetros**, criando um **desafio de otimização de 1.500 dimensões** para algoritmos evolucionários (EAs). Isto impõe requisitos rigorosos tanto na capacidade de pesquisa como na eficiência computacional.
+As experiências usam Swimmer, Hopper e Reacher no Brax, com políticas MLP de três camadas e cerca de 1.500 parâmetros. A pesquisa interna otimiza os pesos; a externa ajusta parâmetros e estratégias do executor DE. Estas simulações não demonstram utilização em robôs reais nem uma melhoria geral da estabilidade do treino.
 
 ![9.png](./metade-13.png "9.png")
 
@@ -145,7 +140,7 @@ Como mostrado na figura, o MetaDE demonstra um desempenho forte em tarefas de co
 
 ## Conclusão e Direções Futuras
 
-O MetaDE é uma abordagem meta-evolutiva inovadora que não só se destaca na resolução de tarefas de otimização, mas também ajusta e aperfeiçoa autonomamente as suas próprias estratégias. Capitalizando os pontos fortes da Evolução Diferencial, o MetaDE exibe um forte potencial na configuração adaptativa de parâmetros e na evolução de estratégias. Os resultados experimentais mostram uma robustez superior numa gama de testes de referência, e a sua aplicabilidade no mundo real é sublinhada pelo sucesso em tarefas de controlo de robôs via aprendizagem por reforço evolucionária. Um desafio central envolve manter um equilíbrio ideal entre generalização e especialização — garantindo que o algoritmo se possa adaptar a diversas tarefas enquanto otimiza eficazmente para problemas específicos. Esta investigação oferece novas perspetivas para algoritmos evolucionários auto-adaptativos e pode impulsionar novos avanços na meta-evolução para sistemas complexos.
+O MetaDE dá à IA evolutiva um mecanismo concreto de adaptação da pesquisa através de feedback. O contributo para o EvoX é uma relação reutilizável entre otimização da tarefa e pesquisa de configurações, apoiada por avaliação em lote. Novas aplicações exigem feedback significativo e consideração do custo dos dois níveis.
 
 ## Recursos
 

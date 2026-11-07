@@ -1,14 +1,17 @@
 ---
-title: "GPU-Accelerated Evolutionary Multiobjective Optimization"
+title: "EvoMO: Making Multiobjective Trade-offs Computable at Scale"
 pubDate: 2025-04-16
-summary: "Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization, introducing the EvoMO library."
+updatedDate: 2026-11-07
+summary: "EvoMO brings tensorized multiobjective search into EvoX, helping experiments explore competing objectives across large candidate populations."
 ---
+
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
 
 ## Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization
 
 Zhenyu Liang,Hao Li,Naiwei Yu, Kebin Sun, and Ran Cheng, Senior Member, IEEE
 
-With the continuous rise in demand for complex optimization solutions across domains such as engineering design and energy management, evolutionary multiobjective optimization (EMO) algorithms have garnered widespread attention due to their robust capabilities in solving multiobjective problems. However, as optimization tasks grow in scale and complexity, traditional CPU-based EMO algorithms encounter significant performance bottlenecks.
+AI and engineering systems often have several objectives: accuracy, resource use, stability or other task-specific requirements. EvoX's evolutionary infrastructure must support exploring these trade-offs. EvoMO addresses the computational side by reorganizing costly population comparisons and selection for GPUs, making larger multiobjective experiments practical.
 
 To address this limitation, the EvoX team proposed to parallelize EMO algorithms on GPUs via the tensorization methodology. Leveraging this method, they have successfully designed and implemented several GPU-accelerated EMO algorithms. Furthermore, the team developed **"MoRobtrol"**, a **benchmark suite for multiobjective robot control** built on the Brax physics engine, aimed at systematically evaluating the performance of GPU-accelerated EMO algorithms.
 
@@ -103,7 +106,8 @@ Table III: Overview of Multiobjective Robot Control Problems in the Proposed MoR
 The experiments compared the performance of TensorNSGA-III, TensorMOEA/D, TensorHypE, TensorRVEA, and Random Search (RS) within the MoRobtrol benchmark. The results show that TensorRVEA achieved the best overall performance, obtaining the highest HV values and demonstrating good solution diversity across multiple environments. TensorMOEA/D exhibited strong adaptability in large-scale tasks, particularly excelling in preference consistency of solutions. TensorNSGA-III and TensorHypE showed similar performance and were competitive on several tasks. Overall, tensorized decomposition-based algorithms demonstrated superior advantages in solving large-scale and complex problems.
 
 ## Conclusion and Future Work
- This study proposes a tensorized representation methodology to address the limitations of traditional CPU-based EMO algorithms in terms of computational efficiency and scalability. The approach has been applied to several representative algorithms, including NSGA-III, MOEA/D, and HypE, achieving significant performance improvements on GPUs while maintaining solution quality. To validate its practical applicability, the team also developed MoRobtrol, a multiobjective robotic control benchmark suite that reformulates robotic control tasks in physics simulation environments as multiobjective optimization problems. The results demonstrate the potential of tensorized algorithms in computationally intensive scenarios such as embodied intelligence. Although the tensorization method has substantially improved algorithmic efficiency, there remains room for further enhancement. Future directions include improving core operators such as non-dominated sorting, designing new tensorized operations for multi-GPU systems, and integrating large-scale data and deep learning techniques to further enhance performance on large-scale optimization problems.
+
+EvoMO contributes the ability to preserve and compare useful alternatives when objectives compete. Within EvoX, this makes multiobjective search a reusable capability for experiments in optimization and simulated control. Parallel computation expands the alternatives that can be evaluated; domain objectives and decision criteria determine which trade-offs matter.
 
 ## Resources
 
