@@ -1,13 +1,13 @@
 {
   "scope": "Local production build; no deployment or search-engine indexing verification",
   "counts": {
-    "articles": 37,
+    "articles": 38,
     "byCollection": {
-      "news": 25,
+      "news": 26,
       "releases": 12
     },
     "locales": 13,
-    "pages": 481,
+    "pages": 494,
     "updatedPages": 221,
     "articleImages": 156,
     "previewPagesExcluded": 65
@@ -2101,6 +2101,105 @@
           "route": "/pt-br/news/genesis-persistent-server",
           "titleCharacters": 65,
           "descriptionCharacters": 155
+        }
+      ]
+    },
+    {
+      "article": "news/genesis-tools-and-skills",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/genesis-tools-and-skills",
+          "titleCharacters": 67,
+          "descriptionCharacters": 162
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/genesis-tools-and-skills",
+          "titleCharacters": 25,
+          "descriptionCharacters": 60
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/genesis-tools-and-skills",
+          "titleCharacters": 25,
+          "descriptionCharacters": 59
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/genesis-tools-and-skills",
+          "titleCharacters": 34,
+          "descriptionCharacters": 72
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/genesis-tools-and-skills",
+          "titleCharacters": 34,
+          "descriptionCharacters": 79
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/genesis-tools-and-skills",
+          "titleCharacters": 63,
+          "descriptionCharacters": 179
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/genesis-tools-and-skills",
+          "titleCharacters": 74,
+          "descriptionCharacters": 160
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/genesis-tools-and-skills",
+          "titleCharacters": 58,
+          "descriptionCharacters": 168
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/genesis-tools-and-skills",
+          "titleCharacters": 70,
+          "descriptionCharacters": 165
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/genesis-tools-and-skills",
+          "titleCharacters": 70,
+          "descriptionCharacters": 165
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/genesis-tools-and-skills",
+          "titleCharacters": 66,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/genesis-tools-and-skills",
+          "titleCharacters": 66,
+          "descriptionCharacters": 161
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/genesis-tools-and-skills",
+          "titleCharacters": 66,
+          "descriptionCharacters": 161
         }
       ]
     },
