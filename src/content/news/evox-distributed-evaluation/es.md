@@ -1,0 +1,25 @@
+---
+title: "EvoX distribuido: compartir la evaluación entre dispositivos"
+pubDate: 2025-04-23
+summary: "El flujo distribuido experimental de EvoX divide la evaluación de candidatos y reúne la aptitud para extender la búsqueda más allá de un dispositivo."
+---
+
+El 23 de abril de 2025, EvoX añade una guía experimental de flujos multi-GPU y distribuidos, tras la implementación de marzo. La cuestión es cómo escalar: si evaluar candidatos domina el coste del experimento, ¿cómo repartirlo sin perder la información global que necesita la búsqueda?
+
+## Distribuir la evaluación y reunir la respuesta
+
+StdWorkflow incorpora opciones de ejecución distribuida. La población se divide por la dimensión de candidatos según el rango del proceso. Cada proceso evalúa su parte; después se reúnen y concatenan las aptitudes antes de regresar a la actualización del algoritmo.
+
+Es una evaluación distribuida dentro de un flujo coordinado, distinta de ejecutar búsquedas independientes y comparar sus respuestas finales. Simulaciones o funciones objetivo costosas son usos plausibles si admiten los lotes asignados y el entorno está bien configurado.
+
+## La reproducibilidad forma parte de la configuración
+
+La guía destaca fijar semillas antes de operaciones Torch o NumPy y describe el arranque con torch.distributed o torchrun. La implementación aísla el estado del generador aleatorio durante la evaluación. La inicialización coherente permite mantener estados de búsqueda compatibles al evaluar candidatos diferentes.
+
+Una orden de arranque no completa la configuración. Grupos de procesos, dispositivos, comunicación y comportamiento del problema necesitan validación. La función se documentó explícitamente como experimental y debe interpretarse en ese contexto.
+
+## Medir la generación completa
+
+Más dispositivos ayudan si la evaluación útil supera la sobrecarga de comunicación y coordinación. Los objetivos sencillos pueden ganar poco; los costosos ofrecen más margen. Los commits no garantizan aceleración universal. EvoX abre una vía concreta para distribuir evaluaciones manteniendo el ciclo de respuesta de la búsqueda evolutiva.
+
+[1](https://github.com/EMI-Group/evox/commit/388f0be9eb0ce01610a7ce60eb8050578a996dfb) · [2](https://github.com/EMI-Group/evox/commit/510452f70e30adeedebdaa4fc6e348a75d649643)
