@@ -1,14 +1,17 @@
 ---
 title: "EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining"
 pubDate: 2026-06-28
-summary: "The EvoX team, in collaboration with Peng Cheng Laboratory, proposes EvoGM, a generative evolutionary model merging framework that reformulates coefficient search as a learnable generative optimization problem, enabling autonomous model merging without retraining large models."
+updatedDate: 2026-11-07
+summary: "EvoGM brings evolutionary feedback to generative AI, learning how to combine existing expert-model capabilities without retraining the participating large models."
 ---
+
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
 
 ![image1.png](./evogm-1.png)
 
 ## Abstract
 
-As large language models grow more capable, an increasing number of expert models fine-tuned for different tasks are becoming available. A central challenge in model merging is how to efficiently reuse the capabilities of these expert models without retraining the participating large models or relying on additional large-scale training data. Existing methods typically depend on average merging, manual scaling, parameter pruning, or random search. While these approaches can combine multiple models to some extent, they struggle to continuously learn from historical evaluations and improve merging strategies over time.
+The growing collection of specialist models creates an opportunity to reuse capabilities across tasks. Within EvoX's broader research direction, EvoGM explores how population feedback can guide that reuse: candidate model combinations are evaluated, and their outcomes teach a lightweight generator how to propose better merging configurations.
 
 To address this problem, the EvoX team, in collaboration with Peng Cheng Laboratory, proposes EvoGM (Evolutionary Generative Merging), a generative evolutionary model merging framework that reformulates coefficient search as a learnable generative optimization problem. EvoGM organizes different merging configurations into a candidate population and, through winner–loser pairing, dual-generator training, cycle-consistency constraints, and evolutionary expert-base updates, enables the population to evolve continuously in a closed loop of "generate–evaluate–select–relearn." From limited validation feedback, it autonomously learns how to transform low-performing configurations into high-performing ones. Experimental results show that EvoGM delivers stronger model merging performance on both seen and unseen tasks.
 

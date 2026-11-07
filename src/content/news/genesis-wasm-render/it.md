@@ -1,12 +1,17 @@
 ---
-title: "EvoX Genesis completa WASM Render in circa due giorni per 36 dollari"
+title: "Genesis WASM Render: dalla generazione locale di codice alla costruzione di sistemi"
 pubDate: 2026-10-15
-summary: "Utilizzando DeepSeek V4 Flash, EvoX Genesis ha completato WASM Render in circa due giorni con soli 36 dollari di costi del modello, diventando il primo sistema di IA al mondo a presentare un risultato per la sfida. I registri di test del team riportano 2,017/2,019 test Khronos CTS superati (99.90%), compresi tutti i 1,184/1,184 test di conformità WebGL2.0 eseguiti."
+updatedDate: 2026-11-07
+summary: "Il renderer software di Genesis studia come interfacce, test e modifiche accettate coordinino la costruzione di una pipeline grafica completa."
 ---
 
-La capacità di portare avanti attività di lunga durata e consegnare infine un progetto ingegneristico completo sta diventando un indicatore importante delle capacità dell’IA. Terminal-Bench è uno dei benchmark rappresentativi per gli agenti di IA e si concentra su attività di programmazione e da riga di comando in ambienti terminale. Terminal-Bench Challenges porta la valutazione oltre, fino alla realizzazione da zero di progetti software completi, con una stima ufficiale dei costi superiore a 1,000 dollari USA per ciascuna sfida.
+*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
 
-EvoX Genesis, il sistema di IA ricorsivo per l’evoluzione del software sviluppato dal team EvoX, ha utilizzato DeepSeek V4 Flash per completare la sfida WASM Render in circa **due giorni**, spendendo solo **36 dollari USA** per il modello, diventando **il primo sistema di IA al mondo a presentare un risultato per questa sfida.** I registri di test del team mostrano che ha superato 2,017/2,019 test della suite Khronos CTS (99.90%), compresi tutti i 1,184/1,184 test di conformità WebGL2.0.
+Costruire un sistema software richiede che le modifiche locali utili rimangano compatibili mentre il progetto cresce. Genesis affronta questa sfida con WASM Render, collegando Agentic AI nell'ecosistema EvoX alla costruzione di sistemi: elaborazione degli shader, rendering e comportamento delle API devono formare un insieme coerente.
+
+La documentazione pubblica di Genesis descrive un renderer software TypeScript sviluppato con DeepSeek V4 Flash. Riporta 2.017/2.019 casi Khronos CTS superati, inclusi 1.184/1.184 casi WebGL2 nell'insieme valutato. I circa 36 USD coprono solo i token, non l'hardware. Le 65,9 ore tra il primo e l'ultimo commit degli agenti sono un intervallo del repository, non una misura del tempo di attività degli agenti.
+
+[Genesis Evidence](https://genesis.evox.group/evidence/tbench-wasm/)
 
 ## Dal codice locale a un sistema completo: dove si trovano le difficoltà?
 
@@ -14,13 +19,13 @@ WASM Render è una sfida dedicata ai sistemi grafici di Terminal-Bench Challenge
 
 Questo equivale a implementare una pipeline grafica via software: interpretare i programmi shader, calcolare la grafica e mantenere coerenti numerose interfacce e variazioni di stato. Una singola funzionalità operativa è ancora ben lontana da un intero sistema che funziona in modo coordinato. Il compito richiede all’IA di mantenere l’allineamento con l’obiettivo durante più cicli di sviluppo, gestire le dipendenze tra moduli, correggere gli errori in base ai riscontri dei test e, infine, completare l’integrazione del sistema e la verifica delle regressioni.
 
-Secondo i risultati pubblicati dal team Terminal-Bench per una prima prova di 12 ore, Devin, il prodotto di Cognition per lo sviluppo software tramite IA, abbinato a Fable 5, ha ottenuto un tasso di superamento del 20.5% nei più impegnativi test di conformità WebGL2.0. Dopo circa due giorni di sviluppo, Genesis ha portato al 100% il tasso di superamento dei test di conformità WebGL2.0 che ha eseguito.
+La prova iniziale di 12 ore e questa esecuzione hanno budget di sviluppo diversi: i tassi di successo non costituiscono una classifica controllata. L'archivio Evidence riporta inoltre 16/38 casi visivi three.js alla soglia rigorosa dello 0,1% e 13/16 casi Babylon.js, entrambi sottoinsiemi selezionati. La conformità delle API non dimostra quindi una compatibilità grafica completa.
 
 ![Risultati dei test di conformità WebGL2.0 e registri dei test Khronos CTS di Genesis](./wasm-render-results-en.png)
 
 *Risultati dei test di conformità WebGL2.0 e registri dei test Khronos CTS di Genesis.*
 
-Il repository pubblico dei risultati di Genesis contiene circa **130,000 righe di codice**, che coprono un compilatore del linguaggio shader GLSL, le interfacce WebGL e la gestione dello stato, la rasterizzazione software e la presentazione delle immagini. Queste implementazioni in TypeScript vengono compilate in un renderer JavaScript, collegando l’elaborazione del linguaggio, il calcolo grafico e il comportamento delle interfacce.
+L'archivio conta 135.165 righe di testo tracciate, inclusi renderer.js generato, codice di terze parti, un lockfile e documentazione; non sono tutte sorgenti del renderer. Il progetto descrive una delle prime consegne autonome, senza una classifica pubblicata dagli organizzatori. I risultati sono dichiarati dal progetto e non riprodotti indipendentemente.
 
 Il ciclo di sviluppo ha infine superato 2,017 test Khronos CTS, con circa 36 dollari USA di costi per i token del modello e un tasso di successo della cache di circa il 98%. Portare avanti e integrare un progetto di ingegneria del software di dimensioni così grandi con un costo del modello contenuto dimostra anche la capacità di Genesis di svolgere uno sviluppo di lunga durata utilizzando modelli open source economici.
 
@@ -32,9 +37,9 @@ Per i progetti di grandi dimensioni, un approccio intuitivo consiste nel dare di
 
 In precedenza, Genesis era partita da un repository vuoto, aveva costruito un compilatore C composto da circa 250,000 righe di codice e aveva portato avanti lo sviluppo passando da un modello all’altro. I risultati dei test WASM Render confermano ulteriormente le capacità di Genesis di costruire e integrare autonomamente sistemi grafici complessi.
 
-## Open source e comunità
+## Sistemi aperti che continuano a evolvere
 
-Il team EvoX continuerà a sviluppare sistemi di IA ricorsivi per l’evoluzione del software, contribuendo ad accumulare codice, risultati di validazione ed esperienza di sviluppo nella comunità open source. Invitiamo altri sviluppatori a partecipare a un’evoluzione sostenibile del software e a costruire insieme un ecosistema aperto per lo sviluppo software.
+Il valore open source di questo caso sta nel rendere ispezionabile la costruzione: interfacce, implementazioni e verifiche restano disponibili per il lavoro successivo. Avanza così la direzione EvoX di software che accumula modifiche utili tra compiti degli agenti, valutando il progresso attraverso il comportamento del sistema integrato.
 
 🔗 Repository Genesis: [https://github.com/EMI-Group/genesis](https://github.com/EMI-Group/genesis)
 

@@ -1,14 +1,17 @@
 ---
-title: "AutoPSO: GPU Computing Power × Meta-Evolution → Fully Automatic Particle Swarm Optimization"
+title: "AutoPSO: Evolving the Algorithms That Search"
 pubDate: 2026-08-25
-summary: "The EvoX team's AutoPSO, published in IEEE TEVC, encodes the parameter configuration, learning mechanisms, and swarm structure of PSO into a searchable evolutionary space, and automatically searches for the optimal PSO variant for a given target problem through meta-evolution."
+updatedDate: 2026-11-07
+summary: "AutoPSO turns particle swarm optimization (PSO) design into a searchable space, showing how EvoX's parallel evaluation supports the evolution of optimization methods themselves."
 ---
+
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
 
 ![](./autopso-hero.png)
 
-The development of particle swarm optimization (PSO) has, in essence, been a history of continuous "manual design." Over the past several decades, researchers have proposed a vast array of improvements concerning inertia weights, learning strategies, swarm topologies, subpopulation structures, and other components, gradually forming an expansive design space around PSO. However, the larger the space, the more difficult the choice. When confronted with a specific optimization task, which parameters to select, which learning mechanisms to adopt, and how to organize the particle swarm—these highly coupled design decisions remain, to this day, heavily dependent on researchers' expertise and trial-and-error experimentation. PSO has grown increasingly rich, yet it has also become increasingly difficult to "choose correctly." What if the very act of "choosing a PSO" were also delegated to algorithmic evolution?
+An evolutionary AI system must decide both what to search for and how to search. AutoPSO brings the second question into the optimization loop: parameters, learning rules and swarm organization become candidates that can be evaluated and improved for a task.
 
-The **AutoPSO** framework, proposed by the EvoX team, uniformly encodes the parameter configuration, learning mechanisms, and swarm structure of PSO into a searchable evolutionary space, and automatically seeks the optimal PSO variant tailored to a given target problem through **meta-evolution**. This framework not only optimizes the solution to the problem but also, at a higher level, automatically optimizes "which PSO to use for solving."
+The **AutoPSO** framework, proposed by the EvoX team, uniformly encodes the parameter configuration, learning mechanisms, and swarm structure of PSO into a searchable evolutionary space, and automatically seeks a task-suited PSO variant tailored to a given target problem through **meta-evolution**. This framework not only optimizes the solution to the problem but also, at a higher level, automatically optimizes "which PSO to use for solving."
 
 Large-scale search in meta-evolution relies on massively parallel evaluations, and EvoX's tensorized computation, batch processing, and GPU parallelism precisely resolve this bottleneck—thousands of candidate variants can evolve simultaneously, rendering meta-level searches that were previously infeasible on CPUs practically achievable.
 
@@ -58,7 +61,7 @@ Proposing an automatic search framework for algorithm structures is not particul
 
 In traditional CPU-based serial environments, such costs are prohibitive. However, this type of computation is inherently parallelizable: candidate algorithms can be evaluated concurrently, and within each candidate algorithm, the particle updates can also be processed in batch. AutoPSO leverages EvoX to map the population structure of evolutionary computation onto the batch-processing capability of GPUs, enabling the outer-level configuration search and the inner-level problem solving to proceed simultaneously.
 
-Here, GPU acceleration is not merely about shortening the runtime of a single execution; more importantly, it substantially increases the number of candidate designs that can be compared within a given time frame. Meta-evolution is essentially a search over the algorithm space, and the quality of that search directly depends on **how many candidate PSO designs have been evaluated**. The more thoroughly they are evaluated, the higher the chance of finding a configuration well suited to the current problem.
+GPU batching increases the number of candidate PSO designs that can be compared within a time budget. Search quality also depends on the component pool, evaluation reliability and budget allocation. AutoPSO seeks a task-suited design within this search space; evaluating more candidates does not guarantee a globally optimal algorithm.
 
 The value of EvoX lies precisely in providing this capability: it organizes the inner-level particle updates and fitness evaluations, as well as the outer-level comparison of candidate algorithms, into tensor operations on GPUs, allowing thousands of candidate designs to advance synchronously in each iteration. In other words, EvoX transforms meta-evolution from a "slow trial-and-error" process into a "large-scale parallel experimentation" one—and this is precisely the computational foundation on which AutoPSO is built.
 
@@ -100,15 +103,7 @@ AutoPSO frees researchers from repetitive parameter tuning and trial-and-error, 
 
 ## From Modifying Algorithms to Constructing Systems That Generate Algorithms
 
-The significance of AutoPSO extends beyond obtaining a stronger PSO variant. It demonstrates a new paradigm for evolutionary algorithms in the era of parallel computing:
-
-- **In the past, we studied "how to design a better algorithm";**
-
-- **now, we study "how to build a system that can automatically generate, select, and improve algorithms."**
-
-As large-scale GPU-based candidate evaluation gradually becomes the norm in research, the boundaries of evolutionary computation are bound to change accordingly: parallel computing hardware is no longer merely a platform that hosts algorithm execution, but is also beginning to participate in reshaping the way algorithms are designed.
-
-AutoPSO × EvoX: empowering evolutionary computation to transition from the manual era to the automatic era.
+AutoPSO illustrates a role for EvoX beyond running a chosen optimizer: making algorithm design itself experimentally searchable. Researchers define useful components and reliable evaluations; population search explores their combinations. The resulting capability is task-dependent algorithm construction, grounded in measured performance and supported by parallel computation.
 
 ## Resources
 

@@ -1,16 +1,17 @@
 ---
 title: "Codex × EvoX: desenvolvimento de algoritmos e experiências reproduzíveis"
 pubDate: 2026-08-08
-summary: "A computação evolutiva está a entrar na era nativa de IA. Com o Codex como representante dos agentes de IA para programação, o EvoX transforma intenções em linguagem natural em fluxos de trabalho de computação evolutiva executáveis — abrangendo modelação de problemas, migração de algoritmos, neuroevolução sem retropropagação e tensorização em GPU."
+updatedDate: 2026-11-07
+summary: "Os agentes de programação ligam a intenção de investigação aos fluxos executáveis do EvoX, desde a definição do problema à avaliação reprodutível."
 ---
 
-A computação evolutiva está a entrar na era nativa de IA.
+Na IA evolutiva, uma ideia de investigação torna-se útil quando entra num ciclo repetível de execução e avaliação. Codex e EvoX ligam a intenção expressa em linguagem natural a esse ciclo: o agente ajuda a construir a experiência, enquanto o EvoX fornece interfaces e cálculo para testar as soluções candidatas.
 
 O [EvoX](https://github.com/EMI-Group/evox) é um framework distribuído e acelerado por GPU para computação evolutiva escalável. Através das suas interfaces unificadas `Algorithm`, `Problem` e `Workflow`, o EvoX reúne a pesquisa por populações, a avaliação em lote, a execução de experiências e a aceleração de hardware numa única arquitetura computacional coerente. Suporta aplicações que vão desde a otimização mono- e multiobjetivo até à neuroevolução, ambientes de aprendizagem por reforço e conceção de sistemas complexos.
 
 Desde o seu lançamento em código aberto, o EvoX tem continuado a evoluir em torno de uma missão clara:
 
-> **Construir infraestruturas de nova geração para a computação evolutiva, desenhadas especificamente para hardware moderno e computação em larga escala.**
+> **Construir infraestrutura para sistemas de IA evolutiva, ligando geração de candidatos, execução, avaliação e melhoria.**
 
 ## Prólogo: a linguagem natural torna-se um novo ponto de entrada para o EvoX
 

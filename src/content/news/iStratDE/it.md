@@ -1,12 +1,15 @@
 ---
-title: "iStratDE: GPU Computing x Popolazioni Ultra-Grandi Sbloccano il Pieno Potenziale dell'Evoluzione Differenziale"
+title: "iStratDE: la diversità della popolazione come principio di ricerca parallela"
 pubDate: 2026-03-16
-summary: "Il team di EvoX presenta iStratDE, un metodo di evoluzione differenziale accelerato su GPU che assegna strategie fisse a livello individuale, consentendo una ricerca parallela su larga scala senza comunicazione, con prestazioni empiriche solide e garanzie teoriche di convergenza."
+updatedDate: 2026-11-07
+summary: "iStratDE studia come strategie individuali fisse producano comportamenti diversi, valutabili in modo efficiente con il calcolo GPU di EvoX."
 ---
+
+*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
 
 ![](./istratde-1.png)
 
-L'Evoluzione Differenziale (DE) è estremamente sensibile alla scelta della strategia. La maggior parte delle varianti esistenti di DE persegue prestazioni migliori attraverso meccanismi adattivi o strutture di controllo sempre più sofisticate. Tuttavia, mentre l'adattamento dinamico è stato ampiamente studiato, i vantaggi strutturali della **diversità statica delle strategie** hanno ricevuto molta meno attenzione.
+La ricerca evolutiva trae le proprie caratteristiche da una popolazione di possibilità differenti. iStratDE studia come preservare questa diversità nel comportamento di ricerca: gli individui mantengono strategie diverse per tutta l'esecuzione. In EvoX, questo collega progettazione algoritmica e valutazione parallela di candidati eterogenei.
 
 Per colmare questa lacuna, il team di EvoX ha indagato come la **diversità delle strategie a livello individuale** influenzi le dinamiche di ricerca di DE e le prestazioni di ottimizzazione, proponendo una variante minimalista: **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. L'idea fondamentale è semplice: all'inizializzazione, a ciascun individuo viene assegnata la propria strategia di mutazione e crossover, e tale assegnazione rimane fissa per tutta l'evoluzione. Introducendo diversità a livello individuale — eliminando al contempo complessi meccanismi di adattamento e cicli di retroazione — iStratDE crea un'eterogeneità comportamentale persistente nell'intera popolazione.
 
@@ -93,9 +96,7 @@ Gli esperimenti includono:
 
 ### 1. Benchmark CEC2022 con Budget di Tempo Fisso
 
-Con lo stesso budget di 60 secondi, gli algoritmi adattivi tradizionali rimangono limitati alla dimensione classica della popolazione di circa 100 individui a causa della loro logica seriale e dell'overhead di sincronizzazione. Al contrario, iStratDE è progettato specificamente per l'esecuzione SIMT su GPU e può gestire efficientemente popolazioni di **100.000 individui**.
-
-Di conseguenza, iStratDE esegue fino a **10^9 valutazioni di funzione** nella stessa finestra temporale, raggiungendo circa **100 volte** il throughput computazionale dei metodi convenzionali. Sulla maggior parte delle funzioni di benchmark, questa combinazione di struttura minimalista e parallelismo massivo porta a una velocità di convergenza e un'accuratezza finale superiori.
+Il confronto CEC2022 a parità di tempo usa 60 secondi e una popolazione di 100 per ogni algoritmo, su problemi 10D e 20D. In tale configurazione, l'articolo riporta circa 10^9 valutazioni per iStratDE contro 10^6–10^7 per i metodi confrontati. La scalabilità a grandi popolazioni è un esperimento distinto. Sono riportati anche problemi in cui iStratDE non è il migliore.
 
 ![](./istratde-3.png)
 *Fig. 2. Confronto del throughput di valutazioni di funzione con budget di tempo fisso.*

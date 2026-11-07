@@ -1,10 +1,15 @@
 ---
-title: "EvoGO: aprender a gerar melhores soluções a partir da experiência de busca"
+title: "EvoGO: aprender a pesquisar através do feedback das avaliações"
 pubDate: 2026-04-05
-summary: "O EvoGO é um framework de otimização evolutiva totalmente orientado a dados que aprende a gerar soluções melhores a partir da experiência de busca passada e alcança desempenho rápido e robusto em tarefas complexas de alta dimensão."
+updatedDate: 2026-11-07
+summary: "O EvoGO liga aprendizagem generativa e otimização evolutiva, transformando candidatos avaliados em experiência para propor a próxima população."
 ---
 
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+
 ![image1](./image1.png)
+
+A pesquisa científica e de engenharia precisa de decidir repetidamente qual experimento realizar a seguir. O EvoGO estuda uma versão computacional desta questão: podem as avaliações ensinar um gerador a melhorar as propostas? Isto liga a IA evolutiva do EvoX a uma pesquisa que aprende com os candidatos já testados.
 
 ## O Dilema: A Otimização Orientada a Dados Ainda Não Deu o Último Passo
 
@@ -62,25 +67,13 @@ Para analisar de forma mais intuitiva a dinâmica de busca do EvoGO, o artigo ap
 
 Os resultados da visualização mostram que o que o EvoGO aprende não é uma perturbação aleatória sem direção, mas um padrão de atualização que se adapta à fase de busca. Na fase inicial, os vetores gerados são geralmente mais longos, indicando que o algoritmo tende a uma exploração global de grande amplitude. À medida que a evolução avança, os comprimentos dos vetores diminuem gradualmente e as regiões geradas continuam a se contrair, demonstrando que a busca se desloca para uma exploração (exploitation) local mais fina. Ao mesmo tempo, os vetores como um todo se reúnem em direção à região ótima, o que indica que o gerador direto já extraiu uma direção de busca com significado prático a partir de amostras históricas. Em nível comportamental, esse fenômeno apoia a propriedade central do EvoGO: ele não aprende meramente a distribuição de soluções candidatas, mas a lei de atualização que passa do estado atual para um estado melhor.
 
-## Aplicação: Validação de Engenharia em uma Asa Supercrítica de um Avião Comercial de Fuselagem Larga
+## Dos benchmarks aos fluxos científicos
 
-A entrega bem-sucedida do **C919** marca um passo crucial para a China no desenvolvimento de grandes aviões de produção nacional. Contudo, como avião de corredor único (fuselagem estreita), o C919 atende principalmente a rotas de curto e médio curso, e ainda são necessários avanços no domínio dos aviões de fuselagem larga. Para atender às necessidades de desenvolvimento da próxima geração de aviões de fuselagem larga nacionais, o **projeto de asas supercríticas** tornou-se um tema-chave na otimização aerodinâmica, desempenhando um papel importante na redução do arrasto de cruzeiro, na melhoria da eficiência de combustível e no aumento da estabilidade de voo. Por conseguinte, a forma de alcançar uma otimização eficiente e confiável de asas supercríticas tornou-se um desafio técnico central no processo de desenvolvimento de aviões de fuselagem larga da China.
-
-![image8](./image8.png)
-
-Como demonstrado no artigo original, ao otimizar características geométricas como uma corda mais longa, uma superfície superior mais plana e o aumento da curvatura do bordo de fuga, uma asa supercrítica pode regular a distribuição de pressão transônica, suprimir a formação de ondas de choque, reduzir o arrasto de onda e melhorar a eficiência de sustentação. No entanto, o seu projeto ideal enfrenta vários desafios. Por um lado, sob condições de alto número de Reynolds em aviões de fuselagem larga, o design precisa satisfazer simultaneamente restrições aerodinâmicas rigorosas, como a relação sustentação/arrasto, o coeficiente de sustentação e o ângulo de ataque de cruzeiro, o que impõe exigências de precisão extremamente elevadas aos parâmetros de forma. Por outro lado, existe uma forte relação de acoplamento não linear entre a geometria do perfil aerodinâmico (airfoil) e o desempenho aerodinâmico, algo difícil de caracterizar com precisão por meio de métodos tradicionais de modelagem. Além disso, o atual processo de design depende fortemente da experiência, de repetidas simulações de CFD e de experimentos em túnel de vento, levando a altos custos computacionais, longos ciclos de desenvolvimento e à dificuldade de se aproximar efetivamente do ótimo global em um espaço de design de alta dimensão.
-
-![image9](./image9.png)
-
-Para resolver esse problema, a equipe EvoX construiu um fluxo de trabalho de design integrado com base no EvoGO, consistindo em avaliação de desempenho, geração de perfis aerodinâmicos e seleção de candidatos. Com base em um pequeno número de amostras históricas de perfis aerodinâmicos, o método constrói um modelo de avaliação de desempenho, um modelo de geração de perfis e um modelo de triagem, melhorando continuamente o design do perfil por meio de evolução iterativa. Um modelo substituto é usado para prever com precisão métricas cruciais, como a relação sustentação/arrasto, o coeficiente de sustentação e o ângulo de ataque de cruzeiro. Paralelamente, é introduzido um mecanismo generativo para substituir a busca heurística tradicional, permitindo uma aproximação eficiente do ótimo em um espaço de design de alta dimensão. Em conjunto com uma estratégia de triagem de candidatos, este método consegue identificar rapidamente perfis potenciais que atendem simultaneamente às restrições físicas e aos requisitos de desempenho aerodinâmico a partir de um vasto espaço de busca, melhorando assim a eficiência do design.
-
-![image10](./image10.png)
-
-Recorrendo a apenas 500 amostras históricas de perfis aerodinâmicos, o método atinge mais de 99,5% de precisão de previsão em três indicadores aerodinâmicos chave — relação sustentação/arrasto, coeficiente de sustentação e ângulo de ataque de cruzeiro — e a taxa de qualificação dos perfis gerados automaticamente ultrapassa 95%. Esses resultados indicam que os métodos de otimização evolutiva totalmente orientados a dados, como o EvoGO, não apenas podem obter bons resultados em testes de referência padrão, mas também estão começando a demonstrar a capacidade de fornecer suporte eficaz ao design em problemas reais de engenharia.
+A pesquisa generativa pode ser explorada no projeto de engenharia, mas os benchmarks não demonstram precisão no projeto de perfis alares nem utilização aeronáutica. São necessários dados definidos, casos de teste independentes, verificações de restrições e validação independente por simulação ou experimentação. O artigo EvoGO citado apresenta benchmarks numéricos, de controle e de robótica; não valida as porcentagens de desempenho aerodinâmico.
 
 ## Conclusão e Perspectivas
 
-O foco do EvoGO não é apenas uma melhoria local do fluxo tradicional de otimização evolutiva, mas sim uma reconstrução mais fundamental do modo como a própria otimização acontece. Ao organizar a otimização nas três etapas unificadas de preparação de dados, treinamento do modelo e geração de população, e ao introduzir a construção de dados direcionais baseada no pareamento superior-inferior, uma arquitetura generativa pareada guiada por substitutos e um mecanismo paralelo de geração de população, o EvoGO demonstra vantagens consistentes, tanto em desempenho quanto em eficiência, em testes de referência padrão. Ao mesmo tempo, também validou seu potencial para resolver problemas reais e complexos de engenharia por meio da otimização do design de asas supercríticas para a próxima geração de aviões comerciais de fuselagem larga. Em um nível mais alto, o valor deste trabalho está em mostrar que a otimização evolutiva não tem necessariamente que permanecer confinada a regras heurísticas definidas manualmente. O próprio processo de otimização pode ser progressivamente extraído da experiência histórica como uma lei que pode ser aprendida.
+O EvoGO fornece aos sistemas de IA evolutiva um mecanismo de proposta capaz de aprender. A ligação a AI for Science está em usar avaliações dispendiosas para orientar pesquisas futuras, juntamente com a geração paralela de candidatos. Aplicações científicas exigem restrições, avaliações e validação específicas do domínio; os benchmarks são o ponto de partida.
 
 ## Recursos
 

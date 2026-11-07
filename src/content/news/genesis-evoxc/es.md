@@ -1,15 +1,40 @@
 ---
-title: "EvoX Compiler: un sistema explícito de grafos tensoriales construido con Genesis"
+title: "Genesis construye EvoX Compiler: la IA desarrolla infraestructura evolutiva"
 pubDate: 2026-11-03
-summary: "El caso EvoX Compiler de Genesis documenta un compilador y runtime Python para grafos tensoriales, con NumPy, IREE, XLA y TVM."
+updatedDate: 2026-11-07
+summary: "El caso EvoX Compiler conecta dos capacidades del ecosistema: Genesis desarrolla software y el compilador resultante permite transformar y ejecutar programas."
 ---
 
-EvoX Compiler (evoxc) convierte el grafo de cálculo en un artefacto inspeccionable. Su frontend construye y transforma EvoXIR; etapas explícitas realizan la reducción a una representación de menor nivel, compilación, carga y ejecución. NumPy es la única dependencia obligatoria; los compiladores externos optimizan y generan código.
+*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
 
-La instantánea Evidence del **28 de octubre de 2026** documenta cuatro rutas: **NumPy, IREE, XLA y TVM**. El repositorio atribuye a Genesis la producción del código, las pruebas y la documentación. El caso sigue la construcción inicial y el desarrollo continuo de interfaces y backends.
+La infraestructura de IA evolutiva es en sí misma un proyecto de software considerable. El caso Genesis–EvoX Compiler conecta ambos niveles: un sistema de desarrollo agéntico construye y amplía un compilador de grafos tensoriales, mientras los contratos de interfaz y las pruebas de regresión definen los cambios que se integran en su desarrollo continuo.
 
-Con IREE instalado, la instantánea informa de **6,789 pruebas superadas, 46 omitidas y 3 fallos esperados**, sin fallos. Son cifras históricas, no los totales actuales. Las **285,659 líneas de texto versionadas** incluyen pruebas, datos de benchmark y documentación; no miden solo el compilador. El gasto en tokens fue de unos **50 dólares**, sin hardware.
+## Responsabilidades explícitas
 
-La validación depende de la configuración: Vulkan utilizó un dispositivo por software y la ruta ROCm de TVM solo se verificó en compilación. Son resultados declarados por el proyecto, sin reproducción independiente. El flujo explícito de grafos y los informes de benchmark del repositorio ofrecen un punto de partida para desarrolladores.
+EvoX Compiler construye y transforma EvoXIR, y después realiza lowering, compilación, carga y ejecución. Los compiladores externos optimizan y generan código. NumPy es la referencia; IREE, XLA y TVM son rutas opcionales.
 
-[Genesis Evidence](https://genesis.evox.group/evidence/evoxc/) · [GitHub](https://github.com/EMI-Group/evoxc) · [README](https://github.com/EMI-Group/evoxc/blob/main/README.md) · [evoxc_hf benchmarks](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)
+Las transformaciones deben preservar significado, los backends admitir los operadores aceptados y el runtime respetar los dispositivos. Son criterios más concretos que aumentar líneas de código.
+
+## Organización del trabajo
+
+El [registro del 28 de octubre de 2026](https://genesis.evox.group/evidence/evoxc/) describe contexto por paquete, dependencias unidireccionales y pruebas antes de avanzar de capa. El repositorio atribuye código, pruebas y documentación a Genesis.
+
+El trabajo continuó en adaptadores, grafos y benchmarks. El registro reconstruye la estructura desde el historial; no audita cada acción de los agentes. Dos meses de calendario no equivalen a ejecución autónoma continua.
+
+## Varios niveles de validación
+
+Con IREE se comunicaron **6.789 pruebas superadas, 46 omitidas y 3 fallos esperados**, sin fallos. Sin compiladores, **6.367 superadas**. No deben reemplazarse estas cifras históricas por las de versiones posteriores.
+
+La integración independiente `evoxc_hf` compara salidas y latencias con torch/transformers. Checkpoint, precisión, backend y hardware forman parte de la comparación: concordancia numérica y velocidad son propiedades distintas.
+
+## Resultados con límites
+
+Las **285.659 líneas de texto registradas** incluyen pruebas, documentación y datos de benchmark. Aproximadamente **50 dólares estadounidenses** cubren tokens, no hardware. Modelo, episodios y tiempo efectivo no se comunicaron.
+
+Vulkan usó Mesa lavapipe, dispositivo software; TVM ROCm solo compilación. Un nombre de backend no demuestra validación completa en todo dispositivo. Los resultados no cuentan con reproducción independiente.
+
+## Conectar evolución del software e infraestructura computacional
+
+Comience por el [README](https://github.com/EMI-Group/evoxc/blob/main/README.md), y relacione las afirmaciones con pruebas y [benchmarks de modelos archivados](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md). Revise rutas compatibles y diferencias de rendimiento pendientes.
+
+El [repositorio EvoX Compiler](https://github.com/EMI-Group/evoxc) ilustra la conexión entre desarrollo asistido por IA e infraestructura computacional. Genesis contribuye a un sistema cuyas representaciones explícitas y vías de ejecución pueden sostener nuevos experimentos evolutivos. Las interfaces, pruebas y mediciones conservadas permiten inspeccionar ese desarrollo.

@@ -1,10 +1,15 @@
 ---
-title: "EvoX Genesis: Um Sistema de IA Recursivo para a Evolução Autônoma de Software a Longo Prazo, que Construiu do Zero um Compilador C de 250 Mil Linhas"
+title: "EvoX Genesis: construir software que possa continuar a evoluir"
 pubDate: 2026-08-17
-summary: "A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o EvoX Genesis, um sistema de IA recursivo para a evolução autônoma de software a longo prazo. Em vez de depender de um agente persistente para sustentar o desenvolvimento de longo prazo, ele deixa o próprio mundo do software continuar evoluindo: partindo de um repositório vazio, o sistema construiu um compilador C de 248.989 linhas em 123,4 horas, com um custo total de tokens do modelo de apenas US$ 44,38."
+updatedDate: 2026-11-07
+summary: "O Genesis estende a IA evolutiva do EvoX ao software: os agentes propõem alterações, a validação seleciona o trabalho aceito e o projeto conserva o progresso."
 ---
 
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+
 ![image1.png](./evox-genesis-1.png)
+
+O Genesis leva a visão do EvoX a Agentic AI, tratando o projeto de software em evolução como resultado persistente de muitas contribuições locais. Geração de código, execução, revisão e integração formam um ciclo de desenvolvimento. As implementações aceitas e os registros de validação sustentam o trabalho seguinte.
 
 A equipe EvoX do Departamento de Ciência de Dados e Inteligência Artificial da Universidade Politécnica de Hong Kong lançou o **EvoX Genesis**, um sistema de IA recursivo para a evolução autônoma de software a longo prazo.
 

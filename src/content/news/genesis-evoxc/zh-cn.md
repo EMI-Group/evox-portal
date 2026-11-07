@@ -1,15 +1,40 @@
 ---
-title: "EvoX Compiler：Genesis 构建的显式张量图编译系统"
+title: "Genesis 构建 EvoX Compiler：让 AI 参与演化基础设施的开发"
 pubDate: 2026-11-03
-summary: "Genesis 的 EvoX Compiler 案例记录了一个 Python 张量图编译器与运行时，提供 NumPy、IREE、XLA 和 TVM 四种执行路径。"
+updatedDate: 2026-11-07
+summary: "EvoX Compiler 案例连接生态中的两层能力：Genesis 推进软件开发，生成的编译器支撑程序变换与执行。"
 ---
 
-EvoX Compiler（evoxc）将程序的计算图变成可检查的产物：前端构建和变换 EvoXIR，再通过显式阶段完成降低、编译、加载与执行。NumPy 是唯一必需依赖，外部编译器负责优化与代码生成。
+*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
 
-Genesis 官网 **2026 年 10 月 28 日**的 Evidence 快照记录了 **NumPy、IREE、XLA 和 TVM** 四种执行路径。仓库声明，其代码、测试和文档均使用 Genesis 产出。案例呈现了项目从初次构建走向接口与后端持续开发的过程。
+演化式 AI 所需的基础设施，本身也是复杂的软件工程。Genesis 构建 EvoX Compiler 的案例连接了这两个层面：智能体开发系统构建和扩展张量图编译器，接口约定与回归测试则决定哪些变更能够进入持续发展的实现。
 
-在安装 IREE 的配置下，快照报告 **6,789 项测试通过、46 项跳过、3 项预期失败**，无失败项。这是历史快照，不是当前仓库的测试总数。记录的 **285,659 行受版本控制文本**包含测试、基准数据和文档，不能全部视为编译器源码。模型 token 费用约 **50 美元**，不含硬件。
+## 先把职责划分清楚
 
-后端验证结果仍取决于具体配置：记录中的 Vulkan 验证使用软件设备，TVM 的 ROCm 路径仅完成编译验证。结果来自项目方报告，尚未独立复现。开发者可以从仓库里的显式计算图流程及已提交的基准报告开始了解和使用 evoxc。
+EvoX Compiler 构建和变换 EvoXIR 图，再依次完成表示转换、编译、加载和运行。外部编译器负责优化与代码生成。NumPy 提供参考解释器，IREE、XLA 与 TVM 提供可选执行路径。
 
-[Genesis Evidence](https://genesis.evox.group/evidence/evoxc/) · [GitHub](https://github.com/EMI-Group/evoxc) · [README](https://github.com/EMI-Group/evoxc/blob/main/README.md) · [evoxc_hf benchmarks](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)
+这些边界形成具体的验收标准：图变换要保留程序含义，后端要支持它接收的算子，运行时要遵守设备约束。它们比单纯增加代码行数更能说明工程进展。
+
+## 开发工作如何组织？
+
+[2026 年 10 月 28 日的 Evidence 快照](https://genesis.evox.group/evidence/evoxc/) 描述了包级上下文文档、单向依赖结构，以及逐层通过测试后继续推进的方式。仓库声明代码、测试和文档均由 Genesis 辅助生成。
+
+后续工作持续涉及适配器、图表示与基准测试。该记录依据仓库历史重建项目结构，并非对每个智能体动作的审计；约两个月的日历跨度也不能视为连续自主运行时长。
+
+## 验证需要分层理解
+
+快照报告：安装 IREE 的配置中，**6,789 项测试通过、46 项跳过、3 项预期失败**，没有失败项；不安装编译器的配置中有 **6,367 项通过**。介绍这次实验时，不应将这些历史数量替换为后续发布版本的数字。
+
+除单元测试外，独立的 `evoxc_hf` 集成还比较模型输出与 torch/transformers 的延迟。比较必须保留检查点、精度、后端和硬件条件：数值一致性与运行速度是两个不同指标。
+
+## 将结果和适用范围一起看
+
+快照中的 **285,659 行跟踪文本**包含基准数据、测试和文档，不只是编译器源码。约 **50 美元**仅为模型 token 费用，不含硬件；基础模型、会话数量和实际执行时长没有报告。
+
+硬件覆盖也有明确边界：Vulkan 使用 Mesa lavapipe 软件设备，TVM ROCm 仅完成编译验证。功能表出现后端名称，不等于每类设备均已完成端到端验证。这些结果由项目报告，尚未独立复现。
+
+## 连接软件演化与计算基础设施
+
+先阅读 [README](https://github.com/EMI-Group/evoxc/blob/main/README.md) 中的图处理流程，再将具体主张追溯到测试和[已提交的模型基准报告](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)，同时查看可用路径与尚未解决的性能差距。
+
+[EvoX Compiler 仓库](https://github.com/EMI-Group/evoxc) 展示了 AI 辅助开发与计算基础设施之间的联系。Genesis 参与构建的系统，以显式表示和执行路径支撑进一步的演化实验；一同保留下来的接口、测试与测量，使持续开发有据可查。

@@ -1,12 +1,15 @@
 ---
-title: "EvoGP : un framework GPU natif pour la programmation génétique arborescente à 10^11 GPops/s"
+title: "EvoGP : étendre la recherche de programmes grâce aux GPU"
 pubDate: 2026-06-02
-summary: "EvoGP réorganise de fond en comble la représentation des arbres, les opérateurs génétiques et l'exécution parallèle, atteignant un débit de pointe supérieur à 10^11 GPops/s et une accélération jusqu'à 304× par rapport aux implémentations GPU existantes."
+updatedDate: 2026-11-07
+summary: "EvoGP rend les populations de programmes structurés accessibles au calcul GPU pour rechercher des expressions interprétables et des politiques de contrôle."
 ---
+
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
 ![img](./evogp-1.jpg)
 
-La programmation génétique est une méthode évolutionnaire qui combine la recherche structurelle et l'interprétabilité. Elle offre des avantages uniques dans des tâches telles que la régression symbolique, la classification et le contrôle — non seulement en optimisant des paramètres, mais aussi en recherchant et en produisant directement des expressions de programme analysables. Cependant, en raison de l'hétérogénéité des structures individuelles et des chemins d'exécution irréguliers, **la plupart des implémentations existantes de programmation génétique restent confinées à l'exécution sur CPU et peinent depuis longtemps à s'adapter véritablement aux GPU.** Cela limite directement l'efficacité de calcul et complique le traitement de jeux de données massifs ou d'environnements de simulation complexes dans les applications modernes.
+L'IA évolutionnaire peut explorer des structures exécutables autant que des vecteurs de paramètres. EvoGP développe cette voie dans l'écosystème EvoX en permettant de calculer sur de grandes populations de programmes arborescents. L'irrégularité des structures et des chemins d'exécution en fait un problème de représentation et d'ordonnancement autant que d'algorithmes.
 
 Pour relever ce défi, **nous proposons le framework EvoGP, en réorganisant de fond en comble la représentation des arbres, la logique des opérateurs génétiques et les mécanismes d'exécution parallèle.** Les résultats expérimentaux montrent qu'**EvoGP atteint un débit de calcul de pointe supérieur à 10^11 GPops/s, permettant l'évaluation rapide de populations de 500 000 individus en moins d'une seconde — jusqu'à 304× plus rapide que les implémentations GPU existantes.** Cette étape marque une rupture définitive avec les barrières d'adaptation matérielle et fait entrer la programmation génétique dans l'ère du calcul haute performance accéléré par GPU.
 
@@ -45,7 +48,7 @@ Figure 3 : Mécanisme parallèle adaptatif. EvoGP bascule automatiquement entre 
 ## Unifier haute performance et facilité d'utilisation
 La vitalité d'un framework de calcul haute performance réside non seulement dans la vitesse sous-jacente, mais aussi dans la compatibilité avec l'écosystème et la facilité d'utilisation. De nombreuses applications pratiques sont déployées dans des écosystèmes basés sur Python tels qu'OpenAI Gym, MuJoCo, Brax et Genesis. **Tout en visant une accélération GPU extrême, EvoGP parvient à une intégration transparente avec les écosystèmes de développement existants en intégrant des noyaux de calcul CUDA haute performance personnalisés comme opérateurs personnalisés au sein du runtime PyTorch.**
 
-De plus, pour exploiter pleinement les avantages de l'architecture GPU, **EvoGP adopte un modèle entièrement résident sur GPU, garantissant que les données de population et les contextes d'évaluation sont maintenus intégralement sur le GPU — éliminant complètement la coûteuse surcharge de transfert de données hôte-périphérique courante dans les frameworks traditionnels.** Cette philosophie de conception zero-copy permet à EvoGP de s'intégrer naturellement et efficacement aux environnements modernes d'apprentissage par renforcement accélérés par GPU, offrant des capacités de simulation parallèle bout en bout efficaces en tant que système complet équilibrant performance extrême et haute évolutivité.
+EvoGP peut conserver les tenseurs de population et les données d'évaluation compatibles sur le GPU entre les itérations, réduisant les transferts répétés. Le chargement initial, les objectifs exécutés sur CPU et l'exportation des résultats peuvent encore nécessiter des transferts. L'accélération globale dépend donc de toute la chaîne d'évaluation.
 
 ![img](./evogp-5.png)
 
@@ -65,7 +68,8 @@ Figure 5 : Comparaison globale des performances. EvoGP obtient des avantages de 
 Figure 6 : Performances selon différentes échelles de population. EvoGP rend les tailles de population plus importantes pratiquement utilisables dans un délai acceptable et libère un potentiel de recherche plus fort.
 
 ## Conclusion
-**Le framework EvoGP répond systématiquement à la question de savoir comment la programmation génétique peut utiliser efficacement les architectures GPU modernes.** Il ne s'agit pas d'un simple correctif aux implémentations existantes, mais d'innovations fondamentales dans la conception sous-jacente grâce à la représentation tensorisée, la refactorisation des opérateurs et le parallélisme adaptatif — ouvrant complètement la voie à l'entrée de la programmation génétique dans les systèmes de calcul haute performance. **Ce travail démontre non seulement la vitalité durable des méthodes évolutionnaires classiques à l'ère du calcul, mais fournit également une solution au niveau système hautement évolutive pour l'apprentissage automatique interprétable et la prise de décision des agents autonomes — marquant la véritable entrée de la programmation génétique dans l'ère accélérée par GPU.**
+
+EvoGP élargit les objets d'une recherche évolutionnaire à grande échelle : expressions symboliques et politiques programmées peuvent être générées, exécutées et sélectionnées en populations. Son apport à l'infrastructure consiste à relier ces candidats structurés au calcul GPU. Le débit permet davantage d'expériences ; l'évaluation propre à la tâche détermine les programmes utiles.
 
 ## Ressources
 

@@ -1,10 +1,13 @@
 ---
-title: "MetaDE: Evolucionando la Evolución Diferencial mediante Evolución Diferencial"
+title: "MetaDE: hacer evolucionar las estrategias de búsqueda con la tarea"
 pubDate: 2025-02-15
-summary: "MetaDE es un método metaevolutivo que utiliza la Evolución Diferencial para evolucionar sus propios hiperparámetros y estrategias, publicado en IEEE TEVC."
+updatedDate: 2026-11-07
+summary: "MetaDE añade un ciclo evolutivo externo a la evolución diferencial y aprovecha el cálculo paralelo de EvoX para evaluar y mejorar configuraciones de búsqueda."
 ---
 
-La Evolución Diferencial (DE), uno de los algoritmos fundamentales en la computación evolutiva, se ha empleado ampliamente en problemas de optimización de caja negra debido a su simplicidad y alta eficiencia. No obstante, su rendimiento depende en gran medida de la selección de hiperparámetros y estrategias, un problema persistente para los investigadores. Para abordar este desafío, el equipo de EvoX publicó recientemente un estudio en *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* titulado "MetaDE: Evolving Differential Evolution by Differential Evolution". Como método metaevolutivo que aprovecha la DE para evolucionar sus propios hiperparámetros y estrategias, MetaDE permite el ajuste dinámico de parámetros y estrategias al tiempo que incorpora computación paralela acelerada por GPU. Este diseño mejora sustancialmente la eficiencia computacional junto con el rendimiento de la optimización. Los resultados experimentales demuestran que MetaDE ofrece un rendimiento excepcional tanto en la suite de benchmarks CEC2022 como en tareas de control de robots. El código fuente de MetaDE es de código abierto y está disponible en GitHub en [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade").
+*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
+
+La adaptación puede actuar sobre cómo busca un sistema, además de sobre las soluciones encontradas. MetaDE introduce esa idea en EvoX con dos niveles evolutivos conectados: uno resuelve el problema objetivo y el otro evalúa qué configuraciones DE hacen eficaz la búsqueda.
 
 ## Antecedentes
 
@@ -123,19 +126,11 @@ Bajo el mismo framework EvoX con computación paralela acelerada por GPU, MetaDE
 
 ## Aprendizaje por Refuerzo Evolutivo: Tareas de control de robots
 
-En el Aprendizaje por Refuerzo (RL), la eficiencia y la estabilidad de la optimización de políticas son cruciales. Los métodos basados en gradientes como PPO y SAC pueden sufrir de desvanecimiento o explosión del gradiente en entornos de alta dimensión. Por el contrario, el Aprendizaje por Refuerzo Evolutivo (EvoRL) elude estos problemas mediante el uso de **búsquedas sin gradiente** para optimizar directamente los parámetros de la política.
+El experimento de control robótico de MetaDE busca parámetros de una política neuronal sin gradientes ni retropropagación del objetivo de la política. El aprendizaje por refuerzo evolutivo también incluye métodos con gradientes e híbridos; no elimina de forma general las dificultades de PPO o SAC.
 
 ![8.png](./metade-12.png "8.png")
 
-Proceso de Aprendizaje por Refuerzo Evolutivo
-
-Dentro del framework EvoRL, MetaDE:
-
-*   **Optimiza automáticamente los parámetros de las redes neuronales**, aumentando la adaptabilidad de los modelos de política.
-*   **Ajusta dinámicamente los hiperparámetros**, mejorando la estabilidad del entrenamiento.
-*   **Aprovecha la aceleración por GPU** para acelerar la optimización de políticas.
-
-Para evaluar el rendimiento de MetaDE en tareas de optimización complejas, lo aplicamos a **problemas de control de robots** utilizando optimización acelerada por GPU en la **plataforma de simulación Brax**. El estudio incluyó tres tareas —**Swimmer**, **Hopper** y **Reacher**— cada una modelada por una red neuronal totalmente conectada (MLP) de tres capas con el objetivo de **maximizar la recompensa**. Cabe destacar que cada MLP contiene unos **1.500 parámetros**, lo que crea un **desafío de optimización de 1.500 dimensiones** para los algoritmos evolutivos (EAs). Esto impone requisitos estrictos tanto en la capacidad de búsqueda como en la eficiencia computacional.
+Los experimentos usan Swimmer, Hopper y Reacher en Brax con políticas MLP de tres capas y unos 1.500 parámetros. La búsqueda interna optimiza los pesos; la externa ajusta parámetros y estrategias del ejecutor DE. Estas simulaciones no demuestran un despliegue en robots reales ni una mejora general de la estabilidad del entrenamiento.
 
 ![9.png](./metade-13.png "9.png")
 
@@ -145,7 +140,7 @@ Como se muestra en la figura, MetaDE demuestra un sólido rendimiento en las tar
 
 ## Conclusión y direcciones futuras
 
-MetaDE es un enfoque de metaevolución innovador que no solo destaca en la resolución de tareas de optimización, sino que también ajusta y perfecciona de forma autónoma sus propias estrategias. Capitalizando las fortalezas de la Evolución Diferencial, MetaDE exhibe un gran potencial en la configuración adaptativa de parámetros y la evolución de estrategias. Los resultados experimentales muestran una robustez superior en una gama de pruebas de benchmark, y su aplicabilidad en el mundo real se ve subrayada por el éxito en las tareas de control de robots a través del aprendizaje por refuerzo evolutivo. Un desafío central consiste en mantener un equilibrio óptimo entre la generalización y la especialización, asegurando que el algoritmo pueda adaptarse a diversas tareas y al mismo tiempo optimizar eficazmente para problemas específicos. Esta investigación ofrece nuevas perspectivas para los algoritmos evolutivos autoadaptativos y puede impulsar nuevos avances en la metaevolución para sistemas complejos.
+MetaDE aporta a la IA evolutiva un mecanismo concreto para adaptar la búsqueda mediante retroalimentación. Su contribución a EvoX es una relación reutilizable entre optimización de tareas y búsqueda de configuraciones, apoyada por evaluación en lotes. Nuevas aplicaciones exigen información útil y considerar el coste de ambos niveles.
 
 ## Recursos
 

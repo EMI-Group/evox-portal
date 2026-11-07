@@ -1,16 +1,17 @@
 ---
 title: "Codex × EvoX : développement d’algorithmes et expériences reproductibles"
 pubDate: 2026-08-08
-summary: "Le calcul évolutionnaire entre dans l'ère native de l'IA. Avec Codex comme agent de codage IA représentatif, EvoX transforme une intention en langage naturel en workflows de calcul évolutionnaire exécutables — couvrant la modélisation de problèmes, la migration d'algorithmes, la neuroévolution sans rétropropagation et la tensorisation GPU."
+updatedDate: 2026-11-07
+summary: "Les agents de programmation relient l'intention de recherche aux workflows exécutables d'EvoX, de la définition du problème à l'évaluation reproductible."
 ---
 
-Le calcul évolutionnaire entre dans l'ère native de l'IA.
+Pour l'IA évolutionnaire, une idée de recherche devient exploitable lorsqu'elle entre dans un cycle reproductible d'exécution et d'évaluation. La collaboration Codex–EvoX relie l'intention exprimée en langage naturel à ce cycle : l'agent aide à construire l'expérience, tandis qu'EvoX fournit les interfaces et le calcul nécessaires pour tester les solutions candidates.
 
 [EvoX](https://github.com/EMI-Group/evox) est un framework distribué et accéléré par GPU pour le calcul évolutionnaire à grande échelle. Grâce à ses interfaces unifiées `Algorithm`, `Problem` et `Workflow`, EvoX réunit la recherche par population, l'évaluation par lots, l'exécution d'expériences et l'accélération matérielle au sein d'une architecture de calcul cohérente. Il prend en charge des applications allant de l'optimisation mono- et multi-objectif à la neuroévolution, aux environnements d'apprentissage par renforcement et à la conception de systèmes complexes.
 
 Depuis sa publication open source, EvoX n'a cessé d'évoluer autour d'une mission claire :
 
-> **Construire une infrastructure de nouvelle génération pour le calcul évolutionnaire, conçue spécifiquement pour le matériel moderne et l'informatique à grande échelle.**
+> **Construire une infrastructure pour les systèmes d'IA évolutionnaire, reliant génération de candidats, exécution, évaluation et amélioration.**
 
 ## Prologue : Le langage naturel devient un nouveau point d'entrée pour EvoX
 

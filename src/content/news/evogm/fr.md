@@ -1,14 +1,17 @@
 ---
 title: "EvoGM : fusion de grands modèles autonome via l'évolution de population, sans réentraînement"
 pubDate: 2026-06-28
-summary: "L'équipe EvoX en collaboration avec le Peng Cheng Laboratory propose EvoGM, un framework de fusion évolutive générative qui transforme la recherche des coefficients de fusion en un problème d'optimisation générative apprenable, permettant la fusion autonome de modèles sans réentraîner les grands modèles impliqués."
+updatedDate: 2026-11-07
+summary: "EvoGM applique le retour évolutionnaire à l'IA générative pour apprendre à combiner les capacités de modèles experts sans réentraîner les grands modèles participants."
 ---
+
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
 ![image1.png](./evogm-1.png)
 
 ## Résumé
 
-Avec l'amélioration continue des capacités des grands modèles de langage, le nombre de modèles experts obtenus par fine-tuning sur différentes tâches ne cesse de croître. Comment réutiliser efficacement les capacités de ces modèles experts sans réentraîner les grands modèles impliqués dans la fusion et sans dépendre de données d'entraînement à grande échelle supplémentaires constitue une question centrale dans la fusion de modèles. Les méthodes existantes reposent généralement sur la fusion moyenne, le scaling manuel, le pruning de paramètres ou la recherche aléatoire. Bien qu'elles permettent de combiner les capacités de plusieurs modèles à un certain niveau, elles peinent à apprendre continuellement des évaluations historiques et à améliorer les stratégies de fusion.
+L'accumulation de modèles spécialisés ouvre des possibilités de réutilisation des capacités entre tâches. Dans la démarche de recherche d'EvoX, EvoGM explore comment les retours d'une population peuvent guider cette réutilisation : les combinaisons sont évaluées, puis leurs résultats apprennent à un générateur léger à proposer de meilleures configurations de fusion.
 
 Pour répondre à ce problème, l'équipe EvoX en collaboration avec le Peng Cheng Laboratory propose EvoGM (Evolutionary Generative Merging), un framework de fusion évolutive générative qui transforme la recherche des coefficients de fusion en un problème d'optimisation générative apprenable. EvoGM organise différentes configurations de fusion en une population de candidats et, grâce au pairing winner-loser, à l'entraînement de double générateur, aux contraintes de cohérence cyclique et à la mise à jour évolutive de la base d'experts, fait évoluer la population dans une boucle fermée de « génération — évaluation — sélection — réapprentissage », apprenant autonomement à partir de retours de validation limités comment transformer des configurations de faible performance en configurations de haute performance. Les résultats expérimentaux montrent que EvoGM démontre une capacité de fusion de modèles plus forte dans les scénarios de tâches vues et non vues.
 

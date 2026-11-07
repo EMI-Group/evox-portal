@@ -1,14 +1,17 @@
 ---
-title: "Optimisation Multiobjectif Évolutionnaire Accélérée par GPU"
+title: "EvoMO : explorer les compromis multiobjectifs à grande échelle"
 pubDate: 2025-04-16
-summary: "Faire le pont entre l'optimisation multiobjectif évolutionnaire et l'accélération GPU via la tensorisation, introduction de la bibliothèque EvoMO."
+updatedDate: 2026-11-07
+summary: "EvoMO intègre la recherche multiobjectif tensorisée à EvoX pour explorer des objectifs concurrents sur de grandes populations candidates."
 ---
+
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
 ## Faire le pont entre l'optimisation multiobjectif évolutionnaire et l'accélération GPU via la tensorisation
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun et Ran Cheng, Senior Member, IEEE
 
-Avec la demande croissante de solutions d'optimisation complexes dans des domaines tels que la conception technique et la gestion de l'énergie, les algorithmes d'optimisation multiobjectif évolutionnaire (EMO) ont attiré une attention considérable en raison de leurs capacités robustes à résoudre des problèmes multiobjectifs. Cependant, à mesure que les tâches d'optimisation augmentent en échelle et en complexité, les algorithmes EMO traditionnels basés sur CPU rencontrent d'importants goulots d'étranglement en termes de performance.
+Les systèmes d'IA et d'ingénierie poursuivent souvent plusieurs objectifs : précision, ressources, stabilité ou autres exigences. L'infrastructure évolutionnaire d'EvoX doit permettre d'explorer ces compromis. EvoMO en traite l'aspect informatique en réorganisant pour les GPU les comparaisons et sélections coûteuses entre individus, rendant possibles de plus grandes expériences multiobjectifs.
 
 Pour remédier à cette limitation, l'équipe EvoX a proposé de paralléliser les algorithmes EMO sur GPU via la méthodologie de tensorisation. En tirant parti de cette méthode, ils ont conçu et implémenté avec succès plusieurs algorithmes EMO accélérés par GPU. De plus, l'équipe a développé **"MoRobtrol"**, une **suite de benchmarks pour le contrôle robotique multiobjectif** construite sur le moteur physique Brax, visant à évaluer systématiquement les performances des algorithmes EMO accélérés par GPU.
 
@@ -103,7 +106,8 @@ Fig.8 : Performance comparative (HV, EU et visualisation des résultats finaux) 
 Les expériences ont comparé les performances de TensorNSGA-III, TensorMOEA/D, TensorHypE, TensorRVEA et de la Recherche Aléatoire (RS) au sein du benchmark MoRobtrol. Les résultats montrent que TensorRVEA a obtenu la meilleure performance globale, obtenant les valeurs HV les plus élevées et démontrant une bonne diversité de solutions dans de multiples environnements. TensorMOEA/D a montré une forte adaptabilité dans les tâches à grande échelle, excellant particulièrement dans la cohérence des préférences des solutions. TensorNSGA-III et TensorHypE ont montré des performances similaires et étaient compétitifs sur plusieurs tâches. Dans l'ensemble, les algorithmes tensorisés basés sur la décomposition ont démontré des avantages supérieurs dans la résolution de problèmes complexes et à grande échelle.
 
 ## Conclusion et Travaux Futurs
-Cette étude propose une méthodologie de représentation tensorisée pour remédier aux limitations des algorithmes EMO traditionnels basés sur CPU en termes d'efficacité computationnelle et de scalabilité. L'approche a été appliquée à plusieurs algorithmes représentatifs, notamment NSGA-III, MOEA/D et HypE, obtenant des améliorations de performance significatives sur GPU tout en maintenant la qualité des solutions. Pour valider son applicabilité pratique, l'équipe a également développé MoRobtrol, une suite de benchmarks de contrôle robotique multiobjectif qui reformule les tâches de contrôle robotique dans des environnements de simulation physique en problèmes d'optimisation multiobjectif. Les résultats démontrent le potentiel des algorithmes tensorisés dans des scénarios gourmands en calcul tels que l'intelligence incarnée. Bien que la méthode de tensorisation ait considérablement amélioré l'efficacité algorithmique, il reste de la place pour d'autres améliorations. Les directions futures incluent l'amélioration des opérateurs de base tels que le tri non dominé, la conception de nouvelles opérations tensorisées pour les systèmes multi-GPU et l'intégration de données à grande échelle et de techniques de deep learning pour améliorer encore les performances sur les problèmes d'optimisation à grande échelle.
+
+EvoMO permet de préserver et comparer des alternatives utiles lorsque les objectifs sont en concurrence. Dans EvoX, la recherche multiobjectif devient une capacité réutilisable pour l'optimisation et le contrôle simulé. Le calcul parallèle élargit les alternatives évaluables ; les objectifs du domaine et les critères de décision définissent les compromis pertinents.
 
 ## Ressources
 

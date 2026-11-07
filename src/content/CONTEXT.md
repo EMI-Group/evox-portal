@@ -37,6 +37,8 @@ Five collections; the schema below is authoritative (zod-validated):
 - **Image names are arbitrary** (e.g. `metade-4.png` with alt text `1.png`); alt/title text does not correspond to the filename.
 
 ## Adding a New Article
+For `news` and `releases`, `updatedDate: YYYY-MM-DD` is optional. Set it to the actual editorial revision date when substantially changing an article, and synchronize it across its translations. Keep `pubDate` unchanged. The shared blog template emits `dateModified` and Open Graph revision metadata; `scripts/article-update-dates.mjs` supplies the same date to sitemap `lastmod`. Do not use the build date or filesystem timestamp. After building, run `python scripts/check-blog-seo.py` to check all blog languages and generated SEO metadata; the report is written to `docs/blog-seo-audit.json`.
+
 1. Create `<collection>/<slug>/` (lowercase-kebab; match news slug style).
 2. Write `en.md` (source of truth) with the collection's frontmatter.
 3. Add other locales as `<locale>.md` (all 13 for consistency; missing ones auto-fall back to English).

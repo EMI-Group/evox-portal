@@ -1,14 +1,17 @@
 ---
-title: "Otimização Multiobjetivo Evolucionária Acelerada por GPU"
+title: "EvoMO: explorar compromissos multiobjetivo em grande escala"
 pubDate: 2025-04-16
-summary: "Unindo a Otimização Multiobjetivo Evolucionária e a aceleração por GPU via Tensorização, apresentando a biblioteca EvoMO."
+updatedDate: 2026-11-07
+summary: "O EvoMO integra pesquisa multiobjetivo tensorizada no EvoX para explorar objetivos concorrentes com grandes populações candidatas."
 ---
+
+*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
 
 ## Unindo a Otimização Multiobjetivo Evolucionária e a Aceleração por GPU via Tensorização
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun e Ran Cheng, Membro Sênior, IEEE
 
-Com o aumento contínuo na demanda por soluções de otimização complexas em domínios como design de engenharia e gestão de energia, os algoritmos de otimização multiobjetivo evolucionária (EMO) ganharam ampla atenção devido às suas capacidades robustas na resolução de problemas multiobjetivo. No entanto, à medida que as tarefas de otimização crescem em escala e complexidade, os algoritmos EMO tradicionais baseados em CPU encontram gargalos de desempenho significativos.
+Os sistemas de IA e engenharia têm frequentemente vários objetivos: precisão, recursos, estabilidade ou outros requisitos. A infraestrutura evolutiva do EvoX deve permitir explorar estes compromissos. O EvoMO reorganiza para GPUs as comparações e a seleção dispendiosas entre indivíduos, tornando viáveis experimentos multiobjetivo maiores.
 
 Para enfrentar essa limitação, a equipe do EvoX propôs a paralelização de algoritmos EMO em GPUs por meio da metodologia de tensorização. Aproveitando este método, eles projetaram e implementaram com sucesso vários algoritmos EMO acelerados por GPU. Além disso, a equipe desenvolveu o **"MoRobtrol"**, uma **suíte de benchmark para controle de robôs multiobjetivo** construída sobre o motor de física Brax, com o objetivo de avaliar sistematicamente o desempenho de algoritmos EMO acelerados por GPU.
 
@@ -104,7 +107,7 @@ Os experimentos compararam o desempenho de TensorNSGA-III, TensorMOEA/D, TensorH
 
 ## Conclusão e Trabalhos Futuros
 
-Este estudo propõe uma metodologia de representação tensorizada para abordar as limitações dos algoritmos EMO tradicionais baseados em CPU em termos de eficiência computacional e escalabilidade. A abordagem foi aplicada a vários algoritmos representativos, incluindo NSGA-III, MOEA/D e HypE, alcançando melhorias significativas de desempenho em GPUs enquanto mantém a qualidade da solução. Para validar sua aplicabilidade prática, a equipe também desenvolveu o MoRobtrol, uma suíte de benchmark de controle robótico multiobjetivo que reformula tarefas de controle robótico em ambientes de simulação física como problemas de otimização multiobjetivo. Os resultados demonstram o potencial dos algoritmos tensorizados em cenários computacionalmente intensivos, como a inteligência incorporada (embodied intelligence). Embora o método de tensorização tenha melhorado substancialmente a eficiência algorítmica, ainda há espaço para melhorias adicionais. Direções futuras incluem o aprimoramento de operadores principais, como a ordenação não-dominada, o design de novas operações tensorizadas para sistemas multi-GPU e a integração de dados em larga escala e técnicas de deep learning para aumentar ainda mais o desempenho em problemas de otimização de larga escala.
+O EvoMO permite preservar e comparar alternativas úteis quando os objetivos competem. No EvoX, a pesquisa multiobjetivo torna-se uma capacidade reutilizável para otimização e controle simulado. O cálculo paralelo amplia as alternativas avaliáveis; os objetivos do domínio e os critérios de decisão determinam os compromissos relevantes.
 
 ## Recursos
 

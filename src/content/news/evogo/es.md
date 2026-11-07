@@ -1,10 +1,15 @@
 ---
-title: "EvoGO: aprender a generar mejores soluciones a partir de la experiencia de búsqueda"
+title: "EvoGO: aprender a buscar a partir de las evaluaciones"
 pubDate: 2026-04-05
-summary: "EvoGO es un marco de optimización evolutiva totalmente basado en datos que aprende cómo generar mejores soluciones a partir de la experiencia de búsqueda pasada y logra un rendimiento rápido y sólido en tareas complejas de alta dimensión."
+updatedDate: 2026-11-07
+summary: "EvoGO conecta aprendizaje generativo y optimización evolutiva, convirtiendo los candidatos evaluados en experiencia para proponer la siguiente población."
 ---
 
+*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
+
 ![image1](./image1.png)
+
+La búsqueda científica y de ingeniería debe decidir repetidamente qué experimento realizar después. EvoGO estudia una versión computacional de esa pregunta: ¿pueden las evaluaciones enseñar a un generador a mejorar sus propuestas? Esto conecta la IA evolutiva de EvoX con una búsqueda que aprende de los candidatos ya comprobados.
 
 ## El problema: La optimización basada en datos aún no ha dado el paso definitivo
 
@@ -62,25 +67,13 @@ Para analizar de forma más intuitiva la dinámica de búsqueda de EvoGO, el art
 
 Los resultados de la visualización muestran que lo que EvoGO aprende no es una perturbación aleatoria sin dirección, sino un patrón de actualización que se adapta a la etapa de la búsqueda. En la etapa inicial, los vectores generados son generalmente más largos, lo que indica que el algoritmo tiende a una exploración global de gran amplitud. A medida que avanza la evolución, las longitudes de los vectores disminuyen gradualmente y las regiones generadas continúan contrayéndose, lo que demuestra que la búsqueda se desplaza hacia una explotación (exploitation) local más fina. Al mismo tiempo, los vectores en su conjunto se agrupan hacia la región óptima, lo que indica que el generador directo ya ha extraído una dirección de búsqueda con significado práctico de las muestras históricas. A nivel de comportamiento, este fenómeno respalda la propiedad central de EvoGO: no solo aprende la distribución de las soluciones candidatas, sino la ley de actualización que se mueve del estado actual hacia un estado mejor.
 
-## Aplicación: Validación en ingeniería del ala supercrítica de un avión de fuselaje ancho
+## De los benchmarks a los flujos científicos
 
-La entrega exitosa del **C919** marca un paso crucial para China en el desarrollo de grandes aviones de producción nacional. Sin embargo, como avión de pasillo único y fuselaje estrecho, el C919 sirve principalmente para rutas de corto y medio alcance, y aún se necesitan avances en el dominio de los aviones de pasajeros de fuselaje ancho. Para satisfacer las necesidades de desarrollo de la próxima generación de aviones nacionales de fuselaje ancho, **el diseño del ala supercrítica** se ha convertido en un tema clave en la optimización aerodinámica, desempeñando un papel importante en la reducción de la resistencia aerodinámica en crucero, la mejora de la eficiencia del combustible y el aumento de la estabilidad de vuelo. Por lo tanto, cómo lograr una optimización eficiente y confiable del ala supercrítica se ha convertido en un desafío técnico fundamental en el proceso de desarrollo de los aviones de fuselaje ancho en China.
-
-![image8](./image8.png)
-
-Como se muestra en el artículo original, mediante la optimización de características geométricas como una cuerda más larga, una superficie superior más plana y un mayor arqueo (camber) del borde de salida, un ala supercrítica puede regular la distribución de la presión transónica, suprimir la formación de ondas de choque, reducir la resistencia de onda y mejorar la eficiencia de la sustentación. Sin embargo, su diseño óptimo se enfrenta a múltiples desafíos. Por un lado, bajo las condiciones de alto número de Reynolds de los aviones de fuselaje ancho, el diseño debe satisfacer simultáneamente restricciones aerodinámicas estrictas como la relación sustentación-resistencia (eficiencia aerodinámica), el coeficiente de sustentación y el ángulo de ataque en crucero, lo que impone requisitos de precisión extremadamente altos sobre los parámetros de forma. Por otro lado, existe una relación de acoplamiento fuertemente no lineal entre la geometría del perfil alar y el rendimiento aerodinámico, que es difícil de caracterizar con precisión para los métodos de modelado tradicionales. Además, el proceso de diseño existente depende en gran medida de la experiencia, de simulaciones CFD repetidas y de experimentos en túneles de viento, lo que conlleva altos costos computacionales, largos ciclos de desarrollo y la dificultad de acercarse efectivamente al óptimo global en un espacio de diseño de alta dimensión.
-
-![image9](./image9.png)
-
-Para abordar este problema, el equipo de EvoX construyó un proceso de diseño integrado basado en EvoGO, que consta de evaluación del rendimiento, generación de perfiles alares y selección de candidatos. Sobre la base de un pequeño número de muestras históricas de perfiles alares, el método construye un modelo de evaluación del rendimiento, un modelo de generación de perfiles alares y un modelo de selección, y mejora continuamente el diseño del perfil alar a través de la evolución iterativa. Se utiliza un modelo sustituto para predecir con precisión métricas clave como la relación sustentación-resistencia, el coeficiente de sustentación y el ángulo de ataque en crucero. Al mismo tiempo, se introduce un mecanismo generativo para reemplazar la búsqueda heurística tradicional, lo que permite una aproximación eficiente al óptimo en un espacio de diseño de alta dimensión. Combinado con una estrategia de selección de candidatos, este método puede identificar rápidamente perfiles alares candidatos que satisfagan tanto las restricciones físicas como los requisitos de rendimiento aerodinámico en un vasto espacio de búsqueda, mejorando así la eficiencia del diseño.
-
-![image10](./image10.png)
-
-Utilizando solo 500 muestras históricas de perfiles alares, el método logra una precisión de predicción superior al 99,5% en tres indicadores aerodinámicos clave —relación sustentación-resistencia, coeficiente de sustentación y ángulo de ataque en crucero—, y la tasa de calificación de los perfiles alares generados automáticamente supera el 95%. Estos resultados indican que los métodos de optimización evolutiva totalmente basados en datos, como EvoGO, no solo pueden tener un buen rendimiento en las pruebas de referencia estándar, sino que también están comenzando a demostrar la capacidad de proporcionar un soporte de diseño efectivo para problemas de ingeniería reales.
+La búsqueda generativa puede explorarse en el diseño de ingeniería, pero los benchmarks no prueban la precisión del diseño de perfiles alares ni su despliegue aeronáutico. Se necesitan datos definidos, casos de prueba independientes, comprobaciones de restricciones y validación independiente por simulación o experimentación. El artículo EvoGO enlazado presenta benchmarks numéricos, de control y robótica; no valida los porcentajes de rendimiento aerodinámico.
 
 ## Conclusión y perspectivas
 
-En lo que se centra EvoGO no es solo en una mejora local del proceso de optimización evolutiva tradicional, sino en una reconstrucción más fundamental de cómo ocurre la optimización en sí misma. Al organizar la optimización en las tres etapas unificadas de preparación de datos, entrenamiento del modelo y generación de la población, y al introducir la construcción direccional de datos basada en el emparejamiento superior-inferior, una arquitectura generativa emparejada guiada por un sustituto y un mecanismo de generación de población paralela, EvoGO demuestra ventajas estables tanto en rendimiento como en eficiencia en las pruebas de referencia estándar. Al mismo tiempo, también ha validado su potencial para problemas de ingeniería reales y complejos a través del diseño de optimización del ala supercrítica de aviones de pasajeros de fuselaje ancho de próxima generación. A un nivel más alto, la importancia de este trabajo radica en demostrar que la optimización evolutiva no tiene que permanecer necesariamente confinada a reglas heurísticas especificadas manualmente. El proceso de optimización en sí mismo puede destilarse progresivamente de la experiencia histórica como una ley que se puede aprender.
+EvoGO aporta a los sistemas de IA evolutiva un mecanismo de propuestas que aprende. Su relación con AI for Science consiste en aprovechar evaluaciones costosas para orientar búsquedas futuras, junto con la generación paralela de candidatos. Las aplicaciones científicas requieren restricciones, evaluación y validación propias del dominio; los benchmarks son el punto de partida.
 
 ## Recursos
 

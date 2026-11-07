@@ -1,10 +1,13 @@
 ---
-title: "MetaDE: Entwicklung von Differential Evolution durch Differential Evolution"
+title: "MetaDE: Suchstrategien mit der Aufgabe weiterentwickeln"
 pubDate: 2025-02-15
-summary: "MetaDE ist eine meta-evolutionäre Methode, die Differential Evolution nutzt, um ihre eigenen Hyperparameter und Strategien zu entwickeln, veröffentlicht in IEEE TEVC."
+updatedDate: 2026-11-07
+summary: "MetaDE ergänzt Differential Evolution um eine äußere Evolutionsschleife und nutzt EvoXs parallele Berechnung zur Bewertung und Verbesserung von Suchkonfigurationen."
 ---
 
-Differential Evolution (DE), einer der Kernalgorithmen in der evolutionären Berechnung, wird aufgrund seiner Einfachheit und hohen Effizienz häufig bei Black-Box-Optimierungsproblemen eingesetzt. Dennoch hängt seine Leistung stark von der Wahl der Hyperparameter und Strategien ab, was für Forscher ein ständiges Problem darstellt. Um dieser Herausforderung zu begegnen, veröffentlichte das EvoX-Team kürzlich eine Studie in *IEEE Transactions on Evolutionary Computation (IEEE TEVC)* mit dem Titel „MetaDE: Evolving Differential Evolution by Differential Evolution“. Als meta-evolutionäre Methode, die DE nutzt, um ihre eigenen Hyperparameter und Strategien zu entwickeln, ermöglicht MetaDE die dynamische Anpassung von Parametern und Strategien unter Einbeziehung von GPU-beschleunigtem parallelem Rechnen. Dieses Design verbessert sowohl die Recheneffizienz als auch die Optimierungsleistung erheblich. Experimentelle Ergebnisse zeigen, dass MetaDE sowohl bei der CEC2022-Benchmark-Suite als auch bei Robotersteuerungsaufgaben eine hervorragende Leistung erbringt. Der Quellcode für MetaDE ist als Open Source auf GitHub unter [https://github.com/EMI-Group/metade](https://github.com/EMI-Group/metade "https://github.com/EMI-Group/metade") verfügbar.
+*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+
+Anpassung kann die Suchweise eines Systems ebenso betreffen wie seine Lösungen. MetaDE bringt dies mit zwei verbundenen evolutionären Ebenen in EvoX: Eine löst das Zielproblem, die andere bewertet, welche DE-Konfigurationen die Suche wirksam machen.
 
 ## Hintergrund
 
@@ -124,19 +127,11 @@ Unter demselben EvoX-Framework mit GPU-beschleunigter paralleler Berechnung erre
 
 ## Evolutionäres Reinforcement Learning: Robotersteuerungsaufgaben
 
-Im Reinforcement Learning (RL) sind die Effizienz und Stabilität der Policy-Optimierung entscheidend. Gradientenbasierte Methoden wie PPO und SAC können in hochdimensionalen Umgebungen unter Gradientenverschwinden oder -explosion leiden. Im Gegensatz dazu umgeht Evolutionary Reinforcement Learning (EvoRL) diese Probleme, indem es **gradientenfreie Suchen** verwendet, um Policy-Parameter direkt zu optimieren.
+MetaDE sucht im Robotersteuerungsexperiment ohne Gradienten nach Parametern neuronaler Strategien; das Strategieziel wird dabei nicht rückwärts differenziert. Evolutionäres Reinforcement Learning umfasst jedoch auch gradientenbasierte und hybride Verfahren und beseitigt nicht grundsätzlich die Schwierigkeiten von PPO oder SAC.
 
 ![8.png](./metade-12.png "8.png")
 
-Prozess des evolutionären Reinforcement Learning
-
-Innerhalb des EvoRL-Frameworks:
-
-* **Optimiert MetaDE automatisch neuronale Netzwerkparameter**, was die Anpassungsfähigkeit von Policy-Modellen erhöht.
-* **Passt MetaDE Hyperparameter dynamisch an**, was die Trainingsstabilität verbessert.
-* **Nutzt MetaDE GPU-Beschleunigung**, um die Policy-Optimierung zu beschleunigen.
-
-Um die Leistung von MetaDE bei komplexen Optimierungsaufgaben zu bewerten, wendeten wir es auf **Robotersteuerungsaufgaben** unter Verwendung von GPU-beschleunigter Optimierung in der **Brax-Simulationsplattform** an. Die Studie umfasste drei Aufgaben – **Swimmer**, **Hopper** und **Reacher** –, die jeweils durch ein dreischichtiges vollständig verbundenes neuronales Netzwerk (MLP) modelliert wurden, mit dem Ziel, **die Belohnung zu maximieren**. Bemerkenswert ist, dass jedes MLP etwa **1.500 Parameter** enthält, was eine **1.500-dimensionale Optimierungsherausforderung** für evolutionäre Algorithmen (EAs) darstellt. Dies stellt strenge Anforderungen an sowohl die Suchfähigkeit als auch die Recheneffizienz.
+Die Versuche verwenden Brax Swimmer, Hopper und Reacher mit dreischichtigen MLP-Strategien mit ungefähr 1.500 Parametern. Die innere Suche optimiert die Gewichte, die äußere die Parameter und Strategien des DE-Executors. Diese Simulationen belegen weder den Einsatz auf realen Robotern noch eine allgemeine Verbesserung der Trainingsstabilität.
 
 ![9.png](./metade-13.png "9.png")
 
@@ -146,7 +141,7 @@ Wie in der Abbildung gezeigt, demonstriert MetaDE eine starke Leistung bei Brax-
 
 ## Fazit und zukünftige Richtungen
 
-MetaDE ist ein innovativer Meta-Evolutionsansatz, der nicht nur bei der Lösung von Optimierungsaufgaben hervorragt, sondern auch seine eigenen Strategien autonom abstimmt und verfeinert. Durch die Nutzung der Stärken von Differential Evolution zeigt MetaDE ein starkes Potenzial bei der adaptiven Parameterkonfiguration und Strategieentwicklung. Experimentelle Ergebnisse zeigen eine überlegene Robustheit in einer Reihe von Benchmark-Tests, und seine Anwendbarkeit in der realen Welt wird durch den Erfolg bei Robotersteuerungsaufgaben mittels evolutionärem Reinforcement Learning unterstrichen. Eine zentrale Herausforderung besteht darin, ein optimales Gleichgewicht zwischen Generalisierung und Spezialisierung aufrechtzuerhalten – sicherzustellen, dass sich der Algorithmus an diverse Aufgaben anpassen kann, während er gleichzeitig effektiv für spezifische Probleme optimiert. Diese Forschung bietet neue Perspektiven für selbstadaptive evolutionäre Algorithmen und könnte weitere Fortschritte in der Meta-Evolution für komplexe Systeme anregen.
+MetaDE bietet evolutionärer KI einen konkreten Mechanismus zur Anpassung der Suche durch Feedback. Sein Beitrag zu EvoX ist eine wiederverwendbare Verbindung zwischen Aufgabenoptimierung und Konfigurationssuche, unterstützt durch Batch-Auswertung. Neue Anwendungen benötigen sinnvolles Feedback und die Berücksichtigung der Kosten beider Ebenen.
 
 ## Ressourcen
 

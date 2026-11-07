@@ -1,10 +1,15 @@
 ---
-title: "EvoX Genesis: A Recursive AI System for Long-Horizon Autonomous Software Evolution That Built a 250K-Line C Compiler from Scratch"
+title: "EvoX Genesis: Building Software That Can Keep Evolving"
 pubDate: 2026-08-17
-summary: "The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released EvoX Genesis, a recursive AI system for long-horizon autonomous software evolution. Rather than relying on a persistent agent to sustain long-horizon development, it lets the software world itself keep evolving: starting from an empty repository, the system built a 248,989-line C compiler in 123.4 hours, with a total model token cost of just $44.38."
+updatedDate: 2026-11-07
+summary: "Genesis extends EvoX's evolutionary AI direction to software: agents generate changes, validation selects accepted work, and the project carries progress forward."
 ---
 
+*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+
 ![image1.png](./evox-genesis-1.png)
+
+Genesis brings the EvoX vision into Agentic AI by treating an evolving software project as the persistent result of many local contributions. Code generation, execution, review and integration form a development cycle. Accepted implementations and their validation records provide the material from which subsequent work can continue.
 
 The EvoX team from the Department of Data Science and Artificial Intelligence at The Hong Kong Polytechnic University has released **EvoX Genesis**, a recursive AI system for long-horizon autonomous software evolution.
 

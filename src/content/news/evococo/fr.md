@@ -1,12 +1,15 @@
 ---
-title: "EvoCoCo : conversion automatique de code MATLAB vers EvoX pour l'optimisation multiobjectif accélérée par GPU"
+title: "EvoCoCo : intégrer les connaissances algorithmiques au calcul GPU"
 pubDate: 2026-10-09
-summary: "EvoCoCo convertit des algorithmes évolutionnaires multiobjectifs écrits en MATLAB en implémentations EvoX accélérées par GPU, grâce à une tensorisation guidée par la sémantique, un retour d'exécution et une validation multi-agents. Évalué sur 48 algorithmes, il atteint une couverture de fidélité d'optimisation de 88.2%."
+updatedDate: 2026-11-07
+summary: "EvoCoCo relie les recherches existantes en optimisation à EvoX par une conversion respectueuse de la sémantique et une tensorisation GPU validée."
 ---
+
+*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
 
 ![Titre et auteurs de l'article EvoCoCo](./title_banner.png)
 
-Un algorithme évolutionnaire multiobjectif (MOEA) implémenté en MATLAB peut-il être confié tel quel à un grand modèle de langage et réécrit automatiquement en un programme accéléré par GPU ? En apparence, il suffirait de remplacer MATLAB par PyTorch, les tableaux par des tenseurs et les boucles par des opérations par lots. La véritable difficulté réside pourtant dans la sémantique de l'algorithme : quels calculs peuvent s'exécuter en parallèle, lesquels dépendent d'un ordre qui doit être préservé, quelles variables sont temporaires et lesquelles portent un état d'une génération à l'autre. Si ces distinctions sont erronées, le code converti peut s'exécuter tout en implémentant un algorithme différent.
+Des décennies de recherche en optimisation sont inscrites dans des logiciels dont le mode d'exécution ne correspond pas toujours au matériel disponible. EvoCoCo établit ce lien dans l'écosystème EvoX : préserver le sens de l'algorithme tout en réorganisant son calcul pour les GPU, afin de réutiliser ces connaissances dans des expériences évolutionnaires plus vastes.
 
 L'équipe EvoX propose EvoCoCo (Evolutionary Code Conversion), un cadre multi-agents de tensorisation automatique guidée par la sémantique. Il comprend d'abord l'algorithme source, puis explore différentes implémentations tensorisées, et utilise enfin le retour d'exécution pour valider, réparer et sélectionner les candidats. EvoCoCo a été évalué sur 48 MOEA selon trois dimensions : la fiabilité de la migration, la fidélité d'optimisation et l'extensibilité calculatoire. La couverture globale de fidélité d'optimisation atteint 88.2%. Les accélérations médianes sont de 22.6× lors de l'agrandissement de la taille de population et de 80.2× lors de l'agrandissement de la dimension des variables de décision. À plus grande échelle, l'algorithme représentatif MOEA/D-DE atteint une accélération de 37,339×.
 

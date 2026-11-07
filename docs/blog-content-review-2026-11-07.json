@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-07",
+  "status": "Updated in local working tree; not committed, pushed or deployed.",
+  "scope": {
+    "newsReviewedExcludingEvoRL": 16,
+    "releaseNotesReviewed": 12,
+    "newsFullyRewritten": 5,
+    "newsTargetedCorrections": 6,
+    "changedLocaleFiles": 143,
+    "locales": [
+      "en",
+      "zh-cn",
+      "zh-tw",
+      "ja",
+      "ko",
+      "fr",
+      "de",
+      "it",
+      "es",
+      "es-419",
+      "ru",
+      "pt",
+      "pt-br"
+    ]
+  },
+  "criteria": [
+    "Assess purpose, background, mechanism, evidence scope, sources and reader next steps; do not use length as the sole acceptance criterion.",
+    "Keep concise version changelogs when their features, fixes and upstream links are complete.",
+    "Treat project-reported experiments as reported evidence, not independent reproductions.",
+    "English is the translation source; preserve publication dates and existing routes; add localized revision notes."
+  ],
+  "rewritten": {
+    "evox-compiler": "Expanded graph lifecycle, transforms, backend boundaries, pinned installation and version-specific test evidence.",
+    "genesis-compiler-continuation": "Explained handoff state, integration and regression requirements, retained LLVM subset, and distinction from initial construction.",
+    "genesis-evoxc": "Expanded architecture, project organization, verification layers, historical snapshot and hardware limits.",
+    "genesis-mesa": "Explained 13-module scope, reference-output testing and distinct speedup snapshots; excludes complete stellar/binary evolution engines.",
+    "evox-quickstart": "Replaced image-dependent and ambiguous installation/device guidance with executable EvoX 1.4.1 instructions, CPU/CUDA selection and a complete PSO example; retained original figures and credits."
+  },
+  "corrected": {
+    "metade": "Removed the implication that all evolutionary RL eliminates PPO/SAC training problems; clarified policy-weight search versus outer DE tuning and simulation scope.",
+    "iStratDE": "Corrected fixed-time comparison to population 100 for every algorithm; population 100,000 belongs to separate scalability experiments.",
+    "evogo": "Removed unsupported airfoil percentages and related engineering-result figures from article text. The cited paper did not establish the 99.5%/95% claims; this is lack of corroboration, not proof those separate team results are false. Replaced with an engineering validation discussion. Assets remain on disk.",
+    "genesis-wasm-render": "Replaced two-day/global-first framing with evidence-record scope; 65.9 hours is commit span, US$36 is tokens, 135,165 lines are tracked text, and curated visual tests are separate from CTS. Added Evidence link. Existing comparison figure retained with explicit unequal-budget qualification.",
+    "autopso": "Replaced optimal-variant promise with task-suited search; quality depends on search space and evaluation design, not candidate count alone.",
+    "evogp": "Qualified GPU residency: it reduces repeated transfers, while loading, CPU objectives and output may still require transfers."
+  },
+  "retained": {
+    "codex-for-evox": "Detailed workflow and operational examples; no full rewrite needed.",
+    "evococo": "Substantial method, evaluation and mechanism discussion; retained scoped results.",
+    "evogm": "Detailed generator/meta-learning narrative and evaluation; no full rewrite needed.",
+    "evox-genesis": "Historical introductory article with architecture and examples; retained as distinct from the narrower evidence case studies.",
+    "gpu-accelerated-emo": "Substantial technical explanation and performance context; no full rewrite needed."
+  },
+  "releaseNotes": [
+    "evox-1-0-0",
+    "evox-1-0-1",
+    "evox-1-1-0",
+    "evox-1-1-1",
+    "evox-1-1-2",
+    "evox-1-2-0",
+    "evox-1-2-1",
+    "evox-1-2-2",
+    "evox-1-3-0",
+    "evox-1-4-0",
+    "evox-1-4-1",
+    "evox-2-0-0a1"
+  ],
+  "sources": [
+    "https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md",
+    "https://genesis.evox.group/evidence/compiler-continuation/",
+    "https://genesis.evox.group/evidence/evoxc/",
+    "https://genesis.evox.group/evidence/mesa/",
+    "https://genesis.evox.group/evidence/tbench-wasm/",
+    "https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md",
+    "https://github.com/EMI-Group/evox/tree/v1.4.1",
+    "https://arxiv.org/abs/2502.10470",
+    "https://arxiv.org/html/2602.01147",
+    "https://arxiv.org/html/2508.00380v3",
+    "https://arxiv.org/abs/2608.07539",
+    "https://github.com/EMI-Group/evogp"
+  ],
+  "validation": {
+    "sourceFiles": {
+      "checked": 143,
+      "errors": [],
+      "checks": [
+        "locale coverage",
+        "publication date preservation",
+        "code-block parity",
+        "link parity with existing localized WASM image exception",
+        "image existence",
+        "Chinese terminology",
+        "UTF-8 and frontmatter"
+      ]
+    },
+    "quickstart": {
+      "version": "evox 1.4.1 (isolated temporary installation); torch 2.9.1+cu128",
+      "runs": [
+        "CUDA: best fitness 9.5367431640625e-07",
+        "CPU fallback: best fitness 9.5367431640625e-07"
+      ],
+      "note": "Executed the complete optimization example; did not rerun research benchmarks."
+    },
+    "build": "pnpm build passed; 910 pages. Set pnpm_config_verify_deps_before_run=false to avoid automatic dependency reinstallation.",
+    "generatedRoutes": {
+      "checked": 156,
+      "includesPriorEvoRL": true,
+      "errors": [],
+      "checks": [
+        "one H1",
+        "canonical URL",
+        "localized update note for this pass",
+        "local image existence"
+      ],
+      "note": "Revision notes compared with the actual localized Markdown source, allowing natural wording differences between articles."
+    },
+    "diffCheck": "git diff --check passed",
+    "buildWarning": "Existing astro-icon warning: optional src/icons directory is absent; build completed."
+  },
+  "preserved": [
+    "Prior EvoRL rewrite in all 13 locales",
+    "Existing src/i18n/locales/en.json change",
+    "Historical publication records and unused image assets"
+  ]
+}
