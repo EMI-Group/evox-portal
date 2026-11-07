@@ -1,0 +1,18 @@
+---
+title: "Desarrollo de Genesis: Assistant y servidor remoto compartido"
+pubDate: 2026-11-07
+summary: "La rama main incorpora un chat de operaciones, un servidor remoto compartido y una gestión más sencilla de trabajos en segundo plano."
+---
+
+Los cambios integrados en la rama `main` de Genesis del 4 al 7 de noviembre de 2026 mejoran las operaciones diarias. **Son avances de desarrollo, no el anuncio de una nueva versión.** En la comprobación del 7 de noviembre, la última versión publicada sigue siendo v0.14.0.
+
+Genesis Assistant se convierte en un chat de operaciones del panel: puede consultar tareas y capacidad del sistema y solicitar operaciones o cambios de configuración. Sus niveles read/write/sudo distinguen las consultas de las operaciones que requieren aprobar el código exacto; sudo dispone de una tarjeta independiente. Consulte los límites en la [guía de Assistant][assistant].
+
+El desarrollo remoto comparte ahora una instancia de servidor con el panel HTTP. `genesis remote stop` desactiva la distribución remota y mantiene HTTP en funcionamiento. Los trabajos en segundo plano reciben identificadores cortos como `bash-1`; `job_output` permite omitir `job_id` cuando el agente que lo invoca solo tiene un trabajo.
+
+En las compilaciones de desarrollo, la ruta personalizada del archivo de credenciales OAuth pertenece ahora a cada perfil de modelo (`[[llm.models]]`), en lugar del ajuste global `[llm] oauth_file`. Revise los cambios enlazados antes de actualizar la configuración; no dé por hecho que están disponibles en v0.14.0.
+
+[GitHub: Assistant](https://github.com/EMI-Group/genesis/commit/0e200579c36c7e37d186392f9594be46470b40fa) · [GitHub: remote](https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82) · [GitHub: jobs](https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9) · [GitHub: OAuth](https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0) · [v0.14.0](https://github.com/EMI-Group/genesis/releases/tag/v0.14.0)
+
+[assistant]: https://github.com/EMI-Group/genesis/blob/e43ca5e1716fea8d6bb681c3309f74f451b58346/docs/genesis-assistant.md
+
