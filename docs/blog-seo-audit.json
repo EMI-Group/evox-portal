@@ -1,13 +1,13 @@
 {
   "scope": "Local production build; no deployment or search-engine indexing verification",
   "counts": {
-    "articles": 32,
+    "articles": 33,
     "byCollection": {
-      "news": 20,
+      "news": 21,
       "releases": 12
     },
     "locales": 13,
-    "pages": 416,
+    "pages": 429,
     "updatedPages": 221,
     "articleImages": 156,
     "previewPagesExcluded": 65
@@ -1606,6 +1606,105 @@
           "route": "/pt-br/news/genesis-mesa",
           "titleCharacters": 62,
           "descriptionCharacters": 133
+        }
+      ]
+    },
+    {
+      "article": "news/genesis-multi-repository",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/genesis-multi-repository",
+          "titleCharacters": 64,
+          "descriptionCharacters": 165
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/genesis-multi-repository",
+          "titleCharacters": 25,
+          "descriptionCharacters": 55
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/genesis-multi-repository",
+          "titleCharacters": 26,
+          "descriptionCharacters": 57
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/genesis-multi-repository",
+          "titleCharacters": 31,
+          "descriptionCharacters": 67
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/genesis-multi-repository",
+          "titleCharacters": 34,
+          "descriptionCharacters": 71
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/genesis-multi-repository",
+          "titleCharacters": 61,
+          "descriptionCharacters": 151
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/genesis-multi-repository",
+          "titleCharacters": 64,
+          "descriptionCharacters": 138
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/genesis-multi-repository",
+          "titleCharacters": 59,
+          "descriptionCharacters": 143
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/genesis-multi-repository",
+          "titleCharacters": 66,
+          "descriptionCharacters": 143
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/genesis-multi-repository",
+          "titleCharacters": 66,
+          "descriptionCharacters": 143
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/genesis-multi-repository",
+          "titleCharacters": 53,
+          "descriptionCharacters": 146
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/genesis-multi-repository",
+          "titleCharacters": 65,
+          "descriptionCharacters": 146
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/genesis-multi-repository",
+          "titleCharacters": 65,
+          "descriptionCharacters": 146
         }
       ]
     },
