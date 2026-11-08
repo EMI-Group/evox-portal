@@ -7,7 +7,7 @@ Shared landing-page bodies for the English and localized route trees. Each accep
 - **HomeContent.astro** — Uses `<Layout fullBleed>` with shared Header and Footer. The homepage opens directly with a compact centered text hero; the header is the only logo in the opening view. Latest updates follow immediately, then evolution, AI paradigms, hardware, and resources. Localized content comes from Astro collections, with UTC dates and translated summary fallbacks. Genesis links externally to `https://genesis.evox.group/`.
 - **EcosystemContent.astro** — Standard Layout chrome, featured Genesis, libraries sorted with EvoX first, and Community at `#community`. QQ opens an accessible QR dialog; Discord links externally.
 - **RuntimeContent.astro** — Standard Layout chrome, Runtime hero, Docs/GitHub links, and RuntimeExamples. Its legacy navy inline background is adapted by global theme styles.
-- **RuntimeExamples.astro** — Three tabs (`examples.singleObj/multiObj/neuro`) pair Python code using the GitHub Dark theme with interactive examples. Scripts provide timed auto-advance, Plotly readiness guards and resize, lazy Brax readiness polling, and Arrow/Home/End keyboard navigation.
+- **RuntimeExamples.astro** — Three tabs (`examples.singleObj/multiObj/neuro`) pair Python code using GitHub Light/Dark themes with interactive examples. Scripts provide timed auto-advance, Plotly readiness guards and resize, lazy Brax readiness polling, and Arrow/Home/End keyboard navigation.
 
 ## Homepage Design and Interaction
 - Typography: the complete hero headline tops out at 64px with consistent weight across both lines; section headings scale from 32px to 52px; primary descriptions use 16–18px; secondary labels use 12–14px. Shared navigation is 14px, with 15–16px mobile menu text. The global font stack explicitly includes Chinese system sans-serif families. The desktop header switches to its mobile menu below 1024px.
@@ -27,7 +27,7 @@ Shared landing-page bodies for the English and localized route trees. Each accep
 
 ## Known Issues and Dependencies
 - RuntimeContent's product-name H1 is an intentional literal; its GitHub link reuses `genesis.hero.github`.
-- Plotly and Brax depend on browser/network capabilities. Preserve readiness guards and polling timeouts; the carousel may skip unavailable panels. Runtime animations are independent of homepage reveals.
+- Plotly and Brax depend on browser/network capabilities. Preserve readiness guards and polling timeouts; the carousel may skip unavailable panels. Runtime animations are independent of homepage reveals. `content/examples/plot-theme.ts` adapts Plotly surfaces, labels and controls without resetting frames. The Brax data-URL iframe receives validated theme messages from its parent and adapts its scene, fog, controls and fallback.
 - The QQ modal lives in EcosystemContent, not on the homepage.
 
 ## Verification

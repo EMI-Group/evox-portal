@@ -62,12 +62,12 @@ const tr = await loadTranslations(locale);
     <div class="example-panel" data-panel="0" role="tabpanel" id="example-panel-0" aria-labelledby="example-tab-0">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div
-          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] runtime-code min-w-0"
         >
           <Code
             code={codeSingleObj}
             lang="python"
-            theme="github-dark"
+            themes={{ light: "github-light", dark: "github-dark" }}
             class="p-4 md:p-6 min-h-full"
           />
         </div>
@@ -81,12 +81,12 @@ const tr = await loadTranslations(locale);
     <div class="example-panel hidden" data-panel="1" role="tabpanel" id="example-panel-1" aria-labelledby="example-tab-1">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div
-          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] runtime-code min-w-0"
         >
           <Code
             code={codeMultiObj}
             lang="python"
-            theme="github-dark"
+            themes={{ light: "github-light", dark: "github-dark" }}
             class="p-4 md:p-6 min-h-full"
           />
         </div>
@@ -100,12 +100,12 @@ const tr = await loadTranslations(locale);
     <div class="example-panel hidden" data-panel="2" role="tabpanel" id="example-panel-2" aria-labelledby="example-tab-2">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div
-          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] bg-[#0d1117] min-w-0"
+          class="rounded-lg overflow-auto shadow-lg border border-gray-200 h-[28rem] runtime-code min-w-0"
         >
           <Code
             code={codeNeuro}
             lang="python"
-            theme="github-dark"
+            themes={{ light: "github-light", dark: "github-dark" }}
             class="p-4 md:p-6 min-h-full"
           />
         </div>
@@ -122,7 +122,7 @@ const tr = await loadTranslations(locale);
 <style>
   /* Example tabs */
   .example-tab {
-    color: #9ca3af;
+    color: var(--site-muted);
     font-size: 1.25rem;
     font-weight: 700;
     text-align: center;
@@ -135,26 +135,26 @@ const tr = await loadTranslations(locale);
   }
   .example-tab .tab-icon {
     opacity: 0.25;
-    filter: grayscale(100%);
+    filter: grayscale(100%) var(--site-logo-filter);
     transition:
       opacity 0.3s ease,
       filter 0.3s ease,
       transform 0.3s ease;
   }
   .example-tab:hover {
-    color: #374151;
+    color: var(--site-ink);
   }
   .example-tab:hover .tab-icon {
     opacity: 0.6;
-    filter: grayscale(50%);
+    filter: grayscale(50%) var(--site-logo-filter);
   }
   .example-tab.active {
-    color: #0f172a;
+    color: var(--site-ink);
     font-size: 1.5rem;
   }
   .example-tab.active .tab-icon {
     opacity: 1;
-    filter: grayscale(0%);
+    filter: var(--site-logo-filter);
   }
 
   @media (max-width: 640px) {

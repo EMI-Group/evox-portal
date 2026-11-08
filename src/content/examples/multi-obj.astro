@@ -27,6 +27,7 @@ const tr = await loadTranslations(locale);
 </script>
 
 <script>
+  import { syncPlotTheme } from "./plot-theme";
   import { coordinate, splashed, layout } from "./rvea-data.js";
   import framesUrl from "./rvea-frames.json?url";
 
@@ -54,7 +55,8 @@ const tr = await loadTranslations(locale);
       });
       // @ts-ignore
       await Plotly.addFrames(rvea_plot, values);
-      rvea_plot.setAttribute("data-ready", "true");
+      syncPlotTheme(rvea_plot);
+        rvea_plot.setAttribute("data-ready", "true");
       // If the panel became visible while frames were loading, the initial
       // newPlot measured a hidden container and got the default size —
       // resize now that the plot can actually be measured.

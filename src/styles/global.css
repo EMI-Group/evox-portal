@@ -47,6 +47,32 @@
   color-scheme: light;
 }
 
+/* Shared SVG and Canvas palette; Canvas reads these on theme changes. */
+:root {
+  --diagram-bg: #1d1d1f;
+  --diagram-fill: #242426;
+  --diagram-ink: #e4e4e7;
+  --diagram-muted: #96969e;
+  --diagram-line: #65656d;
+  --diagram-guide: #3a3a40;
+  --diagram-border: #333337;
+  --diagram-red: #e65361;
+  --diagram-bright: #ff9da6;
+  --diagram-soft: #352327;
+}
+:root[data-theme="light"] {
+  --diagram-bg: #f5f5f7;
+  --diagram-fill: #ffffff;
+  --diagram-ink: #27272a;
+  --diagram-muted: #717178;
+  --diagram-line: #9999a1;
+  --diagram-guide: #dcdce1;
+  --diagram-border: #e5e5e9;
+  --diagram-red: #c8383c;
+  --diagram-bright: #b82e34;
+  --diagram-soft: #f7e6e7;
+}
+
 /* Preserve the established utility API while giving older pages the same
    restrained red accents as the redesigned homepage. */
 @theme {
@@ -120,3 +146,16 @@ html, body { overflow-x: clip; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Match syntax highlighting to the site's explicit theme, including Markdown. */
+.astro-code { border: 1px solid var(--site-line); }
+.runtime-code { background: var(--site-alt); }
+.runtime-code .astro-code { border: 0; }
+:root[data-theme="dark"] .astro-code,
+:root[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+:root[data-theme="light"] .astro-code { background-color: var(--site-alt) !important; }
+.site-main-padded .js-plotly-plot .modebar { background: transparent !important; }
+.site-main-padded .js-plotly-plot .modebar-btn path { fill: var(--site-muted); }
