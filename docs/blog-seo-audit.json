@@ -8,8 +8,8 @@
     },
     "locales": 13,
     "pages": 494,
-    "updatedPages": 247,
-    "articleImages": 208,
+    "updatedPages": 286,
+    "articleImages": 247,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -735,48 +735,48 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/evox-algorithm-correctness",
-          "titleCharacters": 61,
+          "titleCharacters": 47,
           "descriptionCharacters": 170
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/evox-algorithm-correctness",
-          "titleCharacters": 23,
+          "titleCharacters": 25,
           "descriptionCharacters": 56
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/evox-algorithm-correctness",
-          "titleCharacters": 24,
+          "titleCharacters": 25,
           "descriptionCharacters": 57
         },
         {
           "locale": "ja",
           "route": "/ja/news/evox-algorithm-correctness",
-          "titleCharacters": 28,
+          "titleCharacters": 25,
           "descriptionCharacters": 64
         },
         {
           "locale": "ko",
           "route": "/ko/news/evox-algorithm-correctness",
-          "titleCharacters": 33,
+          "titleCharacters": 27,
           "descriptionCharacters": 81
         },
         {
           "locale": "fr",
           "route": "/fr/news/evox-algorithm-correctness",
-          "titleCharacters": 69,
+          "titleCharacters": 60,
           "descriptionCharacters": 166
         },
         {
           "locale": "de",
           "route": "/de/news/evox-algorithm-correctness",
-          "titleCharacters": 65,
+          "titleCharacters": 58,
           "descriptionCharacters": 158
         },
         {
@@ -788,31 +788,31 @@
         {
           "locale": "es",
           "route": "/es/news/evox-algorithm-correctness",
-          "titleCharacters": 58,
+          "titleCharacters": 60,
           "descriptionCharacters": 152
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/evox-algorithm-correctness",
-          "titleCharacters": 58,
+          "titleCharacters": 60,
           "descriptionCharacters": 155
         },
         {
           "locale": "ru",
           "route": "/ru/news/evox-algorithm-correctness",
-          "titleCharacters": 64,
+          "titleCharacters": 52,
           "descriptionCharacters": 151
         },
         {
           "locale": "pt",
           "route": "/pt/news/evox-algorithm-correctness",
-          "titleCharacters": 54,
+          "titleCharacters": 55,
           "descriptionCharacters": 146
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/evox-algorithm-correctness",
-          "titleCharacters": 51,
+          "titleCharacters": 52,
           "descriptionCharacters": 149
         }
       ]
@@ -933,84 +933,84 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/evox-distributed-evaluation",
-          "titleCharacters": 72,
+          "titleCharacters": 69,
           "descriptionCharacters": 150
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/evox-distributed-evaluation",
-          "titleCharacters": 23,
+          "titleCharacters": 22,
           "descriptionCharacters": 42
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/evox-distributed-evaluation",
-          "titleCharacters": 23,
+          "titleCharacters": 22,
           "descriptionCharacters": 42
         },
         {
           "locale": "ja",
           "route": "/ja/news/evox-distributed-evaluation",
-          "titleCharacters": 29,
+          "titleCharacters": 31,
           "descriptionCharacters": 56
         },
         {
           "locale": "ko",
           "route": "/ko/news/evox-distributed-evaluation",
-          "titleCharacters": 32,
+          "titleCharacters": 31,
           "descriptionCharacters": 66
         },
         {
           "locale": "fr",
           "route": "/fr/news/evox-distributed-evaluation",
-          "titleCharacters": 70,
+          "titleCharacters": 68,
           "descriptionCharacters": 150
         },
         {
           "locale": "de",
           "route": "/de/news/evox-distributed-evaluation",
-          "titleCharacters": 65,
+          "titleCharacters": 54,
           "descriptionCharacters": 155
         },
         {
           "locale": "it",
           "route": "/it/news/evox-distributed-evaluation",
-          "titleCharacters": 60,
+          "titleCharacters": 67,
           "descriptionCharacters": 157
         },
         {
           "locale": "es",
           "route": "/es/news/evox-distributed-evaluation",
-          "titleCharacters": 60,
+          "titleCharacters": 66,
           "descriptionCharacters": 149
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/evox-distributed-evaluation",
-          "titleCharacters": 60,
+          "titleCharacters": 66,
           "descriptionCharacters": 149
         },
         {
           "locale": "ru",
           "route": "/ru/news/evox-distributed-evaluation",
-          "titleCharacters": 66,
+          "titleCharacters": 59,
           "descriptionCharacters": 144
         },
         {
           "locale": "pt",
           "route": "/pt/news/evox-distributed-evaluation",
-          "titleCharacters": 58,
+          "titleCharacters": 56,
           "descriptionCharacters": 143
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/evox-distributed-evaluation",
-          "titleCharacters": 61,
+          "titleCharacters": 52,
           "descriptionCharacters": 140
         }
       ]
@@ -1428,54 +1428,54 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/genesis-context-continuity",
-          "titleCharacters": 58,
+          "titleCharacters": 53,
           "descriptionCharacters": 144
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/genesis-context-continuity",
-          "titleCharacters": 22,
+          "titleCharacters": 19,
           "descriptionCharacters": 63
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/genesis-context-continuity",
-          "titleCharacters": 22,
+          "titleCharacters": 19,
           "descriptionCharacters": 60
         },
         {
           "locale": "ja",
           "route": "/ja/news/genesis-context-continuity",
-          "titleCharacters": 28,
+          "titleCharacters": 27,
           "descriptionCharacters": 78
         },
         {
           "locale": "ko",
           "route": "/ko/news/genesis-context-continuity",
-          "titleCharacters": 29,
+          "titleCharacters": 27,
           "descriptionCharacters": 79
         },
         {
           "locale": "fr",
           "route": "/fr/news/genesis-context-continuity",
-          "titleCharacters": 71,
+          "titleCharacters": 67,
           "descriptionCharacters": 146
         },
         {
           "locale": "de",
           "route": "/de/news/genesis-context-continuity",
-          "titleCharacters": 58,
+          "titleCharacters": 65,
           "descriptionCharacters": 145
         },
         {
           "locale": "it",
           "route": "/it/news/genesis-context-continuity",
-          "titleCharacters": 61,
+          "titleCharacters": 64,
           "descriptionCharacters": 139
         },
         {
@@ -1493,19 +1493,19 @@
         {
           "locale": "ru",
           "route": "/ru/news/genesis-context-continuity",
-          "titleCharacters": 59,
+          "titleCharacters": 54,
           "descriptionCharacters": 126
         },
         {
           "locale": "pt",
           "route": "/pt/news/genesis-context-continuity",
-          "titleCharacters": 63,
+          "titleCharacters": 61,
           "descriptionCharacters": 140
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/genesis-context-continuity",
-          "titleCharacters": 63,
+          "titleCharacters": 61,
           "descriptionCharacters": 140
         }
       ]

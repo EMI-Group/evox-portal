@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-08",
+  "batch": 2,
+  "base": "853d35033d714248a56fd20f231224458b6a9ff1",
+  "selection": [
+    "evox-distributed-evaluation",
+    "evox-algorithm-correctness",
+    "genesis-context-continuity"
+  ],
+  "rationale": "Three previously text-only stories; distinct practical questions in distributed execution, algorithm correctness and context/job lifecycles.",
+  "scope": "Revised titles, openings and practical endings; localized original technical explanation retained and checked; removed generic defensive prose; replaced numbered link dumps with nearby source citations. 13 locales each, original pubDate retained.",
+  "images": [
+    {
+      "key": "distributed",
+      "method": "built-in image_gen",
+      "prompt": "Premium editorial concept illustration for EvoX distributed population evaluation. Landscape16:9. Top-down architectural still life on warm ivory paper: one circular tray of small charcoal pebbles fans out into three separated shallow geometric evaluation bowls; thin red inlaid channels lead from the bowls back to one cohesive row of carefully ordered red and charcoal tokens. Show the idea of splitting candidate work then gathering feedback, without arrows or literal charts. Beautiful tactile ceramic, finely machined edges, restrained vermilion accents, natural directional light, deep but soft shadows. High-end science magazine art, strong asymmetric balanced composition, meaningful subjects within central80percent, no text letters numbers logos chips robots screens or neon. Conceptual not measured results. Opaque background.",
+      "asset": "src/content/news/evox-distributed-evaluation/distributed-evaluation-feedback.webp",
+      "width": 1672,
+      "height": 941,
+      "nature": "Concept art, not experimental data or a screenshot."
+    },
+    {
+      "key": "correctness",
+      "method": "built-in image_gen",
+      "prompt": "Premium editorial illustration about EvoX algorithm correctness and faithful search behavior. Landscape16:9, warm ivory background charcoal and vermilion. A precision mechanical drafting instrument holds two finely engraved curved metal tracks: one visibly drifts away from a red reference contour, the corrected graphite track aligns precisely with that red contour. A small red calibration pin anchors the aligned curve. Close architectural product-photography still life, striking macro materials, quiet museum design, beautifully controlled shadows and tactile precision. Convey calibration of intended mathematical behavior without actual numeric plots or fake measurements. Central80percent subject, no text no numbers no logos no robot no chips no neon no repeated floating glass plates.",
+      "asset": "src/content/news/evox-algorithm-correctness/algorithm-behavior-calibration.webp",
+      "width": 1672,
+      "height": 941,
+      "nature": "Concept art, not experimental data or a screenshot."
+    },
+    {
+      "key": "context",
+      "method": "built-in image_gen",
+      "prompt": "Premium editorial concept cover for Genesis context compression with persistent background jobs. Landscape16:9. Warm ivory and charcoal sculpture: a long charcoal ribbon threaded with small ivory fragments passes through a compact red rectangular bookbinding press, emerging as a shorter orderly folded ribbon; beside it a separate continuous dark red thread runs uninterrupted through an open arch and carries three small polished beads. This visual metaphor distinguishes compacted working context and continuing execution. High-end editorial art, sculptural paper and lacquer, tactile tabletop, soft grazing daylight, clear subject scale, restrained red, elegant negative space. No text numbers lettering logos robot chips neon or generic network nodes. Keep meaningful subjects within central80percent, opaque background. Concept illustration not literal product UI.",
+      "asset": "src/content/news/genesis-context-continuity/context-compression-continuity.webp",
+      "width": 1672,
+      "height": 941,
+      "nature": "Concept art, not experimental data or a screenshot."
+    }
+  ],
+  "sources": [
+    "https://github.com/EMI-Group/evox/commit/388f0be9eb0ce01610a7ce60eb8050578a996dfb",
+    "https://github.com/EMI-Group/evox/commit/510452f70e30adeedebdaa4fc6e348a75d649643",
+    "https://github.com/EMI-Group/evox/releases/tag/v1.4.1",
+    "https://github.com/EMI-Group/evox/commit/c92918a906eaf075cf885461acc031ee0eb223b3",
+    "https://github.com/EMI-Group/evox/commit/5e68f81f8b6d6ea0638a44a337efe2183ba47716",
+    "https://github.com/EMI-Group/evox/commit/bcde7d2a171c34722c37a3559813136f702640cb",
+    "https://github.com/EMI-Group/genesis/releases/tag/v0.13.8",
+    "https://github.com/EMI-Group/genesis/releases/tag/v0.13.9",
+    "https://github.com/EMI-Group/genesis/releases/tag/v0.13.10"
+  ],
+  "newVerifiedDetail": "SHADE regression runs five workflow steps, checks changed Memory_FCR and finite entries. Genesis release records distinguish compacted working context from detached jobs and terminal-state correction.",
+  "datePolicy": "Event dates follow upstream release records; original website publication dates preserved. updatedDate=2026-11-08.",
+  "publicationRecord": "Commit, deployment and final live verification recorded in evox-github state.json/editorialRevisions after publishing.",
+  "validation": {
+    "buildPages": 1040,
+    "seoPages": 494,
+    "errors": 0,
+    "localizedArticleChecks": 39,
+    "locales": 13,
+    "visualInspection": "English and Simplified Chinese, desktop1280/mobile390,light/dark",
+    "checks": [
+      "source/code parity",
+      "canonical/hreflang",
+      "OG/Twitter dedicated image",
+      "BlogPosting dates and image",
+      "image loading",
+      "news pagination and internal routes"
+    ]
+  }
+}

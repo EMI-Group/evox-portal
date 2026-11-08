@@ -1,25 +1,28 @@
 ---
-title: "EvoX 1.4.1: preservar a semântica na busca paralela"
+title: "EvoX 1.4.1: quando uma pequena correção muda a busca"
 pubDate: 2026-10-30
 summary: "As correções de SHADE, evolução diferencial e CMA-ES mostram que uma infraestrutura evolutiva confiável exige eficiência e fidelidade aos algoritmos."
+updatedDate: 2026-11-08
 ---
 
-EvoX 1.4.1, publicado em 30 de outubro de 2026, corrige comportamentos algorítmicos e de execução. Quando milhares de candidatos são avaliados em conjunto, um pequeno erro pode alterar sistematicamente a busca. A infraestrutura deve preservar o algoritmo pretendido e executá-lo com eficiência.
+Uma busca pode terminar normalmente seguindo uma regra de atualização errada. O EvoX 1.4.1, publicado em 30 de outubro de 2026, corrige esse desvio em SHADE, evolução diferencial e CMA-ES, recuperando adaptação, amostragem e execução das quais os algoritmos dependem.
+
+![Um instrumento de calibração alinha uma curva de busca escura com a referência vermelha](./algorithm-behavior-calibration.webp)
+
+*Alinhar a implementação com o comportamento previsto.*
 
 ## O programa pode funcionar e buscar de outra forma
 
-Em SHADE, a memória de sucessos de F e CR não se adaptava. As melhorias eram calculadas após substituir a aptidão, e a aritmética com arrays preenchidos com NaN contaminava os valores escolhidos. A correção calcula as melhorias antes da atualização e seleciona os sucessos com `torch.where`.
+Em SHADE, a memória de sucessos de F e CR não se adaptava. As melhorias eram calculadas após substituir a aptidão, e a aritmética com arrays preenchidos com NaN contaminava os valores escolhidos. A correção calcula as melhorias antes da atualização e seleciona os sucessos com `torch.where`. [SHADE](https://github.com/EMI-Group/evox/commit/c92918a906eaf075cf885461acc031ee0eb223b3)
 
-O operador compartilhado de cruzamento binomial comparava amostras normais com uma probabilidade de cruzamento. Agora utiliza amostragem uniforme, coerente com essa probabilidade. Outras correções inicializam CoDE, SaDE e SHADE uniformemente dentro dos limites. Muda o que é gerado, não apenas a ausência de falhas.
+O operador compartilhado de cruzamento binomial comparava amostras normais com uma probabilidade de cruzamento. Agora utiliza amostragem uniforme, coerente com essa probabilidade. Outras correções inicializam CoDE, SaDE e SHADE uniformemente dentro dos limites. Muda o que é gerado, não apenas a ausência de falhas. [DE](https://github.com/EMI-Group/evox/commit/5e68f81f8b6d6ea0638a44a337efe2183ba47716)
 
 ## Definições matemáticas e restrições de execução
 
-As correções CMA-ES abrangem a atualização de covariância de posto um, a constante de acumulação e restrições de aliasing em `torch.cond`. Esta última reativa também um teste CMA-ES desativado. Fórmulas e condições do framework exigem verificações distintas.
+As correções CMA-ES abrangem a atualização de covariância de posto um, a constante de acumulação e restrições de aliasing em `torch.cond`. Esta última reativa também um teste CMA-ES desativado. Fórmulas e condições do framework exigem verificações distintas. [CMA-ES](https://github.com/EMI-Group/evox/commit/bcde7d2a171c34722c37a3559813136f702640cb)
 
-A versão trata ainda da inicialização e subespaços de estratégias evolutivas, seleção por torneio, transferências de dispositivo PSO e hipervolume. Estas correções documentadas não demonstram superioridade universal em todos os benchmarks.
+A versão trata ainda da inicialização e subespaços de estratégias evolutivas, seleção por torneio, transferências de dispositivo PSO e hipervolume. [v1.4.1](https://github.com/EMI-Group/evox/releases/tag/v1.4.1)
 
 ## A confiabilidade faz parte da infraestrutura
 
-Ao comparar experimentos, versão e semente devem acompanhar objetivo, população e orçamento de avaliação. Resultados afetados podem exigir nova avaliação. Para o EvoX, testar a semântica deve acompanhar tensorização e aceleração, para que o retorno experimental corresponda à busca que se pretendia executar.
-
-[1](https://github.com/EMI-Group/evox/releases/tag/v1.4.1) · [2](https://github.com/EMI-Group/evox/commit/c92918a906eaf075cf885461acc031ee0eb223b3) · [3](https://github.com/EMI-Group/evox/commit/5e68f81f8b6d6ea0638a44a337efe2183ba47716) · [4](https://github.com/EMI-Group/evox/commit/bcde7d2a171c34722c37a3559813136f702640cb)
+A correção SHADE adiciona um teste de regressão: cinco passos do fluxo e verificação de que a memória de adaptação muda e mantém valores finitos. Para comparar versões, registre semente, objetivo, população e orçamento de avaliação; depois repita as referências afetadas. As [notas da versão](/pt-br/releases/evox-1-4-1) orientam a atualização.
