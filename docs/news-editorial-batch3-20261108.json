@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-08",
+  "batch": 3,
+  "base": "612b37023ecca146569e430f372ec88b716bb346",
+  "selection": [
+    "genesis-multi-repository",
+    "genesis-development-history",
+    "genesis-tools-and-skills"
+  ],
+  "scope": "Previously unillustrated articles. Preserve useful release chronology and technical explanation; replace generic qualifications and abstract endings with concrete review and reuse routes; localize all changes across13 languages; add nearby sources and related reads.",
+  "sources": [
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.0",
+      "publishedAt": "2026-09-17T07:57:41Z",
+      "verifiedText": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.1",
+      "publishedAt": "2026-09-21T09:55:11Z",
+      "verifiedText": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.2",
+      "publishedAt": "2026-09-22T16:16:38Z",
+      "verifiedText": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.3",
+      "publishedAt": "2026-09-24T13:36:24Z",
+      "verifiedText": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.4",
+      "publishedAt": "2026-09-26T11:51:32Z",
+      "verifiedText": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/blob/v0.11.4/CHANGELOG.md",
+      "note": "Release body empty; read the tagged changelog to verify multi-repository write/review support."
+    }
+  ],
+  "addedDetail": "v0.13.4 tool-result pipeline supports text plus images/audio. Action examples are proposed workflows, not claimed hands-on benchmarks.",
+  "images": [
+    {
+      "key": "multi",
+      "method": "built-in image_gen",
+      "prompt": "Create premium 16:9 editorial concept art about Genesis multi-repository development: three distinct miniature architectural courtyards, each a graphite base with its own ivory archive blocks, joined by one continuous red overhead ribbon spanning them. Each courtyard has a separate small red gate facing viewer, conveying individually reviewable work under one objective. Warm ivory seamless background, restrained vermilion, tactile stone and folded paper, sophisticated asymmetric aerial composition, soft natural light, physically beautiful detail. No people robots chips words letters numbers logos screens or literal data. Clearly conceptual architecture. Central80percent for crops, no floating glass panels. Full opaque background.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/genesis-multi-repository/companion-worktrees.webp",
+      "nature": "Conceptual editorial sculpture, not a product screenshot."
+    },
+    {
+      "key": "history",
+      "method": "built-in image_gen",
+      "prompt": "Create premium 16:9 editorial illustration about agent contributions remaining in Git history after agents end. A sculptural archive made of several slender vertical charcoal rails carrying small ivory square tiles, with a few red tiles and thin red branching connections merging between rails. Lower portion settles into a substantial layered ivory archive block; upper rails rise and terminate independently. Show durable recorded contributions and their lineage, not a literal software screenshot. Swiss editorial composition, warm ivory background graphite and vermilion, finely crafted museum paper-metal sculpture, angled frontal view, quiet dramatic shadow, tactile detail. No text numbers logos screens robots chips neon or floating glass, central80percent content.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/genesis-development-history/durable-agent-history.webp",
+      "nature": "Conceptual editorial sculpture, not a product screenshot."
+    },
+    {
+      "key": "skills",
+      "method": "built-in image_gen",
+      "prompt": "Create premium 16:9 editorial concept cover about Genesis custom tools and versioned skills: a precise charcoal open toolkit holds three abstract functional instruments (a tuning fork form, a small calibration square, and a red cylindrical connector), beside a thick ivory folded instruction folio with red tabs. One red binding thread connects an instrument socket to a page edge, showing callable operations linked with reusable guidance. Strong asymmetric still life, warm white tabletop, graphite vermilion and ivory only, sophisticated product photography with subtle paper grain and machined details, natural soft side light. No lettering numbers logos screens robots chips or diagram labels. Concept illustration, not actual UI or packaged hardware. Wide16:9 central80percent.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/genesis-tools-and-skills/project-tools-guidance.webp",
+      "nature": "Conceptual editorial sculpture, not a product screenshot."
+    }
+  ],
+  "datePolicy": "pubDate2026-09-26 preserved; substantive revision updatedDate2026-11-08.",
+  "publication": "Commit and live verification recorded in automation state.json/editorialRevisions after deployment."
+}
