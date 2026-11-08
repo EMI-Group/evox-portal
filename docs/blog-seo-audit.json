@@ -8,8 +8,8 @@
     },
     "locales": 13,
     "pages": 494,
-    "updatedPages": 221,
-    "articleImages": 156,
+    "updatedPages": 234,
+    "articleImages": 169,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -1527,85 +1527,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/genesis-development-2026-11-07",
-          "titleCharacters": 64,
-          "descriptionCharacters": 106
+          "titleCharacters": 49,
+          "descriptionCharacters": 182
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/genesis-development-2026-11-07",
-          "titleCharacters": 30,
-          "descriptionCharacters": 30
+          "titleCharacters": 32,
+          "descriptionCharacters": 57
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/genesis-development-2026-11-07",
-          "titleCharacters": 30,
-          "descriptionCharacters": 30
+          "titleCharacters": 32,
+          "descriptionCharacters": 57
         },
         {
           "locale": "ja",
           "route": "/ja/news/genesis-development-2026-11-07",
-          "titleCharacters": 34,
-          "descriptionCharacters": 50
+          "titleCharacters": 33,
+          "descriptionCharacters": 93
         },
         {
           "locale": "ko",
           "route": "/ko/news/genesis-development-2026-11-07",
-          "titleCharacters": 34,
-          "descriptionCharacters": 54
+          "titleCharacters": 38,
+          "descriptionCharacters": 92
         },
         {
           "locale": "fr",
           "route": "/fr/news/genesis-development-2026-11-07",
-          "titleCharacters": 63,
-          "descriptionCharacters": 124
+          "titleCharacters": 67,
+          "descriptionCharacters": 215
         },
         {
           "locale": "de",
           "route": "/de/news/genesis-development-2026-11-07",
-          "titleCharacters": 66,
-          "descriptionCharacters": 107
+          "titleCharacters": 56,
+          "descriptionCharacters": 177
         },
         {
           "locale": "it",
           "route": "/it/news/genesis-development-2026-11-07",
-          "titleCharacters": 56,
-          "descriptionCharacters": 125
+          "titleCharacters": 54,
+          "descriptionCharacters": 207
         },
         {
           "locale": "es",
           "route": "/es/news/genesis-development-2026-11-07",
           "titleCharacters": 61,
-          "descriptionCharacters": 133
+          "descriptionCharacters": 206
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/genesis-development-2026-11-07",
-          "titleCharacters": 58,
-          "descriptionCharacters": 129
+          "titleCharacters": 61,
+          "descriptionCharacters": 204
         },
         {
           "locale": "ru",
           "route": "/ru/news/genesis-development-2026-11-07",
-          "titleCharacters": 54,
-          "descriptionCharacters": 103
+          "titleCharacters": 57,
+          "descriptionCharacters": 170
         },
         {
           "locale": "pt",
           "route": "/pt/news/genesis-development-2026-11-07",
-          "titleCharacters": 66,
-          "descriptionCharacters": 125
+          "titleCharacters": 58,
+          "descriptionCharacters": 199
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/genesis-development-2026-11-07",
-          "titleCharacters": 69,
-          "descriptionCharacters": 130
+          "titleCharacters": 66,
+          "descriptionCharacters": 196
         }
       ]
     },

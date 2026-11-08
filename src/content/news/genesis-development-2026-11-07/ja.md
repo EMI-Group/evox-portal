@@ -1,18 +1,39 @@
 ---
-title: "Genesis 開発状況：Assistant と共有リモートサーバー"
+title: "Genesis Assistant：実行中の作業を把握し、操作する"
 pubDate: 2026-11-07
-summary: "main ブランチで操作チャット、共有リモートサーバー、バックグラウンドジョブの簡素化が進みました。"
+updatedDate: 2026-11-08
+summary: "一つの対話でタスクとシステム容量を確認し、操作につなげる。Genesis の main ブランチでは、リモートサービス、バックグラウンドジョブ、モデル認証情報の管理も簡素化されています。"
 ---
 
-2026年11月4〜7日に Genesis の `main` ブランチへ取り込まれた変更は、日常の操作を改善します。
+長時間のソフトウェア開発タスクでは、開始後も疑問が続きます。何がまだ動いているのか、なぜ失敗したのか、次に何をすべきか。2026年11月4〜7日に Genesis の `main` ブランチへ取り込まれた変更は、こうした問いをダッシュボードの Assistant 対話へ集約し、その背後のサービスも改善します。
 
-Genesis Assistant はダッシュボードの操作チャットとなり、タスクやシステム容量の確認、タスク操作や設定変更の要求に対応します。read/write/sudo の実行レベルにより、参照操作と実行コードの承認を必要とする操作を区別し、sudo には専用の承認カードを用意します。境界は [Assistant ガイド][assistant] をご覧ください。
+![共有プラットフォーム上の複数のタスクフローを一つの対話につなぐ概念イラスト](./genesis-assistant-task-flows.webp)
 
-リモート開発は HTTP ダッシュボードと単一のサーバーインスタンスを共有します。`genesis remote stop` は HTTP を維持したままリモート分散接続を無効にします。バックグラウンドジョブには `bash-1` などの短い識別子が付き、呼び出し元エージェントのジョブが1件だけなら `job_output` の `job_id` を省略できます。
+*一つの対話と、並行して進む複数の作業。本更新の主題を表した編集イラスト。*
 
-開発ビルドでは、OAuth 認証情報ファイルの上書きパスを、グローバルな `[llm] oauth_file` ではなく個々のモデルプロファイル（`[[llm.models]]`）に設定します。
+## 操作項目より先に、タスクから考える
 
-[GitHub: Assistant](https://github.com/EMI-Group/genesis/commit/0e200579c36c7e37d186392f9594be46470b40fa) · [GitHub: remote](https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82) · [GitHub: jobs](https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9) · [GitHub: OAuth](https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0)
+Genesis Assistant はGenesis のソースや文書を読み、タスクとスケジューラーの現在の容量を確認できます。開発者は失敗したタスクの状態、エラー、結果を調べさせ、その後で以前の作業の再開などを依頼できます。説明と操作は、現在表示しているノードを対象に連続して行われます。
+
+[Assistant ガイド][assistant]は、実行中の作業の一覧、利用可能なモデルスロットの確認、マージ中のスケジューリング停止といった具体例を示しています。停止中も、すでに実行中の作業は継続します。一時的な実行時設定と保存済み設定は区別されるため、その場の調整が暗黙に恒久的な既定値になるわけではありません。
+
+参照には `read`、変更には実行コードの承認を伴う `write` を使い、`sudo` には専用の承認カードがあります。質問が操作へ変わる時点で、実行される内容を確認できます。
+
+## 一つのサーバー、二つの接続方法
+
+リモート開発と HTTP ダッシュボードは、単一のサーバーインスタンスを共有するようになりました。従来のリモートコマンドは分散接続専用の別インスタンスを起動していました。[共有サーバーへの変更][remote]により、`genesis remote stop` はリモート分散接続だけを無効にし、HTTP ダッシュボードは利用可能なまま残ります。リモート開発の接続を切るために、共有 HTTP サービスを停止する必要はありません。
+
+## 作業を追いやすくする細部
+
+[バックグラウンドジョブ][jobs]には `bash-1` のような短い識別子が付くようになりました。呼び出し元エージェントのジョブが一つだけなら、`job_output` は `job_id` なしで対象を特定できます。複数なら識別子、状態、ラベルを返し、正しいジョブの選択を助けます。
+
+[OAuth 認証情報ファイルの上書き設定][oauth]は、グローバルな `[llm] oauth_file` に代わり、`[[llm.models]]` 内の各モデルプロファイルに属します。独自の認証情報パスを使う開発者は、対象モデルと一緒に管理できます。
+
+これらの変更は、進行中の作業への接点を明確にします。調べるタスク、承認する操作、把握しやすいサービス状態です。全体像は [Genesis の紹介][intro]、具体的な操作は [Assistant ガイド][assistant]をご覧ください。
 
 [assistant]: https://github.com/EMI-Group/genesis/blob/e43ca5e1716fea8d6bb681c3309f74f451b58346/docs/genesis-assistant.md
+[remote]: https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82
+[jobs]: https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9
+[oauth]: https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0
+[intro]: /ja/news/evox-genesis
 

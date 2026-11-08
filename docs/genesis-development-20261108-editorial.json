@@ -1,0 +1,35 @@
+{
+  "article": "genesis-development-2026-11-07",
+  "updatedDate": "2026-11-08",
+  "pubDate": "2026-11-07",
+  "editorialIntent": "Reframe the existing November 4–7 development roundup around understanding and operating running work; retain all four source changes without inventing hands-on results.",
+  "sources": [
+    "https://github.com/EMI-Group/genesis/blob/e43ca5e1716fea8d6bb681c3309f74f451b58346/docs/genesis-assistant.md",
+    "https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82",
+    "https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9",
+    "https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0"
+  ],
+  "image": {
+    "tool": "built-in image_gen",
+    "prompt": "Use case: stylized-concept. Asset: premium editorial hero illustration for an EvoX Genesis technical news story, landscape 16:9, ideally 2048x1152. Theme: understanding and steering a running multi-agent software system through one clear operator interface while work continues. Create a beautifully crafted physical architectural model / precision industrial design still life: a single upright matte vermilion-red rounded speech-aperture sculpture at the left third, its hollow center framing a small charcoal control node. Three fine red channels run from that node over a warm ivory plane toward an ordered system of charcoal and off-white modular task blocks in the right two thirds. Each channel remains individually legible, with a few small red progress markers; a delicate translucent upright gate on one path suggests deliberate human control. One shared low graphite plinth unifies the system. The channels and blocks evoke task flow without pretending to be a literal architecture chart. Sculptural editorial aesthetic, precise edges, subtle brushed and ceramic textures, soft raking studio light, long refined shadows, generous negative space, restrained palette warm ivory #F6F3ED, charcoal #252525 and EvoX red #C8383C. Camera elevated three-quarter view, coherent perspective and deliberate visual hierarchy. Keep all main elements inside central 80% for social crop. High-end scientific magazine art direction, quiet confidence and visual tension between flowing work and a single deliberate control point. No words, numbers, lettering, logo, watermark, screens, UI screenshot, humanoids, robots, brains, generic glowing AI chips, neon, excessive cables or ornamental clutter. Opaque background.",
+    "original": "C:/Users/Admin/.codex/generated_images/01a1a583-a6bd-7100-955d-f3276c92b716/exec-bf6e55ca-e6f6-4cfe-89bf-5a9484ea459e.png",
+    "asset": "src/content/news/genesis-development-2026-11-07/genesis-assistant-task-flows.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 93260,
+    "type": "Editorial concept illustration, not a product screenshot or measurement"
+  },
+  "validation": {
+    "buildPages": 1040,
+    "blogSeoPages": 494,
+    "blogSeoErrors": 0,
+    "articleLocales": 13,
+    "checks": [
+      "Dates and source/code parity",
+      "Body and social image accessibility",
+      "BlogPosting, canonical and localized internal links",
+      "Article/news-list routes",
+      "English and Chinese desktop/mobile visual review"
+    ]
+  }
+}

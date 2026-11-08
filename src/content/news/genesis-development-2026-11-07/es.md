@@ -1,18 +1,39 @@
 ---
-title: "Desarrollo de Genesis: Assistant y servidor remoto compartido"
+title: "Genesis Assistant: comprender y gestionar el trabajo en curso"
 pubDate: 2026-11-07
-summary: "La rama main incorpora un chat de operaciones, un servidor remoto compartido y una gestión más sencilla de trabajos en segundo plano."
+updatedDate: 2026-11-08
+summary: "Consultar tareas, entender la capacidad del sistema y actuar desde una conversación. Los cambios recientes de main también simplifican servicios remotos, trabajos en segundo plano y credenciales de modelos."
 ---
 
-Los cambios integrados en la rama `main` de Genesis del 4 al 7 de noviembre de 2026 mejoran las operaciones diarias.
+Una tarea de desarrollo prolongada plantea preguntas mucho después de empezar: qué sigue en marcha, por qué ha fallado una tarea y cómo continuar. Los cambios integrados en `main` del 4 al 7 de noviembre de 2026 llevan estas preguntas a la conversación Assistant del panel de Genesis y mejoran los servicios que la sustentan.
 
-Genesis Assistant se convierte en un chat de operaciones del panel: puede consultar tareas y capacidad del sistema y solicitar operaciones o cambios de configuración. Sus niveles read/write/sudo distinguen las consultas de las operaciones que requieren aprobar el código exacto; sudo dispone de una tarjeta independiente. Consulte los límites en la [guía de Assistant][assistant].
+![Ilustración conceptual de una conversación conectada con varios flujos de tareas sobre una plataforma compartida](./genesis-assistant-task-flows.webp)
 
-El desarrollo remoto comparte ahora una instancia de servidor con el panel HTTP. `genesis remote stop` desactiva la distribución remota y mantiene HTTP en funcionamiento. Los trabajos en segundo plano reciben identificadores cortos como `bash-1`; `job_output` permite omitir `job_id` cuando el agente que lo invoca solo tiene un trabajo.
+*Una conversación, varios flujos de trabajo: una ilustración editorial de la idea central de esta actualización.*
 
-En las compilaciones de desarrollo, la ruta personalizada del archivo de credenciales OAuth pertenece ahora a cada perfil de modelo (`[[llm.models]]`), en lugar del ajuste global `[llm] oauth_file`.
+## Partir de la tarea para elegir la acción
 
-[GitHub: Assistant](https://github.com/EMI-Group/genesis/commit/0e200579c36c7e37d186392f9594be46470b40fa) · [GitHub: remote](https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82) · [GitHub: jobs](https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9) · [GitHub: OAuth](https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0)
+Genesis Assistant puede leer el código y la documentación de Genesis, consultar tareas y comprobar la capacidad actual del planificador. Puede pedirle que examine el estado, el error y el resultado de una tarea fallida y después solicitar un siguiente paso, como reanudar trabajo anterior. La conversación conecta explicación y operaciones sobre el nodo que se está consultando.
+
+La [guía de Assistant][assistant] ofrece puntos de partida concretos: listar el trabajo en curso, comprobar las plazas disponibles de los modelos o pausar la planificación durante una fusión. El trabajo ya iniciado continúa durante la pausa. Los ajustes temporales de ejecución y la configuración guardada siguen separados, de modo que un cambio de sesión no se convierte implícitamente en un valor permanente.
+
+Las consultas usan el nivel `read`. Los cambios usan `write`, con aprobación del código exacto; `sudo` tiene una tarjeta independiente. Así, la acción propuesta es visible cuando una pregunta se transforma en una operación.
+
+## Un servidor, dos formas de conectarse
+
+El desarrollo remoto y el panel HTTP comparten ahora una única instancia de servidor. Antes, los comandos remotos iniciaban una instancia aparte dedicada a la distribución. Con el [servidor compartido][remote], `genesis remote stop` desactiva la distribución remota mientras el panel HTTP sigue disponible. Desconectar el desarrollo remoto ya no exige detener ese servicio HTTP común.
+
+## Detalles que facilitan el seguimiento
+
+Los [trabajos en segundo plano][jobs] reciben identificadores cortos como `bash-1`. Si el agente que llama tiene un único trabajo, `job_output` puede encontrarlo sin `job_id`; si tiene varios, devuelve sus identificadores, estados y etiquetas para seleccionar el adecuado.
+
+Las [rutas personalizadas de archivos de credenciales OAuth][oauth] pertenecen ahora a cada perfil de modelo bajo `[[llm.models]]`, en lugar del ajuste global `[llm] oauth_file`. Cada ruta puede gestionarse junto al modelo al que sirve.
+
+Estos cambios ofrecen puntos de contacto más claros con el trabajo en marcha: una tarea que examinar, una acción que aprobar y un estado de servicio más fácil de seguir. Consulte la [introducción a Genesis][intro] para conocer el sistema y la [guía de Assistant][assistant] para operaciones concretas.
 
 [assistant]: https://github.com/EMI-Group/genesis/blob/e43ca5e1716fea8d6bb681c3309f74f451b58346/docs/genesis-assistant.md
+[remote]: https://github.com/EMI-Group/genesis/commit/be19052d11b1263ecb7050b7d185295dc70aed82
+[jobs]: https://github.com/EMI-Group/genesis/commit/0db07327a593b99b9a0e7bb7445c6a04c2a853e9
+[oauth]: https://github.com/EMI-Group/genesis/commit/b00f32f15e5daceb5883c169e2af45d6720416d0
+[intro]: /es/news/evox-genesis
 
