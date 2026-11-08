@@ -1,15 +1,13 @@
 ---
 title: "AutoPSO: hacer evolucionar los algoritmos de búsqueda"
 pubDate: 2026-08-25
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "AutoPSO convierte el diseño de la optimización por enjambre de partículas (PSO) en un espacio explorable y muestra cómo la evaluación paralela de EvoX permite evolucionar los propios métodos de optimización."
 ---
 
-*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
-
-![](./autopso-hero.png)
-
 Un sistema de IA evolutiva debe decidir qué buscar y cómo hacerlo. AutoPSO incorpora la segunda pregunta al ciclo de optimización: parámetros, reglas de aprendizaje y organización del enjambre se convierten en diseños candidatos que pueden evaluarse y mejorarse para una tarea.
+
+![Componentes reutilizables ensamblados en un mecanismo de enjambre](./automated-swarm-design.webp)
 
 El marco **AutoPSO**, propuesto por el equipo de EvoX, codifica de forma uniforme la configuración de parámetros, los mecanismos de aprendizaje y la estructura del enjambre del PSO en un espacio evolutivo explorable, y mediante **metaevolución** busca automáticamente una variante de PSO adecuada para un problema objetivo dado. Este marco no solo optimiza la solución del problema, sino que, en un nivel superior, optimiza automáticamente "qué PSO utilizar para resolverlo".
 

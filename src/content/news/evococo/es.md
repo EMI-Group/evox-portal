@@ -1,15 +1,13 @@
 ---
 title: "EvoCoCo: llevar el conocimiento algorítmico al cálculo en GPU"
 pubDate: 2026-10-09
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoCoCo conecta la investigación existente en optimización con EvoX mediante conversión que preserva la semántica y tensorización GPU validada."
 ---
 
-*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
-
-![Título y autores del artículo de EvoCoCo](./title_banner.png)
-
 Décadas de investigación en optimización están incorporadas en software cuyo modelo de ejecución puede no encajar con el hardware disponible. EvoCoCo une ambos elementos en el ecosistema EvoX: conservar el significado del algoritmo y reorganizar su cálculo para GPU, de modo que el conocimiento existente participe en experimentos evolutivos más amplios.
+
+![Una cadena de componentes se reorganiza en una cuadrícula paralela tras la inspección](./semantics-to-parallel-code.webp)
 
 El equipo de EvoX propone EvoCoCo (Evolutionary Code Conversion), un marco multiagente de tensorización automática guiada por semántica. Primero comprende el algoritmo fuente, luego explora distintas implementaciones tensorizadas y, por último, emplea la retroalimentación de ejecución para validar, reparar y seleccionar candidatos. EvoCoCo se evaluó en 48 MOEA según tres dimensiones: fiabilidad de la migración, fidelidad de optimización y escalabilidad computacional. La cobertura global de fidelidad de optimización alcanzó el 88.2%. Las aceleraciones medianas fueron de 22.6× al escalar el tamaño de la población y de 80.2× al escalar la dimensionalidad de las variables de decisión. A mayor escala, el algoritmo representativo MOEA/D-DE logró una aceleración de 37,339×.
 

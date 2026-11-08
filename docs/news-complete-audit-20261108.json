@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-08",
+  "scope": "Complete production news audit: 26 stories × 13 languages = 338 article pages, 39 listing pages; excludes release-note collection.",
+  "base": "d929af7bcec1fe02dda2baaa3033a0d7f993b29a",
+  "findings": [
+    {
+      "article": "autopso",
+      "issue": "Previously misclassified as a designed cover; actual PNG is a 1239×234 paper title strip.",
+      "fix": "New 1672×941 dedicated editorial illustration with 13 localized alt texts; original paper strip remains in existing disclosure."
+    },
+    {
+      "article": "evococo",
+      "issue": "1596×384 paper title strip remained as first/share image.",
+      "fix": "New dedicated editorial cover across all 13 languages; retain paper title/authors in source disclosure."
+    },
+    {
+      "article": "genesis-wasm-render",
+      "issue": "1080×732 results chart remained first/share image.",
+      "fix": "New dedicated conceptual cover across 13 languages; localized results charts remain evidence figures in body."
+    },
+    {
+      "article": "codex-for-evox",
+      "locale": "zh-cn",
+      "issue": "Missing English-source ZDT4 budget/result explanation and MAP-Elites niche comparison; comparison list omitted local AGE-MOEA and independent random baseline. Intro added an unstable star count and named model claims absent from English.",
+      "fix": "Align to English source and retained original experiment figures: four EvoX-based algorithms plus random baseline; 3000 FEs and zero ZDT4 HV; 5000 mazes, 22/36 vs random24,100% solvability. Neutral framework/agent description removes unsupported locale-only additions. No new experiment claimed."
+    }
+  ],
+  "languageReview": {
+    "sourceCoverage": 338,
+    "checked": [
+      "13 actual localized files per story, no English-title fallback",
+      "publication and modification dates synchronized",
+      "same section hierarchy and source URLs",
+      "same fenced code blocks",
+      "shared dedicated cover with localized literal alt",
+      "critical experimental quantities, scopes, baselines and qualifiers reviewed; number spelling/decimal/thousands/date conventions accounted for"
+    ],
+    "numericReviewNotes": "Automated number differences were triaged rather than treated as literal translation errors: dates, heading/figure numbering, internal es-419 paths, localized decimal/thousands separators, CJK 万/만, superscript exponents and spelled-out quantities. Example: AutoPSO German writes hundred-fold and threefold in words; these match English 100 and 3. Actual simplified-Chinese Codex omissions repaired.",
+    "intentionalFigureLocalization": "WASM original evidence figure remains Chinese in zh-cn/zh-tw and English elsewhere, while all 13 share the new text-free hero."
+  },
+  "visualReview": {
+    "dedicatedCovers": 26,
+    "dimensions": "Each first cover at least 1600 pixels wide, landscape; distinct purpose per story; conceptual illustrations are not experimental evidence.",
+    "template": "Existing content-first social selection verified; no new template modification required.",
+    "datePolicy": "Historical pubDate preserved; updatedDate 2026-11-08 for three genuinely revised cover stories; already same-day modified Codex date retained."
+  },
+  "art": [
+    {
+      "slug": "autopso",
+      "name": "automated-swarm-design",
+      "input": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-11c6ace2-5275-4d10-9f9b-a985ada92e23.png",
+      "path": "src/content/news/autopso/automated-swarm-design.webp",
+      "prompt": "Premium editorial cover for AutoPSO automated particle swarm algorithm design. Wide 16:9 at least 1600 px wide. An ivory precision design board holds interchangeable graphite mechanical modules: a branching junction, a curved guide, a small adjustable gear and a divided swarm chamber. Above them a small constellation of red and charcoal candidate beads follows several delicate red threads into one assembled search mechanism. Emphasize reusable algorithm components assembled and evaluated into task-specific PSO designs. Warm ivory, charcoal and restrained brand red, tactile architectural miniature, elegant studio light, high-end editorial still-life. No text, logos, numbers, plots, screens, robots or claimed measurements.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration",
+      "width": 1672,
+      "height": 941,
+      "bytes": 161216
+    },
+    {
+      "slug": "evococo",
+      "name": "semantics-to-parallel-code",
+      "input": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-99920b7c-5a82-4a94-9d37-cab98bf3df5b.png",
+      "path": "src/content/news/evococo/semantics-to-parallel-code.webp",
+      "prompt": "Premium editorial cover for EvoCoCo semantics-preserving code tensorization. Wide 16:9 at least 1600 px wide. On a warm ivory tabletop, an irregular but carefully joined graphite chain of small geometric components enters an elegant red framed inspection gate; on the other side the same components are rearranged into a precise rectangular parallel lattice, with matching distinctive ivory connector shapes visible on both sides. Focus on changing execution structure while preserving meaningful connections, not literal before-after performance. Sophisticated industrial sculpture, tactile plaster and graphite metal, crisp shadows and restrained red highlights. No text, letters, logos, fake code, UI, robots, charts or numerical claims.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration",
+      "width": 1672,
+      "height": 941,
+      "bytes": 188460
+    },
+    {
+      "slug": "genesis-wasm-render",
+      "name": "software-graphics-pipeline",
+      "input": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-b1e002df-bb4d-4ab4-bcc6-d645342a0d90.png",
+      "path": "src/content/news/genesis-wasm-render/software-graphics-pipeline.webp",
+      "prompt": "Premium editorial cover for Genesis software graphics renderer construction. Wide 16:9 at least 1600 px wide. A small ivory geometric scene containing a sphere, stepped cube and folded triangle is seen through four offset translucent graphite-edged glass plates; each plate reveals a progressively assembled geometric facet, and a thin red structural line aligns all plates with a completed miniature scene on an ivory base. Focus on a coherent graphics pipeline assembled from compatible stages. Refined optical sculpture, beautiful natural studio light, warm ivory charcoal red, tactile high-end magazine still-life. No words, letters, logos, screenshots, comparison charts, benchmark numbers, robots or GPUs. Concept illustration, not rendered test output.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration",
+      "width": 1672,
+      "height": 941,
+      "bytes": 105654
+    }
+  ],
+  "verification": {
+    "build": "pnpm build:1040 pages",
+    "seo": "494 blog pages, no errors",
+    "localReport": "C:/Users/Admin/.codex/automations/evox-github/news-complete-local.json",
+    "liveReport": "C:/Users/Admin/.codex/automations/evox-github/news-complete-live.json",
+    "checks": "All 338 HTTP/localized title/summary/visible cover/alt/size/OG/Twitter/JSON-LD/canonical/hreflang/date/internal-news checks; 26 unique share assets; all26 entries exactly once across 3 pages in each of13 locales with matching titles, summaries and pubDate; desktop and mobile light/dark screenshots."
+  },
+  "remainingFindings": []
+}

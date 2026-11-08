@@ -1,15 +1,13 @@
 ---
 title: "AutoPSO: fazer evoluir os algoritmos de pesquisa"
 pubDate: 2026-08-25
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "A AutoPSO transforma o desenho de otimização por enxame de partículas (PSO) num espaço pesquisável e mostra como a avaliação paralela do EvoX apoia a evolução dos métodos de otimização."
 ---
 
-*Atualizado a 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
-
-![](./autopso-hero.png)
-
 Um sistema de IA evolutiva deve decidir o que procurar e como procurar. A AutoPSO integra a segunda questão no ciclo de otimização: parâmetros, regras de aprendizagem e organização do enxame tornam-se configurações candidatas que podem ser avaliadas e melhoradas para uma tarefa.
+
+![Componentes reutilizáveis montados num mecanismo de enxame](./automated-swarm-design.webp)
 
 A framework **AutoPSO**, proposta pela equipa EvoX, codifica de forma uniforme a configuração de parâmetros, os mecanismos de aprendizagem e a estrutura do enxame do PSO num espaço evolutivo pesquisável, e procura automaticamente, através de **metaevolução**, uma variante de PSO adequada adaptada a um determinado problema-alvo. Esta framework não só otimiza a solução do problema, como também, num nível superior, otimiza automaticamente "qual o PSO a utilizar para o resolver".
 

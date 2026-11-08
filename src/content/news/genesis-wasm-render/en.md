@@ -1,13 +1,13 @@
 ---
 title: "Genesis WASM Render: From Local Code Generation to System Construction"
 pubDate: 2026-10-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Genesis's software-renderer case examines how interfaces, tests and accepted changes coordinate the construction of a complete graphics pipeline."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
-
 Building a software system requires useful local changes to remain compatible as the project grows. Genesis's WASM Render case examines that challenge through a graphics pipeline, connecting EvoX's Agentic AI direction to system construction: shader processing, rendering and API behavior must develop into a coherent whole.
+
+![Glass plates align stages of a geometric graphics scene](./software-graphics-pipeline.webp)
 
 Genesis's public record describes a TypeScript software renderer developed with DeepSeek V4 Flash. It reports 2,017/2,019 Khronos CTS cases passing, including 1,184/1,184 WebGL2 cases in the evaluated set. Approximately US$36 covers model tokens, not hardware. The evidence archive records 65.9 hours between the first and last agent commits, which is a repository time span rather than measured active-agent runtime.
 

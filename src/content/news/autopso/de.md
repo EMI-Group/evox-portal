@@ -1,15 +1,13 @@
 ---
 title: "AutoPSO: Suchalgorithmen selbst weiterentwickeln"
 pubDate: 2026-08-25
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "AutoPSO macht Entwürfe für Partikelschwarmoptimierung (PSO) durchsuchbar und zeigt, wie EvoXs parallele Auswertung die Evolution von Optimierungsmethoden unterstützt."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
-
-![](./autopso-hero.png)
-
 Ein evolutionäres KI-System muss entscheiden, was es sucht und wie es sucht. AutoPSO nimmt die zweite Frage in die Optimierung auf: Parameter, Lernregeln und Schwarmorganisation werden zu Entwürfen, die für eine Aufgabe bewertet und verbessert werden können.
+
+![Wiederverwendbare Suchbausteine als Schwarmmechanismus](./automated-swarm-design.webp)
 
 Das vom EvoX-Team vorgeschlagene **AutoPSO**-Framework kodiert die Parameterkonfiguration, die Lernmechanismen und die Schwarmstruktur von PSO einheitlich in einen durchsuchbaren evolutionären Raum und sucht durch **Meta-Evolution** automatisch eine geeignete PSO-Variante für ein bestimmtes Zielproblem. Dieses Framework optimiert nicht nur die Lösung des Problems, sondern auf einer höheren Ebene auch automatisch, „mit welchem PSO gelöst werden soll“.
 

@@ -1,13 +1,13 @@
 ---
 title: "Genesis WASM Render: de la generación local de código a construir sistemas"
 pubDate: 2026-10-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "El renderizador de Genesis estudia cómo interfaces, pruebas y cambios aceptados coordinan la construcción de una cadena gráfica completa."
 ---
 
-*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
-
 Construir un sistema de software requiere que los cambios locales útiles sigan siendo compatibles mientras crece el proyecto. Genesis estudia este reto con WASM Render, conectando Agentic AI en EvoX con la construcción de sistemas: procesamiento de shaders, renderizado y comportamiento de las API deben formar un conjunto coherente.
+
+![Placas de vidrio alinean las etapas de una escena geométrica](./software-graphics-pipeline.webp)
 
 El registro público de Genesis describe un renderizador TypeScript desarrollado con DeepSeek V4 Flash. Informa de 2.017/2.019 casos Khronos CTS superados, incluidos 1.184/1.184 casos WebGL2 en el conjunto evaluado. Los aproximadamente 36 USD cubren tokens del modelo, no hardware. Las 65,9 horas entre el primer y el último commit de los agentes son un intervalo del repositorio, no una medición de su tiempo activo de ejecución.
 

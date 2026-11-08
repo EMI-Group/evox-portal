@@ -1,13 +1,13 @@
 ---
 title: "Genesis WASM Render：從區域性程式碼生成走向系統構建"
 pubDate: 2026-10-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Genesis 的軟體渲染器案例，研究介面、測試與已接受變更如何共同支撐完整圖形流水線的構建。"
 ---
 
-*更新於 2026 年 11 月 7 日。歷史結果保留原始記錄日期。*
-
 構建軟體系統，需要讓有價值的區域性改動在專案增長中保持相容。Genesis 的 WASM Render 案例以圖形流水線研究這一挑戰，將 EvoX 的 Agentic AI 方向推進到系統構建：著色語言處理、渲染與 API 行為，必須共同形成能夠協作的整體。
+
+![玻璃板對齊幾何圖形場景的各個處理階段](./software-graphics-pipeline.webp)
 
 Genesis 的公開記錄描述了使用 DeepSeek V4 Flash 開發的 TypeScript 軟體渲染器：在所評估集合中，2,017/2,019 項 Khronos CTS 透過，其中 WebGL2 為 1,184/1,184。約 36 美元僅包含模型 token 費用，不含硬體。證據檔案記錄首末智慧體提交間隔 65.9 小時，這是倉庫時間跨度，不是測量得到的智慧體有效執行時長。
 

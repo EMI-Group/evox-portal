@@ -1,15 +1,13 @@
 ---
 title: "AutoPSO: Evolving the Algorithms That Search"
 pubDate: 2026-08-25
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "AutoPSO turns particle swarm optimization (PSO) design into a searchable space, showing how EvoX's parallel evaluation supports the evolution of optimization methods themselves."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
-
-![](./autopso-hero.png)
-
 An evolutionary AI system must decide both what to search for and how to search. AutoPSO brings the second question into the optimization loop: parameters, learning rules and swarm organization become candidates that can be evaluated and improved for a task.
+
+![Reusable search components assembled into a swarm design](./automated-swarm-design.webp)
 
 The **AutoPSO** framework, proposed by the EvoX team, uniformly encodes the parameter configuration, learning mechanisms, and swarm structure of PSO into a searchable evolutionary space, and automatically seeks a task-suited PSO variant tailored to a given target problem through **meta-evolution**. This framework not only optimizes the solution to the problem but also, at a higher level, automatically optimizes "which PSO to use for solving."
 
