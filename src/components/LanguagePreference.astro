@@ -1,0 +1,75 @@
+---
+import { locales, defaultLocale } from "../i18n/utils";
+
+interface Props {
+  autoDetect?: boolean;
+}
+
+const { autoDetect = true } = Astro.props;
+---
+
+<script is:inline define:vars={{ supportedLocales: locales, fallbackLocale: defaultLocale, autoDetect }}>
+  (() => {
+    const storageKey = "evox-locale";
+    const isSupported = (locale) => supportedLocales.includes(locale);
+
+    // Save explicit choices before navigation, including the unprefixed English URL.
+    const rememberChoice = (event) => {
+      const link = event.target instanceof Element
+        ? event.target.closest("a[data-locale-link]")
+        : null;
+      if (!link || !isSupported(link.lang)) return;
+      try {
+        localStorage.setItem(storageKey, link.lang);
+      } catch {
+        // Language links still work when browser storage is unavailable.
+      }
+    };
+    document.addEventListener("click", rememberChoice);
+    document.addEventListener("auxclick", (event) => {
+      if (event.button === 1) rememberChoice(event);
+    });
+
+    const url = new URL(window.location.href);
+    const prefix = url.pathname.split("/")[1];
+    // A shared localized link takes precedence over the saved preference.
+    if (!autoDetect || isSupported(prefix)) return;
+
+    const matchLanguage = (language) => {
+      try {
+        const locale = new Intl.Locale(language);
+        const exact = locale.baseName.toLowerCase();
+        if (isSupported(exact)) return exact;
+        if (locale.language === "zh") {
+          return locale.maximize().script === "Hant" ? "zh-tw" : "zh-cn";
+        }
+        if (locale.language === "es" && [
+          "419", "AR", "BO", "BR", "BZ", "CL", "CO", "CR", "CU", "DO",
+          "EC", "GT", "HN", "MX", "NI", "PA", "PE", "PR", "PY", "SV", "UY", "VE",
+        ].includes(locale.region)) return "es-419";
+        return isSupported(locale.language) ? locale.language : null;
+      } catch {
+        return null;
+      }
+    };
+
+    let preferred;
+    try {
+      preferred = localStorage.getItem(storageKey);
+      if (!isSupported(preferred)) {
+        const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
+        preferred = languages.map(matchLanguage).find(Boolean) || fallbackLocale;
+        // Persist detection once so internal English navigation cannot bounce back.
+        localStorage.setItem(storageKey, preferred);
+      }
+    } catch {
+      // Avoid redirect loops when a manual English choice cannot be remembered.
+      return;
+    }
+
+    if (preferred === fallbackLocale) return;
+    const pathname = url.pathname.replace(/\/$/, "");
+    url.pathname = `/${preferred}${pathname}`;
+    window.location.replace(url.href);
+  })();
+</script>

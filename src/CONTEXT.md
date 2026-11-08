@@ -21,6 +21,7 @@ All source code for the **EvoX Portal**: an Astro 6 static, content-first market
 - Markdown frontmatter fields (`pubDate`, `order`, `section`) must be identical across locale variants of an article.
 
 ## Design Decisions
+- **Browser language preference**: `components/LanguagePreference.astro` runs inline in the layout head. Unprefixed pages use the saved `evox-locale` in localStorage, or match browser languages on the first visit and persist the result. Explicit locale prefixes take precedence without overwriting the preference. Desktop/mobile language-menu clicks save the manual choice, including English. Query strings and hashes survive redirects. Error/preview pages disable automatic redirects through `noSEO`; unavailable storage leaves normal language links usable without automatic redirects. Run `node scripts/check-language-preference.mjs` after building for browser regression checks.
 - **Article-first content layout** (introduced in commit 18a23c5): one directory per article with per-locale `.md` files, rather than per-locale directories — enables `getLocalizedArticles` English-driven enumeration and fallback.
 - **`prefixDefaultLocale: false`** in `astro.config.mjs` ⇒ English pages live at top level, all other locales under `[locale]/` — this is why the two page trees are copy-paste twins that must be kept in sync manually.
 - **Lazy-loaded translations** with module-level cache in `i18n/utils.ts`; `en.json` statically imported and pre-seeded.
