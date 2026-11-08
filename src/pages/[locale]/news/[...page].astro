@@ -14,7 +14,7 @@ export async function getStaticPaths({ paginate }: { paginate: PaginateFunction<
   return nonDefaultLocales.flatMap((locale) => {
     const articles = getLocalizedNews(allArticles, locale);
     const sorted = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-    return paginate(sorted, { params: { locale }, pageSize: 10 });
+    return paginate(sorted, { params: { locale }, pageSize: 12 });
   });
 }
 
@@ -34,10 +34,10 @@ const title = t(tr, "news.pageTitle", { page: page.currentPage > 1 ? t(tr, "news
     </div>
   </div>
   <div class="bg-gray-50 min-h-screen py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {page.data.map((article, index) => (
-          <NewsCard article={article} locale={locale} eager={index < 2} />
+          <NewsCard article={article} locale={locale} eager={index < 3} />
         ))}
       </div>
 

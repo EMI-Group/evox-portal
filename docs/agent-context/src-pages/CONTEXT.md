@@ -36,7 +36,7 @@ URL segment to detect the locale.
 | `/404` | `404.astro` | Shared NotFoundContent; `noSEO`; mirrors all 13 locales. The host fallback redirects locale-prefixed missing URLs to their localized 404 page. |
 | `/docs` | `docs/index.astro` | Docs listing grouped by `data.section` (labels via `docs.section.<key>`), sorted by `data.order` |
 | `/docs/<slug>` | `docs/[...slug].astro` | Doc article; paths via `getLocalizedArticles(allDocs, defaultLocale)` |
-| `/news`, `/news/2`, ... | `news/[...page].astro` | Paginated news listing (10/page, pubDate desc). NO separate `index.astro` — paginate emits the base page itself |
+| `/news`, `/news/2`, ... | `news/[...page].astro` | Paginated news listing (12/page, pubDate desc), with 1/2/3 columns below 768px / from 768px / from 1280px. NO separate `index.astro` — paginate emits the base page itself |
 | `/news/<slug>` | `news/[...slug].astro` | News article via `getLocalizedNews` |
 | `/releases`, `/releases/2`, ... | `releases/[...page].astro` | Same pagination pattern (uses `getLocalizedArticles`) |
 | `/releases/<slug>` | `releases/[...slug].astro` | Release article |
@@ -51,7 +51,7 @@ All `[locale]/` pages mirror the above (except 404) using
 slug/paginated routes to generate per-locale combinations.
 
 ## Pagination Conventions
-- `[...page].astro` routes use Astro's `paginate()` with `pageSize: 10`.
+- `[...page].astro` routes use Astro's `paginate()`: news uses `pageSize: 12` to fill both two- and three-column rows; releases uses `pageSize: 10`.
 - Articles are sorted newest-first by `data.pubDate` before paginating.
 - Page 1 is served at the base path (`/news`, `/ja/news`); later pages at
   `/news/2`, `/ja/news/2`, etc.

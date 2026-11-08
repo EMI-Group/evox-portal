@@ -28,13 +28,13 @@ const cover = Object.entries(images).find(([path]) => path.toLowerCase() === ima
     alt={firstImage?.[1] || article.data.title}
     width={1088}
     widths={[480, 768, 1088]}
-    sizes="(min-width: 1152px) 524px, (min-width: 768px) 50vw, 100vw"
+    sizes="(min-width: 1280px) 384px, (min-width: 1024px) calc((100vw - 96px) / 2), (min-width: 768px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
     format="webp"
     loading={eager ? "eager" : "lazy"}
     decoding="async"
     class="block w-full aspect-video object-cover"
   />}
-  <div class="flex flex-col flex-grow p-6 sm:p-8">
+  <div class="flex flex-col flex-grow min-w-0 p-6">
     <div class="mb-5">
       <time datetime={article.data.pubDate.toISOString()} class="inline-block px-3 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-bold uppercase tracking-wider">
         {article.data.pubDate.toLocaleDateString(getDateLocale(locale), {
@@ -42,8 +42,8 @@ const cover = Object.entries(images).find(([path]) => path.toLowerCase() === ima
         })}
       </time>
     </div>
-    <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors leading-tight">{article.data.title}</h2>
-    <p class="text-gray-600 text-lg leading-relaxed line-clamp-3 mb-8 flex-grow">{article.data.summary || t(tr, "news.defaultSummary")}</p>
+    <h2 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors leading-snug break-words">{article.data.title}</h2>
+    <p class="text-gray-600 text-base leading-relaxed line-clamp-3 mb-6">{article.data.summary || t(tr, "news.defaultSummary")}</p>
     <div class="mt-auto flex items-center text-teal-600 font-bold group-hover:gap-2 transition-all">
       {t(tr, "news.readMore")}
       <span class="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
