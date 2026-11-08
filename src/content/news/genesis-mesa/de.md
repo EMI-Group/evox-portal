@@ -1,44 +1,46 @@
 ---
-title: "Genesis und MESA: Die Software hinter wissenschaftlichem Rechnen weiterentwickeln"
+title: "Genesis und MESA: Code neu schreiben, numerisches Verhalten erhalten"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
-summary: "Die Rust-Neuentwicklung ausgewählter MESA-Module verbindet agentische Entwicklung mit Bewahrung und Modernisierung wissenschaftlicher Software."
+updatedDate: 2026-11-08
+summary: "Dreizehn MESA-Module wurden zu einem Rust-Workspace. Referenztests und ein Einzonen-Brennmodell zeigen, wie das Projekt numerische Kontinuität prüft."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+Wissenschaftliche Software neu zu schreiben heißt, mehr als Algorithmen zu übernehmen. Auch das numerische Verhalten, auf dem spätere Berechnungen beruhen, muss erhalten bleiben. Im MESA-Fall von Genesis wurden dreizehn Fortran-Module als Rust-Crates neu entwickelt; ursprüngliche Ausgaben dienen als Referenz. Entscheidend ist, wie diese Kontinuität überprüfbar wird.
 
-Wissenschaftliche Entdeckungen hängen von Software ab, die numerische Methoden und Fachwissen bewahrt. Genesis verbindet bei der Neuentwicklung ausgewählter MESA-Module Agentic AI mit dieser Grundlage von AI for Science: Die Implementierung wird verbessert, vorhandenes numerisches Verhalten dient als Referenz für das zu Bewahrende.
+![Eine geschichtete Sternskulptur über zwei unterschiedlich gestalteten Ringen mit übereinstimmenden Konturen](./mesa-numerical-continuity.webp)
 
-## Ein klar begrenzter Auftrag
+*Konzeptillustration: neue Implementierung, gemeinsame numerische Referenz.*
+
+## Dreizehn Module als zusammenhängender numerischer Stack
 
 Der [Evidence-Eintrag vom 7. September 2026](https://genesis.evox.group/evidence/mesa/) umfasst **13 Module**, von **139.414 Fortran- zu 89.946 Rust-Zeilen**. Diese Snapshot-Zahlen sind nicht mit reinen Bibliothekszeilen gleichzusetzen.
 
 Der Port enthält Interpolation, Löser, Reaktionsnetzwerke, Zustandsgleichung und Opazität. Er ersetzt nicht ganz MESA; stellare und binäre Entwicklungsengines sowie weitere dokumentierte Komponenten bleiben ausgenommen.
 
-## Verhalten vor Geschwindigkeit
+## Die Berechnung prüfen, nicht nur den Build
 
 Jedes Modul entspricht einer Crate mit dokumentierten Schnittstellen und Bedingungen. Golden Tests vergleichen ursprüngliche Fortran-Ausgaben, Integrationstests prüfen das Zusammenspiel.
 
 Numerische Gleichwertigkeit braucht Toleranzen und definierte Aufgaben. Ein gleicher Skalar kann abweichende Lösungswege verdecken; daher dokumentiert das Repository auch Integrationsschritte des Einzonen-Brennproxies. Das belegt mehr als ein erfolgreicher Build.
 
-## Berichtete Validierung
+## Was die Testbilanz enthält
 
-Das Repository nennt **1.052 bestandene Tests, keine Fehler und 18 ignorierte Tests**. Ausgelassene Aufgaben müssen sichtbar bleiben. Die **10,64 US-Dollar** betreffen Modell-Tokens ohne Hardware; Modell, Episoden und Laufzeit sind nicht berichtet.
+Das Repository meldet **1.052 bestandene Tests, keine Fehler und 18 ignorierte Tests**; darunter sind Benchmarks und ein langsamer Brennlauf über die volle Dauer. Evidence nennt **10,64 US-Dollar Modell-Token-Kosten**, ohne Hardware; Modell, Episodenzahl und Laufzeit sind nicht angegeben.
 
-Die Ergebnisse wurden nicht unabhängig reproduziert. Sie gelten für den beschriebenen Port und Testumfang, nicht für sämtliche wissenschaftlichen MESA-Workflows.
+Dies sind von der Quelle berichtete Ergebnisse eines einzelnen Laufs ohne unabhängige Reproduktion. Der dokumentierte Modul- und Workload-Umfang bietet einen konkreten Ausgangspunkt für die Prüfung.
 
-## Benchmarkstände trennen
+## Zwei Momentaufnahmen, unterschiedliche Beschleunigungen
 
-Evidence berichtet **1,55–6,87× mediane Beschleunigung**. Die README-Tabelle vom 5. August verwendet Mediane aus 15 Läufen und nennt **1,25×** für den durchgängigen Einzonen-Brennproxy. Daraus darf keine universelle Beschleunigung abgeleitet werden.
+[Evidence](https://genesis.evox.group/evidence/mesa/) berichtet **1,55–6,87× mediane Beschleunigung**. Die README-Tabelle vom 5. August verwendet Mediane aus 15 Läufen und nennt **1,25×** für den durchgängigen Einzonen-Brennproxy. [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md#latest-verified-results-2026-08-05-15-run-medians-taskset-0-3)
 
-Vergleichen Sie gleiche Aufgaben, Daten, Compileroptionen und Toleranzen. Ein schnellerer Interpolationskern beschleunigt eine ganze Sternsimulation nicht automatisch um denselben Faktor.
+Für das Einzonen-Brennmodell dokumentiert die README in beiden Implementierungen **199 Integrationsschritte, davon 198 akzeptiert und 1 verworfen**. Dies gemeinsam mit Ausgabetoleranzen zu vergleichen macht die Zeitmessung aussagekräftiger als der Vergleich unterschiedlicher numerischer Rechenwege.
 
-## Ein Weg zur Modernisierung wissenschaftlicher Software
+## Einen Workload reproduzieren, dann den Umfang erweitern
 
-Die [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md) enthält Toolchain, Build-, Test- und Benchmarkanweisungen. Nach Einrichtung der Umgebung:
+Die [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md) enthält Toolchain, Build-, Test- und Benchmarkanweisungen. Nach Einrichtung der Umgebung:
 
 ```bash
 cargo test --workspace
 ```
 
-Das [MESA-Neuentwicklungsrepository](https://github.com/EMI-Group/genesis-demo-mesa-rs) zeigt, wie agentische Entwicklung an wissenschaftliche Software mit bestehender Geschichte anknüpft. Für EvoX geht es darum, diese Infrastruktur anpassbar zu machen und überprüfbares wissenschaftliches Verhalten zu erhalten. Eine Ausweitung über die berichteten Module hinaus benötigt weitere fachliche Validierung.
+Wählen Sie einen relevanten Workload und prüfen Sie Referenzausgaben, Toleranzen und Benchmark-Treiber im [MESA-Neuentwicklungsrepository](https://github.com/EMI-Group/genesis-demo-mesa-rs). Die [Genesis-Projektvorstellung](/de/news/evox-genesis) liefert den Hintergrund zur Agentenentwicklung; dieser Fall zeigt, wie sich benötigtes Verhalten nach einer Neufassung konkret überprüfen lässt.

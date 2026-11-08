@@ -8,8 +8,8 @@
     },
     "locales": 13,
     "pages": 494,
-    "updatedPages": 234,
-    "articleImages": 169,
+    "updatedPages": 247,
+    "articleImages": 208,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -834,85 +834,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": "2026-11-07",
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/evox-compiler",
-          "titleCharacters": 70,
-          "descriptionCharacters": 170
+          "titleCharacters": 65,
+          "descriptionCharacters": 147
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/evox-compiler",
-          "titleCharacters": 32,
-          "descriptionCharacters": 48
+          "titleCharacters": 33,
+          "descriptionCharacters": 45
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/evox-compiler",
-          "titleCharacters": 32,
-          "descriptionCharacters": 48
+          "titleCharacters": 33,
+          "descriptionCharacters": 44
         },
         {
           "locale": "ja",
           "route": "/ja/news/evox-compiler",
-          "titleCharacters": 37,
-          "descriptionCharacters": 63
+          "titleCharacters": 35,
+          "descriptionCharacters": 52
         },
         {
           "locale": "ko",
           "route": "/ko/news/evox-compiler",
-          "titleCharacters": 39,
-          "descriptionCharacters": 74
+          "titleCharacters": 38,
+          "descriptionCharacters": 63
         },
         {
           "locale": "fr",
           "route": "/fr/news/evox-compiler",
-          "titleCharacters": 75,
-          "descriptionCharacters": 164
+          "titleCharacters": 65,
+          "descriptionCharacters": 155
         },
         {
           "locale": "de",
           "route": "/de/news/evox-compiler",
-          "titleCharacters": 69,
-          "descriptionCharacters": 157
+          "titleCharacters": 60,
+          "descriptionCharacters": 142
         },
         {
           "locale": "it",
           "route": "/it/news/evox-compiler",
-          "titleCharacters": 76,
-          "descriptionCharacters": 143
+          "titleCharacters": 65,
+          "descriptionCharacters": 128
         },
         {
           "locale": "es",
           "route": "/es/news/evox-compiler",
-          "titleCharacters": 75,
-          "descriptionCharacters": 153
+          "titleCharacters": 66,
+          "descriptionCharacters": 137
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/evox-compiler",
-          "titleCharacters": 75,
-          "descriptionCharacters": 153
+          "titleCharacters": 66,
+          "descriptionCharacters": 135
         },
         {
           "locale": "ru",
           "route": "/ru/news/evox-compiler",
-          "titleCharacters": 61,
-          "descriptionCharacters": 144
+          "titleCharacters": 57,
+          "descriptionCharacters": 134
         },
         {
           "locale": "pt",
           "route": "/pt/news/evox-compiler",
-          "titleCharacters": 71,
-          "descriptionCharacters": 153
+          "titleCharacters": 64,
+          "descriptionCharacters": 132
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/evox-compiler",
-          "titleCharacters": 71,
-          "descriptionCharacters": 153
+          "titleCharacters": 64,
+          "descriptionCharacters": 132
         }
       ]
     },
@@ -1230,85 +1230,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/evox-virtual-populations",
-          "titleCharacters": 75,
-          "descriptionCharacters": 160
+          "titleCharacters": 53,
+          "descriptionCharacters": 165
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/evox-virtual-populations",
-          "titleCharacters": 30,
-          "descriptionCharacters": 63
+          "titleCharacters": 26,
+          "descriptionCharacters": 51
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/evox-virtual-populations",
-          "titleCharacters": 30,
-          "descriptionCharacters": 63
+          "titleCharacters": 26,
+          "descriptionCharacters": 52
         },
         {
           "locale": "ja",
           "route": "/ja/news/evox-virtual-populations",
-          "titleCharacters": 37,
-          "descriptionCharacters": 81
+          "titleCharacters": 31,
+          "descriptionCharacters": 65
         },
         {
           "locale": "ko",
           "route": "/ko/news/evox-virtual-populations",
-          "titleCharacters": 42,
-          "descriptionCharacters": 83
+          "titleCharacters": 36,
+          "descriptionCharacters": 73
         },
         {
           "locale": "fr",
           "route": "/fr/news/evox-virtual-populations",
-          "titleCharacters": 65,
-          "descriptionCharacters": 144
+          "titleCharacters": 63,
+          "descriptionCharacters": 176
         },
         {
           "locale": "de",
           "route": "/de/news/evox-virtual-populations",
-          "titleCharacters": 76,
-          "descriptionCharacters": 134
+          "titleCharacters": 62,
+          "descriptionCharacters": 170
         },
         {
           "locale": "it",
           "route": "/it/news/evox-virtual-populations",
-          "titleCharacters": 63,
-          "descriptionCharacters": 151
+          "titleCharacters": 55,
+          "descriptionCharacters": 163
         },
         {
           "locale": "es",
           "route": "/es/news/evox-virtual-populations",
-          "titleCharacters": 65,
-          "descriptionCharacters": 151
+          "titleCharacters": 55,
+          "descriptionCharacters": 161
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/evox-virtual-populations",
-          "titleCharacters": 65,
-          "descriptionCharacters": 151
+          "titleCharacters": 55,
+          "descriptionCharacters": 161
         },
         {
           "locale": "ru",
           "route": "/ru/news/evox-virtual-populations",
           "titleCharacters": 56,
-          "descriptionCharacters": 141
+          "descriptionCharacters": 156
         },
         {
           "locale": "pt",
           "route": "/pt/news/evox-virtual-populations",
-          "titleCharacters": 63,
-          "descriptionCharacters": 140
+          "titleCharacters": 56,
+          "descriptionCharacters": 148
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/evox-virtual-populations",
-          "titleCharacters": 65,
-          "descriptionCharacters": 140
+          "titleCharacters": 56,
+          "descriptionCharacters": 151
         }
       ]
     },
@@ -1824,85 +1824,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": "2026-11-07",
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
           "route": "/news/genesis-mesa",
           "titleCharacters": 67,
-          "descriptionCharacters": 138
+          "descriptionCharacters": 140
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/genesis-mesa",
-          "titleCharacters": 29,
-          "descriptionCharacters": 49
+          "titleCharacters": 26,
+          "descriptionCharacters": 62
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/genesis-mesa",
-          "titleCharacters": 29,
-          "descriptionCharacters": 49
+          "titleCharacters": 27,
+          "descriptionCharacters": 60
         },
         {
           "locale": "ja",
           "route": "/ja/news/genesis-mesa",
           "titleCharacters": 35,
-          "descriptionCharacters": 61
+          "descriptionCharacters": 70
         },
         {
           "locale": "ko",
           "route": "/ko/news/genesis-mesa",
-          "titleCharacters": 37,
-          "descriptionCharacters": 57
+          "titleCharacters": 36,
+          "descriptionCharacters": 88
         },
         {
           "locale": "fr",
           "route": "/fr/news/genesis-mesa",
-          "titleCharacters": 68,
-          "descriptionCharacters": 158
+          "titleCharacters": 71,
+          "descriptionCharacters": 169
         },
         {
           "locale": "de",
           "route": "/de/news/genesis-mesa",
-          "titleCharacters": 81,
-          "descriptionCharacters": 143
+          "titleCharacters": 68,
+          "descriptionCharacters": 149
         },
         {
           "locale": "it",
           "route": "/it/news/genesis-mesa",
-          "titleCharacters": 64,
-          "descriptionCharacters": 131
+          "titleCharacters": 74,
+          "descriptionCharacters": 158
         },
         {
           "locale": "es",
           "route": "/es/news/genesis-mesa",
-          "titleCharacters": 68,
-          "descriptionCharacters": 138
+          "titleCharacters": 74,
+          "descriptionCharacters": 161
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/genesis-mesa",
-          "titleCharacters": 68,
-          "descriptionCharacters": 138
+          "titleCharacters": 74,
+          "descriptionCharacters": 161
         },
         {
           "locale": "ru",
           "route": "/ru/news/genesis-mesa",
-          "titleCharacters": 62,
-          "descriptionCharacters": 115
+          "titleCharacters": 61,
+          "descriptionCharacters": 153
         },
         {
           "locale": "pt",
           "route": "/pt/news/genesis-mesa",
-          "titleCharacters": 62,
-          "descriptionCharacters": 133
+          "titleCharacters": 71,
+          "descriptionCharacters": 154
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/genesis-mesa",
-          "titleCharacters": 62,
-          "descriptionCharacters": 133
+          "titleCharacters": 71,
+          "descriptionCharacters": 154
         }
       ]
     },

@@ -1,44 +1,46 @@
 ---
-title: "Genesis e MESA: fazer evoluir o software do cálculo científico"
+title: "Genesis e MESA: reescrever o código, preservar o comportamento numérico"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
-summary: "A reconstrução em Rust de módulos MESA selecionados liga desenvolvimento agêntico, preservação e modernização do software científico."
+updatedDate: 2026-11-08
+summary: "Treze módulos MESA tornaram-se um workspace Rust. Testes de referência e um proxy de combustão de uma zona mostram como verificar a continuidade numérica."
 ---
 
-*Atualizado a 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+Reescrever software científico exige transmitir mais do que algoritmos. A nova implementação deve preservar o comportamento numérico de que dependem os cálculos seguintes. No caso MESA do Genesis, treze módulos Fortran foram reconstruídos como crates Rust, usando as saídas originais como referência. O interesse está em tornar essa continuidade verificável.
 
-A descoberta científica depende de software que preserva métodos numéricos e conhecimento acumulado. A reconstrução de módulos MESA com Genesis liga Agentic AI a esta base de AI for Science: melhorar a implementação, usando o comportamento numérico existente como referência do que deve ser preservado.
+![Uma escultura estelar em camadas sobre dois anéis de materiais diferentes com contornos coincidentes](./mesa-numerical-continuity.webp)
 
-## Uma tarefa delimitada
+*Ilustração conceptual: uma nova implementação, uma referência numérica comum.*
+
+## Treze módulos numa cadeia numérica interligada
 
 O [registo de 7 de setembro de 2026](https://genesis.evox.group/evidence/mesa/) cobre **13 módulos**, de **139.414 linhas Fortran para 89.946 linhas Rust**. São tamanhos do snapshot, não apenas do código de biblioteca.
 
 O port inclui interpolação, solvers, redes de reação, equação de estado e opacidade. Não substitui todo o MESA: motores de evolução estelar e binária e outros componentes documentados ficam excluídos.
 
-## Verificar antes de medir velocidade
+## Verificar o cálculo, não apenas a compilação
 
 Cada módulo corresponde a um crate com interfaces e restrições documentadas. Testes de referência comparam saídas Fortran; testes de integração verificam interações.
 
 A equivalência numérica precisa de tolerâncias e tarefas definidas. Um escalar igual pode ocultar um percurso diferente do solver; o repositório regista também passos de integração do proxy de combustão de uma zona. Isto informa mais do que compilar com sucesso.
 
-## Validação reportada
+## O que contém o registo dos testes
 
-O repositório indica **1.052 testes aprovados, zero falhas e 18 ignorados**. As exclusões devem ficar visíveis. Os **10,64 dólares americanos** cobrem tokens sem hardware; modelo, episódios e duração não foram reportados.
+O repositório indica **1 052 testes aprovados, nenhuma falha e 18 ignorados**, incluindo benchmarks e uma combustão lenta de duração completa. Evidence regista **10,64 dólares de custos de tokens do modelo**, excluindo hardware; modelo, número de episódios e tempo decorrido não são especificados.
 
-São resultados do projeto, não uma reprodução independente. Cobrem o port e os testes descritos, não todos os fluxos científicos do MESA.
+São resultados comunicados pela fonte para uma única execução, sem reprodução independente. O âmbito documentado de módulos e cargas oferece um ponto de partida concreto para os examinar.
 
-## Separar os benchmarks
+## Dois retratos, diferentes acelerações
 
-Evidence reporta **1,55–6,87× de aceleração mediana**. A tabela README de 5 de agosto usa medianas de 15 execuções e dá **1,25×** para o proxy de combustão de uma zona de ponta a ponta. Não devem ser fundidos numa aceleração universal.
+[Evidence](https://genesis.evox.group/evidence/mesa/) reporta **1,55–6,87× de aceleração mediana**. A tabela README de 5 de agosto usa medianas de 15 execuções e dá **1,25×** para o proxy de combustão de uma zona de ponta a ponta. [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md#latest-verified-results-2026-08-05-15-run-medians-taskset-0-3)
 
-Compare tarefas, dados, opções de compilação e tolerâncias iguais. Um núcleo de interpolação mais rápido não implica o mesmo fator numa simulação estelar completa.
+Para o proxy de combustão de uma zona, o README regista **199 passos de integração, 198 aceites e 1 rejeitado** em ambas as implementações. Comparar este comportamento com as tolerâncias das saídas torna a medição mais informativa do que cronometrar cálculos com percursos numéricos diferentes.
 
-## Um caminho para modernizar o software científico
+## Reproduzir uma carga antes de alargar o âmbito
 
-O [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md) apresenta ferramentas, compilação, testes e benchmarks. Depois de preparar o ambiente:
+O [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md) apresenta ferramentas, compilação, testes e benchmarks. Depois de preparar o ambiente:
 
 ```bash
 cargo test --workspace
 ```
 
-O [repositório de reconstrução MESA](https://github.com/EMI-Group/genesis-demo-mesa-rs) mostra como o desenvolvimento agêntico pode dar continuidade à história do software científico. Para o EvoX, a direção é tornar esta infraestrutura adaptável, preservando um comportamento científico verificável. A expansão além dos módulos apresentados exige validação adicional do domínio.
+Escolha uma carga relevante e examine saídas de referência, tolerâncias e programas de benchmark no [repositório da reconstrução MESA](https://github.com/EMI-Group/genesis-demo-mesa-rs). A [apresentação do Genesis](/pt/news/evox-genesis) fornece o contexto do desenvolvimento com agentes; este caso permite verificar concretamente se a reescrita preservou o comportamento necessário.

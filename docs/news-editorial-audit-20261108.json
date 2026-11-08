@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-08",
+  "basis": "b44fc966de28085d4f4d3a1df5725efba7b6be02",
+  "scope": "Editorial screening of all 26 English news entries: titles, summaries, openings, section structure and visual coverage. Detailed primary-source verification and revisions limited to the three selected stories. Preserve original publication dates and unrelated drafts.",
+  "selection": {
+    "evox-virtual-populations": "Selected: no image; memory representation is a clear visual subject. Replace generic closing and numbered link dump with practical per-candidate loss guidance, experiment design and nearby sources.",
+    "evox-compiler": "Selected: no image; abstract vision-led opening obscured the concrete release. Lead with inspecting program graphs; clarify staged execution, batching, backend selection and independent distribution.",
+    "genesis-mesa": "Selected: no image; validation statistics fragmented the numerical-preservation story. Add integration-step parity and ignored-test detail, dated source snapshots and an actionable reproduction route.",
+    "genesis-development-2026-11-07": "Exclude: already polished and illustrated as the requested benchmark.",
+    "evorl": "Next candidate: long text-only ecosystem introduction. A dedicated visual and more focused research narrative would help; full research-claim review deserves a separate pass.",
+    "genesis-compiler-continuation": "Next candidate: no image and repetitive context; distinct model-handoff story, but overlaps the scientific-software continuity angle selected here.",
+    "genesis-evoxc": "Defer: no image, but same project as the selected compiler article; keep the existing agentic-development angle as a related read.",
+    "evox-distributed-evaluation": "Defer: no image, compact practical topic already organized around execution and reproducibility.",
+    "evox-algorithm-correctness": "Defer: no image, focused maintenance topic with clear behavior change.",
+    "genesis-context-continuity": "Defer: no image, focused release-specific explanation.",
+    "genesis-development-history": "Defer: no image, focused development-history update.",
+    "genesis-multi-repository": "Defer: no image, focused companion-worktree update.",
+    "genesis-persistent-server": "Defer: no image, focused persistent-execution update.",
+    "genesis-tools-and-skills": "Defer: no image, focused tool/skill lifecycle update.",
+    "evox-quickstart": "Retain this pass: useful concrete workflow and existing visuals; related read for VirtualES.",
+    "evox-genesis": "Retain this pass: six visuals and broader project introduction; related read for MESA.",
+    "genesis-wasm-render": "Retain this pass: existing results illustration; evidence conditions require dedicated review before further rewrite.",
+    "autopso": "Defer: already illustrated; long promotional/repetitive passages merit a future paper-source editorial pass.",
+    "codex-for-evox": "Defer: fourteen visuals and procedural content; not a missing-image priority.",
+    "evococo": "Defer: six visuals and detailed paper explanation; can tighten the opening in a later research pass.",
+    "evogm": "Defer: seven visuals; lengthy abstract-led research treatment needs separate substantive condensation.",
+    "evogo": "Defer: six visuals; research-focused rewrite requires paper-level checks.",
+    "evogp": "Defer: seven visuals; not a missing-image priority.",
+    "gpu-accelerated-emo": "Defer: twelve visuals; author/paper framing and broad claims warrant a dedicated paper-source pass.",
+    "iStratDE": "Defer: eight visuals; broad performance and communication claims warrant detailed source review in a future pass.",
+    "metade": "Defer: nine visuals; introductory repetition and broad performance wording warrant a dedicated source review."
+  },
+  "sources": [
+    {
+      "url": "https://github.com/EMI-Group/evox/commit/d8c0964fd71c3d6171ae83bd0c1483f742b310a6",
+      "date": "2026-07-07T19:23:00Z",
+      "supports": "Full Gaussian VirtualES, center/seeds/sigma, center update."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evox/commit/c6bde1e47df9617cd934053c7f6c69e40068e921",
+      "date": "2026-07-07T19:27:37Z",
+      "supports": "VirtualProblem supported models, fused per-layer evaluation, scalar-loss expansion and reduction='none' guidance."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evox/commit/f4f2fd1067f184c000b7f1a94ff0ee6395c6e697",
+      "date": "2026-07-07T10:09:55Z",
+      "supports": "Virtual workflow bypasses solution transforms and distributed evaluation."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evox/commit/97971618740d35845740320e7db973d3a3f671ef",
+      "supports": "Triton JIT fix for noise helper."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evoxc/releases/tag/v0.1.0",
+      "date": "2026-10-29T07:27:54Z",
+      "prerelease": false,
+      "supports": "Formal v0.1.0 release."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md",
+      "supports": "Explicit stages, graph transforms, matching signatures, support matrix, Python/license, dependencies, independent evoxc-hf, 7511/77/4/0 tests with extras."
+    },
+    {
+      "url": "https://genesis.evox.group/evidence/mesa/",
+      "date": "2026-09-07",
+      "id": "GW-000003",
+      "evidenceLevel": "Source-reported single run; not independently reproduced.",
+      "supports": "13 modules, 139414→89946 snapshot LOC, token-only USD10.64, reported 1.55–6.87x range."
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md",
+      "date": "2026-08-05",
+      "supports": "1052 passed,18 ignored; golden tests and module scope; 15-run median one-zone burn1.25x; integrator199/198/1; reproduction commands."
+    }
+  ],
+  "images": [
+    {
+      "key": "virtual",
+      "method": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Create one premium editorial illustration for EvoX news about VirtualES: many candidate neural-network parameters can be reconstructed from one shared center and small random seeds, instead of storing full copies. Wide 16:9 landscape. A precise sculptural still life in warm ivory, charcoal graphite and a restrained vermilion red. Central-left a single dense graphite rectangular slab with finely engraved irregular contours, nearby a neat arc of small red seed-like beads; across center-right several translucent thin glass planes carry subtly differing versions of the same contours, as if emerging on demand. Make the material contrast and repeated but varying contour motif beautifully legible, quiet museum-quality product photography, grazing soft sunlight, long controlled shadows, tactile matte stone platform, extraordinary surface detail. Strong single composition, no connecting flowchart arrows. Use ample breathing room, main objects within central 80 percent for mobile crops. No words, letters, numbers, logos, circuitry, robot, neural-network node cliché, or charts. Conceptual visual, not a performance measurement or literal scientific simulation. Opaque warm ivory background.",
+      "kind": "Conceptual editorial art; not measured results or product screenshots.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/evox-virtual-populations/virtuales-shared-center.webp"
+    },
+    {
+      "key": "compiler",
+      "method": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Create one high-end editorial cover illustration for EvoX Compiler, about turning numerical programs into inspectable, transformable graphs before execution. Wide landscape 16:9. Architectural exploded-view sculpture: three suspended translucent warm-white square plates arranged diagonally in depth above a charcoal stone base, each carrying an abstract carefully routed graph etched in graphite; discrete vermilion red junctions and one red solid precision-cut element passing through the stages. The first plate has branching paths, the second has clean aligned repeated paths, the final plate is a beautifully compact machined geometric object. Visually convey structural transformation and explicit intermediate stages, not a conveyor-belt factory or a literal UI. Premium Swiss design editorial, warm ivory seamless studio background, graphite and red palette, dimensional materials, precise soft shadows, realistic optical depth, striking composition at thumbnail scale. No textual labels, numbers, logos, source code, chips, robots, neon glow or arrows. Keep meaningful elements in central 80 percent; image must stand alone without typography.",
+      "kind": "Conceptual editorial art; not measured results or product screenshots.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/evox-compiler/evoxc-visible-stages.webp"
+    },
+    {
+      "key": "mesa",
+      "method": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Create a sophisticated editorial illustration for Genesis redeveloping MESA scientific software from Fortran into Rust while checking numerical behavior. Wide 16:9. A beautiful abstract stellar cross-section as a suspended sphere in the center: nested ivory ceramic shells surrounding a small glowing vermilion core, with a carefully opened wedge revealing layers. Below it two contrasting precision-machined half-rings, one charcoal and one brushed ivory, share exactly matching finely etched contour profiles; a restrained red datum line aligns them, metaphor for retaining behavior through a new implementation. This is conceptual art, not a measured star image or physically accurate stellar model. Editorial science magazine meets museum kinetic sculpture, warm off-white studio, tactile high-end materials, soft directional light, exceptionally detailed edges, calm negative space, balanced dark and red accents. No captions, letters, numerals, logos, data charts, spacecraft, robots, chips or neon. Avoid visual reference to hardware performance measurements. All primary objects within central 80 percent, strong legibility at mobile size, opaque background.",
+      "kind": "Conceptual editorial art; not measured results or product screenshots.",
+      "width": 1672,
+      "height": 941,
+      "asset": "src/content/news/genesis-mesa/mesa-numerical-continuity.webp"
+    }
+  ],
+  "validation": {
+    "build": "pnpm build:1040 pages",
+    "seo": "python scripts/check-blog-seo.py:494 localized blog pages, no errors",
+    "localizedArticles": 39,
+    "locales": 13,
+    "originalPubDatesPreserved": true,
+    "updatedDate": "2026-11-08",
+    "visualReview": "English and Simplified Chinese,1280px desktop/390px mobile,light/dark; primary composition and text checked.",
+    "deploymentRecord": "Publication commit and live verification are recorded in the evox-github automation memory after deployment."
+  }
+}

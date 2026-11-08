@@ -1,44 +1,46 @@
 ---
-title: "Genesis and MESA: Evolving the Software Behind Scientific Computing"
+title: "Genesis and MESA: Rewrite the Code, Preserve the Numerical Behavior"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
-summary: "The Rust redevelopment of selected MESA modules connects agentic development to the preservation and modernization of scientific software."
+updatedDate: 2026-11-08
+summary: "Thirteen MESA modules became a Rust workspace. Golden tests and a one-zone burn proxy show how the project checks what survives the rewrite."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+Rewriting scientific software means carrying forward more than algorithms. A new implementation must preserve the numerical behavior on which later calculations depend. In Genesis's MESA case, thirteen Fortran modules were redeveloped as Rust crates, with original outputs serving as references. The interesting story is how the project makes that continuity checkable.
 
-Scientific discovery depends on software that carries accumulated numerical methods and domain knowledge. Genesis's redevelopment of selected MESA modules connects Agentic AI with this foundation of AI for Science: improving the implementation while using existing numerical behavior as a reference for what must be preserved.
+![A layered stellar sculpture above two contrasting rings with matching contours](./mesa-numerical-continuity.webp)
 
-## A bounded redevelopment task
+*Concept illustration: a new implementation, a shared numerical reference.*
+
+## Thirteen modules, one connected numerical stack
 
 The [September 7, 2026 Evidence record](https://genesis.evox.group/evidence/mesa/) covers **13 modules**, with **139,414 lines of Fortran** and a reported **89,946 lines of Rust**. These are snapshot-level size figures, not interchangeable with the repository's library-only line count.
 
 The port covers a chain of numerical and physics modules, including interpolation, solvers, reaction networks, equation of state and opacity. It does not replace the complete MESA system: stellar and binary evolution engines and other documented components remain outside scope.
 
-## Preserve behavior before comparing speed
+## Check the calculation, not just the build
 
 The repository organizes the port as one Rust crate per module and documents their interfaces and constraints. Golden tests compare results with original Fortran output files; integration tests exercise interactions between modules.
 
 Numerical equivalence needs an explicit tolerance and workload. A matching scalar result alone may hide a different solver path, so the repository also records integration-step behavior for its one-zone burn proxy. These checks make migration claims more informative than a successful build.
 
-## What the validation reports
+## What the test record contains
 
-The repository reports **1,052 passing tests, no failures and 18 ignored tests**. Ignored workloads must remain visible in any summary. The Evidence record reports **US$10.64 in model-token charges**, excluding hardware; it does not give the model, episode count or wall time.
+The repository reports **1,052 passing tests, no failures and 18 ignored tests**; the ignored set includes benchmark tests and a slow full-duration burn. The Evidence record lists **US$10.64 in model-token charges**, excluding hardware, and leaves the model, episode count and wall time unspecified.
 
-These are project-reported results rather than an independent reproduction. They support the documented port and evaluation scope, not a claim that every MESA scientific workflow is already covered.
+These are source-reported results from a single run, without independent reproduction. The useful starting point is the documented module and workload coverage.
 
-## Keep benchmark snapshots separate
+## Two snapshots, different speedup figures
 
-The Evidence page reports **1.55–6.87× median speedups**. Separately, the repository's August 5 benchmark table uses medians of 15 runs and reports **1.25×** for its end-to-end one-zone burn proxy. These different records must not be merged into a single universal speedup.
+The [Evidence](https://genesis.evox.group/evidence/mesa/) page reports **1.55–6.87× median speedups**. Separately, the repository's August 5 benchmark table uses medians of 15 runs and reports **1.25×** for its end-to-end one-zone burn proxy. [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md#latest-verified-results-2026-08-05-15-run-medians-taskset-0-3)
 
-A reader should compare the same workload, input data, compiler options and numerical tolerances. A faster interpolation kernel is useful, but its ratio does not automatically become the speedup of a full stellar simulation.
+For the one-zone burn proxy, the README records **199 integration steps, 198 accepted and 1 rejected** in both implementations. Comparing this behavior alongside output tolerances makes the speed measurement more informative than timing a calculation with a different numerical path.
 
-## A path to modernizing scientific software
+## Reproduce a workload before expanding the scope
 
-The [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/main/README.md) lists the toolchain requirements, build steps, test commands and benchmark drivers. After preparing that environment, the workspace test entry point is:
+The [README](https://github.com/EMI-Group/genesis-demo-mesa-rs/blob/2ad071e658f8d4de21aa9f0e906592c364e10023/README.md) lists the toolchain requirements, build steps, test commands and benchmark drivers. After preparing that environment, the workspace test entry point is:
 
 ```bash
 cargo test --workspace
 ```
 
-The [MESA redevelopment repository](https://github.com/EMI-Group/genesis-demo-mesa-rs) shows how agentic development can engage with scientific software that already has a history. For EvoX, the broader direction is to make such infrastructure adaptable while retaining checkable scientific behavior. Expanding beyond the reported modules requires further domain validation.
+Start with a workload relevant to your research and inspect its reference outputs, tolerances and benchmark driver in the [MESA redevelopment repository](https://github.com/EMI-Group/genesis-demo-mesa-rs). The broader [Genesis project](/news/evox-genesis) supplies the agentic development context; this case supplies a concrete way to examine whether a rewrite has kept the behavior you need.

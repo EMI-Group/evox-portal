@@ -1,23 +1,30 @@
 ---
-title: "EvoX VirtualES: explorar sin almacenar todas las redes candidatas"
+title: "EvoX VirtualES: más candidatos, menos pesos almacenados"
 pubDate: 2026-07-08
-summary: "VirtualES y VirtualProblem generan perturbaciones a partir de semillas cuando se necesitan, reduciendo el almacenamiento de parámetros de la población."
+updatedDate: 2026-11-08
+summary: "Un centro compartido y semillas por candidato permiten a VirtualES reconstruir perturbaciones bajo demanda y replantear el presupuesto de memoria de la búsqueda."
 ---
 
-Los cambios de EvoX del 7–8 de julio de 2026 incorporan una vía de población virtual para la neuroevolución. Una población convencional puede necesitar un vector de parámetros por red candidata. VirtualES conserva un centro compartido y una semilla aleatoria por individuo, y reconstruye las perturbaciones gaussianas cuando hacen falta. Aborda una cuestión concreta: cuánta diversidad de candidatos cabe representar con un presupuesto de memoria determinado.
+Ampliar una población de redes neuronales suele exigir más copias de sus pesos. Los cambios de EvoX del 7–8 de julio de 2026 toman otra vía: VirtualES guarda un centro de parámetros compartido y una semilla aleatoria por candidato, y reconstruye las diferencias durante la evaluación. Así se puede reconsiderar cuánta diversidad cabe antes de que los parámetros agoten la memoria.
 
-## Una población compacta y una evaluación explícita
+![Una forma sólida común, semillas rojas y variantes transparentes representan una población virtual](./virtuales-shared-center.webp)
 
-Para P candidatos con D parámetros, almacenar todos sus parámetros requiere espacio proporcional a P × D. La representación mediante centro y semillas necesita aproximadamente D + P elementos. Esta comparación se limita a los parámetros: activaciones, valores de aptitud, estado del optimizador y búferes de evaluación también consumen memoria.
+*Ilustración conceptual: un centro compartido, múltiples candidatos reconstruibles.*
 
-VirtualES envía `(center, seeds, sigma)` al flujo de trabajo. VirtualProblem evalúa los candidatos capa a capa. Una operación Triton fusionada combina el cálculo lineal base con perturbaciones de pesos y sesgos generadas desde las semillas, sin construir el tensor completo de redes perturbadas. La aptitud orienta después la actualización del centro para la siguiente generación.
+## Guardar la receta de un candidato
 
-## Alcance de la implementación
+Con P candidatos de D parámetros, el almacenamiento explícito crece como P × D. La representación con centro y semillas utiliza aproximadamente D + P elementos. La comparación corresponde a los parámetros de la población; activaciones, estado del optimizador y búferes de evaluación también consumen memoria. [Implementación de VirtualES](https://github.com/EMI-Group/evox/commit/d8c0964fd71c3d6171ae83bd0c1483f742b310a6)
 
-Las perturbaciones gaussianas completas sustituyen la anterior formulación LoRA de bajo rango. VirtualProblem admite redes `nn.Sequential` con capas lineales y determinadas funciones de activación. No es un evaluador universal de arquitecturas arbitrarias; la interfaz documentada no admite el envoltorio HPO. La vía virtual también omite la evaluación distribuida y las transformaciones de soluciones.
+VirtualES envía `(center, seeds, sigma)` al flujo de trabajo. VirtualProblem evalúa cada capa con una operación Triton fusionada que combina el cálculo lineal base y las perturbaciones de pesos y sesgos generadas con las semillas. La aptitud guía la actualización del centro. Las perturbaciones gaussianas completas sustituyen a la anterior formulación LoRA de bajo rango. [Implementación de la evaluación](https://github.com/EMI-Group/evox/commit/c6bde1e47df9617cd934053c7f6c69e40068e921)
 
-## Por qué importa la representación
+## Conservar la información de cada candidato
 
-Esta aportación conecta de otro modo la búsqueda por poblaciones con la ejecución. Permite investigar compromisos de memoria sin almacenar primero todos los pesos candidatos. El pico de memoria y el rendimiento dependen de la arquitectura, la población, los lotes y el hardware; estos cambios no demuestran una aceleración universal. Para EvoX, constituyen un paso concreto hacia una exploración evolutiva computacionalmente más flexible.
+El punto de partida compatible es una red `nn.Sequential` con capas lineales y las activaciones documentadas. Configura la pérdida con `reduction='none'` para que VirtualProblem agregue las pérdidas de cada candidato por separado. Una pérdida escalar se extendería a toda la población y borraría esa distinción. Esta pequeña elección de interfaz afecta a la búsqueda.
 
-[1](https://github.com/EMI-Group/evox/commit/d8c0964fd71c3d6171ae83bd0c1483f742b310a6) · [2](https://github.com/EMI-Group/evox/commit/c6bde1e47df9617cd934053c7f6c69e40068e921) · [3](https://github.com/EMI-Group/evox/commit/f4f2fd1067f184c000b7f1a94ff0ee6395c6e697) · [4](https://github.com/EMI-Group/evox/commit/97971618740d35845740320e7db973d3a3f671ef)
+La ruta virtual omite la evaluación distribuida y las transformaciones de soluciones; VirtualProblem tampoco admite el wrapper HPO. Comprueba estos límites antes de adaptar un experimento. [Integración en el flujo](https://github.com/EMI-Group/evox/commit/f4f2fd1067f184c000b7f1a94ff0ee6395c6e697)
+
+## Medir las posibilidades de la representación
+
+Empieza con una red compatible y varía la población, registrando memoria máxima, tiempo de evaluación y aptitud con un presupuesto de evaluación fijo. Así distinguirás el ahorro de almacenamiento del coste de regenerar ruido y procesar activaciones. Los cambios de julio incluyen una [corrección de compilación Triton](https://github.com/EMI-Group/evox/commit/97971618740d35845740320e7db973d3a3f671ef) para la función auxiliar de ruido.
+
+La [guía de inicio](/es/news/evox-quickstart) explica la estructura experimental de EvoX. VirtualES permite plantear una pregunta concreta: ¿cómo cambia tu experimento con una población mayor cuando almacenar todos sus pesos deja de ser un requisito?
