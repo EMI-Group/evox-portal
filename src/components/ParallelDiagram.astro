@@ -3,14 +3,31 @@ import { type Locale, defaultLocale, loadTranslations, t } from "../i18n/utils";
 interface Props { locale?: Locale; }
 const { locale = defaultLocale } = Astro.props;
 const tr = await loadTranslations(locale);
+// Abstract code fragments: indentation and unequal line lengths, without language syntax.
+const codeLines = [
+  { x: 16, y: 40, widths: [16, 30, 9, 19] },
+  { x: 26, y: 52, widths: [12, 7, 25, 8, 16] },
+  { x: 36, y: 64, widths: [9, 15, 6, 18, 7, 12] },
+  { x: 26, y: 76, widths: [12, 6, 22, 8, 10, 7] },
+  { x: 16, y: 91, widths: [23, 9, 18, 28] },
+];
+const codeFragments = (depth: number) => codeLines.flatMap((line, row) => line.widths.map((width, column) => ({
+  x: line.x + line.widths.slice(0, column).reduce((sum, value) => sum + value + 4, 0),
+  y: line.y, width, accent: row > 0 && column === (row + depth) % line.widths.length,
+})));
 const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
 ---
 <figure class="parallel-figure" aria-label={t(tr, "computing.diagram.title")}>
   <div class="network-stage">
     <canvas class="motion-canvas" aria-hidden="true"></canvas>
+    <div class="motion-controls">
     <button class="motion-toggle" type="button" aria-label={t(tr, "evolution.pause")} data-pause={t(tr, "evolution.pause")} data-play={t(tr, "evolution.play")} aria-pressed="false">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path class="pause-icon" d="M5 4v8M11 4v8"/><path class="play-icon" d="m5 3 7 5-7 5Z"/></svg>
     </button>
+    <button class="motion-restart" type="button" aria-label={t(tr, "evolution.restart")}>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6a5.3 5.3 0 1 1 .8 5M3 2v4h4"/></svg>
+    </button>
+    </div>
     <ol class="pipeline">
       <li class="pipeline-step tasks-step">
         <h3><span>01</span>{t(tr, "computing.diagram.tasks")}</h3>
@@ -19,9 +36,8 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
             {[2, 1, 0].map(depth => <g class="task-layer" data-layer={depth} transform={`translate(${22 + depth * 17} ${24 + depth * 28})`}>
               <rect class="task-sheet" width="145" height="112" rx="8"/>
               <path class="task-rule" d="M14 18h36M14 24h20M111 18h19"/>
-              <g transform="translate(18 36)">
-                <path class="graph-wire" d="M8 30L39 8L72 30L105 12M8 30L39 52L72 30L105 52M39 8V52"/>
-                {[[8,30],[39,8],[39,52],[72,30],[105,12],[105,52]].map(([x,y], index) => <circle class:list={["task-point", {accent: index === depth + 1}]} cx={x} cy={y} r="4"/>)}
+              <g class="task-code">
+                {codeFragments(depth).map(fragment => <rect class:list={["task-fragment", {accent: fragment.accent}]} x={fragment.x} y={fragment.y} width={fragment.width} height="3.4" rx="1.7" />)}
               </g>
             </g>)}
           </svg>
@@ -34,7 +50,7 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
           <svg class="tensor-stack" viewBox="0 0 230 220" fill="none" aria-hidden="true">
             {[2, 1, 0].map(depth => <g class="tensor-layer" data-layer={depth} transform={`matrix(1.15 .55 -1.15 .55 115 ${42 + depth * 30})`}>
               <rect class="tensor-plane" x="-4" y="-4" width="78" height="78" rx="3" />
-              {Array.from({length: 25}, (_, index) => <rect class:list={["tensor-cell", {accent: Math.floor(index / 5) === depth + 1}]} x={(index % 5) * 14} y={Math.floor(index / 5) * 14} width="11" height="11" rx="1" style={`--strength: ${.3 + ((index * 3 + depth) % 6) / 10}; --delay: ${depth * -.8}s`} />)}
+              {Array.from({length: 25}, (_, index) => <rect class:list={["tensor-cell", {accent: codeFragments(depth)[index].accent}]} x={(index % 5) * 14} y={Math.floor(index / 5) * 14} width="11" height="11" rx="1" style={`--strength: ${.3 + ((index * 3 + depth) % 6) / 10}; --delay: ${depth * -.8}s`} />)}
             </g>)}
           </svg>
         </div>
@@ -74,9 +90,8 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
   .task-stack, .tensor-stack { width: 100%; max-width: 230px; height: 220px; overflow: visible; }
   .task-sheet { fill: var(--diagram-fill); stroke: var(--diagram-line); stroke-width: .9; }
   .task-rule { stroke: var(--diagram-line); stroke-width: 2; stroke-linecap: round; }
-  .graph-wire { stroke: var(--diagram-line); stroke-width: .9; }
-  .task-point { fill: var(--diagram-fill); stroke: var(--diagram-muted); stroke-width: 1; }.task-point.accent { fill: var(--diagram-red); stroke: var(--diagram-bright); }
-  .tensor-stack { filter: drop-shadow(0 8px 22px #e6536114); }
+  .task-fragment { fill: var(--diagram-muted); fill-opacity: .65; }.task-fragment.accent { fill: var(--diagram-red); fill-opacity: .85; }
+  .tensor-stack { filter: drop-shadow(0 7px 10px rgb(0 0 0 / .04)); }
   .tensor-plane { fill: var(--diagram-fill); stroke: var(--diagram-line); stroke-width: .8; }
   .tensor-cell { fill: var(--diagram-ink); fill-opacity: var(--strength); }
   .tensor-cell.accent { fill: var(--diagram-red); fill-opacity: .85; }
@@ -90,8 +105,9 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
   .tensor-operation { display: flex; align-items: center; gap: 5px; flex: none; }
   .matrix { display: grid; grid-template-columns: repeat(3,1fr); width: 20px; height: 20px; gap: 2px; }.matrix i { background: var(--diagram-line); border-radius: .5px; }.matrix .bright { background: var(--diagram-red); }.matrix.result i { background: var(--diagram-red); }
   .operator { color: var(--diagram-muted); font-size: 11px; }
-  .motion-toggle { position: absolute; right: 12px; top: 10px; z-index: 1; width: 32px; height: 32px; display: grid; place-items: center; color: var(--diagram-muted); border: 1px solid var(--diagram-border); border-radius: 50%; background: var(--diagram-fill); cursor: pointer; }
-  .motion-toggle svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.2; }.motion-toggle:hover { color: var(--diagram-ink); border-color: var(--diagram-bright); }.motion-toggle:focus-visible { outline: 2px solid var(--diagram-bright); outline-offset: 3px; }
+  .motion-controls { position: absolute; right: 12px; top: 10px; z-index: 3; display: flex; gap: 6px; }
+  .motion-controls button { width: 32px; height: 32px; display: grid; place-items: center; color: var(--diagram-muted); border: 1px solid var(--diagram-border); border-radius: 50%; background: var(--diagram-fill); cursor: pointer; }
+  .motion-controls svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.2; }.motion-controls button:hover { color: var(--diagram-ink); border-color: var(--diagram-bright); }.motion-controls button:focus-visible { outline: 2px solid var(--diagram-bright); outline-offset: 3px; }
   .play-icon, [data-user-paused] .pause-icon { display: none; }[data-user-paused] .play-icon { display: block; }[data-paused] * { animation-play-state: paused !important; }
   @media (min-width: 761px) and (max-width: 1000px) { .network-stage { padding-inline: 24px; }.pipeline { gap: 30px; }.transfer { width: 22px; }.compute-node { padding-inline: 8px; }.tensor-operation { gap: 3px; }.matrix { width: 16px; height: 16px; } }
   @media (max-width: 760px) {
@@ -100,22 +116,25 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
     .transfer { left: 50%; top: calc(100% + 6px); width: 1px; height: 26px; }.transfer::after { top: auto; bottom: 0; right: -3px; transform: rotate(135deg); }
     .device-art { height: 200px; padding-left: 28px; gap: 7px; }.compute-node { height: 54px; }.device-bus { top: 0; height: 200px; }
   }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; }.motion-toggle { display: none; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; }.motion-controls { display: none; } }
   .motion-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; opacity: 0; }
   [data-motion-ready] .motion-canvas { opacity: 1; }
-  [data-motion-ready] .task-point { opacity: 0; }
   [data-motion-ready] .task-layer { opacity: var(--task-opacity, 1); }
-  [data-motion-ready] .graph-wire { opacity: var(--graph-opacity, 1); }
-  [data-motion-ready] .tensor-layer { opacity: var(--tensor-opacity, .18); }
-  [data-motion-ready] .tensor-cell { opacity: .3; }
-  [data-motion-ready] .compute-node { border-color: var(--diagram-line); box-shadow: 0 0 24px rgb(219 102 127 / var(--device-glow, 0)); }
-  [data-motion-ready] .tensor-operation { opacity: .6; }
-  [data-motion-ready] .pipeline-step h3 { color: var(--diagram-ink); }
+  [data-motion-ready] .task-code { visibility: hidden; }
+  [data-motion-ready] .tensor-layer { visibility: hidden; }
+  [data-motion-ready] .matrix i { opacity: .18; }
+  [data-motion-ready] .matrix.result i { opacity: 0; }
+  [data-motion-ready] .compute-node { border-color: color-mix(in srgb, var(--diagram-red) calc(var(--device-active, 0) * 30%), var(--diagram-line)); box-shadow: 0 0 22px color-mix(in srgb, var(--diagram-red) calc(var(--device-active, 0) * 8%), transparent); }
+  [data-motion-ready] .pipeline-step h3 { opacity: var(--heading-opacity, 1); }
+  .compute-node::before { content: ""; position: absolute; left: -4px; top: calc(50% - 3px); width: 6px; height: 6px; border: 1px solid var(--diagram-line); border-radius: 50%; background: var(--diagram-fill); }
   .sequence-track { display: flex; gap: 5px; width: 96px; margin: 15px auto 0; }
   .sequence-track i { height: 2px; flex: 1; background: var(--diagram-guide); border-radius: 2px; overflow: hidden; }
   .sequence-track i::after { content: ""; display: block; height: 100%; width: 100%; background: var(--diagram-red); transform-origin: left; transform: scaleX(var(--progress, 0)); }
-  .motion-toggle { z-index: 3; }
-  @media (prefers-reduced-motion: reduce) { .motion-canvas, .sequence-track { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-canvas, .sequence-track { display: none; }
+    .parallel-figure .task-code, .parallel-figure .tensor-layer { visibility: visible; }
+    .parallel-figure .task-layer { opacity: 1; }
+  }
 </style>
 
 <script>
@@ -127,8 +146,13 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
     const ctx = canvas.getContext("2d")!;
     const button = figure.querySelector<HTMLButtonElement>(".motion-toggle")!;
     const steps = [...figure.querySelectorAll<HTMLElement>(".pipeline-step")];
+    const restart = figure.querySelector<HTMLButtonElement>(".motion-restart")!;
     const tracks = [...figure.querySelectorAll<HTMLElement>(".sequence-track i")];
     const devices = [...figure.querySelectorAll<HTMLElement>(".compute-node")];
+    const taskFragments = [0, 1, 2].map(layer => [...figure.querySelectorAll<SVGRectElement>(`.task-layer[data-layer="${layer}"] .task-fragment`)].map(fragment => ({
+      x: Number(fragment.getAttribute("x")), y: Number(fragment.getAttribute("y")),
+      width: Number(fragment.getAttribute("width")), accent: fragment.classList.contains("accent"),
+    })));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const duration = 12000;
     let palette = readDiagramPalette();
@@ -137,6 +161,10 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
     let taskMap: (x: number, y: number) => Point;
     let tensorMap: (x: number, y: number) => Point;
     let matrixTargets: Point[][][] = [];
+    let matrixSizes: number[] = [];
+    let devicePorts: Point[] = [];
+    let dispatchGutter = 0;
+    let tensorLift = 0, tensorSpread = 30;
     const clamp = (n: number) => Math.max(0, Math.min(1, n));
     const ease = (n: number) => { const t = clamp(n); return t * t * (3 - 2 * t); };
     const mix = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -146,6 +174,13 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
       const distance = Math.hypot(b.x - a.x, b.y - a.y) || 1;
       return { x: p.x - (b.y - a.y) / distance * Math.sin(t * Math.PI) * bend, y: p.y + (b.x - a.x) / distance * Math.sin(t * Math.PI) * bend };
     };
+    const gutterCurve = (start: Point, end: Point, progress: number, gutter: number): Point => {
+      const inverse = 1 - progress;
+      return {
+        x: inverse ** 3 * start.x + 3 * inverse * progress * gutter + progress ** 3 * end.x,
+        y: (inverse ** 3 + 3 * inverse ** 2 * progress) * start.y + (3 * inverse * progress ** 2 + progress ** 3) * end.y,
+      };
+    };
     const svgMap = (selector: string) => {
       const box = figure.querySelector(selector)!.getBoundingClientRect();
       const origin = stage.getBoundingClientRect();
@@ -154,15 +189,15 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
     };
     const tensorCell = (layer: number, cell: number) => {
       const x = cell % 5 * 14 + 5.5, y = Math.floor(cell / 5) * 14 + 5.5;
-      return tensorMap(115 + 1.15 * (x - y), 42 + layer * 30 + .55 * (x + y));
+      return tensorMap(115 + 1.15 * (x - y), 42 + tensorLift + layer * tensorSpread + .55 * (x + y));
     };
-    const tile = (p: Point, size: number, tilt: number, alpha: number, accent: boolean, glow = false) => {
+    const tile = (p: Point, size: number, tilt: number, alpha: number, accent: boolean, glow = false, aspect = 1) => {
       if (alpha <= .001) return;
       ctx.save(); ctx.translate(p.x, p.y); ctx.globalAlpha = alpha;
       ctx.fillStyle = accent ? palette.red : palette.muted;
-      if (glow) { ctx.shadowColor = palette.red; ctx.shadowBlur = 9; }
+      if (glow) { ctx.shadowColor = palette.red; ctx.shadowBlur = accent ? 8 : 3; }
       ctx.transform(1, tilt * .48, -tilt, 1 - tilt * .52, 0, 0);
-      ctx.beginPath(); ctx.roundRect(-size / 2, -size / 2, size, size, mix(size / 2, .8, clamp(tilt + .65))); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(-size * aspect / 2, -size / 2, size * aspect, size, .8); ctx.fill();
       ctx.restore();
     };
     new MutationObserver(() => { palette = readDiagramPalette(); draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
@@ -171,67 +206,68 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
       const t = (elapsed % duration) / duration;
       const fade = 1 - ease((t - .94) / .06);
       ctx.clearRect(0, 0, width, height);
-      const forming = ease((t - .05) / .12);
-      const moving = ease((t - .18) / .26);
-      stage.style.setProperty("--graph-opacity", String(1 - forming));
-      stage.style.setProperty("--task-opacity", String(mix(1, .28, moving) * fade + (1 - fade)));
-      stage.style.setProperty("--tensor-opacity", String(.5 + .5 * moving * fade));
-      [1 - ease((t - .31) / .08), ease((t - .18) / .08) * (1 - ease((t - .62) / .08)), ease((t - .56) / .1)].forEach((a, i) => steps[i].style.setProperty("--heading-opacity", String(.48 + .52 * a * fade)));
-      [clamp(t / .35), clamp((t - .25) / .33), clamp((t - .58) / .3)].forEach((p, i) => tracks[i].style.setProperty("--progress", String(p * fade)));
+      const phase = t < .2 ? 0 : t < .55 ? 1 : 2;
+      figure.dataset.phase = String(phase);
+      const moving = ease((t - .18) / .27);
+      stage.style.setProperty("--task-opacity", String(1 - .4 * moving * fade));
+      steps.forEach((step, i) => step.style.setProperty("--heading-opacity", String(i === phase ? 1 : .8)));
+      [clamp(t / .2), clamp((t - .2) / .35), clamp((t - .55) / .39)].forEach((p, i) => tracks[i].style.setProperty("--progress", String(p * fade)));
       const scale = Math.min(1, (tensorMap(230, 0).x - tensorMap(0, 0).x) / 230);
-      const graph = [[8,30],[39,8],[39,52],[72,30],[105,12],[105,52]];
-      // Graph nodes settle into regular grids before the same cells travel into tensor planes.
+      tensorLift = -5 * Math.sin(Math.PI * t) * fade;
+      tensorSpread = 30 + 5 * Math.sin(Math.PI * moving) * fade;
+      // Indented code fragments leave their task cards and gather into tensor cells.
+      // Draw each slice from back to front, preserving a light layered surface.
       for (const layer of [2, 1, 0]) {
-        const assembled = ease((t - .29 - (2 - layer) * .045) / .1) * fade;
-        if (assembled > 0) {
-          const corners = [[-4,-4],[74,-4],[74,74],[-4,74]].map(([x,y]) => tensorMap(115 + 1.15 * (x - y), 42 + layer * 30 + .55 * (x + y)));
-          ctx.save(); ctx.globalAlpha = assembled;
-          const surface = ctx.createLinearGradient(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
-          surface.addColorStop(0, palette.fill); surface.addColorStop(1, palette.fill);
-          ctx.fillStyle = surface; ctx.strokeStyle = palette.line; ctx.lineWidth = .8;
-          ctx.beginPath(); corners.forEach((p, i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y)); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
-        }
+        const assembled = ease((t - .29 - (2 - layer) * .045) / .12) * fade;
+        const corners = [[-4,-4],[74,-4],[74,74],[-4,74]].map(([x,y]) => tensorMap(115 + 1.15 * (x - y), 42 + tensorLift + layer * tensorSpread + .55 * (x + y)));
+        ctx.save();ctx.globalAlpha = .3 + .56 * assembled;ctx.fillStyle = palette.fill;ctx.strokeStyle = palette.line;ctx.lineWidth = .8;
+        ctx.beginPath();corners.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
         for (let cell = 0; cell < 25; cell++) {
-          const [gx, gy] = graph[cell % graph.length];
-          const origin = taskMap(22 + layer * 17 + 18 + gx, 24 + layer * 28 + 36 + gy);
-          const grid = taskMap(22 + layer * 17 + 24 + cell % 5 * 22, 24 + layer * 28 + 38 + Math.floor(cell / 5) * 13);
-          const start = lerp(origin, grid, forming);
-          const travel = ease((t - .19 - (2 - layer) * .045 - cell % 5 * .004) / .18);
+          const row = Math.floor(cell / 5), col = cell % 5;
+          const departure = .18 + (2 - layer) * .045 + col * .006 + row * .004;
+          const travel = ease((t - departure) / .19);
+          const fragment = taskFragments[layer][cell];
+          const start = taskMap(22 + layer * 17 + fragment.x + fragment.width / 2, 24 + layer * 28 + fragment.y + 1.7);
           const destination = tensorCell(layer, cell);
-          const position = curve(start, destination, travel, vertical ? Math.min(110, width * .34) : (layer - 1) * 17);
-          if (travel < .01 && layer > 0) {
-            const occluded = Array.from({length: layer}, (_, front) => {
-              const a = taskMap(22 + front * 17, 24 + front * 28);
-              const b = taskMap(167 + front * 17, 136 + front * 28);
+          const position = vertical ? gutterCurve(start, destination, travel, width - 18) : curve(start, destination, travel, (layer - 1) * 18 + (row - 2) * 3);
+          // Fragments on rear cards stay hidden behind the cards in front until departure.
+          if (travel < .015 && layer > 0) {
+            const occluded = Array.from({length:layer},(_,front) => {
+              const a = taskMap(22 + front * 17,24 + front * 28),b = taskMap(167 + front * 17,136 + front * 28);
               return position.x > a.x && position.x < b.x && position.y > a.y && position.y < b.y;
             }).some(Boolean);
             if (occluded) continue;
           }
-          const alpha = (cell < 6 ? 1 : forming) * fade;
-          tile(position, mix(mix(5, 7, forming), 12.65 * scale, travel), travel, alpha * (Math.floor(cell / 5) === layer + 1 ? .95 : .58), Math.floor(cell / 5) === layer + 1, travel > .05 && travel < .95);
+          const size = mix(3.4, 12.65, travel) * scale;
+          const aspect = mix(fragment.width / 3.4, 1, ease(travel / .38));
+          tile(position, size, travel, (fragment.accent ? .95 : .6) * fade, fragment.accent, travel > .03 && travel < .97, aspect);
         }
       }
-      // Tensor fragments leave only after assembly, then arrive at each hardware input.
+      // Small staggered streams carry each slice to a device input.
+      // Results still wait for arrival and computation; the flow avoids device labels.
       devices.forEach((device, deviceIndex) => {
-        const arrival = .68 + deviceIndex * .025;
-        const computing = clamp((t - arrival) / .13);
-        const active = ease((t - arrival + .02) / .04) * fade;
-        device.style.setProperty("--device-border", String(.5 + active * .5));
-        device.style.setProperty("--device-glow", String(active * .15));
+        const departure = .52 + deviceIndex * .025;
+        const arrival = departure + .17;
+        const computing = clamp((t - arrival - .02) / .13);
+        const active = ease((t - arrival) / .035) * fade;
+        device.style.setProperty("--device-active", String(active));
         for (let cell = 0; cell < 9; cell++) {
-          const departure = .5 + deviceIndex * .025 + cell * .004;
-          const travel = ease((t - departure) / .145);
-          if (t >= departure && travel < 1) {
+          const progress = ease((t - departure - cell * .004) / .135);
+          if (progress > 0 && progress < 1) {
             const start = tensorCell(deviceIndex, Math.floor(cell / 3) * 5 + cell % 3 + 6);
-            const end = matrixTargets[deviceIndex][0][cell];
-            const p = curve(start, end, travel, vertical ? -Math.min(105, width * .32) : (deviceIndex - 1) * 24);
-            tile(p, mix(8 * scale, 5, travel), 1 - travel, Math.min(1, (t - departure) / .018) * fade, true, true);
+            const end = devicePorts[deviceIndex];
+            const path = (p: number) => vertical ? gutterCurve(start,end,p,dispatchGutter) : curve(start,end,p,(deviceIndex-1)*20+(cell%3-1)*5);
+            const alpha = ease(progress / .1) * (1 - ease((progress - .9) / .1));
+            for (const trail of [.05,.025]) {
+              if(progress>trail)tile(path(progress-trail),3*scale,1-progress,alpha*.12,true);
+            }
+            tile(path(progress),mix(7*scale,3.5,progress),1-progress,alpha,true,true);
           }
           matrixTargets[deviceIndex].forEach((matrix, matrixIndex) => {
             const output = matrixIndex === 2;
-            const progress = output ? ease((computing - cell / 14) * 5) : active;
+            const filled = output ? ease((computing - cell / 14) * 5) * fade : active;
             const sweep = !output && computing > 0 && computing < 1 && Math.floor(computing * 3) === Math.floor(cell / 3);
-            tile(matrix[cell], 5, 0, (output ? progress * fade : active * .7), output || sweep, sweep || (output && progress > .1 && progress < .95));
+            tile(matrix[cell], matrixSizes[deviceIndex], 0, filled * (output ? 1 : .8), output || sweep, sweep);
           });
         }
       });
@@ -243,6 +279,9 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
       canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       taskMap = svgMap(".task-stack"); tensorMap = svgMap(".tensor-stack");
+      dispatchGutter = Math.max(12, steps[2].getBoundingClientRect().left - rect.left - 18);
+      devicePorts = devices.map(device => {const r=device.getBoundingClientRect();return {x:r.left-rect.left-9,y:r.top-rect.top+r.height/2};});
+      matrixSizes = devices.map(device => device.querySelector(".matrix i")!.getBoundingClientRect().width);
       matrixTargets = devices.map(device => [...device.querySelectorAll(".matrix")].map(matrix => [...matrix.children].map(cell => { const r = cell.getBoundingClientRect(); return { x: r.left - rect.left + r.width / 2, y: r.top - rect.top + r.height / 2 }; })));
       draw();
     };
@@ -264,6 +303,7 @@ const devices = ["CPU", "GPU", t(tr, "computing.diagram.accelerator")];
       button.setAttribute("aria-label", (userPaused ? button.dataset.play : button.dataset.pause)!);
       sync();
     });
+    restart.addEventListener("click", () => { elapsed = 0; draw(); sync(); });
     new ResizeObserver(measure).observe(stage);
     new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(figure);
     document.addEventListener("visibilitychange", sync);
