@@ -1,19 +1,15 @@
 ---
 title: "Genesis: Softwarefortschritt über Modellwechsel hinweg bewahren"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "Eine Compiler-Übergabe untersucht, wie akzeptierter Code, Projektstruktur und Prüfprotokolle die Entwicklung bei einem Modellwechsel fortsetzen lassen."
+updatedDate: 2026-11-08
 ---
-
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
-
-Evolutionäre KI-Systeme müssen nützlichen Fortschritt erhalten, wenn ihre Beteiligten wechseln. Genesis untersucht dies bei einer Compiler-Übergabe: Kann ein neues Modell vom akzeptierten Projekt aus weiterarbeiten und dessen Code, Randbedingungen und Tests als Grundlage verwenden?
-
-## Ausgangspunkt: ein bestehender Compiler
 
 Der [Evidence-Eintrag vom 7. September 2026](https://genesis.evox.group/evidence/compiler-continuation/) beschreibt die Übergabe von **GLM 5.2 an DeepSeek V4 Flash** innerhalb derselben akzeptierten Entwicklungslinie. Der frühere Gesprächskontext wurde nicht übertragen.
 
-Quellcode, Struktur und akzeptierte Historie blieben jedoch verfügbar. Es geht um die Fortsetzung eines Projekts, nicht um einen zweiten unabhängigen Compiler.
+![Eine durchgehende Brücke verbindet zwei unterschiedliche Zeichenflächen](./compiler-model-handoff.webp)
+
+Quellcode, Struktur und akzeptierte Historie blieben jedoch verfügbar.
 
 ## Was erhalten bleiben muss
 
@@ -23,7 +19,7 @@ Das jcc-Repository zeigt Rust-Implementierung, explizite Zwischendarstellung, Fu
 
 ## Berichtete Ergebnisse
 
-Die rekursive Aufgabentiefe steigt von **4 auf 8**; nach der Übergabe bestehen **1.820/1.820 beibehaltene LLVM-SingleSource-Fälle**. Dies ist das festgelegte Evaluationsset, nicht die gesamte LLVM-Testsuite.
+Die rekursive Aufgabentiefe steigt von **4 auf 8**; nach der Übergabe bestehen **1.820/1.820 beibehaltene LLVM-SingleSource-Fälle**. Dies ist das festgelegte Evaluationsset, nicht die gesamte LLVM-Testsuite. [GW-000002](https://genesis.evox.group/evidence/evidence.json)
 
 Die Tiefe beschreibt Aufgabenzerlegung, nicht unmittelbar Qualität. Verhaltensbelege liefern die Tests. Allgemeine Zuverlässigkeit würde weitere Aufgaben und Wiederholungen verlangen.
 
@@ -31,10 +27,8 @@ Die Tiefe beschreibt Aufgabenzerlegung, nicht unmittelbar Qualität. Verhaltensb
 
 Bewahren Sie Artefakte, die Nachfolger prüfen können: Code, Schnittstellen, Bedingungen, akzeptierte Änderungen und Evaluationsverfahren. Gesprächsgedächtnis kann helfen, muss aber nicht alleiniger Träger des Fortschritts sein.
 
-Beginnen Sie mit der übernommenen Baseline und dem genauen Testverzeichnis. Halten Sie geprüfte Revision, Ausschlüsse und Befehle fest, bevor Sie spätere Verbesserungen vergleichen.
-
 ## Entwicklung mit bleibenden Ergebnissen
 
 Entstehung und Fortführung verwenden [dasselbe Repository](https://github.com/EMI-Group/genesis-demo-jcc). Zählen Sie sie nicht als unabhängige Projekte und addieren Sie keine verschieden abgegrenzten Tests. Zusätzlicher Codeumfang und Kosten der Fortführung wurden nicht berichtet.
 
-Dieser Projektbericht macht Entwicklungskontinuität zu einer Architekturfrage: Was muss ein Softwareprojekt bewahren, damit spätere Agenten es erweitern können? Im EvoX-Ökosystem verbindet dies Modellfähigkeiten mit kumulativer Systementwicklung. Der beibehaltene Testsatz belegt diese Übergabe; allgemeinere Zuverlässigkeit erfordert weitere Bewertungen.
+Eine brauchbare Übergabe bündelt die akzeptierte Revision, die Testliste, Ausführungsbefehle und bekannte Ausschlüsse. Lassen Sie das nächste Modell zunächst eine kleine, prüfbare Änderung vornehmen und vergleichen Sie sie mit der Basis. Die [Historienansicht](/de/news/genesis-development-history) erläutert die Nachverfolgung von Beiträgen nach dem Ende eines Agenten.

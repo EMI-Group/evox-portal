@@ -1,17 +1,17 @@
 ---
 title: "Genesis Builds EvoX Compiler: AI Developing Evolutionary Infrastructure"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "The EvoX Compiler case connects two parts of the ecosystem: Genesis develops software, while the resulting compiler supports program transformation and execution."
+updatedDate: 2026-11-08
 ---
-
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
 
 Infrastructure for evolutionary AI is itself a substantial software undertaking. The Genesis EvoX Compiler case connects these two levels: an agentic development system builds and extends a tensor-graph compiler, while interfaces and regression tests define which changes can become part of its continuing implementation.
 
+![Aligned compiler layers joined by a red structural rod](./compiler-contract-layers.webp)
+
 ## A project with explicit responsibilities
 
-EvoX Compiler constructs and transforms EvoXIR graphs, then stages them through lowering, compilation, loading and execution. External compilers own optimization and code generation. NumPy supplies a reference interpreter; IREE, XLA and TVM provide optional execution paths.
+EvoX Compiler constructs and transforms EvoXIR graphs, then stages them through lowering, compilation, loading and execution. External compilers own optimization and code generation. NumPy supplies a reference interpreter; IREE, XLA and TVM provide optional execution paths. [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
 
 This gives development concrete contracts. A transformation must preserve graph meaning, a backend must support the operations it accepts, and a runtime must respect device boundaries. These are more useful acceptance criteria than simply increasing code volume.
 
@@ -23,7 +23,7 @@ Development continued into adapter work, graph representation and benchmarking. 
 
 ## Verification has several levels
 
-The snapshot reports **6,789 passed, 46 skipped and 3 expected failures**, with no failures, in its IREE-installed configuration. A compiler-free configuration reported **6,367 passing tests**. These historical counts should not be replaced by later release totals when describing this experiment.
+The snapshot reports **6,789 passed, 46 skipped and 3 expected failures**, with no failures, in its IREE-installed configuration. A compiler-free configuration reported **6,367 passing tests**. These historical counts should not be replaced by later release totals when describing this experiment. [GW-000005](https://genesis.evox.group/evidence/evoxc/)
 
 Beyond unit tests, the separate `evoxc_hf` integration compares model outputs and latency against torch/transformers. Such comparisons must retain checkpoint, precision, backend and hardware settings: numerical agreement and runtime are distinct properties.
 
@@ -37,4 +37,4 @@ Hardware coverage is also specific. Vulkan used Mesa lavapipe, a software device
 
 Start with the graph pipeline in the [README](https://github.com/EMI-Group/evoxc/blob/main/README.md), then trace claims to tests and [committed model benchmarks](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md). Check both supported paths and unresolved performance gaps.
 
-The [EvoX Compiler repository](https://github.com/EMI-Group/evoxc) illustrates a productive connection between AI-assisted development and computational infrastructure. Genesis contributes to building a system whose explicit representations and execution paths can support further evolutionary experiments. Preserved interfaces, tests and measurements make that ongoing development inspectable.
+To apply this method, choose one graph transformation or backend path, identify the contract it must preserve and locate the tests that exercise it. Keep numerical checks and latency measurements separate. The [EvoX Compiler overview](/news/evox-compiler) explains the execution pipeline; this case shows how explicit boundaries make its development reviewable.

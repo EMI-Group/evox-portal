@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-08",
+  "batch": 4,
+  "base": "39910b8504e479fbe683cde35777dfb8d50ccd7e",
+  "selection": [
+    "genesis-persistent-server",
+    "genesis-compiler-continuation",
+    "genesis-evoxc"
+  ],
+  "rationale": "Three remaining unillustrated Genesis stories. Improve concrete handoff lead, actionable operational/review conclusions, nearby primary citations and internal reading routes across all 13 languages.",
+  "datePolicy": "Preserve original pubDate; substantive editorial updatedDate 2026-11-08; historical case dates unchanged.",
+  "sources": [
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.13.11",
+      "publishedAt": "2026-10-30T16:44:22Z",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/releases/tag/v0.14.0",
+      "publishedAt": "2026-11-02T17:47:03Z",
+      "verified": true
+    },
+    {
+      "url": "https://genesis.evox.group/evidence/evidence.json",
+      "case": "GW-000002",
+      "snapshotDate": "2026-09-07",
+      "verified": true,
+      "note": "Detail URL returned access error in both web fetch and direct fetch; canonical official machine-readable record provided handoff and verification fields. No disappearance or withdrawal inferred."
+    },
+    {
+      "url": "https://genesis.evox.group/evidence/evoxc/",
+      "case": "GW-000005",
+      "snapshotDate": "2026-10-28",
+      "verified": true
+    }
+  ],
+  "art": [
+    {
+      "prompt": "Premium editorial still-life illustration for an EvoX Genesis article about a headless development server staying available after the desktop session ends. Wide 16:9, at least 1600 pixels wide. Warm ivory architectural studio, a compact charcoal server tower with one steady tiny red indicator stands in a sunken protected central space; a thin red cable leads past an open folding screen resembling a closed workstation session. Show the server as the stable focal point, gentle late evening light and long shadows, tactile ceramic and brushed metal, restrained museum-quality product photography, sophisticated composition with ample negative space. No words, no letters, no logos, no UI, no robots, no charts. Concept illustration, not a product photograph.",
+      "tool": "built-in image_gen",
+      "nature": "Conceptual editorial illustration; not product UI or experiment evidence",
+      "path": "src/content/news/genesis-persistent-server/persistent-server-session.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 148446
+    },
+    {
+      "prompt": "Premium editorial conceptual still-life for EvoX Genesis about a software project surviving a change of AI model. Wide 16:9, at least 1600 pixels wide. An unfinished elegant ivory architectural bridge model stretches horizontally on a warm white table. Left half rests on a dark graphite drafting pad, right half continues seamlessly on a second different pale stone drafting pad; a single precise red structural beam joins both halves, with small aligned model components and a folded paper plan beside the receiving side. The built bridge is continuous although the two work surfaces differ. Three-quarter close view, tactile paper, plaster and machined metal, subtle studio shadows, highly crafted magazine illustration, quiet dramatic tension, no humans, no text, no letters, no logos, no UI. Not a factual experiment diagram.",
+      "tool": "built-in image_gen",
+      "nature": "Conceptual editorial illustration; not product UI or experiment evidence",
+      "path": "src/content/news/genesis-compiler-continuation/compiler-model-handoff.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 231570
+    },
+    {
+      "prompt": "High-end editorial illustration for a Genesis-built tensor-graph compiler case study. Wide 16:9 at least 1600 pixels wide. Warm ivory background. A sculptural exploded assembly of four offset charcoal and ivory precision plates, suspended just apart over a solid base, each with a different intricate geometric cutout. A bright restrained red rod aligns through their matching apertures and ends in one neatly assembled small block on the base. The metaphor is explicit contracts and tests connecting compiler layers into one coherent machine. Rich tactile materials, precision engineering, dramatic side lighting, refined Japanese industrial-design magazine aesthetic. No text, no letters, no numbers, no logos, no robots, no chips, no fake screens, no literal benchmark claims.",
+      "tool": "built-in image_gen",
+      "nature": "Conceptual editorial illustration; not product UI or experiment evidence",
+      "path": "src/content/news/genesis-evoxc/compiler-contract-layers.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 155846
+    }
+  ]
+}

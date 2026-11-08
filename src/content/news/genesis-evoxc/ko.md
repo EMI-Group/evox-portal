@@ -1,17 +1,17 @@
 ---
 title: "Genesis가 EvoX Compiler를 구축하다: AI의 진화 인프라 개발"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "EvoX Compiler 사례는 생태계의 두 능력을 연결합니다. Genesis가 소프트웨어를 개발하고, 그 컴파일러가 프로그램 변환과 실행을 지원합니다."
+updatedDate: 2026-11-08
 ---
-
-*2026년 11월 7일 업데이트. 과거 결과는 원래 기록 시점을 기준으로 합니다.*
 
 진화형 AI의 인프라는 그 자체로 큰 소프트웨어 개발 과제입니다. Genesis의 EvoX Compiler 사례는 두 수준을 연결합니다. 에이전트 개발 시스템이 텐서 그래프 컴파일러를 구축하고 확장하며, 인터페이스 규약과 회귀 테스트가 지속되는 구현에 포함할 변경을 결정합니다.
 
+![빨간 구조봉으로 연결된 컴파일러 계층 부품](./compiler-contract-layers.webp)
+
 ## 역할을 명확히 나누기
 
-EvoX Compiler는 EvoXIR 그래프를 구성·변환한 뒤 lowering, 컴파일, 로딩, 실행으로 전달합니다. 외부 컴파일러는 최적화와 코드 생성을 맡고, NumPy는 기준 인터프리터, IREE·XLA·TVM은 선택 경로를 제공합니다.
+EvoX Compiler는 EvoXIR 그래프를 구성·변환한 뒤 lowering, 컴파일, 로딩, 실행으로 전달합니다. 외부 컴파일러는 최적화와 코드 생성을 맡고, NumPy는 기준 인터프리터, IREE·XLA·TVM은 선택 경로를 제공합니다. [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
 
 변환은 의미를 유지하고, 백엔드는 받아들인 연산자를 지원하며, 런타임은 장치 경계를 지켜야 합니다. 이런 계약은 코드량 증가보다 구체적인 수락 기준입니다.
 
@@ -23,7 +23,7 @@ EvoX Compiler는 EvoXIR 그래프를 구성·변환한 뒤 lowering, 컴파일, 
 
 ## 여러 수준의 검증
 
-IREE 설치 환경에서 **6,789개 통과, 46개 건너뜀, 3개 예상 실패**, 실패 0개를 보고합니다. 컴파일러 없는 환경에서는 **6,367개 통과**입니다. 실험을 설명할 때 후속 릴리스 수치로 바꾸면 안 됩니다.
+IREE 설치 환경에서 **6,789개 통과, 46개 건너뜀, 3개 예상 실패**, 실패 0개를 보고합니다. 컴파일러 없는 환경에서는 **6,367개 통과**입니다. 실험을 설명할 때 후속 릴리스 수치로 바꾸면 안 됩니다. [GW-000005](https://genesis.evox.group/evidence/evoxc/)
 
 별도 `evoxc_hf` 통합은 torch/transformers와 모델 출력 및 지연을 비교합니다. 체크포인트, 정밀도, 백엔드, 하드웨어 조건을 유지해야 하며 수치 일치와 속도는 서로 다른 특성입니다.
 
@@ -37,4 +37,4 @@ Vulkan은 Mesa lavapipe 소프트웨어 장치, TVM ROCm은 컴파일만 검증�
 
 [README](https://github.com/EMI-Group/evoxc/blob/main/README.md)의 그래프 흐름부터 보고 주장을 테스트와 [커밋된 모델 벤치마크](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)로 추적하세요. 지원 경로와 미해결 성능 차이를 함께 확인해야 합니다.
 
-[EvoX Compiler 저장소](https://github.com/EMI-Group/evoxc)는 AI 지원 개발과 계산 인프라의 관계를 보여줍니다. Genesis가 구축에 참여한 시스템의 명시적 표현과 실행 경로는 후속 진화 실험을 지원할 수 있습니다. 보존된 인터페이스, 테스트, 측정 결과를 통해 지속적인 개발을 검사할 수 있습니다.
+이 방법을 적용하려면 그래프 변환이나 백엔드 경로 하나를 선택하고 보존해야 할 계약과 이를 검사하는 테스트를 찾습니다. 수치 검증과 지연 시간 측정은 따로 기록합니다. [EvoX Compiler 개요](/ko/news/evox-compiler)는 실행 파이프라인을 설명하며, 이 사례는 명확한 경계가 개발 검토를 어떻게 돕는지 보여줍니다.

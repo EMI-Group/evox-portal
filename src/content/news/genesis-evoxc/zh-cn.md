@@ -1,17 +1,17 @@
 ---
 title: "Genesis 构建 EvoX Compiler：让 AI 参与演化基础设施的开发"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "EvoX Compiler 案例连接生态中的两层能力：Genesis 推进软件开发，生成的编译器支撑程序变换与执行。"
+updatedDate: 2026-11-08
 ---
-
-*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
 
 演化式 AI 所需的基础设施，本身也是复杂的软件工程。Genesis 构建 EvoX Compiler 的案例连接了这两个层面：智能体开发系统构建和扩展张量图编译器，接口约定与回归测试则决定哪些变更能够进入持续发展的实现。
 
+![红色结构杆贯穿对齐的编译器分层构件](./compiler-contract-layers.webp)
+
 ## 先把职责划分清楚
 
-EvoX Compiler 构建和变换 EvoXIR 图，再依次完成表示转换、编译、加载和运行。外部编译器负责优化与代码生成。NumPy 提供参考解释器，IREE、XLA 与 TVM 提供可选执行路径。
+EvoX Compiler 构建和变换 EvoXIR 图，再依次完成表示转换、编译、加载和运行。外部编译器负责优化与代码生成。NumPy 提供参考解释器，IREE、XLA 与 TVM 提供可选执行路径。 [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
 
 这些边界形成具体的验收标准：图变换要保留程序含义，后端要支持它接收的算子，运行时要遵守设备约束。它们比单纯增加代码行数更能说明工程进展。
 
@@ -23,7 +23,7 @@ EvoX Compiler 构建和变换 EvoXIR 图，再依次完成表示转换、编译�
 
 ## 验证需要分层理解
 
-快照报告：安装 IREE 的配置中，**6,789 项测试通过、46 项跳过、3 项预期失败**，没有失败项；不安装编译器的配置中有 **6,367 项通过**。介绍这次实验时，不应将这些历史数量替换为后续发布版本的数字。
+快照报告：安装 IREE 的配置中，**6,789 项测试通过、46 项跳过、3 项预期失败**，没有失败项；不安装编译器的配置中有 **6,367 项通过**。介绍这次实验时，不应将这些历史数量替换为后续发布版本的数字。 [GW-000005](https://genesis.evox.group/evidence/evoxc/)
 
 除单元测试外，独立的 `evoxc_hf` 集成还比较模型输出与 torch/transformers 的延迟。比较必须保留检查点、精度、后端和硬件条件：数值一致性与运行速度是两个不同指标。
 
@@ -37,4 +37,4 @@ EvoX Compiler 构建和变换 EvoXIR 图，再依次完成表示转换、编译�
 
 先阅读 [README](https://github.com/EMI-Group/evoxc/blob/main/README.md) 中的图处理流程，再将具体主张追溯到测试和[已提交的模型基准报告](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)，同时查看可用路径与尚未解决的性能差距。
 
-[EvoX Compiler 仓库](https://github.com/EMI-Group/evoxc) 展示了 AI 辅助开发与计算基础设施之间的联系。Genesis 参与构建的系统，以显式表示和执行路径支撑进一步的演化实验；一同保留下来的接口、测试与测量，使持续开发有据可查。
+应用这一方法时，可以先选择一项图变换或一条后端路径，明确它必须保留的接口约定，并找到覆盖它的测试。数值检查与延迟测量应分别记录。[EvoX Compiler 概览](/zh-cn/news/evox-compiler)解释执行流程；这个案例则展示，明确边界如何让开发过程可供审查。

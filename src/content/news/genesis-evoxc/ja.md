@@ -1,17 +1,17 @@
 ---
 title: "Genesis が EvoX Compiler を構築：AI による進化基盤の開発"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "EvoX Compiler の事例は、Genesis によるソフトウェア開発と、成果であるコンパイラによるプログラム変換・実行を結びます。"
+updatedDate: 2026-11-08
 ---
-
-*2026年11月7日更新。過去の結果は元の記録日時に基づきます。*
 
 進化型 AI の基盤自体も大規模なソフトウェア開発です。Genesis による EvoX Compiler の構築は両者を結びます。エージェント型開発システムがテンソルグラフコンパイラを構築・拡張し、インターフェースの契約と回帰テストが継続する実装に採用する変更を定めます。
 
+![赤い構造棒で接続されたコンパイラの積層部品](./compiler-contract-layers.webp)
+
 ## 責務を明示する
 
-EvoX Compiler は EvoXIR グラフを構築・変換し、lower、compile、load、run の段階へ渡します。最適化とコード生成は外部コンパイラ、参照実行は NumPy、任意の経路は IREE、XLA、TVM が担当します。
+EvoX Compiler は EvoXIR グラフを構築・変換し、lower、compile、load、run の段階へ渡します。最適化とコード生成は外部コンパイラ、参照実行は NumPy、任意の経路は IREE、XLA、TVM が担当します。 [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
 
 変換は意味を維持し、バックエンドは受け入れる算子を処理し、ランタイムはデバイス境界を守る必要があります。コード量よりも具体的な受け入れ基準になります。
 
@@ -23,7 +23,7 @@ EvoX Compiler は EvoXIR グラフを構築・変換し、lower、compile、load
 
 ## 検証の複数の段階
 
-IREE 導入環境では **6,789 成功、46 スキップ、3 期待された失敗**、失敗ゼロと報告されています。コンパイラなしでは **6,367 成功**でした。この実験の説明を後のリリース総数で置き換えてはいけません。
+IREE 導入環境では **6,789 成功、46 スキップ、3 期待された失敗**、失敗ゼロと報告されています。コンパイラなしでは **6,367 成功**でした。この実験の説明を後のリリース総数で置き換えてはいけません。 [GW-000005](https://genesis.evox.group/evidence/evoxc/)
 
 別の `evoxc_hf` 統合では torch/transformers と出力・遅延を比較します。チェックポイント、精度、バックエンド、機器の条件が必要で、数値一致と速度は別の指標です。
 
@@ -37,4 +37,4 @@ Vulkan は Mesa lavapipe ソフトウェアデバイス、TVM ROCm はコンパ�
 
 [README](https://github.com/EMI-Group/evoxc/blob/main/README.md)の処理手順から始め、主張をテストと[保存済みモデルベンチマーク](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md)へたどってください。対応経路だけでなく未解決の性能差も確認します。
 
-[EvoX Compiler リポジトリ](https://github.com/EMI-Group/evoxc) は、AI 支援開発と計算基盤の関係を示します。Genesis が構築に参加するシステムの明示的な表現と実行経路は、さらに進化的実験を支えます。保存されたインターフェース、テスト、測定結果によって、その継続的な開発を検査できます。
+この方法を適用するには、一つのグラフ変換またはバックエンド経路を選び、維持すべき契約と対応するテストを特定します。数値検証とレイテンシ測定は分けて記録します。[EvoX Compiler の概要](/ja/news/evox-compiler)は実行工程を、本事例は明確な境界による開発のレビュー可能性を示しています。

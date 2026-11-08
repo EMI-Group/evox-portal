@@ -1,17 +1,17 @@
 ---
 title: "Genesis costruisce EvoX Compiler: l'IA sviluppa infrastrutture evolutive"
 pubDate: 2026-11-03
-updatedDate: 2026-11-07
 summary: "Il caso EvoX Compiler collega due livelli dell'ecosistema: Genesis sviluppa software, mentre il compilatore risultante sostiene trasformazione ed esecuzione dei programmi."
+updatedDate: 2026-11-08
 ---
-
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
 
 L'infrastruttura per l'IA evolutiva è essa stessa un importante progetto software. Il caso Genesis–EvoX Compiler collega questi livelli: un sistema di sviluppo agentico costruisce ed estende un compilatore di grafi tensoriali, mentre contratti d'interfaccia e test di regressione stabiliscono quali modifiche integrare nello sviluppo continuo.
 
+![Strati del compilatore allineati e collegati da un’asta rossa](./compiler-contract-layers.webp)
+
 ## Responsabilità esplicite
 
-EvoX Compiler costruisce e trasforma EvoXIR, poi esegue lowering, compilazione, caricamento ed esecuzione. I compilatori esterni ottimizzano e generano codice. NumPy è il riferimento; IREE, XLA e TVM offrono percorsi facoltativi.
+EvoX Compiler costruisce e trasforma EvoXIR, poi esegue lowering, compilazione, caricamento ed esecuzione. I compilatori esterni ottimizzano e generano codice. NumPy è il riferimento; IREE, XLA e TVM offrono percorsi facoltativi. [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
 
 Le trasformazioni devono preservare il significato, i backend supportare gli operatori accettati e il runtime rispettare i dispositivi. Sono criteri più concreti della sola crescita delle righe di codice.
 
@@ -23,7 +23,7 @@ Il lavoro è proseguito su adattatori, grafi e benchmark. Il record ricostruisce
 
 ## Più livelli di verifica
 
-Con IREE installato si riportano **6.789 test superati, 46 saltati e 3 fallimenti attesi**, senza fallimenti. Senza compilatori, **6.367 test superati**. Questi dati storici non vanno sostituiti con quelli di versioni successive.
+Con IREE installato si riportano **6.789 test superati, 46 saltati e 3 fallimenti attesi**, senza fallimenti. Senza compilatori, **6.367 test superati**. Questi dati storici non vanno sostituiti con quelli di versioni successive. [GW-000005](https://genesis.evox.group/evidence/evoxc/)
 
 L’integrazione separata `evoxc_hf` confronta output e latenza con torch/transformers. Checkpoint, precisione, backend e hardware sono parte del confronto: concordanza numerica e velocità sono proprietà diverse.
 
@@ -37,4 +37,4 @@ Vulkan usava Mesa lavapipe, un dispositivo software; TVM ROCm era limitato alla 
 
 Parta dal [README](https://github.com/EMI-Group/evoxc/blob/main/README.md), poi colleghi le affermazioni a test e [benchmark dei modelli archiviati](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md). Consideri percorsi supportati e divari di prestazioni ancora aperti.
 
-Il [repository EvoX Compiler](https://github.com/EMI-Group/evoxc) mostra il legame tra sviluppo assistito dall'IA e infrastruttura computazionale. Genesis contribuisce a un sistema le cui rappresentazioni esplicite e vie di esecuzione possono sostenere altri esperimenti evolutivi. Interfacce, test e misure conservati rendono verificabile lo sviluppo successivo.
+Per applicare il metodo, scelga una trasformazione del grafo o un percorso backend, identifichi il contratto da preservare e i test pertinenti. Registri separatamente verifiche numeriche e misure di latenza. La [panoramica di EvoX Compiler](/it/news/evox-compiler) descrive la pipeline; questo caso mostra come confini espliciti rendano lo sviluppo verificabile.
