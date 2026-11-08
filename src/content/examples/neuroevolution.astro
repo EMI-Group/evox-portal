@@ -23,7 +23,7 @@ const braxViewerHtml = buildBraxViewerHtml({
 
 <script>
   const frame = document.querySelector<HTMLIFrameElement>("[data-brax-viewer]");
-  const syncTheme = () => frame?.contentWindow?.postMessage({type: "evox-theme", theme: document.documentElement.dataset.theme || "dark"}, "*");
+  const syncTheme = () => frame?.contentWindow?.postMessage({type: "evox-theme", theme: document.documentElement.dataset.theme || "light"}, "*");
   frame?.addEventListener("load", syncTheme);
   window.addEventListener("message", event => {
     if (event.source === frame?.contentWindow && event.data?.type === "evox-viewer-ready") syncTheme();

@@ -77,7 +77,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" type="button" aria-label={t(tr, "theme.toggle")} title={t(tr, "theme.toggle")} data-theme-toggle aria-pressed="true">
+      <button class="theme-toggle" type="button" aria-label={t(tr, "theme.toggle")} title={t(tr, "theme.toggle")} data-theme-toggle aria-pressed="false">
         <Icon name="heroicons:sun-20-solid" class="theme-sun" />
         <Icon name="heroicons:moon-20-solid" class="theme-moon" />
       </button>
@@ -260,8 +260,8 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
     syncThemeButtons();
   }));
   window.addEventListener("storage", (event) => {
-    if (event.key === "evox-theme") {
-      document.documentElement.dataset.theme = event.newValue === "light" ? "light" : "dark";
+    if (event.key === "evox-theme" || event.key === null) {
+      document.documentElement.dataset.theme = event.newValue === "dark" ? "dark" : "light";
       syncThemeButtons();
     }
   });
