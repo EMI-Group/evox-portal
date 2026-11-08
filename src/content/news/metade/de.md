@@ -1,13 +1,13 @@
 ---
 title: "MetaDE: Suchstrategien mit der Aufgabe weiterentwickeln"
 pubDate: 2025-02-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "MetaDE ergänzt Differential Evolution um eine äußere Evolutionsschleife und nutzt EvoXs parallele Berechnung zur Bewertung und Verbesserung von Suchkonfigurationen."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+Anpassung kann die Suchweise eines Systems ebenso betreffen wie seine Lösungen. MetaDE bringt dies mit zwei verbundenen evolutionären Ebenen in EvoX: Eine löst das Zielproblem, die andere bewertet, welche DE-Konfigurationen die Suche wirksam machen. [MetaDE](https://github.com/EMI-Group/metade)
 
-Anpassung kann die Suchweise eines Systems ebenso betreffen wie seine Lösungen. MetaDE bringt dies mit zwei verbundenen evolutionären Ebenen in EvoX: Eine löst das Zielproblem, die andere bewertet, welche DE-Konfigurationen die Suche wirksam machen.
+![Ein äußerer Einstellring umschließt eine Kandidatenpopulation](./nested-evolution-search.webp)
 
 ## Hintergrund
 
@@ -141,7 +141,7 @@ Wie in der Abbildung gezeigt, demonstriert MetaDE eine starke Leistung bei Brax-
 
 ## Fazit und zukünftige Richtungen
 
-MetaDE bietet evolutionärer KI einen konkreten Mechanismus zur Anpassung der Suche durch Feedback. Sein Beitrag zu EvoX ist eine wiederverwendbare Verbindung zwischen Aufgabenoptimierung und Konfigurationssuche, unterstützt durch Batch-Auswertung. Neue Anwendungen benötigen sinnvolles Feedback und die Berücksichtigung der Kosten beider Ebenen.
+Erfassen Sie äußere Konfigurationsversuche und innere Zielfunktionsbewertungen. Vergleichen Sie anhand des Gesamtbudgets und der tatsächlich verstrichenen Zeit. [iStratDE: Populationsvielfalt als Prinzip paralleler Suche](/de/news/istratde)
 
 ## Ressourcen
 

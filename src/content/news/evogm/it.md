@@ -1,17 +1,13 @@
 ---
 title: "EvoGM: fusione autonoma di grandi modelli tramite evoluzione di popolazione, senza ri-addestramento"
 pubDate: 2026-06-28
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGM porta il feedback evolutivo nell'IA generativa, imparando a combinare capacità di modelli esperti senza riaddestrare i grandi modelli partecipanti."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+La crescente disponibilità di modelli specializzati permette di riutilizzare capacità tra compiti. Nella direzione di ricerca di EvoX, EvoGM esplora come il feedback della popolazione possa guidare questo riuso: le combinazioni vengono valutate e i risultati insegnano a un generatore leggero a proporre configurazioni di fusione migliori. [EvoGM](https://github.com/JiangTao97/evogm)
 
-![image1.png](./evogm-1.png)
-
-## Sintesi
-
-La crescente disponibilità di modelli specializzati permette di riutilizzare capacità tra compiti. Nella direzione di ricerca di EvoX, EvoGM esplora come il feedback della popolazione possa guidare questo riuso: le combinazioni vengono valutate e i risultati insegnano a un generatore leggero a proporre configurazioni di fusione migliori.
+![Moduli esperti collegati a una forma composita da fili regolabili](./expert-merging-feedback.webp)
 
 Per affrontare questo problema, il team EvoX in collaborazione con il Peng Cheng Laboratory propone EvoGM (Evolutionary Generative Merging), un framework di fusione evolutiva generativa che trasforma la ricerca dei coefficienti di fusione in un problema di ottimizzazione generativa apprendibile. EvoGM organizza diverse configurazioni di fusione in una popolazione di candidati e, attraverso il pairing winner-loser, l'addestramento con doppio generatore, i vincoli di coerenza ciclica e l'aggiornamento evolutivo della base di esperti, fa evolvere la popolazione in un ciclo chiuso di «generazione — valutazione — selezione — riapprendimento», imparando autonomamente da feedback di validazione limitati come trasformare configurazioni a bassa performance in configurazioni ad alta performance. I risultati sperimentali mostrano che EvoGM dimostra una capacità di fusione di modelli più forte negli scenari di attività viste e non viste.
 
@@ -141,7 +137,7 @@ Da EvoGO a EvoGM, si tratta essenzialmente del passaggio da «imparare come otti
 
 ## VIII. Conclusioni e prospettive
 
-Con il continuo aumento di modelli esperti, modelli LoRA e modelli per attività nell'ecosistema open source, la questione chiave del futuro potrebbe non essere più «come addestrare un nuovo modello», ma «come combinare efficacemente le capacità dei modelli esistenti». EvoGM offre una nuova risposta: senza ri-addestrare i grandi modelli coinvolti nella fusione, utilizza l'apprendimento evolutivo generativo per sfruttare feedback di validazione limitati e completare autonomamente la costruzione della popolazione di candidati, la generazione dei piani di fusione, la selezione per valutazione e l'aggiornamento della base di esperti. In breve, EvoGM fa evolvere la fusione di modelli da «regolare i coefficienti per esperienza» a «far apprendere ed evolvere la strategia di fusione stessa». Ciò significa anche che il riutilizzo delle capacità dei grandi modelli potrebbe entrare in una nuova fase: anziché ri-addestrare un modello per ogni nuova attività, i modelli esperti esistenti possono, attraverso l'evoluzione di popolazione e la fusione autonoma, continuare a combinare modelli più adatti alle nuove attività.
+Fissi esperti e suddivisione di validazione prima del confronto. Separi i compiti finali di test dal feedback usato per selezionare i coefficienti. [EvoGO: imparare a cercare dal feedback delle valutazioni](/it/news/evogo)
 
 ## Risorse
 

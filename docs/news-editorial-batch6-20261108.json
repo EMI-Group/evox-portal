@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-08",
+  "batch": 6,
+  "base": "4f99355d904f8489c85edbf948c4e5f24acb4279",
+  "selection": [
+    "codex-for-evox",
+    "evox-genesis",
+    "evogm",
+    "evogp",
+    "evogo",
+    "iStratDE",
+    "metade"
+  ],
+  "scope": "Complete all seven entries in the prior cover-suitability checklist; 91 localized revisions. Retain experiments, code, screenshots, credits and historical numeric evidence. Add unique editorial covers, localized literal alt, source near lead, concrete review/comparison instructions and related reading. Remove repeated dated boilerplate and redundant abstract heading; preserve pubDate and set substantive updatedDate 2026-11-08.",
+  "templateChange": "Prefer the first content image for article social metadata, falling back to legacy paper banner. Four replaced title images remain in the existing source-details disclosure; unaffected existing designed banners resolve to the same images.",
+  "sources": [
+    {
+      "url": "https://github.com/EMI-Group/evox",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/EMI-Group/genesis/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/JiangTao97/evogm/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evogp/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evogo/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/EMI-Group/istratde/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    },
+    {
+      "url": "https://github.com/EMI-Group/metade/blob/main/README.md",
+      "nature": "Primary repository method/usage material; no new performance or experiential claims added."
+    }
+  ],
+  "art": [
+    {
+      "prompt": "Editorial cover for Codex and EvoX research experiments. A warm ivory desk with a graphite folded sheet on the left, a precisely constructed miniature route-planning maze in the middle, and a neat set of ivory experiment cards held by a red clip on the right. One thin red thread connects the idea sheet through the maze to the organized experimental records. Wide 16:9, at least 1600 px wide, sophisticated tactile still-life photography, crisp natural light, evocative and restrained. No text, letters, logos, fake interface, robots, or numerical results. Concept illustration of translating research intent into reviewable experiments.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/codex-for-evox/research-to-experiment.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-f764253f-8cfe-46d6-ae64-33d72d11a2f6.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 185610
+    },
+    {
+      "prompt": "Editorial cover for EvoX Genesis cumulative software development. A striking architectural cutaway miniature tower made of stacked ivory rooms, several incomplete rooms on top, completed charcoal foundations below. A red structural staircase remains continuous through all floors, while small removable drafting stools sit outside the building. The software structure persists as its builders change. Wide 16:9 at least 1600 px wide. Warm white plaster, charcoal metal, brand red, refined studio lighting, precise craftsmanship, no text, logos, screens, humans or real experimental claims.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/evox-genesis/software-world-continuity.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-cc2eeb0d-edd2-42ec-abb7-701dc07d2b5a.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 164246
+    },
+    {
+      "prompt": "Editorial cover for EvoGM evolutionary model merging. Three distinct charcoal sculptural expert modules with subtly different fine surface patterns sit on an ivory workbench. Fine red adjustable tension threads connect them to one central woven ivory-and-graphite composite form, with a small precise red loop returning toward a mechanical adjustment wheel. Emphasize combining existing expert contributions and learning merging choices through feedback. Wide 16:9 at least 1600 px wide, tactile sculpture, clean museum lighting, restrained warm ivory charcoal red palette. No text, letters, logos, brains, robots, chips, charts, UI or numeric claims.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/evogm/expert-merging-feedback.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-f889a107-1b90-4ac0-96f8-4ec028210bac.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 195646
+    },
+    {
+      "prompt": "Editorial cover for EvoGP GPU program search. A precision miniature forest of branching program-tree sculptures, small charcoal stems with ivory forked branches and red terminal beads. Trees differ in shape but are mounted in a regular tray with clean aligned slots, making irregular programs an organized population. One selected tree stands slightly forward. Wide 16:9 at least 1600 px wide, warm ivory tabletop, tactile ceramic and machined charcoal material, beautiful side lighting and shallow architectural perspective. No text, letters, logos, UI, equations, robots, glowing chips or performance numbers.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/evogp/program-tree-populations.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-b91f3a9c-1c0d-4301-ad9e-439f82c730b1.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 172062
+    },
+    {
+      "prompt": "Editorial cover for EvoGO learning search directions from evaluated candidates. A sculptural warm ivory landscape with a series of removable graphite directional stencils set above it; a red ribbon traces a path through the first broad opening then progressively more focused openings toward a small red candidate sphere. The stencils look like refined drafting instruments, suggesting a proposal mechanism shaped by feedback. Wide 16:9 at least 1600 px wide, close architectural still-life, tactile surfaces, dramatic but soft natural light, warm ivory charcoal and red. No text, labels, arrows with data, exact function plot, logos, fake UI or performance claim.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/evogo/learning-search-directions.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-9a6c5807-74b0-43ee-86d9-e6b21dab00ae.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 231674
+    },
+    {
+      "prompt": "Editorial cover for iStratDE fixed individual strategy diversity. Seven parallel narrow ivory lanes on a warm white tabletop, each holding a distinct graphite mechanical path guide: curved, zigzag, stepped, gently arcing. A small red candidate bead follows each lane. The guides remain distinct and all lanes extend side by side into the same depth, expressing persistent individual behaviors in parallel search. Wide 16:9 at least 1600 px wide, precise industrial sculpture, sophisticated restrained warm white charcoal red composition, high-end magazine quality. No text, numbers, labels, logos, screens, robots or exact algorithm diagram.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/iStratDE/persistent-strategy-diversity.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-f4c63085-78dd-440c-b7f3-c604aa783ba5.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 119830
+    },
+    {
+      "prompt": "Editorial cover for MetaDE nested evolutionary search. Two nested sculptural circular instruments on an ivory tabletop: a large graphite outer ring holds several ivory adjustable setting blocks; inside it a small ivory basin contains a population of charcoal candidate beads. A red linkage from an outer setting reaches the inner mechanism, and a small red return arc hints at measured feedback. Emphasize configurations searched in an outer loop and solutions in an inner loop. Wide 16:9 at least 1600 px wide, tactile ceramic precision instrument, museum studio lighting, warm white graphite and restrained red. No text, letters, logos, charts, screens, robots or numerical results.",
+      "tool": "built-in image_gen",
+      "nature": "Concept illustration, not UI or experimental evidence",
+      "path": "src/content/news/metade/nested-evolution-search.webp",
+      "original": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-7cbd4604-4c2f-42be-817a-b7ac55cb7ecf.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 181434
+    }
+  ],
+  "remainingFromPriorChecklist": []
+}

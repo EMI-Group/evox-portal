@@ -1,11 +1,13 @@
 ---
 title: "Codex × EvoX: Algorithm Development and Reproducible Experiments"
 pubDate: 2026-08-08
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "AI coding agents connect research intent to EvoX's executable search workflows, linking problem definition, implementation and reproducible evaluation."
 ---
 
-For evolutionary AI, a research idea becomes useful when it can enter a repeatable cycle of execution and evaluation. The Codex–EvoX workflow connects natural-language intent to that cycle: the coding agent helps construct the experiment, while EvoX provides the interfaces and computation through which candidate solutions are tested.
+For evolutionary AI, a research idea becomes useful when it can enter a repeatable cycle of execution and evaluation. The Codex–EvoX workflow connects natural-language intent to that cycle: the coding agent helps construct the experiment, while EvoX provides the interfaces and computation through which candidate solutions are tested. [EvoX](https://github.com/EMI-Group/evox)
+
+![An idea sheet, route model and experiment cards joined by red thread](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) is a distributed, GPU-accelerated framework for scalable evolutionary computation. Through its unified `Algorithm`, `Problem`, and `Workflow` interfaces, EvoX brings population search, batched evaluation, experiment execution, and hardware acceleration into one cohesive computational architecture. It supports applications ranging from single- and multi-objective optimization to neuroevolution, reinforcement-learning environments, and complex system design.
 
@@ -161,3 +163,5 @@ Start with one sentence, and explore your own evolutionary space.
 **Note 2:** The demonstrations were run with the GPT-5.5 Terra model using medium intelligence, medium reasoning effort, and standard speed.
 
 **Note 3:** The experimental results apply only to the tasks, environments, implementations, budgets, and hardware described here. They do not represent general performance or speedup guarantees.
+
+Start with one task, a fixed seed and an explicit evaluation budget. Save the generated script and results together before asking for a second algorithm. [Getting Started with EvoX: Your First Evolutionary Workflow](/news/evox-quickstart)

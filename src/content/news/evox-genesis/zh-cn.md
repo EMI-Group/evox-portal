@@ -1,15 +1,15 @@
 ---
 title: "EvoX Genesis：构建能够持续演化的软件"
 pubDate: 2026-08-17
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Genesis 将 EvoX 的演化式 AI 方向延伸到软件：智能体提出变更，验证决定哪些成果被接受，项目本身承载后续发展的基础。"
 ---
 
-*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
+Genesis 将 EvoX 的愿景带入 Agentic AI，把不断发展的软件项目视为多次局部贡献所积累的成果。代码生成、执行、审查与集成组成开发循环；被接受的实现及其验证记录，为后续工作提供可以继续发展的基础。 [Genesis](https://github.com/EMI-Group/genesis)
+
+![连续红色楼梯贯穿分层的软件建筑](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
-
-Genesis 将 EvoX 的愿景带入 Agentic AI，把不断发展的软件项目视为多次局部贡献所积累的成果。代码生成、执行、审查与集成组成开发循环；被接受的实现及其验证记录，为后续工作提供可以继续发展的基础。
 
 香港理工大学数据科学及人工智能学系EvoX团队发布**EvoX Genesis（天演·启元）**，一套递归演化式AI系统。
 
@@ -160,3 +160,5 @@ https://github.com/EMI-Group/genesis
 OpenAI, *Run long horizon tasks with Codex* (2026).
 
 Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
+
+从已接受版本开始续写，同时保留构建命令与回归测试。集成下一项贡献前，先对照这份基线审查。 [Genesis：让智能体贡献留在软件历史中](/zh-cn/news/genesis-development-history)

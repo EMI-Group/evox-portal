@@ -1,15 +1,13 @@
 ---
 title: "iStratDE: Population Diversity as a Principle for Parallel Search"
 pubDate: 2026-03-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "iStratDE studies how fixed individual-level strategies create diverse search behavior that can be evaluated efficiently with EvoX's GPU computation."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+Evolutionary search gains its character from a population of different possibilities. iStratDE examines how to preserve that diversity at the level of search behavior: individuals retain different strategies throughout a run. Within EvoX, this links algorithm design to the parallel evaluation of heterogeneous candidates. [iStratDE](https://github.com/EMI-Group/istratde)
 
-![](./istratde-1.png)
-
-Evolutionary search gains its character from a population of different possibilities. iStratDE examines how to preserve that diversity at the level of search behavior: individuals retain different strategies throughout a run. Within EvoX, this links algorithm design to the parallel evaluation of heterogeneous candidates.
+![Distinct path guides remain parallel in separate lanes](./persistent-strategy-diversity.webp)
 
 To address this gap, the EvoX team investigated how **individual-level strategy diversity** shapes DE search dynamics and optimization performance, and proposed a minimalist variant: **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. The core idea is simple: at initialization, each individual is assigned its own mutation and crossover strategy, and that assignment remains fixed throughout evolution. By introducing diversity at the individual level - while discarding complicated adaptation and feedback loops - iStratDE creates persistent behavioral heterogeneity across the population.
 
@@ -144,7 +142,7 @@ iStratDE is a return to algorithmic essentials. Rather than stacking increasingl
 
 The results show that iStratDE can compete with - and in some settings outperform - leading adaptive DE variants on both benchmarks and real-world control tasks. More broadly, this work highlights an important design principle: **complexity is not the only path to performance; population heterogeneity can itself be a powerful engine of evolution.**
 
-This decentralized minimalist paradigm opens a new direction for evolutionary algorithm design. Instead of relying on elaborate centralized coordination, it demonstrates how independent individuals with diverse search behaviors can collectively generate intelligent and scalable optimization dynamics.
+Keep the initial strategy assignments and random seeds in the experiment record. Compare fixed individual diversity with a shared-strategy baseline under equal budgets. [MetaDE: Letting Search Strategies Evolve with the Task](/news/metade)
 
 ## Resources
 

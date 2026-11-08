@@ -1,11 +1,13 @@
 ---
 title: "Codex × EvoX: Algorithmenentwicklung und reproduzierbare Experimente"
 pubDate: 2026-08-08
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Programmieragenten verbinden Forschungsabsichten mit ausführbaren EvoX-Suchabläufen: von der Problemdefinition über die Implementierung bis zur reproduzierbaren Bewertung."
 ---
 
-Für evolutionäre KI wird eine Forschungsidee nutzbar, wenn sie in einen wiederholbaren Ausführungs- und Bewertungszyklus gelangt. Codex und EvoX verbinden natürlichsprachliche Absichten mit diesem Zyklus: Der Agent hilft beim Aufbau des Experiments, EvoX stellt Schnittstellen und Rechenmöglichkeiten für die Prüfung der Kandidaten bereit.
+Für evolutionäre KI wird eine Forschungsidee nutzbar, wenn sie in einen wiederholbaren Ausführungs- und Bewertungszyklus gelangt. Codex und EvoX verbinden natürlichsprachliche Absichten mit diesem Zyklus: Der Agent hilft beim Aufbau des Experiments, EvoX stellt Schnittstellen und Rechenmöglichkeiten für die Prüfung der Kandidaten bereit. [EvoX](https://github.com/EMI-Group/evox)
+
+![Ideenblatt, Wegmodell und Versuchskarten mit rotem Faden](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) ist ein verteiltes, GPU-beschleunigtes Framework für skalierbare evolutionäre Berechnung. Über seine einheitlichen `Algorithm`-, `Problem`- und `Workflow`-Schnittstellen bringt EvoX Populationsuche, Batch-Auswertung, Experimentausführung und Hardwarebeschleunigung in eine kohärente Rechenarchitektur zusammen. Es unterstützt Anwendungen von Ein- und Mehrziel-Optimierung über Neuroevolution und Reinforcement-Learning-Umgebungen bis hin zum Entwurf komplexer Systeme.
 
@@ -161,3 +163,5 @@ Beginnen Sie mit einem Satz und erkunden Sie Ihren eigenen evolutionären Raum.
 **Hinweis 2:** Die Demonstrationen wurden mit dem GPT-5.5 Terra-Modell unter Verwendung von medium intelligence, medium reasoning effort und standard speed ausgeführt.
 
 **Hinweis 3:** Die experimentellen Ergebnisse gelten nur für die hier beschriebenen Aufgaben, Umgebungen, Implementierungen, Budgets und Hardware. Sie stellen keine allgemeinen Leistungs- oder Beschleunigungsgarantien dar.
+
+Beginnen Sie mit einer Aufgabe, festem Seed und explizitem Bewertungsbudget. Speichern Sie Skript und Ergebnisse gemeinsam, bevor Sie einen zweiten Algorithmus vergleichen. [Einstieg in EvoX: Ihr erster evolutionärer Workflow](/de/news/evox-quickstart)

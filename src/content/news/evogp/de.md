@@ -1,15 +1,13 @@
 ---
 title: "EvoGP: Die Suche nach Programmen auf GPUs skalieren"
 pubDate: 2026-06-02
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGP erschließt strukturierte Programmpopulationen für GPU-Berechnungen und unterstützt die evolutionäre Suche nach interpretierbaren Ausdrücken und Steuerungsstrategien."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+Evolutionäre KI kann ausführbare Strukturen ebenso durchsuchen wie Parametervektoren. EvoGP entwickelt diese Richtung im EvoX-Ökosystem, indem es große Populationen baumförmiger Programme berechenbar macht. Unregelmäßige Strukturen und Ausführungspfade erfordern passende Repräsentation und Ablaufplanung ebenso wie geeignete Algorithmen. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![img](./evogp-1.jpg)
-
-Evolutionäre KI kann ausführbare Strukturen ebenso durchsuchen wie Parametervektoren. EvoGP entwickelt diese Richtung im EvoX-Ökosystem, indem es große Populationen baumförmiger Programme berechenbar macht. Unregelmäßige Strukturen und Ausführungspfade erfordern passende Repräsentation und Ablaufplanung ebenso wie geeignete Algorithmen.
+![Verschiedene verzweigte Programmbäume in einem geordneten Tablett](./program-tree-populations.webp)
 
 Um diese Herausforderung zu bewältigen, **schlagen wir das EvoGP-Framework vor und reorganisieren Baumdarstellung, die Logik genetischer Operatoren und parallele Ausführungsmechanismen von Grund auf neu.** Experimentelle Ergebnisse zeigen, dass **EvoGP einen Spitzendurchsatz von über 10^11 GPops/s erreicht und die schnelle Auswertung von Populationen mit 500.000 Individuen innerhalb einer Sekunde ermöglicht — bis zu 304× schneller als bestehende GPU-Implementierungen.** Dieser Meilenstein markiert einen definitiven Bruch mit Hardware-Anpassungsbarrieren und führt Genetic Programming in die Ära des GPU-beschleunigten Hochleistungsrechnens ein.
 
@@ -69,7 +67,7 @@ Abbildung 6: Leistung bei verschiedenen Populationsskalen. EvoGP macht größere
 
 ## Fazit
 
-EvoGP erweitert die Objekte skalierbarer evolutionärer Suche: Symbolische Ausdrücke und programmierte Strategien können als Populationen erzeugt, ausgeführt und ausgewählt werden. Sein Infrastrukturbeitrag verbindet diese strukturierten Kandidaten mit GPU-Berechnungen. Durchsatz ermöglicht größere Experimente; die aufgabenspezifische Bewertung entscheidet, welche Programme nützlich sind.
+Beginnen Sie mit kleiner symbolischer Regression. Legen Sie Funktionsmenge, maximale Baumgröße und Bewertungsbudget vor einer Populationsvergrößerung fest. [Einstieg in EvoX: Ihr erster evolutionärer Workflow](/de/news/evox-quickstart)
 
 ## Ressourcen
 

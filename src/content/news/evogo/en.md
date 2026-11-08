@@ -1,15 +1,13 @@
 ---
 title: "EvoGO: Learning How to Search from Evaluation Feedback"
 pubDate: 2026-04-05
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGO connects generative learning with evolutionary optimization, turning evaluated candidates into experience for proposing the next population."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+Scientific and engineering search repeatedly asks which experiment to run next. EvoGO studies a computational version of that question: can evaluations teach a generator how to improve its proposals? This connects EvoX's evolutionary AI direction to a search process that learns from the candidates it has already tested. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![image1](./image1.png)
-
-Scientific and engineering search repeatedly asks which experiment to run next. EvoGO studies a computational version of that question: can evaluations teach a generator how to improve its proposals? This connects EvoX's evolutionary AI direction to a search process that learns from the candidates it has already tested.
+![Directional stencils focus a red search path](./learning-search-directions.webp)
 
 ## Predicament: Data-Driven Optimization Has Still Not Taken the Final Step
 
@@ -73,7 +71,7 @@ Generative search could be explored for engineering design, but a benchmark resu
 
 ## Conclusion and Outlook
 
-EvoGO contributes a learnable proposal mechanism to evolutionary AI systems. Its connection to AI for Science is the possibility of making costly evaluations inform future search, alongside parallel candidate generation. Realizing that possibility in a scientific domain requires domain-specific constraints, evaluation and validation; the reported benchmarks establish the starting point.
+Choose one benchmark and preserve its evaluation history. Compare learned proposals with a baseline under the same evaluation budget, recording model-training time separately. [EvoGM: Autonomous LLM Merging via Population Evolution Without Retraining](/news/evogm)
 
 ## Resources
 

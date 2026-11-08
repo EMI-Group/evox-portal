@@ -1,15 +1,13 @@
 ---
 title: "iStratDE: Populationsvielfalt als Prinzip paralleler Suche"
 pubDate: 2026-03-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "iStratDE untersucht, wie feste individuelle Strategien vielfältiges Suchverhalten erzeugen, das mit EvoXs GPU-Berechnung effizient bewertet werden kann."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+Evolutionäre Suche lebt von einer Population unterschiedlicher Möglichkeiten. iStratDE untersucht, wie diese Vielfalt im Suchverhalten erhalten bleibt: Individuen behalten während eines Laufs verschiedene Strategien. In EvoX verbindet dies Algorithmenentwurf mit der parallelen Bewertung heterogener Kandidaten. [iStratDE](https://github.com/EMI-Group/istratde)
 
-![](./istratde-1.png)
-
-Evolutionäre Suche lebt von einer Population unterschiedlicher Möglichkeiten. iStratDE untersucht, wie diese Vielfalt im Suchverhalten erhalten bleibt: Individuen behalten während eines Laufs verschiedene Strategien. In EvoX verbindet dies Algorithmenentwurf mit der parallelen Bewertung heterogener Kandidaten.
+![Unterschiedliche Führungen liegen in parallelen Bahnen](./persistent-strategy-diversity.webp)
 
 Um diese Lücke zu schließen, untersuchte das EvoX-Team, wie **Strategiediversität auf Individuen-Ebene** die Suchdynamik und Optimierungsleistung von DE beeinflusst, und schlug eine minimalistische Variante vor: **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. Die Kernidee ist einfach: Bei der Initialisierung erhält jedes Individuum seine eigene Mutations- und Crossover-Strategie, und diese Zuweisung bleibt während der gesamten Evolution unverändert. Durch die Einführung von Diversität auf Individuen-Ebene – unter Verzicht auf komplizierte Anpassungs- und Rückkopplungsschleifen – erzeugt iStratDE eine dauerhafte Verhaltensheterogenität in der Population.
 
@@ -144,7 +142,7 @@ iStratDE ist eine Rückkehr zu algorithmischen Grundlagen. Anstatt zunehmend kom
 
 Die Ergebnisse zeigen, dass iStratDE mit führenden adaptiven DE-Varianten konkurrieren – und sie in manchen Szenarien übertreffen – kann, sowohl auf Benchmarks als auch bei realen Steuerungsaufgaben. Im weiteren Sinne hebt diese Arbeit ein wichtiges Designprinzip hervor: **Komplexität ist nicht der einzige Weg zu Leistung; Populationsheterogenität kann selbst ein mächtiger Motor der Evolution sein.**
 
-Dieses dezentrale minimalistische Paradigma eröffnet eine neue Richtung für das Design evolutionärer Algorithmen. Anstatt auf aufwändige zentralisierte Koordination zu setzen, zeigt es, wie unabhängige Individuen mit vielfältigem Suchverhalten gemeinsam intelligente und skalierbare Optimierungsdynamiken erzeugen können.
+Dokumentieren Sie anfängliche Strategiezuweisungen und Seeds. Vergleichen Sie feste individuelle Vielfalt und eine gemeinsame Strategie bei gleichem Budget. [MetaDE: Suchstrategien mit der Aufgabe weiterentwickeln](/de/news/metade)
 
 ## Ressourcen
 

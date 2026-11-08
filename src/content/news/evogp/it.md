@@ -1,15 +1,13 @@
 ---
 title: "EvoGP: ampliare la ricerca di programmi sulle GPU"
 pubDate: 2026-06-02
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGP rende le popolazioni di programmi strutturati adatte al calcolo GPU, sostenendo la ricerca evolutiva di espressioni interpretabili e politiche di controllo."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+L'IA evolutiva può cercare strutture eseguibili oltre a vettori di parametri. EvoGP sviluppa questa direzione nell'ecosistema EvoX rendendo gestibili grandi popolazioni di programmi ad albero. Strutture e percorsi di esecuzione irregolari richiedono soluzioni di rappresentazione e pianificazione, insieme a quelle algoritmiche. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![img](./evogp-1.jpg)
-
-L'IA evolutiva può cercare strutture eseguibili oltre a vettori di parametri. EvoGP sviluppa questa direzione nell'ecosistema EvoX rendendo gestibili grandi popolazioni di programmi ad albero. Strutture e percorsi di esecuzione irregolari richiedono soluzioni di rappresentazione e pianificazione, insieme a quelle algoritmiche.
+![Alberi di programmi diversi in un vassoio ordinato](./program-tree-populations.webp)
 
 Per affrontare questa sfida, **proponiamo il framework EvoGP, riorganizzando da zero la rappresentazione ad albero, la logica degli operatori genetici e i meccanismi di esecuzione parallela.** I risultati sperimentali mostrano che **EvoGP raggiunge un throughput computazionale di picco superiore a 10^11 GPops/s, consentendo la valutazione rapida di popolazioni di 500.000 individui in meno di un secondo — fino a 304× più veloce delle implementazioni GPU esistenti.** Questo traguardo segna una rottura definitiva con le barriere di adattamento hardware e introduce la programmazione genetica nell'era del calcolo ad alte prestazioni accelerato da GPU.
 
@@ -69,7 +67,7 @@ Figura 6: Prestazioni su diverse scale di popolazione. EvoGP rende dimensioni di
 
 ## Conclusione
 
-EvoGP amplia gli oggetti della ricerca evolutiva scalabile: espressioni simboliche e politiche programmate possono essere generate, eseguite e selezionate in popolazioni. Il contributo infrastrutturale collega questi candidati strutturati al calcolo GPU. La capacità di elaborazione permette esperimenti più ampi; la valutazione del compito determina quali programmi siano utili.
+Inizi con una piccola regressione simbolica. Definisca funzioni disponibili, dimensione massima degli alberi e budget prima di ampliare la popolazione. [Introduzione a EvoX: il primo workflow evolutivo](/it/news/evox-quickstart)
 
 ## Risorse
 

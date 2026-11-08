@@ -1,15 +1,15 @@
 ---
 title: "EvoX Genesis: costruire software che possa continuare a evolvere"
 pubDate: 2026-08-17
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Genesis estende l'IA evolutiva di EvoX al software: gli agenti propongono modifiche, la validazione seleziona il lavoro accettato e il progetto conserva i progressi."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+Genesis porta la visione di EvoX in Agentic AI, facendo del progetto software in evoluzione il risultato persistente di numerosi contributi locali. Generazione del codice, esecuzione, revisione e integrazione formano un ciclo di sviluppo. Le implementazioni accettate e le loro validazioni costituiscono la base del lavoro successivo. [Genesis](https://github.com/EMI-Group/genesis)
+
+![Una torre software attraversata da una scala rossa continua](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
-
-Genesis porta la visione di EvoX in Agentic AI, facendo del progetto software in evoluzione il risultato persistente di numerosi contributi locali. Generazione del codice, esecuzione, revisione e integrazione formano un ciclo di sviluppo. Le implementazioni accettate e le loro validazioni costituiscono la base del lavoro successivo.
 
 Il team EvoX del Dipartimento di Data Science e Intelligenza Artificiale della Hong Kong Polytechnic University ha rilasciato **EvoX Genesis**, un sistema di IA ricorsivo per l'evoluzione autonoma del software a lungo termine.
 
@@ -166,3 +166,5 @@ Riferimenti:
 OpenAI, *Run long horizon tasks with Codex* (2026).
 
 Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
+
+Riparta da una revisione accettata con comandi di compilazione e test di regressione. Esamini il contributo successivo rispetto a questa base prima dell’integrazione. [Genesis: conservare i contributi degli agenti nella storia del software](/it/news/genesis-development-history)

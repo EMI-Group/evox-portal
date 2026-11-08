@@ -1,15 +1,13 @@
 ---
 title: "EvoGO: Aus Bewertungen lernen, wie man sucht"
 pubDate: 2026-04-05
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGO verbindet generatives Lernen mit evolutionärer Optimierung und nutzt bewertete Kandidaten als Erfahrung für die nächste Population."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+Wissenschaftliche und technische Suche muss wiederholt entscheiden, welches Experiment als Nächstes sinnvoll ist. EvoGO untersucht diese Frage rechnerisch: Können Bewertungen einen Generator zu besseren Vorschlägen führen? Damit verbindet sich EvoXs evolutionäre KI mit einem Suchprozess, der aus bereits geprüften Kandidaten lernt. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![image1](./image1.png)
-
-Wissenschaftliche und technische Suche muss wiederholt entscheiden, welches Experiment als Nächstes sinnvoll ist. EvoGO untersucht diese Frage rechnerisch: Können Bewertungen einen Generator zu besseren Vorschlägen führen? Damit verbindet sich EvoXs evolutionäre KI mit einem Suchprozess, der aus bereits geprüften Kandidaten lernt.
+![Richtungsschablonen bündeln einen roten Suchpfad](./learning-search-directions.webp)
 
 ## Das Dilemma: Die datengesteuerte Optimierung hat den letzten Schritt noch nicht getan
 
@@ -73,7 +71,7 @@ Generative Suche ist ein möglicher Ansatz für technische Entwurfsaufgaben. Ben
 
 ## Fazit und Ausblick
 
-EvoGO liefert evolutionären KI-Systemen einen lernfähigen Vorschlagsmechanismus. Der Bezug zu AI for Science liegt darin, aufwendige Bewertungen für die weitere Suche zu nutzen und mit paralleler Kandidatenerzeugung zu verbinden. Wissenschaftliche Anwendungen benötigen fachspezifische Bedingungen, Bewertungen und Validierung; die berichteten Benchmarks bilden den Ausgangspunkt.
+Bewahren Sie einen Benchmark und seine Bewertungshistorie auf. Vergleichen Sie gelernte Vorschläge bei gleichem Budget mit einer Basis und erfassen Sie Trainingszeit getrennt. [EvoGM: autonome Modellfusion durch Populationsentwicklung ohne erneutes Training](/de/news/evogm)
 
 ## Ressourcen
 

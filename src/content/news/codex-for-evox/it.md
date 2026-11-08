@@ -1,11 +1,13 @@
 ---
 title: "Codex × EvoX: sviluppo di algoritmi ed esperimenti riproducibili"
 pubDate: 2026-08-08
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Gli agenti di programmazione collegano l'intento di ricerca ai workflow eseguibili di EvoX, dalla definizione del problema alla valutazione riproducibile."
 ---
 
-Per l'IA evolutiva, un'idea di ricerca diventa utile quando entra in un ciclo ripetibile di esecuzione e valutazione. Codex ed EvoX collegano l'intento espresso in linguaggio naturale a questo ciclo: l'agente aiuta a costruire l'esperimento, mentre EvoX fornisce interfacce e calcolo per verificare le soluzioni candidate.
+Per l'IA evolutiva, un'idea di ricerca diventa utile quando entra in un ciclo ripetibile di esecuzione e valutazione. Codex ed EvoX collegano l'intento espresso in linguaggio naturale a questo ciclo: l'agente aiuta a costruire l'esperimento, mentre EvoX fornisce interfacce e calcolo per verificare le soluzioni candidate. [EvoX](https://github.com/EMI-Group/evox)
+
+![Foglio di idee, modello del percorso e schede uniti da un filo rosso](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) è un framework distribuito e accelerato su GPU per il calcolo evolutivo scalabile. Attraverso le sue interfacce unificate `Algorithm`, `Problem` e `Workflow`, EvoX riunisce la ricerca su popolazione, la valutazione in batch, l'esecuzione degli esperimenti e l'accelerazione hardware in un'unica architettura computazionale coerente. Supporta applicazioni che vanno dall'ottimizzazione a obiettivo singolo e multi-obiettivo alla neuroevoluzione, agli ambienti di apprendimento per rinforzo e alla progettazione di sistemi complessi.
 
@@ -161,3 +163,5 @@ Inizi con una sola frase ed esplori il proprio spazio evolutivo.
 **Nota 2:** Le dimostrazioni sono state eseguite con il modello GPT-5.5 Terra utilizzando intelligenza media, sforzo di ragionamento medio e velocità standard.
 
 **Nota 3:** I risultati sperimentali si applicano solo alle attività, agli ambienti, alle implementazioni, ai budget e all'hardware descritti qui. Non rappresentano garanzie generali di prestazioni o di accelerazione.
+
+Inizi con un compito, un seed fisso e un budget esplicito. Salvi insieme script e risultati prima di confrontare un secondo algoritmo. [Introduzione a EvoX: il primo workflow evolutivo](/it/news/evox-quickstart)

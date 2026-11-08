@@ -1,15 +1,13 @@
 ---
 title: "EvoGP: Scaling the Search for Programs on GPUs"
 pubDate: 2026-06-02
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGP makes structured program populations amenable to GPU computation, supporting evolutionary search for interpretable expressions and control policies."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+Evolutionary AI can search over executable structures as well as parameter vectors. EvoGP develops this direction within the EvoX ecosystem by making tree-based programs computationally tractable as large populations. Irregular structures and execution paths make this a representation and scheduling problem as much as an algorithmic one. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![img](./evogp-1.jpg)
-
-Evolutionary AI can search over executable structures as well as parameter vectors. EvoGP develops this direction within the EvoX ecosystem by making tree-based programs computationally tractable as large populations. Irregular structures and execution paths make this a representation and scheduling problem as much as an algorithmic one.
+![Different branching program trees mounted in an aligned tray](./program-tree-populations.webp)
 
 To address this challenge, **we propose the EvoGP framework, reorganizing tree representation, genetic operator logic, and parallel execution mechanisms from the ground up.** Experimental results show that **EvoGP achieves peak computational throughput exceeding 10^11 GPops/s, enabling rapid evaluation of populations of 500,000 individuals within one second—up to 304× faster than existing GPU implementations.** This milestone marks a definitive break from hardware adaptation barriers, ushering genetic programming into the era of GPU-accelerated high-performance computing.
 
@@ -69,7 +67,7 @@ Core benchmark tests show that EvoGP's peak throughput exceeds 10^11 GPops/s, de
 
 ## Conclusion
 
-EvoGP broadens the objects that can participate in scalable evolutionary search: symbolic expressions and program policies can be generated, executed and selected as populations. Its infrastructure contribution lies in connecting those structured candidates to GPU computation. Throughput enables larger experiments; task-specific evaluation determines which programs are actually useful.
+Start with a small symbolic-regression task. Keep the primitive set, tree-size limit and evaluation budget explicit before increasing the population. [Getting Started with EvoX: Your First Evolutionary Workflow](/news/evox-quickstart)
 
 ## Resources
 

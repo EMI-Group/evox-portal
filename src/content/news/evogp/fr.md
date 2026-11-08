@@ -1,15 +1,13 @@
 ---
 title: "EvoGP : étendre la recherche de programmes grâce aux GPU"
 pubDate: 2026-06-02
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGP rend les populations de programmes structurés accessibles au calcul GPU pour rechercher des expressions interprétables et des politiques de contrôle."
 ---
 
-*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
+L'IA évolutionnaire peut explorer des structures exécutables autant que des vecteurs de paramètres. EvoGP développe cette voie dans l'écosystème EvoX en permettant de calculer sur de grandes populations de programmes arborescents. L'irrégularité des structures et des chemins d'exécution en fait un problème de représentation et d'ordonnancement autant que d'algorithmes. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![img](./evogp-1.jpg)
-
-L'IA évolutionnaire peut explorer des structures exécutables autant que des vecteurs de paramètres. EvoGP développe cette voie dans l'écosystème EvoX en permettant de calculer sur de grandes populations de programmes arborescents. L'irrégularité des structures et des chemins d'exécution en fait un problème de représentation et d'ordonnancement autant que d'algorithmes.
+![Des arbres de programmes variés dans un plateau aligné](./program-tree-populations.webp)
 
 Pour relever ce défi, **nous proposons le framework EvoGP, en réorganisant de fond en comble la représentation des arbres, la logique des opérateurs génétiques et les mécanismes d'exécution parallèle.** Les résultats expérimentaux montrent qu'**EvoGP atteint un débit de calcul de pointe supérieur à 10^11 GPops/s, permettant l'évaluation rapide de populations de 500 000 individus en moins d'une seconde — jusqu'à 304× plus rapide que les implémentations GPU existantes.** Cette étape marque une rupture définitive avec les barrières d'adaptation matérielle et fait entrer la programmation génétique dans l'ère du calcul haute performance accéléré par GPU.
 
@@ -69,7 +67,7 @@ Figure 6 : Performances selon différentes échelles de population. EvoGP rend l
 
 ## Conclusion
 
-EvoGP élargit les objets d'une recherche évolutionnaire à grande échelle : expressions symboliques et politiques programmées peuvent être générées, exécutées et sélectionnées en populations. Son apport à l'infrastructure consiste à relier ces candidats structurés au calcul GPU. Le débit permet davantage d'expériences ; l'évaluation propre à la tâche détermine les programmes utiles.
+Commencez par une petite régression symbolique. Précisez fonctions disponibles, taille maximale des arbres et budget avant d’agrandir la population. [Débuter avec EvoX : votre premier workflow évolutionnaire](/fr/news/evox-quickstart)
 
 ## Ressources
 

@@ -34,7 +34,7 @@ const articleImages = import.meta.glob<ImageMetadata>("../../content/{news,relea
 const firstImage = article.body?.match(/!\[[^\]]*\]\(\.\/([^\s)]+)/)?.[1];
 const imageKey = `../../content/${kind}/${article.id.replace(/\/[^/]+$/, "")}/${firstImage}`.toLowerCase();
 const contentImage = Object.entries(articleImages).find(([key]) => key.toLowerCase() === imageKey)?.[1];
-const articleImage = paperBanner?.src ?? contentImage?.src;
+const articleImage = contentImage?.src ?? paperBanner?.src;
 const breadcrumbs = [
   { name: "EvoX", url: getLocalizedUrl("/", locale) },
   { name: t(tr, `nav.blog.${kind}`), url: getLocalizedUrl(`/${kind}`, locale) },

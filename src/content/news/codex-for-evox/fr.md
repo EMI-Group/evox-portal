@@ -1,11 +1,13 @@
 ---
 title: "Codex × EvoX : développement d’algorithmes et expériences reproductibles"
 pubDate: 2026-08-08
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Les agents de programmation relient l'intention de recherche aux workflows exécutables d'EvoX, de la définition du problème à l'évaluation reproductible."
 ---
 
-Pour l'IA évolutionnaire, une idée de recherche devient exploitable lorsqu'elle entre dans un cycle reproductible d'exécution et d'évaluation. La collaboration Codex–EvoX relie l'intention exprimée en langage naturel à ce cycle : l'agent aide à construire l'expérience, tandis qu'EvoX fournit les interfaces et le calcul nécessaires pour tester les solutions candidates.
+Pour l'IA évolutionnaire, une idée de recherche devient exploitable lorsqu'elle entre dans un cycle reproductible d'exécution et d'évaluation. La collaboration Codex–EvoX relie l'intention exprimée en langage naturel à ce cycle : l'agent aide à construire l'expérience, tandis qu'EvoX fournit les interfaces et le calcul nécessaires pour tester les solutions candidates. [EvoX](https://github.com/EMI-Group/evox)
+
+![Une feuille, une maquette de trajet et des fiches reliées par un fil rouge](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) est un framework distribué et accéléré par GPU pour le calcul évolutionnaire à grande échelle. Grâce à ses interfaces unifiées `Algorithm`, `Problem` et `Workflow`, EvoX réunit la recherche par population, l'évaluation par lots, l'exécution d'expériences et l'accélération matérielle au sein d'une architecture de calcul cohérente. Il prend en charge des applications allant de l'optimisation mono- et multi-objectif à la neuroévolution, aux environnements d'apprentissage par renforcement et à la conception de systèmes complexes.
 
@@ -161,3 +163,5 @@ Commencez par une phrase, et explorez votre propre espace évolutionnaire.
 **Note 2 :** Les démonstrations ont été exécutées avec le modèle GPT-5.5 Terra en utilisant medium intelligence, medium reasoning effort et standard speed.
 
 **Note 3 :** Les résultats expérimentaux s'appliquent uniquement aux tâches, environnements, implémentations, budgets et matériel décrits ici. Ils ne représentent pas des garanties générales de performance ou d'accélération.
+
+Commencez par une tâche, une graine fixe et un budget explicite. Conservez script et résultats ensemble avant de comparer un second algorithme. [Débuter avec EvoX : votre premier workflow évolutionnaire](/fr/news/evox-quickstart)

@@ -1,15 +1,13 @@
 ---
 title: "iStratDE: diversidade populacional como princípio de pesquisa paralela"
 pubDate: 2026-03-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "O iStratDE estuda como estratégias individuais fixas produzem comportamentos diversos, avaliáveis de forma eficiente com o cálculo GPU do EvoX."
 ---
 
-*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+A pesquisa evolutiva caracteriza-se por uma população de possibilidades diferentes. O iStratDE estuda como preservar essa diversidade no comportamento de pesquisa: os indivíduos mantêm estratégias distintas durante toda a execução. No EvoX, isto liga desenho algorítmico e avaliação paralela de candidatos heterogêneos. [iStratDE](https://github.com/EMI-Group/istratde)
 
-![](./istratde-1.png)
-
-A pesquisa evolutiva caracteriza-se por uma população de possibilidades diferentes. O iStratDE estuda como preservar essa diversidade no comportamento de pesquisa: os indivíduos mantêm estratégias distintas durante toda a execução. No EvoX, isto liga desenho algorítmico e avaliação paralela de candidatos heterogêneos.
+![Guias distintas permanecem paralelas em pistas separadas](./persistent-strategy-diversity.webp)
 
 Para preencher essa lacuna, a equipe EvoX investigou como a **diversidade de estratégias no nível individual** molda a dinâmica de busca e o desempenho de otimização da DE, e propôs uma variante minimalista: **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. A ideia central é simples: na inicialização, cada indivíduo recebe sua própria estratégia de mutação e cruzamento, e essa atribuição permanece fixa ao longo de toda a evolução. Ao introduzir diversidade no nível individual — descartando loops complicados de adaptação e retroalimentação — o iStratDE cria uma heterogeneidade comportamental persistente em toda a população.
 
@@ -144,7 +142,7 @@ O iStratDE é um retorno aos fundamentos algorítmicos. Em vez de empilhar lógi
 
 Os resultados mostram que o iStratDE pode competir com — e em alguns cenários superar — as principais variantes adaptativas de DE tanto em benchmarks quanto em tarefas de controle do mundo real. De forma mais ampla, este trabalho destaca um princípio de design importante: **a complexidade não é o único caminho para o desempenho; a heterogeneidade populacional pode ser, por si só, um poderoso motor de evolução.**
 
-Esse paradigma minimalista descentralizado abre uma nova direção para o design de algoritmos evolutivos. Em vez de depender de coordenação centralizada elaborada, demonstra como indivíduos independentes com comportamentos de busca diversos podem coletivamente gerar dinâmicas de otimização inteligentes e escaláveis.
+Registre atribuições iniciais de estratégias e sementes. Compare diversidade individual fixa e estratégia compartilhada com orçamentos iguais. [MetaDE: fazer evoluir as estratégias de pesquisa com a tarefa](/pt-br/news/metade)
 
 ## Recursos
 

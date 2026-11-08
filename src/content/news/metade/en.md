@@ -1,13 +1,13 @@
 ---
 title: "MetaDE: Letting Search Strategies Evolve with the Task"
 pubDate: 2025-02-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "MetaDE adds an outer evolutionary loop around differential evolution, using EvoX's parallel computation to evaluate and improve search configurations."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+Adaptation can operate on the way a system searches as well as on the solutions it finds. MetaDE brings this idea into EvoX through two connected evolutionary levels: one solves the target problem, while the other evaluates which DE configurations make that search effective. [MetaDE](https://github.com/EMI-Group/metade)
 
-Adaptation can operate on the way a system searches as well as on the solutions it finds. MetaDE brings this idea into EvoX through two connected evolutionary levels: one solves the target problem, while the other evaluates which DE configurations make that search effective.
+![An outer settings ring surrounds an inner candidate population](./nested-evolution-search.webp)
 
 ## Background
 
@@ -124,7 +124,7 @@ As shown in the figure, MetaDE demonstrates strong performance in Brax-based rob
 
 ## Conclusion and Future Directions
 
-MetaDE gives evolutionary AI a concrete mechanism for adapting its search process through feedback. Its contribution to EvoX is a reusable relationship between task optimization and configuration search, supported by batched evaluation. Extending that relationship to new applications requires defining meaningful feedback and accounting for the cost of both levels.
+Account for both levels of search: record outer configuration trials and inner objective evaluations. Compare methods using the total budget, alongside wall-clock time. [iStratDE: Population Diversity as a Principle for Parallel Search](/news/istratde)
 
 ## Resources
 

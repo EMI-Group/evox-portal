@@ -1,15 +1,15 @@
 ---
 title: "EvoX Genesis : construire des logiciels qui continuent d'évoluer"
 pubDate: 2026-08-17
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Genesis étend l'IA évolutionnaire d'EvoX au logiciel : les agents proposent des changements, la validation sélectionne le travail accepté et le projet conserve les progrès."
 ---
 
-*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
+Genesis applique la vision d'EvoX à Agentic AI en faisant du projet logiciel évolutif le résultat durable de nombreuses contributions locales. Génération de code, exécution, revue et intégration forment un cycle de développement. Les implémentations acceptées et leurs validations constituent la matière à partir de laquelle le travail suivant peut se poursuivre. [Genesis](https://github.com/EMI-Group/genesis)
+
+![Une tour logicielle traversée par un escalier rouge continu](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
-
-Genesis applique la vision d'EvoX à Agentic AI en faisant du projet logiciel évolutif le résultat durable de nombreuses contributions locales. Génération de code, exécution, revue et intégration forment un cycle de développement. Les implémentations acceptées et leurs validations constituent la matière à partir de laquelle le travail suivant peut se poursuivre.
 
 L'équipe EvoX du Département de Science des Données et Intelligence Artificielle de la Hong Kong Polytechnic University a publié **EvoX Genesis**, un système d'IA récursif pour l'évolution autonome des logiciels sur le long terme.
 
@@ -166,3 +166,5 @@ Références :
 OpenAI, *Run long horizon tasks with Codex* (2026).
 
 Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
+
+Reprenez depuis une révision acceptée avec ses commandes de compilation et ses tests de régression. Examinez la contribution suivante par rapport à cette référence avant intégration. [Genesis : conserver les contributions des agents dans l'histoire du logiciel](/fr/news/genesis-development-history)

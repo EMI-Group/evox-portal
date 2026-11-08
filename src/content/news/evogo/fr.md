@@ -1,15 +1,13 @@
 ---
 title: "EvoGO : apprendre à chercher à partir des évaluations"
 pubDate: 2026-04-05
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGO associe apprentissage génératif et optimisation évolutionnaire, transformant les candidats évalués en expérience pour proposer la population suivante."
 ---
 
-*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
+La recherche scientifique et technique doit sans cesse décider quelle expérience mener ensuite. EvoGO étudie une version informatique de cette question : les évaluations peuvent-elles apprendre à un générateur à améliorer ses propositions ? Cette approche inscrit la démarche d'IA évolutionnaire d'EvoX dans un processus de recherche qui apprend des candidats déjà testés. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![image1](./image1.png)
-
-La recherche scientifique et technique doit sans cesse décider quelle expérience mener ensuite. EvoGO étudie une version informatique de cette question : les évaluations peuvent-elles apprendre à un générateur à améliorer ses propositions ? Cette approche inscrit la démarche d'IA évolutionnaire d'EvoX dans un processus de recherche qui apprend des candidats déjà testés.
+![Des gabarits directionnels resserrent un trajet rouge](./learning-search-directions.webp)
 
 ## La Situation : L'Optimisation Pilotée par les Données N'a Toujours Pas Franchi l'Étape Finale
 
@@ -73,7 +71,7 @@ La recherche générative peut être explorée en conception technique, mais les
 
 ## Conclusion et Perspectives
 
-EvoGO apporte aux systèmes d'IA évolutionnaire un mécanisme de proposition capable d'apprendre. Son lien avec AI for Science tient à la possibilité d'utiliser les évaluations coûteuses pour orienter les recherches suivantes, parallèlement à la génération de candidats. Une application scientifique exige des contraintes, évaluations et validations propres au domaine ; les benchmarks constituent le point de départ.
+Conservez un benchmark et son historique d’évaluations. Comparez les propositions apprises à une référence à budget égal, en enregistrant séparément le temps d’entraînement. [EvoGM : fusion de grands modèles autonome via l'évolution de population, sans réentraînement](/fr/news/evogm)
 
 ## Ressources
 

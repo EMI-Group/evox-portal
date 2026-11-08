@@ -1,15 +1,13 @@
 ---
 title: "EvoGO: imparare a cercare dal feedback delle valutazioni"
 pubDate: 2026-04-05
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoGO unisce apprendimento generativo e ottimizzazione evolutiva, trasformando i candidati valutati in esperienza per proporre la popolazione successiva."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+La ricerca scientifica e ingegneristica deve decidere ripetutamente quale esperimento eseguire dopo. EvoGO ne studia una versione computazionale: le valutazioni possono insegnare a un generatore a migliorare le proposte? Questo collega l'IA evolutiva di EvoX a un processo di ricerca che impara dai candidati già verificati. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![image1](./image1.png)
-
-La ricerca scientifica e ingegneristica deve decidere ripetutamente quale esperimento eseguire dopo. EvoGO ne studia una versione computazionale: le valutazioni possono insegnare a un generatore a migliorare le proposte? Questo collega l'IA evolutiva di EvoX a un processo di ricerca che impara dai candidati già verificati.
+![Sagome direzionali concentrano un percorso rosso](./learning-search-directions.webp)
 
 ## L'Ostacolo: L'Ottimizzazione Guidata dai Dati Non Ha Ancora Compiuto il Passo Finale
 
@@ -73,7 +71,7 @@ La ricerca generativa può essere esplorata nella progettazione, ma i benchmark 
 
 ## Conclusione e Prospettive
 
-EvoGO offre ai sistemi di IA evolutiva un meccanismo di proposta capace di apprendere. Il legame con AI for Science consiste nell'usare valutazioni costose per orientare la ricerca futura, insieme alla generazione parallela di candidati. Le applicazioni scientifiche richiedono vincoli, valutazioni e validazioni di dominio; i benchmark ne sono il punto di partenza.
+Conservi un benchmark e la cronologia delle valutazioni. Confronti proposte apprese e riferimento con lo stesso budget, registrando separatamente il tempo di addestramento. [EvoGM: fusione autonoma di grandi modelli tramite evoluzione di popolazione, senza ri-addestramento](/it/news/evogm)
 
 ## Risorse
 

@@ -1,15 +1,13 @@
 ---
 title: "EvoGO: aprender a pesquisar através do feedback das avaliações"
 pubDate: 2026-04-05
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "O EvoGO liga aprendizagem generativa e otimização evolutiva, transformando candidatos avaliados em experiência para propor a próxima população."
 ---
 
-*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
+A pesquisa científica e de engenharia precisa de decidir repetidamente qual experimento realizar a seguir. O EvoGO estuda uma versão computacional desta questão: podem as avaliações ensinar um gerador a melhorar as propostas? Isto liga a IA evolutiva do EvoX a uma pesquisa que aprende com os candidatos já testados. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![image1](./image1.png)
-
-A pesquisa científica e de engenharia precisa de decidir repetidamente qual experimento realizar a seguir. O EvoGO estuda uma versão computacional desta questão: podem as avaliações ensinar um gerador a melhorar as propostas? Isto liga a IA evolutiva do EvoX a uma pesquisa que aprende com os candidatos já testados.
+![Moldes direcionais concentram um caminho vermelho](./learning-search-directions.webp)
 
 ## O Dilema: A Otimização Orientada a Dados Ainda Não Deu o Último Passo
 
@@ -73,7 +71,7 @@ A pesquisa generativa pode ser explorada no projeto de engenharia, mas os benchm
 
 ## Conclusão e Perspectivas
 
-O EvoGO fornece aos sistemas de IA evolutiva um mecanismo de proposta capaz de aprender. A ligação a AI for Science está em usar avaliações dispendiosas para orientar pesquisas futuras, juntamente com a geração paralela de candidatos. Aplicações científicas exigem restrições, avaliações e validação específicas do domínio; os benchmarks são o ponto de partida.
+Guarde um benchmark e o histórico de avaliações. Compare propostas aprendidas e referência com o mesmo orçamento, registrando o tempo de treinamento separadamente. [EvoGM: fusão autônoma de modelos de grande escala por meio de evolução populacional sem retreinamento](/pt-br/news/evogm)
 
 ## Recursos
 

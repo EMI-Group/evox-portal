@@ -1,13 +1,13 @@
 ---
 title: "MetaDE: far evolvere le strategie di ricerca con il compito"
 pubDate: 2025-02-15
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "MetaDE aggiunge un ciclo evolutivo esterno all'evoluzione differenziale, sfruttando il calcolo parallelo di EvoX per valutare e migliorare le configurazioni."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+L'adattamento può riguardare il modo di cercare oltre alle soluzioni trovate. MetaDE porta questa idea in EvoX con due livelli evolutivi connessi: uno risolve il problema target, l'altro valuta quali configurazioni DE rendano efficace la ricerca. [MetaDE](https://github.com/EMI-Group/metade)
 
-L'adattamento può riguardare il modo di cercare oltre alle soluzioni trovate. MetaDE porta questa idea in EvoX con due livelli evolutivi connessi: uno risolve il problema target, l'altro valuta quali configurazioni DE rendano efficace la ricerca.
+![Un anello esterno di impostazioni circonda la popolazione interna](./nested-evolution-search.webp)
 
 ## Contesto
 
@@ -141,7 +141,7 @@ Come mostrato nella figura, MetaDE dimostra prestazioni elevate nei compiti di c
 
 ## Conclusioni e direzioni future
 
-MetaDE offre all'IA evolutiva un meccanismo concreto per adattare la ricerca attraverso il feedback. Il contributo a EvoX è una relazione riutilizzabile tra ottimizzazione del compito e ricerca delle configurazioni, sostenuta dalla valutazione in batch. Nuove applicazioni richiedono feedback significativo e attenzione al costo di entrambi i livelli.
+Conteggi tentativi di configurazione esterni e valutazioni interne. Confronti i metodi usando budget totale e tempo effettivo. [iStratDE: la diversità della popolazione come principio di ricerca parallela](/it/news/istratde)
 
 ## Risorse
 
