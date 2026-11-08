@@ -1,13 +1,13 @@
 ---
 title: "EvoRL: Evolutionäre Suche und Reinforcement Learning gemeinsam auf GPUs"
 pubDate: 2025-01-14
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoRL verbindet Populationssuche, Reinforcement Learning und parallele Simulation als experimentelle Grundlage evolutionärer Ansätze für Physical AI."
 ---
 
-*Aktualisiert am 7. November 2026. Dieser erweiterte Artikel beschreibt die aktuelle Projektimplementierung.*
-
 Physical AI muss unterschiedliche Verhaltensweisen erkunden, durch Interaktion prüfen und nützliche Erfahrungen weiterverwenden. EvoRL bringt diesen Zyklus in parallele Simulationen: Einzelne Strategien lernen aus Erfahrung, während die Populationssuche Alternativen und Lernkonfigurationen untersucht. So wird das Verhältnis zwischen Lernen und Evolution experimentell zugänglich.
+
+![Mechanische Beinmodelle erkunden unterschiedliche Wege in einer Simulationsschleife](./population-learning-loop.webp)
 
 EvoRL ist ein Open-Source-Forschungsframework für diese Fragen. Auf Basis von JAX verbindet es Reinforcement Learning, evolutionäre Berechnung und Simulation in einem gemeinsamen Trainingsworkflow zur Entwicklung und Bewertung klassischer und hybrider Methoden. Als Schwesterprojekt von EvoX konzentriert sich EvoRL auf ihre Kombination, damit populationsbasierte Suche die Rechenleistung moderner GPUs nutzen kann. [Projektvorstellung](https://github.com/EMI-Group/evorl)
 
@@ -84,6 +84,8 @@ Für evolutionäres Reinforcement Learning können Sie vorhandene Algorithmen al
 
 ## Ihr erstes Experiment starten
 
+Die aktuelle Installation erfordert Python 3.12 oder neuer und JAX/jaxlib 0.10.0 oder neuer. [EvoRL](https://github.com/EMI-Group/evorl#installation)
+
 Richten Sie zunächst JAX gemäß der [Installationsanleitung](https://evorl.readthedocs.io/latest/guide/installation.html) für Ihre Hardware ein. Installieren Sie EvoRL anschließend aus dem Quellcode, um die Trainingsskripte und Konfigurationen des Beispiels zu erhalten:
 
 ```bash
@@ -100,4 +102,4 @@ python scripts/train.py agent=ppo env=brax/ant
 
 EvoRL verwaltet Experimentkonfigurationen mit Hydra. Sobald die Baseline läuft, können Sie Zufallsseeds, Algorithmuskonfigurationen und Umgebungseinstellungen variieren und anschließend hybride Verfahren oder Populationstraining untersuchen. Details finden Sie im [Schnellstart](https://evorl.readthedocs.io/latest/guide/quickstart.html).
 
-EvoRL soll die Verbindung von Evolution und Lernen praktisch zugänglicher machen: Fragen formulieren, Methoden kombinieren, Experimente durchführen und Ideen anhand der Ergebnisse prüfen – in einem Framework. Im [GitHub-Repository](https://github.com/EMI-Group/evorl) können Sie Algorithmen ausprobieren, Implementierungen beitragen oder Ihre Forschung und Erfahrungen in [Discussions](https://github.com/EMI-Group/evorl/discussions) teilen.
+Bewahren Sie den ersten PPO-Lauf als Basis auf: Speichern Sie Umgebung, Seed, Konfiguration und Lernkurve vor jeder Komponentenänderung. Einen einfacheren Einstieg in die Populationssuche bietet das [EvoX-Tutorial](/de/news/evox-quickstart).

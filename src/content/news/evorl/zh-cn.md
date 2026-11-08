@@ -1,13 +1,13 @@
 ---
 title: "EvoRL：让演化搜索与强化学习在 GPU 上协同运行"
 pubDate: 2025-01-14
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoRL 连接种群搜索、强化学习与并行仿真，为面向 Physical AI 的演化方法提供实验基础。"
 ---
 
-*更新于 2026 年 11 月 7 日。本文根据当前项目实现扩写。*
-
 Physical AI 需要探索不同的行为，通过交互检验它们，并将有价值的经验带入下一轮学习。EvoRL 将这个循环放入并行仿真：个体策略从经验中学习，种群搜索探索不同策略与学习配置，使学习和演化之间的关系成为能够系统研究的实验问题。
+
+![机械腿模型围绕共享仿真循环探索不同路径](./population-learning-loop.webp)
 
 EvoRL 围绕这些问题构建了一套开源研究框架。它基于 JAX，将强化学习、演化计算与环境仿真接入统一的训练流程，支持从经典算法到混合方法的开发与评估。作为 EvoX 的姊妹项目，EvoRL 聚焦于演化计算与强化学习的结合，让种群层面的搜索能够充分利用现代 GPU 的并行计算能力。[项目介绍](https://github.com/EMI-Group/evorl)
 
@@ -84,6 +84,8 @@ EvoRL 支持 Brax 和 MuJoCo Playground 等机器人仿真环境，适合开展�
 
 ## 开始第一个实验
 
+当前安装要求为 Python 3.12 或更新版本，以及 JAX/jaxlib 0.10.0 或更新版本。 [EvoRL](https://github.com/EMI-Group/evorl#installation)
+
 建议先按[安装指南](https://evorl.readthedocs.io/latest/guide/installation.html)配置与硬件匹配的 JAX 环境，再从源码安装 EvoRL，以获得示例所需的训练脚本和配置：
 
 ```bash
@@ -100,4 +102,4 @@ python scripts/train.py agent=ppo env=brax/ant
 
 EvoRL 使用 Hydra 管理实验配置。跑通基线后，可以进一步修改随机种子、算法配置和环境设置，再开展混合算法或种群训练实验。完整用法见[快速入门](https://evorl.readthedocs.io/latest/guide/quickstart.html)。
 
-EvoRL 希望让演化与学习的结合成为更容易实践的研究方向：在一个统一框架中提出问题、组合方法、运行实验，再用结果检验想法。欢迎访问 [GitHub 仓库](https://github.com/EMI-Group/evorl)，尝试现有算法、贡献新的实现，或在 [Discussions](https://github.com/EMI-Group/evorl/discussions) 中交流研究与使用经验。
+将第一次 PPO 运行保留为基线：修改组件前，保存环境、随机种子、配置和学习曲线。如果希望先从更简单的种群搜索入手，可以阅读 [EvoX 工作流教程](/zh-cn/news/evox-quickstart)。

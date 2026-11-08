@@ -1,17 +1,17 @@
 ---
 title: "EvoMO: esplorare compromessi multiobiettivo su larga scala"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO integra la ricerca multiobiettivo tensorizzata in EvoX per esplorare obiettivi concorrenti con grandi popolazioni candidate."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
+I sistemi di IA e ingegneria perseguono spesso più obiettivi: precisione, risorse, stabilità o altre esigenze. L'infrastruttura evolutiva di EvoX deve permettere di esplorare questi compromessi. EvoMO riorganizza per le GPU i confronti e la selezione costosi tra individui, rendendo praticabili esperimenti multiobiettivo più ampi. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![Una griglia di candidati si distribuisce su terrazze di compromessi diversi](./tensorized-tradeoff-population.webp)
 
 ## Collegare l'ottimizzazione multi-obiettivo evolutiva e l'accelerazione GPU tramite tensorizzazione
 
 Zhenyu Liang,Hao Li,Naiwei Yu, Kebin Sun, and Ran Cheng, Senior Member, IEEE
-
-I sistemi di IA e ingegneria perseguono spesso più obiettivi: precisione, risorse, stabilità o altre esigenze. L'infrastruttura evolutiva di EvoX deve permettere di esplorare questi compromessi. EvoMO riorganizza per le GPU i confronti e la selezione costosi tra individui, rendendo praticabili esperimenti multiobiettivo più ampi.
 
 Per affrontare questa limitazione, il team EvoX ha proposto di parallelizzare gli algoritmi EMO su GPU tramite la metodologia di tensorizzazione. Sfruttando questo metodo, hanno progettato è implementato con successo diversi algoritmi EMO accelerati da GPU. Inoltre, il team ha sviluppato **"MoRobtrol"**, una **suite di benchmark per il controllo robotico multi-obiettivo** costruita sul motore fisico Brax, volta a valutare sistematicamente le prestazioni degli algoritmi EMO accelerati da GPU.
 
@@ -114,3 +114,5 @@ EvoMO permette di preservare e confrontare alternative utili quando gli obiettiv
 - [Articolo scientifico](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+Inizi con un compito e un budget di valutazioni fissi. Registri separatamente qualità delle soluzioni e tempo di esecuzione, poi vari la popolazione mantenendo il protocollo. Il [tutorial EvoX](/it/news/evox-quickstart) offre un punto di partenza più semplice.

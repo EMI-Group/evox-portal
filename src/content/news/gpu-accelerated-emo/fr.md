@@ -1,17 +1,17 @@
 ---
 title: "EvoMO : explorer les compromis multiobjectifs à grande échelle"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO intègre la recherche multiobjectif tensorisée à EvoX pour explorer des objectifs concurrents sur de grandes populations candidates."
 ---
 
-*Mis à jour le 7 novembre 2026. Les résultats historiques conservent leur date de référence.*
+Les systèmes d'IA et d'ingénierie poursuivent souvent plusieurs objectifs : précision, ressources, stabilité ou autres exigences. L'infrastructure évolutionnaire d'EvoX doit permettre d'explorer ces compromis. EvoMO en traite l'aspect informatique en réorganisant pour les GPU les comparaisons et sélections coûteuses entre individus, rendant possibles de plus grandes expériences multiobjectifs. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![Une grille de candidats se déploie sur des terrasses de compromis](./tensorized-tradeoff-population.webp)
 
 ## Faire le pont entre l'optimisation multiobjectif évolutionnaire et l'accélération GPU via la tensorisation
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun et Ran Cheng, Senior Member, IEEE
-
-Les systèmes d'IA et d'ingénierie poursuivent souvent plusieurs objectifs : précision, ressources, stabilité ou autres exigences. L'infrastructure évolutionnaire d'EvoX doit permettre d'explorer ces compromis. EvoMO en traite l'aspect informatique en réorganisant pour les GPU les comparaisons et sélections coûteuses entre individus, rendant possibles de plus grandes expériences multiobjectifs.
 
 Pour remédier à cette limitation, l'équipe EvoX a proposé de paralléliser les algorithmes EMO sur GPU via la méthodologie de tensorisation. En tirant parti de cette méthode, ils ont conçu et implémenté avec succès plusieurs algorithmes EMO accélérés par GPU. De plus, l'équipe a développé **"MoRobtrol"**, une **suite de benchmarks pour le contrôle robotique multiobjectif** construite sur le moteur physique Brax, visant à évaluer systématiquement les performances des algorithmes EMO accélérés par GPU.
 
@@ -114,3 +114,5 @@ EvoMO permet de préserver et comparer des alternatives utiles lorsque les objec
 - [Article scientifique](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+Commencez par une tâche et un budget d’évaluations fixes. Consignez séparément qualité des solutions et temps d’exécution, puis faites varier la population sans changer le protocole. Le [tutoriel EvoX](/fr/news/evox-quickstart) fournit un point de départ plus simple.

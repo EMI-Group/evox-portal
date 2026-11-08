@@ -9,7 +9,7 @@
     "locales": 13,
     "pages": 494,
     "updatedPages": 338,
-    "articleImages": 325,
+    "articleImages": 338,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -636,7 +636,7 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": "2026-11-07",
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
@@ -1131,7 +1131,7 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": "2026-11-07",
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",
@@ -2319,7 +2319,7 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": "2026-11-07",
+      "updatedDate": "2026-11-08",
       "pages": [
         {
           "locale": "en",

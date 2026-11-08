@@ -1,17 +1,17 @@
 ---
 title: "EvoMO: Zielkonflikte in großem Maßstab untersuchen"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO bringt tensorisierte Mehrzielsuche in EvoX, um konkurrierende Ziele über große Kandidatenpopulationen zu untersuchen."
 ---
 
-*Aktualisiert am 7. November 2026. Historische Ergebnisse behalten ihren ursprünglichen Bezugszeitpunkt.*
+KI- und technische Systeme verfolgen häufig mehrere Ziele: Genauigkeit, Ressourcenverbrauch, Stabilität oder weitere Anforderungen. EvoXs evolutionäre Infrastruktur muss die Untersuchung dieser Zielkonflikte ermöglichen. EvoMO organisiert aufwendige Populationsvergleiche und Auswahl für GPUs neu und macht damit größere Mehrzielexperimente praktikabel. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![Ein Kandidatenraster verteilt sich auf Terrassen unterschiedlicher Zielkonflikte](./tensorized-tradeoff-population.webp)
 
 ## Verbindung von evolutionärer mehrkriterieller Optimierung und GPU-Beschleunigung durch Tensorisierung
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun und Ran Cheng, Senior Member, IEEE
-
-KI- und technische Systeme verfolgen häufig mehrere Ziele: Genauigkeit, Ressourcenverbrauch, Stabilität oder weitere Anforderungen. EvoXs evolutionäre Infrastruktur muss die Untersuchung dieser Zielkonflikte ermöglichen. EvoMO organisiert aufwendige Populationsvergleiche und Auswahl für GPUs neu und macht damit größere Mehrzielexperimente praktikabel.
 
 Um diese Einschränkung zu beheben, schlug das EvoX-Team vor, EMO-Algorithmen mittels der Tensorisierungsmethodik auf GPUs zu parallelisieren. Unter Nutzung dieser Methode haben sie erfolgreich mehrere GPU-beschleunigte EMO-Algorithmen entworfen und implementiert. Darüber hinaus entwickelte das Team **"MoRobtrol"**, eine **Benchmark-Suite für mehrkriterielle Robotersteuerung**, die auf der Brax-Physik-Engine aufbaut und darauf abzielt, die Leistung von GPU-beschleunigten EMO-Algorithmen systematisch zu bewerten.
 
@@ -114,3 +114,5 @@ EvoMO ermöglicht, bei konkurrierenden Zielen nützliche Alternativen zu bewahre
 - [Forschungsarbeit](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+Beginnen Sie mit einer Aufgabe und festem Bewertungsbudget. Erfassen Sie Lösungsqualität und Laufzeit getrennt und variieren Sie dann die Populationsgröße bei gleichem Protokoll. Das [EvoX-Tutorial](/de/news/evox-quickstart) bietet dafür einen kleineren Einstieg.

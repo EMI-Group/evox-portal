@@ -1,15 +1,13 @@
 ---
 title: "Primeiros passos com o EvoX: o seu primeiro fluxo evolutivo"
 pubDate: 2025-04-30
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Crie um experimento completo com EvoX 1.4.1 e compreenda como problemas, populações, avaliação e execução formam um fluxo reutilizável."
 ---
 
-*Atualizado em 7 de novembro de 2026. Os resultados históricos mantêm a data de referência.*
-
-Um fluxo evolutivo liga um objetivo a candidatos, avaliações e melhorias sucessivas. Este tutorial apresenta a infraestrutura através de um pequeno experimento executável, para que os mesmos limites entre componentes possam depois apoiar diferentes problemas, algoritmos e orçamentos de avaliação.
-
 Este tutorial minimiza Ackley em duas dimensões com PSO, verifica o dispositivo e apresenta o histórico. Destina-se ao **EvoX 1.4.1 com PyTorch**, não à API experimental 2.x. A tarefa pequena ensina o fluxo; não é um benchmark GPU.
+
+![Esferas candidatas em um relevo de busca conectado a molduras de workflow](./first-search-workflow.webp)
 
 ## Preparar um ambiente isolado
 
@@ -96,3 +94,5 @@ O tutorial original foi escrito por Boqing Xu, Xinmeng Yu, Bowen Zheng e Xinyao 
 ![EvoX overview](./quickstart-8.png)
 
 Consulte o [código da versão](https://github.com/EMI-Group/evox/tree/v1.4.1) e a [documentação](https://evox.readthedocs.io/en/latest/). Verifique a versão antes de copiar uma API de material mais recente.
+
+Antes de ampliar o exemplo, salve juntos versões dos pacotes, dispositivo, semente e melhor aptidão. Altere uma configuração e repita o mesmo orçamento. A [explicação do EvoMO](/pt-br/news/gpu-accelerated-emo) apresenta as decisões adicionais para objetivos concorrentes.

@@ -1,17 +1,17 @@
 ---
 title: "EvoMO: Making Multiobjective Trade-offs Computable at Scale"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO brings tensorized multiobjective search into EvoX, helping experiments explore competing objectives across large candidate populations."
 ---
 
-*Updated November 7, 2026. Historical results retain their original snapshot dates.*
+AI and engineering systems often have several objectives: accuracy, resource use, stability or other task-specific requirements. EvoX's evolutionary infrastructure must support exploring these trade-offs. EvoMO addresses the computational side by reorganizing costly population comparisons and selection for GPUs, making larger multiobjective experiments practical. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![An array of candidates fans out into distinct trade-off terraces](./tensorized-tradeoff-population.webp)
 
 ## Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization
 
 Zhenyu Liang,Hao Li,Naiwei Yu, Kebin Sun, and Ran Cheng, Senior Member, IEEE
-
-AI and engineering systems often have several objectives: accuracy, resource use, stability or other task-specific requirements. EvoX's evolutionary infrastructure must support exploring these trade-offs. EvoMO addresses the computational side by reorganizing costly population comparisons and selection for GPUs, making larger multiobjective experiments practical.
 
 To address this limitation, the EvoX team proposed to parallelize EMO algorithms on GPUs via the tensorization methodology. Leveraging this method, they have successfully designed and implemented several GPU-accelerated EMO algorithms. Furthermore, the team developed **"MoRobtrol"**, a **benchmark suite for multiobjective robot control** built on the Brax physics engine, aimed at systematically evaluating the performance of GPU-accelerated EMO algorithms.
 
@@ -114,3 +114,5 @@ EvoMO contributes the ability to preserve and compare useful alternatives when o
 - [Research paper](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+Start a comparison with one task and a fixed evaluation budget. Record solution quality and execution time separately, then vary population size while keeping the protocol unchanged. The [EvoX workflow tutorial](/news/evox-quickstart) provides a smaller starting point for organizing that experiment.

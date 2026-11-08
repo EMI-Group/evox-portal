@@ -1,13 +1,13 @@
 ---
 title: "EvoRL：GPU 上で進化的探索と強化学習を連携させる"
 pubDate: 2025-01-14
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoRL は集団探索、強化学習、並列シミュレーションを結び、Physical AI に向けた進化的手法の実験基盤を提供します。"
 ---
 
-*2026年11月7日更新。現在のプロジェクトの実装に基づき、記事を拡充しました。*
-
 Physical AI では異なる行動を探り、相互作用を通じて試し、有用な経験を次の学習へ引き継ぐ必要があります。EvoRL はこれを並列シミュレーションに取り込みます。個々の方策は経験から学び、集団探索は別の方策や学習設定を調べるため、学習と進化の関係を実験的に研究できます。
+
+![共有シミュレーションの循環で異なる経路を探索する機械脚の模型](./population-learning-loop.webp)
 
 EvoRL は、これらの問いに取り組むオープンソースの研究フレームワークです。JAX を基盤に、強化学習、進化計算、環境シミュレーションを共通の学習ワークフローに統合し、従来手法からハイブリッド手法までの開発と評価を支援します。EvoX の姉妹プロジェクトとして進化計算と強化学習の融合に焦点を当て、集団レベルの探索で GPU の並列計算能力を活用します。[プロジェクト紹介](https://github.com/EMI-Group/evorl)
 
@@ -84,6 +84,8 @@ EvoRL は Brax や MuJoCo Playground などのロボットシミュレーショ�
 
 ## 最初の実験を実行する
 
+現在のインストール要件は Python 3.12 以降と JAX/jaxlib 0.10.0 以降です。 [EvoRL](https://github.com/EMI-Group/evorl#installation)
+
 まず[インストールガイド](https://evorl.readthedocs.io/latest/guide/installation.html)に従い、ハードウェアに合う JAX 環境を設定してください。続いて EvoRL をソースからインストールし、例で使う学習スクリプトと設定を取得します。
 
 ```bash
@@ -100,4 +102,4 @@ python scripts/train.py agent=ppo env=brax/ant
 
 EvoRL は Hydra で実験設定を管理します。ベースラインが動作したら、乱数シード、アルゴリズム設定、環境設定を変え、ハイブリッド手法や集団学習へ進めます。詳しくは[クイックスタート](https://evorl.readthedocs.io/latest/guide/quickstart.html)を参照してください。
 
-EvoRL は進化と学習の組合せを実践しやすくすることを目指しています。共通の枠組みで問いを立て、手法を組み合わせ、実験を行い、結果から着想を検証できます。[GitHub リポジトリ](https://github.com/EMI-Group/evorl)で既存手法を試し、新たな実装を提供したり、[Discussions](https://github.com/EMI-Group/evorl/discussions)で研究や利用経験を共有したりしてください。
+最初の PPO 実行を基準として残し、部品を変更する前に環境、シード、設定、学習曲線を保存します。より単純な集団探索から始めるには、[EvoX ワークフローチュートリアル](/ja/news/evox-quickstart)をご覧ください。

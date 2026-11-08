@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-08",
+  "batch": 5,
+  "base": "db3f450e3306b115ad667ee6249370b8515bdcf0",
+  "selection": [
+    "evorl",
+    "evox-quickstart",
+    "gpu-accelerated-emo"
+  ],
+  "rationale": "EvoRL was the last text-only news. Quickstart's lead asset was an old convergence result; EvoMO's was a technical table. Add dedicated editorial art while retaining source results, scripts, credits, dates and figures. Tighten quickstart lead; add actionable experiment protocols and localized related reads.",
+  "sources": [
+    {
+      "url": "https://github.com/EMI-Group/evorl/blob/main/README.md",
+      "verified": "Read installation, algorithms, source training command, environments and performance setup; newly include Python >=3.12 and JAX/jaxlib >=0.10.0 requirements."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evox/blob/v1.4.1/src/evox/workflows/std_workflow.py",
+      "verified": "Read versioned workflow interfaces; tutorial code retained."
+    },
+    {
+      "url": "https://github.com/EMI-Group/evomo/blob/main/README.md",
+      "verified": "Read tensorized population algorithms, benchmark, and workflow example."
+    },
+    {
+      "url": "https://arxiv.org/html/2501.15129v1#S5",
+      "verified": "Primary architecture and experiment source; original historical figures retained."
+    },
+    {
+      "url": "https://arxiv.org/html/2503.20286v1#S3",
+      "verified": "Primary tensorization source; original technical figures and numeric claims retained."
+    }
+  ],
+  "datePolicy": "Preserve pubDate and historical snapshots; substantive updatedDate 2026-11-08 in all 13 locales.",
+  "art": [
+    {
+      "prompt": "Premium editorial illustration for EvoRL, evolutionary search and reinforcement learning sharing a GPU simulation workflow. Landscape 16:9 at least 1600 pixels wide. A tabletop research landscape made of warm ivory sculpted terrain with five miniature articulated abstract mechanical leg models following different shallow paths. One central red track forms a subtle feedback loop connecting their paths around a charcoal circular platform. Focus on a population exploring different motion strategies and sharing a computational experiment, not a humanoid robot. Refined tactile plaster, anodized charcoal metal and restrained brand red; bright soft studio lighting, precise miniature craftsmanship, generous negative space, rich depth. No text, letters, logos, diagrams with data, fake UI, glowing chips or claimed results. Conceptual art, not experiment evidence.",
+      "tool": "built-in image_gen",
+      "nature": "Concept editorial illustration, not experiment evidence or exact function plot",
+      "path": "src/content/news/evorl/population-learning-loop.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 151976
+    },
+    {
+      "prompt": "Premium editorial still-life illustration for an EvoX beginner tutorial on a complete optimization workflow. Landscape 16:9 at least 1600 pixels wide. A shallow ivory topographic bowl with many smooth concentric contour ridges, a small set of charcoal candidate beads distributed along the surface and one red bead near its low centre. A fine red thread passes through three elegant small open ivory frames arranged to the side, connecting the sculptural search landscape with a neat graphite notebook. The mood is approachable precision and a first reproducible experiment. Warm white studio, natural shadows, tactile plaster and paper, crisp sophisticated magazine photography. No text, no numbers, no axes, no logos, no screens. This is a conceptual optimization landscape, not an exact Ackley graph or a measured convergence plot.",
+      "tool": "built-in image_gen",
+      "nature": "Concept editorial illustration, not experiment evidence or exact function plot",
+      "path": "src/content/news/evox-quickstart/first-search-workflow.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 260642
+    },
+    {
+      "prompt": "Premium editorial conceptual illustration for EvoMO, GPU tensorization of multiobjective evolutionary optimization. Landscape 16:9 at least 1600 pixels wide. Many tiny charcoal and ivory cylindrical candidates form a broad orderly rectangular array on a warm white architectural table. Toward the foreground they fan out onto three subtly diverging stepped terraces; a carefully spaced arc of red candidates remains along the boundary between terraces, suggesting different valuable trade-offs. A single low camera angle emphasizes both batch structure and alternatives. Museum quality precision sculpture, tactile matte materials, soft directional daylight, warm ivory charcoal and brand red palette. No words, numbers, chart axes, logos, robots, glowing chips or performance claims. Concept illustration, not a numerical Pareto-front chart.",
+      "tool": "built-in image_gen",
+      "nature": "Concept editorial illustration, not experiment evidence or exact function plot",
+      "path": "src/content/news/gpu-accelerated-emo/tensorized-tradeoff-population.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 180416
+    }
+  ],
+  "remainingAudit": {
+    "textOnlyAfterBatch": [],
+    "otherStoriesToReviewForCoverSuitability": [
+      "codex-for-evox",
+      "evox-genesis",
+      "evogm",
+      "evogp",
+      "evogo",
+      "iStratDE",
+      "metade"
+    ],
+    "note": "These have article-specific screenshots or research figures already; not treated as fully revised in this batch. Existing designed covers for autopso and evococo retained."
+  }
+}

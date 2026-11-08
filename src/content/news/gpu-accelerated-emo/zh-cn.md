@@ -1,17 +1,17 @@
 ---
 title: "EvoMO：让多目标权衡进入大规模计算"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO 将张量化多目标搜索接入 EvoX，让实验能够在大规模候选种群中探索相互竞争的目标。"
 ---
 
-*更新于 2026 年 11 月 7 日。历史结果保留其原始记录日期。*
+AI 与工程系统往往同时面对精度、资源消耗、稳定性等多个目标。EvoX 的演化基础设施需要支持对这些权衡的探索。EvoMO 从计算层面解决这一问题：面向 GPU 重组开销较大的种群比较与选择，使更大规模的多目标实验变得可行。 [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![候选阵列展开为体现不同取舍的阶梯平台](./tensorized-tradeoff-population.webp)
 
 ## 通过张量化连接演化多目标优化与 GPU 加速
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, 和 Ran Cheng, IEEE 高级会员
-
-AI 与工程系统往往同时面对精度、资源消耗、稳定性等多个目标。EvoX 的演化基础设施需要支持对这些权衡的探索。EvoMO 从计算层面解决这一问题：面向 GPU 重组开销较大的种群比较与选择，使更大规模的多目标实验变得可行。
 
 为了解决这一局限性，EvoX 团队提出通过张量化方法在 GPU 上并行化 EMO 算法。利用这种方法，他们成功设计并实现了多种 GPU 加速的 EMO 算法。此外，团队还开发了 **"MoRobtrol"**，这是一个基于 Brax 物理引擎构建的**多目标机器人控制基准测试套件**，旨在系统地评估 GPU 加速 EMO 算法的性能。
 
@@ -114,3 +114,5 @@ EvoMO 提供了在目标相互竞争时保留、比较有价值方案的能力�
 - [研究论文](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+比较算法时，可以先固定一个任务和评估预算，将解的质量与执行时间分别记录，再保持实验流程不变，调整种群规模。[EvoX 工作流教程](/zh-cn/news/evox-quickstart)提供了组织这类实验的简洁起点。

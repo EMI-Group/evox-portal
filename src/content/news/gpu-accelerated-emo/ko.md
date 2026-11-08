@@ -1,17 +1,17 @@
 ---
 title: "EvoMO: 다목적 절충 관계를 대규모로 탐색하다"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO는 텐서화된 다목적 탐색을 EvoX에 연결해 큰 후보 개체군에서 경쟁하는 목표를 탐구할 수 있게 합니다."
 ---
 
-*2026년 11월 7일 업데이트. 과거 결과는 원래 기록 시점을 기준으로 합니다.*
+AI와 공학 시스템에는 정확도, 자원 사용, 안정성 등 여러 목표가 있습니다. EvoX의 진화 인프라는 이 절충 관계의 탐색을 지원해야 합니다. EvoMO는 비용이 큰 개체군 비교와 선택을 GPU에 맞게 재구성해 더 큰 다목적 실험을 가능하게 합니다. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![서로 다른 절충을 나타내는 계단형 면으로 펼쳐진 후보 배열](./tensorized-tradeoff-population.webp)
 
 ## 텐서화를 통한 진화 다목적 최적화와 GPU 가속의 연결
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun, 및 Ran Cheng, Senior Member, IEEE
-
-AI와 공학 시스템에는 정확도, 자원 사용, 안정성 등 여러 목표가 있습니다. EvoX의 진화 인프라는 이 절충 관계의 탐색을 지원해야 합니다. EvoMO는 비용이 큰 개체군 비교와 선택을 GPU에 맞게 재구성해 더 큰 다목적 실험을 가능하게 합니다.
 
 이러한 한계를 해결하기 위해 EvoX 팀은 텐서화(tensorization) 방법론을 통해 GPU에서 EMO 알고리즘을 병렬화할 것을 제안했습니다. 이 방법을 활용하여 팀은 여러 GPU 가속 EMO 알고리즘을 성공적으로 설계하고 구현했습니다. 또한, 팀은 Brax 물리 엔진을 기반으로 구축된 **다목적 로봇 제어를 위한 벤치마크 제품군**인 **"MoRobtrol"**을 개발하여 GPU 가속 EMO 알고리즘의 성능을 체계적으로 평가하는 것을 목표로 하고 있습니다.
 
@@ -114,3 +114,5 @@ EvoMO는 목표가 경쟁할 때 유용한 대안을 보존하고 비교하는 �
 - [연구 논문](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+한 작업과 평가 예산을 고정하고 해의 품질과 실행 시간을 따로 기록하여 비교를 시작합니다. 이후 실험 절차를 유지하면서 개체군 크기를 바꿉니다. [EvoX 워크플로 튜토리얼](/ko/news/evox-quickstart)은 이러한 실험을 구성하는 간단한 출발점입니다.

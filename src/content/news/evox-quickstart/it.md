@@ -1,15 +1,13 @@
 ---
 title: "Introduzione a EvoX: il primo workflow evolutivo"
 pubDate: 2025-04-30
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "Un esperimento completo con EvoX 1.4.1 per capire come problemi, popolazioni, valutazione ed esecuzione formino un workflow riutilizzabile."
 ---
 
-*Aggiornato il 7 novembre 2026. I risultati storici mantengono la data della rilevazione originale.*
-
-Un workflow evolutivo collega un obiettivo a candidati, valutazioni e miglioramenti successivi. Questo tutorial presenta l'infrastruttura con un piccolo esperimento eseguibile, affinché gli stessi confini tra componenti possano poi sostenere problemi, algoritmi e budget di valutazione differenti.
-
 Il tutorial minimizza Ackley in due dimensioni con PSO, verifica il dispositivo e visualizza la cronologia. È per **EvoX 1.4.1 con PyTorch**, non per l’API sperimentale 2.x. Il piccolo problema serve a capire il workflow, non a misurare le prestazioni GPU.
+
+![Sfere candidate su un paesaggio di ricerca collegato a cornici di workflow](./first-search-workflow.webp)
 
 ## Preparare un ambiente isolato
 
@@ -96,3 +94,5 @@ Il tutorial originale è stato scritto da Boqing Xu, Xinmeng Yu, Bowen Zheng e X
 ![EvoX overview](./quickstart-8.png)
 
 Per l’esempio usi il [codice versionato](https://github.com/EMI-Group/evox/tree/v1.4.1); per approfondire, la [documentazione](https://evox.readthedocs.io/en/latest/). Verifichi la versione prima di copiare API più recenti.
+
+Prima di estendere l’esempio, salvi insieme versioni dei pacchetti, dispositivo, seed e fitness migliore. Cambi una sola impostazione e ripeta lo stesso budget. La [spiegazione di EvoMO](/it/news/gpu-accelerated-emo) introduce le ulteriori scelte per obiettivi in conflitto.

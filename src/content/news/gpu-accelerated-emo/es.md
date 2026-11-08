@@ -1,17 +1,17 @@
 ---
 title: "EvoMO: explorar compromisos multiobjetivo a gran escala"
 pubDate: 2025-04-16
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoMO incorpora búsqueda multiobjetivo tensorizada a EvoX para explorar objetivos en conflicto mediante grandes poblaciones candidatas."
 ---
 
-*Actualizado el 7 de noviembre de 2026. Los resultados históricos conservan su fecha de referencia.*
+Los sistemas de IA e ingeniería suelen tener varios objetivos: precisión, recursos, estabilidad u otros requisitos. La infraestructura evolutiva de EvoX debe permitir explorar esos compromisos. EvoMO reorganiza para GPU las comparaciones y la selección costosas entre individuos, haciendo viables experimentos multiobjetivo más amplios. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
+
+![Una matriz de candidatos se abre hacia terrazas de distintas compensaciones](./tensorized-tradeoff-population.webp)
 
 ## Cerrando la brecha entre la Optimización Multiobjetivo Evolutiva y la aceleración por GPU mediante la tensorización
 
 Zhenyu Liang, Hao Li, Naiwei Yu, Kebin Sun y Ran Cheng, Senior Member, IEEE
-
-Los sistemas de IA e ingeniería suelen tener varios objetivos: precisión, recursos, estabilidad u otros requisitos. La infraestructura evolutiva de EvoX debe permitir explorar esos compromisos. EvoMO reorganiza para GPU las comparaciones y la selección costosas entre individuos, haciendo viables experimentos multiobjetivo más amplios.
 
 Para abordar esta limitación, el equipo de EvoX propuso paralelizar los algoritmos EMO en GPUs mediante la metodología de tensorización. Aprovechando este método, han diseñado e implementado con éxito varios algoritmos EMO acelerados por GPU. Además, el equipo desarrolló **"MoRobtrol"**, una **suite de benchmark para el control de robots multiobjetivo** construida sobre el motor de física Brax, destinada a evaluar sistemáticamente el rendimiento de los algoritmos EMO acelerados por GPU.
 
@@ -114,3 +114,5 @@ EvoMO permite conservar y comparar alternativas útiles cuando los objetivos com
 - [Artículo de investigación](https://arxiv.org/abs/2503.20286)
 - [GitHub](https://github.com/EMI-Group/evomo)
 - [EvoX](https://github.com/EMI-Group/evox)
+
+Empiece con una tarea y un presupuesto de evaluaciones fijos. Registre por separado calidad y tiempo; después varíe la población manteniendo el protocolo. El [tutorial de EvoX](/es/news/evox-quickstart) ofrece un punto de partida más sencillo.

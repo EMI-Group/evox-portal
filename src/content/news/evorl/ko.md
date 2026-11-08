@@ -1,13 +1,13 @@
 ---
 title: "EvoRL: GPU에서 진화 탐색과 강화학습을 함께 실행하기"
 pubDate: 2025-01-14
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "EvoRL은 개체군 탐색, 강화학습, 병렬 시뮬레이션을 연결해 Physical AI를 위한 진화적 접근의 실험 기반을 제공합니다."
 ---
 
-*2026년 11월 7일 업데이트. 현재 프로젝트 구현을 바탕으로 내용을 확장했습니다.*
-
 Physical AI는 다양한 행동을 탐색하고 상호작용으로 시험하며 유용한 경험을 다음 학습에 반영해야 합니다. EvoRL은 이 순환을 병렬 시뮬레이션으로 가져옵니다. 개별 정책은 경험에서 배우고 개체군 탐색은 대안과 학습 구성을 조사하므로, 학습과 진화의 관계를 실험적으로 연구할 수 있습니다.
+
+![공유 시뮬레이션 순환에서 서로 다른 경로를 탐색하는 기계 다리 모형](./population-learning-loop.webp)
 
 EvoRL은 이러한 질문을 위한 오픈소스 연구 프레임워크입니다. JAX를 기반으로 강화학습, 진화 연산, 환경 시뮬레이션을 공통 학습 워크플로에 통합하여 기존 방법과 하이브리드 방법의 개발 및 평가를 지원합니다. EvoX의 자매 프로젝트인 EvoRL은 진화와 강화학습을 결합하여 개체군 수준 탐색에 현대 GPU의 병렬 처리 능력을 활용합니다. [프로젝트 소개](https://github.com/EMI-Group/evorl)
 
@@ -84,6 +84,8 @@ EvoRL은 연속 제어, 정책 탐색, 개체군 학습을 위해 Brax와 MuJoCo
 
 ## 첫 실험 실행하기
 
+현재 설치 요구 사항은 Python 3.12 이상과 JAX/jaxlib 0.10.0 이상입니다. [EvoRL](https://github.com/EMI-Group/evorl#installation)
+
 먼저 [설치 안내](https://evorl.readthedocs.io/latest/guide/installation.html)에 따라 하드웨어에 맞게 JAX를 설정하세요. 그런 다음 소스에서 EvoRL을 설치하여 예제에 필요한 학습 스크립트와 설정을 준비합니다.
 
 ```bash
@@ -100,4 +102,4 @@ python scripts/train.py agent=ppo env=brax/ant
 
 EvoRL은 Hydra로 실험 설정을 관리합니다. 기준선이 실행되면 난수 시드, 알고리즘 설정, 환경 설정을 바꾼 뒤 하이브리드 방법이나 개체군 학습으로 진행하세요. 전체 사용법은 [빠른 시작](https://evorl.readthedocs.io/latest/guide/quickstart.html)을 참고하세요.
 
-EvoRL은 진화와 학습의 결합을 더 쉽게 실천하도록 돕고자 합니다. 하나의 프레임워크에서 질문을 세우고, 방법을 조합하고, 실험하고, 결과로 아이디어를 검증할 수 있습니다. [GitHub 저장소](https://github.com/EMI-Group/evorl)에서 기존 알고리즘을 시험하거나 구현을 기여하고, [Discussions](https://github.com/EMI-Group/evorl/discussions)에서 연구 및 사용 경험을 나누어 주세요.
+첫 PPO 실행을 기준선으로 보관하고, 구성 요소를 변경하기 전에 환경, 시드, 설정과 학습 곡선을 저장합니다. 더 단순한 개체군 탐색부터 시작하려면 [EvoX 워크플로 튜토리얼](/ko/news/evox-quickstart)을 참고하세요.

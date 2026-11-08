@@ -1,13 +1,13 @@
 ---
 title: "EvoRL: pesquisa evolutiva e aprendizado por reforço em conjunto nas GPUs"
 pubDate: 2025-01-14
-updatedDate: 2026-11-07
+updatedDate: 2026-11-08
 summary: "O EvoRL liga pesquisa por populações, aprendizagem por reforço e simulação paralela, oferecendo uma base experimental para abordagens evolutivas a Physical AI."
 ---
 
-*Atualizado em 7 de novembro de 2026. Este artigo ampliado reflete a implementação atual do projeto.*
-
 Physical AI precisa de explorar comportamentos diferentes, testá-los por interação e reutilizar a experiência útil. O EvoRL coloca esse ciclo na simulação paralela: as políticas individuais aprendem, enquanto a pesquisa por populações explora alternativas e configurações de aprendizagem. A relação entre aprendizagem e evolução torna-se assim acessível à experimentação.
+
+![Modelos de pernas mecânicas exploram caminhos em um ciclo de simulação compartilhado](./population-learning-loop.webp)
 
 O EvoRL é um framework de pesquisa de código aberto construído em torno destas questões. Baseado em JAX, reúne aprendizado por reforço, computação evolutiva e simulação num fluxo de treinamento comum para desenvolver e avaliar métodos clássicos e híbridos. Como projeto irmão do EvoX, concentra-se na sua combinação para que a pesquisa ao nível da população aproveite as GPUs modernas. [Apresentação do projeto](https://github.com/EMI-Group/evorl)
 
@@ -84,6 +84,8 @@ Na pesquisa em aprendizado por reforço evolutivo, é possível estabelecer uma 
 
 ## Executar o primeiro experimento
 
+A instalação atual requer Python 3.12 ou posterior e JAX/jaxlib 0.10.0 ou posterior. [EvoRL](https://github.com/EMI-Group/evorl#installation)
+
 Siga primeiro o [guia de instalação](https://evorl.readthedocs.io/latest/guide/installation.html) para configurar o JAX de acordo com o hardware. Instale depois o EvoRL a partir do código-fonte para obter os scripts e as configurações do exemplo:
 
 ```bash
@@ -100,4 +102,4 @@ python scripts/train.py agent=ppo env=brax/ant
 
 O EvoRL utiliza o Hydra para gerenciar configurações. Depois de a referência funcionar, pode variar sementes aleatórias, configurações dos algoritmos e configurações do ambiente antes de passar aos métodos híbridos ou às populações. Consulte o [guia de início rápido](https://evorl.readthedocs.io/latest/guide/quickstart.html).
 
-O EvoRL busca tornar mais acessível a combinação de evolução e aprendizado: formular perguntas, combinar métodos, executar experimentos e confrontar ideias com resultados em um único framework. Visite o [repositório GitHub](https://github.com/EMI-Group/evorl) para experimentar algoritmos, contribuir com implementações ou compartilhar pesquisas e experiências em [Discussions](https://github.com/EMI-Group/evorl/discussions).
+Guarde a primeira execução PPO como referência: registre ambiente, semente, configuração e curva antes de alterar um componente. Para começar por uma busca populacional mais simples, consulte o [tutorial EvoX](/pt-br/news/evox-quickstart).
