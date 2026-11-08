@@ -7,7 +7,7 @@ summary: "Aufgaben prüfen, Systemkapazität verstehen und in einem Gespräch ha
 
 Bei einer lang laufenden Entwicklungsaufgabe bleiben nach dem Start Fragen offen: Was läuft noch, warum ist eine Aufgabe fehlgeschlagen und was soll als Nächstes geschehen? Die vom 4. bis 7. November 2026 in Genesis `main` aufgenommenen Änderungen führen diese Fragen im Assistant-Chat des Dashboards zusammen und verbessern die darunterliegenden Dienste.
 
-![Konzeptillustration eines Gesprächs, das mehrere Aufgabenströme auf einer gemeinsamen Plattform verbindet](./genesis-assistant-task-flows.webp)
+![Ein Entwickler prüft laufende und pausierte Aufgaben](./genesis-assistant-task-flows.webp)
 
 *Ein Gespräch, mehrere Arbeitsströme: eine redaktionelle Illustration des Kerngedankens dieser Aktualisierung.*
 

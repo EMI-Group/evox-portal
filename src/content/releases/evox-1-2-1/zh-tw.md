@@ -4,6 +4,8 @@ pubDate: 2025-05-13
 summary: "穩定性改進，新增基準測試函數（Ellipsoid, Griewank）並修復了錯誤。"
 ---
 
+![檢查並校正演算法行為](./benchmark-sampling-correction.webp)
+
 這是一個次要版本，專注於提升穩定性並修復錯誤，同時包含了一些使用體驗上的改進。
 
 ## 新功能

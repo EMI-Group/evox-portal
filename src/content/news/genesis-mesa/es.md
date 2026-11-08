@@ -7,7 +7,7 @@ summary: "Trece módulos MESA se convierten en un workspace Rust. Las pruebas de
 
 Reescribir software científico exige conservar algo más que los algoritmos: también el comportamiento numérico del que dependen los cálculos posteriores. En el caso MESA de Genesis, trece módulos Fortran se reconstruyeron como crates Rust usando las salidas originales como referencia. Lo interesante es cómo el proyecto hace comprobable esa continuidad.
 
-![Una escultura estelar por capas sobre dos anillos de materiales distintos con contornos coincidentes](./mesa-numerical-continuity.webp)
+![Resultados de Fortran y Rust comparados con una lupa](./mesa-numerical-continuity.webp)
 
 *Ilustración conceptual: una nueva implementación y una referencia numérica compartida.*
 

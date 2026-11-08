@@ -7,7 +7,7 @@ summary: "EvoGO は生成学習と進化的最適化を結び、評価済み候�
 
 科学や工学の探索では、次に何を試すかを繰り返し決めます。EvoGO はその計算上の実現を研究します。評価結果から、生成器は提案を改善できるでしょうか。この問いを通じて、EvoX の進化型 AI を、試した候補から学ぶ探索プロセスへとつなぎます。 [EvoGO](https://github.com/EMI-Group/evogo)
 
-![赤い探索経路を絞り込む方向テンプレート](./learning-search-directions.webp)
+![過去の候補が導く新たな探索経路](./learning-search-directions.webp)
 
 ## 課題：データ駆動型最適化はまだ最後の一歩を踏み出していない
 

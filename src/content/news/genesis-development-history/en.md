@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 An agent tree describes who is working now. A project's history must also explain what remains afterward. Released on September 26, 2026, Genesis 0.13.4 develops the commit-history view introduced in 0.13.2 and the durable task references added in 0.13.3. Together they connect temporary activity to inspectable software versions.
 
-![Commit tiles on branching rails settle into a durable layered archive](./durable-agent-history.webp)
+![Agent activity preserved in a project history ledger](./durable-agent-history.webp)
 
 ## From live agents to durable task references
 

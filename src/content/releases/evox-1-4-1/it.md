@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "Correzioni a CMA-ES, varianti DE, PSO, strategie evolutive, selezione a torneo e calcolo dell’ipervolume."
 ---
 
+![Verifica e correzione del comportamento algoritmico](./algorithm-update-correction.webp)
+
 **EvoX v1.4.1** corregge errori algoritmici e problemi di esecuzione nella serie stabile 1.x.
 
 ## Correzioni agli algoritmi

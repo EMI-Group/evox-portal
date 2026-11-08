@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Genesis 0.14.0, publicado a 2 de novembro de 2026, deteta o estado de lingering do systemd no arranque do servidor e propõe ativá-lo. Prossegue a distribuição headless introduzida em 0.13.11 a 30 de outubro. O ciclo de vida do ambiente de execução pode assim ser gerido separadamente da sessão de desktop.
 
-![Um servidor cinzento-escuro permanece ligado junto de um biombo](./persistent-server-session.webp)
+![Um servidor mantém tarefas com o terminal fechado](./persistent-server-session.webp)
 
 ## Uma distribuição servidor com controlos operacionais
 

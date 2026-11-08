@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Une fonctionnalité peut concerner un service API, une application cliente et une bibliothèque partagée. L'objectif est commun, mais les dépôts Git peuvent être distincts. Genesis 0.13.4, publié le 26 septembre 2026, ajoute des worktrees persistants aux dépôts associés modifiables afin de clarifier le lieu d'exécution.
 
-![Trois cours indépendantes reliées par un ruban rouge, chacune avec son entrée](./companion-worktrees.webp)
+![Historiques de dépôts distincts reliés à un même projet](./companion-worktrees.webp)
 
 ## De l'accès à l'isolation du travail
 

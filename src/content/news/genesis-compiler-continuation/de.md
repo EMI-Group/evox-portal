@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Der [Evidence-Eintrag vom 7. September 2026](https://genesis.evox.group/evidence/compiler-continuation/) beschreibt die Übergabe von **GLM 5.2 an DeepSeek V4 Flash** innerhalb derselben akzeptierten Entwicklungslinie. Der frühere Gesprächskontext wurde nicht übertragen.
 
-![Eine durchgehende Brücke verbindet zwei unterschiedliche Zeichenflächen](./compiler-model-handoff.webp)
+![Ein Compilerprojekt bleibt beim Werkzeugwechsel erhalten](./compiler-model-handoff.webp)
 
 Quellcode, Struktur und akzeptierte Historie blieben jedoch verfügbar.
 

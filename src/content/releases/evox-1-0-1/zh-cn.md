@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "修复 Windows 安装脚本、DE 系列算法的基向量选择，以及 SHADE 在较大种群下的越界问题。"
 ---
 
+![检查并校正算法行为](./bounded-random-selection.webp)
+
 **EvoX v1.0.1** 是一次维护性更新，包含三项修复：
 
 - 更新 Windows 安装脚本 `win-install.bat` ([#204](https://github.com/EMI-Group/evox/pull/204)).

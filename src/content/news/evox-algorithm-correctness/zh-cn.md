@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 一次搜索顺利结束，也可能始终沿着错误的更新规则运行。2026 年 10 月 30 日发布的 EvoX 1.4.1，修正了 SHADE、差分演化与 CMA-ES 中的这类偏差，让适应机制、采样和执行行为回到算法所依赖的定义。
 
-![校准工具将深色搜索轮廓与红色参考线对齐](./algorithm-behavior-calibration.webp)
+![检查并校正算法行为](./algorithm-behavior-calibration.webp)
 
 *让实现与算法预期行为对齐。*
 

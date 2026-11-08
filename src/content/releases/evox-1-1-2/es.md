@@ -4,6 +4,8 @@ pubDate: 2025-03-31
 summary: "Actualizaciones de documentación, funciones de vmap y HPO, correcciones en benchmarks e inicio del soporte para flujos de trabajo distribuidos."
 ---
 
+![Estaciones separadas comparten la evaluación de la población](./distributed-parameter-trials.webp)
+
 ## Cambios realizados
 - Se ha actualizado la documentación con notas de uso y guías para el ajuste de parámetros.
 

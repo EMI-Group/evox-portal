@@ -4,6 +4,8 @@ pubDate: 2025-06-03
 summary: "Rilascio minore focalizzato su correzioni dell'algoritmo DE e miglioramenti della documentazione."
 ---
 
+![Inizializzazione separata dai passi evolutivi ripetuti](./initialization-evolution-steps.webp)
+
 Questo è un rilascio minore focalizzato esclusivamente sulla correzione di bug:
 
 - Rimossi import inutilizzati per migliorare la pulizia del codice.

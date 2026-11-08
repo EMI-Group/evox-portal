@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Infrastructure for evolutionary AI is itself a substantial software undertaking. The Genesis EvoX Compiler case connects these two levels: an agentic development system builds and extends a tensor-graph compiler, while interfaces and regression tests define which changes can become part of its continuing implementation.
 
-![Aligned compiler layers joined by a red structural rod](./compiler-contract-layers.webp)
+![Compiler graphs checked against regression tests](./compiler-contract-layers.webp)
 
 ## A project with explicit responsibilities
 

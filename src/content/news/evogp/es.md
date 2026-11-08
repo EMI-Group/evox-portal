@@ -7,7 +7,7 @@ summary: "EvoGP adapta poblaciones de programas estructurados al cálculo GPU pa
 
 La IA evolutiva puede buscar estructuras ejecutables además de vectores de parámetros. EvoGP desarrolla esta dirección en el ecosistema EvoX, haciendo viables grandes poblaciones de programas en árbol. Las estructuras y rutas de ejecución irregulares plantean un problema de representación y planificación, además del diseño algorítmico. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![Árboles de programas distintos en una bandeja alineada](./program-tree-populations.webp)
+![Árboles de programas dispuestos para evaluación paralela](./program-tree-populations.webp)
 
 Para abordar este reto, **proponemos el framework EvoGP, reorganizando desde cero la representación de árboles, la lógica de los operadores genéticos y los mecanismos de ejecución paralela.** Los resultados experimentales muestran que **EvoGP alcanza un rendimiento computacional pico superior a 10^11 GPops/s, permitiendo evaluar rápidamente poblaciones de 500.000 individuos en un segundo —hasta 304× más rápido que las implementaciones GPU existentes.** Este hito marca una ruptura definitiva con las barreras de adaptación al hardware e inaugura la programación genética en la era de la computación de alto rendimiento acelerada por GPU.
 

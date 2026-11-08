@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Lorsque l’évaluation des candidats domine le coût d’une recherche, la répartir peut ouvrir la voie à une expérience plus grande. Le guide expérimental EvoX du 23 avril 2025 explique le mécanisme introduit en mars : répartir la population entre processus, puis réunir les valeurs d’aptitude avant la mise à jour de l’algorithme.
 
-![Un plateau de population se divise en trois récipients d’évaluation puis rejoint une rangée ordonnée de retours](./distributed-evaluation-feedback.webp)
+![Des stations distinctes partagent le retour sur la population](./distributed-evaluation-feedback.webp)
 
 *Évaluations séparées, retour commun à la population.*
 

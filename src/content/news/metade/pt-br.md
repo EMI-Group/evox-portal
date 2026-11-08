@@ -7,7 +7,7 @@ summary: "O MetaDE acrescenta um ciclo evolutivo externo à evolução diferenci
 
 A adaptação pode atuar sobre a forma de pesquisar, além das soluções encontradas. O MetaDE traz esta ideia para o EvoX com dois níveis evolutivos ligados: um resolve o problema-alvo e o outro avalia quais configurações DE tornam a pesquisa eficaz. [MetaDE](https://github.com/EMI-Group/metade)
 
-![Um anel externo de configurações envolve a população interna](./nested-evolution-search.webp)
+![Busca externa de parâmetros em torno de experimentos internos](./nested-evolution-search.webp)
 
 ## Contexto
 

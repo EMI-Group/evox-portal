@@ -7,7 +7,7 @@ summary: "Un esperimento completo con EvoX 1.4.1 per capire come problemi, popol
 
 Il tutorial minimizza Ackley in due dimensioni con PSO, verifica il dispositivo e visualizza la cronologia. È per **EvoX 1.4.1 con PyTorch**, non per l’API sperimentale 2.x. Il piccolo problema serve a capire il workflow, non a misurare le prestazioni GPU.
 
-![Sfere candidate su un paesaggio di ricerca collegato a cornici di workflow](./first-search-workflow.webp)
+![Particelle candidate esplorano un paesaggio di ricerca](./first-search-workflow.webp)
 
 ## Preparare un ambiente isolato
 

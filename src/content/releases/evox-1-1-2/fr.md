@@ -4,6 +4,8 @@ pubDate: 2025-03-31
 summary: "Mises à jour de la documentation, fonctionnalités vmap et HPO, corrections de benchmarks et prise en charge initiale des workflows distribués."
 ---
 
+![Des stations distinctes partagent le retour sur la population](./distributed-parameter-trials.webp)
+
 ## Ce qui a changé
 - Mise à jour de la documentation avec des notes d'utilisation et des conseils sur le réglage des paramètres
 

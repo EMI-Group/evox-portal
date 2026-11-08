@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Une recherche peut se terminer normalement tout en suivant une règle de mise à jour erronée. EvoX 1.4.1, publié le 30 octobre 2026, corrige cet écart dans SHADE, l’évolution différentielle et CMA-ES, en rétablissant l’adaptation, l’échantillonnage et le comportement d’exécution attendus.
 
-![Un instrument de calibrage aligne une courbe de recherche sombre sur sa référence rouge](./algorithm-behavior-calibration.webp)
+![Vérification et correction du comportement algorithmique](./algorithm-behavior-calibration.webp)
 
 *Aligner l’implémentation sur le comportement attendu.*
 

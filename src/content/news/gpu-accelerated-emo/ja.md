@@ -7,7 +7,7 @@ summary: "EvoMO はテンソル化した多目的探索を EvoX に導入し、�
 
 AI や工学のシステムは、精度、資源使用、安定性など複数の目的を持ちます。EvoX の進化基盤はそれらのトレードオフを探索できる必要があります。EvoMO は高コストの集団比較と選択を GPU 向けに再構成し、大規模な多目的実験を可能にします。 [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![異なるトレードオフの段状面へ広がる候補配列](./tensorized-tradeoff-population.webp)
+![トレードオフ地形に分布する候補解](./tensorized-tradeoff-population.webp)
 
 ## テンソル化による進化的多目的最適化とGPUアクセラレーションの橋渡し
 

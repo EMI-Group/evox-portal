@@ -7,7 +7,7 @@ summary: "Genesis extiende la IA evolutiva de EvoX al software: los agentes prop
 
 Genesis lleva la visión de EvoX a Agentic AI al tratar el proyecto de software en evolución como resultado persistente de muchas aportaciones locales. Generación de código, ejecución, revisión e integración forman un ciclo de desarrollo. Las implementaciones aceptadas y sus registros de validación sirven de base para el trabajo posterior. [Genesis](https://github.com/EMI-Group/genesis)
 
-![Una torre de software con una escalera roja continua](./software-world-continuity.webp)
+![Módulos de código forman un proyecto en crecimiento](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
 

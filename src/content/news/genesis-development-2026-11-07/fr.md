@@ -7,7 +7,7 @@ summary: "Consulter les tâches, comprendre la capacité du système et agir dan
 
 Une tâche de développement longue soulève des questions bien après son démarrage : que reste-t-il en cours, pourquoi une tâche a-t-elle échoué et quelle suite donner ? Les changements intégrés à `main` du 4 au 7 novembre 2026 amènent ces questions dans la conversation Assistant du tableau de bord Genesis, tout en améliorant les services sous-jacents.
 
-![Illustration conceptuelle reliant une conversation à plusieurs flux de tâches sur une plateforme partagée](./genesis-assistant-task-flows.webp)
+![Un développeur examine les tâches actives et en pause](./genesis-assistant-task-flows.webp)
 
 *Une conversation, plusieurs flux de travail : une illustration éditoriale de l’idée centrale de cette mise à jour.*
 

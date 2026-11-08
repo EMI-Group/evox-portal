@@ -7,7 +7,7 @@ summary: "Genesis untersucht mit einem Software-Renderer, wie Schnittstellen, Te
 
 Beim Aufbau eines Softwaresystems müssen nützliche lokale Änderungen mit dem wachsenden Projekt vereinbar bleiben. Genesis untersucht diese Herausforderung anhand der WASM-Render-Grafikpipeline. Damit verbindet EvoXs Agentic-AI-Richtung lokale Entwicklung mit Systemaufbau: Shader-Verarbeitung, Rendering und API-Verhalten müssen ein zusammenhängendes Ganzes bilden.
 
-![Glasplatten richten die Stufen einer geometrischen Szene aus](./software-graphics-pipeline.webp)
+![Drahtgittergeometrie wird zu einem schattierten Pixelbild](./software-graphics-pipeline.webp)
 
 Der öffentliche Genesis-Bericht beschreibt einen mit DeepSeek V4 Flash entwickelten TypeScript-Software-Renderer. Er meldet 2.017/2.019 bestandene Khronos-CTS-Fälle, darunter 1.184/1.184 WebGL2-Fälle im geprüften Satz. Etwa 36 USD betreffen nur Modell-Tokens, ohne Hardware. Die 65,9 Stunden zwischen erstem und letztem Agenten-Commit sind eine Zeitspanne im Repository, keine gemessene aktive Agentenlaufzeit.
 

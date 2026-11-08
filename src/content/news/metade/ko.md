@@ -7,7 +7,7 @@ summary: "MetaDE는 차분 진화 바깥에 진화 루프를 추가하고 EvoX�
 
 적응은 발견한 해뿐 아니라 시스템이 해를 찾는 방식에도 적용됩니다. MetaDE는 연결된 두 진화 수준으로 이 생각을 EvoX에 도입합니다. 내부는 목표 문제를 해결하고, 외부는 탐색을 효과적으로 만드는 DE 구성을 평가합니다. [MetaDE](https://github.com/EMI-Group/metade)
 
-![내부 후보 개체군을 둘러싼 외부 설정 고리](./nested-evolution-search.webp)
+![내부 후보 실험을 둘러싼 외부 매개변수 탐색](./nested-evolution-search.webp)
 
 ## 배경
 

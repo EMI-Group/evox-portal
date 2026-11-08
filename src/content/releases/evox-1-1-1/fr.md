@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "Corrections de bugs pour la capture de graphe torch.compile, les ruptures de graphe use_state et les fuites de BatchedTensor."
 ---
 
+![Structure du programme rendue visible pour inspection](./graph-break-repair.webp)
+
 ## Ce qui a changé
 **Cette version mineure comprend principalement des corrections de bugs et des améliorations :**
 

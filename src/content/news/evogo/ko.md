@@ -7,7 +7,7 @@ summary: "EvoGO는 생성 학습과 진화 최적화를 연결하고, 평가한 
 
 과학과 공학의 탐색은 다음에 어떤 실험을 할지 반복해서 결정합니다. EvoGO는 이 질문을 계산적으로 다룹니다. 평가 결과가 생성기에게 더 나은 제안을 가르칠 수 있을까요? 이는 EvoX의 진화형 AI를 이미 시험한 후보에서 배우는 탐색 과정으로 연결합니다. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![빨간 탐색 경로를 좁혀 가는 방향 템플릿](./learning-search-directions.webp)
+![이전 후보가 이끄는 새로운 탐색 경로](./learning-search-directions.webp)
 
 ## 당면 과제: 데이터 구동형 최적화는 아직 마지막 단계를 내딛지 못했습니다
 

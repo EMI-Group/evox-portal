@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Cuando evaluar candidatos concentra el coste de una búsqueda, repartir ese trabajo permite plantear experimentos mayores. La guía experimental de EvoX del 23 de abril de 2025 explica la vía introducida en marzo: dividir la población entre procesos y reunir la aptitud antes de actualizar el algoritmo.
 
-![Una bandeja de población se divide en tres recipientes de evaluación y vuelve a una fila ordenada de resultados](./distributed-evaluation-feedback.webp)
+![Estaciones separadas comparten la evaluación de la población](./distributed-evaluation-feedback.webp)
 
 *Evaluaciones separadas, información común para la población.*
 

@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 When candidate evaluation is the expensive part of a search, distributing that work can open room for a larger experiment. EvoX's experimental guide of April 23, 2025 explains the path introduced that March: split the population across processes, then gather fitness before the algorithm updates.
 
-![A population tray branches into three evaluation bowls and rejoins an ordered feedback row](./distributed-evaluation-feedback.webp)
+![Separate evaluation stations share population feedback](./distributed-evaluation-feedback.webp)
 
 *Separate evaluations, shared population feedback.*
 

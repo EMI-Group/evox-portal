@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "A maintenance release correcting CMA-ES, DE variants, PSO, evolution strategies, tournament selection, and hypervolume calculation."
 ---
 
+![Checking and correcting algorithm behavior](./algorithm-update-correction.webp)
+
 **EvoX v1.4.1** fixes algorithm correctness and runtime issues in the stable 1.x series.
 
 ## Algorithm fixes

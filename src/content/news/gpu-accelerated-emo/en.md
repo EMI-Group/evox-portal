@@ -7,7 +7,7 @@ summary: "EvoMO brings tensorized multiobjective search into EvoX, helping exper
 
 AI and engineering systems often have several objectives: accuracy, resource use, stability or other task-specific requirements. EvoX's evolutionary infrastructure must support exploring these trade-offs. EvoMO addresses the computational side by reorganizing costly population comparisons and selection for GPUs, making larger multiobjective experiments practical. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![An array of candidates fans out into distinct trade-off terraces](./tensorized-tradeoff-population.webp)
+![Candidate solutions distributed across a trade-off landscape](./tensorized-tradeoff-population.webp)
 
 ## Bridging Evolutionary Multiobjective Optimization and GPU Acceleration via Tensorization
 

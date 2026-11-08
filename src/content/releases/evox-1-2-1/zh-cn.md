@@ -4,6 +4,8 @@ pubDate: 2025-05-13
 summary: "稳定性改进，新增基准测试函数（Ellipsoid, Griewank）并修复了若干 Bug。"
 ---
 
+![检查并校正算法行为](./benchmark-sampling-correction.webp)
+
 这是一个专注于提升稳定性并修复 Bug 的小版本更新，同时包含了一些易用性改进。
 
 ## 新特性

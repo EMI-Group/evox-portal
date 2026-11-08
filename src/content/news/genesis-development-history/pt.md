@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 A árvore dos agentes mostra quem trabalha agora. A história do projeto deve também explicar o que fica depois. Genesis 0.13.4, publicado a 26 de setembro de 2026, desenvolve a vista de commits de 0.13.2 e as referências persistentes das tarefas de 0.13.3, ligando atividade temporária a versões inspecionáveis.
 
-![Carris ramificados com peças de commits convergem num arquivo em camadas](./durable-agent-history.webp)
+![Atividade dos agentes preservada no histórico do projeto](./durable-agent-history.webp)
 
 ## De agentes ativos a referências persistentes
 

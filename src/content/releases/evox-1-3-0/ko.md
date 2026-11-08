@@ -4,6 +4,8 @@ pubDate: 2025-11-06
 summary: "새로운 기능: Workflow가 이제 opt_direction 리스트를 허용합니다. 그 외 몇 가지 버그가 수정되었습니다."
 ---
 
+![최소화와 최대화를 나타내는 반대 방향 트랙](./objective-directions.webp)
+
 ## 기능
 
 - Workflow가 이제 `opt_direction` 리스트를 허용합니다.

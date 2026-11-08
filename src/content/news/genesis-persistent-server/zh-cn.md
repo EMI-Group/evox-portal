@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 2026 年 11 月 2 日发布的 Genesis 0.14.0 在服务器启动时加入 systemd lingering 状态检测，并提供启用选项。它延续了 10 月 30 日在 0.13.11 中引入的独立服务器发行形式。这些变化让开发工作拥有可以独立于桌面会话管理生命周期的执行环境。
 
-![屏风旁仍亮着指示灯的深灰色服务器](./persistent-server-session.webp)
+![终端关闭后服务器继续处理任务](./persistent-server-session.webp)
 
 ## 具有运维控制的服务器发行包
 

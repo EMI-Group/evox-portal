@@ -7,7 +7,7 @@ summary: "iStratDE 研究固定的個體級策略如何形成多樣化搜尋行�
 
 演化搜尋的特點，來自一組不同可能性所組成的種群。iStratDE 研究如何在搜尋行為層面保留這種多樣性，讓不同個體在整個執行過程中持續採用各自的策略。在 EvoX 中，這將演算法設計與異質候選物件的並行評價連線起來。 [iStratDE](https://github.com/EMI-Group/istratde)
 
-![不同路徑導軌在獨立通道內平行排列](./persistent-strategy-diversity.webp)
+![不同策略模式沿各自搜尋路徑保持不變](./persistent-strategy-diversity.webp)
 
 為了填補這一空白，EvoX 團隊研究了**個體層級的策略多樣性**如何影響 DE 的搜尋動態與最佳化效能，並提出了一種極簡變體：**iStratDE（Individual-Level Strategy Diversity Differential Evolution）**。其核心概念非常簡單：在初始化時，每個個體被指定自己的突變與交叉策略，且該指定在整個演化過程中保持不變。透過在個體層級引入多樣性——同時捨棄複雜的自適應與回饋迴路——iStratDE 在族群中創造了持久的行為異質性。
 

@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Le [dossier Evidence du 7 septembre 2026](https://genesis.evox.group/evidence/compiler-continuation/) décrit un relais de **GLM 5.2 vers DeepSeek V4 Flash** sur la même lignée acceptée. Le nouveau modèle n’a pas reçu le contexte conversationnel précédent.
 
-![Un pont continu relie deux surfaces de dessin différentes](./compiler-model-handoff.webp)
+![Un projet de compilateur conservé entre deux jeux d’outils](./compiler-model-handoff.webp)
 
 Il disposait néanmoins du code, de la structure et de l’historique accepté.
 

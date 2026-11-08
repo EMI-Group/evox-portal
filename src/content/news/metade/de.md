@@ -7,7 +7,7 @@ summary: "MetaDE ergänzt Differential Evolution um eine äußere Evolutionsschl
 
 Anpassung kann die Suchweise eines Systems ebenso betreffen wie seine Lösungen. MetaDE bringt dies mit zwei verbundenen evolutionären Ebenen in EvoX: Eine löst das Zielproblem, die andere bewertet, welche DE-Konfigurationen die Suche wirksam machen. [MetaDE](https://github.com/EMI-Group/metade)
 
-![Ein äußerer Einstellring umschließt eine Kandidatenpopulation](./nested-evolution-search.webp)
+![Äußere Parametersuche umgibt innere Kandidatenexperimente](./nested-evolution-search.webp)
 
 ## Hintergrund
 

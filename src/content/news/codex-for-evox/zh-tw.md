@@ -7,7 +7,7 @@ summary: "AI 程式設計智慧體將研究意圖接入 EvoX 的可執行搜尋�
 
 對於演化式 AI，一個研究想法需要進入可重複的執行與評價迴圈，才能轉化為可檢驗的能力。Codex 與 EvoX 的協作將自然語言意圖接入這個迴圈：程式設計智慧體協助構建實驗，EvoX 則提供檢驗候選解所需的介面與計算能力。 [EvoX](https://github.com/EMI-Group/evox)
 
-![想法草稿、路徑模型與實驗卡片由紅線連接](./research-to-experiment.webp)
+![研究者準備演化實驗](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) 是一個分散式、GPU 加速的可擴展演化計算框架。透過統一的 `Algorithm`、`Problem` 與 `Workflow` 介面，EvoX 將族群搜尋、批次評估、實驗執行與硬體加速整合到一個連貫的計算架構中。它的應用範疇涵蓋從單目標與多目標最佳化到神經演化、強化學習環境以及複雜系統設計。
 

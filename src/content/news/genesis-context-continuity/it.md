@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Un test può essere ancora in corso quando la conversazione dell’agente è piena. Genesis 0.13.8–0.13.10, pubblicato dal 26 al 29 ottobre 2026, separa i due cicli: comprimere il contesto di lavoro del modello mantenendo disponibili output e stato finale dei job shell distaccati.
 
-![Una pressa rossa compatta un nastro frammentato mentre un filo separato rimane continuo](./context-compression-continuity.webp)
+![Contesto lungo compresso mentre le attività proseguono](./context-compression-continuity.webp)
 
 *Comprimere il contesto di lavoro, continuare l’esecuzione.*
 

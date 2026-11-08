@@ -4,6 +4,8 @@ pubDate: 2025-03-31
 summary: "文档更新、vmap 和 HPO 功能、基准测试修复以及初步的分布式工作流支持。"
 ---
 
+![独立评估工作站汇总种群反馈](./distributed-parameter-trials.webp)
+
 ## 变更内容
 - 更新了文档，增加了使用说明和参数调优指南
 

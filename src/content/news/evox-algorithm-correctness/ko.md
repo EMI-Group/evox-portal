@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 탐색이 정상 종료되어도 잘못된 갱신 규칙을 따를 수 있습니다. 2026년 10월 30일 공개된 EvoX 1.4.1은 SHADE, 차분 진화와 CMA-ES의 이런 차이를 수정해 알고리즘이 의존하는 적응, 샘플링과 실행 동작을 복원합니다.
 
-![교정 도구가 어두운 탐색 곡선을 붉은 기준선에 맞추는 모습](./algorithm-behavior-calibration.webp)
+![알고리즘 동작 점검 및 수정](./algorithm-behavior-calibration.webp)
 
 *구현을 알고리즘의 의도된 동작에 맞춥니다.*
 

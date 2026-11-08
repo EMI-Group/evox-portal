@@ -7,7 +7,7 @@ summary: "Inspect tasks, understand system capacity and act through one conversa
 
 A long-running software task raises questions long after it starts: which work is still active, why did a task fail, and what should happen next? Changes merged into Genesis’s `main` branch on November 4–7, 2026 bring those questions into the dashboard’s Assistant conversation, alongside improvements to the services underneath it.
 
-![Concept illustration of one conversation connecting several task flows on a shared platform](./genesis-assistant-task-flows.webp)
+![A developer reviews running and paused tasks](./genesis-assistant-task-flows.webp)
 
 *One conversation, several work streams: an editorial illustration of the update’s central idea.*
 

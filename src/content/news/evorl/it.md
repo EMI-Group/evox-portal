@@ -7,7 +7,7 @@ summary: "EvoRL collega ricerca per popolazioni, apprendimento per rinforzo e si
 
 Physical AI deve esplorare comportamenti diversi, verificarli attraverso l'interazione e riutilizzare l'esperienza acquisita. EvoRL porta questo ciclo nella simulazione parallela: le politiche individuali apprendono, mentre la ricerca per popolazioni esplora alternative e configurazioni di apprendimento. La relazione tra apprendimento ed evoluzione diventa così sperimentabile.
 
-![Modelli di gambe meccaniche esplorano percorsi diversi in un ciclo di simulazione](./population-learning-loop.webp)
+![Quadrupedi simulati esplorano diversi movimenti](./population-learning-loop.webp)
 
 EvoRL è un framework di ricerca open source costruito attorno a queste domande. Basato su JAX, riunisce apprendimento per rinforzo, calcolo evolutivo e simulazione in un workflow comune per sviluppare e valutare metodi classici e ibridi. Progetto gemello di EvoX, si concentra sulla loro combinazione affinché la ricerca su popolazioni possa sfruttare le GPU moderne. [Presentazione del progetto](https://github.com/EMI-Group/evorl)
 

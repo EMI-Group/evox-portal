@@ -7,7 +7,7 @@ summary: "透過完整的 EvoX 1.4.1 實驗，理解問題、種群、評價與�
 
 本文完成一個小而完整的最佳化實驗：使用 PSO 最小化二維 Ackley 函式，確認執行裝置並繪製搜尋歷史。示例對應 **EvoX 1.4.1 與 PyTorch**，不適用於實驗性的 2.x 編譯器 API。小規模任務用於理解流程，不作為 GPU 效能基準。
 
-![搜尋地形上的候選小球與工作流程框架相連](./first-search-workflow.webp)
+![候選粒子探索搜尋地形](./first-search-workflow.webp)
 
 ## 準備獨立環境
 

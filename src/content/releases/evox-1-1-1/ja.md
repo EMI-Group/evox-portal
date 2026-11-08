@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "torch.compileのグラフキャプチャ、use_stateによるグラフの中断、およびBatchedTensorのリークに関するバグ修正。"
 ---
 
+![コンパイラの検査に向けて可視化されたプログラム構造](./graph-break-repair.webp)
+
 ## 変更点
 
 このマイナーリリースには、主にバグ修正と改善が含まれています.

@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Genesis 0.14.0 vom 2. November 2026 erkennt beim Serverstart den systemd-Lingering-Status und bietet dessen Aktivierung an. Es folgt dem Headless-Paket aus 0.13.11 vom 30. Oktober. Damit lässt sich der Lebenszyklus der Entwicklungsumgebung getrennt von einer Desktopsitzung verwalten.
 
-![Ein anthrazitfarbener Server leuchtet neben einem Paravent weiter](./persistent-server-session.webp)
+![Ein Server arbeitet bei geschlossenem Terminal weiter](./persistent-server-session.webp)
 
 ## Serverpaket mit Betriebssteuerung
 

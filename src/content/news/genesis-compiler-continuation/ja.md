@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 [2026年9月7日の Evidence 記録](https://genesis.evox.group/evidence/compiler-continuation/)では、受け入れ済みの同じ開発履歴で **GLM 5.2 から DeepSeek V4 Flash** へ引き継いでいます。前のエージェントの会話文脈は渡していません。
 
-![異なる二つの製図面をまたぐ連続した橋](./compiler-model-handoff.webp)
+![異なるツール間で引き継ぐコンパイラプロジェクト](./compiler-model-handoff.webp)
 
 引き継ぐモデルには、既存のソース、プロジェクト構造、採用済みの開発履歴が残されています。
 

@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "Bug fixes for the Windows installer, DE-family base-vector selection, and SHADE with larger populations."
 ---
 
+![Checking and correcting algorithm behavior](./bounded-random-selection.webp)
+
 **EvoX v1.0.1** is a maintenance release with three fixes:
 
 - Updated the Windows installer script, `win-install.bat` ([#204](https://github.com/EMI-Group/evox/pull/204)).

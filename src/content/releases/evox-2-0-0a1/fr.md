@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "Une alpha expérimentale avec une nouvelle API fonctionnelle et un compilateur de graphes de tenseurs explicites. La branche stable 1.x reste recommandée en production."
 ---
 
+![Structure du programme rendue visible pour inspection](./experimental-compiler-runtime.webp)
+
 **EvoX v2.0.0a1** est la première alpha d’une réécriture complète fondée sur [EvoX Compiler (`evoxc`)](https://github.com/EMI-Group/evoxc).
 
 > **Préversion expérimentale :** la nouvelle API est incompatible avec 1.x et ne permet pas une mise à niveau directe. La branche stable 1.x reste recommandée en production. Essayez l’alpha dans un environnement séparé.

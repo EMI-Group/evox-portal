@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Un projet conserve du code, mais aussi des façons de le construire, vérifier et modifier. Genesis 0.13.4, publié le 26 septembre 2026, place les modifications des outils de compétences dans le worktree et les rend révisables dans Git. Avec les outils personnalisés de 0.13.1, publiés le 21 septembre, il offre deux voies distinctes pour intégrer les méthodes du projet.
 
-![Une boîte à outils sombre reliée par un fil rouge à un manuel ivoire](./project-tools-guidance.webp)
+![Outils du projet et fiches d’instructions réutilisables](./project-tools-guidance.webp)
 
 ## Exposer des opérations par des outils personnalisés
 

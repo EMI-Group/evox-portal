@@ -7,7 +7,7 @@ summary: "MESA 모듈 13개를 Rust 워크스페이스로 재구축했습니다.
 
 과학 소프트웨어를 다시 쓰려면 알고리즘 이상의 것을 이어받아야 합니다. 이후 계산이 의존하는 수치 동작도 유지해야 합니다. Genesis의 MESA 사례에서는 Fortran 모듈 13개를 Rust crate로 재개발하고 원래 출력을 기준으로 삼았습니다. 핵심은 그 연속성을 어떻게 검증 가능한 형태로 만들었는가입니다.
 
-![층을 드러낸 항성 조형물 아래에 같은 윤곽을 가진 서로 다른 재질의 두 고리](./mesa-numerical-continuity.webp)
+![돋보기로 비교하는 Fortran과 Rust 출력](./mesa-numerical-continuity.webp)
 
 *개념 일러스트: 새로운 구현과 공유하는 수치 기준.*
 

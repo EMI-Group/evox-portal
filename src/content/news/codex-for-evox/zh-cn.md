@@ -7,7 +7,7 @@ summary: "AI 编程智能体将研究意图接入 EvoX 的可执行搜索流程�
 
 对于演化式 AI，一个研究想法需要进入可重复的执行与评价循环，才能转化为可检验的能力。Codex 与 EvoX 的协作将自然语言意图接入这个循环：编程智能体协助构建实验，EvoX 则提供检验候选解所需的接口与计算能力。 [EvoX](https://github.com/EMI-Group/evox)
 
-![想法草稿、路径模型与实验卡片由红线连接](./research-to-experiment.webp)
+![研究者准备演化实验](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) 是分布式 GPU 加速的演化计算框架。通过统一的 `Algorithm`、`Problem` 和 `Workflow` 接口，它将种群搜索、批量评价、实验执行与硬件加速组织在一起，支持单目标与多目标优化、神经演化、强化学习环境和复杂系统设计。
 

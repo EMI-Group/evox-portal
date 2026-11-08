@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Quando valutare i candidati domina il costo della ricerca, distribuire quel lavoro può consentire esperimenti più ampi. La guida sperimentale EvoX del 23 aprile 2025 spiega il percorso introdotto a marzo: suddividere la popolazione tra processi, poi raccogliere la fitness prima dell’aggiornamento dell’algoritmo.
 
-![Un vassoio di popolazione si divide in tre recipienti di valutazione e confluisce in una fila ordinata di feedback](./distributed-evaluation-feedback.webp)
+![Stazioni separate condividono il feedback sulla popolazione](./distributed-evaluation-feedback.webp)
 
 *Valutazioni separate, feedback comune alla popolazione.*
 

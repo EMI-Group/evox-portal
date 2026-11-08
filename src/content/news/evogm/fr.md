@@ -7,7 +7,7 @@ summary: "EvoGM applique le retour évolutionnaire à l'IA générative pour app
 
 L'accumulation de modèles spécialisés ouvre des possibilités de réutilisation des capacités entre tâches. Dans la démarche de recherche d'EvoX, EvoGM explore comment les retours d'une population peuvent guider cette réutilisation : les combinaisons sont évaluées, puis leurs résultats apprennent à un générateur léger à proposer de meilleures configurations de fusion. [EvoGM](https://github.com/JiangTao97/evogm)
 
-![Des modules experts reliés à une forme composite par des fils réglables](./expert-merging-feedback.webp)
+![Modèles experts combinés en configurations candidates](./expert-merging-feedback.webp)
 
 Pour répondre à ce problème, l'équipe EvoX en collaboration avec le Peng Cheng Laboratory propose EvoGM (Evolutionary Generative Merging), un framework de fusion évolutive générative qui transforme la recherche des coefficients de fusion en un problème d'optimisation générative apprenable. EvoGM organise différentes configurations de fusion en une population de candidats et, grâce au pairing winner-loser, à l'entraînement de double générateur, aux contraintes de cohérence cyclique et à la mise à jour évolutive de la base d'experts, fait évoluer la population dans une boucle fermée de « génération — évaluation — sélection — réapprentissage », apprenant autonomement à partir de retours de validation limités comment transformer des configurations de faible performance en configurations de haute performance. Les résultats expérimentaux montrent que EvoGM démontre une capacité de fusion de modèles plus forte dans les scénarios de tâches vues et non vues.
 

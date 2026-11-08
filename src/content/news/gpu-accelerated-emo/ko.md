@@ -7,7 +7,7 @@ summary: "EvoMO는 텐서화된 다목적 탐색을 EvoX에 연결해 큰 후보
 
 AI와 공학 시스템에는 정확도, 자원 사용, 안정성 등 여러 목표가 있습니다. EvoX의 진화 인프라는 이 절충 관계의 탐색을 지원해야 합니다. EvoMO는 비용이 큰 개체군 비교와 선택을 GPU에 맞게 재구성해 더 큰 다목적 실험을 가능하게 합니다. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![서로 다른 절충을 나타내는 계단형 면으로 펼쳐진 후보 배열](./tensorized-tradeoff-population.webp)
+![절충 지형에 분포한 후보 해](./tensorized-tradeoff-population.webp)
 
 ## 텐서화를 통한 진화 다목적 최적화와 GPU 가속의 연결
 

@@ -7,7 +7,7 @@ summary: "Build a complete EvoX 1.4.1 experiment and learn how problems, populat
 
 This tutorial builds a small, complete optimization experiment: use PSO to minimize the two-dimensional Ackley function, inspect the execution device and plot the search history. It targets **EvoX 1.4.1 with PyTorch**, not the experimental 2.x compiler API. The small workload teaches the workflow; it is not a GPU performance benchmark.
 
-![Candidate beads on a sculpted search landscape connected to workflow frames](./first-search-workflow.webp)
+![Candidate particles explore a search landscape](./first-search-workflow.webp)
 
 ## Prepare an isolated environment
 

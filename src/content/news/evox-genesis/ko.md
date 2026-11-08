@@ -7,7 +7,7 @@ summary: "Genesis는 EvoX의 진화형 AI를 소프트웨어로 확장합니다.
 
 Genesis는 EvoX의 비전을 Agentic AI로 확장하며, 진화하는 소프트웨어 프로젝트를 여러 국소적 기여가 축적된 지속적인 결과로 봅니다. 코드 생성, 실행, 검토, 통합이 개발 순환을 이룹니다. 채택된 구현과 검증 기록은 후속 작업이 이어질 기반이 됩니다. [Genesis](https://github.com/EMI-Group/genesis)
 
-![연속된 빨간 계단이 관통하는 다층 소프트웨어 건물](./software-world-continuity.webp)
+![소스 모듈로 확장되는 소프트웨어 프로젝트](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
 

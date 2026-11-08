@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "EvoX 1.0.0은 PyTorch 통합, 50개 이상의 진화 알고리즘과 GPU 가속 최적화를 지원합니다."
 ---
 
+![탐색 구성 요소와 후보 설계](./pytorch-evolution-toolkit.webp)
+
 ## EvoX 1.0.0의 새로운 기능은 무엇인가요?
 * **완전한 PyTorch 호환성**: EvoX는 이제 PyTorch 생태계와 원활하게 통합되어, **신경망 아키텍처 탐색(NAS), 강화 학습(RL), 메타 학습(meta-learning)에 진화 알고리즘(EAs)을 적용**하기가 그 어느 때보다 쉬워졌습니다.
 * **광범위한 알고리즘 라이브러리**: **GA, DE, PSO, CMA-ES, MOEAs (NSGA-II, RVEA, MOEA/D 등)** 및 최첨단 메타 진화 방법을 포함한 **50개 이상의 진화 알고리즘**을 제공합니다.

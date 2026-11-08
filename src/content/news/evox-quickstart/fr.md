@@ -7,7 +7,7 @@ summary: "Réalisez une expérience complète avec EvoX 1.4.1 et découvrez comm
 
 Ce tutoriel minimise la fonction Ackley en deux dimensions avec PSO, vérifie le matériel utilisé et trace l’historique. Il cible **EvoX 1.4.1 avec PyTorch**, et non l’API expérimentale 2.x. Cette petite tâche enseigne le workflow ; ce n’est pas un benchmark GPU.
 
-![Des billes candidates sur un relief de recherche relié à des cadres de workflow](./first-search-workflow.webp)
+![Des particules candidates explorent un paysage de recherche](./first-search-workflow.webp)
 
 ## Préparer un environnement isolé
 

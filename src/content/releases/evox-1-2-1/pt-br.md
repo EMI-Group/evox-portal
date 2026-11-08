@@ -4,6 +4,8 @@ pubDate: 2025-05-13
 summary: "Melhorias de estabilidade com novas funções de benchmark (Ellipsoid, Griewank) e correções de bugs."
 ---
 
+![Verificação e correção do comportamento dos algoritmos](./benchmark-sampling-correction.webp)
+
 Este é um lançamento menor focado em melhorar a estabilidade e corrigir bugs, com algumas melhorias de qualidade de vida.
 
 ## Novos Recursos

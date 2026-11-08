@@ -7,7 +7,7 @@ summary: "Le renderer logiciel de Genesis explore comment interfaces, tests et c
 
 Construire un système logiciel exige que les changements locaux utiles restent compatibles à mesure que le projet grandit. Le cas WASM Render de Genesis étudie ce défi avec une chaîne graphique, reliant Agentic AI dans EvoX à la construction de systèmes : traitement des shaders, rendu et comportement des API doivent former un ensemble cohérent.
 
-![Des plaques de verre alignent les étapes d’une scène géométrique](./software-graphics-pipeline.webp)
+![Une géométrie filaire devient une image ombrée en pixels](./software-graphics-pipeline.webp)
 
 Le dossier public de Genesis décrit un moteur de rendu logiciel TypeScript développé avec DeepSeek V4 Flash. Il rapporte 2 017/2 019 cas Khronos CTS réussis, dont 1 184/1 184 cas WebGL2 dans l'ensemble évalué. Les quelque 36 USD couvrent les tokens, sans le matériel. L'archive indique 65,9 heures entre le premier et le dernier commit des agents : cet intervalle ne mesure pas leur temps de travail actif.
 

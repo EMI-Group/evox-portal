@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "Windows インストーラー、DE 系の基底ベクトル選択、大きな個体群での SHADE の不具合を修正。"
 ---
 
+![アルゴリズムの動作を確認して修正](./bounded-random-selection.webp)
+
 **EvoX v1.0.1** は、次の3点を修正するメンテナンスリリースです。
 
 - Windows インストーラー `win-install.bat` を更新 ([#204](https://github.com/EMI-Group/evox/pull/204)).

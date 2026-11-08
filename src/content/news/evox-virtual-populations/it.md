@@ -7,7 +7,7 @@ summary: "Un centro condiviso e semi casuali per candidato consentono a VirtualE
 
 Una popolazione più ampia di reti neurali richiede normalmente più copie dei pesi. Le modifiche EvoX del 7–8 luglio 2026 seguono un’altra strada: VirtualES conserva un centro di parametri condiviso e un seme casuale per candidato, ricostruendo le differenze durante la valutazione. Quanta diversità di ricerca può trovare spazio prima che i parametri esauriscano la memoria?
 
-![Una forma solida condivisa, semi rossi e varianti trasparenti rappresentano una popolazione virtuale](./virtuales-shared-center.webp)
+![Parametri condivisi e seed formano candidati virtuali](./virtuales-shared-center.webp)
 
 *Illustrazione concettuale: un centro condiviso, molti candidati ricostruibili.*
 

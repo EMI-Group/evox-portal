@@ -7,7 +7,7 @@ summary: "MetaDE ajoute une boucle évolutionnaire autour de l'évolution diffé
 
 L'adaptation peut concerner la façon de chercher autant que les solutions trouvées. MetaDE intègre cette idée dans EvoX avec deux niveaux évolutionnaires liés : l'un résout le problème cible, l'autre évalue les configurations DE qui rendent la recherche efficace. [MetaDE](https://github.com/EMI-Group/metade)
 
-![Un anneau de réglages entoure une population intérieure](./nested-evolution-search.webp)
+![Recherche externe de paramètres autour d’expériences internes](./nested-evolution-search.webp)
 
 ## Contexte
 

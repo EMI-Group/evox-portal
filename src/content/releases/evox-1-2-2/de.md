@@ -4,6 +4,8 @@ pubDate: 2025-06-03
 summary: "Ein kleineres Release, das sich auf Fehlerbehebungen konzentriert, einschließlich Korrekturen an DE-Algorithmen und Verbesserungen der Dokumentation."
 ---
 
+![Initialisierung getrennt von wiederholten Evolutionsschritten](./initialization-evolution-steps.webp)
+
 Dies ist ein kleineres Release, das sich ausschließlich auf Fehlerbehebungen konzentriert:
 
 - Nicht verwendete Importe wurden entfernt, um die Sauberkeit des Codes zu verbessern.

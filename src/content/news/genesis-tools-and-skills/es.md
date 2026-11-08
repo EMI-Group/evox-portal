@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Los proyectos acumulan código y formas de construirlo, comprobarlo y modificarlo. Genesis 0.13.4, publicado el 26 de septiembre de 2026, sitúa las modificaciones de habilidades en el árbol de trabajo y las hace revisables en Git. Junto con las herramientas personalizadas de 0.13.1, del 21 de septiembre, ofrece dos vías para integrar métodos del proyecto.
 
-![Una caja de herramientas oscura unida por un hilo rojo a un manual marfil](./project-tools-guidance.webp)
+![Herramientas del proyecto y tarjetas de instrucciones reutilizables](./project-tools-guidance.webp)
 
 ## Exponer operaciones mediante herramientas propias
 

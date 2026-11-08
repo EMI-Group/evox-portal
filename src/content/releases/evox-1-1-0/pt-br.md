@@ -4,6 +4,8 @@ pubDate: 2025-03-01
 summary: "EvoX 1.1 substitui TorchScript por torch.compile. TorchDynamo captura grafos de cálculo durante a execução de Python."
 ---
 
+![Estrutura do programa exposta para inspeção](./execution-graph-capture.webp)
+
 ## Atualização do compilador
 
 EvoX 1.1 substitui TorchScript por `torch.compile`. TorchDynamo captura grafos de cálculo durante a execução de Python.

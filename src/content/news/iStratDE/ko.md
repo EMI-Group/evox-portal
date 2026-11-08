@@ -7,7 +7,7 @@ summary: "iStratDE는 고정된 개체별 전략이 다양한 탐색 행동을 �
 
 진화 탐색의 특징은 서로 다른 가능성으로 이루어진 개체군에서 나옵니다. iStratDE는 이를 탐색 행동 수준에서 보존하는 방법을 살펴봅니다. 개체들은 실행 내내 서로 다른 전략을 유지합니다. EvoX에서는 알고리즘 설계와 이질적 후보의 병렬 평가를 연결합니다. [iStratDE](https://github.com/EMI-Group/istratde)
 
-![독립 레인에 나란히 놓인 서로 다른 경로 가이드](./persistent-strategy-diversity.webp)
+![개별 탐색 경로에서 유지되는 서로 다른 전략 패턴](./persistent-strategy-diversity.webp)
 
 이러한 격차를 해소하기 위해, EvoX 팀은 **개체 수준의 전략 다양성**이 DE의 탐색 역학과 최적화 성능에 어떤 영향을 미치는지 조사하고, 미니멀리스트 변형인 **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**를 제안했습니다. 핵심 아이디어는 간단합니다: 초기화 시 각 개체에 고유한 돌연변이 및 교차 전략이 할당되며, 이 할당은 진화 과정 전체에서 고정된 채로 유지됩니다. 복잡한 적응 및 피드백 루프를 배제하고 개체 수준에서 다양성을 도입함으로써, iStratDE는 개체군 전반에 걸쳐 지속적인 행동 이질성을 만들어냅니다.
 

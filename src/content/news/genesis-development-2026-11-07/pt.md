@@ -7,7 +7,7 @@ summary: "Consultar tarefas, compreender a capacidade do sistema e agir numa só
 
 Uma tarefa de desenvolvimento prolongada levanta questões muito depois de arrancar: o que continua ativo, porque falhou uma tarefa e como prosseguir? As alterações integradas em `main` do Genesis entre 4 e 7 de novembro de 2026 levam essas questões à conversa Assistant do painel e melhoram os serviços subjacentes.
 
-![Ilustração conceptual de uma conversa ligada a vários fluxos de tarefas numa plataforma partilhada](./genesis-assistant-task-flows.webp)
+![Um programador verifica tarefas em execução e em pausa](./genesis-assistant-task-flows.webp)
 
 *Uma conversa, vários fluxos de trabalho: uma ilustração editorial da ideia central desta atualização.*
 

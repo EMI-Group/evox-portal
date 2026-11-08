@@ -7,7 +7,7 @@ summary: "iStratDE étudie comment des stratégies individuelles fixes produisen
 
 La recherche évolutionnaire tire son caractère d'une population de possibilités différentes. iStratDE examine comment conserver cette diversité dans les comportements de recherche : chaque individu garde une stratégie distincte pendant l'exécution. Dans EvoX, cette approche relie conception algorithmique et évaluation parallèle de candidats hétérogènes. [iStratDE](https://github.com/EMI-Group/istratde)
 
-![Des guides distincts restent parallèles dans leurs voies](./persistent-strategy-diversity.webp)
+![Des stratégies distinctes persistent sur leurs parcours de recherche](./persistent-strategy-diversity.webp)
 
 Pour combler cette lacune, l'equipe EvoX a etudie comment la **diversite des strategies au niveau individuel** influence la dynamique de recherche de DE et les performances d'optimisation, et a propose une variante minimaliste : **iStratDE (Individual-Level Strategy Diversity Differential Evolution)**. L'idee centrale est simple : lors de l'initialisation, chaque individu se voit attribuer sa propre strategie de mutation et de croisement, et cette attribution reste fixe tout au long de l'evolution. En introduisant la diversite au niveau individuel -- tout en eliminant les boucles complexes d'adaptation et de retroaction -- iStratDE cree une heterogeneite comportementale persistante au sein de la population.
 

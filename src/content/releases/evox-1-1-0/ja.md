@@ -4,6 +4,8 @@ pubDate: 2025-03-01
 summary: "EvoX 1.1 は TorchScript を torch.compile に置き換え、TorchDynamo によって Python 実行中に計算グラフを取得します。"
 ---
 
+![コンパイラの検査に向けて可視化されたプログラム構造](./execution-graph-capture.webp)
+
 ## コンパイル基盤の更新
 
 EvoX 1.1 は TorchScript を `torch.compile` に置き換え、TorchDynamo によって Python 実行中に計算グラフを取得します。

@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "修复 CMA-ES、DE 变体、PSO、演化策略、锦标赛选择和超体积计算中的问题。"
 ---
 
+![检查并校正算法行为](./algorithm-update-correction.webp)
+
 **EvoX v1.4.1** 修复稳定版 1.x 系列中的算法正确性与运行问题。
 
 ## 算法修复

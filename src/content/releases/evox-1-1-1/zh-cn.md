@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "修复了 torch.compile 图捕获、use_state 图中断以及 BatchedTensor 泄漏等问题。"
 ---
 
+![展开程序结构以检查编译过程](./graph-break-repair.webp)
+
 ## 变更内容
 
 本次小版本发布主要包含错误修复和改进.

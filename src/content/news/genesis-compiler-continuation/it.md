@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Il [record Evidence del 7 settembre 2026](https://genesis.evox.group/evidence/compiler-continuation/) descrive il passaggio da **GLM 5.2 a DeepSeek V4 Flash** sulla stessa linea di sviluppo accettata. Il contesto della conversazione precedente non è stato trasferito.
 
-![Un ponte continuo attraversa due diverse superfici da disegno](./compiler-model-handoff.webp)
+![Un progetto di compilatore conservato tra diversi strumenti](./compiler-model-handoff.webp)
 
 Codice, struttura e cronologia accettata rimanevano disponibili.
 

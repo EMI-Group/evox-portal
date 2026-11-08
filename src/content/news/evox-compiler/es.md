@@ -7,7 +7,7 @@ summary: "Grafos explícitos, transformaciones combinables y etapas separadas pe
 
 Cuando los candidatos de una búsqueda son programas, depurar solo la salida final deja oculta buena parte del experimento. EvoX Compiler hace que el propio programa sea inspeccionable: puedes conservar su grafo, transformarlo y elegir un backend mediante etapas separadas y visibles.
 
-![Capas de grafos suspendidas se convierten en una estructura alineada y un artefacto rojo compacto](./evoxc-visible-stages.webp)
+![Estructura del programa visible para su inspección](./evoxc-visible-stages.webp)
 
 *Ilustración conceptual: la estructura del programa se hace visible entre definición y ejecución.*
 

@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 A feature may span an API service, a client application and a shared library. Their changes belong to one objective but not necessarily one Git repository. Genesis 0.13.4, released on September 26, 2026, adds persistent worktrees for writable companion repositories, giving cross-repository work a more explicit execution boundary.
 
-![Three separate courtyards connected by a red ribbon, each with its own gate](./companion-worktrees.webp)
+![Separate repository histories connected to one project](./companion-worktrees.webp)
 
 ## From access to isolated work
 

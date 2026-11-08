@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "EvoX 1.0.0 引入 PyTorch 整合、50 多種演化演算法與 GPU 加速最佳化支援。"
 ---
 
+![搜尋元件與候選方案](./pytorch-evolution-toolkit.webp)
+
 ## EvoX 1.0.0 有哪些新功能？
 * **完整的 PyTorch 相容性**：EvoX 現在與 PyTorch 生態系統無縫整合，使在 **神經架構搜尋 (NAS)、強化學習 (RL) 和元學習 (Meta-learning)** 中應用 **演化演算法 (EAs)** 變得前所未有的簡單。
 * **廣泛的演算法庫**：包含 **50 多種演化演算法**，包括 **GA、DE、PSO、CMA-ES、MOEAs（NSGA-II、RVEA、MOEA/D 等）**，以及最先進的元演化 (Meta-evolution) 方法。

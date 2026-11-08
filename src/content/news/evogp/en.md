@@ -7,7 +7,7 @@ summary: "EvoGP makes structured program populations amenable to GPU computation
 
 Evolutionary AI can search over executable structures as well as parameter vectors. EvoGP develops this direction within the EvoX ecosystem by making tree-based programs computationally tractable as large populations. Irregular structures and execution paths make this a representation and scheduling problem as much as an algorithmic one. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![Different branching program trees mounted in an aligned tray](./program-tree-populations.webp)
+![Program trees arranged in a parallel evaluation tray](./program-tree-populations.webp)
 
 To address this challenge, **we propose the EvoGP framework, reorganizing tree representation, genetic operator logic, and parallel execution mechanisms from the ground up.** Experimental results show that **EvoGP achieves peak computational throughput exceeding 10^11 GPops/s, enabling rapid evaluation of populations of 500,000 individuals within one second—up to 304× faster than existing GPU implementations.** This milestone marks a definitive break from hardware adaptation barriers, ushering genetic programming into the era of GPU-accelerated high-performance computing.
 

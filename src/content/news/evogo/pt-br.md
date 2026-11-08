@@ -7,7 +7,7 @@ summary: "O EvoGO liga aprendizagem generativa e otimização evolutiva, transfo
 
 A pesquisa científica e de engenharia precisa de decidir repetidamente qual experimento realizar a seguir. O EvoGO estuda uma versão computacional desta questão: podem as avaliações ensinar um gerador a melhorar as propostas? Isto liga a IA evolutiva do EvoX a uma pesquisa que aprende com os candidatos já testados. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![Moldes direcionais concentram um caminho vermelho](./learning-search-directions.webp)
+![Candidatos anteriores orientam novos caminhos de busca](./learning-search-directions.webp)
 
 ## O Dilema: A Otimização Orientada a Dados Ainda Não Deu o Último Passo
 
