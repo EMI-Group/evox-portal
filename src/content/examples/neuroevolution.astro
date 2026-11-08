@@ -15,8 +15,19 @@ const braxViewerHtml = buildBraxViewerHtml({
 });
 ---
 
-<iframe
+<iframe data-brax-viewer
   src={`data:text/html;charset=utf-8,${encodeURIComponent(braxViewerHtml)}`}
   class="w-full h-full border-0"
   title={t(tr, "examples.brax.title")}
   loading="lazy"></iframe>
+
+<script>
+  const frame = document.querySelector<HTMLIFrameElement>("[data-brax-viewer]");
+  const syncTheme = () => frame?.contentWindow?.postMessage({type: "evox-theme", theme: document.documentElement.dataset.theme || "dark"}, "*");
+  frame?.addEventListener("load", syncTheme);
+  window.addEventListener("message", event => {
+    if (event.source === frame?.contentWindow && event.data?.type === "evox-viewer-ready") syncTheme();
+  });
+  new MutationObserver(syncTheme).observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+  syncTheme();
+</script>

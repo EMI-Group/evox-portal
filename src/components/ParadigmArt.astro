@@ -27,21 +27,20 @@ const Illustration = illustrations[kind];
 
 <style>
   .application-art {
-    --art-ink: #d5d3dc;
-    --art-line: #777580;
-    --art-guide: #2e2b35;
-    --art-fill: #101015;
-    --art-surface: #060607;
-    --art-accent: #e65361;
-    --art-bright: #ff9da6;
-    --art-accent-soft: #221016;
-    --art-glow: drop-shadow(0 0 3px #e6536155);
+    --art-ink: var(--diagram-ink);
+    --art-line: var(--diagram-muted);
+    --art-guide: var(--diagram-guide);
+    --art-fill: var(--diagram-fill);
+    --art-surface: var(--diagram-bg);
+    --art-accent: var(--diagram-red);
+    --art-bright: var(--diagram-bright);
+    --art-accent-soft: var(--diagram-soft);
+    --art-glow: drop-shadow(0 0 3px color-mix(in srgb, var(--diagram-red) 25%, transparent));
     position: relative;
     width: 100%;
-    aspect-ratio: 12 / 7;
-    border: 1px solid #303034;
+    border: 1px solid var(--diagram-border);
     border-radius: 18px;
-    background: radial-gradient(ellipse at 52% 54%, #e6536109, transparent 62%), #060607;
+    background: var(--diagram-bg);
     overflow: hidden;
     isolation: isolate;
   }

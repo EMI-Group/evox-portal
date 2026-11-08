@@ -46,10 +46,9 @@ const GITHUB_URL = "https://github.com/EMI-Group";
 // 02 · The Power of Evolution — interactive loop beside the intro copy.
 const evolutionSteps = [
   "evolution.step.generate",
-  "evolution.step.execute",
   "evolution.step.evaluate",
   "evolution.step.select",
-  "evolution.step.improve",
+  "evolution.step.mutate",
 ];
 
 // 03 · Evolution Across AI Paradigms — compact 2 × 2 cards, each backed by a
@@ -177,6 +176,7 @@ const chapters = [
         <div class="evolution-panel reveal">
           <EvolutionDiagram
             steps={evolutionSteps.map((key) => t(tr, key))}
+            captions={evolutionSteps.map((key) => t(tr, key.replace(".step.", ".caption.")))}
             description={t(tr, "evolution.figure")}
             pauseLabel={t(tr, "evolution.pause")}
             playLabel={t(tr, "evolution.play")}

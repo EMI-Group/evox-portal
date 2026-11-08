@@ -27,6 +27,10 @@ export function buildBraxViewerHtml(messages: BraxViewerMessages): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+      :root { --viewer-bg: #f5f5f7; --viewer-ink: #1d1d1f; color-scheme: light; }
+      :root[data-theme="dark"] { --viewer-bg: #1d1d1f; --viewer-ink: #f5f5f7; color-scheme: dark; }
+      body { background: var(--viewer-bg); color: var(--viewer-ink); }
+      .lil-gui { --background-color: var(--viewer-bg); --text-color: var(--viewer-ink); --title-background-color: var(--viewer-bg); }
       #brax-viewer { width: 100%; height: 100%; }
     </style>
     <script type="importmap">
@@ -44,11 +48,22 @@ export function buildBraxViewerHtml(messages: BraxViewerMessages): string {
   <body>
     <div id="brax-viewer"></div>
     <script type="module">
+      let viewer;
+      const applyTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        const background = theme === "dark" ? 0x1d1d1f : 0xf5f5f7;
+        viewer?.scene.background?.setHex(background);
+        viewer?.scene.fog?.color.setHex(background);
+      };
+      window.addEventListener("message", (event) => {
+        if (event.source === parent && event.data?.type === "evox-theme" && ["light", "dark"].includes(event.data.theme)) applyTheme(event.data.theme);
+      });
+      parent.postMessage({type: "evox-viewer-ready"}, "*");
       const system = ${braxDataString};
       const brax = document.getElementById("brax-viewer");
       const setFallback = (message) => {
         if (!brax) return;
-        brax.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:24px;box-sizing:border-box;background:linear-gradient(180deg,#0f172a,#111827);color:#e5e7eb;font:500 14px/1.6 system-ui,sans-serif;text-align:center;">' + message + "</div>";
+        brax.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:24px;box-sizing:border-box;background:var(--viewer-bg);color:var(--viewer-ink);font:500 14px/1.6 system-ui,sans-serif;text-align:center;">' + message + "</div>";
       };
       const hasWebGLSupport = () => {
         try {
@@ -75,7 +90,8 @@ export function buildBraxViewerHtml(messages: BraxViewerMessages): string {
             if (system.geoms && system.geoms.world && system.geoms.world[0]) {
               system.geoms.world[0].size = [0, 0, 40];
             }
-            const viewer = new Viewer(brax, system);
+            viewer = new Viewer(brax, system);
+            applyTheme(document.documentElement.dataset.theme || "light");
             if (viewer.animator && viewer.animator.mixer) {
               viewer.animator.mixer.timeScale = 0.1;
             }

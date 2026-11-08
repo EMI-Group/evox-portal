@@ -16,6 +16,9 @@ export default defineConfig({
   site: "https://www.evox.group",
 
   devToolbar: { enabled: false },
+  markdown: {
+    shikiConfig: { themes: { light: "github-light", dark: "github-dark" } },
+  },
 
   vite: {
     plugins: [tailwindcss()],

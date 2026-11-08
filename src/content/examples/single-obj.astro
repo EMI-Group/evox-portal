@@ -5,7 +5,7 @@ const { locale = defaultLocale } = Astro.props;
 const tr = await loadTranslations(locale);
 ---
 
-<div id="cso-plot" data-generation={t(tr, "examples.plot.generation")}  data-min={t(tr, "examples.plot.min")}  data-max={t(tr, "examples.plot.max")}  data-median={t(tr, "examples.plot.median")}  data-front={t(tr, "examples.plot.front")}  data-population={t(tr, "examples.plot.population")}  class="w-full h-full"></div>
+<div id="cso-plot" data-generation={t(tr, "examples.plot.generation")}  data-min={t(tr, "examples.plot.min")}  data-max={t(tr, "examples.plot.max")}  data-median={t(tr, "examples.plot.median")} data-average={t(tr, "examples.plot.average")}  data-front={t(tr, "examples.plot.front")}  data-population={t(tr, "examples.plot.population")}  class="w-full h-full"></div>
 <script is:inline>
   // Load Plotly only once: multiple components on the same page share this
   // promise, so the CDN script is injected a single time and everyone awaits it.
@@ -26,6 +26,7 @@ const tr = await loadTranslations(locale);
 </script>
 
 <script>
+  import { syncPlotTheme } from "./plot-theme";
   import { data, layout } from "./cso-data.js";
 
   const cso_plot = document.getElementById("cso-plot");
@@ -34,7 +35,7 @@ const tr = await loadTranslations(locale);
     localizedLayout.sliders.forEach(slider => {
       slider.currentvalue.prefix = `${cso_plot.dataset.generation}: `;
     });
-    const localizedData = data.map(trace => ({ ...trace, name: cso_plot.dataset[({ Min: "min", Max: "max", Median: "median" })[trace.name]] || trace.name }));
+    const localizedData = data.map(trace => ({ ...trace, name: cso_plot.dataset[({ Min: "min", Max: "max", Median: "median", Average: "average" })[trace.name]] || trace.name }));
     // @ts-ignore
     (window.__plotlyLoad || Promise.reject(new Error("Plotly loader not initialized")))
       .then(() => {
@@ -63,6 +64,7 @@ const tr = await loadTranslations(locale);
         return Plotly.addFrames(cso_plot, subdata);
       })
       .then(() => {
+        syncPlotTheme(cso_plot);
         cso_plot.setAttribute("data-ready", "true");
       })
       .catch((err: unknown) => {
