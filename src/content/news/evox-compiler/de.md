@@ -7,7 +7,7 @@ summary: "Explizite Graphen, kombinierbare Transformationen und getrennte Ausfü
 
 Sind die Kandidaten einer Suche selbst Programme, bleibt beim Debuggen nur der Endausgabe vieles verborgen. EvoX Compiler macht das Programm selbst zugänglich: Forschende können seinen Graphen aufbewahren, transformieren und über getrennte, sichtbare Stufen ein Ausführungsbackend wählen.
 
-![Schwebende Graphschichten werden zu einer ausgerichteten Struktur und einem kompakten roten Artefakt](./evoxc-visible-stages.webp)
+![Sichtbare Programmstruktur zur Compilerprüfung](./evoxc-visible-stages.webp)
 
 *Konzeptillustration: Zwischen Definition und Ausführung wird die Programmstruktur sichtbar.*
 

@@ -4,6 +4,8 @@ pubDate: 2025-05-13
 summary: "새로운 벤치마크 함수(Ellipsoid, Griewank) 추가 및 버그 수정을 통한 안정성 개선."
 ---
 
+![알고리즘 동작 점검 및 수정](./benchmark-sampling-correction.webp)
+
 이번 릴리스는 안정성 향상과 버그 수정에 중점을 둔 마이너 릴리스이며, 몇 가지 편의성 개선이 포함되어 있습니다.
 
 ## 새로운 기능

@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "Fehlerbehebungen für die torch.compile Graph-Erfassung, use_state Graph-Unterbrechungen und BatchedTensor-Lecks."
 ---
 
+![Sichtbare Programmstruktur zur Compilerprüfung](./graph-break-repair.webp)
+
 ## Was sich geändert hat
 
 Dieses Minor-Release enthält hauptsächlich Fehlerbehebungen und Verbesserungen.

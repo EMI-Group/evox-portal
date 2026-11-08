@@ -4,6 +4,8 @@ pubDate: 2025-03-01
 summary: "EvoX 1.1 заменяет TorchScript на torch.compile. TorchDynamo захватывает графы вычислений во время выполнения Python."
 ---
 
+![Структура программы открыта для проверки компилятора](./execution-graph-capture.webp)
+
 ## Обновление компилятора
 
 EvoX 1.1 заменяет TorchScript на `torch.compile`. TorchDynamo захватывает графы вычислений во время выполнения Python.

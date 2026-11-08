@@ -7,7 +7,7 @@ summary: "MetaDE 在差分演化之外加入一层演化循环，借助 EvoX 的
 
 适应既可以发生在解的层面，也可以发生在系统寻找解的方式上。MetaDE 通过两个相互连接的演化层次，将这一思路带入 EvoX：内层解决目标问题，外层评价哪些 DE 配置能够让搜索更有效。 [MetaDE](https://github.com/EMI-Group/metade)
 
-![外层配置环围绕内层候选种群](./nested-evolution-search.webp)
+![外层参数搜索围绕内层候选实验](./nested-evolution-search.webp)
 
 ## 背景
 

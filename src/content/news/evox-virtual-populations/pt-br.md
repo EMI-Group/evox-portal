@@ -7,7 +7,7 @@ summary: "Um centro compartilhado e sementes por candidato permitem ao VirtualES
 
 Uma população maior de redes neurais normalmente exige mais cópias dos pesos. As mudanças do EvoX de 7–8 de julho de 2026 seguem outro caminho: o VirtualES guarda um centro de parâmetros compartilhado e uma semente aleatória por candidato, reconstruindo as diferenças durante a avaliação. Quanta diversidade de busca cabe antes de os parâmetros esgotarem a memória?
 
-![Uma forma sólida comum, sementes vermelhas e variantes transparentes representam uma população virtual](./virtuales-shared-center.webp)
+![Parâmetros compartilhados e sementes formam candidatos virtuais](./virtuales-shared-center.webp)
 
 *Ilustração conceitual: um centro compartilhado, vários candidatos reconstruíveis.*
 

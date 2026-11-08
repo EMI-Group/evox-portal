@@ -7,7 +7,7 @@ summary: "EvoGO verbindet generatives Lernen mit evolutionärer Optimierung und 
 
 Wissenschaftliche und technische Suche muss wiederholt entscheiden, welches Experiment als Nächstes sinnvoll ist. EvoGO untersucht diese Frage rechnerisch: Können Bewertungen einen Generator zu besseren Vorschlägen führen? Damit verbindet sich EvoXs evolutionäre KI mit einem Suchprozess, der aus bereits geprüften Kandidaten lernt. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![Richtungsschablonen bündeln einen roten Suchpfad](./learning-search-directions.webp)
+![Frühere Kandidaten leiten neue Suchpfade](./learning-search-directions.webp)
 
 ## Das Dilemma: Die datengesteuerte Optimierung hat den letzten Schritt noch nicht getan
 

@@ -7,7 +7,7 @@ summary: "AI coding agents connect research intent to EvoX's executable search w
 
 For evolutionary AI, a research idea becomes useful when it can enter a repeatable cycle of execution and evaluation. The Codex–EvoX workflow connects natural-language intent to that cycle: the coding agent helps construct the experiment, while EvoX provides the interfaces and computation through which candidate solutions are tested. [EvoX](https://github.com/EMI-Group/evox)
 
-![An idea sheet, route model and experiment cards joined by red thread](./research-to-experiment.webp)
+![A researcher prepares an evolutionary experiment](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) is a distributed, GPU-accelerated framework for scalable evolutionary computation. Through its unified `Algorithm`, `Problem`, and `Workflow` interfaces, EvoX brings population search, batched evaluation, experiment execution, and hardware acceleration into one cohesive computational architecture. It supports applications ranging from single- and multi-objective optimization to neuroevolution, reinforcement-learning environments, and complex system design.
 

@@ -7,7 +7,7 @@ summary: "A shared parameter center and per-candidate seeds let VirtualES recons
 
 A larger neural-network population usually means storing more copies of its weights. EvoX's July 7–8, 2026 changes take another route: VirtualES stores one shared parameter center and a random seed per candidate, then reconstructs the differences during evaluation. The useful question becomes how much search diversity can fit before parameter storage consumes the memory budget.
 
-![A solid shared form, red seeds and translucent variations illustrate a virtual population](./virtuales-shared-center.webp)
+![Shared parameters and seeds form virtual candidates](./virtuales-shared-center.webp)
 
 *Concept illustration: one shared center, many reconstructable candidates.*
 

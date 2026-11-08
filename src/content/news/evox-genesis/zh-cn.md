@@ -7,7 +7,7 @@ summary: "Genesis 将 EvoX 的演化式 AI 方向延伸到软件：智能体提�
 
 Genesis 将 EvoX 的愿景带入 Agentic AI，把不断发展的软件项目视为多次局部贡献所积累的成果。代码生成、执行、审查与集成组成开发循环；被接受的实现及其验证记录，为后续工作提供可以继续发展的基础。 [Genesis](https://github.com/EMI-Group/genesis)
 
-![连续红色楼梯贯穿分层的软件建筑](./software-world-continuity.webp)
+![源码模块构成持续扩展的软件项目](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
 

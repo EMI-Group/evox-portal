@@ -7,7 +7,7 @@ summary: "MetaDE は差分進化の外側に進化ループを設け、EvoX の�
 
 適応は得られる解だけでなく、システムが解を探す方法にも働きます。MetaDE は結びついた二つの進化階層でこの考えを EvoX に導入します。内側は対象問題を解き、外側は探索を有効にする DE 設定を評価します。 [MetaDE](https://github.com/EMI-Group/metade)
 
-![内側の候補集団を囲む外側の設定リング](./nested-evolution-search.webp)
+![内側の候補実験を囲む外側のパラメータ探索](./nested-evolution-search.webp)
 
 ## 背景
 

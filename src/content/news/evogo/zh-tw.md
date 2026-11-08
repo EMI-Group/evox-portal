@@ -7,7 +7,7 @@ summary: "EvoGO 連線生成式學習與演化最佳化，將已評價的候選�
 
 科學與工程搜尋需要反覆回答：下一次應當嘗試什麼？EvoGO 研究這個問題的計算實現——能否讓評價結果教會生成器改進候選方案？它將 EvoX 的演化式 AI 方向推進到搜尋過程自身的學習，讓已經完成的試驗參與指導下一輪探索。 [EvoGO](https://github.com/EMI-Group/evogo)
 
-![方向模板逐步聚焦紅色搜尋路徑](./learning-search-directions.webp)
+![歷史候選引導新的搜尋路徑](./learning-search-directions.webp)
 
 ## 困境：數據驅動最佳化仍未邁出最後一步
 

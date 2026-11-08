@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 演化式 AI 所需的基礎設施，本身也是複雜的軟體工程。Genesis 構建 EvoX Compiler 的案例連線了這兩個層面：智慧體開發系統構建和擴充套件張量圖編譯器，介面約定與迴歸測試則決定哪些變更能夠進入持續發展的實現。
 
-![紅色結構桿貫穿對齊的編譯器分層構件](./compiler-contract-layers.webp)
+![編譯器計算圖與迴歸測試對照](./compiler-contract-layers.webp)
 
 ## 先把職責劃分清楚
 

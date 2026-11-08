@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "实验性 Alpha 版本带来新的函数式 API 和显式张量图编译器。生产使用仍推荐稳定的 1.x 系列。"
 ---
 
+![展开程序结构以检查编译过程](./experimental-compiler-runtime.webp)
+
 **EvoX v2.0.0a1** 是基于 [EvoX Compiler（`evoxc`）](https://github.com/EMI-Group/evoxc) 完全重写后的首个 Alpha 版本。
 
 > **实验性预发布版本：** 新 API 与 1.x 不兼容，无法直接替换升级。生产使用仍推荐稳定的 1.x 系列；请在独立环境中试用 Alpha。

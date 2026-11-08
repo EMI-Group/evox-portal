@@ -7,7 +7,7 @@ summary: "Genesis erweitert EvoXs evolutionäre KI auf Software: Agenten schlage
 
 Genesis überträgt EvoXs Vision auf Agentic AI: Das sich entwickelnde Softwareprojekt bleibt als Ergebnis vieler lokaler Beiträge bestehen. Codegenerierung, Ausführung, Review und Integration bilden einen Entwicklungszyklus. Akzeptierte Implementierungen und ihre Prüfergebnisse liefern die Grundlage für anschließende Arbeit. [Genesis](https://github.com/EMI-Group/genesis)
 
-![Ein mehrschichtiger Softwareturm mit durchgehender roter Treppe](./software-world-continuity.webp)
+![Quellmodule bilden ein wachsendes Softwareprojekt](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
 

@@ -7,7 +7,7 @@ summary: "Esaminare le attività, capire la capacità del sistema e agire in un�
 
 Un’attività di sviluppo lunga continua a porre domande dopo l’avvio: quale lavoro è ancora attivo, perché un’attività è fallita e come proseguire? Le modifiche integrate in `main` dal 4 al 7 novembre 2026 portano queste domande nella conversazione Assistant della dashboard Genesis, migliorando anche i servizi sottostanti.
 
-![Illustrazione concettuale di una conversazione collegata a più flussi di attività su una piattaforma condivisa](./genesis-assistant-task-flows.webp)
+![Uno sviluppatore controlla attività in corso e in pausa](./genesis-assistant-task-flows.webp)
 
 *Una conversazione, più flussi di lavoro: un’illustrazione editoriale dell’idea centrale di questo aggiornamento.*
 

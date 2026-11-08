@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 演化式 AI 所需的基础设施，本身也是复杂的软件工程。Genesis 构建 EvoX Compiler 的案例连接了这两个层面：智能体开发系统构建和扩展张量图编译器，接口约定与回归测试则决定哪些变更能够进入持续发展的实现。
 
-![红色结构杆贯穿对齐的编译器分层构件](./compiler-contract-layers.webp)
+![编译器计算图与回归测试对照](./compiler-contract-layers.webp)
 
 ## 先把职责划分清楚
 

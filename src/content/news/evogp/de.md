@@ -7,7 +7,7 @@ summary: "EvoGP erschließt strukturierte Programmpopulationen für GPU-Berechnu
 
 Evolutionäre KI kann ausführbare Strukturen ebenso durchsuchen wie Parametervektoren. EvoGP entwickelt diese Richtung im EvoX-Ökosystem, indem es große Populationen baumförmiger Programme berechenbar macht. Unregelmäßige Strukturen und Ausführungspfade erfordern passende Repräsentation und Ablaufplanung ebenso wie geeignete Algorithmen. [EvoGP](https://github.com/EMI-Group/evogp)
 
-![Verschiedene verzweigte Programmbäume in einem geordneten Tablett](./program-tree-populations.webp)
+![Programmbäume in einer parallelen Auswertungsschale](./program-tree-populations.webp)
 
 Um diese Herausforderung zu bewältigen, **schlagen wir das EvoGP-Framework vor und reorganisieren Baumdarstellung, die Logik genetischer Operatoren und parallele Ausführungsmechanismen von Grund auf neu.** Experimentelle Ergebnisse zeigen, dass **EvoGP einen Spitzendurchsatz von über 10^11 GPops/s erreicht und die schnelle Auswertung von Populationen mit 500.000 Individuen innerhalb einer Sekunde ermöglicht — bis zu 304× schneller als bestehende GPU-Implementierungen.** Dieser Meilenstein markiert einen definitiven Bruch mit Hardware-Anpassungsbarrieren und führt Genetic Programming in die Ära des GPU-beschleunigten Hochleistungsrechnens ein.
 

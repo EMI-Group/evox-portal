@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Projects carry more than source code: they also have ways to build, check and change it. Genesis 0.13.4, released on September 26, 2026, makes skill-tool changes worktree-aware and reviewable in Git. Combined with custom tools introduced in 0.13.1 on September 21, this provides two distinct ways to bring project methods into agent-assisted development.
 
-![A dark toolkit connected by a red thread to an ivory instruction folio](./project-tools-guidance.webp)
+![Project tools beside reusable instruction cards](./project-tools-guidance.webp)
 
 ## Expose operations through custom tools
 

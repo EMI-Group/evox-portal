@@ -7,7 +7,7 @@ summary: "Explicit graphs, composable transformations and separate execution sta
 
 When the candidates in a search are programs, debugging only the final output leaves much of the experiment hidden. EvoX Compiler makes the program itself available for inspection: researchers can keep its graph, transform it and choose an execution backend through separate, visible stages.
 
-![Suspended graph layers become an aligned structure and a compact red artifact](./evoxc-visible-stages.webp)
+![Program structure exposed for compiler inspection](./evoxc-visible-stages.webp)
 
 *Concept illustration: program structure becomes visible between definition and execution.*
 

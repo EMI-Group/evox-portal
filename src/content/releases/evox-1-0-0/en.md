@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "EvoX 1.0.0 introduces PyTorch integration, more than 50 evolutionary algorithms, and support for GPU-accelerated optimization."
 ---
 
+![Search components and candidate designs](./pytorch-evolution-toolkit.webp)
+
 ## What's New in EvoX 1.0.0?
 * **Full PyTorch Compatibility**: EvoX now integrates seamlessly with the PyTorch ecosystem, making it easier than ever to apply **evolutionary algorithms (EAs) in neural architecture search (NAS), reinforcement learning (RL), and meta-learning**.
 * **Extensive Algorithm Library**: Features **50+ evolutionary algorithms**, including **GA, DE, PSO, CMA-ES, MOEAs (NSGA-II, RVEA, MOEA/D, etc.)**, and state-of-the-art meta-evolution methods.

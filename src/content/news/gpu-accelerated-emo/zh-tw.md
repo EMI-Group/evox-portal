@@ -7,7 +7,7 @@ summary: "EvoMO 將張量化多目標搜尋接入 EvoX，讓實驗能夠在大�
 
 AI 與工程系統往往同時面對精度、資源消耗、穩定性等多個目標。EvoX 的演化基礎設施需要支援對這些權衡的探索。EvoMO 從計算層面解決這一問題：面向 GPU 重組開銷較大的種群比較與選擇，使更大規模的多目標實驗變得可行。 [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![候選陣列展開為呈現不同取捨的階梯平台](./tensorized-tradeoff-population.webp)
+![候選解分布在多目標權衡地形上](./tensorized-tradeoff-population.webp)
 
 ## 透過張量化技術連結演化多目標最佳化與 GPU 加速
 

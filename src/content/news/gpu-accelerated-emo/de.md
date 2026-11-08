@@ -7,7 +7,7 @@ summary: "EvoMO bringt tensorisierte Mehrzielsuche in EvoX, um konkurrierende Zi
 
 KI- und technische Systeme verfolgen häufig mehrere Ziele: Genauigkeit, Ressourcenverbrauch, Stabilität oder weitere Anforderungen. EvoXs evolutionäre Infrastruktur muss die Untersuchung dieser Zielkonflikte ermöglichen. EvoMO organisiert aufwendige Populationsvergleiche und Auswahl für GPUs neu und macht damit größere Mehrzielexperimente praktikabel. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![Ein Kandidatenraster verteilt sich auf Terrassen unterschiedlicher Zielkonflikte](./tensorized-tradeoff-population.webp)
+![Kandidatenlösungen in einer Landschaft von Zielkonflikten](./tensorized-tradeoff-population.webp)
 
 ## Verbindung von evolutionärer mehrkriterieller Optimierung und GPU-Beschleunigung durch Tensorisierung
 

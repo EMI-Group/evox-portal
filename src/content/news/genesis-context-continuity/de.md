@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Ein Test kann noch laufen, wenn der Gesprächskontext eines Agenten voll ist. Genesis 0.13.8–0.13.10, veröffentlicht vom 26. bis 29. Oktober 2026, trennt beide Lebenszyklen: den Arbeitskontext des Modells komprimieren und zugleich Ausgabe und Abschlussstatus abgekoppelter Shell-Jobs verfügbar halten.
 
-![Eine rote Presse verdichtet ein fragmentiertes Band, während ein separater Faden durchgehend bleibt](./context-compression-continuity.webp)
+![Langer Kontext wird bei fortlaufenden Aufgaben verdichtet](./context-compression-continuity.webp)
 
 *Arbeitskontext verdichten, Ausführung fortsetzen.*
 

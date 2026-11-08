@@ -4,6 +4,8 @@ pubDate: 2025-03-01
 summary: "EvoX 1.1 使用 torch.compile 替代 TorchScript，通过 TorchDynamo 在 Python 执行过程中捕获计算图。"
 ---
 
+![展开程序结构以检查编译过程](./execution-graph-capture.webp)
+
 ## 编译后端更新
 
 EvoX 1.1 使用 `torch.compile` 替代 TorchScript，通过 TorchDynamo 在 Python 执行过程中捕获计算图。

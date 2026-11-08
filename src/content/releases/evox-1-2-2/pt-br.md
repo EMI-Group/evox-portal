@@ -4,6 +4,8 @@ pubDate: 2025-06-03
 summary: "Uma versão menor focada em correções de bugs, incluindo ajustes no algoritmo DE e melhorias na documentação."
 ---
 
+![Inicialização separada dos passos evolutivos repetidos](./initialization-evolution-steps.webp)
+
 Esta é uma versão menor focada exclusivamente em correções de bugs:
 
 - Removidos imports não utilizados para melhorar a limpeza do código.

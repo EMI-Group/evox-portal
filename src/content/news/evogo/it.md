@@ -7,7 +7,7 @@ summary: "EvoGO unisce apprendimento generativo e ottimizzazione evolutiva, tras
 
 La ricerca scientifica e ingegneristica deve decidere ripetutamente quale esperimento eseguire dopo. EvoGO ne studia una versione computazionale: le valutazioni possono insegnare a un generatore a migliorare le proposte? Questo collega l'IA evolutiva di EvoX a un processo di ricerca che impara dai candidati già verificati. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![Sagome direzionali concentrano un percorso rosso](./learning-search-directions.webp)
+![I candidati precedenti guidano nuovi percorsi di ricerca](./learning-search-directions.webp)
 
 ## L'Ostacolo: L'Ottimizzazione Guidata dai Dati Non Ha Ancora Compiuto il Passo Finale
 

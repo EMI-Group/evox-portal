@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 The [Evidence record dated September 7, 2026](https://genesis.evox.group/evidence/compiler-continuation/) describes a handoff from **GLM 5.2 to DeepSeek V4 Flash** on an accepted compiler lineage. The receiving model did not inherit the previous agent's conversational context.
 
-![A continuous bridge spans two different drafting surfaces](./compiler-model-handoff.webp)
+![A compiler project retained between different toolsets](./compiler-model-handoff.webp)
 
 The existing source, project structure and accepted history remained available.
 

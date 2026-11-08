@@ -7,7 +7,7 @@ summary: "Un centre partagé et des graines aléatoires par candidat permettent 
 
 Agrandir une population de réseaux neuronaux demande généralement de stocker davantage de copies des poids. Les changements EvoX des 7 et 8 juillet 2026 empruntent une autre voie : VirtualES conserve un centre de paramètres commun et une graine par candidat, puis reconstruit les différences pendant l’évaluation. Quelle diversité de recherche peut-on ainsi représenter avant de saturer la mémoire ?
 
-![Une forme pleine commune, des graines rouges et des variations transparentes évoquent une population virtuelle](./virtuales-shared-center.webp)
+![Paramètres partagés et graines forment des candidats virtuels](./virtuales-shared-center.webp)
 
 *Illustration conceptuelle : un centre partagé, plusieurs candidats reconstructibles.*
 

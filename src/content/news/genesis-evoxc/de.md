@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Infrastruktur für evolutionäre KI ist selbst ein umfangreiches Softwarevorhaben. Der Genesis-EvoX-Compiler-Fall verbindet beide Ebenen: Ein agentisches Entwicklungssystem erstellt und erweitert einen Tensorgraph-Compiler, während Schnittstellenverträge und Regressionstests bestimmen, welche Änderungen in die fortgesetzte Implementierung eingehen.
 
-![Ausgerichtete Compilerschichten mit einem roten Verbindungsstab](./compiler-contract-layers.webp)
+![Compilergraphen werden mit Regressionstests geprüft](./compiler-contract-layers.webp)
 
 ## Klare Zuständigkeiten
 

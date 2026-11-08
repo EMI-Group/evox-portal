@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "Bug fixes for torch.compile graph capture, use_state graph breaks, and BatchedTensor leaks."
 ---
 
+![Program structure exposed for compiler inspection](./graph-break-repair.webp)
+
 ## What's Changed
 
 This minor release primarily includes bug fixes and improvements.

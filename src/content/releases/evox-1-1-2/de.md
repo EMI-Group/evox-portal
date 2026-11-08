@@ -4,6 +4,8 @@ pubDate: 2025-03-31
 summary: "Dokumentationsaktualisierungen, vmap- und HPO-Funktionen, Benchmark-Korrekturen und erste Unterstützung für verteilte Workflows."
 ---
 
+![Getrennte Auswertungsstationen teilen Populationsrückmeldungen](./distributed-parameter-trials.webp)
+
 ## Was sich geändert hat
 - Aktualisierte Dokumentation mit Nutzungshinweisen und Anleitungen zum Parameter-Tuning
 

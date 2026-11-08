@@ -7,7 +7,7 @@ summary: "EvoX 1.4.1 실험을 완성하고 문제, 개체군, 평가, 실행이
 
 PSO로 2차원 Ackley 함수를 최소화하고 실행 장치와 탐색 기록을 확인합니다. **EvoX 1.4.1 및 PyTorch**용 예제로, 실험적인 2.x 컴파일러 API와 다릅니다. 작은 과제는 흐름을 배우기 위한 것이며 GPU 성능 벤치마크가 아닙니다.
 
-![탐색 지형의 후보 구슬과 연결된 워크플로 프레임](./first-search-workflow.webp)
+![탐색 지형을 탐험하는 후보 입자](./first-search-workflow.webp)
 
 ## 독립 환경 준비
 

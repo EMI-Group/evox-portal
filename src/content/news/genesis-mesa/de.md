@@ -7,7 +7,7 @@ summary: "Dreizehn MESA-Module wurden zu einem Rust-Workspace. Referenztests und
 
 Wissenschaftliche Software neu zu schreiben heißt, mehr als Algorithmen zu übernehmen. Auch das numerische Verhalten, auf dem spätere Berechnungen beruhen, muss erhalten bleiben. Im MESA-Fall von Genesis wurden dreizehn Fortran-Module als Rust-Crates neu entwickelt; ursprüngliche Ausgaben dienen als Referenz. Entscheidend ist, wie diese Kontinuität überprüfbar wird.
 
-![Eine geschichtete Sternskulptur über zwei unterschiedlich gestalteten Ringen mit übereinstimmenden Konturen](./mesa-numerical-continuity.webp)
+![Fortran- und Rust-Ausgaben unter der Lupe](./mesa-numerical-continuity.webp)
 
 *Konzeptillustration: neue Implementierung, gemeinsame numerische Referenz.*
 

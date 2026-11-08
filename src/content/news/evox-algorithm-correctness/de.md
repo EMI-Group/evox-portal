@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Eine Suche kann erfolgreich enden und dennoch einer falschen Aktualisierungsregel folgen. EvoX 1.4.1 vom 30. Oktober 2026 korrigiert solche Abweichungen in SHADE, Differential Evolution und CMA-ES und stellt benötigtes Anpassungs-, Stichproben- und Ausführungsverhalten wieder her.
 
-![Ein Kalibrierinstrument richtet eine dunkle Suchkontur an einer roten Referenz aus](./algorithm-behavior-calibration.webp)
+![Prüfung und Korrektur des Algorithmusverhaltens](./algorithm-behavior-calibration.webp)
 
 *Implementierung am beabsichtigten Algorithmusverhalten ausrichten.*
 

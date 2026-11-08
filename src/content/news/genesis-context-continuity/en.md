@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 A test run may still be working when an agent's conversation fills up. Genesis 0.13.8–0.13.10, released October 26–29, 2026, give those two lifecycles separate mechanisms: compress the model's working context, while detached shell jobs keep their output and completion status available.
 
-![A red press compacts a fragmented ribbon while a separate thread remains continuous](./context-compression-continuity.webp)
+![Long context compressed while tasks continue](./context-compression-continuity.webp)
 
 *Compact working context, continuing execution.*
 

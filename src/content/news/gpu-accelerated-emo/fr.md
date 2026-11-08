@@ -7,7 +7,7 @@ summary: "EvoMO intègre la recherche multiobjectif tensorisée à EvoX pour exp
 
 Les systèmes d'IA et d'ingénierie poursuivent souvent plusieurs objectifs : précision, ressources, stabilité ou autres exigences. L'infrastructure évolutionnaire d'EvoX doit permettre d'explorer ces compromis. EvoMO en traite l'aspect informatique en réorganisant pour les GPU les comparaisons et sélections coûteuses entre individus, rendant possibles de plus grandes expériences multiobjectifs. [EvoMO](https://arxiv.org/html/2503.20286v1#S3)
 
-![Une grille de candidats se déploie sur des terrasses de compromis](./tensorized-tradeoff-population.webp)
+![Solutions candidates réparties dans un paysage de compromis](./tensorized-tradeoff-population.webp)
 
 ## Faire le pont entre l'optimisation multiobjectif évolutionnaire et l'accélération GPU via la tensorisation
 

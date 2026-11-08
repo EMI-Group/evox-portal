@@ -4,6 +4,8 @@ pubDate: 2025-03-16
 summary: "torch.compile 그래프 캡처, use_state 그래프 중단(break), BatchedTensor 누수(leak)에 대한 버그 수정."
 ---
 
+![컴파일러 검사를 위해 드러낸 프로그램 구조](./graph-break-repair.webp)
+
 ## 변경 사항
 
 이번 마이너 릴리스는 주로 버그 수정 및 개선 사항을 포함합니다.

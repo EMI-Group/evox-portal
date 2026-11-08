@@ -7,7 +7,7 @@ summary: "코딩 에이전트는 연구 의도를 EvoX의 실행 가능한 탐�
 
 진화형 AI에서 연구 아이디어는 반복 가능한 실행과 평가의 순환에 들어갈 때 검증 가능한 능력이 됩니다. Codex와 EvoX는 자연어 의도를 이 순환에 연결합니다. 에이전트는 실험 구성을 돕고, EvoX는 후보 해를 시험할 인터페이스와 계산을 제공합니다. [EvoX](https://github.com/EMI-Group/evox)
 
-![빨간 실로 연결된 아이디어 용지, 경로 모형과 실험 카드](./research-to-experiment.webp)
+![진화 실험을 준비하는 연구자](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox)는 확장 가능한 진화 연산을 위한 분산형 GPU 가속 프레임워크입니다. 통합된 `Algorithm`, `Problem`, `Workflow` 인터페이스를 통해 EvoX는 개체군 탐색, 배치 평가, 실험 실행, 하드웨어 가속을 하나의 일관된 컴퓨팅 아키텍처로 통합합니다. 단일 및 다목적 최적화부터 신경진화, 강화학습 환경, 복잡계 설계까지 다양한 응용을 지원합니다.
 

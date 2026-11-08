@@ -7,7 +7,7 @@ summary: "EvoGM nutzt evolutionäres Feedback in generativer KI, um Fähigkeiten
 
 Die wachsende Sammlung spezialisierter Modelle eröffnet Möglichkeiten, Fähigkeiten für neue Aufgaben wiederzuverwenden. EvoGM untersucht innerhalb der EvoX-Forschungsrichtung, wie Populationsfeedback dies steuert: Modellkombinationen werden bewertet, und ihre Ergebnisse lehren einen kleinen Generator, bessere Fusionskonfigurationen vorzuschlagen. [EvoGM](https://github.com/JiangTao97/evogm)
 
-![Expertenmodule mit verstellbaren Fäden zu einer Verbundform](./expert-merging-feedback.webp)
+![Expertenmodelle bilden Kandidatenkonfigurationen](./expert-merging-feedback.webp)
 
 Um dieses Problem zu lösen, schlagen das EvoX-Team in Zusammenarbeit mit dem Peng Cheng Laboratory EvoGM (Evolutionary Generative Merging) vor, ein generatives evolutionäres Modellfusion-Framework, das die Suche nach Fusionskoeffizienten in ein lernbares generatives Optimierungsproblem umwandelt. EvoGM organisiert verschiedene Fusionkonfigurationen als Kandidatenpopulation und evolviert die Population durch winner-loser-Pairing, Training mit doppeltem Generator, zyklische Konsistenzbeschränkungen und evolutionäre Aktualisierung der Expertenbasis in einer geschlossenen Schleife von „Generierung — Bewertung — Selektion — erneutes Lernen“, wobei es autonom aus begrenztem Validierungsfeedback lernt, wie Konfigurationen mit niedriger Leistung in Konfigurationen mit hoher Leistung transformiert werden. Experimentelle Ergebnisse zeigen, dass EvoGM in Szenarien mit gesehenen und ungesehenen Aufgaben eine stärkere Modellfusion-Fähigkeit demonstriert.
 

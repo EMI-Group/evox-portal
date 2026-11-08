@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Una prueba puede seguir ejecutándose cuando la conversación del agente ya está llena. Genesis 0.13.8–0.13.10, publicado del 26 al 29 de octubre de 2026, separa ambos ciclos: comprime el contexto de trabajo del modelo y mantiene disponibles la salida y el estado final de los trabajos de shell desacoplados.
 
-![Una prensa roja compacta una cinta fragmentada mientras un hilo independiente mantiene su continuidad](./context-compression-continuity.webp)
+![Contexto largo comprimido mientras continúan las tareas](./context-compression-continuity.webp)
 
 *Comprimir el contexto de trabajo y continuar la ejecución.*
 

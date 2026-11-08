@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Eine Funktion kann API-Dienst, Client-Anwendung und gemeinsame Bibliothek betreffen. Das Ziel ist gemeinsam, die Git-Repositories sind es möglicherweise nicht. Genesis 0.13.4 vom 26. September 2026 ergänzt persistente Worktrees für beschreibbare Begleit-Repositories und schafft klarere Ausführungsgrenzen.
 
-![Drei unabhängige Höfe mit eigenen Toren, verbunden durch ein rotes Band](./companion-worktrees.webp)
+![Getrennte Repository-Verläufe in einem Projekt](./companion-worktrees.webp)
 
 ## Vom Zugriff zur isolierten Arbeit
 

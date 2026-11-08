@@ -4,6 +4,8 @@ pubDate: 2025-11-06
 summary: "Nueva funcionalidad: Workflow ahora acepta una lista de opt_direction. Además de varias correcciones de errores."
 ---
 
+![Rutas opuestas para minimización y maximización](./objective-directions.webp)
+
 ## Funcionalidades
 
 - `Workflow` ahora acepta una lista de `opt_direction`.

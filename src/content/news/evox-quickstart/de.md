@@ -7,7 +7,7 @@ summary: "Erstellen Sie ein vollständiges EvoX-1.4.1-Experiment und verstehen S
 
 Dieses Beispiel minimiert die zweidimensionale Ackley-Funktion mit PSO, prüft das Ausführungsgerät und zeichnet den Verlauf. Es verwendet **EvoX 1.4.1 mit PyTorch**, nicht die experimentelle 2.x-API. Die kleine Aufgabe erklärt den Workflow und ist kein GPU-Benchmark.
 
-![Kandidatenkugeln auf einer Suchlandschaft mit Workflow-Rahmen](./first-search-workflow.webp)
+![Kandidatenpartikel erkunden eine Suchlandschaft](./first-search-workflow.webp)
 
 ## Eine isolierte Umgebung vorbereiten
 

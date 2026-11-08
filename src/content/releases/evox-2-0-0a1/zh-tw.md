@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "實驗性 Alpha 版本帶來新的函數式 API 與顯式張量圖編譯器。正式環境仍建議使用穩定的 1.x 系列。"
 ---
 
+![展開程式結構以檢查編譯過程](./experimental-compiler-runtime.webp)
+
 **EvoX v2.0.0a1** 是以 [EvoX Compiler（`evoxc`）](https://github.com/EMI-Group/evoxc) 全面重寫後的首個 Alpha 版本。
 
 > **實驗性預先發布版本：** 新 API 與 1.x 不相容，無法直接替換升級。正式環境仍建議使用穩定的 1.x 系列；請在獨立環境中試用 Alpha。

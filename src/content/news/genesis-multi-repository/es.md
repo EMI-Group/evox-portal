@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Una función puede abarcar un servicio API, una aplicación cliente y una biblioteca compartida. Comparten objetivo, pero no necesariamente repositorio Git. Genesis 0.13.4, publicado el 26 de septiembre de 2026, añade árboles de trabajo persistentes para repositorios asociados modificables y define mejor el lugar de ejecución.
 
-![Tres patios independientes con sus propias entradas unidos por una cinta roja](./companion-worktrees.webp)
+![Historiales de repositorios separados conectados a un proyecto](./companion-worktrees.webp)
 
 ## Del acceso al trabajo aislado
 

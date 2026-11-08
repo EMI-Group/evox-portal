@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 [2026 年 9 月 7 日的 Evidence 记录](https://genesis.evox.group/evidence/compiler-continuation/) 描述了在同一条已接受的编译器开发历史上，从 **GLM 5.2 向 DeepSeek V4 Flash** 的交接。接手模型没有继承前一个智能体的对话上下文。
 
-![一座连续桥梁跨越两种不同的制图工作面](./compiler-model-handoff.webp)
+![不同工具组之间保留同一编译器项目](./compiler-model-handoff.webp)
 
 接手模型仍可访问已有源代码、项目结构和已接受的开发历史。
 

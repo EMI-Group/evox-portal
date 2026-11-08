@@ -7,7 +7,7 @@ summary: "Thirteen MESA modules became a Rust workspace. Golden tests and a one-
 
 Rewriting scientific software means carrying forward more than algorithms. A new implementation must preserve the numerical behavior on which later calculations depend. In Genesis's MESA case, thirteen Fortran modules were redeveloped as Rust crates, with original outputs serving as references. The interesting story is how the project makes that continuity checkable.
 
-![A layered stellar sculpture above two contrasting rings with matching contours](./mesa-numerical-continuity.webp)
+![Fortran and Rust outputs compared under a magnifying glass](./mesa-numerical-continuity.webp)
 
 *Concept illustration: a new implementation, a shared numerical reference.*
 

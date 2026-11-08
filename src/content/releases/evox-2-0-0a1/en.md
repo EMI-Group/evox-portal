@@ -4,6 +4,8 @@ pubDate: 2026-10-30
 summary: "An experimental alpha with a new functional API and an explicit tensor-graph compiler. The stable 1.x series remains recommended for production."
 ---
 
+![Program structure exposed for compiler inspection](./experimental-compiler-runtime.webp)
+
 **EvoX v2.0.0a1** is the first alpha of a complete rewrite built on [EvoX Compiler (`evoxc`)](https://github.com/EMI-Group/evoxc).
 
 > **Experimental pre-release:** The new API is incompatible with 1.x. This is not a drop-in upgrade; the stable 1.x series remains recommended for production use. Try the alpha in a separate environment.

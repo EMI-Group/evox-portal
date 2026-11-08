@@ -7,7 +7,7 @@ summary: "AutoPSO trasforma la progettazione dell'ottimizzazione a sciame di par
 
 Un sistema di IA evolutiva deve decidere cosa cercare e come cercarlo. AutoPSO porta la seconda domanda nel ciclo di ottimizzazione: parametri, regole di apprendimento e organizzazione dello sciame diventano progetti candidati da valutare e migliorare per un compito.
 
-![Componenti riutilizzabili assemblati in un meccanismo di sciame](./automated-swarm-design.webp)
+![Componenti di ricerca e progetti candidati](./automated-swarm-design.webp)
 
 Il framework **AutoPSO**, proposto dal team EvoX, codifica in modo uniforme la configurazione dei parametri, i meccanismi di apprendimento e la struttura dello sciame del PSO in uno spazio evolutivo ricercabile, e tramite **meta-evoluzione** cerca automaticamente una variante di PSO adatta per un dato problema target. Questo framework non solo ottimizza la soluzione del problema, ma, a un livello superiore, ottimizza automaticamente "quale PSO utilizzare per risolverlo".
 

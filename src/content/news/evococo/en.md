@@ -7,7 +7,7 @@ summary: "EvoCoCo connects existing optimization research to EvoX through semant
 
 Decades of optimization research are embodied in software whose execution model may no longer match available hardware. EvoCoCo addresses this gap in the EvoX ecosystem: preserve the algorithm's meaning while reorganizing its computation for GPUs, so existing knowledge can participate in larger evolutionary experiments.
 
-![An irregular component chain becomes a parallel lattice through an inspection gate](./semantics-to-parallel-code.webp)
+![Code structures woven into parallel arrangements](./semantics-to-parallel-code.webp)
 
 The EvoX team proposes EvoCoCo (Evolutionary Code Conversion), a multi-agent framework for semantics-guided automatic tensorization. It first understands the source algorithm, then explores different tensorized implementations, and finally uses execution feedback to validate, repair, and select candidates. EvoCoCo was evaluated on 48 MOEAs across three dimensions: migration reliability, optimization fidelity, and computational scalability. Overall optimization-fidelity coverage reached 88.2%. Median speedups were 22.6× when scaling population size and 80.2× when scaling decision-variable dimensionality. At a larger scale, the representative algorithm MOEA/D-DE achieved a speedup of 37,339×.
 

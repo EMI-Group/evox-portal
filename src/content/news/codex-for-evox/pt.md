@@ -7,7 +7,7 @@ summary: "Os agentes de programação ligam a intenção de investigação aos f
 
 Na IA evolutiva, uma ideia de investigação torna-se útil quando entra num ciclo repetível de execução e avaliação. Codex e EvoX ligam a intenção expressa em linguagem natural a esse ciclo: o agente ajuda a construir a experiência, enquanto o EvoX fornece interfaces e cálculo para testar as soluções candidatas. [EvoX](https://github.com/EMI-Group/evox)
 
-![Folha de ideias, modelo de percurso e fichas unidos por fio vermelho](./research-to-experiment.webp)
+![Um investigador prepara uma experiência evolutiva](./research-to-experiment.webp)
 
 O [EvoX](https://github.com/EMI-Group/evox) é um framework distribuído e acelerado por GPU para computação evolutiva escalável. Através das suas interfaces unificadas `Algorithm`, `Problem` e `Workflow`, o EvoX reúne a pesquisa por populações, a avaliação em lote, a execução de experiências e a aceleração de hardware numa única arquitetura computacional coerente. Suporta aplicações que vão desde a otimização mono- e multiobjetivo até à neuroevolução, ambientes de aprendizagem por reforço e conceção de sistemas complexos.
 

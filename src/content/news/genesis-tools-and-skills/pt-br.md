@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Os projetos acumulam código e formas de o construir, verificar e alterar. Genesis 0.13.4, publicado em 26 de setembro de 2026, coloca alterações das ferramentas de competências na árvore de trabalho e torna-as passíveis de revisão em Git. Com as ferramentas personalizadas de 0.13.1, de 21 de setembro, oferece duas vias distintas para integrar métodos do projeto.
 
-![Uma caixa de ferramentas escura ligada por fio vermelho a um manual marfim](./project-tools-guidance.webp)
+![Ferramentas do projeto e cartões de instruções reutilizáveis](./project-tools-guidance.webp)
 
 ## Expor operações através de ferramentas próprias
 

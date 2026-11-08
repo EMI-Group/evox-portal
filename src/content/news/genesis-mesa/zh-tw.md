@@ -7,7 +7,7 @@ summary: "13 個 MESA 模組被重建為 Rust 工作區。黃金測試與單區�
 
 重寫科學軟體，需要延續的遠不止演算法。新實作還必須保留後續計算所依賴的數值行為。在 Genesis 的 MESA 案例中，13 個 Fortran 模組被重建為 Rust crate，並以原始輸出為參照。這個案例最值得關注的，是專案如何讓這種延續能夠被檢查。
 
-![分層恆星雕塑下方，兩種材質的環具有互相匹配的輪廓](./mesa-numerical-continuity.webp)
+![放大鏡下對照 Fortran 與 Rust 輸出](./mesa-numerical-continuity.webp)
 
 *概念插畫：實作可以更新，數值參照保持相通。*
 

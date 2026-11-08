@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 [2026년 9월 7일 Evidence 기록](https://genesis.evox.group/evidence/compiler-continuation/)은 수락된 동일 개발 이력에서 **GLM 5.2에서 DeepSeek V4 Flash로** 인계한 사례입니다. 이전 에이전트의 대화 맥락은 전달되지 않았습니다.
 
-![서로 다른 두 설계 작업면을 잇는 연속된 다리](./compiler-model-handoff.webp)
+![서로 다른 도구 사이에 유지되는 컴파일러 프로젝트](./compiler-model-handoff.webp)
 
 인계받은 모델은 기존 소스, 프로젝트 구조와 수락된 개발 이력을 사용할 수 있었습니다.
 

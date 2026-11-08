@@ -4,6 +4,8 @@ pubDate: 2025-06-03
 summary: "A minor release focused on bug fixes including DE algorithm fixes and documentation improvements."
 ---
 
+![Initialization separated from repeated evolution steps](./initialization-evolution-steps.webp)
+
 This is a minor release focused solely on bug fixes:
 
 - Removed unused imports to improve code cleanliness.

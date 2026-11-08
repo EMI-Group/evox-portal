@@ -4,6 +4,8 @@ pubDate: 2025-11-06
 summary: "新特性：Workflow 现在接受 opt_direction 列表。此外还有若干错误修复。"
 ---
 
+![相反轨道表示最小化与最大化目标](./objective-directions.webp)
+
 ## 新特性
 
 - Workflow 现在接受 `opt_direction` 列表。

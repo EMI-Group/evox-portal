@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 진화형 AI의 인프라는 그 자체로 큰 소프트웨어 개발 과제입니다. Genesis의 EvoX Compiler 사례는 두 수준을 연결합니다. 에이전트 개발 시스템이 텐서 그래프 컴파일러를 구축하고 확장하며, 인터페이스 규약과 회귀 테스트가 지속되는 구현에 포함할 변경을 결정합니다.
 
-![빨간 구조봉으로 연결된 컴파일러 계층 부품](./compiler-contract-layers.webp)
+![회귀 테스트와 대조하는 컴파일러 그래프](./compiler-contract-layers.webp)
 
 ## 역할을 명확히 나누기
 

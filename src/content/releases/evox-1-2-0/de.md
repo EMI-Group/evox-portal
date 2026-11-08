@@ -4,6 +4,8 @@ pubDate: 2025-04-23
 summary: "Neue Funktionen einschließlich final_step(), Mujoco Playground-Umgebung, Benutzer-Tutorials und EvoMO-Integration."
 ---
 
+![Physikalisches Simulationsmodell in einer Testumgebung](./mujoco-playground.webp)
+
 **Wir freuen uns, die Veröffentlichung von „EvoX v1.2.0“ bekannt zu geben, vollgepackt mit neuen Funktionen, Verbesserungen und wichtigen Fehlerbehebungen!**
 
 **Dieses Update verbessert die Flexibilität und Leistung des Frameworks in wichtigen Modulen.**

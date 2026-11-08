@@ -7,7 +7,7 @@ summary: "Ein gemeinsames Parameterzentrum und individuelle Zufallsseeds lassen 
 
 Eine größere Population neuronaler Netze bedeutet üblicherweise mehr gespeicherte Gewichtskopien. Die EvoX-Änderungen vom 7.–8. Juli 2026 gehen einen anderen Weg: VirtualES speichert ein gemeinsames Parameterzentrum und einen Zufallsseed je Kandidat. Unterschiede werden während der Bewertung rekonstruiert. Damit stellt sich neu die Frage, wie viel Suchvielfalt ins Speicherbudget passt.
 
-![Ein gemeinsamer massiver Körper, rote Seeds und transparente Varianten veranschaulichen eine virtuelle Population](./virtuales-shared-center.webp)
+![Geteilte Parameter und Seeds erzeugen virtuelle Kandidaten](./virtuales-shared-center.webp)
 
 *Konzeptillustration: ein gemeinsames Zentrum, viele rekonstruierbare Kandidaten.*
 

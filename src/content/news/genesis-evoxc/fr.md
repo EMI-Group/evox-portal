@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 L'infrastructure nécessaire à l'IA évolutionnaire est elle-même un projet logiciel important. Le cas Genesis–EvoX Compiler relie ces niveaux : un système de développement agentique construit et étend un compilateur de graphes tensoriels, tandis que les contrats d'interface et les tests de régression déterminent les changements intégrés à son développement continu.
 
-![Des couches de compilateur alignées et reliées par une tige rouge](./compiler-contract-layers.webp)
+![Graphes du compilateur confrontés aux tests de régression](./compiler-contract-layers.webp)
 
 ## Des responsabilités explicites
 

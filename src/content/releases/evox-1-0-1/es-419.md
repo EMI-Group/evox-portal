@@ -4,6 +4,8 @@ pubDate: 2025-01-20
 summary: "Correcciones del instalador de Windows, de la selección de vectores base en DE y de SHADE con poblaciones grandes."
 ---
 
+![Verificación y corrección del comportamiento algorítmico](./bounded-random-selection.webp)
+
 **EvoX v1.0.1** es una versión de mantenimiento con tres correcciones:
 
 - Actualizado el script de instalación de Windows `win-install.bat` ([#204](https://github.com/EMI-Group/evox/pull/204)).

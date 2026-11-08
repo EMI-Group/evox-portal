@@ -7,7 +7,7 @@ summary: "MetaDE adds an outer evolutionary loop around differential evolution, 
 
 Adaptation can operate on the way a system searches as well as on the solutions it finds. MetaDE brings this idea into EvoX through two connected evolutionary levels: one solves the target problem, while the other evaluates which DE configurations make that search effective. [MetaDE](https://github.com/EMI-Group/metade)
 
-![An outer settings ring surrounds an inner candidate population](./nested-evolution-search.webp)
+![Outer parameter search surrounds inner candidate experiments](./nested-evolution-search.webp)
 
 ## Background
 

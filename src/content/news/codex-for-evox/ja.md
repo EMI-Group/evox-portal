@@ -7,7 +7,7 @@ summary: "コーディングエージェントが研究意図を EvoX の実行�
 
 進化型 AI における研究の着想は、繰り返せる実行と評価のサイクルに入ることで検証可能になります。Codex と EvoX の連携は自然言語の意図をこのサイクルにつなぎます。エージェントが実験構築を助け、EvoX が候補解を試すためのインターフェースと計算を担います。 [EvoX](https://github.com/EMI-Group/evox)
 
-![赤い糸でつながるアイデア用紙、経路模型、実験カード](./research-to-experiment.webp)
+![進化実験を準備する研究者](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) は、スケーラブルな進化計算のための分散型・GPU 加速フレームワークです。統一された `Algorithm`、`Problem`、`Workflow` インターフェースを通じて、EvoX は集団探索、バッチ評価、実験実行、ハードウェア加速を一貫した計算アーキテクチャに統合します。単目的・多目的最適化から神経進化、強化学習環境、複雑システムの設計まで、幅広い応用を支えます。
 

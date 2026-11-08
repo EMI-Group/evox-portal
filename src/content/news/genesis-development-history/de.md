@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Ein Agentenbaum zeigt, wer gerade arbeitet. Die Projekthistorie muss auch erklären, was danach bleibt. Genesis 0.13.4 vom 26. September 2026 entwickelt die Commitansicht aus 0.13.2 und die dauerhaften Aufgabenreferenzen aus 0.13.3 weiter. Zeitweilige Aktivität wird mit prüfbaren Softwareversionen verbunden.
 
-![Verzweigte Schienen mit Commit-Plättchen münden in ein geschichtetes Archiv](./durable-agent-history.webp)
+![Agentenaktivität bleibt im Projektverlauf erhalten](./durable-agent-history.webp)
 
 ## Von aktiven Agenten zu dauerhaften Referenzen
 

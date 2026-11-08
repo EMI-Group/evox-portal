@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Projekte enthalten nicht nur Quellcode, sondern auch Methoden zum Bauen, Prüfen und Ändern. Genesis 0.13.4 vom 26. September 2026 legt Änderungen durch Skill-Werkzeuge in den Worktree und macht sie in Git prüfbar. Zusammen mit eigenen Werkzeugen aus 0.13.1 vom 21. September entstehen zwei unterschiedliche Erweiterungswege.
 
-![Ein dunkler Werkzeugkasten ist mit einem roten Faden an ein helles Handbuch gebunden](./project-tools-guidance.webp)
+![Projektwerkzeuge und wiederverwendbare Anweisungskarten](./project-tools-guidance.webp)
 
 ## Operationen durch eigene Werkzeuge anbieten
 

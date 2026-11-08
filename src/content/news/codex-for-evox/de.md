@@ -7,7 +7,7 @@ summary: "Programmieragenten verbinden Forschungsabsichten mit ausführbaren Evo
 
 Für evolutionäre KI wird eine Forschungsidee nutzbar, wenn sie in einen wiederholbaren Ausführungs- und Bewertungszyklus gelangt. Codex und EvoX verbinden natürlichsprachliche Absichten mit diesem Zyklus: Der Agent hilft beim Aufbau des Experiments, EvoX stellt Schnittstellen und Rechenmöglichkeiten für die Prüfung der Kandidaten bereit. [EvoX](https://github.com/EMI-Group/evox)
 
-![Ideenblatt, Wegmodell und Versuchskarten mit rotem Faden](./research-to-experiment.webp)
+![Ein Forscher bereitet ein evolutionäres Experiment vor](./research-to-experiment.webp)
 
 [EvoX](https://github.com/EMI-Group/evox) ist ein verteiltes, GPU-beschleunigtes Framework für skalierbare evolutionäre Berechnung. Über seine einheitlichen `Algorithm`-, `Problem`- und `Workflow`-Schnittstellen bringt EvoX Populationsuche, Batch-Auswertung, Experimentausführung und Hardwarebeschleunigung in eine kohärente Rechenarchitektur zusammen. Es unterstützt Anwendungen von Ein- und Mehrziel-Optimierung über Neuroevolution und Reinforcement-Learning-Umgebungen bis hin zum Entwurf komplexer Systeme.
 

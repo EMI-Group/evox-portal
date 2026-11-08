@@ -4,6 +4,8 @@ pubDate: 2025-06-03
 summary: "Une version mineure axée sur la correction de bugs, incluant des correctifs pour les algorithmes DE et des améliorations de la documentation."
 ---
 
+![Initialisation séparée des étapes d’évolution répétées](./initialization-evolution-steps.webp)
+
 Il s'agit d'une version mineure axée uniquement sur des corrections de bugs :
 
 - Suppression des imports inutilisés pour améliorer la propreté du code.

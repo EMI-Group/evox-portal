@@ -7,7 +7,7 @@ summary: "iStratDE は個体ごとに固定した戦略が多様な探索行動�
 
 進化的探索の特徴は、異なる可能性を持つ集団にあります。iStratDE はこの多様性を探索行動に保持する方法を検討します。個体は実行を通じて異なる戦略を維持します。EvoX では、これがアルゴリズム設計と異質な候補の並列評価を結びます。 [iStratDE](https://github.com/EMI-Group/istratde)
 
-![別々のレーンに並ぶ異なる経路ガイド](./persistent-strategy-diversity.webp)
+![別々の探索経路で維持される戦略パターン](./persistent-strategy-diversity.webp)
 
 このギャップに対処するため、EvoXチームは**個体レベルの戦略多様性**がDEの探索ダイナミクスと最適化性能にどのように影響するかを調査し、ミニマリストな変種 **iStratDE（Individual-Level Strategy Diversity Differential Evolution）** を提案しました。中核となるアイデアはシンプルです：初期化時に各個体に独自の突然変異・交叉戦略を割り当て、その割り当ては進化の全過程を通じて固定されます。複雑な適応やフィードバックループを排除しつつ、個体レベルで多様性を導入することで、iStratDEは集団全体にわたる持続的な行動の異質性を生み出します。
 

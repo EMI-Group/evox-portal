@@ -7,7 +7,7 @@ summary: "Genesis étend l'IA évolutionnaire d'EvoX au logiciel : les agents pr
 
 Genesis applique la vision d'EvoX à Agentic AI en faisant du projet logiciel évolutif le résultat durable de nombreuses contributions locales. Génération de code, exécution, revue et intégration forment un cycle de développement. Les implémentations acceptées et leurs validations constituent la matière à partir de laquelle le travail suivant peut se poursuivre. [Genesis](https://github.com/EMI-Group/genesis)
 
-![Une tour logicielle traversée par un escalier rouge continu](./software-world-continuity.webp)
+![Modules sources assemblés en un projet logiciel évolutif](./software-world-continuity.webp)
 
 ![image1.png](./evox-genesis-1.png)
 

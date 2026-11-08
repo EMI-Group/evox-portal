@@ -7,7 +7,7 @@ summary: "EvoGO connects generative learning with evolutionary optimization, tur
 
 Scientific and engineering search repeatedly asks which experiment to run next. EvoGO studies a computational version of that question: can evaluations teach a generator how to improve its proposals? This connects EvoX's evolutionary AI direction to a search process that learns from the candidates it has already tested. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![Directional stencils focus a red search path](./learning-search-directions.webp)
+![Previous candidates guide new search paths](./learning-search-directions.webp)
 
 ## Predicament: Data-Driven Optimization Has Still Not Taken the Final Step
 

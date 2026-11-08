@@ -7,7 +7,7 @@ summary: "EvoGM brings evolutionary feedback to generative AI, learning how to c
 
 The growing collection of specialist models creates an opportunity to reuse capabilities across tasks. Within EvoX's broader research direction, EvoGM explores how population feedback can guide that reuse: candidate model combinations are evaluated, and their outcomes teach a lightweight generator how to propose better merging configurations. [EvoGM](https://github.com/JiangTao97/evogm)
 
-![Expert modules joined to a composite form by adjustable threads](./expert-merging-feedback.webp)
+![Expert models combined into candidate configurations](./expert-merging-feedback.webp)
 
 To address this problem, the EvoX team, in collaboration with Peng Cheng Laboratory, proposes EvoGM (Evolutionary Generative Merging), a generative evolutionary model merging framework that reformulates coefficient search as a learnable generative optimization problem. EvoGM organizes different merging configurations into a candidate population and, through winner–loser pairing, dual-generator training, cycle-consistency constraints, and evolutionary expert-base updates, enables the population to evolve continuously in a closed loop of "generate–evaluate–select–relearn." From limited validation feedback, it autonomously learns how to transform low-performing configurations into high-performing ones. Experimental results show that EvoGM delivers stronger model merging performance on both seen and unseen tasks.
 

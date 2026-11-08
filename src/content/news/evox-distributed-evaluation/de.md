@@ -7,7 +7,7 @@ updatedDate: 2026-11-08
 
 Wenn die Kandidatenbewertung den Großteil einer Suche kostet, kann ihre Verteilung größere Experimente ermöglichen. Der experimentelle EvoX-Leitfaden vom 23. April 2025 beschreibt den im März eingeführten Weg: die Population auf Prozesse aufteilen und Fitnesswerte vor dem Algorithmusupdate zusammenführen.
 
-![Eine Populationsschale verzweigt zu drei Bewertungsschalen und einer geordneten Feedbackreihe](./distributed-evaluation-feedback.webp)
+![Getrennte Auswertungsstationen teilen Populationsrückmeldungen](./distributed-evaluation-feedback.webp)
 
 *Getrennte Bewertungen, gemeinsames Populationsfeedback.*
 

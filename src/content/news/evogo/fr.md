@@ -7,7 +7,7 @@ summary: "EvoGO associe apprentissage génératif et optimisation évolutionnair
 
 La recherche scientifique et technique doit sans cesse décider quelle expérience mener ensuite. EvoGO étudie une version informatique de cette question : les évaluations peuvent-elles apprendre à un générateur à améliorer ses propositions ? Cette approche inscrit la démarche d'IA évolutionnaire d'EvoX dans un processus de recherche qui apprend des candidats déjà testés. [EvoGO](https://github.com/EMI-Group/evogo)
 
-![Des gabarits directionnels resserrent un trajet rouge](./learning-search-directions.webp)
+![Les candidats précédents guident de nouvelles recherches](./learning-search-directions.webp)
 
 ## La Situation : L'Optimisation Pilotée par les Données N'a Toujours Pas Franchi l'Étape Finale
 
