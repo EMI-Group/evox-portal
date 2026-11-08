@@ -43,7 +43,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
   .evx-control:hover {color:var(--diagram-ink);border-color:var(--diagram-bright);background:var(--diagram-soft)}
   .evx-control:focus-visible,.evx-step:focus-visible {outline:2px solid var(--diagram-bright);outline-offset:5px}
   .evx-control svg {width:14px;height:14px;display:block}
-  .evx-steps {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+  .evx-steps {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
   .evx-step {appearance:none;position:relative;border:0;background:transparent;color:var(--site-muted);text-align:left;padding:19px 0 2px;cursor:pointer;font:inherit;min-width:0}
   .evx-step::before,.evx-step::after {content:"";height:1px;position:absolute;left:0;right:0;top:0;background:var(--diagram-guide)}
   .evx-step::after {height:2px;right:auto;width:100%;transform:scaleX(var(--progress,0));transform-origin:left;background:var(--evx-red)}
@@ -73,17 +73,17 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
 
 /* EvoX evolution loop. Plain Canvas 2D + JavaScript; no network or library dependency.
    This is an illustrative, deterministic toy evolutionary algorithm, not EvoX benchmark data.
-   12 candidates -> evaluate a synthetic objective -> retain 3 elites -> mutate offspring.
+   Generate (inherit and vary) -> evaluate a synthetic objective -> retain 3 elites.
    The same selected individuals persist across generations. The ring itself does not rotate. */
 (() => {
   'use strict';
   const TAU = Math.PI*2;
   const COUNT = 12, KEEP = 3, FAMILY = COUNT / KEEP;
-  const DURATIONS = [2600,3400,2600,3400];
+  const DURATIONS = [5000,3400,3000];
   const STARTS = [0];
   DURATIONS.forEach(v=>STARTS.push(STARTS[STARTS.length-1]+v));
-  const CYCLE = STARTS[4];
-  const NAMES = ['Generate','Evaluate','Select','Mutate'];
+  const CYCLE = STARTS[DURATIONS.length];
+  const NAMES = ['Generate','Evaluate','Select'];
 
   const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
   const mix=(a,b,t)=>a+(b-a)*t;
@@ -180,7 +180,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
     }
     readTime() {
       const gen=Math.floor(this.time/CYCLE),inCycle=this.time-gen*CYCLE;
-      let stage=3;for(let i=0;i<DURATIONS.length;i++)if(inCycle<STARTS[i+1]){stage=i;break}
+      let stage=DURATIONS.length-1;for(let i=0;i<DURATIONS.length;i++)if(inCycle<STARTS[i+1]){stage=i;break}
       return {gen,stage,p:clamp((inCycle-STARTS[stage])/DURATIONS[stage]),inCycle};
     }
     ring(r,a,b,stroke,width=1,alpha=1) {
@@ -208,11 +208,11 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
     }
     drawFramework(state) {
       const {stage,p}=state,c=this.ctx;
-      // Fixed geometry: four stationary waypoints, no mechanically rotating wheel.
+      // Three fixed waypoints; each arc covers one phase of the loop.
       this.ring(198,0,TAU,this.grey,.7,.14);
       this.ring(112,0,TAU,this.grey,.7,.12);
-      const span=TAU/4;
-      for(let i=0;i<4;i++) {
+      const span=TAU/DURATIONS.length;
+      for(let i=0;i<DURATIONS.length;i++) {
         const a=-Math.PI/2+i*span,gap=.056;
         this.ring(207,a+gap,a+span-gap,this.grey,1,.49);
         if(i<stage)this.ring(207,a+gap,a+span-gap,this.red,1.35,.53);
@@ -247,15 +247,15 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       let pos=t,alpha=1,scale=1,red=0,scan=0,fitness=0;
       if(stage===0) {
         if(item.retained) {
-          const settle=smooth(p/.85);
+          const settle=smooth((p-.45)/.45);
           red=mix(1,0,settle);scale=mix(1.12,1,settle);
         } else {
           const group=gen===0?Math.floor(item.slot/FAMILY):item.parent;
           const source=gen===0?{...target(group*FAMILY),r:target(group*FAMILY).r-5}:budPose(item);
           const rank=item.slot%FAMILY;
-          const progress=ease((p-.045-rank*.047)/.59);
+          const progress=gen===0?ease((p-.045-rank*.047)/.59):ease((p-.48-rank*.025)/.40);
           pos=moving(source,t,progress,-14);
-          alpha=gen===0?smooth((p-.045-rank*.047)/.13):mix(.8,1,progress);
+          alpha=gen===0?smooth((p-.045-rank*.047)/.13):smooth((p-.05-rank*.025)/.18);
           scale=mix(gen===0?.32:.48,1,progress);
         }
       } else if(stage===1) {
@@ -268,15 +268,12 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
         const select=smooth((p-.06)/.63);
         fitness=1-select;
         const evaluatedAlpha=.4+.6*item.fitness,evaluatedScale=.8+.35*item.fitness;
-        if(winner>=0){red=mix(red,1,select);alpha=mix(evaluatedAlpha,1,select);scale=mix(evaluatedScale,1.12,select);scan=.24*Math.sin(Math.PI*select)}
-        else {alpha=mix(evaluatedAlpha,.10,smooth((p-.06-item.slot*.009)/.62));pos={a:t.a,r:t.r+12*select};scale=evaluatedScale*(1-.3*select)}
-      } else {
-        if(winner<0){alpha=0;scale=.5}
-        else {
-          red=1;scale=1.12;
-          const arrive=smooth((p-.02)/.63);
-          pos=moving(t,target(winner*FAMILY),arrive,-12);
+        if(winner>=0){
+          red=select;alpha=mix(evaluatedAlpha,1,select);scale=mix(evaluatedScale,1.12,select);scan=.24*Math.sin(Math.PI*select);
+          // Prepare the selected parents at their family positions for the next Generate.
+          pos=moving(t,target(winner*FAMILY),smooth((p-.65)/.35),-12);
         }
+        else {alpha=mix(evaluatedAlpha,0,smooth((p-.06-item.slot*.009)/.70));pos={a:t.a,r:t.r+12*select};scale=evaluatedScale*(1-.3*select)}
       }
       return {...pos,alpha,scale,red,scan,fitness,winner};
     }
@@ -293,22 +290,30 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       c.beginPath();c.roundRect(-13,-15,26,30,5);
       c.fillStyle=color(this.fill,alpha);c.fill();
       c.strokeStyle=color(rgb,alpha*(.55+.35*red));c.lineWidth=red>.7?1.4:.85;c.stroke();
-      const genes=[clamp((item.x+1.2)/2.4),clamp((item.y+1.2)/2.4),.5+.35*Math.sin(item.trait)];
+      const signature=v=>[clamp((v.x+1.2)/2.4),clamp((v.y+1.2)/2.4),.5+.35*Math.sin(v.trait)];
+      const genes=signature(item);
+      let inherited=null,change=1;
+      if(stage===0&&state.gen>0&&!item.retained) {
+        const previous=this.generation(state.gen-1);
+        inherited=signature(previous.items[previous.winners[item.parent]]);
+        change=smooth((p-.20)/.28);
+      }
       genes.forEach((value,j)=>{
+        if(inherited)value=mix(inherited[j],value,change);
         const y=-8+j*8;
         c.beginPath();c.moveTo(-8,y);c.lineTo(8,y);
         c.strokeStyle=color(this.grey,alpha*.16);c.lineWidth=2.5;c.stroke();
         c.beginPath();c.moveTo(-8,y);c.lineTo(-8+4+12*value,y);
         c.strokeStyle=color(core,alpha*.85);c.stroke();
+        if(inherited&&change>0) {
+          c.beginPath();c.moveTo(-4+12*inherited[j],y);c.lineTo(-4+12*value,y);
+          c.strokeStyle=color(this.bright,alpha*(1-smooth((p-.65)/.3)));c.stroke();
+        }
       });
       if(stage===1) {
         const y=-12+24*((p*1.5+item.seed)%1);
         c.beginPath();c.moveTo(-10,y);c.lineTo(10,y);
         c.strokeStyle=color(this.bright,alpha*scan*.7);c.lineWidth=1;c.stroke();
-      }
-      if(stage===0&&!item.retained&&state.gen>0) {
-        // A short accent on the changed parameters fades as the offspring settles.
-        this.dot(10,-12,2,this.bright,alpha*(1-smooth(p)));
       }
       if(fitness>.001) {
         c.beginPath();c.moveTo(-12,21);c.lineTo(12,21);
@@ -322,7 +327,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       const {stage,p}=state,c=this.ctx,pop=this.generation(state.gen);
       const tile=(item,x,y,alpha=1,red=0,scale=1)=>this.drawCandidate(item,{a:Math.atan2(y,x),r:Math.hypot(x,y),scale,red,scan:0,fitness:0,alpha},state);
       c.save();c.scale(1.12,1.12);c.lineCap='round';
-      if(stage===0) {
+      if(stage===0&&state.gen===0) {
         // Distinct signatures appear one by one, without implying quality yet.
         [0,4,8].forEach((slot,i)=>{
           const enter=smooth((p-i*.14)/.35);
@@ -346,49 +351,39 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
         });
       } else {
         // Retained parent and two actual descendants: unchanged features stay neutral.
-        const parent=pop.items[pop.winners[0]],next=this.generation(state.gen+1);
-        const copy=smooth(p/.35),mutate=smooth((p-.35)/.4);
+        const parent=pop.items[0],next=pop;
+        const copy=smooth(p/.20);
         tile(parent,-43,14,1,1,1.1);
         [{x:38,y:-7},{x:38,y:39}].forEach(({x,y},i)=>{
           c.beginPath();c.moveTo(-26,14);c.bezierCurveTo(0,14,0,y,20,y);
           c.strokeStyle=color(this.grey,.5*copy);c.lineWidth=1;c.stroke();
           c.beginPath();c.moveTo(16,y-3);c.lineTo(20,y);c.lineTo(16,y+3);c.stroke();
           const child=next.items[i+1];
-          const shown={...child,x:mix(parent.x,child.x,mutate),y:mix(parent.y,child.y,mutate),trait:mix(parent.trait,child.trait,mutate)};
-          tile(shown,x,y,copy,0,1);
-          // Highlight only the changed segment of each parameter, not an assumed improvement.
-          const genes=v=>[clamp((v.x+1.2)/2.4),clamp((v.y+1.2)/2.4),.5+.35*Math.sin(v.trait)];
-          const original=genes(parent),changed=genes(shown);
-          changed.forEach((value,j)=>{
-            c.beginPath();c.moveTo(x-4+12*original[j],y-8+j*8);c.lineTo(x-4+12*value,y-8+j*8);
-            c.strokeStyle=color(this.bright,mutate);c.lineWidth=3;c.stroke();
-          });
+          tile(child,x,y,copy,0,1);
         });
       }
       c.restore();
     }
     drawInheritance(state,pop) {
       const {stage,p}=state;
-      if(stage!==3&&stage!==0)return;
-      for(let j=0;j<3;j++) {
+      if(stage!==0||state.gen===0)return;
+      for(let j=0;j<KEEP;j++) {
         const t=target(j*FAMILY),q=polar(t.r,t.a);
-        const strength=stage===3?smooth((p-.63)/.13):1-smooth(p/.30);
+        const strength=1-smooth(p/.45);
         if(strength>.001) {
-          const ripple=stage===3?clamp((p-.64)/.36):clamp(p/.3);
+          const ripple=clamp(p/.45);
           const c=this.ctx;c.beginPath();c.arc(q.x,q.y,12+16*ripple,0,TAU);c.lineWidth=.8;
           c.strokeStyle=color(this.red,strength*(1-ripple)*.32);c.stroke();
         }
       }
-      // Visible offspring buds at the end of Mutate persist into the next Generate.
-      // Brief local branches make inheritance visible without a permanent network.
-      if(stage===3) {
-        const next=this.generation(state.gen+1),begin=smooth((p-.65)/.35);
-        next.items.filter(v=>!v.retained).forEach(item=>{
-          const pose={...budPose(item),alpha:begin*.8,scale:.48,red:0,scan:0,fitness:0};
+      // New candidates branch from retained parents before expanding into the population.
+      const strength=smooth(p/.18)*(1-smooth((p-.50)/.25));
+      if(strength>.001) {
+        pop.items.filter(v=>!v.retained).forEach(item=>{
+          const pose=this.pose(item,state,pop);
           const source=target(item.parent*FAMILY),from=polar(source.r,source.a),to=polar(pose.r,pose.a);
           const c=this.ctx;c.beginPath();c.moveTo(from.x,from.y);c.lineTo(to.x,to.y);
-          c.strokeStyle=color(this.red,begin*.28);c.lineWidth=.7;c.stroke();
-          this.drawCandidate(item,pose,state);
+          c.strokeStyle=color(this.red,strength*.28);c.lineWidth=.7;c.stroke();
         });
       }
     }
@@ -398,7 +393,17 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       c.setTransform(this.dpr,0,0,this.dpr,0,0);c.fillStyle=this.background;c.fillRect(0,0,this.w,this.h);
       c.save();c.translate(this.w/2,this.h/2+4);c.scale(this.scale,this.scale);
       // A neutral stage keeps the red emphasis on active nodes.
-      this.drawFramework(s);this.drawTests(s);
+      this.drawFramework(s);
+      // Briefly blend the center scenes while the new phase title stays readable.
+      // Keep direct stage selection and reduced-motion views immediate.
+      const enter=this.motion||!this.playing?1:smooth(s.p*DURATIONS[s.stage]/260);
+      if(enter<1&&(s.gen>0||s.stage>0)) {
+        const previousStage=(s.stage+DURATIONS.length-1)%DURATIONS.length;
+        c.save();c.globalAlpha=1-enter;
+        this.drawTests({...s,gen:s.gen-(s.stage===0?1:0),stage:previousStage,p:1});
+        c.restore();
+      }
+      c.save();c.globalAlpha=enter;this.drawTests(s);c.restore();
       this.drawInheritance(s,pop);
       for(const item of pop.items)this.drawCandidate(item,this.pose(item,s,pop),s);
       c.restore();
