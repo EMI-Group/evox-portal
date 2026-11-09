@@ -2,8 +2,8 @@ import { agentCode, nextAgentPopulation, type AgentPopulation } from "./agentic-
 import { diagramAlpha, readDiagramPalette } from "./diagram-theme";
 /* Illustrative evolutionary experiments, not measured model, robotics or CFD results.
    Each population retains its elite unchanged and mutates its inherited parameters. */
-export type EvolutionKind = "generative" | "physical" | "science";
-export type SceneKind = EvolutionKind | "agentic";
+export type PopulationKind = "generative" | "physical" | "science";
+export type ParadigmKind = PopulationKind | "agentic";
 type Candidate = { genes: number[]; score: number; id: string; parent: string | null };
 export type Population = { candidates: Candidate[]; winner: number };
 type Point = { x: number; y: number };
@@ -12,12 +12,12 @@ const clamp = (n: number, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, n));
 const mix = (a: number, b: number, p: number) => a + (b - a) * p;
 const smooth = (p: number) => { p = clamp(p); return p * p * (3 - 2 * p); };
 function rng(seed: number) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
-const targets: Record<EvolutionKind, number[]> = {
+const targets: Record<PopulationKind, number[]> = {
   generative: Array.from({length:16}, (_, i) => .2 + ((i * 7 + 3) % 11) / 18),
   physical: [.72, .68, .35, .8],
   science: [.38, .58, .32],
 };
-export function nextPopulation(kind: EvolutionKind, previous: Population | undefined, generation: number): Population {
+export function nextPopulation(kind: PopulationKind, previous: Population | undefined, generation: number): Population {
   const random = rng(8217 + generation * 7013 + kind.length * 123);
   const count = 3;
   const parent = previous?.candidates[previous.winner];
@@ -50,12 +50,12 @@ export function nextPopulation(kind: EvolutionKind, previous: Population | undef
   return {candidates, winner};
 }
 
-class EvolutionScene {
+class ParadigmScene {
   palette = readDiagramPalette();
   root: HTMLElement;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  kind: SceneKind;
+  kind: ParadigmKind;
   population: Population;
   previousPopulation?: Population;
   offspring?: Population;
@@ -77,7 +77,7 @@ class EvolutionScene {
   durations = [2200, 4200, 1800, 2200, 4200];
   starts = [0, 2200, 6400, 8200, 10400, 14600];
   constructor(root: HTMLElement) {
-    this.root = root; this.kind = root.dataset.kind as SceneKind;
+    this.root = root; this.kind = root.dataset.kind as ParadigmKind;
     this.canvas = root.querySelector("canvas")!; this.ctx = this.canvas.getContext("2d")!;
     this.population = this.kind === "agentic" ? {candidates:[],winner:0} : nextPopulation(this.kind, undefined, 0);
     this.button = root.querySelector('[data-action="pause"]')!;
@@ -500,6 +500,6 @@ class EvolutionScene {
     else this.agentic(current,p);
   }
 }
-export function mountEvolutionScenes() {
-  document.querySelectorAll<HTMLElement>(".evolution-scene:not([data-ready])").forEach(root=>new EvolutionScene(root));
+export function mountParadigmScenes() {
+  document.querySelectorAll<HTMLElement>(".paradigm-scene:not([data-ready])").forEach(root=>new ParadigmScene(root));
 }

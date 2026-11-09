@@ -98,7 +98,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
   function target(slot) {return {a:-Math.PI/2+slot*TAU/COUNT,r:147+5*Math.sin(slot*2.39996323)}}
   function budPose(item) {const source=target(item.parent*FAMILY),rank=item.slot%FAMILY;return {a:source.a+(rank-2)*.20,r:source.r-32}}
   function moving(a,b,t,curve=0) {return {a:a.a+shortAngle(a.a,b.a)*t,r:mix(a.r,b.r,t)+Math.sin(Math.PI*t)*curve}}
-  class EvoXEvolution {
+  class EvolutionDiagram {
     constructor(root) {
       if(!root) throw new Error('An EvoX component root is required.');
       this.updatePalette();
@@ -437,8 +437,8 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
     }
     destroy() {this.pause();this.destroyed=true;this.abort.abort();this.themeObserver.disconnect();this.resizeObserver.disconnect();this.intersectionObserver.disconnect()}
   }
-  window.EvoXEvolution=EvoXEvolution;
-  window.evoxLoop=new EvoXEvolution(document.getElementById('evox-evolution'));
+  window.EvolutionDiagram=EvolutionDiagram;
+  window.evolutionDiagram=new EvolutionDiagram(document.getElementById('evox-evolution'));
 })();
 
 </script>

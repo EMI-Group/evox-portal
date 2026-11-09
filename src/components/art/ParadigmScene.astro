@@ -1,10 +1,11 @@
 ---
 import { type Locale, defaultLocale, loadTranslations, t } from "../../i18n/utils";
-interface Props { kind: "generative" | "physical" | "science" | "agentic"; locale?: Locale; }
+import type { ParadigmKind } from "./paradigm-scenes";
+interface Props { kind: ParadigmKind; locale?: Locale; }
 const { kind, locale = defaultLocale } = Astro.props;
 const tr = await loadTranslations(locale);
 ---
-<div class="evolution-scene" data-kind={kind} data-caption0={t(tr, `scene.${kind}.0`)} data-caption1={t(tr, `scene.${kind}.1`)} data-caption2={t(tr, `scene.${kind}.2`)}
+<div class="paradigm-scene" data-kind={kind} data-caption0={t(tr, `scene.${kind}.0`)} data-caption1={t(tr, `scene.${kind}.1`)} data-caption2={t(tr, `scene.${kind}.2`)}
   data-caption3={t(tr, `scene.${kind}.3`)}
   data-generation-label={t(tr, "scene.generation")}
   data-tests-label={kind === "agentic" ? t(tr, "scene.agentic.tests") : undefined}
@@ -25,7 +26,7 @@ const tr = await loadTranslations(locale);
   </div>
 </div>
 <style>
-  .evolution-scene { position:relative; width:100%; }
+  .paradigm-scene { position:relative; width:100%; }
   .scene-canvas { display:block; width:100%; height:auto; aspect-ratio:12/7; opacity:0; }
   .scene-fallback { position:absolute; top:0; left:0; width:100%; height:auto; aspect-ratio:12/7; }
   [data-ready] .scene-canvas { opacity:1; }[data-ready] .scene-fallback { display:none; }
@@ -38,6 +39,6 @@ const tr = await loadTranslations(locale);
   .play-icon,[data-user-paused] .pause-icon { display:none; }[data-user-paused] .play-icon { display:block; }
 </style>
 <script>
-  import { mountEvolutionScenes } from "./evolution-scenes";
-  mountEvolutionScenes();
+  import { mountParadigmScenes } from "./paradigm-scenes";
+  mountParadigmScenes();
 </script>

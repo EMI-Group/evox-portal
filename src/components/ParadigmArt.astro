@@ -1,32 +1,23 @@
 ---
 import { type Locale } from "../i18n/utils";
-import GenerativeArt from "./art/GenerativeArt.astro";
-import AgenticArt from "./art/AgenticArt.astro";
-import PhysicalArt from "./art/PhysicalArt.astro";
-import ScienceArt from "./art/ScienceArt.astro";
+import ParadigmScene from "./art/ParadigmScene.astro";
+import type { ParadigmKind } from "./art/paradigm-scenes";
 
 interface Props {
   locale?: Locale;
-  kind: "generative" | "agentic" | "physical" | "science";
+  kind: ParadigmKind;
 }
 
+// Shared surface and palette; each paradigm's scene stays domain-specific.
 const { kind, locale } = Astro.props;
-// Share surface and palette while keeping each domain-specific animation distinct.
-const illustrations = {
-  generative: GenerativeArt,
-  agentic: AgenticArt,
-  physical: PhysicalArt,
-  science: ScienceArt,
-};
-const Illustration = illustrations[kind];
 ---
 
-<div class={`application-art application-art--${kind}`}>
-  <div class="art-content"><Illustration locale={locale} /></div>
+<div class={`paradigm-surface paradigm-surface--${kind}`}>
+  <div class="art-content"><ParadigmScene kind={kind} locale={locale} /></div>
 </div>
 
 <style>
-  .application-art {
+  .paradigm-surface {
     --art-ink: var(--diagram-ink);
     --art-line: var(--diagram-muted);
     --art-guide: var(--diagram-guide);
@@ -47,7 +38,7 @@ const Illustration = illustrations[kind];
   .art-content { position: relative; z-index: 1; width: 100%; }
   .art-content :global(svg) { display: block; width: 100%; height: auto; overflow: visible; transform: scale(.93); transform-origin: center; }
   .art-content :global(svg :is(path, rect, circle, ellipse, line, polyline)) { vector-effect: non-scaling-stroke; }
-  .application-art[data-paused] .art-content :global(*) { animation-play-state: paused !important; }
+  .paradigm-surface[data-paused] .art-content :global(*) { animation-play-state: paused !important; }
   @media (prefers-reduced-motion: reduce) {
     .art-content :global(*) { animation: none !important; transition: none !important; }
   }

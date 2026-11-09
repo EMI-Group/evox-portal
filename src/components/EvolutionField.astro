@@ -1,0 +1,508 @@
+---
+// Decorative hero backdrop: a live evolutionary algorithm on a dynamic fitness
+// landscape. Peaks hold still, then periodically shift so a different one leads
+// and the population must re-adapt; on desktop a resting cursor holds a peak.
+interface Props {
+  generationLabel: string;
+  /** Elements whose text the population should fade behind. */
+  quietSelector?: string;
+}
+
+const { generationLabel, quietSelector = "" } = Astro.props;
+---
+
+<div class="evolution-field" aria-hidden="true" data-generation-label={generationLabel} data-quiet={quietSelector}>
+  <canvas></canvas>
+</div>
+
+<style>
+  .evolution-field { position: absolute; inset: 0 0 auto; height: 880px; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 96% 92% at 50% 34%, #000 50%, transparent 100%); mask-image: radial-gradient(ellipse 96% 92% at 50% 34%, #000 50%, transparent 100%); }
+  .evolution-field canvas { display: block; width: 100%; height: 100%; }
+  @media (max-width: 600px) { .evolution-field { height: 760px; } }
+</style>
+
+<script>
+  import { strokeContours, traceContours } from "./art/contours";
+
+  type Peak = { x: number; y: number; a: number; sx: number; sy: number };
+  type Agent = { x: number; y: number; px: number; py: number; born: number; fit: number; shared: number; elite: boolean };
+  type Ghost = { x: number; y: number; died: number };
+  type TrailPoint = { x: number; y: number; jump: boolean };
+  type Rgb = [number, number, number];
+
+  // Moving Peaks environment: position and widths are fractions of the field,
+  // `a` is the height. The landscape holds still for STABLE_MS so the population
+  // can visibly converge, then shifts over SHIFT_MS to a reshuffled landscape
+  // whose highest peak is always a different one.
+  const PEAKS: Peak[] = [
+    { x: .8, y: .36, a: 1.15, sx: .15, sy: .17 },
+    { x: .18, y: .56, a: .85, sx: .14, sy: .19 },
+    { x: .56, y: .84, a: .65, sx: .19, sy: .13 },
+    { x: .42, y: .22, a: .45, sx: .12, sy: .12 },
+  ];
+  const HEIGHTS = [1.15, .85, .65, .45];
+  const STABLE_MS = 10000;
+  const SHIFT_MS = 1600;
+  const POINTER_PEAK = 1.5;
+  const LEVELS = Array.from({ length: 15 }, (_, i) => .1 + i * .1);
+  const MAX_FITNESS = 1.6;
+  const GENERATION_MS = 820;
+  const ELITES = 5;
+  const TRAIL = 24;
+  const TRAIL_FADE_MS = 1200;
+  // Label corners as [x, y] directions from the best: up-right, up-left, down-right, down-left.
+  const LABEL_CORNERS = [[1, -1], [-1, -1], [1, 1], [-1, 1]];
+  const hexToRgb = (value: string): Rgb => {
+    let hex = value.trim().replace("#", "");
+    if (hex.length === 3) hex = [...hex].map((c) => c + c).join("");
+    const n = parseInt(hex, 16);
+    return Number.isNaN(n) ? [128, 128, 128] : [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const rgba = ([r, g, b]: Rgb, a: number) => `rgba(${r},${g},${b},${Math.max(0, Math.min(1, a))})`;
+  const easeOut = (t: number) => 1 - (1 - t) ** 3;
+  const easeInOut = (t: number) => t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+  const smooth = (t: number) => { const c = Math.max(0, Math.min(1, t)); return c * c * (3 - 2 * c); };
+  const gauss = () => Math.sqrt(-2 * Math.log(1 - Math.random())) * Math.cos(2 * Math.PI * Math.random());
+
+  class EvolutionField {
+    root: HTMLElement; canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D;
+    label: string; quiet: string; quietRects: DOMRect[] = []; quietMap = new Float32Array(0);
+    w = 0; h = 0; dpr = 1; scale = 1; cell = 14; cols = 0; rows = 0; grid = new Float32Array(0);
+    agents: Agent[] = []; ghosts: Ghost[] = []; best: Agent | null = null;
+    bestText = { generation: 0, text: "", width: 0 }; labelCorner = 0;
+    // Per-generation positions of the best individual; the previous landscape's trail fades on each shift.
+    trail: TrailPoint[] = []; fadingTrail: TrailPoint[] = []; fadeStart = 0;
+    clock = 0; time = 0; lastGeneration = 0; generation = 1; frame = 0; frameId = 0; last = 0;
+    visible = true; reduced: MediaQueryList;
+    peaks: Peak[] = PEAKS.map((p) => ({ ...p })); shiftFrom: Peak[] = []; shiftTo: Peak[] = [];
+    shiftStart = -1; nextShift = STABLE_MS + 1500; shiftPulse = 0;
+    // Client coordinates are kept so the peak stays under a resting cursor while the page scrolls.
+    pointer = { cx: -1, cy: -1, x: 0, y: 0, strength: 0 };
+    optimum = { x: 0, y: 0, tx: 0, ty: 0, ready: false };
+    // The field is resampled only when the landscape or the cursor peak changes.
+    fieldDirty = true; landscapeDirty = true; base = new Float32Array(0);
+    // One path per contour level, so higher levels can be drawn stronger.
+    contours: Path2D[] = [];
+    // Elevation tint at grid resolution, upscaled with smoothing when drawn.
+    shade = document.createElement("canvas"); shadeCtx = this.shade.getContext("2d")!; shadeData: ImageData | null = null;
+    ink: Rgb = [0, 0, 0]; muted: Rgb = [0, 0, 0]; bg: Rgb = [255, 255, 255]; accent: Rgb = [200, 56, 60]; mono = "monospace";
+
+    constructor(root: HTMLElement) {
+      this.root = root;
+      this.canvas = root.querySelector("canvas")!;
+      this.ctx = this.canvas.getContext("2d")!;
+      this.label = root.dataset.generationLabel ?? "{n}";
+      this.quiet = root.dataset.quiet ?? "";
+      this.reduced = matchMedia("(prefers-reduced-motion: reduce)");
+      this.loop = this.loop.bind(this);
+      this.readPalette();
+      new ResizeObserver(() => this.resize()).observe(root);
+      new IntersectionObserver((entries) => { this.visible = entries[0].isIntersecting; this.schedule(); }).observe(root);
+      new MutationObserver(() => { this.readPalette(); this.paintShade(); this.render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      document.addEventListener("visibilitychange", () => this.schedule());
+      this.reduced.addEventListener("change", () => { this.settle(); this.schedule(); });
+      window.addEventListener("pointermove", (event) => this.track(event), { passive: true });
+      document.documentElement.addEventListener("pointerleave", () => { this.pointer.cx = -1; });
+    }
+
+    readPalette() {
+      const style = getComputedStyle(document.documentElement);
+      const get = (name: string) => style.getPropertyValue(name);
+      this.ink = hexToRgb(get("--site-ink")); this.muted = hexToRgb(get("--site-muted")); this.bg = hexToRgb(get("--site-bg"));
+      this.accent = hexToRgb(get("--site-accent"));
+      this.mono = get("--site-mono").trim() || "monospace";
+    }
+
+    resize() {
+      const rect = this.root.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const first = !this.w;
+      const sx = first ? 1 : rect.width / this.w, sy = first ? 1 : rect.height / this.h;
+      this.w = rect.width; this.h = rect.height;
+      this.dpr = Math.min(devicePixelRatio || 1, 1.5);
+      this.canvas.width = Math.round(this.w * this.dpr); this.canvas.height = Math.round(this.h * this.dpr);
+      this.scale = Math.max(this.w, this.h) * .8;
+      this.cell = this.w < 700 ? 12 : 14;
+      this.cols = Math.ceil(this.w / this.cell) + 1; this.rows = Math.ceil(this.h / this.cell) + 1;
+      this.grid = new Float32Array(this.cols * this.rows); this.base = new Float32Array(this.cols * this.rows);
+      this.shade.width = this.cols; this.shade.height = this.rows; this.shadeData = this.shadeCtx.createImageData(this.cols, this.rows);
+      this.landscapeDirty = true;
+      this.quietRects = this.quiet ? [...document.querySelectorAll<HTMLElement>(this.quiet)].map((el) => {
+        const r = el.getBoundingClientRect();
+        return new DOMRect(r.left - rect.left, r.top - rect.top, r.width, r.height);
+      }) : [];
+      this.quietMap = new Float32Array(this.cols * this.rows);
+      for (let j = 0; j < this.rows; j++) for (let i = 0; i < this.cols; i++) this.quietMap[j * this.cols + i] = this.quietnessAt(i * this.cell, j * this.cell);
+      if (first) this.seed();
+      else {
+        for (const a of this.agents) { a.x *= sx; a.px *= sx; a.y *= sy; a.py *= sy; }
+        for (const p of [...this.trail, ...this.fadingTrail]) { p.x *= sx; p.y *= sy; }
+      }
+      if (this.reduced.matches && first) this.settle();
+      this.computeField();
+      if (this.reduced.matches) { this.optimum.x = this.optimum.tx; this.optimum.y = this.optimum.ty; }
+      this.render(); this.schedule();
+    }
+
+    seed() {
+      const count = this.w < 700 ? 36 : 64;
+      this.agents = Array.from({ length: count }, () => {
+        const x = Math.random() * this.w, y = Math.random() * this.h;
+        return { x, y, px: x, py: y, born: -1e9, fit: 0, shared: 0, elite: false };
+      });
+    }
+
+    // Reduced motion: evolve offline, then show a single settled generation.
+    settle() {
+      if (!this.reduced.matches || !this.w) return;
+      for (let i = 0; i < 30; i++) { this.clock += GENERATION_MS; this.time += GENERATION_MS / 1000; this.step(); }
+      this.clock += 1e6; this.ghosts = [];
+      this.computeField(); this.render();
+    }
+
+    track(event: PointerEvent) {
+      if (event.pointerType !== "mouse" || this.reduced.matches) return;
+      this.pointer.cx = event.clientX; this.pointer.cy = event.clientY;
+    }
+
+    // While the cursor rests in the upper hero it holds the highest peak; leaving releases it.
+    updatePointer(dt: number) {
+      const p = this.pointer;
+      if (p.cx < 0 && p.strength === 0) return;
+      const rect = this.root.getBoundingClientRect();
+      const tx = p.cx - rect.left, ty = p.cy - rect.top;
+      const inside = p.cx >= 0 && tx >= 0 && ty >= 0 && tx <= rect.width && ty <= rect.height * .7;
+      const { x, y, strength } = p;
+      if (inside && p.strength < .05) { p.x = tx; p.y = ty; }
+      if (inside) {
+        const k = Math.min(1, dt / 160);
+        p.x = Math.abs(tx - p.x) < .3 ? tx : p.x + (tx - p.x) * k;
+        p.y = Math.abs(ty - p.y) < .3 ? ty : p.y + (ty - p.y) * k;
+      }
+      const goal = inside ? 1 : 0;
+      p.strength += (goal - p.strength) * Math.min(1, dt / (inside ? 350 : 900));
+      if (Math.abs(goal - p.strength) < .003) p.strength = goal;
+      if (p.strength !== strength || (p.strength > .01 && (p.x !== x || p.y !== y))) this.fieldDirty = true;
+    }
+
+    reshuffle(prev: Peak[]) {
+      const leader = prev.reduce((best, p, i) => p.a > prev[best].a ? i : best, 0);
+      let heights: number[];
+      do heights = [...HEIGHTS].sort(() => Math.random() - .5); while (heights[leader] === HEIGHTS[0]);
+      return prev.map((p, i) => {
+        let x = p.x, y = p.y;
+        for (let attempt = 0; attempt < 12; attempt++) {
+          const angle = Math.random() * Math.PI * 2, distance = .12 + Math.random() * .12;
+          x = clamp(p.x + Math.cos(angle) * distance, .1, .9);
+          y = clamp(p.y + Math.sin(angle) * distance * 1.4, .15, .88);
+          // The two tallest peaks must stay clear of the hero copy, where agents fade out.
+          if (heights[i] < HEIGHTS[1] || x < .3 || x > .7 || y > .45) break;
+        }
+        return { ...p, a: heights[i], x, y };
+      });
+    }
+
+    updateEnvironment() {
+      if (this.shiftStart < 0 && this.clock >= this.nextShift) {
+        this.shiftFrom = this.peaks.map((p) => ({ ...p }));
+        this.shiftTo = this.reshuffle(this.peaks);
+        this.shiftStart = this.clock;
+        this.fadeTrail();
+      }
+      if (this.shiftStart < 0) { this.shiftPulse = 0; return; }
+      const t = Math.min(1, (this.clock - this.shiftStart) / SHIFT_MS), e = easeInOut(t);
+      this.peaks = this.shiftFrom.map((p, i) => {
+        const q = this.shiftTo[i];
+        return { ...p, x: p.x + (q.x - p.x) * e, y: p.y + (q.y - p.y) * e, a: p.a + (q.a - p.a) * e };
+      });
+      this.shiftPulse = Math.sin(Math.PI * t);
+      this.fieldDirty = this.landscapeDirty = true;
+      if (t >= 1) { this.shiftStart = -1; this.nextShift = this.clock + STABLE_MS; }
+    }
+
+    fadeTrail() {
+      if (this.trail.length > 1) { this.fadingTrail = this.trail; this.fadeStart = this.clock; }
+      this.trail = [];
+    }
+
+    peakList() {
+      return this.peaks.map((p) => ({ x: p.x * this.w, y: p.y * this.h, a: p.a, sx: p.sx * this.scale, sy: p.sy * this.scale }));
+    }
+
+    landscape(x: number, y: number, peaks: ReturnType<EvolutionField["peakList"]>) {
+      let value = 0;
+      for (const p of peaks) {
+        const dx = (x - p.x) / p.sx, dy = (y - p.y) / p.sy;
+        value += p.a * Math.exp(-.5 * (dx * dx + dy * dy));
+      }
+      return value;
+    }
+
+    pointerBump(x: number, y: number) {
+      const { strength, x: px, y: py } = this.pointer;
+      if (strength <= .01) return 0;
+      const s = this.scale * .13, dx = (x - px) / s, dy = (y - py) / s;
+      return POINTER_PEAK * strength * Math.exp(-.5 * (dx * dx + dy * dy));
+    }
+
+    fitness(x: number, y: number, peaks = this.peakList()) {
+      return this.landscape(x, y, peaks) + this.pointerBump(x, y);
+    }
+
+    computeField() {
+      const peaks = this.peakList(), cols = this.cols, rows = this.rows, c = this.cell;
+      if (this.landscapeDirty) {
+        this.landscapeDirty = false;
+        for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) this.base[j * cols + i] = this.landscape(i * c, j * c, peaks);
+      }
+      this.grid.set(this.base);
+      // Beyond 3.2 sigma the cursor bump is below 1% of a contour step.
+      const p = this.pointer;
+      if (p.strength > .01) {
+        const reach = this.scale * .13 * 3.2;
+        const i0 = Math.max(0, Math.floor((p.x - reach) / c)), i1 = Math.min(cols - 1, Math.ceil((p.x + reach) / c));
+        const j0 = Math.max(0, Math.floor((p.y - reach) / c)), j1 = Math.min(rows - 1, Math.ceil((p.y + reach) / c));
+        for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) this.grid[j * cols + i] += this.pointerBump(i * c, j * c);
+      }
+      this.contours = traceContours(this.grid, cols, rows, c, LEVELS);
+      this.paintShade();
+
+      const o = this.optimum;
+      let topValue = -Infinity;
+      const consider = (x: number, y: number) => { const v = this.fitness(x, y, peaks); if (v > topValue) { topValue = v; o.tx = x; o.ty = y; } };
+      for (const p of peaks) consider(p.x, p.y);
+      if (this.pointer.strength > .5) consider(this.pointer.x, this.pointer.y);
+      if (!o.ready) { o.x = o.tx; o.y = o.ty; o.ready = true; }
+    }
+
+    // Hypsometric tint: accent alpha depends on height alone, so the taller of two
+    // peaks reads as redder. A text-aware factor here would print the copy's fixed
+    // rectangles into the tint.
+    paintShade() {
+      const data = this.shadeData;
+      if (!data || !this.grid.length) return;
+      const [r, g, b] = this.accent, px = data.data;
+      for (let k = 0; k < this.grid.length; k++) {
+        const t = Math.min(1, this.grid[k] / MAX_FITNESS), o = k * 4;
+        px[o] = r; px[o + 1] = g; px[o + 2] = b; px[o + 3] = 255 * t ** 2.2;
+      }
+      this.shadeCtx.putImageData(data, 0, 0);
+    }
+
+    easeOptimum(dt: number) {
+      const o = this.optimum, k = 1 - .92 ** (dt / 33);
+      o.x += (o.tx - o.x) * k; o.y += (o.ty - o.y) * k;
+    }
+
+    // One generation: evaluate with fitness sharing so niches form on several
+    // peaks, keep one elite per niche, breed the rest by tournament selection and
+    // Gaussian mutation, and add a few random immigrants to keep exploring.
+    step() {
+      const now = this.clock, peaks = this.peakList(), radius = this.scale * .12;
+      for (const a of this.agents) a.fit = this.fitness(a.x, a.y, peaks);
+      for (const a of this.agents) {
+        let crowd = 0;
+        for (const b of this.agents) { const d = Math.hypot(a.x - b.x, a.y - b.y); if (d < radius) crowd += 1 - d / radius; }
+        a.shared = a.fit / crowd;
+      }
+      const ranked = [...this.agents].sort((p, q) => q.fit - p.fit);
+      this.best = ranked[0];
+      // The trail records only improvements and connects every best point; a jump to
+      // another niche is drawn dashed. Only a landscape shift clears it.
+      const last = this.trail[this.trail.length - 1], moved = last ? Math.hypot(last.x - this.best.x, last.y - this.best.y) : Infinity;
+      if (moved > .5) this.trail.push({ x: this.best.x, y: this.best.y, jump: !last || moved > radius * 1.2 });
+      if (this.trail.length > TRAIL) this.trail.shift();
+      const elites: Agent[] = [];
+      for (const a of ranked) {
+        if (elites.length === ELITES) break;
+        if (elites.every((e) => Math.hypot(e.x - a.x, e.y - a.y) > radius * 1.2)) elites.push(a);
+      }
+      const next: Agent[] = elites.map((a) => ({ ...a, px: a.x, py: a.y, born: -1e9, elite: true }));
+      for (const a of ranked) if (!elites.includes(a)) this.ghosts.push({ x: a.x, y: a.y, died: now });
+      const pool = [...this.agents].sort((p, q) => q.shared - p.shared).slice(0, Math.ceil(ranked.length * .55));
+      const sigma = this.scale * .05;
+      while (next.length < ranked.length) {
+        if (Math.random() < .1) {
+          const x = Math.random() * this.w, y = Math.random() * this.h;
+          next.push({ x, y, px: x, py: y, born: now, fit: 0, shared: 0, elite: false });
+          continue;
+        }
+        let parent = pool[Math.floor(Math.random() * pool.length)];
+        for (let k = 0; k < 2; k++) { const rival = pool[Math.floor(Math.random() * pool.length)]; if (rival.shared > parent.shared) parent = rival; }
+        const x = Math.max(0, Math.min(this.w, parent.x + gauss() * sigma));
+        const y = Math.max(0, Math.min(this.h, parent.y + gauss() * sigma));
+        next.push({ x, y, px: parent.x, py: parent.y, born: now, fit: 0, shared: 0, elite: false });
+      }
+      this.agents = next;
+      this.generation++;
+      this.lastGeneration = now;
+    }
+
+    // Precomputed per grid node on resize; rendering samples it bilinearly.
+    quietness(x: number, y: number) {
+      const c = this.cell, cols = this.cols, q = this.quietMap;
+      const fx = clamp(x / c, 0, cols - 1.001), fy = clamp(y / c, 0, this.rows - 1.001);
+      const i = fx | 0, j = fy | 0, u = fx - i, v = fy - j, k = j * cols + i;
+      return (q[k] * (1 - u) + q[k + 1] * u) * (1 - v) + (q[k + cols] * (1 - u) + q[k + cols + 1] * u) * v;
+    }
+
+    quietnessAt(x: number, y: number) {
+      let m = 1;
+      for (const r of this.quietRects) {
+        const dx = Math.max(r.left - 16 - x, 0, x - r.right - 16), dy = Math.max(r.top - 12 - y, 0, y - r.bottom - 12);
+        m = Math.min(m, .12 + .88 * smooth(Math.hypot(dx, dy) / 70));
+      }
+      return m;
+    }
+
+    schedule() {
+      const run = this.visible && !document.hidden && !this.reduced.matches && this.w > 0;
+      if (run && !this.frameId) { this.last = performance.now(); this.frameId = requestAnimationFrame(this.loop); }
+      if (!run && this.frameId) { cancelAnimationFrame(this.frameId); this.frameId = 0; }
+    }
+
+    loop(timestamp: number) {
+      const dt = Math.min(50, timestamp - this.last);
+      this.last = timestamp; this.clock += dt; this.time += dt / 1000;
+      this.updatePointer(dt);
+      this.updateEnvironment();
+      if (this.clock - this.lastGeneration >= GENERATION_MS) this.step();
+      // Landscape shifts resample at ~30 Hz; cursor-only changes at ~20 Hz.
+      if (this.fieldDirty && this.frame++ % (this.landscapeDirty ? 2 : 3) === 0) { this.fieldDirty = false; this.computeField(); }
+      this.easeOptimum(dt);
+      this.render();
+      this.frameId = requestAnimationFrame(this.loop);
+    }
+
+    drawTrail(points: TrailPoint[], alpha: number) {
+      const ctx = this.ctx, n = points.length;
+      if (n < 2 || alpha <= 0) return;
+      ctx.lineWidth = 1.4; ctx.lineCap = "round";
+      for (let i = 0; i < n; i++) {
+        const b = points[i], q = Math.max(.45, this.quietness(b.x, b.y)) * alpha * (.25 + .55 * i / (n - 1));
+        if (i > 0) {
+          ctx.strokeStyle = rgba(this.accent, b.jump ? q * .6 : q);
+          ctx.setLineDash(b.jump ? [3, 4] : []);
+          ctx.beginPath(); ctx.moveTo(points[i - 1].x, points[i - 1].y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        if (i < n - 1) { ctx.fillStyle = rgba(this.accent, q * 1.2); ctx.beginPath(); ctx.arc(b.x, b.y, 1.7, 0, Math.PI * 2); ctx.fill(); }
+      }
+      ctx.setLineDash([]);
+    }
+
+    render() {
+      const { ctx, w, h, clock: now } = this;
+      if (!w || !this.contours.length) return;
+      const dark = document.documentElement.dataset.theme === "dark";
+      ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      const c = this.cell, o = this.optimum;
+      ctx.globalAlpha = dark ? .2 : .11; ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(this.shade, -c / 2, -c / 2, this.cols * c, this.rows * c);
+      ctx.globalAlpha = 1;
+
+      // Contours brighten briefly while the environment shifts.
+      strokeContours(ctx, this.contours, this.ink, dark, 1 + this.shiftPulse * .9);
+
+      // The cursor's peak: a soft halo and a slowly turning dashed ring.
+      const cursor = this.pointer;
+      if (cursor.strength > .02) {
+        const qc = Math.max(.5, this.quietness(cursor.x, cursor.y)) * cursor.strength;
+        const halo = ctx.createRadialGradient(cursor.x, cursor.y, 0, cursor.x, cursor.y, 80);
+        halo.addColorStop(0, rgba(this.accent, (dark ? .2 : .14) * qc)); halo.addColorStop(1, rgba(this.accent, 0));
+        ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cursor.x, cursor.y, 80, 0, Math.PI * 2); ctx.fill();
+        ctx.setLineDash([3, 5]); ctx.lineDashOffset = -this.time * 10;
+        ctx.strokeStyle = rgba(this.accent, .6 * qc); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cursor.x, cursor.y, 30, 0, Math.PI * 2); ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      let alive = 0;
+      for (const g of this.ghosts) if (now - g.died < 480) this.ghosts[alive++] = g;
+      this.ghosts.length = alive;
+      for (const g of this.ghosts) {
+        const t = (now - g.died) / 480, q = this.quietness(g.x, g.y);
+        ctx.fillStyle = rgba(this.ink, (1 - t) * .3 * q);
+        ctx.beginPath(); ctx.arc(g.x, g.y, 2.2 * (1 - t * .6), 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Best-of-generation trajectory: older steps fade along the line; the last point is the red best.
+      if (this.fadingTrail.length) {
+        const t = (now - this.fadeStart) / TRAIL_FADE_MS;
+        if (t >= 1) this.fadingTrail = [];
+        else this.drawTrail(this.fadingTrail, 1 - easeOut(t));
+      }
+      this.drawTrail(this.trail, 1);
+
+      ctx.lineWidth = 1;
+      for (const a of this.agents) {
+        const age = now - a.born;
+        if (age < 900 && (a.px !== a.x || a.py !== a.y)) {
+          const e = easeOut(Math.min(1, age / 520)), q = this.quietness(a.x, a.y);
+          ctx.strokeStyle = rgba(this.muted, (1 - age / 900) * .45 * q);
+          ctx.beginPath(); ctx.moveTo(a.px, a.py); ctx.lineTo(a.px + (a.x - a.px) * e, a.py + (a.y - a.py) * e); ctx.stroke();
+        }
+      }
+      // Niche elites are red dots the size of ordinary agents; only the overall best gets the halo, ring and label.
+      const top = this.best && (this.agents.find((a) => a.elite && a.x === this.best!.x && a.y === this.best!.y) ?? this.best);
+      for (const a of this.agents) {
+        const age = now - a.born, e = easeOut(Math.min(1, age / 520));
+        const x = a.px + (a.x - a.px) * e, y = a.py + (a.y - a.py) * e, q = this.quietness(x, y);
+        if (a === top) {
+          const qb = Math.max(.6, q);
+          ctx.fillStyle = rgba(this.accent, .2 * qb); ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = rgba(this.accent, qb); ctx.beginPath(); ctx.arc(x, y, 3.4, 0, Math.PI * 2); ctx.fill();
+        } else if (a.elite) {
+          ctx.fillStyle = rgba(this.accent, .8 * q);
+          ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill();
+        } else {
+          ctx.fillStyle = rgba(this.ink, Math.min(1, age / 200) * .55 * q);
+          ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+
+      // Optimum reticle: where the landscape currently peaks.
+      const spin = this.time * .4, qo = this.quietness(o.x, o.y);
+      ctx.strokeStyle = rgba(this.accent, .5 * qo); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(o.x, o.y, 15, 0, Math.PI * 2); ctx.stroke();
+      for (let k = 0; k < 4; k++) {
+        const ang = spin + k * Math.PI / 2;
+        ctx.beginPath(); ctx.moveTo(o.x + Math.cos(ang) * 19, o.y + Math.sin(ang) * 19); ctx.lineTo(o.x + Math.cos(ang) * 25, o.y + Math.sin(ang) * 25); ctx.stroke();
+      }
+
+      if (this.best && top) {
+        // The best marker and its label keep a readable floor even inside the quiet zone around the hero copy.
+        const b = top;
+        const q = Math.max(.6, this.quietness(b.x, b.y)), ql = Math.max(.75, q);
+        ctx.strokeStyle = rgba(this.accent, .8 * q); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(b.x, b.y, 9, 0, Math.PI * 2); ctx.stroke();
+        // Generation annotation: an elbow leader out of the ring and bare text on its
+        // shelf, as in a plot callout. It keeps its last corner unless that would
+        // leave the field or cover page text, then tries the other corners in order.
+        ctx.font = `500 10.5px ${this.mono}`; ctx.textBaseline = "middle";
+        if (this.bestText.generation !== this.generation) {
+          const text = this.label.replace("{n}", String(this.generation));
+          this.bestText = { generation: this.generation, text, width: ctx.measureText(text).width };
+        }
+        const { text, width } = this.bestText;
+        const fits = ([sx, sy]: number[]) => {
+          const ly = b.y + sy * 15, x0 = sx > 0 ? b.x + 30 : b.x - 30 - width, x1 = x0 + width;
+          if (x0 < 8 || x1 > w - 8 || ly < 10 || ly > h - 10) return false;
+          return this.quietRects.every((r) => x1 < r.left - 6 || x0 > r.right + 6 || ly + 8 < r.top - 4 || ly - 8 > r.bottom + 4);
+        };
+        const order = [0, 1, 2, 3].map((k) => (this.labelCorner + k) % 4);
+        this.labelCorner = order.find((k) => fits(LABEL_CORNERS[k])) ?? this.labelCorner;
+        const [sx, sy] = LABEL_CORNERS[this.labelCorner], ly = b.y + sy * 15;
+        ctx.strokeStyle = rgba(this.accent, .6 * ql);
+        ctx.beginPath(); ctx.moveTo(b.x + sx * 6.4, b.y + sy * 6.4); ctx.lineTo(b.x + sx * 15, ly); ctx.lineTo(b.x + sx * 26, ly); ctx.stroke();
+        ctx.textAlign = sx > 0 ? "left" : "right";
+        ctx.fillStyle = rgba(this.ink, .8 * ql); ctx.fillText(text, b.x + sx * 30, ly + .5);
+        ctx.textAlign = "left";
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>(".evolution-field").forEach((root) => new EvolutionField(root));
+</script>
