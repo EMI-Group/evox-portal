@@ -8,17 +8,12 @@ const tr = await loadTranslations(locale);
 <div class="paradigm-scene" data-kind={kind} data-caption0={t(tr, `scene.${kind}.0`)} data-caption1={t(tr, `scene.${kind}.1`)} data-caption2={t(tr, `scene.${kind}.2`)}
   data-caption3={t(tr, `scene.${kind}.3`)}
   data-generation-label={t(tr, "scene.generation")}
-  data-tests-label={kind === "agentic" ? t(tr, "scene.agentic.tests") : undefined}
-  data-test-empty-label={kind === "agentic" ? t(tr, "scene.agentic.test.empty") : undefined}
-  data-test-text-label={kind === "agentic" ? t(tr, "scene.agentic.test.text") : undefined}
-  data-retained-label={kind === "science" ? t(tr, "scene.science.retained") : kind === "physical" ? t(tr, "scene.physical.retained") : kind === "agentic" ? t(tr, "scene.agentic.retained") : kind === "generative" ? t(tr, "scene.retained") : undefined}>
+  data-level0={kind === "agentic" ? t(tr, "scene.agentic.level0") : undefined}
+  data-level1={kind === "agentic" ? t(tr, "scene.agentic.level1") : undefined}
+  data-level2={kind === "agentic" ? t(tr, "scene.agentic.level2") : undefined}
+  data-retained-label={kind === "science" ? t(tr, "scene.science.retained") : kind === "physical" ? t(tr, "scene.physical.retained") : kind === "generative" ? t(tr, "scene.retained") : undefined}>
   <canvas class="scene-canvas" role="img" aria-label={`${t(tr, `paradigms.${kind}.title`)} · ${t(tr, "evolution.figure")}`}></canvas>
-  <svg class="scene-fallback" viewBox="0 0 480 280" fill="none" aria-hidden="true">
-    <path d="M90 140H390" stroke="var(--diagram-line)" stroke-width="1"/>
-    {[90,240,390].map((x,i) => <g transform={`translate(${x} 140)`}>
-      {kind === "agentic" ? <><rect x="-42" y="-30" width="84" height="60" rx="4" stroke="var(--diagram-muted)"/><path d="M-30-16h30M-30-2h56M-30 8h44M-30 18h50" stroke={i===2?"var(--diagram-red)":"var(--diagram-muted)"}/></> : kind === "generative" ? <>{Array.from({length:16},(_,j)=><rect x={-22+j%4*12} y={-22+Math.floor(j/4)*12} width="8" height="8" fill={i===2 ? "var(--diagram-red)" : "var(--diagram-muted)"}/>)}</> : kind === "physical" ? <><path d="M-22-22H22V-12H-22ZM-18-12L-28 4L-20 23M18-12L28 4L20 23" stroke={i===2 ? "var(--diagram-red)" : "var(--diagram-ink)"}/></> : <path d="M-45 0Q-30-23 45 4Q-25 16-45 0Z" stroke={i===2 ? "var(--diagram-red)" : "var(--diagram-ink)"}/>}
-    </g>)}
-  </svg>
+  <div class="scene-loading" aria-hidden="true"><i></i><i></i><i></i></div>
   <p class="scene-caption">{t(tr, `scene.${kind}.0`)}</p>
   <div class="scene-controls">
     <button type="button" data-action="pause" data-play={t(tr,"evolution.play")} data-pause={t(tr,"evolution.pause")} aria-label={t(tr,"evolution.pause")} aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="pause-icon" d="M5 4v8M11 4v8"/><path class="play-icon" d="m5 3 7 5-7 5Z"/></svg></button>
@@ -28,8 +23,12 @@ const tr = await loadTranslations(locale);
 <style>
   .paradigm-scene { position:relative; width:100%; }
   .scene-canvas { display:block; width:100%; height:auto; aspect-ratio:12/7; opacity:0; }
-  .scene-fallback { position:absolute; top:0; left:0; width:100%; height:auto; aspect-ratio:12/7; }
-  [data-ready] .scene-canvas { opacity:1; }[data-ready] .scene-fallback { display:none; }
+  .scene-loading { position:absolute; top:0; left:0; display:flex; align-items:center; justify-content:center; gap:7px; width:100%; aspect-ratio:12/7; }
+  .scene-loading i { width:5px; height:5px; border-radius:50%; background:var(--diagram-muted); opacity:.25; animation:scene-loading 1.2s ease-in-out infinite; }
+  .scene-loading i:nth-child(2) { animation-delay:.15s; }.scene-loading i:nth-child(3) { animation-delay:.3s; }
+  @keyframes scene-loading { 0%,80%,100% { opacity:.25; transform:scale(.8); } 40% { opacity:.9; transform:scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .scene-loading i { animation:none; opacity:.5; } }
+  [data-ready] .scene-canvas { opacity:1; }[data-ready] .scene-loading { display:none; }
   .scene-caption { display:flex; align-items:center; justify-content:center; min-height:44px; margin:0; padding:0 16px 12px; text-align:center; font-size:12px; line-height:1.4; color:var(--diagram-muted); pointer-events:none; }
   .scene-controls { position:absolute; top:10px; right:12px; display:none; gap:5px; z-index:4; }
   [data-ready] .scene-controls { display:flex; }

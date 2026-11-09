@@ -235,7 +235,7 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
     };
     const svgMap = (selector: string) => {
       const box = figure.querySelector(selector)!.getBoundingClientRect();
-      const origin = stage.getBoundingClientRect();
+      const origin = canvas.getBoundingClientRect();
       const scale = Math.min(box.width / 230, box.height / 220);
       return (x: number, y: number): Point => ({ x: box.left - origin.left + (box.width - 230 * scale) / 2 + x * scale, y: box.top - origin.top + (box.height - 220 * scale) / 2 + y * scale });
     };
@@ -364,7 +364,8 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
       }
     };
     const measure = () => {
-      const rect = stage.getBoundingClientRect(); width = rect.width; height = rect.height;
+      // Measure from the canvas, not the stage: the stage border offsets the canvas by 1px.
+      const rect = canvas.getBoundingClientRect(); width = rect.width; height = rect.height;
       vertical = steps[1].getBoundingClientRect().top > steps[0].getBoundingClientRect().bottom;
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);

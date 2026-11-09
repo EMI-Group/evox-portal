@@ -1,5 +1,5 @@
-import { agentCode, nextAgentPopulation, type AgentPopulation } from "./agentic-evolution";
 import { diagramAlpha, readDiagramPalette } from "./diagram-theme";
+import { MAIN_MERGE, agentEpisode, commitId, type Agent } from "./recursive-agents";
 /* Illustrative evolutionary experiments, not measured model, robotics or CFD results.
    Each population retains its elite unchanged and mutates its inherited parameters. */
 export type PopulationKind = "generative" | "physical" | "science";
@@ -12,6 +12,10 @@ const clamp = (n: number, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, n));
 const mix = (a: number, b: number, p: number) => a + (b - a) * p;
 const smooth = (p: number) => { p = clamp(p); return p * p * (3 - 2 * p); };
 function rng(seed: number) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+// Recursive agents in an oblique projection: time runs left to right over AGENT_SPAN ms, each recursion
+// depth is a floor (LEVELS gives floor heights), and siblings recede along z with RECEDE per unit.
+const AGENT_SPAN = 12000, MAIN_Y = 46, LEVELS = [96, 164, 232], FLOOR_Z = 44;
+const RECEDE = { x: .5, y: -.55 };
 const targets: Record<PopulationKind, number[]> = {
   generative: Array.from({length:16}, (_, i) => .2 + ((i * 7 + 3) % 11) / 18),
   physical: [.72, .68, .35, .8],
@@ -59,8 +63,6 @@ class ParadigmScene {
   population: Population;
   previousPopulation?: Population;
   offspring?: Population;
-  agentPopulation = nextAgentPopulation(undefined, 0);
-  agentOffspring?: AgentPopulation;
   generation = 0;
   time = 0;
   frame = 0;
@@ -83,20 +85,21 @@ class ParadigmScene {
     this.button = root.querySelector('[data-action="pause"]')!;
     this.caption = root.querySelector(".scene-caption")!;
     this.paused = this.media.matches;
-    if (this.paused) this.time = 13700;
+    if (this.paused) this.time = this.rest;
     this.button.addEventListener("click", () => { this.paused = !this.paused; this.sync(); });
     root.querySelector('[data-action="restart"]')!.addEventListener("click", () => {
-      this.time = this.media.matches ? 13700 : 0; this.generation = 0; this.previousPopulation = undefined; this.offspring = undefined;
-      this.agentPopulation = nextAgentPopulation(undefined, 0); this.agentOffspring = undefined;
+      this.time = this.media.matches ? this.rest : 0; this.generation = 0; this.previousPopulation = undefined; this.offspring = undefined;
       this.population = this.kind === "agentic" ? {candidates:[],winner:0} : nextPopulation(this.kind, undefined, 0); this.render(); this.sync();
     });
-    this.media.addEventListener("change", () => { this.paused = this.media.matches; if (this.paused) this.time = 13700; this.render(); this.sync(); });
+    this.media.addEventListener("change", () => { this.paused = this.media.matches; if (this.paused) this.time = this.rest; this.render(); this.sync(); });
     document.addEventListener("visibilitychange", () => this.sync());
     new IntersectionObserver(([entry]) => { this.visible = entry.isIntersecting; this.sync(); }).observe(root);
     new ResizeObserver(() => this.resize()).observe(root);
     new MutationObserver(() => { this.palette = readDiagramPalette(); this.render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     this.resize(); root.dataset.ready = ""; this.sync();
   }
+  // Reduced motion shows a resolved population, or the finished commit graph of one agent episode.
+  get rest() { return this.kind === "agentic" ? 12000 : 13700; }
   resize() {
     const box = this.canvas.getBoundingClientRect();
     this.ratio = Math.min(devicePixelRatio || 1, 2); this.scale = box.width / 480;
@@ -116,11 +119,7 @@ class ParadigmScene {
     const cycle = this.starts[5];
     if (this.time >= cycle) {
       this.time -= cycle; this.previousPopulation = this.population; this.generation++;
-      if(this.kind === "agentic") {
-        this.agentPopulation = this.agentOffspring ?? nextAgentPopulation(this.agentPopulation, this.generation);
-        this.agentOffspring = undefined;
-      }
-      else this.population = this.offspring ?? nextPopulation(this.kind, this.population, this.generation);
+      if(this.kind !== "agentic") this.population = this.offspring ?? nextPopulation(this.kind, this.population, this.generation);
       this.offspring = undefined;
     }
     this.render(); this.frame = requestAnimationFrame(this.tick);
@@ -172,7 +171,7 @@ class ParadigmScene {
     const pop=this.population,champ=pop.candidates[pop.winner];
     const parent=this.previousPopulation?.candidates[this.previousPopulation.winner];
     const tested=Math.min(2,Math.floor(p*3)),testP=(p*3)%1;
-    const rows=[88,151,214], left=78, center={x:244,y:150}, right=405;
+    const rows=[88,150,212], left=78, center={x:244,y:150}, right=405;
     const label=this.root.dataset.generationLabel??"";
     this.text(label.replace("{n}",String(this.generation+1)),40,50,this.palette.muted,1,10);
     this.text(this.root.dataset.retainedLabel??"",211,84,this.palette.muted,1,10);
@@ -263,7 +262,7 @@ class ParadigmScene {
   }
   physical(stage: number,p: number) {
     const pop=this.population,champ=pop.candidates[pop.winner];
-    const rows=[82,150,218],left=45,right=411,center={x:244,y:145};
+    const rows=[82,150,218],left=45,right=411,center={x:244,y:150};
     const label=this.root.dataset.generationLabel??"";
     this.text(label.replace("{n}",String(this.generation+1)),20,46,this.palette.muted,1,10);
     this.text(label.replace("{n}",String(this.generation+2)),363,46,this.palette.muted,stage===4?1:.35,10);
@@ -303,9 +302,9 @@ class ParadigmScene {
     });
     if(stage>=3){
       const reveal=stage===3?smooth((p-.35)/.45):1;
-      this.text(this.root.dataset.retainedLabel??"",205,103,this.palette.muted,reveal,10);
+      this.text(this.root.dataset.retainedLabel??"",205,108,this.palette.muted,reveal,10);
       this.policy(center.x,center.y,champ.genes,reveal);
-      this.check(center.x,183,true,reveal);
+      this.check(center.x,188,true,reveal);
       // The retained controller still drives the same body, not a new robot design.
       this.line([{x:206,y:249},{x:282,y:249}],this.palette.muted,.3*reveal,.8);
       this.robot(244,249,champ.genes,.4,champ.score,.6*reveal,false,0);
@@ -340,7 +339,8 @@ class ParadigmScene {
   }
   science(stage: number,p: number) {
     const pop=this.population,champ=pop.candidates[pop.winner];
-    const rows=[86,150,214],left=24,right=365,center={x:166,y:153},length=136;
+    // The centre shares the middle row's height so both middle routes are straight.
+    const rows=[86,150,214],left=24,right=365,center={x:166,y:150},length=136;
     const label=this.root.dataset.generationLabel??"";
     this.text(label.replace("{n}",String(this.generation+1)),24,48,this.palette.muted,1,10);
     this.text(label.replace("{n}",String(this.generation+2)),365,48,this.palette.muted,stage===4?1:.35,10);
@@ -412,72 +412,145 @@ class ParadigmScene {
     if(success)this.line([{x:x-3,y},{x:x-1,y:y+2},{x:x+4,y:y-4}],this.palette.ink,alpha,1.2);
     else {this.line([{x:x-3,y:y-3},{x:x+3,y:y+3}],this.palette.red,alpha,1.1);this.line([{x:x-3,y:y+3},{x:x+3,y:y-3}],this.palette.red,alpha,1.1);}
   }
-  codeCard(x:number,y:number,edits:boolean[],alpha=1,changed:number[] = [],accent=false) {
-    this.frameBox(x,y,112,57,alpha,accent);
-    this.text("solve.py",x+8,y+12,this.palette.ink,alpha,9);
-    agentCode(edits).forEach((line,i)=>{
-      const edited=changed.includes(i);
-      if(edited){
-        const c=this.ctx;c.save();c.fillStyle=diagramAlpha(this.palette.red,.1*alpha);c.fillRect(x+4,y+18+i*11,104,11);c.restore();
-      }
-      this.text(line,x+8,y+27+i*11,edited?this.palette.red:this.palette.muted,alpha,8);
+  // Recursive agents as a 3D git graph: floors are recursion depths, time runs left to right. Lines
+  // grow with time; nodes appear only once their moment arrives. Returns the caption index.
+  agentic():number {
+    const c=this.ctx,P=this.palette,T=this.time,e=this.generation,d=this.root.dataset;
+    const u=T/AGENT_SPAN,F=1-smooth((T-14000)/500);
+    const pt=(t:number,y:number,z=0):Point=>({x:52+t*372+z*RECEDE.x,y:y+z*RECEDE.y});
+    const lane=(a:Agent,t:number)=>pt(t,LEVELS[a.level],a.z);
+    const arrive=(t:number)=>u<t?0:smooth((u-t)/.02);
+    const label=(s:string,x:number,y:number,color:string,alpha:number,align:CanvasTextAlign="left",size=8,mono=true)=>{
+      if(alpha<=.01)return;
+      c.save();c.globalAlpha=alpha;c.fillStyle=color;c.textAlign=align;
+      c.font=mono?`${size}px ui-monospace, SFMono-Regular, Consolas, monospace`:`${size}px "Instrument Sans", ui-sans-serif, system-ui, sans-serif`;
+      c.fillText(s,x,y);c.restore();
+    };
+    const stroke=(pts:Point[],color:string,alpha:number,width=.8,dash?:number[])=>{
+      // Dashes are anchored to the canvas, so they stay still while a line grows or is swept.
+      if(alpha<=.01)return;c.save();if(dash){c.setLineDash(dash);c.lineDashOffset=pts[0].x;}this.line(pts,color,alpha,width);c.restore();
+    };
+    // Dispatch and merge share one hand-off: a dashed guide grows from a to b behind a red dot,
+    // the target node appears as the dot arrives, then the guide fades away.
+    const HAND=.03,FADE=.04;
+    const guide=(a:Point,b:Point,t0:number)=>{
+      if(u<t0||u>t0+HAND+FADE)return;
+      const k=smooth((u-t0)/HAND),tip={x:mix(a.x,b.x,k),y:mix(a.y,b.y,k)};
+      stroke([a,tip],P.muted,.75*F*(1-smooth((u-t0-HAND)/FADE)),.8,[2,2.5]);
+      if(k<1){this.halo(tip.x,tip.y,7,.2*F);this.dot(tip.x,tip.y,2.2,P.red,F);}
+    };
+    const nodes:(()=>void)[]=[];
+    // Every node is a commit: filled on main, hollow on agent branches.
+    // Final commits and merges are full size; earlier commits on a branch are smaller and unlabelled.
+    const commitNode=(p:Point,color:string,t:number,r=3,alpha=1)=>nodes.push(()=>{
+      const g=arrive(t);if(g<=0||alpha<=.01)return;
+      this.halo(p.x,p.y,r*3.3,.25*Math.sin(Math.PI*clamp((u-t)/.05))*F*alpha);
+      c.save();c.globalAlpha=F*alpha;c.fillStyle=P.fill;c.strokeStyle=color;c.lineWidth=r<3?.9:1.1;
+      c.beginPath();c.arc(p.x,p.y,r*mix(1.7,1,g),0,TAU);c.fill();c.stroke();c.restore();
     });
-  }
-  agentic(stage:number,p:number) {
-    const pop=this.agentPopulation,champ=pop.candidates[pop.winner];
-    const rows=[65,132,199], left=20, center={x:184,y:126},right=348;
-    const label=this.root.dataset.generationLabel??"";
-    this.text(label.replace("{n}",String(this.generation+1)),20,50,this.palette.muted,1,10);
-    this.text(label.replace("{n}",String(this.generation+2)),348,50,this.palette.muted,stage===4?1:.35,10);
-    // Every candidate sees exactly the same three inputs and expected answers.
-    const testing=stage===1?clamp(p*3):stage>=2?3:0;
-    const boardAlpha=stage===3?1-smooth(p/.4):stage===4?0:1;
-    if(boardAlpha>0){
-      this.frameBox(165,70,150,155,boardAlpha*.8);
-      this.text(this.root.dataset.testsLabel??"",176,86,this.palette.ink,boardAlpha,10);
-      ["A","B","C"].forEach((name,i)=>this.text(name,239+i*27,106,this.palette.ink,boardAlpha,10));
-      [this.root.dataset.testEmptyLabel??"",this.root.dataset.testTextLabel??"","NaN"].forEach((name,test)=>{
-        const y=133+test*33;
-        this.text(name,176,y,this.palette.muted,boardAlpha,9);
-        pop.candidates.forEach((candidate,i)=>{
-          const x=242+i*27,done=testing>=test+1;
-          if(done)this.check(x,y-3,candidate.tests[test],boardAlpha);
-          else if(testing>test)this.circle(x,y-3,4,Math.max(.12,testing-test),this.palette.red,boardAlpha,.9);
-          else this.dot(x,y-3,1.5,this.palette.muted,.3*boardAlpha);
-        });
-      });
-    }
-    pop.candidates.forEach((candidate,i)=>{
-      const selected=stage>=3&&i===pop.winner;
-      const enter=smooth(p);
-      const x=stage===0&&this.generation>0?mix(right,left,enter):left;
-      const alpha=stage>=3&&!selected?.3:stage===0&&this.generation===0?smooth(p*2-i*.2):1;
-      this.route({x:left+112,y:rows[i]+28},{x:165,y:148},20,selected?this.palette.red:this.palette.muted,selected?.7:.2,stage===1?(p+i/3)%1:undefined);
-      this.codeCard(x,rows[i],candidate.edits,alpha,[],selected);
-      this.text(String.fromCharCode(65+i),x+97,rows[i]+12,this.palette.muted,alpha,9);
-      if(selected)this.check(left+123,rows[i]+28,true,.9);
-      if(stage===3&&selected&&p<.7){
-        const t=smooth(p/.7);
-        this.codeCard(mix(left,center.x,t),mix(rows[i],center.y,t),champ.edits,Math.sin(Math.PI*t));
-      }
+    const poly=(q:Point[])=>{c.beginPath();q.forEach((p,j)=>j?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.closePath();};
+    // Floors: one translucent plane per recursion depth, laid down only as far as the present.
+    const floorNames=[d.level0,d.level1,d.level2],reach=clamp(u,0,1);
+    LEVELS.forEach((y,i)=>{
+      const q=[pt(-.02,y,-FLOOR_Z),pt(reach,y,-FLOOR_Z),pt(reach,y,FLOOR_Z),pt(-.02,y,FLOOR_Z)];
+      const glass=c.createLinearGradient(0,q[2].y,0,q[0].y);
+      glass.addColorStop(0,diagramAlpha(P.fill,.85));glass.addColorStop(1,diagramAlpha(P.fill,.4));
+      c.save();c.globalAlpha=F;c.fillStyle=glass;c.strokeStyle=P.line;c.lineWidth=.8;poly(q);c.fill();c.stroke();c.restore();
     });
-    if(stage>=3){
-      const promote=stage===3?smooth(p/.7):1;
-      this.text(this.root.dataset.retainedLabel??"",184,106,this.palette.muted,promote,10);
-      this.codeCard(center.x,center.y,champ.edits,promote);
-      this.check(240,201,true,promote);
+    // The present is one vertical time plane through every floor; nothing exists to its right yet.
+    const present=F*(1-smooth((u-.96)/.04));
+    if(present>.01){
+      // It spans the floors only; on main the present is a tick, keeping the sheet clear of the controls.
+      const top=LEVELS[0],bottom=LEVELS[2];
+      const sheet=[pt(reach,top,-FLOOR_Z),pt(reach,top,FLOOR_Z),pt(reach,bottom,FLOOR_Z),pt(reach,bottom,-FLOOR_Z)];
+      const shade=c.createLinearGradient(sheet[0].x,0,sheet[1].x,0);
+      shade.addColorStop(0,diagramAlpha(P.ink,.06));shade.addColorStop(1,diagramAlpha(P.ink,.015));
+      c.save();c.globalAlpha=present;c.fillStyle=shade;poly(sheet);c.fill();c.restore();
+      stroke([sheet[3],sheet[0]],P.muted,.45*present,.8);
+      stroke([sheet[0],sheet[1],sheet[2]],P.muted,.2*present,.8);
+      LEVELS.forEach(y=>stroke([pt(reach,y,-FLOOR_Z),pt(reach,y,FLOOR_Z)],P.muted,.5*present,.8));
+      stroke([pt(reach,MAIN_Y-6),pt(reach,MAIN_Y+6)],P.muted,.6*present,.8);
     }
-    if(stage===4){
-      this.agentOffspring??=nextAgentPopulation(pop,this.generation+1);
-      this.agentOffspring.candidates.forEach((child,i)=>{
-        const copy=smooth((p-i*.075)/.4),edit=smooth((p-.6-i*.025)/.18);
-        const edits=edit>0?child.edits:champ.edits;
-        const changed=edit>0?child.edits.flatMap((v,j)=>v!==champ.edits[j]?[j]:[]):[];
-        this.route({x:center.x+112,y:center.y+28},{x:right,y:rows[i]+28},22,this.palette.muted,.3*copy);
-        this.codeCard(mix(center.x,right,copy),mix(center.y,rows[i],copy),edits,copy,changed);
-        if(i===0&&copy>.95)this.check(451,rows[i]+12,true,.85);
-      });
-    }else rows.forEach(y=>this.frameBox(right,y,112,57,.1));
+    LEVELS.forEach((y,i)=>{const at=pt(-.02,y,-FLOOR_Z);label(floorNames[i]??"",at.x,at.y+11,P.muted,1,"left",9,false);});
+    // A branch runs through nodes at the given times. Between nodes it is dashed (red while the agent
+    // works, muted while it waits) until the next node lands: that stretch then sweeps solid from left
+    // to right, and the node appears as the sweep arrives.
+    const SWEEP=.03;
+    const branch=(at:(t:number)=>Point,stops:number[],live:(t:number)=>boolean,breaks:number[]=[],fossil=0)=>{
+      c.save();c.lineCap="butt";
+      for(let k=1;k<stops.length;k++){
+        const s0=stops[k-1],s1=stops[k];if(u<=s0)break;
+        const tip=Math.min(u,mix(s0,s1,smooth((u-s1+SWEEP)/SWEEP)));
+        if(tip>s0){stroke([at(s0),at(tip)],P.ink,.8*F*(1-fossil),1.2);stroke([at(s0),at(tip)],P.muted,.8*F*fossil,1.2);}
+        const cuts=[tip,...breaks.filter(b=>b>tip&&b<s1),s1];
+        for(let j=1;j<cuts.length&&u>cuts[j-1];j++){
+          const on=live(cuts[j-1]);
+          stroke([at(cuts[j-1]),at(Math.min(u,cuts[j]))],on?P.red:P.muted,(on?.8:.55)*F,on?1.2:.8,[2,2.5]);
+        }
+      }
+      c.restore();
+    };
+    // Text that starts at a lane is revealed by the time plane as it passes.
+    const reveal=(z:number,draw:()=>void)=>{c.save();c.beginPath();c.rect(0,0,pt(u,0,z).x,280);c.clip();draw();c.restore();};
+    // Main history: the previous episode's merge is this episode's base commit. Main is always drawn in
+    // full; only the present tick on it moves with the time plane.
+    stroke([pt(-.02,MAIN_Y),pt(1,MAIN_Y)],P.muted,.55,1);
+    label("main",pt(-.02,MAIN_Y).x-4,MAIN_Y+3,P.ink,.8,"right",9);
+    // The base sits right above the root's first node, the same commit. At the end of the episode the
+    // new commit slides back to become the next episode's base.
+    const agents=agentEpisode(e),baseAt=pt(agents[0].spawn+HAND,MAIN_Y),slide=smooth((T-14000)/600);
+    this.dot(baseAt.x,baseAt.y,3.4,P.ink,1-slide);label(commitId(`${e-1}-0`),baseAt.x,MAIN_Y-8,P.muted,1-slide,"center");
+    agents.forEach((a,i)=>{
+      if(u<a.spawn)return;
+      const parent=a.parent<0?null:agents[a.parent],start=a.spawn+HAND,head=lane(a,start);
+      const fork=parent?lane(parent,a.spawn):baseAt;
+      guide(fork,head,a.spawn);
+      if(u<start)return;
+      // A rejected branch stops at its ×, then fades into a muted fossil that stays in the history.
+      const fossil=a.rejected?smooth((u-a.commit-.05)/FADE):0;
+      reveal(a.z,()=>label(a.name,head.x+4,head.y-4,P.ink,.75*F*(1-.5*fossil)));
+      const stops=[start,...(a.dispatch===null?[]:[a.dispatch]),...a.commits,a.commit].sort((p,q)=>p-q);
+      const live=(t:number)=>a.dispatch===null||t<a.dispatch||a.work.some(([w0,w1])=>t>=w0&&t<w1);
+      branch(t=>lane(a,t),stops,live,a.work.flat(),fossil);
+      commitNode(head,P.ink,start,2.2,1-fossil);commitNode(head,P.muted,start,2.2,fossil);
+      if(a.dispatch!==null)commitNode(lane(a,a.dispatch),P.ink,a.dispatch,2.2);
+      a.commits.forEach(t=>{const at=lane(a,t);commitNode(at,P.ink,t,2.2,1-fossil);commitNode(at,P.muted,t,2.2,fossil);});
+      if(u<a.commit)return;
+      const at=lane(a,a.commit),id=commitId(`${e}-${i}`),g=arrive(a.commit);
+      if(a.rejected){
+        nodes.push(()=>[[P.red,1-fossil],[P.muted,fossil]].forEach(([color,k])=>{
+          const alpha=+k*F*g;if(alpha<=.01)return;
+          c.save();c.globalAlpha=alpha;c.fillStyle=P.fill;c.strokeStyle=color as string;c.lineWidth=1.1;
+          c.beginPath();c.arc(at.x,at.y,3*mix(1.7,1,g),0,TAU);c.fill();c.stroke();c.restore();
+          label(id,at.x-5,at.y-4,color as string,.85*alpha,"right");
+          stroke([{x:at.x-40,y:at.y-6.5},{x:at.x-5,y:at.y-6.5}],color as string,.85*alpha,.8);
+          stroke([{x:at.x+6,y:at.y-2.5},{x:at.x+11,y:at.y+2.5}],color as string,alpha,1);
+          stroke([{x:at.x+6,y:at.y+2.5},{x:at.x+11,y:at.y-2.5}],color as string,alpha,1);
+        }));
+        return;
+      }
+      commitNode(at,P.ink,a.commit);
+      label(id,at.x-5,at.y-4,P.ink,.75*F*g,"right");
+      // Surviving subagents hand their commits up together, arriving as the parent's own sweep reaches its
+      // merge commit.
+      // Main does not get a new commit: its ref rises straight up to the root's merge commit.
+      if(!parent){guide(at,pt(a.commit,MAIN_Y),MAIN_MERGE-HAND);return;}
+      guide(at,lane(parent,parent.commit),parent.commit-HAND);
+    });
+    nodes.forEach(draw=>draw());
+    // Main fast-forwards to the root's merge commit, drawn at that commit's time with its id.
+    const g=arrive(MAIN_MERGE);
+    if(g>0){
+      const end=pt(agents[0].commit,MAIN_Y),at={x:mix(end.x,baseAt.x,slide),y:MAIN_Y},id=commitId(`${e}-0`);
+      this.halo(at.x,at.y,11,.25*Math.sin(Math.PI*clamp((u-MAIN_MERGE)/.05)));
+      this.dot(at.x,at.y,3.4*mix(1.7,1,g),P.ink,1);
+      // Left of the node, clear of the playback controls; centred above it once it is the base.
+      c.font="8px ui-monospace, SFMono-Regular, Consolas, monospace";
+      const w=c.measureText(id).width,lx=mix(end.x-6-w/2,baseAt.x,slide),ly=mix(MAIN_Y-6,MAIN_Y-8,slide);
+      label(id,lx,ly,P.ink,.75*g*(1-slide),"center");label(id,lx,ly,P.muted,slide,"center");
+    }
+    const dispatched=Math.max(...agents.map(a=>a.dispatch??0))+HAND;
+    return u<agents[0].dispatch!?0:u<dispatched?1:u<agents[0].commit?2:3;
   }
   render() {
     if(!this.scale)return;
@@ -487,17 +560,19 @@ class ParadigmScene {
     const stage=Math.min(4,this.starts.findIndex((v,i)=>i>0&&this.time<v)-1);
     const current=Math.max(0,stage),p=clamp((this.time-this.starts[current])/this.durations[current]);
     this.root.dataset.phase=String(current);this.root.dataset.generation=String(this.generation);
-    const caption=current===4?3:current===0?0:current<3?1:2;
+    let caption=current===4?3:current===0?0:current<3?1:2;
+    if(this.kind==="agentic")caption=this.agentic();
+    else{
+      // Keep the stage neutral; local halos identify active candidates only.
+      for(let i=0;i<22;i++)this.dot(20+i*21,42,.55,this.palette.muted,.2);
+      if(this.kind==="generative")this.generative(current,p);
+      else if(this.kind==="physical")this.physical(current,p);
+      else this.science(current,p);
+    }
     if(caption!==this.lastCaption){
       this.caption.textContent=this.root.dataset[`caption${caption}`]??"";
       this.lastCaption=caption;
     }
-    // Keep the stage neutral; local halos identify active candidates only.
-    for(let i=0;i<22;i++)this.dot(20+i*21,42,.55,this.palette.muted,.2);
-    if(this.kind==="generative")this.generative(current,p);
-    else if(this.kind==="physical")this.physical(current,p);
-    else if(this.kind==="science") this.science(current,p);
-    else this.agentic(current,p);
   }
 }
 export function mountParadigmScenes() {
