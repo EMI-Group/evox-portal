@@ -1,40 +1,58 @@
 ---
-title: "Genesis entwickelt EvoX Compiler: KI baut evolutionäre Infrastruktur"
+title: "Genesis entwickelt EvoX Compiler: Verträge, Graph-Tests und Gerätesynchronisation"
 pubDate: 2026-11-03
-summary: "Der EvoX-Compiler-Fall verbindet zwei Ökosystemebenen: Genesis entwickelt Software, der resultierende Compiler unterstützt Programmtransformation und Ausführung."
-updatedDate: 2026-11-08
+updatedDate: 2026-11-10
+summary: "Wie Genesis einen Tensor-Graph-Compiler um explizite Stufen, Transformationsprüfungen und Backend-Verträge herum entwickelt hat, mit konkreten Beispielen aus seinen öffentlichen Tests."
 ---
 
-Infrastruktur für evolutionäre KI ist selbst ein umfangreiches Softwarevorhaben. Der Genesis-EvoX-Compiler-Fall verbindet beide Ebenen: Ein agentisches Entwicklungssystem erstellt und erweitert einen Tensorgraph-Compiler, während Schnittstellenverträge und Regressionstests bestimmen, welche Änderungen in die fortgesetzte Implementierung eingehen.
+Einen Tensor-Graph-Compiler zu bauen bedeutet, mehrere Implementierungen derselben Berechnung in Übereinstimmung zu halten. Eine Graph-Transformation kann das Tensor-Layout ändern; ein Adapter kann eine Operation ablehnen; ein Geräteaufruf kann zurückkehren, bevor die Berechnung abgeschlossen ist. Der Fall des EvoX Compiler von Genesis wird dann nützlich, wenn diese Grenzen einzeln untersucht werden.
 
-![Compilergraphen werden mit Regressionstests geprüft](./compiler-contract-layers.webp)
+![Compiler-Graphen geprüft gegen Regressionstests](./compiler-contract-layers.webp)
 
-## Klare Zuständigkeiten
+Der [Evidence-Snapshot vom 28. Oktober](https://genesis.evox.group/evidence/evoxc/) verzeichnet 6.789 bestandene Tests und etwa 50 US-Dollar an Modell-Token-Kosten. Um das Engineering hinter diesen Zahlen zu untersuchen, nutzt dieser Artikel auch den öffentlich zugänglichen Quellcode von v0.1.0. Der Snapshot und das Release haben unterschiedliche Test-Gesamtzahlen; die unten stehenden Implementierungsbeispiele sind durch ihre Version gekennzeichnet.
 
-EvoX Compiler erzeugt und transformiert EvoXIR und führt anschließend Lowering, Kompilierung, Laden und Ausführung durch. Externe Compiler optimieren und erzeugen Code. NumPy dient als Referenz; IREE, XLA und TVM sind optionale Pfade. [EvoX Compiler](https://genesis.evox.group/evidence/evoxc/)
+## Das Ziel in testbare Schnittstellen überführen
 
-Transformationen müssen Bedeutung erhalten, Backends akzeptierte Operationen unterstützen und die Laufzeit Gerätegrenzen beachten. Das sind konkretere Abnahmekriterien als wachsende Codezahlen.
+EvoX Compiler besitzt die Tensor-Sprache, den EvoXIR-Graphen und die Staging-Schnittstellen. Externe Compiler empfangen seine exportierte Repräsentation und übernehmen Optimierung, Scheduling und Codegenerierung. Seine [Package-Verträge](https://github.com/EMI-Group/evoxc/blob/v0.1.0/CONTEXT.md) dokumentieren die Abhängigkeitsrichtung: Werttypen und IR bilden die Grundlage für Tracing und Operationen, während Transformationen und Adapter auf diesen Schichten aufbauen. Das separate Paket `evoxc_hf` nutzt die öffentliche Compiler-API; der Compiler importiert die Modellintegration nicht.
 
-## Organisation der Arbeit
+Diese Aufteilung gibt der lokalen Entwicklungsarbeit eine konkrete Grenze. Beispielsweise erzeugt eine Transformation einen weiteren gewöhnlichen Graphen, anstatt von jedem Backend zu verlangen, Pythons `vmap` zu verstehen. Eine Lücke im Backend muss zu einem expliziten Fehler werden, anstatt stillschweigend den Ausführungspfad zu ändern. Kontextdokumente auf Paketebene halten die APIs und Einschränkungen fest, die eine andere Entwicklungsaufgabe bewahren muss.
 
-Der [Evidence-Stand vom 28. Oktober 2026](https://genesis.evox.group/evidence/evoxc/) beschreibt Paketkontexte, einseitige Abhängigkeiten und Tests vor dem Aufbau weiterer Schichten. Laut Repository wurden Code, Tests und Dokumentation mit Genesis erstellt.
+Die öffentliche Pipeline lautet `trace → lower → compile → load → run`. Jede Stufe gibt ein eigenes Objekt zurück. Die [Spezifikationstests](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/test_spec_compliance.py) prüfen Eingaben der falschen Stufe, lehnen direkte Eager-Execution-Aufrufe von Graphdefinitionen ab und verifizieren, dass Convenience-Funktionen in die dokumentierte Pipeline expandieren. Sie verhindern auch das Erfassen eines konkreten Tensors aus einem Closure, es sei denn, der Autor bettet ihn explizit ein. Der praktische Nutzen besteht darin, dass eine scheinbar bequeme Abkürzung nicht heimlich einen zweiten Satz von Semantiken einführen kann.
 
-Die Arbeit setzte sich bei Adaptern, Graphen und Benchmarks fort. Der Eintrag rekonstruiert Struktur aus der Historie; er prüft nicht jede Agentenaktion. Zwei Kalendermonate sind keine zwei Monate ununterbrochener autonomer Laufzeit.
+Laut dem Evidence-Bericht schritt die Entwicklung Schicht für Schicht voran, wobei pytest-Prüfungen erforderlich waren, bevor mit der nächsten Schicht fortgefahren wurde. Das Repository bietet einsehbare Verträge und Tests für diese Methode; es bietet keine vollständige archivierte Sequenz von Agentenentscheidungen.
 
-## Mehrstufige Validierung
+## Eine Populations-Transformation geprüft gegen zwei Referenzen
 
-Mit IREE wurden **6.789 bestandene, 46 übersprungene und 3 erwartete Fehlschläge**, ohne Fehler, berichtet. Ohne Compiler bestanden **6.367 Tests**. Diese historischen Zahlen dürfen nicht durch spätere Release-Summen ersetzt werden. [GW-000005](https://genesis.evox.group/evidence/evoxc/)
+Ein anspruchsvolles Feature ist `batch_functions`: die Kombination mehrerer Programme mit übereinstimmenden Input/Output-Signaturen in einem einzigen Graphen. Sein Vertrag ist stärker als „der kombinierte Graph läuft“: Die Ausgabezeile i muss weiterhin dem Ergebnis von Programm i entsprechen.
 
-Die separate Integration `evoxc_hf` vergleicht Ausgaben und Latenz mit torch/transformers. Checkpoint, Präzision, Backend und Hardware gehören zum Vergleich: numerische Übereinstimmung und Laufzeit sind verschiedene Eigenschaften.
+Die [Integrationstests von v0.1.0](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py) nutzen ein kleines, lesbares Beispiel. An derselben Graphposition führen drei Programme `x + 1`, `x * 2` und `x - 3` aus. Mit `switch_ops=True` repräsentiert der zusammengeführte Graph die verschiedenen Operationen durch eine Auswahl pro Zeile. Die Tests kompilieren diesen Graphen über den CPU-Pfad von IREE und vergleichen seine Ausgabe sowohl mit der NumPy-Ausführung des zusammengeführten Graphen als auch mit den gestapelten NumPy-Ergebnissen der ursprünglichen Funktionen bei `rtol=atol=1e-5`.
 
-## Grenzen der Ergebnisse
+Compiler-freie Prüfungen inspizieren die StableHLO-Ausgabe auf die erwartete Auswahl-Operation. Eine weitere Prüfung führt identische Programme zusammen und vergleicht das Ergebnis mit `vmap`, wo keine Auswahl erforderlich sein sollte. Zusammen untersuchen diese Tests die Programmerhaltung, den Export und die Backend-Integration, anstatt eine erfolgreiche Kompilierung als einzige Akzeptanzbedingung zu verwenden.
 
-Die **285.659 versionierten Textzeilen** enthalten Tests, Dokumentation und Benchmarkdaten. Rund **50 US-Dollar** decken nur Modell-Tokens ab, keine Hardware. Modell, Episodenzahl und tatsächliche Laufzeit wurden nicht genannt.
+## Device Placement ist Teil der Korrektheit
 
-Vulkan nutzte das Softwaregerät Mesa lavapipe; TVM ROCm war nur kompiliert. Ein Backendname beweist keine vollständige Gerätevalidierung. Ergebnisse sind projektseitig berichtet, ohne unabhängige Reproduktion.
+Ein Executable, das auf einer GPU läuft, sollte keine Host-Daten akzeptieren, indem es vorgibt, diese befänden sich bereits auf dem Gerät. Die [Spezifikationstests für Tensoren und Placement](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/test_spec_compliance.py) prüfen, ob Daten ein physisches Gerät zugewiesen haben, ob Transfers explizit über `Tensor.to(device)` erfolgen und ob ein ungültiges Placement einen `DeviceError` auslöst.
 
-## Softwareevolution und Recheninfrastruktur verbinden
+Dies ist auch für die Leistungsmessung von Bedeutung. Wenn jeder Aufruf die Modellgewichte erneut überträgt, misst ein Latenzwert eine andere Arbeitslast als eine, die sie resident hält. Die [Dokumentation zur Modellintegration von v0.1.0](https://github.com/EMI-Group/evoxc/blob/v0.1.0/evoxc_hf/CONTEXT.md) trennt das Laden von Checkpoints, die Forward-Berechnung und das Staging des Executables. Parameter bleiben explizite Graph-Eingaben, was ihr Placement sichtbar macht.
 
-Beginnen Sie mit der Pipeline in der [README](https://github.com/EMI-Group/evoxc/blob/main/README.md) und verfolgen Sie Aussagen zu Tests und [gespeicherten Modellbenchmarks](https://github.com/EMI-Group/evoxc/blob/main/bench_logs/hf_bench_results.md). Prüfen Sie verfügbare Pfade und offene Leistungsdefizite.
+## Ein zurückgegebener Aufruf ist nicht zwingend abgeschlossene Arbeit
 
-Wählen Sie zur Anwendung eine Graphtransformation oder einen Backend-Pfad und bestimmen Sie den zu erhaltenden Vertrag sowie die zugehörigen Tests. Halten Sie numerische Prüfungen und Latenzmessungen getrennt fest. Der [EvoX-Compiler-Überblick](/de/news/evox-compiler) erklärt die Ausführungspipeline; dieser Fall zeigt, wie klare Grenzen die Entwicklung überprüfbar machen.
+Der geräteresidente Pfad von XLA kann Arbeit in die Warteschlange stellen und zurückkehren, bevor sie abgeschlossen ist. Eine Zeitmessung nur von `run` würde daher die Ausführung unterschätzen. Die [Synchronisationstests](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/backends/test_xla_synchronize.py) prüfen den Ereignis-Lebenszyklus: Durchläufe sammeln Completion-Handles; `synchronize()` wartet auf diese und zerstört sie; eine zweite Synchronisation führt keine zusätzliche Plugin-Arbeit aus.
+
+Die Fehlerfälle sind ebenso spezifisch. Wenn das Warten fehlschlägt, müssen die verbleibenden Handles dennoch verarbeitet und der erste Fehler ausgegeben werden. Ein Plugin, das kein Completion-Event liefert, muss einen expliziten Fehler auslösen, anstatt einen falschen Abschluss zu behaupten.
+
+Diese Tests verwenden ein kleines Fake-PJRT-Plugin, das keine numerischen Berechnungen durchführt. Sie verifizieren die Synchronisationssemantik und das Cleanup, nicht den GPU-Durchsatz oder die numerische Genauigkeit. Diese Unterscheidung sorgt dafür, dass die Evidenz des Tests zum Anspruch passt.
+
+## Historisches Ergebnis und Release-Ergebnis getrennt halten
+
+| Datensatz | Konfiguration | Gemeldetes Ergebnis |
+| --- | --- | --- |
+| Evidence-Snapshot 28. Okt. | IREE installiert | 6.789 bestanden; 46 übersprungen; 3 erwartete Fehler; 0 fehlgeschlagen |
+| Evidence-Snapshot 28. Okt. | Compiler-frei | 6.367 bestanden; 95 übersprungen; 3 erwartete Fehler |
+| v0.1.0 Release README | Core- und Modellintegrations-Suites, alle Extras installiert | 7.511 bestanden; 77 übersprungen; 4 erwartete Fehler; 0 fehlgeschlagen |
+
+Quellen: [Evidence-Verifizierung](https://genesis.evox.group/evidence/evoxc/#verification) und [versionierter Release-Status](https://github.com/EMI-Group/evoxc/blob/v0.1.0/README.md#status--deferrals). Dies sind vom Projekt gemeldete Durchläufe. Abhängigkeits- und Hardware-Guards erklären nicht ausgeführte Pfade; ein bestandener CPU-Test ist keine Validierung für jeden Beschleuniger.
+
+Die 285.659 verfolgten Textzeilen des Evidence-Snapshots umfassen Tests, Dokumentation und Benchmark-Material. Die etwa 50 US-Dollar decken Modell-Token ab, exklusive Hardware; Modell, Anzahl der Episoden und aktive Ausführungszeit wurden nicht gemeldet. Die Kalenderspanne des Repositorys ist keine kontinuierliche autonome Laufzeit.
+
+Das Repository schreibt Genesis die Erstellung seines Codes, seiner Tests und seiner Dokumentation zu. Das konkrete Ergebnis ist ein Compiler mit separat prüfbaren Stufenverträgen, Tests zur Programmerhaltung und Semantiken für den Geräteabschluss. Beginnen Sie mit dem [Populations-Integrationstest](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py), um ein Feature über diese Grenzen hinweg zu verfolgen; die [EvoX Compiler Übersicht](/news/evox-compiler) erklärt die benutzerseitige Pipeline.
