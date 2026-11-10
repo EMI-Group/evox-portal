@@ -1,170 +1,50 @@
 ---
-title: "EvoX Genesis : construire des logiciels qui continuent d'évoluer"
+title: "EvoX Genesis : Construire un compilateur C via des étapes inspectables et des jalons de régression"
 pubDate: 2026-08-17
-updatedDate: 2026-11-08
-summary: "Genesis étend l'IA évolutionnaire d'EvoX au logiciel : les agents proposent des changements, la validation sélectionne le travail accepté et le projet conserve les progrès."
+updatedDate: 2026-11-10
+summary: "Le cas du compilateur C suit une implémentation vide à travers les étapes de compilation, les diagnostics et les bancs d'essai externes, avec des résultats maintenus dans leur périmètre documenté."
 ---
 
-Genesis applique la vision d'EvoX à Agentic AI en faisant du projet logiciel évolutif le résultat durable de nombreuses contributions locales. Génération de code, exécution, revue et intégration forment un cycle de développement. Les implémentations acceptées et leurs validations constituent la matière à partir de laquelle le travail suivant peut se poursuivre. [Genesis](https://github.com/EMI-Group/genesis)
+Partir d'une implémentation vide est un objectif clair ; produire un exécutable au comportement correct est une condition d'acceptation bien plus exigeante. Le cas du compilateur C de Genesis peut être examiné à travers les interfaces qu'il a construites et les couches de vérification qui les entourent.
 
-![Modules sources assemblés en un projet logiciel évolutif](./software-world-continuity.webp)
+![Modules sources assemblés dans un projet logiciel en pleine croissance](./software-world-continuity.webp)
 
-![image1.png](./evox-genesis-1.png)
+Le [registre Evidence du compilateur C](https://genesis.evox.group/evidence/c-compiler/) rapporte **248 989 lignes de Rust**, **1 019 épisodes d'agent archivés**, **123,4 heures** et **44,38 $ US de frais de jetons de modèle**, en utilisant DeepSeek V4 Flash. Il répertorie 220/220 cas de la c-testsuite, 32/36 cas LLVM évalués et 2 904/2 904 tests Rust. Il s'agit de résultats rapportés par le projet, et non d'une nouvelle reproduction pour cet article.
 
-L'équipe EvoX du Département de Science des Données et Intelligence Artificielle de la Hong Kong Polytechnic University a publié **EvoX Genesis**, un système d'IA récursif pour l'évolution autonome des logiciels sur le long terme.
+## Faire d'abord transiter un programme par chaque étape
 
-EvoX Genesis ne repose plus sur un agent persistant pour soutenir un développement de longue durée. Il laisse au contraire le monde du logiciel évoluer par lui-même.
+Le compilateur public, jcc, documente une séquence de jalons d'ingénierie : établir l'espace de travail, construire un squelette de compilation de bout en bout, étendre la couverture du langage, ajouter l'optimisation, puis exercer les suites externes et les constructions d'applications. La [feuille de route](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/roadmap.md) définit ces jalons ; elle doit être lue comme le registre de développement du dépôt plutôt que comme une transcription horodatée de chaque épisode Genesis.
 
-À partir d'un dépôt vide, le système a construit un **compilateur C de 248 989 lignes** en 123,4 heures, à travers 1 019 épisodes d'agent, pour un coût en tokens de modèle de seulement **44,38 $**.
+L'[architecture](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md) connecte le prétraitement, l'analyse lexicale et syntaxique, les vérifications sémantiques, l'exécution technique du lowering vers CIR, l'optimisation, la génération de code machine, l'assemblage d'objets et l'édition de liens. Des crates distinctes gèrent ces étapes.
 
-## Le codage sur le long terme : une frontière qui recule sans cesse
+Cette structure crée des artefacts intermédiaires utiles. `-E` s'arrête après le prétraitement ; `-emit-jcc-ir` expose la CIR ; `-S` émet l'assembleur ; `-c` produit un objet. Lorsqu'un programme compilé échoue, ces limites restreignent l'investigation avant de modifier l'ensemble du pipeline.
 
-Le temps de travail des agents de codage est passé de courtes tâches ponctuelles à plusieurs dizaines d'heures.
+## Préserver la sémantique C à travers la représentation intermédiaire
 
-OpenAI a exécuté Codex à partir d'un dépôt vide pendant environ 25 heures d'affilée, produisant environ 30 000 lignes de code.
+La CIR est la représentation SSA typée du compilateur, distincte de l'IR LLVM. L'optimisation transforme la CIR en CIR ; le flux de travail documenté pour les builds de débogage exécute le vérificateur après les passes. Le [guide de test](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/testing.md) décrit les vérifications pour le lowering, les représentations invalides, les réécritures, l'encodage des instructions et le comportement en ligne de commande.
 
-Anthropic a mobilisé 16 agents Claude, à travers près de 2 000 sessions, environ deux semaines et près de 20 000 $ de coûts d'API, pour construire de zéro un compilateur C d'environ 100 000 lignes.
+La vérification de la représentation est une couche, pas une preuve de compilation correcte. Une transformation structurellement valide peut tout de même modifier le résultat d'un programme. C'est pourquoi la stratégie de test compile et exécute également des programmes C et compare leur sortie.
 
-Le temps s'allonge, les agents se multiplient et les logiciels deviennent de plus en plus complexes.
+Le corpus inclut des échecs de compilation délibérés : les tests vérifient la sévérité du diagnostic, le message et la plage de code source. Cela préserve le comportement de rejet pour les entrées invalides parallèlement au comportement d'exécution réussi. Le [document de conformité C11](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/c11-compliance.md) du compilateur enregistre les constructions prises en charge et la politique d'extension.
 
-Mais le centre de la recherche reste l'agent :
+## Des suites externes testent le chemin complet
 
-des modèles plus puissants, des contextes plus longs, une mémoire plus persistante, plus d'agents.
+Le [harnais c-testsuite](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/c-testsuite/run.py) fournit un jalon externe de test du langage. Le [lanceur LLVM](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/llvm-suite/run.py) pilote CMake avec le compilateur testé, construit des programmes et compare l'exécution par rapport à une sortie de référence. Sa comparaison numérique par défaut utilise une tolérance de 1e-4, tandis que les jetons non numériques et le code de sortie doivent correspondre exactement.
 
-**L'équipe EvoX a retourné la question dans une autre direction :**
+Le [harnais Csmith](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/csmith/run.py) ajoute des tests différentiels de programmes générés par rapport à un compilateur de référence. Dans l'instantané inspecté du README, son exécution sur 100 graines rapporte **93 succès, 0 échec et 7 sauts**, les sauts étant attribués au dépassement de délai des deux compilateurs. Qualifier cela de « 93/93 » sans les graines sautées masquerait une partie de la charge de travail.
 
-**Pourquoi l'agent devrait-il persister ?**
+Ces vérifications détectent différentes classes d'erreurs : une suite de langage sonde des constructions spécifiées, des programmes aléatoires explorent des combinaisons, et les builds d'applications liées exercent ensemble le pilote, les fichiers objets et les interfaces d'exécution.
 
-Et si ce qui devait vraiment persister, c'était le monde du logiciel dans lequel il vit ?
+## Lier le succès à l'opération testée
 
-## 123,4 heures, 250 000 lignes
+Le [README versionné](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/README.md#validation) indique que lz4 se construit et réussit ses huit tests essentiels. Il décrit SQLite comme étant analysé et converti proprement (lowering), avec des travaux de vérification de fichiers complets enregistrés ultérieurement. Analyser SQLite est un jalon d'intégration utile ; ce n'est pas la même chose que de réussir la suite complète de tests d'exécution de SQLite.
 
-Nous avons laissé EvoX Genesis partir d'un dépôt à l'implémentation vide.
+La même source répertorie l'arithmétique `long double` partielle, les plateformes différées et les jalons documentés de la politique d'extension. Le résultat LLVM de 32/36 doit donc conserver son sous-ensemble évalué et ses exclusions. Le README et la page Evidence présentent également des décomptes de tests d'espace de travail différents ; cet article maintient le total d'Evidence attaché à son propre registre plutôt que de combiner les instantanés.
 
-Il n'y avait qu'un seul objectif : construire un compilateur C.
+## Ce qui persiste entre les tâches de développement
 
-123,4 heures, 1 019 épisodes d'agent, **248 989 lignes de code** et un coût en tokens de modèle de seulement **44,38 $**.
+Le [modèle de développement documenté](https://genesis.evox.group/getting-started/) de Genesis utilise une décomposition récursive des tâches autour d'un projet logiciel. Dans ce cas, les artefacts d'ingénierie durables sont concrets : modules sources, contrats de représentation, sorties intermédiaires, diagnostics et harnais de régression. Une tâche ultérieure peut s'appuyer sur ces artefacts au lieu de dépendre uniquement de la conversation d'un prédécesseur.
 
-Le compilateur final a réussi 220/220 tests de c-testsuite, 32/36 cas de test LLVM et 93/93 tests de programmes aléatoires Csmith.
+Le [cas de continuation de modèle](/news/genesis-compiler-continuation) examine un transfert ultérieur et son résultat de 1 820 cas au périmètre distinct. La [réécriture MESA](/news/genesis-mesa) utilise le comportement numérique original comme référence, tandis qu'[EvoX Compiler](/news/genesis-evoxc) vérifie les graphes de tenseurs et les contrats de périphériques. Il s'agit de problèmes de vérification distincts plutôt que d'exécutions supplémentaires de la même expérience de compilateur.
 
-Aucun compilateur existant n'attendait d'être complété — **il est parti de zéro.**
-
-![image2.png](./evox-genesis-2.png)
-
-_Figure 1 : résultats de l'expérience du compilateur C / taille du code, temps d'exécution, épisodes d'agent, coût et résultats de tests_
-
-_(avec le modèle DeepSeek V4 Flash)_
-
-## Ne pas maintenir l'agent en vie — maintenir le monde du logiciel en vie
-
-La vie d'un logiciel complexe est naturellement plus longue qu'une session d'agent.
-
-EvoX Genesis organise le logiciel en un monde logiciel qui se déploie récursivement :
-
-les agents de niveau supérieur décomposent les objectifs, et de nouveaux agents accomplissent le travail en positions locales ;
-
-une fois les résultats vérifiés, ils entrent dans l'historique des versions du logiciel et deviennent la réalité du prochain cycle de développement.
-
-Puis les agents peuvent disparaître,
-
-et de nouveaux agents continuent à partir du monde logiciel déjà constitué.
-
-Ce qui persiste, ce n'est pas une conversation, pas un bloc-notes sans cesse croissant, et pas un « agent maître » toujours en ligne.
-
-Ce qui persiste, ce sont le code, la structure, les contraintes, les résultats de vérification et l'histoire déjà écrite.
-
-**Ce qui persiste, ce n'est pas l'agent, mais le monde du logiciel.**
-
-**Agent does not persist. Its validated consequences do.**
-
-C'est ainsi qu'EvoX Genesis soutient l'évolution autonome des logiciels sur le long terme. Pour les utilisateurs, cela signifie aussi quelque chose de très simple :
-
-**Vous ne construisez pas des agents — vous décrivez seulement ce que le logiciel doit devenir.**
-
-Nul besoin de concevoir à l'avance des agents, des rôles ou des flux de travail, ni de décomposer manuellement un arbre de tâches complet.
-
-L'utilisateur se contente de décrire l'objectif de développement en un court texte ;
-
-la décomposition des tâches, la génération des agents, le déploiement de la récursion et la vérification des résultats — tout cela est fait par EvoX Genesis lui-même.
-
-![image3.png](./evox-genesis-3.png)
-
-_Figure 2 : le concept de Persistent Recursive World / les agents naissent, agissent et disparaissent ; le monde logiciel continue de se déployer_
-
-## Les modèles peuvent changer ; le monde du logiciel continue
-
-Cette continuité n'exige même pas d'utiliser le même modèle du début à la fin.
-
-Dans une autre série d'expériences, un monde logiciel initialement construit par GLM 5.2 a été confié à DeepSeek V4 Flash pour poursuivre le développement.
-
-Au final, il a réussi 1 820/1 820 des tests LLVM SingleSource conservés.
-
-Les modèles peuvent être remplacés, les agents peuvent être remplacés — le monde du logiciel continue.
-
-![image4.png](./evox-genesis-4.png)
-
-_Figure 3 : l'expérience de continuation entre modèles, GLM 5.2 → DeepSeek V4 Flash_
-
-## Partir de zéro, ou hériter de l'histoire
-
-Construire à partir de zéro n'est qu'un bout du cycle de vie d'un logiciel ;
-
-l'autre bout, c'est un monde logiciel qui existe depuis des années, riche de structure et d'histoire.
-
-Nous avons appliqué EvoX Genesis à MESA — un système de calcul scientifique pour l'évolution stellaire, développé de longue date.
-
-L'expérience portait sur 13 modules Fortran, totalisant **139 414 lignes** ;
-
-EvoX Genesis les a refactorisés en crates Rust correspondantes, pour un coût en tokens de modèle d'environ **10,6 $**.
-
-Un monde logiciel peut être créé à partir de rien, ou hériter de l'histoire et continuer d'évoluer.
-
-![image5.png](./evox-genesis-5.png)
-
-_Figure 4 : MESA Fortran → Rust, 13 modules, 139 414 lignes de code, 10,6 $_
-
-## Les avantages de coût se composent dans le temps
-
-Le développement logiciel de longue durée ne signifie pas que les coûts croissent linéairement.
-
-Dans EvoX Genesis, le code vérifié, la structure et l'historique de développement s'accumulent et deviennent le socle du prochain cycle de travail. Les agents suivants n'ont pas besoin de récomprendre tout le projet à partir de zéro ; une grande partie des informations existantes peut être directement mise en cache et réutilisée, avec un taux de réussite de cache allant jusqu'à 97,4 %.
-
-À mesure que le système tourne, l'état de développement réutilisable s'enrichit, les calculs redondants diminuent, et le coût unitaire du développement finit par baisser au fil du temps.
-
-Ce sont des intérêts composés d'ingénierie qui s'accumulent avec le temps.
-
-## EvoX Genesis est désormais open source
-
-Le projet est open source, avec des packages d'installation disponibles pour Windows, macOS et Linux.
-
-🌐 Site web :
-
-https://genesis.evox.group/
-
-🔗 **GitHub** :
-
-https://github.com/EMI-Group/genesis
-
-↓ **Téléchargements** :
-
-**https://github.com/EMI-Group/genesis/releases**
-
-**▤ Article :**
-
-**https://arxiv.org/abs/2608.10450**
-
-🌐 Groupe QQ : 297969717
-
-![image7.png](./evox-genesis-7.png)
-
-**Les agents s'en vont ; le monde du logiciel continue d'évoluer**
-
-**EvoX Genesis**
-
-Références :
-
-OpenAI, *Run long horizon tasks with Codex* (2026).
-
-Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
-
-Reprenez depuis une révision acceptée avec ses commandes de compilation et ses tests de régression. Examinez la contribution suivante par rapport à cette référence avant intégration. [Genesis : conserver les contributions des agents dans l'histoire du logiciel](/fr/news/genesis-development-history)
+Les 44,38 $ US couvrent les jetons de modèle et excluent le matériel. Les registres publics soutiennent un cas substantiel de construction de compilateur dans leur périmètre rapporté ; ils n'établissent pas une compatibilité C sans restriction. Pour inspecter le résultat, suivez l'[architecture](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md) jusqu'à un harnais externe, puis examinez les programmes et les sorties exacts qui définissent son jalon.

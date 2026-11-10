@@ -1,52 +1,68 @@
 ---
-title: "Genesis WASM Render: da geração local de código à construção de sistemas"
+title: "Genesis WASM Render: Corrigindo a Ordem de Validação e a Precisão de Pixeis num Renderizador WebGL"
 pubDate: 2026-10-15
-updatedDate: 2026-11-08
-summary: "O renderizador do Genesis estuda como interfaces, testes e alterações aceites coordenam a construção de uma cadeia gráfica completa."
+updatedDate: 2026-11-10
+summary: "Duas correções documentadas de WebGL2 ligam causas raiz a resultados de regressão, enquanto o registo de verificação final distingue a conformidade da API do emparelhamento visual."
 ---
 
-Construir um sistema de software exige que alterações locais úteis permaneçam compatíveis à medida que o projeto cresce. O Genesis estuda este desafio com WASM Render, ligando Agentic AI no EvoX à construção de sistemas: processamento de shaders, renderização e comportamento das API devem formar um conjunto coerente.
+Um renderizador WebGL por software deve fazer mais do que desenhar uma imagem reconhecível. Deve compilar shaders, manter o estado da API, validar entradas na ordem correta e preservar a precisão da imagem entre as fronteiras dos módulos. O caso do Genesis WASM Render contém dois exemplos concretos desses requisitos a serem depurados e verificados novamente.
 
-![Geometria de arame torna-se uma imagem sombreada](./software-graphics-pipeline.webp)
+![A geometria wireframe torna-se uma imagem de pixeis sombreada](./software-graphics-pipeline.webp)
 
-O registo público do Genesis descreve um renderizador TypeScript desenvolvido com DeepSeek V4 Flash. Relata 2.017/2.019 casos Khronos CTS aprovados, incluindo 1.184/1.184 casos WebGL2 no conjunto avaliado. Os cerca de 36 USD cobrem tokens do modelo, sem hardware. As 65,9 horas entre o primeiro e o último commit dos agentes são um intervalo do repositório, não uma medição do tempo ativo dos agentes.
+O [registo Evidence](https://genesis.evox.group/evidence/tbench-wasm/) descreve uma implementação em TypeScript desenvolvida com o DeepSeek V4 Flash: 2.017/2.019 casos do Khronos CTS aprovados, aproximadamente US$36 em custos de tokens do modelo, e 65,9 horas entre os primeiros e últimos commits do agente. Esse intervalo corresponde à duração do histórico do repositório, não ao tempo de execução medido do agente ativo.
 
-[Genesis Evidence](https://genesis.evox.group/evidence/tbench-wasm/)
+## Dividir o pipeline ao longo de interfaces utilizáveis
 
-## Do código local a um sistema completo: onde está a dificuldade?
+A [arquitetura de origem](https://github.com/BillHuang2001/tbench-wasm/blob/67f620392b667714ba028f320d0e24f8ed32a16a/src/CONTEXT.md) separa a compilação e ligação de shaders, a rasterização, o estado e objetos WebGL, e a apresentação/descodificação de imagem. O resultado de um shader ainda tem de passar pela interpolação, execução de fragmentos, manipulação de texturas e pelo buffer de desenho antes de se tornar uma imagem visível.
 
-WASM Render é um desafio de sistemas gráficos do Terminal-Bench Challenges: executar programas WebGL sem navegador, GPU ou bibliotecas externas de execução.
+O renderizador com zero dependências em tempo de execução visa a execução sem renderização nativa por GPU. Estruturas de conformidade baseadas no navegador ainda são utilizadas para o testar; esse ambiente de verificação é distinto da reivindicação de dependência em tempo de execução do renderizador.
 
-Isto equivale a implementar uma cadeia de processamento gráfico em software: interpretar programas de sombreamento, calcular os gráficos e manter a coerência de um grande conjunto de interfaces e alterações de estado. Uma funcionalidade individual que funciona está ainda longe de um sistema inteiro a trabalhar em conjunto. A tarefa exige que a IA se mantenha alinhada com o objetivo ao longo de várias rondas de desenvolvimento, trate das dependências entre módulos, corrija erros com base nos resultados dos testes e, por fim, conclua a integração do sistema e a validação de regressões.
+## Um erro de segurança tinha de ocorrer antes de um erro de vinculação de textura
 
-O ensaio anterior de 12 horas e esta execução têm orçamentos de desenvolvimento diferentes: as taxas de aprovação não formam uma classificação controlada. O arquivo Evidence também relata 16/38 casos visuais three.js no limiar rigoroso de 0,1% e 13/16 casos Babylon.js, ambos subconjuntos selecionados. A conformidade das API não demonstra compatibilidade gráfica completa.
+Uma página de WebGL2 que falhava dizia respeito a uma origem de imagem contaminada (origin-tainted). O [registo de verificação final](https://github.com/BillHuang2001/tbench-wasm/blob/67f620392b667714ba028f320d0e24f8ed32a16a/tests/conformance/FINAL.md#vs-previous-record-bundle-e3565d4-2015p4f) rastreia o problema até à ordem de validação, em vez de uma capacidade de worker em falta.
 
-![Resultados dos testes de conformidade WebGL2.0 e registos de testes do Khronos CTS do Genesis](./wasm-render-results-en.png)
+A implementação verificava a vinculação da textura antes de verificar se a origem era segura (origin-clean). A correção `7d8718a` moveu a verificação de segurança para antes da validação de vinculação em todos os seis pontos de entrada de origem de imagem relevantes, cobrindo carregamentos de imagem e de sub-imagem. A página afetada passou de **9 subtestes aprovados / 4 falhados para 13 / 0**.
 
-*Resultados dos testes de conformidade WebGL2.0 e registos de testes do Khronos CTS do Genesis.*
+Este é um problema de integração: ambas as verificações existiam, mas a sua ordenação alterava o comportamento observável da API. O resultado pretendido foi então incluído numa execução de toda a suite, em vez de ser tratado como prova de que o comportamento não relacionado permaneceu inalterado.
 
-O arquivo conta 135.165 linhas de texto versionadas, incluindo renderer.js gerado, código de terceiros, um ficheiro de bloqueio e documentação; não são apenas código-fonte do renderizador. O projeto descreve uma submissão autónoma inicial, sem uma classificação publicada pelos organizadores. Os resultados são relatados pelo projeto e não foram reproduzidos de forma independente.
+## Uma textura de elevada profundidade de bits falhava antes de chegar ao renderizador
 
-O processo de desenvolvimento terminou com a aprovação em 2,017 testes do Khronos CTS, com um custo de tokens do modelo de cerca de 36 dólares americanos e uma taxa de acertos da cache de aproximadamente 98%. Manter e integrar um projeto de engenharia de software de tão grande dimensão com um custo reduzido de utilização do modelo também demonstra a capacidade do Genesis para realizar desenvolvimento de longa duração com modelos de código aberto económicos.
+Uma segunda página testava a entrada de texturas de maior precisão. O mesmo registo identifica um caminho de descodificação de imagem que reduzia a origem para oito bits por canal antes do carregamento. As correções `89e4559` e `9bd7811` adicionaram um caminho PNG de 16 bits em JavaScript e corrigiram a manipulação de canais, incluindo a entrada RGBA.
 
-## Deixar o projeto continuar a evoluir e os agentes intervir conforme necessário
+A página `tex-image-10bpc` passou de **2 subtestes aprovados / 1 falhado para 3 / 0**. A implementação relevante é o [descodificador PNG da camada de apresentação](https://github.com/BillHuang2001/tbench-wasm/blob/67f620392b667714ba028f320d0e24f8ed32a16a/src/present/png.ts). Este exemplo mostra por que razão alterar apenas a aritmética do shader não teria resolvido todas as falhas de precisão: os dados já tinham perdido precisão a montante.
 
-O Genesis é um sistema de IA recursivo para a evolução de software. Os utilizadores descrevem um objetivo de desenvolvimento de software e o sistema desdobra as tarefas em torno desse objetivo, atribui agentes locais aos pontos onde há trabalho a realizar e conserva o código aceite e os resultados de validação no projeto de software.
+## Verificar o bundle submetido, incluindo qual o renderizador executado
 
-Perante grandes projetos, uma abordagem intuitiva é dar mais recursos aos agentes: contextos mais longos, sessões mais persistentes e uma colaboração predefinida mais elaborada. O Genesis coloca a continuidade do desenvolvimento no próprio projeto de software. Os objetivos e as restrições de nível superior orientam todo o desenvolvimento, enquanto as tarefas se desdobram recursivamente ao longo da estrutura do repositório. Os agentes tratam do trabalho local e saem quando terminam; os agentes seguintes continuam a partir do projeto que já tomou forma.
+O [registo final de 29 de agosto](https://github.com/BillHuang2001/tbench-wasm/blob/67f620392b667714ba028f320d0e24f8ed32a16a/tests/conformance/FINAL.md) identifica o commit do bundle `c4ffbff`. Refere que o `renderer.js` integrado foi testado tal como extraído, sem ser reconstruído para verificação.
 
-Anteriormente, o Genesis partiu de um repositório vazio, construiu um compilador de C com aproximadamente 250,000 linhas de código e deu continuidade ao desenvolvimento entre diferentes modelos. Os resultados dos testes WASM Render validam ainda mais as capacidades de construção e integração autónomas do Genesis no desenvolvimento de sistemas gráficos complexos.
+| Suite avaliada | Aprovados | Falhados | Timeouts / erros |
+| --- | --- | --- | --- |
+| WebGL1 | 833/835 | 2 | 0 / 0 |
+| WebGL2 | 1.184/1.184 | 0 | 0 / 0 |
+| Combinado | 2.017/2.019 | 2 | 0 / 0 |
 
-## Sistemas abertos que continuam a evoluir
+O denominador segue os manifestos nessa árvore de testes. O registo também afirma que todas as 2.019 páginas classificadas reportaram o renderizador de software como ativo, pelo que o fallback nativo não forneceu os resultados positivos. Para aquelas duas páginas WebGL2 corrigidas, a execução completa recuperou ambas as falhas preservando as páginas que anteriormente já passavam.
 
-O valor aberto deste caso está numa construção verificável: interfaces, implementações e resultados de validação permanecem disponíveis para trabalho posterior. Avança assim a direção do EvoX para software que acumula alterações úteis entre tarefas de agentes, avaliando o progresso pelo comportamento do sistema integrado.
+![Resultados de conformidade WebGL para a execução documentada do Genesis](./wasm-render-results-en.png)
 
-🔗 Repositório do Genesis: [https://github.com/EMI-Group/genesis](https://github.com/EMI-Group/genesis)
+*Figura de resultados históricos; o registo final com versão define os manifestos e contagens avaliados.*
 
-📄 Artigo do Genesis: [https://arxiv.org/abs/2608.10450](https://arxiv.org/abs/2608.10450)
+## Investigar falhas residuais com um controlo
 
-✅ Repositório de resultados do desafio: [https://github.com/BillHuang2001/tbench-wasm](https://github.com/BillHuang2001/tbench-wasm)
+Duas páginas de WebGL1 continuaram a falhar. O registo final atribui o caso de cor com alpha baixo ao comportamento de apresentação/leitura do canvas 2D do Chromium e reporta a mesma falha com WebGL nativo. Para identificadores de shader com duplo sublinhado, reporta que o Chrome nativo também falhou na página de teste.
 
-🔼 Projeto de origem (EvoX): [https://github.com/EMI-Group/evox](https://github.com/EMI-Group/evox)
+Estes são os resultados de controlo documentados do projeto, não uma reprodução independente. Eles explicam a classificação dos resíduos pelos autores sem transformar 2.017/2.019 numa reivindicação de compatibilidade incondicional.
 
-🌐 Grupo QQ: 297969717
+A comparação visual é uma verificação separada. O registo Evidence reporta **16/38 páginas three.js num limiar rigoroso de 0,1% de pixeis** e **13/16 cenas Babylon.js**, ambos subconjuntos selecionados. A conformidade da API e a concordância de pixeis medem propriedades diferentes; a contagem elevada no CTS não apaga as falhas visuais.
+
+## Acompanhar uma falha desde a página de teste até ao artefacto final
+
+Com as árvores de teste e dependências de suporte preparadas, o registo final documenta este ponto de entrada WebGL2:
+
+```bash
+npx tsx tests/conformance/run.ts --renderer ./renderer.js --suite webgl2 --report tests/reports/webgl2-FINAL2.json
+```
+
+O registo observa que as saídas JSON detalhadas estão no gitignore. O seu relatório integrado e os identificadores de correção são o rasto público; este artigo não executou novamente a suite.
+
+As 135.165 linhas de texto monitorizadas do arquivo incluem o bundle gerado, material de terceiros, ficheiros lock e documentação. Os US$36 cobrem os tokens do modelo, excluindo hardware. Comece pela correção da ordem de validação e pela sua página de teste ao inspecionar este caso: ela liga uma falha específica, uma alteração no código-fonte e o resultado integrado sem depender apenas do volume de código.

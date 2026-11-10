@@ -1,164 +1,50 @@
 ---
-title: "EvoX Genesis: 계속 진화할 수 있는 소프트웨어를 만들다"
+title: "EvoX Genesis: 검사 가능한 단계와 회귀 게이트를 통한 C 컴파일러 구축"
 pubDate: 2026-08-17
-updatedDate: 2026-11-08
-summary: "Genesis는 EvoX의 진화형 AI를 소프트웨어로 확장합니다. 에이전트가 변경을 제안하고 검증이 채택을 결정하며 프로젝트가 진전을 보존합니다."
+updatedDate: 2026-11-10
+summary: "C 컴파일러 사례는 빈 구현체에서 시작하여 컴파일러 단계, 진단 및 외부 테스트 하네스를 거치는 과정을 따르며, 결과는 문서화된 범위 내에서 유지됩니다."
 ---
 
-Genesis는 EvoX의 비전을 Agentic AI로 확장하며, 진화하는 소프트웨어 프로젝트를 여러 국소적 기여가 축적된 지속적인 결과로 봅니다. 코드 생성, 실행, 검토, 통합이 개발 순환을 이룹니다. 채택된 구현과 검증 기록은 후속 작업이 이어질 기반이 됩니다. [Genesis](https://github.com/EMI-Group/genesis)
+빈 구현체에서 시작하는 것은 명확한 목표입니다. 하지만 올바르게 동작하는 실행 파일을 생성하는 것은 훨씬 더 까다로운 수락 조건입니다. Genesis의 C 컴파일러 사례는 구축된 인터페이스와 이를 둘러싼 검증 계층을 통해 살펴볼 수 있습니다.
 
-![소스 모듈로 확장되는 소프트웨어 프로젝트](./software-world-continuity.webp)
+![성장하는 소프트웨어 프로젝트로 조립되는 소스 모듈](./software-world-continuity.webp)
 
-![image1.png](./evox-genesis-1.png)
+[C Compiler Evidence 기록](https://genesis.evox.group/evidence/c-compiler/)에 따르면, DeepSeek V4 Flash를 사용하여 **248,989 라인의 Rust**, **1,019개의 아카이브된 agent episodes**, **123.4시간** 및 **모델 토큰 비용 US$44.38**이 소요되었습니다. 또한 220/220개의 c-testsuite 케이스, 32/36개의 평가된 LLVM 케이스, 2,904/2,904개의 Rust 테스트 결과가 나열되어 있습니다. 이는 프로젝트에서 보고된 결과이며, 이 기사를 위해 새로 재현된 것이 아닙니다.
 
-홍콩이공대학교 데이터과학 및 인공지능학과의 EvoX 팀이 장기 자율 소프트웨어 진화를 위한 재귀적 AI 시스템인 **EvoX Genesis**를 공개했습니다.
+## 먼저 하나의 프로그램을 모든 단계에 통과시키기
 
-EvoX Genesis는 장기 개발을 유지하기 위해 지속적으로 존재하는 agent에 의존하지 않습니다. 대신, 소프트웨어 세계 자체가 계속 진화하도록 합니다.
+공개 컴파일러인 jcc는 일련의 엔지니어링 마일스톤을 문서화합니다. 워크스페이스 구축, 엔드 투 엔드(end-to-end) 컴파일 골격 제작, 언어 커버리지 확장, 최적화 추가, 그리고 외부 스위트 및 애플리케이션 빌드 실행 순입니다. [roadmap](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/roadmap.md)은 이러한 게이트들을 정의하며, 이는 Genesis의 모든 에피소드에 대한 타임스탬프 기록이라기보다 리포지토리의 개발 기록으로 읽어야 합니다.
 
-빈 저장소에서 출발하여 시스템은 1,019개의 agent 에피소드를 거쳐 123.4시간 만에 **248,989줄의 C 컴파일러**를 구축했으며, 모델 token 비용은 단 **44.38달러**였습니다.
+[architecture](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md)는 전처리, 어휘 및 구문 분석, 의미론적 검사, CIR lowering, 최적화, 기계어 생성, 오브젝트 어셈블리 및 링킹을 연결합니다. 각 단계는 별도의 crate가 담당합니다.
 
-## 롱호라이즌 코딩: 경계는 계속 움직인다
+이러한 구조는 유용한 중간 산출물을 생성합니다. `-E`는 전처리 후 중단하고, `-emit-jcc-ir`은 CIR을 노출하며, `-S`는 어셈블리를 출력하고, `-c`는 오브젝트 파일을 생성합니다. 컴파일된 프로그램이 실패할 경우, 이러한 경계는 전체 파이프라인을 변경하기 전에 조사 범위를 좁혀줍니다.
 
-코딩 agent의 작업 시간은 한 번의 짧은 작업에서 수십 시간으로 확장되었습니다.
+## 중간 표현을 통한 C 의미론 보존
 
-OpenAI는 Codex를 빈 저장소에서 약 25시간 연속으로 실행하여 약 3만 줄의 코드를 생성했습니다.
+CIR은 LLVM IR과는 별개인 컴파일러의 타입이 지정된 SSA 표현식입니다. 최적화는 CIR을 CIR로 변환하며, 문서화된 디버그 빌드 워크플로우는 패스(pass) 실행 후 검증기(verifier)를 실행합니다. [testing guide](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/testing.md)는 lowering, 잘못된 표현식, rewrite, 인스트럭션 인코딩 및 명령줄 동작에 대한 검사를 설명합니다.
 
-Anthropic은 16개의 Claude agent를 사용해 약 2,000개 세션, 약 2주, 약 2만 달러의 API 비용으로 약 10만 줄의 C 컴파일러를 처음부터 구축했습니다.
+표현식 검증은 하나의 계층일 뿐, 올바른 컴파일을 증명하는 것은 아닙니다. 구조적으로 유효한 변환이라도 프로그램의 결과를 바꿀 수 있습니다. 이것이 테스트 전략에서 C 프로그램을 컴파일 및 실행하고 그 출력을 비교하는 이유입니다.
 
-시간은 점점 길어지고, agent는 점점 많아지며, 소프트웨어는 점점 복잡해지고 있습니다.
+코퍼스에는 의도적인 컴파일 실패 사례도 포함되어 있습니다. 테스트는 진단 심각도, 메시지 및 소스 범위를 확인합니다. 이는 성공적인 실행 동작과 더불어 유효하지 않은 입력에 대한 거부 동작을 보존합니다. 컴파일러의 [C11 compliance document](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/c11-compliance.md)는 지원되는 구문과 확장 정책을 기록합니다.
 
-하지만 연구의 중심은 여전히 agent입니다:
+## 외부 스위트를 통한 전체 경로 테스트
 
-더 강력한 모델, 더 긴 컨텍스트, 더 지속적인 메모리, 더 많은 agent.
+[c-testsuite harness](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/c-testsuite/run.py)는 외부 언어 테스트 게이트를 제공합니다. [LLVM runner](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/llvm-suite/run.py)는 테스트 대상 컴파일러로 CMake를 구동하고, 프로그램을 빌드하며, 실행 결과를 참조 출력과 비교합니다. 기본 수치 비교에는 1e-4의 허용 오차를 사용하며, 비수치 토큰과 종료 상태는 정확히 일치해야 합니다.
 
-**EvoX 팀은 질문의 방향을 바꿨습니다:**
+[Csmith harness](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/csmith/run.py)는 참조 컴파일러와의 생성 프로그램 차분 테스트(differential testing)를 추가합니다. 검사된 README 스냅샷에서 100개의 시드 실행 결과는 **93개 통과, 0개 실패, 7개 건너뜀**으로 보고되었으며, 건너뜀은 두 컴파일러 모두에서 발생한 타임아웃 때문으로 명시되었습니다. 건너뛴 시드를 제외하고 이를 "93/93"이라고 부르는 것은 워크로드의 일부를 숨기는 결과가 됩니다.
 
-**왜 agent는 계속 존재해야 하는가?**
+이러한 검사들은 서로 다른 클래스의 오류를 감지합니다. 언어 스위트는 지정된 구문을 조사하고, 무작위 프로그램은 조합을 탐색하며, 링크된 애플리케이션 빌드는 드라이버, 오브젝트 파일 및 런타임 인터페이스를 함께 실행합니다.
 
-정말로 지속되어야 하는 것은, agent가 살고 있는 소프트웨어 세계가 아닐까?
+## 성공 지표를 테스트된 작업에 국한시키기
 
-## 123.4시간, 25만 줄
+[버전 관리된 README](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/README.md#validation)는 lz4가 빌드되고 8개의 필수 테스트를 통과했음을 보고합니다. 또한 SQLite가 깔끔하게 파싱 및 lowering 되었으며, 추가적인 전체 파일 검증 작업이 기록되어 있다고 설명합니다. SQLite를 파싱하는 것은 유용한 통합 마일스톤이지만, 이는 SQLite의 전체 런타임 테스트 스위트를 통과하는 것과는 다릅니다.
 
-우리는 EvoX Genesis가 구현이 비어 있는 저장소에서 시작하게 했습니다.
+동일한 소스에는 부분적인 `long double` 산술, 보류된 플랫폼 및 문서화된 확장 정책 게이트가 나열되어 있습니다. 따라서 32/36 LLVM 결과는 평가된 하위 집합과 제외 사항을 유지해야 합니다. README와 Evidence 페이지는 워크스페이스 테스트 횟수도 다르게 나타나는데, 이 기사에서는 스냅샷을 결합하는 대신 Evidence의 합계를 해당 기록에 귀속시킵니다.
 
-목표는 하나뿐이었습니다: C 컴파일러 구축.
+## 개발 작업 간에 지속되는 요소
 
-123.4시간, 1,019개의 agent 에피소드, **248,989줄의 코드**, 그리고 모델 token 비용은 단 **44.38달러**였습니다.
+Genesis의 [문서화된 개발 모델](https://genesis.evox.group/getting-started/)은 소프트웨어 프로젝트를 중심으로 재귀적인 작업 분해를 사용합니다. 이 사례에서 지속 가능한 엔지니어링 산출물은 구체적입니다. 소스 모듈, 표현식 규약, 중간 출력물, 진단 및 회귀 하네스가 그것입니다. 이후의 작업은 이전 작업의 대화 내용에만 의존하는 대신 이러한 산출물을 바탕으로 진행될 수 있습니다.
 
-최종 컴파일러는 c-testsuite 220/220, LLVM 테스트 케이스 32/36, Csmith 랜덤 프로그램 테스트 93/93을 통과했습니다.
+[model-continuation 사례](/news/genesis-compiler-continuation)는 이후의 인수인계와 별도로 범위가 지정된 1,820개 케이스의 결과를 조사합니다. [MESA rewrite](/news/genesis-mesa)는 원래의 수치적 동작을 참조로 사용하며, [EvoX Compiler](/news/genesis-evoxc)는 텐서 그래프와 디바이스 규약을 확인합니다. 이것들은 동일한 컴파일러 실험의 추가 실행이 아니라 별개의 검증 문제입니다.
 
-거기에는 보완되기를 기다리는 기존 컴파일러가 없었습니다. **완전히 처음부터 시작했습니다.**
-
-![image2.png](./evox-genesis-2.png)
-
-_그림 1: C 컴파일러 실험 결과 / 코드 규모, 실행 시간, agent 에피소드, 비용 및 테스트 결과_
-
-_(DeepSeek V4 Flash 모델 사용)_
-
-## agent를 지속시키지 말고, 소프트웨어 세계를 지속시켜라
-
-복잡한 소프트웨어의 수명은 단일 agent 세션보다 본질적으로 깁니다.
-
-EvoX Genesis는 소프트웨어를 재귀적으로 전개되는 소프트웨어 세계로 조직합니다:
-
-상위 agent가 목표를 분해하고, 새로운 agent가 각자의 국소적 위치에서 작업을 완수합니다;
-
-결과가 검증되면 소프트웨어의 버전 역사에 들어가, 다음 개발 라운드의 현실이 됩니다.
-
-그리고 agent는 사라져도 되고,
-
-새로운 agent는 이미 형성된 소프트웨어 세계에서 이어받아 나아갑니다.
-
-지속되는 것은 어떤 대화도, 끝없이 길어지는 스크래치패드도, 항상 온라인 상태인 '마스터 agent'도 아닙니다.
-
-지속되는 것은 코드, 구조, 제약, 검증 결과, 그리고 이미 일어난 역사입니다.
-
-**지속되는 것은 agent가 아니라 소프트웨어 세계입니다.**
-
-**Agent does not persist. Its validated consequences do.**
-
-이것이 EvoX Genesis가 장기 자율 소프트웨어 진화를 지속시키는 방식입니다. 사용자에게 이는 매우 단순한 한 가지를 의미합니다:
-
-**agent를 구축할 필요가 없습니다 — 소프트웨어가 무엇이 되기를 원하는지만 기술하면 됩니다.**
-
-agent, 역할, 워크플로를 미리 설계할 필요도, 완전한 작업 트리를 수동으로 분해할 필요도 없습니다.
-
-사용자는 소프트웨어 개발 목표를 짧은 글로 기술하기만 하면 되고,
-
-작업을 어떻게 분해할지, agent를 어떻게 생성할지, 재귀를 어떻게 전개할지, 결과를 어떻게 검증할지는 모두 EvoX Genesis가 스스로 처리합니다.
-
-![image3.png](./evox-genesis-3.png)
-
-_그림 2: Persistent Recursive World 개념도 / agent는 태어나고, 행동하고, 사라진다; 소프트웨어 세계는 계속 전개된다_
-
-## 모델은 바꿀 수 있고, 소프트웨어 세계는 계속된다
-
-이러한 연속성은 같은 모델을 끝까지 사용할 것도 요구하지 않습니다.
-
-다른 실험에서는 GLM 5.2가 구축을 시작한 소프트웨어 세계를 DeepSeek V4 Flash에 넘겨 개발을 계속하게 했습니다.
-
-최종적으로 유지된 LLVM SingleSource 테스트의 1,820/1,820을 통과했습니다.
-
-모델은 교체될 수 있고, agent도 교체될 수 있습니다 — 소프트웨어 세계는 계속됩니다.
-
-![image4.png](./evox-genesis-4.png)
-
-_그림 3: GLM 5.2 → DeepSeek V4 Flash 교차 모델 연속 실험_
-
-## 처음부터, 혹은 역사를 이어받아
-
-제로부터 구축하는 것은 소프트웨어 라이프사이클의 한쪽 끝일 뿐이고,
-
-다른 쪽 끝은 수년간 존재해 온, 구조와 역사가 풍부한 소프트웨어 세계입니다.
-
-우리는 EvoX Genesis를 MESA — 오랫동안 개발되어 온 항성 진화 과학 계산 시스템 — 에 적용했습니다.
-
-실험은 13개의 Fortran 모듈, 총 **139,414줄**을 대상으로 했으며,
-
-EvoX Genesis는 이를 대응하는 Rust crates로 리팩터링했습니다. 모델 token 비용은 약 **10.6달러**였습니다.
-
-소프트웨어 세계는 무에서 창조될 수도 있고, 역사를 이어받아 계속 변할 수도 있습니다.
-
-![image5.png](./evox-genesis-5.png)
-
-_그림 4: MESA Fortran → Rust, 13개 모듈, 139,414줄 코드, 10.6달러_
-
-## 비용 우위도 시간이 지나면 복리로 쌓인다
-
-EvoX Genesis에서는 검증된 코드, 구조, 개발 역사가 계속 축적되어 다음 작업의 기반이 됩니다. 후속 agent는 전체 프로젝트를 처음부터 다시 이해할 필요가 없고, 기존 정보의 상당 부분은 그대로 캐시하여 재사용할 수 있으며, 캐시 적중률은 최대 97.4%에 달합니다.
-
-## EvoX Genesis가 오픈소스로 공개되었습니다
-
-프로젝트는 오픈소스로 공개되었으며, Windows, macOS, Linux용 설치 패키지를 제공합니다.
-
-🌐 공식 웹사이트:
-
-https://genesis.evox.group/
-
-🔗 **GitHub**:
-
-https://github.com/EMI-Group/genesis
-
-↓ **다운로드**:
-
-**https://github.com/EMI-Group/genesis/releases**
-
-**▤ 논문:**
-
-**https://arxiv.org/abs/2608.10450**
-
-🌐 QQ 그룹: 297969717
-
-![image7.png](./evox-genesis-7.png)
-
-**agent는 떠나도, 소프트웨어 세계는 계속 진화합니다**
-
-**EvoX Genesis**
-
-참고:
-
-OpenAI, *Run long horizon tasks with Codex* (2026).
-
-Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
-
-수락된 리비전과 빌드 명령, 회귀 테스트를 인계 기준으로 삼습니다. 다음 기여를 통합하기 전에 이 기준과 비교하여 검토합니다. [Genesis: 에이전트의 기여를 소프트웨어 이력에 남기다](/ko/news/genesis-development-history)
+US$44.38은 모델 토큰 비용이며 하드웨어 비용은 제외됩니다. 공개 기록은 보고된 범위 내에서 실질적인 컴파일러 구축 사례를 뒷받침하지만, 무제한적인 C 호환성을 확립하는 것은 아닙니다. 결과를 검사하려면 [architecture](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md)를 따라 외부 하네스 중 하나를 확인한 다음, 해당 게이트를 정의하는 정확한 프로그램과 출력을 조사하십시오.

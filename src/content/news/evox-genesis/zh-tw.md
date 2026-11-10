@@ -1,164 +1,50 @@
 ---
-title: "EvoX Genesis：構建能夠持續演化的軟體"
+title: "EvoX Genesis：從空實現到 C 編譯器，開發階段與迴歸驗證如何銜接"
 pubDate: 2026-08-17
-updatedDate: 2026-11-08
-summary: "Genesis 將 EvoX 的演化式 AI 方向延伸到軟體：智慧體提出變更，驗證決定哪些成果被接受，專案本身承載後續發展的基礎。"
+updatedDate: 2026-11-10
+summary: "從端到端編譯骨架、CIR 驗證到外部測試集，公開記錄展示了 Genesis 構建 C 編譯器的工程階段與驗收方法。"
 ---
 
-Genesis 將 EvoX 的願景帶入 Agentic AI，把不斷發展的軟體專案視為多次區域性貢獻所積累的成果。程式碼生成、執行、審查與整合組成開發迴圈；被接受的實現及其驗證記錄，為後續工作提供可以繼續發展的基礎。 [Genesis](https://github.com/EMI-Group/genesis)
+從空實現開始是一個清晰的目標；而生成一個行為正確的可執行檔案則是一個要求高得多的驗收條件。Genesis 的 C 編譯器案例可以透過其構建的介面以及圍繞這些介面的驗證層來進行考察。
 
-![原始碼模組構成持續擴展的軟體專案](./software-world-continuity.webp)
+![原始碼模組組裝成不斷增長的軟體專案](./software-world-continuity.webp)
 
-![image1.png](./evox-genesis-1.png)
+[C Compiler Evidence 記錄](https://genesis.evox.group/evidence/c-compiler/)報告了 **248,989 行 Rust 程式碼**、**1,019 個歸檔的智慧體執行回合**、**123.4 小時**以及 **44.38 美元的模型 token 費用**（使用 DeepSeek V4 Flash）。它列出了 220/220 個 c-testsuite 案例、32/36 個已評估的 LLVM 案例以及 2,904/2,904 個 Rust 測試。這些是專案報告的結果，而非針對本文進行的重新復現。
 
-香港理工大學數據科學及人工智能學系的 EvoX 團隊，發表了**EvoX Genesis（天演·啟元）**——一套遞迴演化式 AI 系統。
+## 首先使一個程式貫穿所有階段
 
-EvoX Genesis 不再依賴持續存在的 Agent 來維持長程開發，而是讓軟體世界本身持續演化。
+公開的編譯器 jcc 記錄了一系列工程里程碑：建立工作區、構建端到端編譯骨架、擴充套件語言覆蓋範圍、新增最佳化，然後執行外部套件和應用程式構建。[路線圖](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/roadmap.md)定義了這些階段驗收條件；它應當被視為倉庫的開發記錄，而非 Genesis 每個執行回合的帶時間戳的執行日誌。
 
-從空白儲存庫出發，系統在 123.4 小時內建構出**248,989 行的 C 編譯器**，歷經 1,019 個 Agent episode，模型 token 成本僅為**44.38 美元**。
+其[架構](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md)連線了預處理、詞法和語法分析、語義檢查、CIR 表示轉換、最佳化、機器碼生成、目標檔案生成和連結。不同的 crate 負責這些階段。
 
-## 長程 Coding：邊界不斷推進
+這種結構產生了有用的中間產物。`-E` 在預處理後停止；`-emit-jcc-ir` 暴露 CIR；`-S` 輸出彙編；`-c` 生成目標檔案。當編譯後的程式失敗時，這些邊界可以在更改整個流水線之前縮小調查範圍。
 
-Coding Agent 的工作時間，已經從單次的短任務，延長到數十小時。
+## 透過中間表示保留 C 語義
 
-OpenAI 曾讓 Codex 從空白儲存庫連續執行約 25 小時，產出約 3 萬行程式碼；
+CIR 是編譯器的有型別 SSA 表示，獨立於 LLVM IR。最佳化將 CIR 轉換為 CIR；記錄的除錯構建工作流在各 pass 之後執行驗證器。[測試指南](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/testing.md)描述了針對表示轉換、無效表示、重寫、指令編碼和命令列行為的檢查。
 
-Anthropic 則動用 16 個 Claude Agent，歷經近 2,000 個 session、約兩週時間與近 2 萬美元的 API 成本，從零打造出一個約 10 萬行的 C 編譯器。
+表示驗證只是一個層面，並非正確編譯的證明。結構上有效的轉換仍可能改變程式的執行結果。這就是為什麼測試策略還包括編譯並執行 C 程式並對比其輸出。
 
-時間越來越長，Agent 越來越多，軟體越來越複雜。
+測試用例集中包含了刻意的編譯失敗案例：測試會檢查診斷嚴重程度、訊息和原始碼位置範圍（source span）。這在確保成功執行行為的同時，也保留了對無效輸入的拒絕行為。編譯器的 [C11 合規性文件](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/c11-compliance.md)記錄了支援的結構和擴充套件策略。
 
-但研究的中心，仍然是 Agent：
+## 外部套件測試完整路徑
 
-更強的模型、更長的上下文、更持久的記憶、更多的 Agent。
+[c-testsuite 測試框架](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/c-testsuite/run.py)提供了一個外部語言測試驗收條件。[LLVM 執行器](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/llvm-suite/run.py)透過被測編譯器驅動 CMake，構建程式並將執行結果與參考輸出進行對比。其預設數值比較使用 1e-4 的容差，非數值文字與退出狀態則必須完全匹配。
 
-**EvoX 團隊把問題轉向了另一個方向：**
+[Csmith 測試框架](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/tools/csmith/run.py)增加了針對參考編譯器的生成程式差異測試。在審查的 README 快照中，其 100 個種子的執行報告為 **93 次透過、0 次失敗和 7 次跳過**，跳過歸因於兩個編譯器均超時。如果撇開跳過的種子而稱其為“93/93”，將會掩蓋部分工作負載。
 
-**為什麼一定要讓 Agent 持續存在？**
+這些檢查檢測不同類別的錯誤：語言套件探測指定的結構，隨機程式探索組合，而連結的應用程式構建則共同檢驗驅動程式、目標檔案和執行時介面。
 
-如果真正需要持續存在的，是它所身處的軟體世界呢？
+## 把結果落實到實際透過的操作
 
-## 123.4 小時，25 萬行
+[版本化的 README](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/README.md#validation) 報告了 lz4 的構建並透過了其八項核心測試。它描述了 SQLite 已透過解析和表示轉換，並記錄了進一步的全檔案驗證工作。解析 SQLite 是一個有用的整合里程碑；但這並不等同於透過 SQLite 的完整執行時測試套件。
 
-我們讓 EvoX Genesis 從一個實作為空的儲存庫開始。
+同一來源列出了部分 `long double` 運算、推遲的平臺支援以及記錄在案的擴充套件策略限制。因此，32/36 的 LLVM 結果必須保留其評估子集和排除項。README 和 Evidence 頁面也有不同的工作區測試計數；本文將 Evidence 的總數與其記錄掛鉤，而非合併快照。
 
-目標只有一個：打造一個 C 編譯器。
+## 開發任務之間持久存在的內容
 
-123.4 小時、1,019 個 Agent episode、**248,989 行程式碼**，模型 token 成本僅為**44.38 美元**。
+Genesis 的[開發模型說明](https://genesis.evox.group/getting-started/)圍繞軟體專案使用遞迴任務分解。在這種情況下，持久的工程產物是具體的：原始碼模組、表示契約、中間輸出、診斷和迴歸框架。後續任務可以針對這些產物開展工作，而不僅僅依賴於前序任務的對話。
 
-最終的編譯器通過了 220/220 c-testsuite 測試、32/36 LLVM 測試案例，以及 93/93 Csmith 隨機程式測試。
+[模型延續案例](/news/genesis-compiler-continuation)考察了稍後的交接及其獨立範圍內的 1,820 個案例結果。[MESA 重寫](/news/genesis-mesa)使用原始數值行為作為參考，而 [EvoX Compiler](/news/genesis-evoxc) 則檢查張量圖和裝置契約。這些是截然不同的驗證問題，而非同一編譯器實驗的額外執行。
 
-那裡沒有一個現成的編譯器等待補全——**它是從零開始的。**
-
-![image2.png](./evox-genesis-2.png)
-
-_圖1：C 編譯器實驗結果 / 程式碼規模、執行時間、Agent episodes、成本與測試結果_
-
-_（使用 DeepSeek V4 Flash 模型）_
-
-## 不是讓 Agent 持續存活，而是讓軟體世界持續存活
-
-複雜軟體的生命，天生就比單次 Agent 工作階段更長。
-
-EvoX Genesis 將軟體組織成一個不斷遞迴展開的軟體世界：
-
-上層 Agent 分解目標，新的 Agent 在各自的位置完成工作；
-
-結果通過驗證後，便進入軟體的版本歷史，成為下一輪開發的現實。
-
-然後，Agent 可以消失，
-
-新的 Agent 從已經成形的軟體世界繼續出發。
-
-持續存在的，不是某段 conversation，不是不斷膨脹的 scratchpad，也不是一個永遠在線的「總管 Agent」。
-
-持續存在的是程式碼、結構、約束、驗證結果，以及已經發生的歷史。
-
-**持續存在的不是 Agent，而是軟體世界。**
-
-**Agent does not persist. Its validated consequences do.**
-
-這就是 EvoX Genesis 的遞迴自主演化。對使用者而言，它也意味著一件非常簡單的事：
-
-**你不需要打造 Agent——只需要描述你希望軟體成為什麼樣子。**
-
-無需預先設計 Agent、角色或工作流程，也無需手動拆解完整的任務樹。
-
-使用者只需要用一段簡短的文字描述軟體開發目標；
-
-任務如何分解、Agent 如何生成、遞迴如何展開、結果如何驗證——這一切全部由 EvoX Genesis 自行完成。
-
-![image3.png](./evox-genesis-3.png)
-
-_圖2：Persistent Recursive World 概念圖 / Agent 誕生、行動、消失；軟體世界持續展開_
-
-## 模型可以替換，軟體世界繼續
-
-這種連續性甚至不要求從頭到尾使用同一個模型。
-
-在另一組實驗中，一個最初由 GLM 5.2 建構的軟體世界，被交給 DeepSeek V4 Flash 繼續發展。
-
-最終，在保留的 LLVM SingleSource 測試中，它通過了 1,820/1,820。
-
-模型可以替換，Agent 可以替換——軟體世界繼續。
-
-![image4.png](./evox-genesis-4.png)
-
-_圖3：GLM 5.2 → DeepSeek V4 Flash 的跨模型接續實驗_
-
-## 從無到有，或繼承歷史
-
-從零打造只是軟體生命週期的一端；
-
-另一端，是已經存在多年、沉積著大量結構與歷史的軟體世界。
-
-我們將 EvoX Genesis 應用在 MESA——一個長期發展的恆星演化科學計算系統。
-
-實驗涉及 13 個 Fortran 模組，共**139,414 行**；
-
-EvoX Genesis 將它們重構為對應的 Rust crates，模型 token 成本約**10.6 美元**。
-
-一個軟體世界可以從無到有，也可以繼承歷史、持續變化。
-
-![image5.png](./evox-genesis-5.png)
-
-_圖4：MESA Fortran → Rust，13 個模組、139,414 行程式碼、10.6 美元_
-
-## 成本優勢，也會隨時間複利累積
-
-在 EvoX Genesis 中，已驗證的程式碼、結構與開發歷史會不斷累積，成為下一輪工作的基礎。後續的 Agent 不需要每次都從頭理解整個專案，大量既有資訊可以直接快取並重複使用，快取命中率高達 97.4%。
-
-## EvoX Genesis 現已開源
-
-專案已開放原始碼，並提供 Windows、macOS 與 Linux 的安裝包。
-
-🌐 官方網站：
-
-https://genesis.evox.group/
-
-🔗 **GitHub**：
-
-https://github.com/EMI-Group/genesis
-
-↓ **下載連結**：
-
-**https://github.com/EMI-Group/genesis/releases**
-
-**▤ 論文：**
-
-**https://arxiv.org/abs/2608.10450**
-
-🌐 QQ 交流群組：297969717
-
-![image7.png](./evox-genesis-7.png)
-
-**Agent 會離開，軟體世界持續演化**
-
-**EvoX Genesis，天演·啟元**
-
-參考文獻：
-
-OpenAI, *Run long horizon tasks with Codex* (2026).
-
-Anthropic, *Building a C compiler with a team of parallel Claudes* (2026).
-
-從已接受版本開始續寫，同時保留建置指令與回歸測試。整合下一項貢獻前，先對照這份基準審查。 [Genesis：讓智慧體貢獻留在軟體歷史中](/zh-tw/news/genesis-development-history)
+44.38 美元涵蓋了模型 token，不包括硬體。這些公開記錄為編譯器構建成果提供了具體依據；它們並未建立不受限的 C 相容性。如需審查結果，請遵循[架構](https://github.com/EMI-Group/genesis-demo-jcc/blob/a8c116ec7ed3d59479ad3be8fed3e63384f50a87/docs/architecture.md)進入某個外部框架，然後檢查定義其門控的具體程式和輸出。
