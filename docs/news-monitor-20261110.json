@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-10",
+  "window": {
+    "since": "2026-11-07T07:42:59Z",
+    "until": "2026-11-10T07:42:22Z"
+  },
+  "stories": [
+    {
+      "slug": "genesis-0-14-1-model-profiles",
+      "type": "release",
+      "key": "genesis:release:438243942",
+      "version": "v0.14.1",
+      "upstreamPublishedAt": "2026-11-08T12:51:03Z",
+      "source": "https://github.com/EMI-Group/genesis/releases/tag/v0.14.1",
+      "dedup": "Previous November7 development story covered Assistant and OAuth path scoping; new release story focuses on canonical provider-account profiles and unified remote server.",
+      "art": {
+        "content_prompt": "An editor opens a single organized provider-account folio with distinct model selection tabs, beside a continuous remote server cable that stays plugged in. Main scene is a close view of hands choosing one clearly separated account compartment and its matching model tab; one highlighted red tab is the focal point. Metaphor for Genesis 0.14.1 preserving provider-account/model/reasoning choices across tasks and runtime. No fabricated UI, account names, credential text, logos or measured claims. Secondary remote server silhouette small, not a feature-icon collage.",
+        "style_prompt": "Contemporary technology editorial ink illustration. Attached artwork is a style reference only: do not reuse its subject or layout. Neutral white and achromatic gray planes, confident charcoal linework, limited local print texture in shadows. Small crimson #c8383c accent only on selected tab and one connection. No beige, pink or blue cast; no polished stone sculpture, glossy plastic, flowchart or UI screenshot. Landscape 16:9, at least1600px wide, generous crop-safe margins, no text.",
+        "reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/model-merging.png",
+        "path": "src/content/news/genesis-0-14-1-model-profiles/provider-account-continuity.webp"
+      }
+    },
+    {
+      "slug": "genesis-project-registry-2026-11-09",
+      "type": "development",
+      "key": "genesis:commit:9d5df6d4be631f591d5949f744fa7011218eb64d",
+      "branch": "main",
+      "source": "https://github.com/EMI-Group/genesis/commit/9d5df6d4be631f591d5949f744fa7011218eb64d",
+      "upstreamDate": "2026-11-09",
+      "verified": "Read full commit message plus Projects AsyncLoad, Project, ProjectFlow and persistence patches; registry/node behavior described, no benchmark claims.",
+      "art": {
+        "content_prompt": "A wide archive-room scene: two separate open repository cabinets represent local and remote hosts. A librarian places a small project folder onto the correct cabinet shelf while matching its unique physical mount tag to a central registry ledger. Keep cabinets clearly separated so a folder belonging to one cannot appear as a choice in the other. Concept metaphor for Genesis main-branch project registry replacing recents, tracking project mount identity and respecting remote-host boundaries. No text, fake software UI, metrics, logs or invented real screenshot.",
+        "style_prompt": "Contemporary technology editorial ink illustration. Attached artwork is a style reference only: do not reuse its subject or layout. Neutral white and achromatic gray planes, confident charcoal linework, limited local print texture in shadows. Small crimson #c8383c accent only on selected tab and one connection. No beige, pink or blue cast; no polished stone sculpture, glossy plastic, flowchart or UI screenshot. Landscape 16:9, at least1600px wide, generous crop-safe margins, no text.",
+        "reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/code-migration.png",
+        "path": "src/content/news/genesis-project-registry-2026-11-09/project-host-registry.webp"
+      }
+    }
+  ],
+  "artTool": "built-in image_gen; conceptual editorial artwork, not real product screenshots",
+  "locales": 13,
+  "verification": "sources-20261110.json and monitor-20261110-local/live.json retained in automation memory directory",
+  "sourceReview": {
+    "evox": {
+      "commits": 8,
+      "newReleases": 0,
+      "mergedPRs": 7,
+      "decision": "README animation/layout changes and CI/dependency maintenance; no standalone user-facing feature story."
+    },
+    "genesis": {
+      "commits": 555,
+      "pages": 6,
+      "newReleases": 1,
+      "mergedPRs": 0
+    },
+    "evidence": {
+      "cases": 5,
+      "indexAndAllDetailMarkdownRead": true,
+      "decision": "Existing historical outcomes, dates, metrics and verification levels unchanged. Explanation and pinned primary-source links expanded; no new achievement or withdrawal inferred."
+    }
+  },
+  "scope": "Only two news articles, original covers, SEO audit and this record; no edits to main workspace changes."
+}

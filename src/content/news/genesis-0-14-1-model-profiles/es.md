@@ -1,0 +1,23 @@
+---
+title: "Genesis 0.14.1: mantener la elección del modelo vinculada al trabajo"
+pubDate: 2026-11-10
+summary: "Los perfiles de cuenta conectan modelo y razonamiento en Genesis; el desarrollo remoto pasa a un servidor compartido."
+---
+
+Elegir un modelo implica también cuenta, credenciales y razonamiento. Genesis 0.14.1, publicado el 8 de noviembre de 2026, transmite esa elección entre Settings, Projects, Assistant, planificador y ejecución, reduciendo diferencias entre lo solicitado y lo que se ejecuta. [v0.14.1](https://github.com/EMI-Group/genesis/releases/tag/v0.14.1)
+
+![La pestaña de cuenta seleccionada sigue conectada a las opciones del modelo](./provider-account-continuity.webp)
+
+## Un perfil, una selección coherente
+
+Los perfiles canónicos separan cuenta del proveedor y modelo. Los selectores compartidos ofrecen modelo y razonamiento; las correcciones del planificador conservan elecciones explícitas y la configuración completa guardada. Los perfiles compatibles incorporan OAuth/suscripción, estado de sesión individual e importación de credenciales de las CLI del proveedor.
+
+## Un servidor para uso local y remoto
+
+El desarrollo remoto utiliza ahora genesis_server, igual que el panel sin escritorio. Se retira genesis_remote como distribución separada. La CLI gestiona inicio, parada, estado y registros remotos; la distribución puede cambiarse durante la ejecución manteniendo HTTP disponible.
+
+## Comprobar el traspaso al actualizar
+
+Tras actualizar, revise cuenta, modelo y razonamiento en Settings y una tarea con elección explícita. Las rutas OAuth personalizadas pertenecen a cada perfil de modelo. Revise el servidor compartido antes de reutilizar scripts antiguos del demonio. Las notas de versión incluyen toda la migración y las correcciones. [v0.14.1](https://github.com/EMI-Group/genesis/releases/tag/v0.14.1)
+
+[Genesis Assistant: comprender y gestionar el trabajo en curso](/es/news/genesis-development-2026-11-07)
