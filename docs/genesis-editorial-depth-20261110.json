@@ -1,0 +1,80 @@
+{
+  "revisionDate": "2026-11-10",
+  "purpose": "User-requested expansion of two compressed articles under the separate release/news writing standards; update existing canonical entries, not new publications.",
+  "baseCommit": "37e0d545a1183798b281ebc82b0449f65e5c9e20",
+  "locales": ["en", "zh-cn", "zh-tw", "ja", "ko", "fr", "de", "it", "es", "es-419", "ru", "pt", "pt-br"],
+  "stories": [
+    {
+      "collection": "releases",
+      "slug": "genesis-0-14-1",
+      "sourceKey": "genesis:release:438243942",
+      "story_type": "release",
+      "depth": "regular",
+      "englishBodyWords": 768,
+      "upstreamDate": "2026-11-08T12:51:03Z",
+      "upstreamStatus": "v0.14.1 formal release",
+      "coverage": {
+        "accountAndModelMechanism": "Account authentication/endpoint/capacity vs nested model inventory; explicit selection vs Auto; shared quota and distinct credential names; inventory requirement and UI/core reasoning defaults.",
+        "authentication": "Vendor CLI import, OAuth-only openai_codex, Anthropic auth_mode, provider-profile oauth_file, removed global key, atomic writes/0600, per-provider managed entries and remote-node diagnostics.",
+        "remoteMigration": "genesis_remote retired in favor of shared genesis_server; runtime distribution switch and always-on HTTP; remote CLI lifecycle; remote tests/resume and localhost/SSH access.",
+        "importantFixes": "Explicit selection persistence, scheduler fallback pools, complete model snapshots/schema error, JSON-safe archived settings and redaction.",
+        "runtimeInteraction": "Brokered evaluator exact-code/recoverable approval and output budget; turn recovery; final replies; sequential job IDs; stable cache identity; fused controls.",
+        "upgrade": "Pinned release installers/assets, configuration backup, legacy compatibility and explicit-save migration, Settings path and model inventory, process credentials, server status and explicit/Auto/remote checks.",
+        "notExpanded": "Minor layout/accessibility/copy polish, internal product-string renames, context commit grouping, catalog refresh and dependency bumps remain in linked full release notes; no invented security advisory or performance result."
+      },
+      "sources": [
+        "https://github.com/EMI-Group/genesis/releases/tag/v0.14.1",
+        "https://github.com/EMI-Group/genesis/blob/v0.14.1/docs/llm-profiles.md",
+        "https://github.com/EMI-Group/genesis/blob/v0.14.1/docs/llm-oauth.md",
+        "https://github.com/EMI-Group/genesis/blob/v0.14.1/README.md"
+      ],
+      "url": "https://www.evox.group/zh-cn/releases/genesis-0-14-1",
+      "art": {
+        "path": "src/content/releases/genesis-0-14-1/provider-account-continuity.webp",
+        "decision": "Retain the existing dedicated conceptual cover: account/model continuity and remote-server connection still match the expanded argument. All13 localized alt texts checked.",
+        "provenance": "docs/news-monitor-20261110.json records original built-in image_gen prompts/style/source; classification moved the unchanged asset to releases. This image is editorial illustration."
+      }
+    },
+    {
+      "collection": "news",
+      "slug": "genesis-project-registry-2026-11-09",
+      "sourceKey": "genesis:commit:9d5df6d4be631f591d5949f744fa7011218eb64d",
+      "story_type": "development",
+      "depth": "regular",
+      "englishBodyWords": 773,
+      "upstreamDate": "2026-11-09",
+      "upstreamStatus": "Merged main development; code pinned at 7383db2f1851c12bace5258bb7da44eab0571a72",
+      "coverage": {
+        "problemAndIdentity": "Host-relative meaning of paths; VCT point/mount metadata, stable reopening, collision suffixes and narrowly conditioned relocation rule.",
+        "persistence": "SQLite vct_mounts vs read cache; atomic persistence before state change; failure behavior and node-aware notification; default100-entry retention boundary.",
+        "navigation": "Project palette and Projects page share registered mounts; mount_project/reload; registered path search then filesystem suggestions; display lookup and forget scope.",
+        "scenario": "Local demo and SSH demo; remote-first list loading, pending connection isolation and activation gate; host-specific absolute paths; async activation and unwrapped remote result fix.",
+        "migrationAndNextSteps": "Legacy projects derivation, names/collisions/100-row cap, skipped unusable paths; unreadable table aborts/rolls back; upstream test fixture is evidence, not an editor-run test claim. Host data backup, reopen/restart/point checks and preserve diagnostic state on failure."
+      },
+      "sources": [
+        "https://github.com/EMI-Group/genesis/commit/9d5df6d4be631f591d5949f744fa7011218eb64d",
+        "https://github.com/EMI-Group/genesis/blob/7383db2f1851c12bace5258bb7da44eab0571a72/apps/evo_git/lib/evo_git/vct.ex",
+        "https://github.com/EMI-Group/genesis/blob/7383db2f1851c12bace5258bb7da44eab0571a72/apps/evo_git/lib/evo_git/vct/table.ex",
+        "https://github.com/EMI-Group/genesis/commit/002d6ee324c29b1adbb009dbc38d625e674e70b9",
+        "https://github.com/EMI-Group/genesis/commit/1eca4865be25f480573fd1df41b7a48fd9392700"
+      ],
+      "url": "https://www.evox.group/zh-cn/news/genesis-project-registry-2026-11-09",
+      "art": {
+        "path": "src/content/news/genesis-project-registry-2026-11-09/project-host-registry.webp",
+        "decision": "Retain original article-specific registry/host-boundary illustration with full localized alt texts.",
+        "provenance": "docs/news-monitor-20261110.json contains original image_gen content/style prompts and source record. Editorial concept illustration."
+      }
+    }
+  ],
+  "validation": {
+    "sourceReview": "Full release notes plus versioned profile/OAuth/README documentation; Projects integration patches, pinned VCT store/table and migration safeguard code/tests read. No Genesis runtime execution claimed.",
+    "multilingual": "26 files; identical technical tokens, source URL sets, reference coverage, section counts, image paths and dates; localized related links. Content reviewed for mechanism/scenario/upgrade parity, including Chinese terminology and regional Spanish/Portuguese variants.",
+    "build": "pnpm --config.verifyDepsBeforeRun=false build:1066 pages built successfully.",
+    "seo": "python scripts/check-blog-seo.py:520 blog pages,40 articles,13 locales;0 errors.",
+    "render": "All26 revised local pages: full sections/paragraphs/upgrade steps, title/summary, canonical/hreflang, BlogPosting dates/image, OG/Twitter assets, localized alt, related links and correct collection. All13 news/releases lists retain complete26/14 article inventories, revised summaries and news cover. Existing release list intentionally uses its established text-card layout.",
+    "visual": "English and Simplified Chinese,1280px desktop and390px mobile,light/dark; decoded hero images, no horizontal overflow; screenshots inspected.",
+    "evidenceFiles": "C:/Users/Admin/.codex/automations/evox-github/depth-source-20261110.json;depth-render-local-20261110.json;build-depth-20261110.log;depth-local-*.png",
+    "production": "Push isolated content-only revision to prod, observe Vercel and rerun26-page/localized-list checks including old release URL redirects. Final deployment commit/live verification retained in automation state/memory after success."
+  },
+  "monitoring": "Editorial revision only. Keep all source cursors, Evidence baselines and publication deduplication keys unchanged."
+}

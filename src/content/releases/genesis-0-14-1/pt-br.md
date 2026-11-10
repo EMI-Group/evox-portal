@@ -1,23 +1,51 @@
 ---
-title: "Genesis 0.14.1: manter a escolha do modelo ligada ao trabalho"
+title: "Genesis 0.14.1: manter a escolha do modelo ao longo do trabalho"
 pubDate: 2026-11-10
-summary: "Os perfis de conta conectam modelo e raciocínio no Genesis; o desenvolvimento remoto passa para um servidor compartilhado."
+updatedDate: 2026-11-10
+summary: "Perfis de modelos por conta, autenticação por assinatura e um servidor remoto comum: os mecanismos do Genesis 0.14.1 e o que verificar ao atualizar."
 ---
 
-Escolher um modelo envolve conta, credenciais e raciocínio. O Genesis 0.14.1, publicado em 8 de novembro de 2026, transmite essa escolha entre Settings, Projects, Assistant, agendador e execução, reduzindo diferenças entre pedido e execução real. [v0.14.1](https://github.com/EMI-Group/genesis/releases/tag/v0.14.1)
+Escolher um modelo também é escolher a conta que paga, as credenciais e as configurações de raciocínio transmitidas à tarefa. O **Genesis 0.14.1 foi lançado oficialmente em 8 de novembro de 2026** e mantém essa identidade entre Settings, Projects, Assistant, o escalonador e a execução. A versão unifica ainda o funcionamento remoto no servidor sem interface e amplia o controle da inspeção durante a execução. [Notas de lançamento completas][release]
 
-![A aba de conta selecionada mantém a conexão com as opções do modelo](./provider-account-continuity.webp)
+![A aba da conta selecionada mantém a conexão às respectivas escolhas de modelo](./provider-account-continuity.webp)
 
-## Um perfil, uma seleção coerente
+## Configurar a conta, escolher a tarefa com precisão
 
-Os perfis canônicos separam conta do provedor e modelo. Seletores comuns expõem modelo e raciocínio; as correções do agendador preservam escolhas explícitas e a configuração completa salva. Os perfis compatíveis acrescentam OAuth/assinatura, estado de login individual e importação de credenciais das CLI dos provedores.
+Um provider profile contém autenticação, endpoint, concorrência e horários. O inventário de modelos aninhado enumera os modelos disponíveis nessa conta e as substituições específicas de geração e raciocínio. A seleção da tarefa transporta uma identidade sem credenciais: ID do perfil, ID do modelo e esforço de raciocínio opcional. Uma escolha concreta fixa essa identidade na execução seguinte; **Auto** deixa a seleção às regras configuradas.
 
-## Um servidor para uso local e remoto
+Por exemplo, dois modelos de uma conta de trabalho compartilham os seus lugares de concorrência e a espera após limites de frequência. Adicionar um modelo não cria outra quota independente. Uma conta pessoal pode ter credenciais e horários diferentes. Para API keys distintas, use também nomes de credenciais distintos, além de IDs de perfil diferentes. [Configuração e regras de seleção][profiles]
 
-O desenvolvimento remoto usa agora genesis_server, como o painel headless. A distribuição separada genesis_remote é retirada. A CLI gerencia início, parada, estado e logs remotos; a distribuição pode ser alternada em execução mantendo HTTP disponível.
+Cada modelo selecionável precisa de uma entrada em `[[llm.providers.models]]`; apenas `default_model` não basta. O esforço padrão é separado do inventário de níveis suportados. No painel, uma lista não vazia sem valor padrão definido seleciona o primeiro nível; uma chamada à API interna sem esforço pode omitir o parâmetro. Revise modelo e esforço depois de mudar de perfil.
 
-## Verificar a passagem ao atualizar
+A versão corrige a perda de seleções explícitas entre tarefa, agente e sistema, os grupos alternativos do escalonador e os instantâneos incompletos que podiam causar `:model_spec_schema_unavailable`. As configurações arquivadas são agora seguras para JSON e ocultam credenciais. As correções interessam tanto a novas tarefas como à reutilização de configurações salvas.
 
-Após atualizar, verifique conta, modelo e raciocínio em Settings e uma tarefa com escolha explícita. Os caminhos OAuth personalizados pertencem a cada perfil. Revise o servidor compartilhado antes de reutilizar scripts antigos do daemon. As notas da versão contêm a migração e as correções completas. [v0.14.1](https://github.com/EMI-Group/genesis/releases/tag/v0.14.1)
+## A assinatura segue a configuração da conta
 
-[Genesis Assistant: compreender e gerenciar o trabalho em andamento](/pt-br/news/genesis-development-2026-11-07)
+Os perfis suportados recebem autenticação OAuth/por assinatura e estado de início de sessão individual. O Genesis importa os arquivos de sessão das CLI dos fornecedores para um arquivo gerenciado lido pelo ReqLLM. `openai_codex` é exclusivo de OAuth; os perfis de assinatura Anthropic usam `auth_mode = "oauth"`. O guia desta versão começa com `codex login` ou uma sessão Claude CLI no nó que usará a conta. [Configurar a assinatura][oauth]
+
+O arquivo gerenciado padrão é `auth.json`, junto de `config.toml`. Um `oauth_file` personalizado pertence ao provider profile; a chave global `[llm] oauth_file` foi removida. Os novos arquivos têm permissões `0600` e a importação é atômica. O arquivo contém uma entrada por provider: IDs de perfil diferentes não isolam, por si só, várias sessões de assinatura.
+
+Para trabalho remoto, verifique a sessão no nó remoto. Se a sessão do fornecedor existe mas o destino gerenciado é somente leitura, indique no perfil um caminho privado com escrita; iniciar sessão novamente não resolve o destino. Os OAuth tokens fornecidos apenas pelo ambiente não se renovam automaticamente. As mensagens revistas distinguem estes casos.
+
+## Um servidor para execução remota e painel
+
+A distribuição separada `genesis_remote` foi retirada. Os comandos remotos e a inicialização usam `genesis_server`, com HTTP sempre disponível e Erlang distribution comutável em execução por um protocolo de arquivos acionado por SIGHUP. A CLI disponibiliza `genesis remote start`, `stop`, `status` e `logs`. [Servidor e instalação][readme]
+
+Para quem mantém o painel no notebook e executa em um host SSH, a gerenciamento do serviço muda: revise os scripts que referem a distribuição antiga e passe a gerenciar o servidor comum. A versão permite também testes de projetos remotos e retomada de testes no momento da chamada. O servidor HTTP sem interface escuta localhost por padrão e não tem autenticação integrada; o acesso remoto documentado usa um túnel SSH.
+
+## Recuperar interações durante execuções longas
+
+O avaliador Elixir por níveis e com mediação acrescenta aprovação do código exato e aprovação recuperável no chat. A saída é truncada ao orçamento restante em vez de falhar por excedê-lo. Outras mudanças incluem uma curta janela de recuperação após o limite de turnos, respostas finais sem ferramentas, IDs de trabalhos sequenciais mais curtos e identidades de cache de prompt estáveis por execução de agente para chamadas GPT OpenAI/Codex. O painel recebe ainda um bloco de cápsulas fundido e controles comuns de tarefa/modelo. [Alterações e correções][release]
+
+## Atualizar com a configuração à vista
+
+1. Obtenha os instaladores ou arquivos de servidor de [v0.14.1][release] para a plataforma pretendida. Salve uma cópia da configuração antes de alterar as contas. O antigo `[[llm.models]]` continua compatível; os provider profiles canônicos têm prioridade e salvar explicitamente em Settings/config executa a migração.
+2. Em **Settings → LLM → Provider profiles**, revise autenticação, inventário aninhado, esforço padrão e `oauth_file` personalizado. As credenciais devem estar acessíveis ao processo que executa a tarefa, incluindo no servidor remoto.
+3. Depois de reiniciar o servidor sem interface, use `genesis status`; verifique uma seleção explícita de perfil/modelo/esforço, Auto e a conexão remota efetiva. Revise os scripts antigos do daemon antes de os reutilizar. Estes controles decorrem das mudanças documentadas.
+
+Para o fluxo de operação das tarefas em curso, continue com [Genesis Assistant: uma visão mais clara do trabalho em execução](/pt-br/news/genesis-development-2026-11-07).
+
+[release]: https://github.com/EMI-Group/genesis/releases/tag/v0.14.1
+[profiles]: https://github.com/EMI-Group/genesis/blob/v0.14.1/docs/llm-profiles.md
+[oauth]: https://github.com/EMI-Group/genesis/blob/v0.14.1/docs/llm-oauth.md
+[readme]: https://github.com/EMI-Group/genesis/blob/v0.14.1/README.md

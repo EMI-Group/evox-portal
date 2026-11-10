@@ -8,7 +8,7 @@
     },
     "locales": 13,
     "pages": 520,
-    "updatedPages": 338,
+    "updatedPages": 364,
     "articleImages": 520,
     "previewPagesExcluded": 65
   },
@@ -2022,85 +2022,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-10",
       "pages": [
         {
           "locale": "en",
           "route": "/news/genesis-project-registry-2026-11-09",
           "titleCharacters": 56,
-          "descriptionCharacters": 150
+          "descriptionCharacters": 200
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/news/genesis-project-registry-2026-11-09",
           "titleCharacters": 23,
-          "descriptionCharacters": 51
+          "descriptionCharacters": 74
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/news/genesis-project-registry-2026-11-09",
           "titleCharacters": 23,
-          "descriptionCharacters": 49
+          "descriptionCharacters": 74
         },
         {
           "locale": "ja",
           "route": "/ja/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 28,
-          "descriptionCharacters": 62
+          "titleCharacters": 32,
+          "descriptionCharacters": 95
         },
         {
           "locale": "ko",
           "route": "/ko/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 29,
-          "descriptionCharacters": 64
+          "titleCharacters": 35,
+          "descriptionCharacters": 106
         },
         {
           "locale": "fr",
           "route": "/fr/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 63,
-          "descriptionCharacters": 145
+          "titleCharacters": 66,
+          "descriptionCharacters": 192
         },
         {
           "locale": "de",
           "route": "/de/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 52,
-          "descriptionCharacters": 141
+          "titleCharacters": 58,
+          "descriptionCharacters": 220
         },
         {
           "locale": "it",
           "route": "/it/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 57,
-          "descriptionCharacters": 131
+          "titleCharacters": 59,
+          "descriptionCharacters": 199
         },
         {
           "locale": "es",
           "route": "/es/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 59,
-          "descriptionCharacters": 140
+          "titleCharacters": 65,
+          "descriptionCharacters": 185
         },
         {
           "locale": "es-419",
           "route": "/es-419/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 59,
-          "descriptionCharacters": 140
+          "titleCharacters": 65,
+          "descriptionCharacters": 185
         },
         {
           "locale": "ru",
           "route": "/ru/news/genesis-project-registry-2026-11-09",
           "titleCharacters": 46,
-          "descriptionCharacters": 116
+          "descriptionCharacters": 199
         },
         {
           "locale": "pt",
           "route": "/pt/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 62,
-          "descriptionCharacters": 136
+          "titleCharacters": 67,
+          "descriptionCharacters": 198
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/news/genesis-project-registry-2026-11-09",
-          "titleCharacters": 63,
-          "descriptionCharacters": 136
+          "titleCharacters": 68,
+          "descriptionCharacters": 194
         }
       ]
     },
@@ -3903,85 +3903,85 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-10",
       "pages": [
         {
           "locale": "en",
           "route": "/releases/genesis-0-14-1",
           "titleCharacters": 55,
-          "descriptionCharacters": 132
+          "descriptionCharacters": 180
         },
         {
           "locale": "zh-cn",
           "route": "/zh-cn/releases/genesis-0-14-1",
-          "titleCharacters": 24,
-          "descriptionCharacters": 43
+          "titleCharacters": 26,
+          "descriptionCharacters": 64
         },
         {
           "locale": "zh-tw",
           "route": "/zh-tw/releases/genesis-0-14-1",
-          "titleCharacters": 24,
-          "descriptionCharacters": 43
+          "titleCharacters": 26,
+          "descriptionCharacters": 64
         },
         {
           "locale": "ja",
           "route": "/ja/releases/genesis-0-14-1",
-          "titleCharacters": 30,
-          "descriptionCharacters": 49
+          "titleCharacters": 32,
+          "descriptionCharacters": 72
         },
         {
           "locale": "ko",
           "route": "/ko/releases/genesis-0-14-1",
-          "titleCharacters": 32,
-          "descriptionCharacters": 53
+          "titleCharacters": 35,
+          "descriptionCharacters": 77
         },
         {
           "locale": "fr",
           "route": "/fr/releases/genesis-0-14-1",
-          "titleCharacters": 62,
-          "descriptionCharacters": 120
+          "titleCharacters": 70,
+          "descriptionCharacters": 175
         },
         {
           "locale": "de",
           "route": "/de/releases/genesis-0-14-1",
-          "titleCharacters": 62,
-          "descriptionCharacters": 117
+          "titleCharacters": 65,
+          "descriptionCharacters": 177
         },
         {
           "locale": "it",
           "route": "/it/releases/genesis-0-14-1",
-          "titleCharacters": 64,
-          "descriptionCharacters": 113
+          "titleCharacters": 69,
+          "descriptionCharacters": 172
         },
         {
           "locale": "es",
           "route": "/es/releases/genesis-0-14-1",
-          "titleCharacters": 68,
-          "descriptionCharacters": 117
+          "titleCharacters": 71,
+          "descriptionCharacters": 154
         },
         {
           "locale": "es-419",
           "route": "/es-419/releases/genesis-0-14-1",
-          "titleCharacters": 68,
-          "descriptionCharacters": 117
+          "titleCharacters": 71,
+          "descriptionCharacters": 154
         },
         {
           "locale": "ru",
           "route": "/ru/releases/genesis-0-14-1",
-          "titleCharacters": 57,
-          "descriptionCharacters": 103
+          "titleCharacters": 58,
+          "descriptionCharacters": 137
         },
         {
           "locale": "pt",
           "route": "/pt/releases/genesis-0-14-1",
-          "titleCharacters": 61,
-          "descriptionCharacters": 116
+          "titleCharacters": 63,
+          "descriptionCharacters": 148
         },
         {
           "locale": "pt-br",
           "route": "/pt-br/releases/genesis-0-14-1",
-          "titleCharacters": 61,
-          "descriptionCharacters": 122
+          "titleCharacters": 63,
+          "descriptionCharacters": 148
         }
       ]
     }
