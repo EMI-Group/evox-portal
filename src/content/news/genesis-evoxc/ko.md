@@ -55,4 +55,4 @@ XLA 디바이스 상주 경로는 작업을 큐에 넣고 완료 전에 반환�
 
 Evidence 스냅샷의 추적된 285,659개 텍스트 라인에는 테스트, 문서 및 벤치마크 자료가 포함되어 있습니다. 약 50달러의 비용은 하드웨어를 제외한 모델 토큰 비용이며, 모델, 에피소드 수 및 활성 실행 시간은 보고되지 않았습니다. 저장소의 달력상 기간은 연속적인 자율 실행 시간이 아닙니다.
 
-저장소는 코드, 테스트 및 문서를 생성한 공로를 Genesis에 돌립니다. 구체적인 결과물은 개별적으로 검사 가능한 단계별 컨트랙트, 그래프 보존 테스트 및 디바이스 완료 세맨틱을 갖춘 컴파일러입니다. 이러한 경계를 가로지르는 하나의 기능을 따라가 보려면 [population integration test](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py)부터 시작하십시오. [EvoX Compiler overview](/news/evox-compiler)는 사용자용 파이프라인을 설명합니다.
+저장소는 코드, 테스트 및 문서를 생성한 공로를 Genesis에 돌립니다. 구체적인 결과물은 개별적으로 검사 가능한 단계별 컨트랙트, 그래프 보존 테스트 및 디바이스 완료 세맨틱을 갖춘 컴파일러입니다. 이러한 경계를 가로지르는 하나의 기능을 따라가 보려면 [population integration test](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py)부터 시작하십시오. [EvoX Compiler overview](/ko/releases/evoxc-0-1-0)는 사용자용 파이프라인을 설명합니다.

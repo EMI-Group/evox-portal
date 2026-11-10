@@ -17,6 +17,10 @@ Five collections; the schema below is authoritative (zod-validated):
 - `docs` sections in use: `developer` (5 topics), `examples` (6), `install` (2), `misc` (4), `experimental` (1). `tutorials` orders are 1–7.
 - `libs.json` is an array of `{id, title, description, url}`; ids: evox, evogit, evogp, evorl, evomo, evococo, tensorneat, metade, evoxbench, istratde, evogo, evonas, evocmo, autopso.
 
+## Blog classification
+
+Published-version announcements and upgrade references for EvoX, Genesis, EvoX Compiler and other ecosystem products belong in `releases/`. Alpha/beta/RC releases use the same collection with their prerelease state stated accurately. Development progress, research, Evidence cases and independent technical analysis belong in `news/`; mentioning a version is not sufficient to make an analysis a release announcement. Link analysis to the canonical release entry when one exists, without duplicating its changelog. See `docs/blog-classification.md` for the routing and migration policy. A collection move preserves publication dates, moves all 13 locale files and assets, updates localized internal links, and permanently redirects the old URLs.
+
 ## Locale / Filename Conventions
 - 13 locales: `en, zh-cn, zh-tw, ja, ko, fr, de, it, es, es-419, ru, pt, pt-br` (mirrors `src/i18n/utils.ts` `locales`).
 - Filename = `<locale>.md` inside the topic dir. Glob-loader entry IDs are the relative path without extension, e.g. `evogp/en`.

@@ -3,8 +3,8 @@
   "counts": {
     "articles": 40,
     "byCollection": {
-      "news": 28,
-      "releases": 12
+      "news": 26,
+      "releases": 14
     },
     "locales": 13,
     "pages": 520,
@@ -818,105 +818,6 @@
       ]
     },
     {
-      "article": "news/evox-compiler",
-      "locales": [
-        "en",
-        "zh-cn",
-        "zh-tw",
-        "ja",
-        "ko",
-        "fr",
-        "de",
-        "it",
-        "es",
-        "es-419",
-        "ru",
-        "pt",
-        "pt-br"
-      ],
-      "updatedDate": "2026-11-08",
-      "pages": [
-        {
-          "locale": "en",
-          "route": "/news/evox-compiler",
-          "titleCharacters": 65,
-          "descriptionCharacters": 147
-        },
-        {
-          "locale": "zh-cn",
-          "route": "/zh-cn/news/evox-compiler",
-          "titleCharacters": 33,
-          "descriptionCharacters": 45
-        },
-        {
-          "locale": "zh-tw",
-          "route": "/zh-tw/news/evox-compiler",
-          "titleCharacters": 33,
-          "descriptionCharacters": 44
-        },
-        {
-          "locale": "ja",
-          "route": "/ja/news/evox-compiler",
-          "titleCharacters": 35,
-          "descriptionCharacters": 52
-        },
-        {
-          "locale": "ko",
-          "route": "/ko/news/evox-compiler",
-          "titleCharacters": 38,
-          "descriptionCharacters": 63
-        },
-        {
-          "locale": "fr",
-          "route": "/fr/news/evox-compiler",
-          "titleCharacters": 65,
-          "descriptionCharacters": 155
-        },
-        {
-          "locale": "de",
-          "route": "/de/news/evox-compiler",
-          "titleCharacters": 60,
-          "descriptionCharacters": 142
-        },
-        {
-          "locale": "it",
-          "route": "/it/news/evox-compiler",
-          "titleCharacters": 65,
-          "descriptionCharacters": 128
-        },
-        {
-          "locale": "es",
-          "route": "/es/news/evox-compiler",
-          "titleCharacters": 66,
-          "descriptionCharacters": 137
-        },
-        {
-          "locale": "es-419",
-          "route": "/es-419/news/evox-compiler",
-          "titleCharacters": 66,
-          "descriptionCharacters": 135
-        },
-        {
-          "locale": "ru",
-          "route": "/ru/news/evox-compiler",
-          "titleCharacters": 57,
-          "descriptionCharacters": 134
-        },
-        {
-          "locale": "pt",
-          "route": "/pt/news/evox-compiler",
-          "titleCharacters": 64,
-          "descriptionCharacters": 132
-        },
-        {
-          "locale": "pt-br",
-          "route": "/pt-br/news/evox-compiler",
-          "titleCharacters": 64,
-          "descriptionCharacters": 132
-        }
-      ]
-    },
-    {
       "article": "news/evox-distributed-evaluation",
       "locales": [
         "en",
@@ -1309,105 +1210,6 @@
           "route": "/pt-br/news/evox-virtual-populations",
           "titleCharacters": 56,
           "descriptionCharacters": 151
-        }
-      ]
-    },
-    {
-      "article": "news/genesis-0-14-1-model-profiles",
-      "locales": [
-        "en",
-        "zh-cn",
-        "zh-tw",
-        "ja",
-        "ko",
-        "fr",
-        "de",
-        "it",
-        "es",
-        "es-419",
-        "ru",
-        "pt",
-        "pt-br"
-      ],
-      "updatedDate": null,
-      "pages": [
-        {
-          "locale": "en",
-          "route": "/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 55,
-          "descriptionCharacters": 132
-        },
-        {
-          "locale": "zh-cn",
-          "route": "/zh-cn/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 24,
-          "descriptionCharacters": 43
-        },
-        {
-          "locale": "zh-tw",
-          "route": "/zh-tw/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 24,
-          "descriptionCharacters": 43
-        },
-        {
-          "locale": "ja",
-          "route": "/ja/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 30,
-          "descriptionCharacters": 49
-        },
-        {
-          "locale": "ko",
-          "route": "/ko/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 32,
-          "descriptionCharacters": 53
-        },
-        {
-          "locale": "fr",
-          "route": "/fr/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 62,
-          "descriptionCharacters": 120
-        },
-        {
-          "locale": "de",
-          "route": "/de/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 62,
-          "descriptionCharacters": 117
-        },
-        {
-          "locale": "it",
-          "route": "/it/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 64,
-          "descriptionCharacters": 113
-        },
-        {
-          "locale": "es",
-          "route": "/es/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 68,
-          "descriptionCharacters": 117
-        },
-        {
-          "locale": "es-419",
-          "route": "/es-419/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 68,
-          "descriptionCharacters": 117
-        },
-        {
-          "locale": "ru",
-          "route": "/ru/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 57,
-          "descriptionCharacters": 103
-        },
-        {
-          "locale": "pt",
-          "route": "/pt/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 61,
-          "descriptionCharacters": 116
-        },
-        {
-          "locale": "pt-br",
-          "route": "/pt-br/news/genesis-0-14-1-model-profiles",
-          "titleCharacters": 61,
-          "descriptionCharacters": 122
         }
       ]
     },
@@ -3982,6 +3784,204 @@
           "route": "/pt-br/releases/evox-2-0-0a1",
           "titleCharacters": 46,
           "descriptionCharacters": 160
+        }
+      ]
+    },
+    {
+      "article": "releases/evoxc-0-1-0",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": "2026-11-08",
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/releases/evoxc-0-1-0",
+          "titleCharacters": 65,
+          "descriptionCharacters": 147
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/releases/evoxc-0-1-0",
+          "titleCharacters": 33,
+          "descriptionCharacters": 45
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/releases/evoxc-0-1-0",
+          "titleCharacters": 33,
+          "descriptionCharacters": 44
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/releases/evoxc-0-1-0",
+          "titleCharacters": 35,
+          "descriptionCharacters": 52
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/releases/evoxc-0-1-0",
+          "titleCharacters": 38,
+          "descriptionCharacters": 63
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/releases/evoxc-0-1-0",
+          "titleCharacters": 65,
+          "descriptionCharacters": 155
+        },
+        {
+          "locale": "de",
+          "route": "/de/releases/evoxc-0-1-0",
+          "titleCharacters": 60,
+          "descriptionCharacters": 142
+        },
+        {
+          "locale": "it",
+          "route": "/it/releases/evoxc-0-1-0",
+          "titleCharacters": 65,
+          "descriptionCharacters": 128
+        },
+        {
+          "locale": "es",
+          "route": "/es/releases/evoxc-0-1-0",
+          "titleCharacters": 66,
+          "descriptionCharacters": 137
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/releases/evoxc-0-1-0",
+          "titleCharacters": 66,
+          "descriptionCharacters": 135
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/releases/evoxc-0-1-0",
+          "titleCharacters": 57,
+          "descriptionCharacters": 134
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/releases/evoxc-0-1-0",
+          "titleCharacters": 64,
+          "descriptionCharacters": 132
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/releases/evoxc-0-1-0",
+          "titleCharacters": 64,
+          "descriptionCharacters": 132
+        }
+      ]
+    },
+    {
+      "article": "releases/genesis-0-14-1",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/releases/genesis-0-14-1",
+          "titleCharacters": 55,
+          "descriptionCharacters": 132
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/releases/genesis-0-14-1",
+          "titleCharacters": 24,
+          "descriptionCharacters": 43
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/releases/genesis-0-14-1",
+          "titleCharacters": 24,
+          "descriptionCharacters": 43
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/releases/genesis-0-14-1",
+          "titleCharacters": 30,
+          "descriptionCharacters": 49
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/releases/genesis-0-14-1",
+          "titleCharacters": 32,
+          "descriptionCharacters": 53
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/releases/genesis-0-14-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 120
+        },
+        {
+          "locale": "de",
+          "route": "/de/releases/genesis-0-14-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 117
+        },
+        {
+          "locale": "it",
+          "route": "/it/releases/genesis-0-14-1",
+          "titleCharacters": 64,
+          "descriptionCharacters": 113
+        },
+        {
+          "locale": "es",
+          "route": "/es/releases/genesis-0-14-1",
+          "titleCharacters": 68,
+          "descriptionCharacters": 117
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/releases/genesis-0-14-1",
+          "titleCharacters": 68,
+          "descriptionCharacters": 117
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/releases/genesis-0-14-1",
+          "titleCharacters": 57,
+          "descriptionCharacters": 103
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/releases/genesis-0-14-1",
+          "titleCharacters": 61,
+          "descriptionCharacters": 116
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/releases/genesis-0-14-1",
+          "titleCharacters": 61,
+          "descriptionCharacters": 122
         }
       ]
     }

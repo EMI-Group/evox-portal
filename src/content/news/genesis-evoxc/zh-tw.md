@@ -55,4 +55,4 @@ XLA 的裝置常駐執行路徑可以先提交任務，再在計算完成前返�
 
 Evidence 快照追蹤的 285,659 行文字包括測試、文件和基準測試材料。其約 50 美元的費用涵蓋了模型 token，不包括硬體；模型、執行回合數和實際執行時長未報告。倉庫的時間跨度並非連續的自主執行時間。
 
-該倉庫將程式碼、測試和文件的生成歸功於 Genesis。具體成果是一個具有可獨立檢查的階段契約、計算語義保持測試和裝置完成語義的編譯器。可以從[種群整合測試](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py)開始，追蹤一個特性如何跨越這些邊界；[EvoX Compiler 概覽](/news/evox-compiler)解釋了面向使用者的流水線。
+該倉庫將程式碼、測試和文件的生成歸功於 Genesis。具體成果是一個具有可獨立檢查的階段契約、計算語義保持測試和裝置完成語義的編譯器。可以從[種群整合測試](https://github.com/EMI-Group/evoxc/blob/v0.1.0/tests/transforms/test_batch_functions_integration.py)開始，追蹤一個特性如何跨越這些邊界；[EvoX Compiler 概覽](/zh-tw/releases/evoxc-0-1-0)解釋了面向使用者的流水線。
