@@ -1,0 +1,108 @@
+/* Shared glass materials. Components choose a data-glass preset and own only
+   their layout; tint, blur, refraction width, highlights and fallbacks live here. */
+:root {
+  --lg-tint: linear-gradient(180deg, rgb(52 52 58 / .46), rgb(28 28 32 / .5));
+  --lg-tint-thin: linear-gradient(180deg, rgb(48 48 54 / .3), rgb(24 24 28 / .38));
+  --lg-default-blur: 12px;
+  --lg-lens-rest: saturate(190%) brightness(.96);
+  --lg-rim: linear-gradient(135deg, rgb(255 255 255 / .36), rgb(255 255 255 / .05) 34%, rgb(255 255 255 / 0) 62%, rgb(255 255 255 / .16));
+  --lg-shadow: 0 0 0 .5px rgb(0 0 0 / .7), 0 16px 40px -10px rgb(0 0 0 / .7), inset 0 1px 1px rgb(255 255 255 / .1), inset 0 -10px 18px -14px rgb(255 255 255 / .18);
+  --lg-glare: rgb(255 255 255 / .1);
+  --lg-accent-tint: linear-gradient(180deg, color-mix(in srgb, var(--site-accent) 64%, transparent), color-mix(in srgb, var(--site-accent) 76%, transparent));
+}
+:root[data-theme="light"] {
+  --lg-tint: linear-gradient(180deg, rgb(250 251 254 / .46), rgb(228 231 240 / .42));
+  --lg-tint-thin: linear-gradient(180deg, rgb(252 252 255 / .16), rgb(232 235 244 / .2));
+  --lg-default-blur: 10px;
+  --lg-lens-rest: saturate(210%);
+  --lg-rim: linear-gradient(135deg, rgb(255 255 255 / 1), rgb(255 255 255 / .35) 34%, rgb(255 255 255 / .1) 62%, rgb(255 255 255 / .85));
+  --lg-shadow: 0 0 0 .5px rgb(0 0 0 / .13), 0 2px 6px rgb(0 0 0 / .05), 0 18px 40px -12px rgb(30 30 60 / .26), inset 0 1px 1.5px rgb(255 255 255 / 1), inset 0 -1px 1px rgb(0 0 0 / .05), inset 0 -10px 18px -14px rgb(255 255 255 / .95);
+  --lg-glare: rgb(255 255 255 / .55);
+  --lg-accent-tint: linear-gradient(180deg, color-mix(in srgb, var(--site-accent) 42%, transparent), color-mix(in srgb, var(--site-accent) 56%, transparent));
+}
+
+.lens-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.glass {
+  --lg-blur: 9px;
+  --lg-edge-width: 0px;
+  --lg-edge-strength: 1;
+  --lg-surface: var(--lg-tint);
+  --lg-tone: var(--lg-lens-rest);
+  --lg-fallback-tone: var(--lg-tone);
+  --lg-ink: var(--site-ink);
+  --lg-opaque-bg: var(--site-bg);
+  --lg-unsupported-bg: var(--glass-strong);
+  position: relative;
+  isolation: isolate;
+  color: var(--lg-ink);
+  background: var(--lg-surface);
+  box-shadow: var(--lg-shadow);
+  -webkit-backdrop-filter: blur(var(--lg-blur)) var(--lg-fallback-tone);
+  backdrop-filter: blur(var(--lg-blur)) var(--lg-fallback-tone);
+}
+.glass[data-lens-id] { backdrop-filter: var(--lg-lens-url) var(--lg-tone); }
+
+/* Clear and tinted controls share their silhouette, sharp rim and shadow. */
+[data-glass="clear"], [data-glass="accent"] {
+  --lg-blur: 1px;
+  --lg-surface: linear-gradient(180deg, color-mix(in srgb, var(--site-bg) 6%, transparent), color-mix(in srgb, var(--site-bg) 12%, transparent));
+  --lg-fallback-tone: saturate(180%);
+  --lg-glare: rgb(255 255 255 / .1);
+}
+[data-glass="accent"] {
+  --lg-surface: var(--lg-accent-tint);
+  /* Colorize the transmitted luminance instead of mixing red with a neutral
+     grey backdrop. Calibrated white maps to the EvoX red, with a dark-red floor. */
+  --lg-tone: grayscale(1) contrast(.7) brightness(.3971) sepia(1) saturate(12.8) hue-rotate(332.25deg) brightness(.7843);
+  --lg-fallback-tone: var(--lg-tone);
+  --lg-ink: #fff;
+  --lg-opaque-bg: var(--site-accent);
+  --lg-unsupported-bg: var(--site-accent);
+}
+[data-glass="content"] {
+  --lg-blur: 1px;
+  --lg-edge-width: 32px;
+  --lg-edge-strength: 2.2;
+  --lg-fallback-tone: saturate(180%);
+  --lg-content-veil: color-mix(in srgb, var(--site-bg) 8%, transparent);
+  --lg-surface: linear-gradient(var(--lg-content-veil), var(--lg-content-veil)), var(--lg-tint-thin);
+}
+[data-glass="navigation"] {
+  --lg-navigation-veil: color-mix(in srgb, var(--site-bg) 30%, transparent);
+  --lg-surface: linear-gradient(var(--lg-navigation-veil), var(--lg-navigation-veil)), var(--lg-tint);
+}
+[data-glass="menu"] { --lg-surface: var(--glass-strong); }
+[data-glass="frosted"] { --lg-blur: var(--lg-default-blur); }
+
+.glass::before, .glass::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+}
+.glass::before {
+  z-index: -1;
+  background: radial-gradient(160px circle at var(--lg-x, 30%) var(--lg-y, 0%), var(--lg-glare), transparent 70%);
+  opacity: .8;
+  transition: opacity .3s;
+}
+[data-glass="frosted"]::before { display: none; }
+.glass::after {
+  padding: 1px;
+  background: var(--lg-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--lg-unsupported-bg) !important; }
+  [data-glass="accent"]::before { display: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root .glass {
+    background: var(--lg-opaque-bg) !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass::before { display: none; }
+  :root .glass-chip { background: var(--site-bg) !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

@@ -10,7 +10,7 @@ All source code for the **EvoX Portal**: an Astro 6 static, content-first market
 - `content/` — Content collections in **article-first layout**: each article is a directory containing one `.md` per locale (`<article>/en.md`, `<article>/zh-cn.md`, …), `en.md` being source of truth. Plus `examples/` (static runtime example sources consumed by RuntimeExamples) and `libs.json`. See `content/CONTEXT.md`.
 - `i18n/` — Centralized UI-string translation (`utils.ts` + `locales/*.json`, 13 files with exactly 235 keys each) and localized-content helpers (`getLocalizedArticles`/`getLocalizedNews`/`findLocalizedArticle`/`findLocalizedNews` with English fallback). See `i18n/CONTEXT.md`.
 - `layouts/Layout.astro` — Single page layout: SEO head (canonical, hreflang for all 13 locales, OG/Twitter, noindex via `noSEO` prop), renders `<Header>`/`<Footer>` around `<slot>`; props: `title?`, `description?`, `hideHeader?`, `hideFooter?`, `locale?` (default en), `noSEO?`, `localePath?`. Normalizes trailing slash on build-time pathname so canonical/hreflang/og:url agree.
-- `styles/global.css` — `@import "tailwindcss"; @plugin "@tailwindcss/typography";` (Tailwind v4 CSS-first config; the only global stylesheet).
+- `styles/global.css` — `@import "tailwindcss"; @plugin "@tailwindcss/typography";` (Tailwind v4 CSS-first entry; imports `styles/glass.css` for shared glass materials).
 - `types/pagination.ts` — Shared types for the pagination pages: `PaginatedPageUrl`, `PaginatedPage<T>`, `PaginateFunction<T>`.
 - `assets/` — Static images (logos, hero arrows, banner) imported by components.
 
@@ -43,7 +43,7 @@ All source code for the **EvoX Portal**: an Astro 6 static, content-first market
 - `content/` → Content collections (docs/, examples/, news/, releases/, tutorials/, libs.json)
 - `i18n/` → UI-string locales (`locales/`) + i18n utils
 - `layouts/` → `Layout.astro` (SEO head, page chrome; leaf — no CONTEXT.md needed)
-- `styles/` → `global.css` (Tailwind v4 entry; leaf)
+- `styles/` → `global.css` (Tailwind v4 entry) and `glass.css` (shared glass presets and fallbacks)
 - `types/` → `pagination.ts` shared types (leaf)
 - `assets/` → Images (leaf; no code)
 - `content.config.ts` → Content collection schemas (single file at this level)

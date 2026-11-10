@@ -1,4 +1,5 @@
 import { diagramAlpha, readDiagramPalette } from "./diagram-theme";
+import { AnimationLifetime } from "./animation-lifetime";
 import { MAIN_MERGE, agentEpisode, commitId, type Agent } from "./recursive-agents";
 /* Illustrative evolutionary experiments, not measured model, robotics or CFD results.
    Each population retains its elite unchanged and mutates its inherited parameters. */
@@ -55,6 +56,7 @@ export function nextPopulation(kind: PopulationKind, previous: Population | unde
 }
 
 class ParadigmScene {
+  lifetime = new AnimationLifetime();
   palette = readDiagramPalette();
   root: HTMLElement;
   canvas: HTMLCanvasElement;
@@ -85,17 +87,19 @@ class ParadigmScene {
     this.button = root.querySelector('[data-action="pause"]')!;
     this.caption = root.querySelector(".scene-caption")!;
     this.paused = this.media.matches;
+    const { lifetime } = this, { signal } = lifetime;
     if (this.paused) this.time = this.rest;
-    this.button.addEventListener("click", () => { this.paused = !this.paused; this.sync(); });
+    this.button.addEventListener("click", () => { this.paused = !this.paused; this.sync(); }, { signal });
     root.querySelector('[data-action="restart"]')!.addEventListener("click", () => {
       this.time = this.media.matches ? this.rest : 0; this.generation = 0; this.previousPopulation = undefined; this.offspring = undefined;
       this.population = this.kind === "agentic" ? {candidates:[],winner:0} : nextPopulation(this.kind, undefined, 0); this.render(); this.sync();
-    });
-    this.media.addEventListener("change", () => { this.paused = this.media.matches; if (this.paused) this.time = this.rest; this.render(); this.sync(); });
-    document.addEventListener("visibilitychange", () => this.sync());
-    new IntersectionObserver(([entry]) => { this.visible = entry.isIntersecting; this.sync(); }).observe(root);
-    new ResizeObserver(() => this.resize()).observe(root);
-    new MutationObserver(() => { this.palette = readDiagramPalette(); this.render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    }, { signal });
+    this.media.addEventListener("change", () => { this.paused = this.media.matches; if (this.paused) this.time = this.rest; this.render(); this.sync(); }, { signal });
+    document.addEventListener("visibilitychange", () => this.sync(), { signal });
+    lifetime.observe(new IntersectionObserver(([entry]) => { this.visible = entry.isIntersecting; this.sync(); })).observe(root);
+    lifetime.observe(new ResizeObserver(() => this.resize())).observe(root);
+    lifetime.observe(new MutationObserver(() => { this.palette = readDiagramPalette(); this.render(); })).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    lifetime.add(() => cancelAnimationFrame(this.frame));
     this.resize(); root.dataset.ready = ""; this.sync();
   }
   // Reduced motion shows a resolved population, or the finished commit graph of one agent episode.
@@ -114,6 +118,7 @@ class ParadigmScene {
     if (!this.paused && this.visible && !document.hidden) this.frame = requestAnimationFrame(this.tick);
   }
   tick = (now: number) => {
+    if (this.last && now - this.last < 1000 / 30 - 1) { this.frame = requestAnimationFrame(this.tick); return; }
     if (this.last) this.time += Math.min(now - this.last, 80);
     this.last = now;
     const cycle = this.starts[5];
@@ -559,7 +564,8 @@ class ParadigmScene {
     c.clearRect(0,0,480,280);c.lineCap="round";c.lineJoin="round";
     const stage=Math.min(4,this.starts.findIndex((v,i)=>i>0&&this.time<v)-1);
     const current=Math.max(0,stage),p=clamp((this.time-this.starts[current])/this.durations[current]);
-    this.root.dataset.phase=String(current);this.root.dataset.generation=String(this.generation);
+    if(this.root.dataset.phase!==String(current))this.root.dataset.phase=String(current);
+    if(this.root.dataset.generation!==String(this.generation))this.root.dataset.generation=String(this.generation);
     let caption=current===4?3:current===0?0:current<3?1:2;
     if(this.kind==="agentic")caption=this.agentic();
     else{

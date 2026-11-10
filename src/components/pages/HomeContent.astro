@@ -116,7 +116,7 @@ const chapters = [
 
 <Layout title={t(tr, "site.title")} fullBleed locale={locale}>
   <div class="evox-home" id="top">
-    <EvolutionField generationLabel={t(tr, "scene.generation")} quietSelector=".site-brand, .desktop-nav, .header-actions, .hero-statement, .hero-description, .hero-actions, .news-heading h2, .news-heading .text-link" />
+    <EvolutionField generationLabel={t(tr, "scene.generation")} quietSelector=".site-brand, .desktop-nav, .header-actions, .hero-statement, .hero-description, .hero-actions, .news-heading h2, .news-heading .text-link" coverSelector=".news-card" />
 
     <section class="hero chapter" id="home" data-chapter-id="top" aria-labelledby="hero-title">
       <div class="container hero-content">
@@ -132,11 +132,11 @@ const chapters = [
         <div class="hero-support">
           <p class="hero-description">{t(tr, "hero.subtitle")}</p>
           <div class="hero-actions">
-            <a href={getLocalizedUrl("/docs", locale)} class="button button-primary">
+            <a href={getLocalizedUrl("/docs", locale)} class="button button-primary glass" data-glass="accent">
               {t(tr, "hero.cta.button")}
               <Icon name="heroicons:arrow-right-20-solid" aria-hidden="true" />
             </a>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="button button-glass liquid-glass">
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="button button-glass glass" data-glass="clear">
               <Icon name="simple-icons:github" aria-hidden="true" />
               {t(tr, "nav.github")}
               <span aria-hidden="true">↗</span>
@@ -154,7 +154,7 @@ const chapters = [
         </div>
         <div class="news-grid">
           {latestArticles.map(({ post, section }) => (
-            <a href={getLocalizedUrl(`/${section}/${post.slug}`, locale)} class="news-card liquid-glass reveal" data-frost="1">
+            <a href={getLocalizedUrl(`/${section}/${post.slug}`, locale)} class="news-card glass reveal" data-glass="content">
               <div class="news-meta">
                 <span>{t(tr, `nav.blog.${section}`)}</span>
                 <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString(dateLocale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}</time>
@@ -278,7 +278,7 @@ const chapters = [
 
 
 
-    <nav class="chapter-map liquid-glass" aria-label={t(tr, "nav.primary")}>
+    <nav class="chapter-map glass" data-glass="frosted" aria-label={t(tr, "nav.primary")}>
       <ol>
         {chapters.slice(1).map((chapter) => (
           <li>
@@ -309,16 +309,11 @@ const chapters = [
   .hero-description { max-width: 620px; margin: 0 auto; font-size: 19px; line-height: 1.8; color: var(--site-muted); text-wrap: balance; }
   .hero-actions { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; }
   .hero-actions .button { min-height: 50px; padding: 13px 27px; font-size: 16px; }
-  /* Secondary control over the live backdrop, so it gets the full Liquid Glass material. */
-  .button-glass { position: relative; padding-inline: 24px; color: var(--site-ink); transition: transform .2s; }
-  .button-glass:hover { transform: translateY(-2px); }
+  .button-glass { padding-inline: 24px; }
   .button-glass > span { color: var(--site-muted); }
   .button { display: inline-flex; gap: 10px; justify-content: center; align-items: center; min-height: 48px; padding: 12px 25px; border-radius: 999px; font-weight: 500; font-size: 15px; transition: background .2s, transform .2s; }
   .button svg, .text-link svg { width: 17px; height: 17px; }
-  .button-primary { color: #fff; background: linear-gradient(180deg, color-mix(in srgb, var(--site-accent) 88%, #fff), var(--site-accent) 55%); box-shadow: inset 0 1px 0 rgb(255 255 255 / .28), inset 0 -1px 0 rgb(0 0 0 / .12), 0 6px 18px color-mix(in srgb, var(--site-accent) 22%, transparent); transition: background .2s, transform .2s, box-shadow .2s; }
-  .button-primary { position: relative; isolation: isolate; }
-  .button-primary::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: linear-gradient(180deg, rgb(255 255 255 / .55), rgb(255 255 255 / .05) 45%, rgb(255 255 255 / .2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
-  .button-primary:hover { background: linear-gradient(180deg, var(--site-accent), #ae2e32 55%); transform: translateY(-2px); box-shadow: inset 0 1px 0 rgb(255 255 255 / .25), inset 0 -1px 0 rgb(0 0 0 / .12), 0 10px 26px color-mix(in srgb, var(--site-accent) 32%, transparent); }
+  .hero-actions .button:hover { transform: translateY(-2px); }
   .text-link { display: inline-flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 500; }
   .text-link:hover { text-decoration: underline; text-underline-offset: 5px; }
   .text-link > span { color: var(--site-muted); }
@@ -393,8 +388,7 @@ const chapters = [
   .news-heading h2 { font-size: 24px; line-height: 1.3; letter-spacing: -.025em; }
   .news-heading .text-link { flex-shrink: 0; font-size: 14px; }
   .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-  /* These cards float over the live EvolutionField, so they get Liquid Glass like the navigation layer. */
-  .news-card { --lg-filter: blur(1px) saturate(180%); position: relative; display: flex; flex-direction: column; min-width: 0; padding: 24px; border-radius: 20px; background: var(--lg-tint-thin); transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+  .news-card { display: flex; flex-direction: column; min-width: 0; padding: 24px; border-radius: 20px; transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
   .news-card:hover { transform: translateY(-3px); }
   .news-card:hover::before { opacity: 1; }
   .news-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; font-size: 12px; line-height: 1.6; color: var(--site-muted); margin-bottom: 18px; }
@@ -470,7 +464,7 @@ const chapters = [
   @media (prefers-reduced-motion: reduce) {
     .reveal.is-ready { opacity: 1; transform: none; transition: none; }
     .button, .paradigm-card, .genesis-resource, .genesis-resource > svg, .resource-row > svg, .news-card, .news-arrow { transition: none; }
-    .button:hover, .paradigm-card:hover, .genesis-resource:hover > svg, .resource-row:hover > svg, .news-card:hover, .news-card:hover .news-arrow,
+    .hero-actions .button:hover, .button:hover, .paradigm-card:hover, .genesis-resource:hover > svg, .resource-row:hover > svg, .news-card:hover, .news-card:hover .news-arrow,
     .news-card.reveal.is-visible:hover, .paradigm-card.reveal.is-visible:hover { transform: none; }
   }
 </style>
@@ -506,12 +500,15 @@ const chapters = [
     const chapterMap = home.querySelector<HTMLElement>(".chapter-map");
     const links = [...home.querySelectorAll<HTMLAnchorElement>("[data-chapter]")];
     let frame = 0;
+    let previousActive: string | undefined;
     const updateChapter = () => {
       frame = 0;
       let active = sections[0]?.id;
       for (const section of sections) {
         if (section.getBoundingClientRect().top <= window.innerHeight * 0.4) active = section.dataset.chapterId ?? section.id;
       }
+      if (active === previousActive) return;
+      previousActive = active;
       const activeIndex = links.findIndex((link) => link.dataset.chapter === active);
       links.forEach((link, index) => {
         if (index === activeIndex) link.setAttribute("aria-current", "location");

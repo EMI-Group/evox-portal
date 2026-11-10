@@ -147,7 +147,7 @@ const structuredJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");-
         document.documentElement.dataset.theme = "light";
       }
       // Only Chromium renders SVG filters inside backdrop-filter; elsewhere the lens is skipped.
-      if (navigator.userAgentData?.brands?.some((entry) => entry.brand === "Chromium")) document.documentElement.dataset.lens = "";
+      if (navigator.userAgentData?.brands?.some((entry) => entry.brand === "Chromium") && CSS.supports("backdrop-filter", "url(#lens)")) document.documentElement.dataset.lens = "";
     </script>
     <link rel="preload" href="/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -190,82 +190,14 @@ const structuredJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");-
     {!hideFooter && <Footer locale={locale} />}
     <script>
       import { mountContourBackdrops } from "../components/art/contour-backdrop";
+      import { AnimationLifetime } from "../components/art/animation-lifetime";
+      import { mountGlassLenses } from "../components/art/glass-lenses";
+      import { mountSurfaceGlare } from "../components/art/surface-glare";
       mountContourBackdrops();
+      const glassLifetime = new AnimationLifetime();
 
-      // Glass glare and surface rim light follow the pointer.
-      document.addEventListener("pointermove", (event) => {
-        if (event.pointerType !== "mouse" || !(event.target instanceof Element)) return;
-        const host = event.target.closest<HTMLElement>(".liquid-glass, .surface-card, .surface-button, .site-header");
-        const glass = host?.classList.contains("site-header") ? host.querySelector<HTMLElement>(":scope > .liquid-glass") : host;
-        if (!glass) return;
-        const rect = glass.getBoundingClientRect();
-        glass.style.setProperty("--lg-x", `${event.clientX - rect.left}px`);
-        glass.style.setProperty("--lg-y", `${event.clientY - rect.top}px`);
-      }, { passive: true });
-
-      // Chromium only: each glass surface gets a pixel-exact lens filter. The
-      // centre is frosted; a thin rim shows the backdrop displaced and almost
-      // sharp, so content bends at the edges like light through thick glass.
-      const lensDefs = document.querySelector(".lens-defs");
-      if (lensDefs && "lens" in document.documentElement.dataset) {
-        const SVG_NS = "http://www.w3.org/2000/svg";
-        let count = 0;
-        const svgUrl = (w: number, h: number, body: string) =>
-          `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="${SVG_NS}" width="${w}" height="${h}">${body}</svg>`)}`;
-        const core = (w: number, h: number, inset: number, radius: number, fill: string) =>
-          `<filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${inset / 3}"/></filter><rect x="${inset}" y="${inset}" width="${w - inset * 2}" height="${h - inset * 2}" rx="${Math.max(0, radius - inset)}" fill="${fill}" filter="url(#b)"/>`;
-        // Red ramps act only in the left/right bands and green only in the top/bottom
-        // bands (128 is neutral), so every rim sample is pulled straight inward.
-        const ramp = (id: string, channel: (v: number) => string, band: number, vertical: boolean) =>
-          `<linearGradient id="${id}"${vertical ? ' x2="0" y2="1"' : ""}><stop offset="0" stop-color="${channel(255)}"/><stop offset="${band}" stop-color="${channel(128)}"/><stop offset="${1 - band}" stop-color="${channel(128)}"/><stop offset="1" stop-color="${channel(0)}"/></linearGradient>`;
-        const displacementMap = (w: number, h: number, inset: number) => svgUrl(w, h,
-          `${ramp("r", (v) => `rgb(${v},0,0)`, Math.min(.45, inset * 1.4 / w), false)}${ramp("g", (v) => `rgb(0,${v},0)`, Math.min(.45, inset * 1.4 / h), true)}<rect width="${w}" height="${h}" fill="url(#r)"/><rect width="${w}" height="${h}" fill="url(#g)" style="mix-blend-mode:screen"/>`);
-        const rimMask = (w: number, h: number, inset: number, radius: number) => svgUrl(w, h,
-          `<rect width="${w}" height="${h}" fill="#fff"/>${core(w, h, inset, radius, "#000")}`);
-        const set = (el: Element, attrs: Record<string, string | number>) => { for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v)); return el; };
-        const primitive = (name: string, attrs: Record<string, string | number>) => set(document.createElementNS(SVG_NS, name), attrs);
-        const update = (glass: HTMLElement) => {
-          const { width, height } = glass.getBoundingClientRect();
-          const filter = document.getElementById(glass.dataset.lensId ?? "");
-          if (!filter || width < 8 || height < 8) return;
-          const w = Math.round(width), h = Math.round(height);
-          const radius = parseFloat(getComputedStyle(glass).borderTopLeftRadius) || 0;
-          const size = `${w}x${h}x${radius}`;
-          if (glass.dataset.lensSize === size) return;
-          glass.dataset.lensSize = size;
-          const inset = Math.min(14, w / 5, h / 4.5);
-          set(filter, { width: w, height: h });
-          const [map, mask] = filter.querySelectorAll("feImage");
-          set(map, { width: w, height: h, href: displacementMap(w, h, inset) });
-          set(mask, { width: w, height: h, href: rimMask(w, h, inset, radius) });
-        };
-        const pending = new Set<HTMLElement>();
-        let frame = 0;
-        const resizeObserver = new ResizeObserver((entries) => {
-          entries.forEach((entry) => pending.add(entry.target as HTMLElement));
-          frame ||= requestAnimationFrame(() => { frame = 0; pending.forEach(update); pending.clear(); });
-        });
-        document.querySelectorAll<HTMLElement>(".liquid-glass").forEach((glass) => {
-          const id = `liquid-lens-${count++}`;
-          const filter = primitive("filter", { id, filterUnits: "userSpaceOnUse", primitiveUnits: "userSpaceOnUse", x: 0, y: 0, "color-interpolation-filters": "sRGB" });
-          filter.append(
-            primitive("feImage", { x: 0, y: 0, preserveAspectRatio: "none", result: "map" }),
-            primitive("feImage", { x: 0, y: 0, preserveAspectRatio: "none", result: "ring" }),
-            primitive("feColorMatrix", { in: "ring", type: "luminanceToAlpha", result: "rim" }),
-            primitive("feGaussianBlur", { in: "SourceGraphic", stdDeviation: glass.dataset.frost ?? 9, edgeMode: "duplicate", result: "frost" }),
-            primitive("feDisplacementMap", { in: "SourceGraphic", in2: "map", scale: 30, xChannelSelector: "R", yChannelSelector: "G", result: "bent" }),
-            primitive("feGaussianBlur", { in: "bent", stdDeviation: 2.2, result: "lens" }),
-            primitive("feComposite", { in: "lens", in2: "rim", operator: "in", result: "edge" }),
-            primitive("feMerge", {}),
-          );
-          filter.lastElementChild!.append(primitive("feMergeNode", { in: "frost" }), primitive("feMergeNode", { in: "edge" }));
-          lensDefs.append(filter);
-          glass.dataset.lensId = id;
-          glass.style.setProperty("--lg-lens-url", `url(#${id})`);
-          update(glass);
-          resizeObserver.observe(glass);
-        });
-      }
+      mountSurfaceGlare(glassLifetime);
+      mountGlassLenses(glassLifetime);
     </script>
   </body>
 </html>

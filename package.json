@@ -8,7 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "export:preview": "pnpm build && node scripts/export-preview.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "check:animation-lifetime": "node scripts/check-animation-lifetime.mjs",
+    "check:glass": "node scripts/check-glass-lenses.mjs",
+    "check:glass:rendering": "node scripts/check-glass-rendering.mjs",
+    "check:performance": "node scripts/check-home-performance.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

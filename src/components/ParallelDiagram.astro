@@ -179,6 +179,7 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
 
 <script>
   import { readDiagramPalette } from "./art/diagram-theme";
+  import { AnimationLifetime } from "./art/animation-lifetime";
   type Point = { x: number; y: number };
   type Kind = "cpu" | "gpu";
   const GAP = 16;
@@ -186,6 +187,7 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
   const PARTS = { cpu: { columns: 2, cells: 10, base: 0, x0: -4, x1: 29, sign: -1 }, gpu: { columns: 3, cells: 15, base: 28, x0: 24, x1: 71, sign: 1 } };
   const SEAM = 26.5;
   document.querySelectorAll<HTMLElement>(".parallel-figure").forEach(figure => {
+    const lifetime = new AnimationLifetime(), { signal } = lifetime;
     const stage = figure.querySelector<HTMLElement>(".network-stage")!;
     const canvas = figure.querySelector<HTMLCanvasElement>("canvas")!;
     const ctx = canvas.getContext("2d")!;
@@ -263,7 +265,7 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
       if (fill) ctx.fill();
       ctx.globalAlpha = alpha; ctx.stroke(); ctx.restore();
     };
-    new MutationObserver(() => { palette = readDiagramPalette(); draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    lifetime.observe(new MutationObserver(() => { palette = readDiagramPalette(); draw(); })).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     const draw = () => {
       if (!width || !taskMap) return;
       const t = (elapsed % duration) / duration;
@@ -389,6 +391,7 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
       draw();
     };
     const tick = (now: number) => {
+      if (previous && now - previous < 1000 / 30 - 1) { frame = requestAnimationFrame(tick); return; }
       if (previous) elapsed += Math.min(now - previous, 80);
       previous = now; draw(); frame = requestAnimationFrame(tick);
     };
@@ -405,12 +408,13 @@ const devices = [{ kind: "cpu", label: "CPU" }, { kind: "gpu", label: "GPU / NPU
       button.setAttribute("aria-pressed", String(userPaused));
       button.setAttribute("aria-label", (userPaused ? button.dataset.play : button.dataset.pause)!);
       sync();
-    });
-    restart.addEventListener("click", () => { elapsed = 0; draw(); sync(); });
-    new ResizeObserver(measure).observe(stage);
-    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(figure);
-    document.addEventListener("visibilitychange", sync);
-    reduced.addEventListener("change", sync);
+    }, { signal });
+    restart.addEventListener("click", () => { elapsed = 0; draw(); sync(); }, { signal });
+    lifetime.observe(new ResizeObserver(measure)).observe(stage);
+    lifetime.observe(new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); })).observe(figure);
+    document.addEventListener("visibilitychange", sync, { signal });
+    reduced.addEventListener("change", sync, { signal });
+    lifetime.add(() => cancelAnimationFrame(frame));
     measure(); sync();
   });
 </script>

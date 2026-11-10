@@ -84,5 +84,6 @@ refpage/
 
 # temp/build artifacts
 .vercel/
+output/playwright/
 articles_md/
 debug-screenshots/.claude/

@@ -1,4 +1,5 @@
 import { strokeContours, traceContours } from "./contours";
+import { AnimationLifetime } from "./animation-lifetime";
 
 // Live topographic texture behind inner-page banners: a few Gaussian peaks drift
 // along slow, incommensurate sine paths and breathe in height, so the contours
@@ -14,20 +15,24 @@ const LEVELS = Array.from({ length: 15 }, (_, i) => .1 + i * .1);
 const FRAME_MS = 33;
 
 class ContourBackdrop {
+  lifetime = new AnimationLifetime();
   canvas = document.createElement("canvas"); ctx = this.canvas.getContext("2d")!;
   w = 0; h = 0; dpr = 1; cell = 16; cols = 0; rows = 0; grid = new Float32Array(0);
-  time = Math.random() * 600; last = 0; drawn = 0; frame = 0; visible = true;
+  time = Math.random() * 600; last = 0; drawn = 0; frame = 0; visible = false;
+  xSamples = new Float32Array(0);
   ink: [number, number, number] = [0, 0, 0];
   reduced = matchMedia("(prefers-reduced-motion: reduce)");
 
   constructor(private root: HTMLElement) {
     root.append(this.canvas);
     this.readInk();
-    new ResizeObserver(() => this.resize()).observe(root);
-    new IntersectionObserver(([entry]) => { this.visible = entry.isIntersecting; this.schedule(); }).observe(root);
-    new MutationObserver(() => { this.readInk(); this.draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    document.addEventListener("visibilitychange", () => this.schedule());
-    this.reduced.addEventListener("change", () => this.schedule());
+    const { lifetime } = this, { signal } = lifetime;
+    lifetime.observe(new ResizeObserver(() => this.resize())).observe(root);
+    lifetime.observe(new IntersectionObserver(([entry]) => { this.visible = entry.isIntersecting; this.schedule(); })).observe(root);
+    lifetime.observe(new MutationObserver(() => { this.readInk(); this.draw(); })).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    document.addEventListener("visibilitychange", () => this.schedule(), { signal });
+    this.reduced.addEventListener("change", () => { this.draw(); this.schedule(); }, { signal });
+    lifetime.add(() => cancelAnimationFrame(this.frame));
   }
 
   readInk() {
@@ -44,6 +49,7 @@ class ContourBackdrop {
     this.cell = width < 700 ? 14 : 16;
     this.cols = Math.ceil(width / this.cell) + 1; this.rows = Math.ceil(height / this.cell) + 1;
     this.grid = new Float32Array(this.cols * this.rows);
+    this.xSamples = new Float32Array(this.cols);
     this.draw(); this.schedule();
   }
 
@@ -69,11 +75,17 @@ class ContourBackdrop {
       a: p.a + p.da * Math.sin(t * p.wa + p.phase * .7),
       s: p.s * scale,
     }));
-    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
-      const x = i * cell, y = j * cell;
-      let v = 0;
-      for (const p of peaks) { const dx = (x - p.x) / p.s, dy = (y - p.y) / p.s; v += p.a * Math.exp(-.5 * (dx * dx + dy * dy)); }
-      this.grid[j * cols + i] = v;
+    // A Gaussian is separable: evaluate exponentials per row/column, not per cell.
+    this.grid.fill(0);
+    for (const p of peaks) {
+      for (let i = 0; i < cols; i++) {
+        const dx = (i * cell - p.x) / p.s;
+        this.xSamples[i] = Math.exp(-.5 * dx * dx);
+      }
+      for (let j = 0; j < rows; j++) {
+        const dy = (j * cell - p.y) / p.s, amplitude = p.a * Math.exp(-.5 * dy * dy);
+        for (let i = 0; i < cols; i++) this.grid[j * cols + i] += this.xSamples[i] * amplitude;
+      }
     }
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);

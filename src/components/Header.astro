@@ -36,7 +36,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
 ---
 
 <header class="site-header">
-  <div class="header-glass liquid-glass" aria-hidden="true"></div>
+  <div class="header-glass glass" data-glass="navigation" data-lens-morph aria-hidden="true"></div>
   <div class="header-inner">
     <a href={getLocalizedUrl("/", locale)} class="site-brand" aria-label="EvoX">
       <span class="header-mark"><BrandWordmark /></span>
@@ -48,7 +48,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
           <summary class="nav-link" aria-expanded="false">
             {link.label}<Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" />
           </summary>
-          <div class="dropdown-panel liquid-glass">
+          <div class="dropdown-panel glass" data-glass="menu">
             {link.dropdown.map((item) => (
               <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}>
                 <span class="dropdown-label">{item.label}</span>
@@ -69,7 +69,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
           <Icon name="heroicons:language-20-solid" class="nav-icon" />
           <span>{localeNames[locale]}</span><Icon name="heroicons:chevron-down-20-solid" class="nav-chevron" />
         </summary>
-        <div class="dropdown-panel language-panel liquid-glass">
+        <div class="dropdown-panel language-panel glass" data-glass="menu">
           {locales.map((loc) => (
             <a href={getLocalizedUrl(currentPath, loc)} data-locale-link lang={loc} aria-current={loc === locale ? "true" : undefined}>{localeNames[loc]}</a>
           ))}
@@ -87,7 +87,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
           <Icon name="heroicons:bars-3-20-solid" class="mobile-open-icon" />
           <Icon name="heroicons:x-mark-20-solid" class="mobile-close-icon" />
         </summary>
-        <div class="mobile-panel liquid-glass">
+        <div class="mobile-panel glass" data-glass="menu">
           <nav aria-label={t(tr, "nav.primary")}>
             {navLinks.map((link) => link.dropdown ? (
               <details class="mobile-section">
@@ -119,11 +119,11 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
 </header>
 
 <style>
-  .site-header { position: fixed; inset: 0 0 auto; z-index: 100; height: 64px; }
+  .site-header { --header-height: 64px; --header-inset: 8px; --header-radius: 24px; position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-height); }
   /* The glass is a sibling layer, so the header is not a backdrop root and its menus can blur the page. */
-  .header-glass { position: absolute; inset: 0; z-index: -1; border-radius: 0; background: var(--glass-strong); transition: inset .55s cubic-bezier(.2, .9, .25, 1), border-radius .55s cubic-bezier(.2, .9, .25, 1), opacity .35s; }
+  .header-glass { position: absolute; inset: 0; z-index: -1; border-radius: 0; transition: inset .55s cubic-bezier(.2, .9, .25, 1), border-radius .55s cubic-bezier(.2, .9, .25, 1), opacity .35s; }
   .site-header[data-at-top] .header-glass { opacity: 0; }
-  .site-header[data-floating] .header-glass { inset: 8px max(12px, calc(50% - 632px)); border-radius: 24px; background: linear-gradient(color-mix(in srgb, var(--site-bg) 30%, transparent), color-mix(in srgb, var(--site-bg) 30%, transparent)), var(--lg-tint); }
+  .site-header[data-floating] .header-glass { inset: var(--header-inset) max(12px, calc(50% - 632px)); border-radius: var(--header-radius); }
   .header-inner { width: min(100% - 64px, 1216px); height: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
   .site-brand { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; }
   .header-mark { display: flex; flex-shrink: 0; width: 120px; }
@@ -140,7 +140,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .nav-chevron { width: 13px; height: 13px; transition: transform .2s; }
   details[open] > summary .nav-chevron { transform: rotate(180deg); }
   .nav-dropdown { position: relative; }
-  .dropdown-panel { position: absolute; top: calc(100% - 1px); left: -24px; width: 286px; padding: 8px; border-radius: 20px; background: var(--glass-strong); }
+  .dropdown-panel { position: absolute; top: calc(100% - 1px); left: -24px; width: 286px; padding: 8px; border-radius: 20px; }
   .dropdown-panel a { display: block; padding: 12px 14px; border-radius: 9px; transition: background .2s; }
   .dropdown-panel a:hover, .dropdown-panel a:focus-visible { background: color-mix(in srgb, var(--site-ink) 6%, transparent); }
   .dropdown-label { display: block; color: var(--site-ink); font-size: 15px; font-weight: 600;  line-height: 1.5; }
@@ -159,7 +159,7 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
   .mobile-toggle svg { width: 18px; height: 18px; }
   .mobile-close-icon, .mobile-menu[open] .mobile-open-icon { display: none; }
   .mobile-menu[open] .mobile-close-icon { display: block; }
-  .mobile-panel { position: absolute; inset: 62px 12px auto; padding: 12px 20px 20px; border-radius: 24px; max-height: calc(100dvh - 76px); overflow-y: auto; background: var(--glass-strong); }
+  .mobile-panel { position: absolute; inset: 62px 12px auto; padding: 12px 20px 20px; border-radius: 24px; max-height: calc(100dvh - 76px); overflow-y: auto; }
   .mobile-link, .mobile-section > summary { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 16px; color: var(--site-ink); border-bottom: 1px solid var(--site-line); cursor: pointer; }
   .mobile-submenu { display: grid; gap: 0; padding: 6px 0 12px; }
   .mobile-submenu a { padding: 10px 16px; font-size: 15px; color: var(--site-muted);  line-height: 1.5; }
@@ -178,8 +178,11 @@ const navLinks: { label: string; href?: string; dropdown?: { label: string; desc
 
 <script>
   const siteHeader = document.querySelector<HTMLElement>(".site-header");
+  let previousAtTop: boolean | undefined;
   const syncHeaderState = () => {
     const atTop = window.scrollY < 8;
+    if (atTop === previousAtTop) return;
+    previousAtTop = atTop;
     siteHeader?.toggleAttribute("data-at-top", atTop);
     siteHeader?.toggleAttribute("data-floating", !atTop);
   };

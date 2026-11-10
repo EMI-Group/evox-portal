@@ -109,7 +109,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       this.playButton=root.querySelector('[data-action="play"]');
       this.resetButton=root.querySelector('[data-action="reset"]');
       this.status=root.querySelector('[data-status]');
-      this.generations=[];this.time=0;this.playing=false;this.visible=true;this.destroyed=false;
+      this.generations=new Map();this.generatedThrough=-1;this.time=0;this.playing=false;this.visible=false;this.destroyed=false;
       this.frameId=null;this.lastTime=null;this.lastStage=-1;this.lastGen=-1;
       this.abort=new AbortController();const signal=this.abort.signal;
       this.media=matchMedia('(prefers-reduced-motion: reduce)');
@@ -123,6 +123,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
         if(playing)this.play();
       },{signal}));
       document.addEventListener('visibilitychange',()=>this.schedule(),{signal});
+      window.addEventListener('pagehide',e=>{if(!e.persisted)this.destroy()},{signal});
       this.media.addEventListener('change',e=>{this.motion=e.matches;if(e.matches)this.pause()},{signal});
       this.resizeObserver=new ResizeObserver(this.resize);this.resizeObserver.observe(this.canvas);
       this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.schedule()},{threshold:0});
@@ -143,8 +144,11 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
       this.fill=rgb('fill');this.red=rgb('red');this.bright=rgb('bright');this.grey=rgb('muted');this.ink=rgb('ink');this.background=hex('bg');
     }
     generation(g) {
-      if(this.generations[g])return this.generations[g];
-      for(let k=this.generations.length;k<=g;k++) {
+      if(this.generations.has(g))return this.generations.get(g);
+      // Rendering needs the current and previous generation only. Backward seeks
+      // outside the window deterministically replay from the original seed.
+      if(g<this.generatedThrough){this.generations.clear();this.generatedThrough=-1}
+      for(let k=this.generatedThrough+1;k<=g;k++) {
         const random=rng(24771+k*7013),items=[];
         if(k===0) {
           for(let i=0;i<COUNT;i++) {
@@ -152,7 +156,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
             items.push({id:`0:${i}`,slot:i,x,y,fitness:score(x,y),trait:random()*TAU,seed:random(),parent:-1,retained:false});
           }
         } else {
-          const prev=this.generations[k-1],parents=prev.winners.map(i=>prev.items[i]);
+          const prev=this.generations.get(k-1),parents=prev.winners.map(i=>prev.items[i]);
           for(let i=0;i<COUNT;i++) {
             const pi=Math.floor(i/FAMILY),parent=parents[pi];
             if(i%FAMILY===0)items.push({...parent,slot:i,parent:pi,retained:true});
@@ -165,9 +169,11 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
           }
         }
         const winners=items.map((_,i)=>i).sort((a,b)=>items[b].fitness-items[a].fitness).slice(0,KEEP);
-        this.generations.push({items,winners,best:items[winners[0]].fitness});
+        this.generations.set(k,{items,winners,best:items[winners[0]].fitness});
+        this.generatedThrough=k;
+        if(this.generations.size>3)this.generations.delete(this.generations.keys().next().value);
       }
-      return this.generations[g];
+      return this.generations.get(g);
     }
     resize() {
       if(this.destroyed)return;
@@ -416,6 +422,7 @@ const { steps, captions, description, pauseLabel, playLabel, restartLabel } = As
     loop(now) {
       this.frameId=null;
       if(this.destroyed||!this.playing||!this.visible||document.hidden)return;
+      if(this.lastTime!==null&&now-this.lastTime<1000/30-1){this.frameId=requestAnimationFrame(this.loop);return}
       if(this.lastTime!==null)this.time+=Math.min(now-this.lastTime,120);
       this.lastTime=now;this.render();this.frameId=requestAnimationFrame(this.loop);
     }

@@ -6,12 +6,14 @@ interface Props {
   generationLabel: string;
   /** Elements whose text the population should fade behind. */
   quietSelector?: string;
+  /** Elements drawn over the field; the tallest peaks stay clear of them and of quiet text. */
+  coverSelector?: string;
 }
 
-const { generationLabel, quietSelector = "" } = Astro.props;
+const { generationLabel, quietSelector = "", coverSelector = "" } = Astro.props;
 ---
 
-<div class="evolution-field" aria-hidden="true" data-generation-label={generationLabel} data-quiet={quietSelector}>
+<div class="evolution-field" aria-hidden="true" data-generation-label={generationLabel} data-quiet={quietSelector} data-cover={coverSelector}>
   <canvas></canvas>
 </div>
 
@@ -23,32 +25,33 @@ const { generationLabel, quietSelector = "" } = Astro.props;
 
 <script>
   import { strokeContours, traceContours } from "./art/contours";
+  import { AnimationLifetime } from "./art/animation-lifetime";
 
-  type Peak = { x: number; y: number; a: number; sx: number; sy: number };
+  type Peak = { x: number; y: number; a: number; sx: number; sy: number; r: number };
   type Agent = { x: number; y: number; px: number; py: number; born: number; fit: number; shared: number; elite: boolean };
   type Ghost = { x: number; y: number; died: number };
-  type TrailPoint = { x: number; y: number; jump: boolean };
+  type TrailPoint = { x: number; y: number; at: number };
   type Rgb = [number, number, number];
 
-  // Moving Peaks environment: position and widths are fractions of the field,
-  // `a` is the height. The landscape holds still for STABLE_MS so the population
-  // can visibly converge, then shifts over SHIFT_MS to a reshuffled landscape
-  // whose highest peak is always a different one.
-  const PEAKS: Peak[] = [
-    { x: .8, y: .36, a: 1.15, sx: .15, sy: .17 },
-    { x: .18, y: .56, a: .85, sx: .14, sy: .19 },
-    { x: .56, y: .84, a: .65, sx: .19, sy: .13 },
-    { x: .42, y: .22, a: .45, sx: .12, sy: .12 },
-  ];
-  const HEIGHTS = [1.15, .85, .65, .45];
+  // Moving Peaks environment: positions are fractions of the field, widths fractions of
+  // its scale, `a` is the height and `r` the angle of an elongated peak. The landscape
+  // holds still for STABLE_MS so the population can visibly converge, then shifts over
+  // SHIFT_MS to a freshly generated landscape whose highest peak lies elsewhere.
+  const PEAK_COUNT = 4;
   const STABLE_MS = 10000;
   const SHIFT_MS = 1600;
-  const POINTER_PEAK = 1.5;
-  const LEVELS = Array.from({ length: 15 }, (_, i) => .1 + i * .1);
+  // The cursor raises the ground beneath it to this height, just above the tallest peak,
+  // so the population still migrates there without a spike on top of an existing peak.
+  const POINTER_PEAK = 1.35;
+  const POINTER_SIGMA = .15;
+  const LEVELS = Array.from({ length: 20 }, (_, i) => .08 + i * .08);
   const MAX_FITNESS = 1.6;
   const GENERATION_MS = 820;
   const ELITES = 5;
   const TRAIL = 24;
+  // Each trail point fades out with age; a landscape shift fades the whole trail at once.
+  const TRAIL_LIFE_MS = 7000;
+  const TRAIL_GROW_MS = 360;
   const TRAIL_FADE_MS = 1200;
   // Label corners as [x, y] directions from the best: up-right, up-left, down-right, down-left.
   const LABEL_CORNERS = [[1, -1], [-1, -1], [1, 1], [-1, 1]];
@@ -67,18 +70,18 @@ const { generationLabel, quietSelector = "" } = Astro.props;
 
   class EvolutionField {
     root: HTMLElement; canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D;
-    label: string; quiet: string; quietRects: DOMRect[] = []; quietMap = new Float32Array(0);
+    label: string; quiet: string; quietRects: DOMRect[] = []; quietMap = new Float32Array(0); cover: string; coverRects: DOMRect[] = [];
     w = 0; h = 0; dpr = 1; scale = 1; cell = 14; cols = 0; rows = 0; grid = new Float32Array(0);
     agents: Agent[] = []; ghosts: Ghost[] = []; best: Agent | null = null;
     bestText = { generation: 0, text: "", width: 0 }; labelCorner = 0;
     // Per-generation positions of the best individual; the previous landscape's trail fades on each shift.
     trail: TrailPoint[] = []; fadingTrail: TrailPoint[] = []; fadeStart = 0;
-    clock = 0; time = 0; lastGeneration = 0; generation = 1; frame = 0; frameId = 0; last = 0;
-    visible = true; reduced: MediaQueryList;
-    peaks: Peak[] = PEAKS.map((p) => ({ ...p })); shiftFrom: Peak[] = []; shiftTo: Peak[] = [];
+    clock = 0; time = 0; lastGeneration = 0; generation = 1; fieldAt = 0; frameId = 0; last = 0;
+    visible = false; reduced: MediaQueryList; lifetime = new AnimationLifetime();
+    peaks: Peak[] = []; shiftFrom: Peak[] = []; shiftTo: Peak[] = [];
     shiftStart = -1; nextShift = STABLE_MS + 1500; shiftPulse = 0;
     // Client coordinates are kept so the peak stays under a resting cursor while the page scrolls.
-    pointer = { cx: -1, cy: -1, x: 0, y: 0, strength: 0 };
+    pointer = { cx: -1, cy: -1, x: 0, y: 0, strength: 0, lift: 0 };
     optimum = { x: 0, y: 0, tx: 0, ty: 0, ready: false };
     // The field is resampled only when the landscape or the cursor peak changes.
     fieldDirty = true; landscapeDirty = true; base = new Float32Array(0);
@@ -86,6 +89,7 @@ const { generationLabel, quietSelector = "" } = Astro.props;
     contours: Path2D[] = [];
     // Elevation tint at grid resolution, upscaled with smoothing when drawn.
     shade = document.createElement("canvas"); shadeCtx = this.shade.getContext("2d")!; shadeData: ImageData | null = null;
+    backdrop = document.createElement("canvas"); backdropCtx = this.backdrop.getContext("2d")!;
     ink: Rgb = [0, 0, 0]; muted: Rgb = [0, 0, 0]; bg: Rgb = [255, 255, 255]; accent: Rgb = [200, 56, 60]; mono = "monospace";
 
     constructor(root: HTMLElement) {
@@ -94,16 +98,19 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       this.ctx = this.canvas.getContext("2d")!;
       this.label = root.dataset.generationLabel ?? "{n}";
       this.quiet = root.dataset.quiet ?? "";
+      this.cover = root.dataset.cover ?? "";
       this.reduced = matchMedia("(prefers-reduced-motion: reduce)");
       this.loop = this.loop.bind(this);
       this.readPalette();
-      new ResizeObserver(() => this.resize()).observe(root);
-      new IntersectionObserver((entries) => { this.visible = entries[0].isIntersecting; this.schedule(); }).observe(root);
-      new MutationObserver(() => { this.readPalette(); this.paintShade(); this.render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-      document.addEventListener("visibilitychange", () => this.schedule());
-      this.reduced.addEventListener("change", () => { this.settle(); this.schedule(); });
-      window.addEventListener("pointermove", (event) => this.track(event), { passive: true });
-      document.documentElement.addEventListener("pointerleave", () => { this.pointer.cx = -1; });
+      const { lifetime } = this, { signal } = lifetime;
+      lifetime.observe(new ResizeObserver(() => this.resize())).observe(root);
+      lifetime.observe(new IntersectionObserver((entries) => { this.visible = entries[0].isIntersecting; this.schedule(); })).observe(root);
+      lifetime.observe(new MutationObserver(() => { this.readPalette(); this.paintShade(); this.paintBackdrop(); this.render(); })).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      document.addEventListener("visibilitychange", () => this.schedule(), { signal });
+      this.reduced.addEventListener("change", () => { this.settle(); this.schedule(); }, { signal });
+      window.addEventListener("pointermove", (event) => this.track(event), { passive: true, signal });
+      document.documentElement.addEventListener("pointerleave", () => { this.pointer.cx = -1; }, { signal });
+      lifetime.add(() => cancelAnimationFrame(this.frameId));
     }
 
     readPalette() {
@@ -120,21 +127,23 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       const first = !this.w;
       const sx = first ? 1 : rect.width / this.w, sy = first ? 1 : rect.height / this.h;
       this.w = rect.width; this.h = rect.height;
-      this.dpr = Math.min(devicePixelRatio || 1, 1.5);
+      this.dpr = Math.min(devicePixelRatio || 1, 1.5, Math.sqrt(3_000_000 / (this.w * this.h)));
       this.canvas.width = Math.round(this.w * this.dpr); this.canvas.height = Math.round(this.h * this.dpr);
+      this.backdrop.width = this.canvas.width; this.backdrop.height = this.canvas.height;
       this.scale = Math.max(this.w, this.h) * .8;
       this.cell = this.w < 700 ? 12 : 14;
       this.cols = Math.ceil(this.w / this.cell) + 1; this.rows = Math.ceil(this.h / this.cell) + 1;
       this.grid = new Float32Array(this.cols * this.rows); this.base = new Float32Array(this.cols * this.rows);
       this.shade.width = this.cols; this.shade.height = this.rows; this.shadeData = this.shadeCtx.createImageData(this.cols, this.rows);
       this.landscapeDirty = true;
-      this.quietRects = this.quiet ? [...document.querySelectorAll<HTMLElement>(this.quiet)].map((el) => {
+      const rects = (selector: string) => selector ? [...document.querySelectorAll<HTMLElement>(selector)].map((el) => {
         const r = el.getBoundingClientRect();
         return new DOMRect(r.left - rect.left, r.top - rect.top, r.width, r.height);
       }) : [];
+      this.quietRects = rects(this.quiet); this.coverRects = rects(this.cover);
       this.quietMap = new Float32Array(this.cols * this.rows);
       for (let j = 0; j < this.rows; j++) for (let i = 0; i < this.cols; i++) this.quietMap[j * this.cols + i] = this.quietnessAt(i * this.cell, j * this.cell);
-      if (first) this.seed();
+      if (first) { this.peaks = this.generateLandscape(); this.seed(); }
       else {
         for (const a of this.agents) { a.x *= sx; a.px *= sx; a.y *= sy; a.py *= sy; }
         for (const p of [...this.trail, ...this.fadingTrail]) { p.x *= sx; p.y *= sy; }
@@ -158,6 +167,7 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       if (!this.reduced.matches || !this.w) return;
       for (let i = 0; i < 30; i++) { this.clock += GENERATION_MS; this.time += GENERATION_MS / 1000; this.step(); }
       this.clock += 1e6; this.ghosts = [];
+      for (const p of this.trail) p.at += 1e6;
       this.computeField(); this.render();
     }
 
@@ -186,27 +196,73 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       if (p.strength !== strength || (p.strength > .01 && (p.x !== x || p.y !== y))) this.fieldDirty = true;
     }
 
-    reshuffle(prev: Peak[]) {
-      const leader = prev.reduce((best, p, i) => p.a > prev[best].a ? i : best, 0);
-      let heights: number[];
-      do heights = [...HEIGHTS].sort(() => Math.random() - .5); while (heights[leader] === HEIGHTS[0]);
-      return prev.map((p, i) => {
-        let x = p.x, y = p.y;
-        for (let attempt = 0; attempt < 12; attempt++) {
-          const angle = Math.random() * Math.PI * 2, distance = .12 + Math.random() * .12;
-          x = clamp(p.x + Math.cos(angle) * distance, .1, .9);
-          y = clamp(p.y + Math.sin(angle) * distance * 1.4, .15, .88);
-          // The two tallest peaks must stay clear of the hero copy, where agents fade out.
-          if (heights[i] < HEIGHTS[1] || x < .3 || x > .7 || y > .45) break;
+    // A new landscape is sampled many times and the most open layout kept: peaks of varied size and
+    // elongation, well apart, the summit clear of page text and cards and away from the last one.
+    generateLandscape(prev?: Peak[]) {
+      const unit = (dx: number, dy: number) => Math.hypot(dx * this.w, dy * this.h) / this.scale;
+      // Broad peaks overlap, so the summit is found on a coarse grid rather than at a peak's centre.
+      const summit = (peaks: Peak[]) => {
+        const list = peaks.map((p) => ({ x: p.x * this.w, y: p.y * this.h, a: p.a, sx: p.sx * this.scale, sy: p.sy * this.scale, cos: Math.cos(p.r), sin: Math.sin(p.r) }));
+        let top = { x: 0, y: 0 }, high = -Infinity;
+        for (let j = 0; j < 24; j++) for (let i = 0; i < 36; i++) {
+          const x = (i + .5) / 36, y = (j + .5) / 24, v = this.landscape(x * this.w, y * this.h, list);
+          if (v > high) { high = v; top = { x, y }; }
         }
-        return { ...p, a: heights[i], x, y };
+        return top;
+      };
+      const leader = prev && summit(prev);
+      let chosen: Peak[] = [], best: Peak[] = [], score = -Infinity;
+      const open = (p: { x: number; y: number }, quiet: number) => {
+        const x = p.x * this.w, y = p.y * this.h;
+        return this.quietnessAt(x, y) >= quiet && this.coverRects.every((r) => x < r.left - 50 || x > r.right + 50 || y < r.top - 50 || y > r.bottom + 50);
+      };
+      // Narrow screens may have no open ground for the summit, so the demand relaxes step by step.
+      const demands = [.95, .5, 0];
+      for (let attempt = 0; attempt < 360 && !chosen.length; attempt++) {
+        const quiet = demands[Math.floor(attempt / 120)];
+        // Broad, overlapping peaks fill the page with contours; saddles between them shape the rings.
+        const heights = [1.1 + Math.random() * .1, .8 + Math.random() * .15, .6 + Math.random() * .15, .4 + Math.random() * .15];
+        // The tallest peak starts at a side of the field, where page text and cards rarely reach.
+        const peaks = heights.map((a, i): Peak => {
+          const size = .17 + Math.random() * .1, stretch = .6 + Math.random() * 1, side = Math.random() < .5 ? .04 : .76;
+          const x = i ? .06 + Math.random() * .88 : side + Math.random() * .2, y = i ? .1 + Math.random() * .8 : .1 + Math.random() * .55;
+          return { x, y, a, sx: size * Math.sqrt(stretch), sy: size / Math.sqrt(stretch), r: Math.random() * Math.PI };
+        });
+        const top = summit(peaks);
+        if (quiet > 0 && (!open(top, quiet) || (leader && unit(top.x - leader.x, top.y - leader.y) < .3))) continue;
+        let apart = Infinity;
+        for (let i = 0; i < PEAK_COUNT; i++) for (let j = i + 1; j < PEAK_COUNT; j++) {
+          const p = peaks[i], q = peaks[j];
+          apart = Math.min(apart, unit(p.x - q.x, p.y - q.y) / (Math.max(p.sx, p.sy) + Math.max(q.sx, q.sy)));
+        }
+        const value = apart + Math.random() * .3;
+        if (value > score) { score = value; best = peaks; }
+        if (attempt % 120 === 119 && best.length) chosen = best;
+      }
+      if (!prev) return chosen;
+      // Each old peak travels to the new peak that keeps the total movement shortest.
+      let order: number[] = [], least = Infinity;
+      const permute = (rest: number[], done: number[]) => {
+        if (!rest.length) {
+          const cost = done.reduce((sum, k, i) => sum + unit(chosen[k].x - prev[i].x, chosen[k].y - prev[i].y) ** 2, 0);
+          if (cost < least) { least = cost; order = done; }
+          return;
+        }
+        rest.forEach((k, i) => permute([...rest.slice(0, i), ...rest.slice(i + 1)], [...done, k]));
+      };
+      permute(chosen.map((_, i) => i), []);
+      return order.map((k, i) => {
+        const p = chosen[k];
+        let turn = (p.r - prev[i].r) % Math.PI;
+        if (turn > Math.PI / 2) turn -= Math.PI; else if (turn < -Math.PI / 2) turn += Math.PI;
+        return { ...p, r: prev[i].r + turn };
       });
     }
 
     updateEnvironment() {
       if (this.shiftStart < 0 && this.clock >= this.nextShift) {
         this.shiftFrom = this.peaks.map((p) => ({ ...p }));
-        this.shiftTo = this.reshuffle(this.peaks);
+        this.shiftTo = this.generateLandscape(this.peaks);
         this.shiftStart = this.clock;
         this.fadeTrail();
       }
@@ -214,7 +270,8 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       const t = Math.min(1, (this.clock - this.shiftStart) / SHIFT_MS), e = easeInOut(t);
       this.peaks = this.shiftFrom.map((p, i) => {
         const q = this.shiftTo[i];
-        return { ...p, x: p.x + (q.x - p.x) * e, y: p.y + (q.y - p.y) * e, a: p.a + (q.a - p.a) * e };
+        const at = (k: "x" | "y" | "a" | "sx" | "sy" | "r") => p[k] + (q[k] - p[k]) * e;
+        return { x: at("x"), y: at("y"), a: at("a"), sx: at("sx"), sy: at("sy"), r: at("r") };
       });
       this.shiftPulse = Math.sin(Math.PI * t);
       this.fieldDirty = this.landscapeDirty = true;
@@ -227,23 +284,23 @@ const { generationLabel, quietSelector = "" } = Astro.props;
     }
 
     peakList() {
-      return this.peaks.map((p) => ({ x: p.x * this.w, y: p.y * this.h, a: p.a, sx: p.sx * this.scale, sy: p.sy * this.scale }));
+      return this.peaks.map((p) => ({ x: p.x * this.w, y: p.y * this.h, a: p.a, sx: p.sx * this.scale, sy: p.sy * this.scale, cos: Math.cos(p.r), sin: Math.sin(p.r) }));
     }
 
     landscape(x: number, y: number, peaks: ReturnType<EvolutionField["peakList"]>) {
       let value = 0;
       for (const p of peaks) {
-        const dx = (x - p.x) / p.sx, dy = (y - p.y) / p.sy;
+        const ox = x - p.x, oy = y - p.y, dx = (ox * p.cos + oy * p.sin) / p.sx, dy = (oy * p.cos - ox * p.sin) / p.sy;
         value += p.a * Math.exp(-.5 * (dx * dx + dy * dy));
       }
       return value;
     }
 
     pointerBump(x: number, y: number) {
-      const { strength, x: px, y: py } = this.pointer;
+      const { strength, lift, x: px, y: py } = this.pointer;
       if (strength <= .01) return 0;
-      const s = this.scale * .13, dx = (x - px) / s, dy = (y - py) / s;
-      return POINTER_PEAK * strength * Math.exp(-.5 * (dx * dx + dy * dy));
+      const s = this.scale * POINTER_SIGMA, dx = (x - px) / s, dy = (y - py) / s;
+      return lift * strength * Math.exp(-.5 * (dx * dx + dy * dy));
     }
 
     fitness(x: number, y: number, peaks = this.peakList()) {
@@ -257,22 +314,25 @@ const { generationLabel, quietSelector = "" } = Astro.props;
         for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) this.base[j * cols + i] = this.landscape(i * c, j * c, peaks);
       }
       this.grid.set(this.base);
-      // Beyond 3.2 sigma the cursor bump is below 1% of a contour step.
+      // Beyond 3.2 sigma the cursor bump is below 1% of a contour step. Over an existing peak the
+      // bump only tops it up, with a floor so the cursor always shapes the ground a little.
       const p = this.pointer;
+      p.lift = Math.max(.3, POINTER_PEAK - this.landscape(p.x, p.y, peaks));
       if (p.strength > .01) {
-        const reach = this.scale * .13 * 3.2;
+        const reach = this.scale * POINTER_SIGMA * 3.2;
         const i0 = Math.max(0, Math.floor((p.x - reach) / c)), i1 = Math.min(cols - 1, Math.ceil((p.x + reach) / c));
         const j0 = Math.max(0, Math.floor((p.y - reach) / c)), j1 = Math.min(rows - 1, Math.ceil((p.y + reach) / c));
         for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) this.grid[j * cols + i] += this.pointerBump(i * c, j * c);
       }
       this.contours = traceContours(this.grid, cols, rows, c, LEVELS);
       this.paintShade();
+      this.paintBackdrop();
 
+      // The optimum is the highest grid node, cursor peak included.
       const o = this.optimum;
-      let topValue = -Infinity;
-      const consider = (x: number, y: number) => { const v = this.fitness(x, y, peaks); if (v > topValue) { topValue = v; o.tx = x; o.ty = y; } };
-      for (const p of peaks) consider(p.x, p.y);
-      if (this.pointer.strength > .5) consider(this.pointer.x, this.pointer.y);
+      let top = 0;
+      for (let k = 1; k < this.grid.length; k++) if (this.grid[k] > this.grid[top]) top = k;
+      o.tx = (top % cols) * c; o.ty = Math.floor(top / cols) * c;
       if (!o.ready) { o.x = o.tx; o.y = o.ty; o.ready = true; }
     }
 
@@ -288,6 +348,18 @@ const { generationLabel, quietSelector = "" } = Astro.props;
         px[o] = r; px[o + 1] = g; px[o + 2] = b; px[o + 3] = 255 * t ** 2.2;
       }
       this.shadeCtx.putImageData(data, 0, 0);
+    }
+
+    // Reuse the rasterized landscape while it is still. Agents and trails remain live.
+    paintBackdrop() {
+      const ctx = this.backdropCtx, c = this.cell;
+      const dark = document.documentElement.dataset.theme === "dark";
+      ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+      ctx.clearRect(0, 0, this.w, this.h);
+      ctx.globalAlpha = dark ? .2 : .11;
+      ctx.drawImage(this.shade, -c / 2, -c / 2, this.cols * c, this.rows * c);
+      ctx.globalAlpha = 1;
+      strokeContours(ctx, this.contours, this.ink, dark, 1 + this.shiftPulse * .9);
     }
 
     easeOptimum(dt: number) {
@@ -308,11 +380,10 @@ const { generationLabel, quietSelector = "" } = Astro.props;
       }
       const ranked = [...this.agents].sort((p, q) => q.fit - p.fit);
       this.best = ranked[0];
-      // The trail records only improvements and connects every best point; a jump to
-      // another niche is drawn dashed. Only a landscape shift clears it.
+      // The trail records only moves of the best and connects every point, jumps to another niche included.
       const last = this.trail[this.trail.length - 1], moved = last ? Math.hypot(last.x - this.best.x, last.y - this.best.y) : Infinity;
-      if (moved > .5) this.trail.push({ x: this.best.x, y: this.best.y, jump: !last || moved > radius * 1.2 });
-      if (this.trail.length > TRAIL) this.trail.shift();
+      if (moved > .5) this.trail.push({ x: this.best.x, y: this.best.y, at: now });
+      while (this.trail.length > TRAIL || (this.trail.length > 1 && now - this.trail[0].at > TRAIL_LIFE_MS)) this.trail.shift();
       const elites: Agent[] = [];
       for (const a of ranked) {
         if (elites.length === ELITES) break;
@@ -363,55 +434,57 @@ const { generationLabel, quietSelector = "" } = Astro.props;
     }
 
     loop(timestamp: number) {
-      const dt = Math.min(50, timestamp - this.last);
+      if (timestamp - this.last < 1000 / 30 - 1) { this.frameId = requestAnimationFrame(this.loop); return; }
+      const dt = Math.min(100, timestamp - this.last);
       this.last = timestamp; this.clock += dt; this.time += dt / 1000;
       this.updatePointer(dt);
       this.updateEnvironment();
       if (this.clock - this.lastGeneration >= GENERATION_MS) this.step();
       // Landscape shifts resample at ~30 Hz; cursor-only changes at ~20 Hz.
-      if (this.fieldDirty && this.frame++ % (this.landscapeDirty ? 2 : 3) === 0) { this.fieldDirty = false; this.computeField(); }
+      if (this.fieldDirty && this.clock - this.fieldAt >= (this.landscapeDirty ? 1000 / 30 - 1 : 50)) {
+        this.fieldAt = this.clock; this.fieldDirty = false; this.computeField();
+      }
       this.easeOptimum(dt);
       this.render();
       this.frameId = requestAnimationFrame(this.loop);
     }
 
+    // One solid line through the best's past positions. Opacity follows each point's age, and a gradient
+    // carries it along every segment, so the trail recedes smoothly from its oldest end.
     drawTrail(points: TrailPoint[], alpha: number) {
-      const ctx = this.ctx, n = points.length;
+      const ctx = this.ctx, n = points.length, now = this.clock;
       if (n < 2 || alpha <= 0) return;
+      const strength = (p: TrailPoint) => Math.max(.45, this.quietness(p.x, p.y)) * alpha * .8 * (1 - smooth((now - p.at) / TRAIL_LIFE_MS)) ** 1.4;
       ctx.lineWidth = 1.4; ctx.lineCap = "round";
-      for (let i = 0; i < n; i++) {
-        const b = points[i], q = Math.max(.45, this.quietness(b.x, b.y)) * alpha * (.25 + .55 * i / (n - 1));
-        if (i > 0) {
-          ctx.strokeStyle = rgba(this.accent, b.jump ? q * .6 : q);
-          ctx.setLineDash(b.jump ? [3, 4] : []);
-          ctx.beginPath(); ctx.moveTo(points[i - 1].x, points[i - 1].y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-        if (i < n - 1) { ctx.fillStyle = rgba(this.accent, q * 1.2); ctx.beginPath(); ctx.arc(b.x, b.y, 1.7, 0, Math.PI * 2); ctx.fill(); }
+      for (let i = 1; i < n; i++) {
+        const a = points[i - 1], b = points[i], grow = easeOut(Math.min(1, (now - b.at) / TRAIL_GROW_MS));
+        const x = a.x + (b.x - a.x) * grow, y = a.y + (b.y - a.y) * grow, qa = strength(a), qb = strength(b);
+        if (qa <= .005 && qb <= .005) continue;
+        const line = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+        line.addColorStop(0, rgba(this.accent, qa)); line.addColorStop(1, rgba(this.accent, qb));
+        ctx.strokeStyle = line; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(x, y); ctx.stroke();
       }
-      ctx.setLineDash([]);
+      for (let i = 0; i < n - 1; i++) {
+        const p = points[i];
+        ctx.fillStyle = rgba(this.accent, strength(p) * 1.2); ctx.beginPath(); ctx.arc(p.x, p.y, 1.7, 0, Math.PI * 2); ctx.fill();
+      }
     }
 
     render() {
       const { ctx, w, h, clock: now } = this;
       if (!w || !this.contours.length) return;
-      const dark = document.documentElement.dataset.theme === "dark";
       ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
-      const c = this.cell, o = this.optimum;
-      ctx.globalAlpha = dark ? .2 : .11; ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(this.shade, -c / 2, -c / 2, this.cols * c, this.rows * c);
-      ctx.globalAlpha = 1;
-
-      // Contours brighten briefly while the environment shifts.
-      strokeContours(ctx, this.contours, this.ink, dark, 1 + this.shiftPulse * .9);
+      const o = this.optimum;
+      ctx.drawImage(this.backdrop, 0, 0, w, h);
 
       // The cursor's peak: a soft halo and a slowly turning dashed ring.
       const cursor = this.pointer;
       if (cursor.strength > .02) {
         const qc = Math.max(.5, this.quietness(cursor.x, cursor.y)) * cursor.strength;
         const halo = ctx.createRadialGradient(cursor.x, cursor.y, 0, cursor.x, cursor.y, 80);
-        halo.addColorStop(0, rgba(this.accent, (dark ? .2 : .14) * qc)); halo.addColorStop(1, rgba(this.accent, 0));
+        halo.addColorStop(0, rgba(this.accent, (document.documentElement.dataset.theme === "dark" ? .2 : .14) * qc)); halo.addColorStop(1, rgba(this.accent, 0));
         ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cursor.x, cursor.y, 80, 0, Math.PI * 2); ctx.fill();
         ctx.setLineDash([3, 5]); ctx.lineDashOffset = -this.time * 10;
         ctx.strokeStyle = rgba(this.accent, .6 * qc); ctx.lineWidth = 1;
@@ -428,7 +501,7 @@ const { generationLabel, quietSelector = "" } = Astro.props;
         ctx.beginPath(); ctx.arc(g.x, g.y, 2.2 * (1 - t * .6), 0, Math.PI * 2); ctx.fill();
       }
 
-      // Best-of-generation trajectory: older steps fade along the line; the last point is the red best.
+      // Best-of-generation trajectory: older steps recede with age; the last point is the red best.
       if (this.fadingTrail.length) {
         const t = (now - this.fadeStart) / TRAIL_FADE_MS;
         if (t >= 1) this.fadingTrail = [];
