@@ -1,15 +1,15 @@
 {
   "scope": "Local production build; no deployment or search-engine indexing verification",
   "counts": {
-    "articles": 40,
+    "articles": 42,
     "byCollection": {
-      "news": 26,
+      "news": 28,
       "releases": 14
     },
     "locales": 13,
-    "pages": 520,
+    "pages": 546,
     "updatedPages": 364,
-    "articleImages": 520,
+    "articleImages": 546,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -1214,6 +1214,105 @@
       ]
     },
     {
+      "article": "news/genesis-assistant-interactive-sessions",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 59,
+          "descriptionCharacters": 153
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 27,
+          "descriptionCharacters": 55
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 28,
+          "descriptionCharacters": 53
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 32,
+          "descriptionCharacters": 74
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 34,
+          "descriptionCharacters": 74
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 57,
+          "descriptionCharacters": 171
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 53,
+          "descriptionCharacters": 150
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 57,
+          "descriptionCharacters": 164
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 53,
+          "descriptionCharacters": 164
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 53,
+          "descriptionCharacters": 164
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 49,
+          "descriptionCharacters": 132
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 49,
+          "descriptionCharacters": 144
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/genesis-assistant-interactive-sessions",
+          "titleCharacters": 49,
+          "descriptionCharacters": 144
+        }
+      ]
+    },
+    {
       "article": "news/genesis-compiler-continuation",
       "locales": [
         "en",
@@ -1705,6 +1804,105 @@
           "route": "/pt-br/news/genesis-evoxc",
           "titleCharacters": 88,
           "descriptionCharacters": 196
+        }
+      ]
+    },
+    {
+      "article": "news/genesis-local-mcp",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/genesis-local-mcp",
+          "titleCharacters": 47,
+          "descriptionCharacters": 128
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/genesis-local-mcp",
+          "titleCharacters": 27,
+          "descriptionCharacters": 50
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/genesis-local-mcp",
+          "titleCharacters": 26,
+          "descriptionCharacters": 48
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/genesis-local-mcp",
+          "titleCharacters": 27,
+          "descriptionCharacters": 82
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/genesis-local-mcp",
+          "titleCharacters": 30,
+          "descriptionCharacters": 75
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/genesis-local-mcp",
+          "titleCharacters": 49,
+          "descriptionCharacters": 174
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/genesis-local-mcp",
+          "titleCharacters": 56,
+          "descriptionCharacters": 138
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/genesis-local-mcp",
+          "titleCharacters": 54,
+          "descriptionCharacters": 150
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/genesis-local-mcp",
+          "titleCharacters": 57,
+          "descriptionCharacters": 160
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/genesis-local-mcp",
+          "titleCharacters": 57,
+          "descriptionCharacters": 160
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/genesis-local-mcp",
+          "titleCharacters": 53,
+          "descriptionCharacters": 138
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/genesis-local-mcp",
+          "titleCharacters": 58,
+          "descriptionCharacters": 165
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/genesis-local-mcp",
+          "titleCharacters": 58,
+          "descriptionCharacters": 165
         }
       ]
     },

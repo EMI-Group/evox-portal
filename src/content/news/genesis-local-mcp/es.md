@@ -1,0 +1,37 @@
+---
+title: "Genesis: delegar trabajo local de desarrollo mediante MCP"
+pubDate: 2026-11-12
+summary: "La rama main de Genesis incorpora un punto de acceso MCP local para iniciar tareas, seguirlas por ID y recuperar sus resultados desde un agente de programación."
+---
+
+Un agente de programación puede tener ya el objetivo y la ruta del proyecto. Si otro motor asume el trabajo, el agente necesita iniciarlo, seguirlo y recoger el resultado desde la misma conversación. El 11 de noviembre de 2026, Genesis incorporó a `main` un punto de acceso local al Model Context Protocol (MCP). Los agentes compatibles pueden utilizar las API de tareas existentes a través de una sola conexión. [Cambio integrado][pr]
+
+![Dos terminales de un mismo banco intercambian una ficha de tarea y su resultado](./genesis-local-mcp.webp)
+
+*Ilustración editorial del traspaso local de trabajo entre un agente de programación y Genesis.*
+
+## Conectarse al proceso de Genesis que ejecuta el trabajo
+
+El punto de acceso Streamable HTTP `/mcp` está montado en el servidor Genesis en ejecución. El servidor autentica la petición, valida los argumentos y llama a la API de tareas o del planificador. El trabajo continúa en el servidor después de que termine la petición HTTP. La conexión no mantiene estado, así que el ID de la tarea sirve para localizarla más adelante.
+
+Genesis acepta conexiones de bucle local y valida Host y Origin. Las peticiones usan un token bearer del archivo `mcp-token` de la instancia en ejecución. El anfitrión del agente debe admitir Streamable HTTP y conservar la cabecera de autorización. Genesis y el directorio del proyecto con permiso de escritura deben estar en el mismo ordenador. La [guía de conexión][guide] explica cómo configurar una compilación desde el código fuente con este cambio. Consulte [Genesis 0.14.1][related] para configurar el servidor de la versión publicada.
+
+## Incluir el contexto necesario en el objetivo
+
+Suponga que un agente ha localizado un defecto en un analizador y que debe delegar una prueba de regresión. Puede comprobar la configuración local con `genesis_check` y usar `genesis_start_task` con la ruta absoluta de la copia de trabajo principal y un objetivo que describa la entrada problemática, el comportamiento esperado y la prueba. Genesis usa su propio modelo configurado. El objetivo debe incluir el contexto pertinente de la conversación del agente.
+
+Las nueve herramientas cubren la disponibilidad, la recarga de configuración, la consulta de modelos, el envío, listado, estado y resultados de tareas, los mensajes y la cancelación. Un repositorio Git existente necesita un commit inicial. Este acceso exige una copia principal con directorio `.git` y rechaza los árboles de trabajo vinculados y las raíces de submódulos. [Requisitos de tareas y repositorios][guide]
+
+## Volver a consultar la tarea por ID
+
+Guarde el ID devuelto al enviar la tarea. Tras reconectarse, consulte `genesis_get_task` con ese ID o enumere las tareas recientes del proyecto antes de reenviar la petición. El estado muestra información acotada del planificador y del estado guardado. En las consultas periódicas, puede omitir el resultado completo y usar el token de cambio para esperar durante un tiempo limitado.
+
+La respuesta a un mensaje confirma su entrada en la cola. La respuesta a una cancelación describe la petición aceptada y el estado guardado. Para confirmar el resultado, lea el estado final, recupérelo con `genesis_get_result` y revise los commits y las pruebas que se hayan notificado. [Seguimiento y control de tareas][guide]
+
+## Comprobar la conexión antes de delegar
+
+Compile la revisión pertinente y configure el proveedor en la instancia Genesis que realizará el trabajo. Siga la guía para crear un token privado y registrar la dirección real de bucle local en el cliente. Abra una sesión nueva y llame a `genesis_check` para comprobar por separado la conexión MCP y la disponibilidad del modelo antes de enviar una tarea. [Configuración y comprobación de la conexión][guide]
+
+[pr]: https://github.com/EMI-Group/genesis/pull/171
+[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/agent-mcp.md
+[related]: /es/releases/genesis-0-14-1

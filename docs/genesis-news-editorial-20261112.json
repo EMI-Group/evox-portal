@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-12",
+  "type": "Genesis main development news",
+  "productionBase": "10f3f6d38f30c2f3f0773157b384804d3f5485b6",
+  "locales": [
+    "en",
+    "zh-cn",
+    "zh-tw",
+    "ja",
+    "ko",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "es-419",
+    "ru",
+    "pt",
+    "pt-br"
+  ],
+  "articles": [
+    {
+      "slug": "genesis-local-mcp",
+      "sourceKey": "genesis:pr:171",
+      "englishBodyWords": 514,
+      "upstreamDate": "2026-11-11",
+      "evidence": [
+        "https://github.com/EMI-Group/genesis/pull/171",
+        "https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/agent-mcp.md"
+      ],
+      "coverage": [
+        "Local Streamable HTTP and authentication",
+        "Repository, runtime and client prerequisites",
+        "Parser regression scenario",
+        "Task identity and observable outcomes",
+        "Connection verification"
+      ],
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "cover": {
+        "path": "src/content/news/genesis-local-mcp/genesis-local-mcp.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 281414,
+        "generator": "built-in ImageGen",
+        "original": "exec-e6d13b33-b118-44ca-a7d1-d2240392699d.png",
+        "styleReference": "code-migration.png",
+        "contentPrompt": "Editorial cover for Genesis exposing local MCP task control. Isometric close view of two small distinct terminal units fixed onto a single shared workshop bench, joined by a short cable with one small crimson keyed connector. A narrow physical job ticket is in a slot at the first terminal, and a matching ticket with the same red notch emerges at the second, suggesting persistent task identity and returned result. Use blank screens with only a few abstract lines. Coherent physical scene, wide, crop safe. No arrows, no depiction of network access beyond the bench.",
+        "stylePrompt": "Use the attached illustration only for drawing style. Achromatic white and grey, confident black ink outlines, restrained charcoal stipple shading on the objects, clean background. Crimson #c8383c only for one or two small relevant details, total 2–5 percent. Strong tangible silhouettes, generous margins, 16:9 landscape, about 1672×941 or larger. No text, branding, letters, numbers, clouds, network icons, or screenshot look."
+      },
+      "verificationScope": "Pinned upstream source and documentation reviewed. Product scenarios are illustrative. Website verified separately."
+    },
+    {
+      "slug": "genesis-assistant-interactive-sessions",
+      "sourceKey": "genesis:commit:124abbf7eaaa21c5ca6fe803128a962e7384d1b5",
+      "englishBodyWords": 509,
+      "upstreamDate": "2026-11-10 to 2026-11-12",
+      "evidence": [
+        "https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md",
+        "https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736",
+        "https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5",
+        "https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b"
+      ],
+      "coverage": [
+        "Session identity and slot release",
+        "Sidebar and route compatibility",
+        "Failed test review scenario",
+        "Exact-code and target-node approval",
+        "Task status and retry behavior"
+      ],
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "cover": {
+        "path": "src/content/news/genesis-assistant-interactive-sessions/genesis-assistant-interactive-sessions.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 255238,
+        "generator": "built-in ImageGen",
+        "original": "exec-af007cac-efd5-41e0-84cf-8bf5376da7f6.png",
+        "styleReference": "release-correctness.png",
+        "contentPrompt": "Editorial cover for returning to a paused Genesis Assistant session and reviewing its pending action. Overhead view of a developer's forearm and hand on a plain desk, reopening one marked page of an open conversation notebook. The open page shows a few clearly abstract paired conversation marks. A separate slim translucent review slip sits neatly over the lower part of the page, the hand holding its corner for inspection; a single crimson tab marks the same thread. Neighboring closed page tabs are neutral. Real tactile arrangement, no terminals, no fabricated interface or readable code. Wide crop-safe composition.",
+        "stylePrompt": "Use the attached illustration only for drawing style. Achromatic white and grey, confident black ink outlines, restrained charcoal stipple shading on the objects, clean background. Crimson #c8383c only for one or two small relevant details, total 2–5 percent. Strong tangible silhouettes, generous margins, 16:9 landscape, about 1672×941 or larger. No text, branding, letters, numbers, clouds, network icons, or screenshot look."
+      },
+      "verificationScope": "Pinned upstream source and documentation reviewed. Product scenarios are illustrative. Website verified separately."
+    }
+  ]
+}
