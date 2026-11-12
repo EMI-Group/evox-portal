@@ -199,7 +199,7 @@
   "libs.desc.evococo": "A multi-agent framework for semantics-guided automatic tensorization of evolutionary multiobjective optimization (EMO) software.",
   "news.pageTitle": "News{page} | EvoX",
   "news.pageTitlePage": " - Page {page}",
-  "news.heroTitle": "Latest News",
+  "news.heroTitle": "Latest Updates",
   "news.heroDesc": "Deep dives into evolutionary computation, project updates, and community news.",
   "news.readMore": "Read More",
   "news.prev": "Previous",

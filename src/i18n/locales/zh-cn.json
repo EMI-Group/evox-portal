@@ -199,7 +199,7 @@
   "libs.desc.evococo": "一个多智能体框架，用于对演化多目标优化 (EMO) 软件进行语义引导的自动张量化。",
   "news.pageTitle": "新闻{page} | EvoX",
   "news.pageTitlePage": " - 第 {page} 页",
-  "news.heroTitle": "最新新闻",
+  "news.heroTitle": "最新动态",
   "news.heroDesc": "深入探讨演化计算、项目更新和社区新闻。",
   "news.readMore": "阅读更多",
   "news.prev": "上一页",
