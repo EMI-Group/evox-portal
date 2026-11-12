@@ -1,0 +1,255 @@
+{
+  "preparedAt": "2026-11-12",
+  "productionBase": "9c9b93be58da7e3febc0922f0b46a58a6e51a6c8",
+  "scope": "Six approved historical additions; EvoCoCo existing coverage retained.",
+  "locales": [
+    "en",
+    "zh-cn",
+    "zh-tw",
+    "ja",
+    "ko",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "es-419",
+    "ru",
+    "pt",
+    "pt-br"
+  ],
+  "articles": [
+    {
+      "slug": "evomo-constraint-aware-search",
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "englishBodyWords": 478,
+      "pubDate": "2026-10-30",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evomo/pull/48",
+        "s2": "https://github.com/EMI-Group/evomo/tree/2aa4b3d059090ac9561b18b439002265e4015ca4",
+        "related": "/releases/evomo-0-3-1"
+      },
+      "coverage": [
+        "Feasibility must survive the whole workflow",
+        "An odd population should remain a valid population",
+        "Faster selection with explicit execution limits",
+        "Check the search before scaling it"
+      ],
+      "cover": {
+        "slug": "evomo-constraint-aware-search",
+        "collection": "news",
+        "date": "2026-10-30",
+        "concept": "A cutaway topographic terrain model with several winding candidate paths approaching a raised boundary fence. A small crimson gate allows a feasible path through while other gray paths stop at the constraint; a careful mechanical selector retains diverse paths on the accessible side. One coherent landscape scene viewed obliquely. Metaphor for retaining feasibility information through multiobjective selection, not a real measured Pareto chart.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-294abc65-1097-4f93-8058-bc9ad8ffd3b0.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/news/evomo-constraint-aware-search"
+    },
+    {
+      "slug": "evoxc-0-1-1",
+      "collection": "releases",
+      "story_type": "release",
+      "depth": "regular",
+      "englishBodyWords": 481,
+      "pubDate": "2026-10-30",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evoxc/releases/tag/v0.1.1",
+        "s2": "https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1",
+        "s3": "https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md",
+        "related": "/releases/evoxc-0-1-0"
+      },
+      "coverage": [
+        "Grouping programs needs a cost model",
+        "Remove repeated work from graph preparation",
+        "Backend failures become easier to diagnose",
+        "Upgrade around one representative population"
+      ],
+      "cover": {
+        "slug": "evoxc-0-1-1",
+        "collection": "releases",
+        "date": "2026-10-30",
+        "concept": "Close view of an editorial drafting desk with a fan of different branching program structures being grouped into three compact parallel bands, all leading to a single neatly bound graph sheet. A small crimson alignment clasp emphasizes the grouping point. Metaphor for batching different program structures and reducing preparation overhead. No code, arrows, charts or benchmark numbers.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-4fc3452f-2853-4954-ae70-bef9a7cc8b21.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/releases/evoxc-0-1-1"
+    },
+    {
+      "slug": "evorl-jax-training-consistency",
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "englishBodyWords": 469,
+      "pubDate": "2026-11-08",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evorl/blob/v0.2.0/README.md",
+        "s2": "https://github.com/EMI-Group/evorl/commit/5c889cad465ca88e3ec0d9112b0ec55835eb68fc",
+        "s3": "https://github.com/EMI-Group/evorl/commit/a1ca25e9b232fdb6a6160c12cfc8bd702477096b",
+        "s4": "https://github.com/EMI-Group/evorl/commit/992a554eb164a87ef9249592711cebd319ad9ebc",
+        "related": "/news/evorl"
+      },
+      "coverage": [
+        "A gradient path sensitive to JAX versions",
+        "Keep environment and device assumptions explicit",
+        "A population is not one policy",
+        "Reproduce a small run before resuming a study"
+      ],
+      "cover": {
+        "slug": "evorl-jax-training-consistency",
+        "collection": "news",
+        "date": "2026-11-08",
+        "concept": "A small simulated robotic walker on a grid test platform, with three precisely aligned calibration frames surrounding its path. A single crimson plumb line aligns the frames and ground grid. Conceptual metaphor for training gradients, device layout and metrics remaining consistent; no screenshot, UI or performance graph. Low three-quarter view, strong legible silhouette.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-35081040-a980-4d3e-8421-fea076c66f74.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/news/evorl-jax-training-consistency"
+    },
+    {
+      "slug": "evogp-rocm-population-execution",
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "englishBodyWords": 479,
+      "pubDate": "2026-10-16",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evogp/pull/14",
+        "s2": "https://github.com/EMI-Group/evogp/pull/12",
+        "s3": "https://github.com/EMI-Group/evogp/blob/85c9f96490185b371438768668da53de930cc3f6/README.md",
+        "related": "/news/evogp"
+      },
+      "coverage": [
+        "Keep population statistics in tensor operations",
+        "One source base for CUDA and ROCm",
+        "Follow the backend's build environment",
+        "Validate a small search, then increase the population"
+      ],
+      "cover": {
+        "slug": "evogp-rocm-population-execution",
+        "collection": "news",
+        "date": "2026-10-16",
+        "concept": "Two distinctly shaped unbranded accelerator boards side by side in an open lab fixture, each supporting the same branching program-tree structure above it. One thin crimson connection ties matching branch tips across the boards. Metaphor for a shared genetic-programming representation running across GPU backends, not a literal hardware layout or performance comparison. Overhead diagonal composition.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-1d9ff106-fa4c-4522-b03b-d0fca474c15c.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/news/evogp-rocm-population-execution"
+    },
+    {
+      "slug": "tensorneat-gradient-memory",
+      "collection": "news",
+      "story_type": "development",
+      "depth": "regular",
+      "englishBodyWords": 485,
+      "pubDate": "2026-04-04",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/tensorneat/pull/37",
+        "s2": "https://github.com/EMI-Group/tensorneat/commit/ce27fa9f794928c9416d9f12c398f58481c821ce",
+        "s3": "https://github.com/EMI-Group/tensorneat/blob/ce27fa9f794928c9416d9f12c398f58481c821ce/examples/func_fit/xor_grad.py",
+        "s4": "https://github.com/EMI-Group/tensorneat/tree/ce27fa9f794928c9416d9f12c398f58481c821ce"
+      },
+      "coverage": [
+        "Different structures can share a gradient operation",
+        "Batch the working set, not the search space",
+        "Lookups no longer need broad comparison intermediates",
+        "Choose a batch size with a reproducible experiment"
+      ],
+      "cover": {
+        "slug": "tensorneat-gradient-memory",
+        "collection": "news",
+        "date": "2026-04-04",
+        "concept": "Many small neural network structures with visibly different branching topologies waiting in a shallow tray; a narrow open processing aperture admits a small group while the remaining population remains intact behind. One selected network has crimson adjustable connection joints. Metaphor for topology-diverse gradient refinement and processing a population in memory-bounded batches, not a literal machine. Wide side perspective, no text.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-fab03742-5926-469e-9f92-f86c1b80a38b.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/news/tensorneat-gradient-memory"
+    },
+    {
+      "slug": "evomo-0-3-1",
+      "collection": "releases",
+      "story_type": "release",
+      "depth": "regular",
+      "englishBodyWords": 476,
+      "pubDate": "2026-10-08",
+      "datePolicy": "Historical upstream event date in Asia/Shanghai, explicitly requested by user; actual deployment time recorded separately.",
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evomo/releases/tag/v0.3.1",
+        "s2": "https://github.com/EMI-Group/evomo/releases/tag/v0.3.0",
+        "s3": "https://github.com/EMI-Group/evomo/pull/38",
+        "s4": "https://github.com/EMI-Group/evomo/pull/34",
+        "s5": "https://github.com/EMI-Group/evomo/pull/39",
+        "s6": "https://github.com/EMI-Group/evomo/blob/v0.3.1/README.md",
+        "related": "/news/gpu-accelerated-emo"
+      },
+      "coverage": [
+        "More algorithms on a common tensor foundation",
+        "Correctness changes affect the comparison itself",
+        "Constraints and simulation need their own checks",
+        "Upgrade with a small reference experiment"
+      ],
+      "cover": {
+        "slug": "evomo-0-3-1",
+        "collection": "releases",
+        "date": "2026-10-08",
+        "concept": "A scientific specimen cabinet opened to show varied delicate geometric branching instruments, with one instrument placed over a small sculpted terrain of competing peaks in the foreground. A few crimson tips mark different useful trade-off points. Metaphor for a broader multiobjective algorithm toolkit and validated selection, not a real device or numeric result. Frontal elevated viewpoint, visually unlike a circuit-board image.",
+        "originalImage": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-e91d9e62-be83-4396-af20-32c1d222b259.png",
+        "image": "cover.webp",
+        "imageDimensions": [
+          1672,
+          941
+        ],
+        "generator": "built-in image_gen",
+        "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
+      },
+      "url": "https://www.evox.group/zh-cn/releases/evomo-0-3-1"
+    }
+  ],
+  "validation": {
+    "build": "passed",
+    "seoAudit": {
+      "pages": 624,
+      "errors": 0
+    },
+    "browser": {
+      "localizedArticles": 78,
+      "collectionLists": 26,
+      "responsiveScreenshots": 36,
+      "result": "passed"
+    },
+    "languageConsistency": "13 locales; source references, inline code, paragraphs and sections aligned; regional variants reviewed"
+  }
+}

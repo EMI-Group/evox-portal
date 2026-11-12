@@ -1,0 +1,41 @@
+---
+title: "EvoRL: mantener alineados gradientes, dispositivos y métricas"
+pubDate: 2026-11-08
+summary: "Los cambios del 8 de noviembre abordan diferenciación JAX y Playground, tras las correcciones de ubicación y métricas poblacionales."
+---
+
+Un entrenamiento puede fallar antes de aprender o terminar con registros que oculten lo medido. Los cambios main de EvoRL del 8 de noviembre de 2026 abordan JAX y compatibilidad ambiental, continuando las correcciones de octubre en dispositivos y métricas. La [etiqueta fuente v0.2.0][s1] conserva este estado de desarrollo para inspeccionarlo de forma reproducible.
+
+![Un robot simulado alineado con marcos de calibración y una cuadrícula](./cover.webp)
+
+*Ilustración conceptual: el entrenamiento coherente depende de varios contratos de ejecución alineados.*
+
+## Una ruta de gradiente sensible a la versión
+
+El [cambio de compatibilidad][s2] amplía la solución local a JAX 0.12.0.1. En JAX 0.12.0 y 0.12.0.1, las derivadas de `erf` y `erfc` dentro de `shard_map` pueden fallar las comprobaciones VMA. La ruta Tanh Normal afectada utiliza otro cálculo del logaritmo de la CDF normal, con expansión de colas.
+
+En control continuo, la distribución de la política debe ofrecer probabilidades diferenciables para actualizar parámetros. La inicialización puede funcionar y el gradiente posterior fallar. El ajuste se limita a esas versiones; las demás mantienen la ruta original. El README de la etiqueta recomienda JAX 0.11.0 con CUDA 13 como combinación probada para ese estado.
+
+## Explicitar las suposiciones del entorno y del dispositivo
+
+El mismo commit limita la dependencia a `playground>=0.2.0,<1`, preservando la interfaz JAX/MJX del adaptador. Una actualización que la cambie modifica la base incluso con idéntica configuración de entrenamiento.
+
+El trabajo de octubre reconstruye valores predeterminados de arrays capturados mediante copia explícita, para que JAX eager respete la malla activa. ARS utiliza el evaluador ordinario cuando la normalización de observaciones está desactivada y evita estadísticas inexistentes en ese modo. Ubicación y normalización pasan a ser contratos comprobables. [Corrección de dispositivos y ARS][s3]
+
+## Una población no es una política
+
+La [corrección del 28 de octubre][s4] diferencia colecciones y resultados individuales. `pop_episode_returns` y `pop_episode_lengths` conservan el eje poblacional; los resultados de política individual y central utilizan el singular cuando corresponde. El aprendiz único de ERL-EDA recibe métricas escalares y las colecciones mantienen arrays.
+
+Volver a promediar un campo agregado o tratar un vector como escalar puede producir una gráfica convincente pero engañosa al comparar con una política única. Antes de reutilizar análisis, revisa nombres y formas en el límite del registro. La migración debe conservar las reducciones previstas sobre población, episodios y aprendices.
+
+## Reproducir un caso pequeño antes de continuar
+
+El código etiquetado requiere Python 3.12 o posterior y JAX/jaxlib 0.10.0 o posterior. La distribución es `evorl-jax`, aunque la importación sigue siendo `evorl`. Para scripts y configuraciones, utiliza la etiqueta y sus instrucciones. El ejemplo básico es `python scripts/train.py agent=ppo env=brax/ant`.
+
+Comprueba gradientes, ubicación y formas en una ejecución pequeña antes de comparar curvas. Aim está incluido por defecto; los registradores opcionales necesitan sus SDK. Guarda entorno, semilla y presupuesto. La [introducción a EvoRL][related] explica aprendizaje y evolución; estos cambios permiten verificar las suposiciones de cada experimento.
+
+[s1]: https://github.com/EMI-Group/evorl/blob/v0.2.0/README.md
+[s2]: https://github.com/EMI-Group/evorl/commit/5c889cad465ca88e3ec0d9112b0ec55835eb68fc
+[s3]: https://github.com/EMI-Group/evorl/commit/a1ca25e9b232fdb6a6160c12cfc8bd702477096b
+[s4]: https://github.com/EMI-Group/evorl/commit/992a554eb164a87ef9249592711cebd319ad9ebc
+[related]: /es/news/evorl
