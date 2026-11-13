@@ -1,0 +1,71 @@
+{
+  "slug": "evorl-local-jsonl-recording",
+  "collection": "news",
+  "story_type": "development",
+  "depth": "regular",
+  "pubDate": "2026-11-13",
+  "upstreamDatesAsiaShanghai": [
+    "2026-11-12",
+    "2026-11-13"
+  ],
+  "englishBodyWords": 607,
+  "sourceKeys": [
+    "evorl:commit:286abeb55c8f0fb6f70d0f1d9b315564111dfb49",
+    "evorl:commit:d47e80db01a7eb14889f5c16c518f303c1745097"
+  ],
+  "sources": {
+    "change": "https://github.com/EMI-Group/evorl/commit/286abeb55c8f0fb6f70d0f1d9b315564111dfb49",
+    "fix": "https://github.com/EMI-Group/evorl/commit/d47e80db01a7eb14889f5c16c518f303c1745097",
+    "guide": "https://github.com/EMI-Group/evorl/blob/d47e80db01a7eb14889f5c16c518f303c1745097/docs/guide/quickstart.md#local-jsonl-records",
+    "related": "/news/evorl-jax-training-consistency"
+  },
+  "editorialReview": {
+    "problem": "Separate write order from training-step identity without requiring a tracking SDK.",
+    "coverage": {
+      "section1": "Configuration, metadata header, integer steps, raw order and flush.",
+      "section2": "Recursive merge, latest field wins, whole-array/null replacement, metadata omission and concrete step 10/8 example.",
+      "section3": "NumPy/JAX/pandas conversion, DataFrame index loss, nonfinite null conversion, malformed-line errors, full-dataset memory and nested step metric.",
+      "section4": "Final filename rule supersedes initial percent encoding, shared utility, preserved metadata, distinct suffixes, collision and overwrite implications, actionable small-run checks."
+    },
+    "omissions": "Unrelated public recorder utility exports omitted; not central to the local record story. No unexecuted tests presented as local verification.",
+    "passed": true
+  },
+  "locales": [
+    "de",
+    "en",
+    "es-419",
+    "es",
+    "fr",
+    "it",
+    "ja",
+    "ko",
+    "pt-br",
+    "pt",
+    "ru",
+    "zh-cn",
+    "zh-tw"
+  ],
+  "image": {
+    "file": "jsonl-recording-cover.webp",
+    "original": "C:/Users/Admin/.codex/generated_images/01a1a583-a6bd-7100-955d-f3276c92b716/exec-dfce3888-8785-4524-8f77-15084c5930c1.png",
+    "generator": "built-in image_gen",
+    "content_prompt": "Oblique archival desk: raw observation sheets retained in a ledger beside grouped indexed records. Matching crimson clips connect observations conceptually. No text or invented results. Metaphor for raw write preservation and read-time grouping.",
+    "style_prompt": "Neutral white and gray, charcoal ink contours, local engraving texture, small crimson highlights; clean background, 16:9 crop-safe composition.",
+    "style_reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/code-migration.png",
+    "bytes": 321782
+  },
+  "url": "https://www.evox.group/zh-cn/news/evorl-local-jsonl-recording",
+  "validation": {
+    "build": "passed",
+    "seo": {
+      "pages": 637,
+      "errors": 0
+    },
+    "browser": {
+      "localizedArticles": 13,
+      "lists": 13,
+      "desktopMobileLightDark": "passed"
+    },
+    "languageConsistency": "Full paragraph and section alignment; identical technical tokens and source links; regional Chinese and Portuguese variants reviewed."
+  }
+}

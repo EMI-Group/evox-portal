@@ -1,0 +1,40 @@
+---
+title: "EvoRL: conservar cada escritura y leer un registro por paso de entrenamiento"
+pubDate: 2026-11-13
+summary: "El registro JSONL local conserva metadatos y escrituras de métricas, y combina pasos repetidos al leer sin un SDK de seguimiento."
+---
+
+Una iteración de entrenamiento puede producir varias observaciones: una pérdida, un retorno de evaluación y después una métrica corregida. Tratar cada escritura como una iteración nueva desajusta el experimento; descartar pasos repetidos pierde información. EvoRL, el framework de aprendizaje por refuerzo y aprendizaje evolutivo, añadió el [registro JSONL local][change] a `main` el 12 de noviembre de 2026. Un [ajuste de nombres de archivo][fix] llegó el 13 de noviembre, hora de Pekín. Juntos ofrecen el historial original de escrituras y una vista independiente alineada por paso para el análisis.
+
+![Hojas originales del experimento junto a un archivo agrupado por pasos de observación](./jsonl-recording-cover.webp)
+
+*Ilustración conceptual: conservar cada observación y organizar su vista combinada por paso de entrenamiento.*
+
+## Un archivo local con el contexto del experimento
+
+Al seleccionar `recorders=[log,jsonl]`, se guardan métricas legibles por máquina junto a los logs habituales sin añadir un SDK de seguimiento. La [guía de inicio versionada][guide] documenta la configuración compartida por los scripts de entrenamiento. El backend JSONL recibe proyecto, nombre de ejecución, configuración resuelta, etiquetas, ruta de salida y grupo opcional.
+
+La inicialización escribe ese contexto en una cabecera de metadatos. Cada escritura posterior añade un objeto JSON con el entero `step` indicado y los `data` anidados, y vacía el búfer del archivo. El archivo original conserva el orden de llegada, incluidos pasos desordenados y escrituras repetidas. Al trasladar el directorio de salida a un ordenador de análisis independiente, configuración y observaciones viajan juntas en un archivo local legible.
+
+## Combinar al leer, no al registrar
+
+`load_jsonl_records(path)`, exportado desde `evorl.recorders`, lee el conjunto de datos completo y devuelve una lista ordenada por paso. Combina recursivamente los diccionarios del mismo paso: las escrituras posteriores sustituyen los valores en conflicto y mantienen las métricas no mencionadas. Los arrays se sustituyen enteros, y un `null` posterior también reemplaza el valor anterior. La cabecera opcional de la primera línea se omite en la lista de métricas.
+
+Supongamos que la pérdida de entrenamiento y el retorno de evaluación se escriben por separado en el paso 10, y luego se corrige la pérdida. El archivo original conserva las tres escrituras. El registro cargado contiene la última pérdida y el retorno de evaluación. Un registro del paso 8 recibido después se ordena antes del 10. Al dibujar curvas de aprendizaje, la identidad de la iteración procede de `step`, no de la posición de la línea ni del número de llamadas al registro.
+
+## Qué conserva la serialización
+
+La [implementación y las pruebas de regresión][change] cubren valores NumPy, JAX y pandas. Los arrays y Series se convierten en listas. Los DataFrames conservan columnas y datos de las filas, pero omiten el índice. NaN, infinito y valores ausentes de pandas pasan a JSON `null`. Si el índice identifica muestras, conviértalo en una columna explícita antes de registrar: es una consecuencia directa de la representación guardada.
+
+Las líneas mal formadas o incompletas generan un error con el archivo y el número de línea. El lector no descarta silenciosamente un último registro truncado. Carga el conjunto completo en memoria, por lo que conviene planificar la memoria de análisis según el tamaño acumulado del archivo. Una métrica de aplicación llamada `step` permanece dentro de `data`, separada del campo externo de iteración.
+
+## Un destino distinto para cada ejecución
+
+El ajuste comparte `sanitize_filename` entre JSONL y los logs creados por los scripts. Sustituye `/` por `_`: `MetaWorld/Hammer-v3` pasa a ser `MetaWorld_Hammer-v3`. Los demás caracteres no cambian y los metadatos mantienen el nombre original. Los archivos usan extensiones separadas `.jsonl` y `.log`. Esta regla sustituye la codificación porcentual del primer commit; normalizar el nombre no garantiza que sea único.
+
+Reinicializar la misma ruta JSONL sobrescribe su contenido. Use un directorio o nombre distinto por ejecución, sobre todo cuando los nombres solo difieran en barra y guion bajo. Empiece con la configuración anterior en una copia del código que incluya ambos commits; cargue un experimento pequeño y revise cabecera, combinación de pasos repetidos y destino antes de una ejecución larga. El [anterior artículo de desarrollo de EvoRL][related] explica gradientes, dispositivos y formas de las métricas; esta actualización facilita conservar y revisar esas observaciones localmente.
+
+[change]: https://github.com/EMI-Group/evorl/commit/286abeb55c8f0fb6f70d0f1d9b315564111dfb49
+[fix]: https://github.com/EMI-Group/evorl/commit/d47e80db01a7eb14889f5c16c518f303c1745097
+[guide]: https://github.com/EMI-Group/evorl/blob/d47e80db01a7eb14889f5c16c518f303c1745097/docs/guide/quickstart.md#local-jsonl-records
+[related]: /es/news/evorl-jax-training-consistency
