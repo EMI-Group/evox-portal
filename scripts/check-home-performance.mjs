@@ -55,7 +55,9 @@ try {
     const sample = { name, seconds: (Date.now() - start) / 1000, taskMs: (after.TaskDuration - before.TaskDuration) * 1000, scriptMs: (after.ScriptDuration - before.ScriptDuration) * 1000, layouts: after.LayoutCount - before.LayoutCount, styleRecalculations: after.RecalcStyleCount - before.RecalcStyleCount, draws: await page.evaluate(() => window.drawCounts) };
     report.samples.push(sample);
     if (label !== "before") {
-      for (const count of Object.values(sample.draws)) assert.ok(count < 140, "Decorative canvases must draw at about 30 FPS or less");
+      for (const [canvas, count] of Object.entries(sample.draws)) {
+        assert.ok(count < (canvas === "hero" ? 270 : 140), "Hero draws at up to 60 FPS; other decorative canvases at about 30 FPS");
+      }
     }
     if (name === "footer") assert.deepEqual(sample.draws, {}, "Offscreen canvases must stop drawing");
     console.log(JSON.stringify(sample));
