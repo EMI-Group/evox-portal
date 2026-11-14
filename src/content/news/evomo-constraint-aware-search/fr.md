@@ -1,6 +1,7 @@
 ---
 title: "EvoMO : conserver la faisabilité de chaque candidat"
 pubDate: 2026-10-30
+updatedDate: 2026-11-14
 summary: "La sélection sous contraintes, la cohérence des populations impaires et le chemin OSP-NSDE amélioré facilitent le contrôle des expériences multiobjectifs."
 ---
 
@@ -27,6 +28,8 @@ Les méthodes parcimonieuses et dynamiques reçoivent aussi des corrections de l
 OSP-NSDE trie une fois les distances voisines et les actualise après les suppressions. Des noyaux Triton optionnels déplacent la troncature du front limite sur CUDA. Le chemin automatique couvre les appareils compatibles, float32/float64 et les populations demandées jusqu'à 128 ; les autres configurations utilisent PyTorch. Le classement non dominé reste sous PyTorch.
 
 Pour compiler, initialisez d'abord puis utilisez `torch.compile(workflow.step, fullgraph=False)`. Prédiction, recherche locale et mélanges conservent des parties eager. Les mesures locales sur RTX 5060 Ti rapportées dans la PR utilisent synchronisation et budgets fixes ; les résultats complets montrent aussi que la compilation ne dépasse pas toujours l'exécution eager optimisée. Mesurez l'ensemble du travail pour choisir.
+
+La compilation peut aussi modifier la génération aléatoire et les opérations flottantes : une même graine ne garantit donc pas la même trajectoire. Dans la comparaison CUDA ZDT3 sur cinq graines du PR, l’IGD moyen du chemin compilé était moins bon qu’en exécution eager. Comparez qualité des solutions et durée avec le même budget d’évaluations avant de choisir le mode. [Comparaison de qualité][s1]
 
 ## Vérifier la recherche avant de l'agrandir
 

@@ -1,6 +1,7 @@
 ---
 title: "EvoMO: mantenere la fattibilità insieme a ogni candidato"
 pubDate: 2026-10-30
+updatedDate: 2026-11-14
 summary: "Selezione con vincoli, popolazioni dispari coerenti e un percorso OSP-NSDE più efficiente rendono gli esperimenti multiobiettivo più controllabili."
 ---
 
@@ -27,6 +28,8 @@ Gli algoritmi sparsi e dinamici ricevono inoltre correzioni rispetto ai flussi d
 OSP-NSDE ordina una volta le distanze fra vicini e le aggiorna dopo le eliminazioni. Kernel Triton opzionali trasferiscono su CUDA il troncamento supportato del fronte limite. Il percorso automatico copre dispositivi compatibili, float32/float64 e popolazioni richieste fino a 128; le altre configurazioni usano PyTorch. L'ordinamento non dominato resta in PyTorch.
 
 Per compilare, occorre inizializzare e poi usare `torch.compile(workflow.step, fullgraph=False)`. Previsione, ricerca locale e modelli a miscela conservano parti eager. Le misure locali su RTX 5060 Ti della PR usano sincronizzazione e budget fissi; i risultati complessivi mostrano che la compilazione non supera sempre l'eager ottimizzato. La scelta va fatta misurando l'intero carico.
+
+La compilazione può anche cambiare generazione casuale e operazioni in virgola mobile: lo stesso seed non garantisce quindi la stessa traiettoria. Nel confronto CUDA ZDT3 del PR su cinque seed, l’IGD medio del percorso compilato era peggiore rispetto all’esecuzione eager. Prima di scegliere la modalità, confronti qualità e durata con lo stesso budget di valutazioni. [Confronto della qualità][s1]
 
 ## Verificare la ricerca prima di ampliarla
 

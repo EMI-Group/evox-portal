@@ -1,6 +1,7 @@
 ---
 title: "EvoMO: Keep Feasibility Attached to Every Candidate"
 pubDate: 2026-10-30
+updatedDate: 2026-11-14
 summary: "Constraint-aware selection, aligned odd populations and a more efficient OSP-NSDE path make multiobjective experiments easier to control."
 ---
 
@@ -27,6 +28,8 @@ Sparse and dynamic algorithms also receive reference-flow corrections. DMMOEA de
 OSP-NSDE sorts neighbor distances once and updates them after deletions. Optional Triton kernels move supported cutoff-front truncation onto CUDA. The automatic path covers supported devices, float32/float64 and requested populations up to 128; other configurations use PyTorch. Non-dominated ranking remains in PyTorch.
 
 For compilation, the documented sequence is to initialize first, then use `torch.compile(workflow.step, fullgraph=False)`. Prediction, local search and mixture-model work still include eager sections. The PR reports local RTX 5060 Ti measurements with synchronized timing and fixed budgets; its full-run results also show that compilation does not always beat optimized eager execution. Choose a path by measuring the complete workload.
+
+Compilation can also change random-number generation and floating-point execution, so the same seed need not produce the same search trajectory. The PR’s five-seed CUDA ZDT3 comparison found worse mean IGD for the compiled path than for eager execution. Measure solution quality alongside runtime at the same evaluation budget before selecting an execution mode. [Quality comparison][s1]
 
 ## Check the search before scaling it
 

@@ -1,15 +1,15 @@
 {
   "scope": "Local production build; no deployment or search-engine indexing verification",
   "counts": {
-    "articles": 42,
+    "articles": 50,
     "byCollection": {
-      "news": 28,
-      "releases": 14
+      "news": 34,
+      "releases": 16
     },
     "locales": 13,
-    "pages": 546,
-    "updatedPages": 364,
-    "articleImages": 546,
+    "pages": 650,
+    "updatedPages": 377,
+    "articleImages": 650,
     "previewPagesExcluded": 65
   },
   "errors": [],
@@ -620,6 +620,303 @@
       ]
     },
     {
+      "article": "news/evogp-rocm-population-execution",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evogp-rocm-population-execution",
+          "titleCharacters": 58,
+          "descriptionCharacters": 124
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evogp-rocm-population-execution",
+          "titleCharacters": 24,
+          "descriptionCharacters": 41
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evogp-rocm-population-execution",
+          "titleCharacters": 26,
+          "descriptionCharacters": 43
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evogp-rocm-population-execution",
+          "titleCharacters": 30,
+          "descriptionCharacters": 46
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evogp-rocm-population-execution",
+          "titleCharacters": 33,
+          "descriptionCharacters": 54
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evogp-rocm-population-execution",
+          "titleCharacters": 60,
+          "descriptionCharacters": 133
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evogp-rocm-population-execution",
+          "titleCharacters": 66,
+          "descriptionCharacters": 112
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evogp-rocm-population-execution",
+          "titleCharacters": 65,
+          "descriptionCharacters": 118
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evogp-rocm-population-execution",
+          "titleCharacters": 59,
+          "descriptionCharacters": 126
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evogp-rocm-population-execution",
+          "titleCharacters": 59,
+          "descriptionCharacters": 126
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evogp-rocm-population-execution",
+          "titleCharacters": 54,
+          "descriptionCharacters": 113
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evogp-rocm-population-execution",
+          "titleCharacters": 54,
+          "descriptionCharacters": 114
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evogp-rocm-population-execution",
+          "titleCharacters": 55,
+          "descriptionCharacters": 114
+        }
+      ]
+    },
+    {
+      "article": "news/evomo-constraint-aware-search",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": "2026-11-14",
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evomo-constraint-aware-search",
+          "titleCharacters": 51,
+          "descriptionCharacters": 137
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evomo-constraint-aware-search",
+          "titleCharacters": 21,
+          "descriptionCharacters": 44
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evomo-constraint-aware-search",
+          "titleCharacters": 21,
+          "descriptionCharacters": 44
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evomo-constraint-aware-search",
+          "titleCharacters": 25,
+          "descriptionCharacters": 54
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evomo-constraint-aware-search",
+          "titleCharacters": 30,
+          "descriptionCharacters": 65
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evomo-constraint-aware-search",
+          "titleCharacters": 51,
+          "descriptionCharacters": 154
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evomo-constraint-aware-search",
+          "titleCharacters": 61,
+          "descriptionCharacters": 137
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evomo-constraint-aware-search",
+          "titleCharacters": 56,
+          "descriptionCharacters": 147
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evomo-constraint-aware-search",
+          "titleCharacters": 48,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evomo-constraint-aware-search",
+          "titleCharacters": 48,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evomo-constraint-aware-search",
+          "titleCharacters": 56,
+          "descriptionCharacters": 128
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evomo-constraint-aware-search",
+          "titleCharacters": 51,
+          "descriptionCharacters": 148
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evomo-constraint-aware-search",
+          "titleCharacters": 51,
+          "descriptionCharacters": 148
+        }
+      ]
+    },
+    {
+      "article": "news/evonas",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evonas",
+          "titleCharacters": 72,
+          "descriptionCharacters": 170
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evonas",
+          "titleCharacters": 24,
+          "descriptionCharacters": 66
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evonas",
+          "titleCharacters": 24,
+          "descriptionCharacters": 66
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evonas",
+          "titleCharacters": 34,
+          "descriptionCharacters": 69
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evonas",
+          "titleCharacters": 35,
+          "descriptionCharacters": 79
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evonas",
+          "titleCharacters": 74,
+          "descriptionCharacters": 161
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evonas",
+          "titleCharacters": 71,
+          "descriptionCharacters": 165
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evonas",
+          "titleCharacters": 70,
+          "descriptionCharacters": 157
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evonas",
+          "titleCharacters": 71,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evonas",
+          "titleCharacters": 71,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evonas",
+          "titleCharacters": 65,
+          "descriptionCharacters": 144
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evonas",
+          "titleCharacters": 67,
+          "descriptionCharacters": 140
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evonas",
+          "titleCharacters": 67,
+          "descriptionCharacters": 148
+        }
+      ]
+    },
+    {
       "article": "news/evorl",
       "locales": [
         "en",
@@ -715,6 +1012,204 @@
           "route": "/pt-br/news/evorl",
           "titleCharacters": 72,
           "descriptionCharacters": 159
+        }
+      ]
+    },
+    {
+      "article": "news/evorl-jax-training-consistency",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evorl-jax-training-consistency",
+          "titleCharacters": 55,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evorl-jax-training-consistency",
+          "titleCharacters": 19,
+          "descriptionCharacters": 53
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evorl-jax-training-consistency",
+          "titleCharacters": 19,
+          "descriptionCharacters": 53
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evorl-jax-training-consistency",
+          "titleCharacters": 23,
+          "descriptionCharacters": 60
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evorl-jax-training-consistency",
+          "titleCharacters": 28,
+          "descriptionCharacters": 67
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evorl-jax-training-consistency",
+          "titleCharacters": 60,
+          "descriptionCharacters": 141
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evorl-jax-training-consistency",
+          "titleCharacters": 57,
+          "descriptionCharacters": 148
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evorl-jax-training-consistency",
+          "titleCharacters": 59,
+          "descriptionCharacters": 141
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evorl-jax-training-consistency",
+          "titleCharacters": 61,
+          "descriptionCharacters": 132
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evorl-jax-training-consistency",
+          "titleCharacters": 61,
+          "descriptionCharacters": 132
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evorl-jax-training-consistency",
+          "titleCharacters": 50,
+          "descriptionCharacters": 120
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evorl-jax-training-consistency",
+          "titleCharacters": 59,
+          "descriptionCharacters": 126
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evorl-jax-training-consistency",
+          "titleCharacters": 59,
+          "descriptionCharacters": 126
+        }
+      ]
+    },
+    {
+      "article": "news/evorl-local-jsonl-recording",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/evorl-local-jsonl-recording",
+          "titleCharacters": 58,
+          "descriptionCharacters": 134
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/evorl-local-jsonl-recording",
+          "titleCharacters": 23,
+          "descriptionCharacters": 49
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/evorl-local-jsonl-recording",
+          "titleCharacters": 23,
+          "descriptionCharacters": 50
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/evorl-local-jsonl-recording",
+          "titleCharacters": 31,
+          "descriptionCharacters": 63
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/evorl-local-jsonl-recording",
+          "titleCharacters": 29,
+          "descriptionCharacters": 64
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/evorl-local-jsonl-recording",
+          "titleCharacters": 67,
+          "descriptionCharacters": 137
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/evorl-local-jsonl-recording",
+          "titleCharacters": 80,
+          "descriptionCharacters": 149
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/evorl-local-jsonl-recording",
+          "titleCharacters": 78,
+          "descriptionCharacters": 152
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/evorl-local-jsonl-recording",
+          "titleCharacters": 76,
+          "descriptionCharacters": 129
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/evorl-local-jsonl-recording",
+          "titleCharacters": 76,
+          "descriptionCharacters": 129
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/evorl-local-jsonl-recording",
+          "titleCharacters": 64,
+          "descriptionCharacters": 135
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/evorl-local-jsonl-recording",
+          "titleCharacters": 66,
+          "descriptionCharacters": 125
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/evorl-local-jsonl-recording",
+          "titleCharacters": 72,
+          "descriptionCharacters": 130
         }
       ]
     },
@@ -2798,6 +3293,204 @@
       ]
     },
     {
+      "article": "news/tensorneat-gradient-memory",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/news/tensorneat-gradient-memory",
+          "titleCharacters": 72,
+          "descriptionCharacters": 126
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/news/tensorneat-gradient-memory",
+          "titleCharacters": 29,
+          "descriptionCharacters": 35
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/news/tensorneat-gradient-memory",
+          "titleCharacters": 30,
+          "descriptionCharacters": 37
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/news/tensorneat-gradient-memory",
+          "titleCharacters": 35,
+          "descriptionCharacters": 47
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/news/tensorneat-gradient-memory",
+          "titleCharacters": 43,
+          "descriptionCharacters": 53
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/news/tensorneat-gradient-memory",
+          "titleCharacters": 79,
+          "descriptionCharacters": 130
+        },
+        {
+          "locale": "de",
+          "route": "/de/news/tensorneat-gradient-memory",
+          "titleCharacters": 80,
+          "descriptionCharacters": 123
+        },
+        {
+          "locale": "it",
+          "route": "/it/news/tensorneat-gradient-memory",
+          "titleCharacters": 70,
+          "descriptionCharacters": 112
+        },
+        {
+          "locale": "es",
+          "route": "/es/news/tensorneat-gradient-memory",
+          "titleCharacters": 69,
+          "descriptionCharacters": 105
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/news/tensorneat-gradient-memory",
+          "titleCharacters": 69,
+          "descriptionCharacters": 105
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/news/tensorneat-gradient-memory",
+          "titleCharacters": 71,
+          "descriptionCharacters": 100
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/news/tensorneat-gradient-memory",
+          "titleCharacters": 72,
+          "descriptionCharacters": 114
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/news/tensorneat-gradient-memory",
+          "titleCharacters": 72,
+          "descriptionCharacters": 114
+        }
+      ]
+    },
+    {
+      "article": "releases/evomo-0-3-1",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/releases/evomo-0-3-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 142
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/releases/evomo-0-3-1",
+          "titleCharacters": 26,
+          "descriptionCharacters": 41
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/releases/evomo-0-3-1",
+          "titleCharacters": 29,
+          "descriptionCharacters": 44
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/releases/evomo-0-3-1",
+          "titleCharacters": 29,
+          "descriptionCharacters": 50
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/releases/evomo-0-3-1",
+          "titleCharacters": 26,
+          "descriptionCharacters": 61
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/releases/evomo-0-3-1",
+          "titleCharacters": 69,
+          "descriptionCharacters": 126
+        },
+        {
+          "locale": "de",
+          "route": "/de/releases/evomo-0-3-1",
+          "titleCharacters": 63,
+          "descriptionCharacters": 128
+        },
+        {
+          "locale": "it",
+          "route": "/it/releases/evomo-0-3-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 116
+        },
+        {
+          "locale": "es",
+          "route": "/es/releases/evomo-0-3-1",
+          "titleCharacters": 69,
+          "descriptionCharacters": 118
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/releases/evomo-0-3-1",
+          "titleCharacters": 69,
+          "descriptionCharacters": 118
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/releases/evomo-0-3-1",
+          "titleCharacters": 64,
+          "descriptionCharacters": 116
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/releases/evomo-0-3-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 112
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/releases/evomo-0-3-1",
+          "titleCharacters": 62,
+          "descriptionCharacters": 112
+        }
+      ]
+    },
+    {
       "article": "releases/evox-1-0-0",
       "locales": [
         "en",
@@ -4081,6 +4774,105 @@
           "route": "/pt-br/releases/evoxc-0-1-0",
           "titleCharacters": 64,
           "descriptionCharacters": 132
+        }
+      ]
+    },
+    {
+      "article": "releases/evoxc-0-1-1",
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "it",
+        "es",
+        "es-419",
+        "ru",
+        "pt",
+        "pt-br"
+      ],
+      "updatedDate": null,
+      "pages": [
+        {
+          "locale": "en",
+          "route": "/releases/evoxc-0-1-1",
+          "titleCharacters": 59,
+          "descriptionCharacters": 134
+        },
+        {
+          "locale": "zh-cn",
+          "route": "/zh-cn/releases/evoxc-0-1-1",
+          "titleCharacters": 33,
+          "descriptionCharacters": 50
+        },
+        {
+          "locale": "zh-tw",
+          "route": "/zh-tw/releases/evoxc-0-1-1",
+          "titleCharacters": 33,
+          "descriptionCharacters": 50
+        },
+        {
+          "locale": "ja",
+          "route": "/ja/releases/evoxc-0-1-1",
+          "titleCharacters": 36,
+          "descriptionCharacters": 68
+        },
+        {
+          "locale": "ko",
+          "route": "/ko/releases/evoxc-0-1-1",
+          "titleCharacters": 40,
+          "descriptionCharacters": 69
+        },
+        {
+          "locale": "fr",
+          "route": "/fr/releases/evoxc-0-1-1",
+          "titleCharacters": 75,
+          "descriptionCharacters": 140
+        },
+        {
+          "locale": "de",
+          "route": "/de/releases/evoxc-0-1-1",
+          "titleCharacters": 66,
+          "descriptionCharacters": 154
+        },
+        {
+          "locale": "it",
+          "route": "/it/releases/evoxc-0-1-1",
+          "titleCharacters": 73,
+          "descriptionCharacters": 136
+        },
+        {
+          "locale": "es",
+          "route": "/es/releases/evoxc-0-1-1",
+          "titleCharacters": 71,
+          "descriptionCharacters": 136
+        },
+        {
+          "locale": "es-419",
+          "route": "/es-419/releases/evoxc-0-1-1",
+          "titleCharacters": 71,
+          "descriptionCharacters": 136
+        },
+        {
+          "locale": "ru",
+          "route": "/ru/releases/evoxc-0-1-1",
+          "titleCharacters": 64,
+          "descriptionCharacters": 120
+        },
+        {
+          "locale": "pt",
+          "route": "/pt/releases/evoxc-0-1-1",
+          "titleCharacters": 70,
+          "descriptionCharacters": 130
+        },
+        {
+          "locale": "pt-br",
+          "route": "/pt-br/releases/evoxc-0-1-1",
+          "titleCharacters": 70,
+          "descriptionCharacters": 130
         }
       ]
     },

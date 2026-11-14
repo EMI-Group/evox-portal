@@ -1,6 +1,7 @@
 ---
 title: "EvoMO: Die Zulässigkeit jedes Kandidaten durchgehend erhalten"
 pubDate: 2026-10-30
+updatedDate: 2026-11-14
 summary: "Nebenbedingungen, konsistente ungerade Populationen und ein effizienterer OSP-NSDE-Pfad machen Mehrzielexperimente besser kontrollierbar."
 ---
 
@@ -27,6 +28,8 @@ Auch dünn besetzte und dynamische Verfahren werden an Referenzabläufe angepass
 OSP-NSDE sortiert Nachbarabstände einmal und aktualisiert sie nach Löschungen. Optionale Triton-Kernel verlagern unterstützte Kürzungen der Grenzfront auf CUDA. Der automatische Pfad gilt für unterstützte Geräte, float32/float64 und angeforderte Größen bis 128; sonst wird PyTorch verwendet. Die nichtdominierte Rangbildung bleibt in PyTorch.
 
 Für die Kompilierung zuerst initialisieren, danach `torch.compile(workflow.step, fullgraph=False)` verwenden. Vorhersage, lokale Suche und Mischmodelle enthalten weiterhin Eager-Abschnitte. Die im PR berichteten lokalen RTX-5060-Ti-Messungen nutzen synchronisierte Zeiten und feste Budgets. Gesamtmessungen zeigen auch, dass Kompilierung nicht immer schneller als optimiertes Eager ist. Entscheidend ist die vollständige Arbeitslast.
+
+Kompilierung kann auch Zufallszahlengenerierung und Gleitkommaausführung verändern; derselbe Seed garantiert daher keinen identischen Suchverlauf. Im CUDA-ZDT3-Vergleich des PR mit fünf Seeds war die mittlere IGD des kompilierten Pfads schlechter als bei eager-Ausführung. Vergleichen Sie vor der Auswahl Lösungsqualität und Laufzeit bei gleichem Evaluationsbudget. [Qualitätsvergleich][s1]
 
 ## Vor dem Skalieren die Suche prüfen
 
