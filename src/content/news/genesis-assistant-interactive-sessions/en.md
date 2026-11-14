@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant: Pick up the conversation where it paused"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "Genesis main keeps Assistant conversations in interactive sessions and brings pending approvals into a review dialog with the exact code and target node."
 ---
 
@@ -32,8 +33,14 @@ The dialog now reads the target node stamped by the runtime and displays any war
 
 After a write is accepted, inspect the resulting task and check its status before treating the work as finished. If the response was interrupted or the write timed out, check current state before asking for a second write. To try the interaction on a build containing these changes, start with a read-only task inspection, switch to another dashboard page, and return through **Conversations** for the follow-up. The [previous Assistant overview][related] describes the operator tools this session flow builds on. [Current Assistant guide][guide]
 
+## Keep the final answer when a session ends
+
+November 14 update: changes merged into `main` on November 13 pass a final, authoritative snapshot to Assistant and the selected-agent inspector. Transcript and terminal status are applied together; late task broadcasts cannot reopen the sealed conversation. If the handoff is unavailable, the last coherent cached text remains visible rather than starting a separate history read. An inspector can retain ended-agent details outside the live tree. On a build containing this change, keep a conversation selected through completion and check that its final text and status agree before retrying work. [Terminal handoff implementation][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae

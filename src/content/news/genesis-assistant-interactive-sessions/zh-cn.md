@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant：回到刚才暂停的对话"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审批窗口显示拟执行的确切代码和目标节点。"
 ---
 
@@ -32,8 +33,14 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 
 写入请求获准后，查看生成的任务及其状态，确认工作是否完成。若响应中断或写入超时，应先检查当前状态，再决定是否发起第二次写入。要体验这套流程，可以在包含这些改动的构建上先进行一次只读任务检查，切到另一个仪表板页面，再从 **Conversations** 回来追问。[此前的 Assistant 介绍][related]介绍了这套会话流程所依托的操作工具。[当前 Assistant 指南][guide]
 
+## 会话结束时保留最终回答
+
+11 月 14 日补充：11 月 13 日合入 `main` 的更新，将最终权威快照交给 Assistant 和所选智能体的检查面板。对话正文与终止状态一起应用，迟到的任务广播不能重新打开已封闭的会话。如果交接不可用，界面保留最后一致的缓存文本，而不是另行读取历史。检查面板可在活动树之外保留已结束智能体的详情。在包含此更新的构建上，保持选中会话直至完成，确认最终文本与状态一致后再决定是否重试工作。[终止交接实现][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /zh-cn/news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae

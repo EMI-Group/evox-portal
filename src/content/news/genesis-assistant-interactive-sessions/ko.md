@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant: 멈춘 대화에서 작업 이어가기"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하며, 검토 대화 상자에 정확한 코드와 대상 노드를 표시합니다."
 ---
 
@@ -32,8 +33,14 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 
 쓰기 요청을 승인한 뒤 생성된 작업의 상태를 읽어 완료 여부를 판단합니다. 응답이 중단되거나 쓰기가 시간 초과되면 다시 요청하기 전에 현재 상태를 확인합니다. 변경 사항이 포함된 빌드에서 읽기 전용 조회를 한 다음 다른 대시보드 페이지로 이동하고 **Conversations**를 통해 돌아와 후속 질문을 해 보세요. 이 흐름의 기반이 되는 작업 도구는 [이전 Assistant 소개][related]에서 확인할 수 있습니다. [현재 Assistant 가이드][guide]
 
+## 세션이 끝나도 최종 답변 유지
+
+11월 14일 추가: 11월 13일 `main`에 통합된 변경은 최종 권위 있는 스냅샷을 Assistant와 선택한 에이전트의 검사 패널에 전달합니다. 대화 내용과 종료 상태를 함께 적용하므로 늦은 작업 알림이 닫힌 대화를 다시 열지 못합니다. 인계가 불가능하면 별도 이력을 읽는 대신 마지막으로 일관된 캐시 텍스트를 표시합니다. 검사 패널은 활성 트리 밖에서 종료된 에이전트의 상세 정보를 유지할 수 있습니다. 이 변경을 포함한 빌드에서 완료까지 대화를 선택한 채로 두고, 최종 텍스트와 상태가 일치하는지 확인한 후 재시도를 결정하세요. [종료 인계 구현][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /ko/news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae

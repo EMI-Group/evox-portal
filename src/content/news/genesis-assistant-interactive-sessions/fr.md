@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant : reprendre une conversation en attente"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "La branche main de Genesis maintient les conversations de l’Assistant dans des sessions interactives et affiche le code exact et le nœud cible dans la boîte d’approbation."
 ---
 
@@ -32,8 +33,14 @@ La boîte affiche désormais le nœud cible indiqué par le moteur d’exécutio
 
 Après avoir accepté une écriture, consultez la tâche créée et vérifiez son état. Si la réponse a été interrompue ou si l’écriture a expiré, vérifiez l’état actuel avant de réessayer. Sur une compilation intégrant ces changements, commencez par une inspection en lecture seule, changez de page et revenez via **Conversations** pour poser une autre question. La [présentation précédente de l’Assistant][related] décrit les outils sur lesquels repose ce parcours. [Guide actuel][guide]
 
+## Conserver la réponse finale à la fin d’une session
+
+Ajout du 14 novembre : les changements intégrés à `main` le 13 novembre transmettent un instantané final faisant autorité à Assistant et à l’inspecteur de l’agent sélectionné. Transcription et statut terminal sont appliqués ensemble ; les notifications tardives ne rouvrent pas la conversation close. Si le transfert est indisponible, le dernier texte cohérent en cache reste visible, sans lecture indépendante de l’historique. L’inspecteur peut conserver les détails d’un agent terminé hors de l’arbre actif. Sur une version contenant ce changement, gardez la conversation sélectionnée jusqu’à sa fin et vérifiez l’accord entre texte final et statut avant de relancer le travail. [Implémentation du transfert final][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /fr/news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae

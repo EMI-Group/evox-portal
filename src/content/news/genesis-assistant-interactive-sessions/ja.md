@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant：中断した会話から作業を続ける"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "Genesis の main では Assistant の会話が対話セッションとして続き、承認ダイアログに実行するコードと対象ノードが表示されます。"
 ---
 
@@ -32,8 +33,14 @@ summary: "Genesis の main では Assistant の会話が対話セッションと
 
 書き込みを許可したら、生成されたタスクとその状態を確認してから完了と判断します。応答が中断されたり書き込みがタイムアウトしたりした場合は、再実行の前に現在の状態を確認します。変更を含むビルドでは、まず読み取り専用でタスクを調べ、別ページに移動して **Conversations** から戻ると、この流れを確認できます。基盤となる操作ツールは [以前の Assistant 紹介][related]を参照してください。[現在の Assistant ガイド][guide]
 
+## セッション終了時も最終回答を保持
+
+11 月 14 日追記：11 月 13 日に `main` へ統合された変更は、最終的な権威あるスナップショットを Assistant と選択中のエージェントのインスペクターへ渡します。会話と終了状態を同時に適用し、遅れて届くタスク通知で閉じた会話が再開されることを防ぎます。引き継ぎが利用できない場合は、別途履歴を読み込まず、最後の整合したキャッシュ済みテキストを表示します。終了したエージェントの詳細はライブツリー外で保持できます。この変更を含むビルドで会話を完了まで選択したままにし、最終テキストと状態の一致を確認してから再試行を判断してください。[終了時の引き継ぎ実装][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /ja/news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae

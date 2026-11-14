@@ -1,6 +1,7 @@
 ---
 title: "Genesis Assistant: retomar una conversación en espera"
 pubDate: 2026-11-12
+updatedDate: 2026-11-14
 summary: "La rama main de Genesis conserva las conversaciones de Assistant en sesiones interactivas y muestra el código exacto y el nodo de destino al revisar una aprobación."
 ---
 
@@ -32,8 +33,14 @@ El diálogo muestra el nodo de destino indicado por el entorno de ejecución y l
 
 Después de aprobar una escritura, consulte la tarea resultante y su estado. Si la respuesta se interrumpe o la escritura supera el tiempo de espera, compruebe el estado actual antes de repetirla. En una compilación que incorpore estos cambios, empiece por una consulta de solo lectura, cambie de página y vuelva mediante **Conversations** con otra pregunta. La [introducción anterior a Assistant][related] describe las herramientas en las que se apoya este flujo. [Guía actual][guide]
 
+## Conservar la respuesta final cuando termina la sesión
+
+Actualización del 14 de noviembre: los cambios integrados en `main` el 13 de noviembre entregan una instantánea final autoritativa a Assistant y al inspector del agente seleccionado. La transcripción y el estado terminal se aplican juntos; las notificaciones tardías no reabren la conversación cerrada. Si la transferencia no está disponible, permanece el último texto coherente en caché, sin leer el historial por separado. El inspector puede conservar los detalles del agente terminado fuera del árbol activo. En una compilación con este cambio, mantenga seleccionada la conversación hasta completarse y compruebe que texto final y estado coincidan antes de repetir el trabajo. [Implementación de la transferencia final][handoff]
+
 [guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
 [related]: /es/news/genesis-development-2026-11-07
+
+[handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
