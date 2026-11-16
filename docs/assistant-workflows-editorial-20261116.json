@@ -1,0 +1,36 @@
+{
+  "collection": "news",
+  "story_type": "development",
+  "depth": "regular",
+  "slug": "genesis-assistant-interactive-sessions",
+  "updatedDate": "2026-11-16",
+  "sourceKeys": [
+    "genesis:pr:172",
+    "genesis:commit:6e10e18dd56ca3c84e2215dac647473c30563fee"
+  ],
+  "sources": [
+    "https://github.com/EMI-Group/genesis/pull/172",
+    "https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md"
+  ],
+  "decision": "Update canonical session story with substantive new project/task and attachment workflow rather than duplicate coverage. Retain dedicated conversation/action-review illustration. Explicitly supersede older checkout requirement.",
+  "coverage": [
+    "Optional source context and project boundary",
+    "Structured parameter-bound approvals shared with MCP",
+    "Concrete start/follow workflow and observed cards",
+    "Reply stopping versus task cancellation and Git effects",
+    "Browser attachments, limits and remote path boundary",
+    "Volatile conversation versus persistent task storage",
+    "Actionable state checks before retries"
+  ],
+  "omissions": "Low-level Git ancestor-path parser fix and test counts omitted; no unsupported local testing claim.",
+  "englishWords": 919,
+  "validation": {
+    "build": "passed",
+    "seoPages": 650,
+    "seoErrors": 0,
+    "localizedPages": 13,
+    "lists": 13,
+    "desktopMobileLightDark": "passed"
+  },
+  "locales": 13
+}

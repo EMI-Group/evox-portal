@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: 멈춘 대화에서 작업 이어가기"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하며, 검토 대화 상자에 정확한 코드와 대상 노드를 표시합니다."
 ---
 
@@ -10,6 +10,12 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 ![개발자가 표시된 대화로 돌아와 제안된 작업 하나를 검토하는 모습](./genesis-assistant-interactive-sessions.webp)
 
 *Assistant 대화를 이어가며 제안된 동작을 검토하는 장면을 그린 편집 삽화입니다.*
+
+## 프로젝트 작업과 첨부: 11월 16일 추가
+
+11월 15일 `main`에 병합된 PR #172는 아래의 준비 방식을 바꿉니다. 일반 대화와 작업 제어에는 Genesis 체크아웃이 필요 없고, 소스 참조는 승인받는 선택 기능입니다. 선택 호스트의 프로젝트는 생략된 작업 경로를 채우지만 파일을 읽거나 개발을 허가하지 않습니다. 답변 중에는 프로젝트 전환이 잠기며, 다른 경로를 명시하면 승인 화면에 실제 대상으로 표시합니다. Assistant는 MCP와 열한 가지 작업 제어 정의를 공유하고, 변경 승인을 정확한 구조화 매개변수와 서버가 관리하는 노드·대화 식별에 연결합니다. [병합된 변경][workflows]
+
+예를 들어 프로젝트를 선택하고 백그라운드 작업을 요청한 뒤 매개변수를 확인하여 승인합니다. 시작에 성공하면 자동으로 추적하며, 검색 가능한 Tasks 선택기에서 기존 작업을 연결할 수도 있습니다. 카드는 관측 상태와 갱신 시각을 표시하고 갱신 실패 시 마지막 정보를 유지합니다. 답변 중지는 백그라운드 개발을 멈추지 않습니다. 요구사항 전송과 작업 취소 요청은 각각 승인하는 동작이며, 취소는 Git 변경을 되돌리지 않습니다. 브라우저 업로드는 텍스트, PDF, DOCX, 이미지, 오디오를 메시지당 네 파일, 파일당 15 MiB까지 지원하며 완료된 첨부는 본문 없이 보낼 수 있습니다. 보조 서버 경로 입력은 대시보드 로컬 노드를 지원하며 미지원 원격 노드를 해당 호스트로 대체하지 않습니다. 세션 종료 후 작업 연결은 남지만 메모리 대화는 서버 재시작 후 복원되지 않습니다. 영속 작업은 다시 찾아 추적할 수 있습니다. PR #172가 포함된 빌드에서 시도하고, 제출 결과가 불확실하면 재시도 전에 상태를 확인하세요. [업데이트된 가이드][workflowguide]
 
 ## 입력을 기다리는 대화로 돌아가기
 
@@ -44,3 +50,6 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 [related]: /ko/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

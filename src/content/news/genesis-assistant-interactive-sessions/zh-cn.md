@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：回到刚才暂停的对话"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审批窗口显示拟执行的确切代码和目标节点。"
 ---
 
@@ -10,6 +10,12 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 ![开发者回到带标记的会话，查看一项拟执行操作](./genesis-assistant-interactive-sessions.webp)
 
 *编辑插画：回到 Assistant 会话并审阅拟执行操作。*
+
+## 项目任务与附件：11 月 16 日更新
+
+11 月 15 日合入 `main` 的 PR #172 改变了下文所述准备方式：普通聊天和任务控制不再需要 Genesis 源码检出。源码参考现为可选、需审批的能力。选择目标主机上的项目可补全任务省略的路径，但不会读取项目文件或授权开发。回复期间不能切换项目；明确指定其他路径时，审批仍显示实际目标。Assistant 与 MCP 共用十一项任务控制定义，修改操作的审批绑定确切结构化参数，以及服务器维护的节点和会话身份。[已合并的工作流更新][workflows]
+
+例如，选择项目、请求后台任务、检查参数后批准。成功启动的任务自动跟踪，也可用支持搜索的 Tasks 选择器关联已有任务。卡片显示已观测状态和刷新时间，刷新失败保留最后已知信息。停止回复不会停止后台开发；补充需求和请求取消任务是分别审批的操作，取消不会撤销 Git 修改。浏览器上传支持文本、PDF、DOCX、图片和音频，每条消息最多四个文件、每个 15 MiB，上传完成后可不加文字直接发送。次级服务器路径入口支持仪表板本地节点，不会用该主机替代不支持的远程节点。任务关联在 Assistant 会话结束后仍保留，但内存中的会话存储不能跨服务器重启恢复；持久化任务可以重新查找和跟踪。在包含 PR #172 的构建上尝试这一流程，对结果不确定的提交先检查任务状态再重试。[更新后的 Assistant 指南][workflowguide]
 
 ## 回到等待输入的会话
 
@@ -44,3 +50,6 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 [related]: /zh-cn/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

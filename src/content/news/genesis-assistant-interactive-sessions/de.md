@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: Ein pausiertes Gespräch fortsetzen"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Genesis main hält Assistant-Gespräche in interaktiven Sitzungen und zeigt bei ausstehenden Freigaben den genauen Code und Zielknoten im Prüfdialog an."
 ---
 
@@ -10,6 +10,12 @@ Wer Genesis Assistant eine fehlgeschlagene Aufgabe untersuchen lässt, wechselt 
 ![Eine Person kehrt zu einem markierten Gespräch zurück und prüft eine vorgeschlagene Aktion](./genesis-assistant-interactive-sessions.webp)
 
 *Redaktionelle Illustration zur Fortsetzung eines Assistant-Gesprächs und zur Prüfung einer Aktion.*
+
+## Projekttasks und Anhänge: Ergänzung vom 16. November
+
+PR #172, am 15. November in `main` integriert, ändert die unten beschriebene Vorbereitung: Chat und Task-Steuerung benötigen keinen Genesis-Checkout mehr. Quellcodereferenz ist optional und genehmigungspflichtig. Ein Projekt auf dem ausgewählten Host ergänzt fehlende Task-Pfade, liest aber keine Dateien und autorisiert keine Entwicklung. Während einer Antwort ist der Projektwechsel gesperrt; ein ausdrücklich anderer Pfad bleibt das angezeigte Genehmigungsziel. Assistant teilt elf Task-Definitionen mit MCP. Änderungsgenehmigungen binden die exakten strukturierten Parameter und die serverseitige Knoten-/Gesprächsidentität. [Integrierte Änderungen][workflows]
+
+Wählen Sie etwa ein Projekt, fordern Sie einen Hintergrundtask an und prüfen und genehmigen Sie die Parameter. Erfolgreiche Starts werden automatisch verfolgt; die durchsuchbare Tasks-Auswahl verknüpft vorhandene Tasks. Karten zeigen beobachteten Status und Aktualisierungszeit und behalten bei Fehlern den letzten Kenntnisstand. Antwort stoppen lässt die Entwicklung weiterlaufen; Anforderungen senden und Task-Abbruch anfordern sind getrennte genehmigte Aktionen. Abbruch macht Git-Änderungen nicht rückgängig. Browser-Uploads unterstützen Text, PDF, DOCX, Bilder und Audio, vier Dateien pro Nachricht mit je 15 MiB; fertige Anhänge benötigen keinen Begleittext. Die zusätzliche Serverpfadeingabe unterstützt den lokalen Dashboard-Knoten und ersetzt keinen nicht unterstützten entfernten Knoten durch diesen Host. Task-Verknüpfungen bleiben nach Sitzungsende erhalten, Gespräche im Speicher jedoch nicht nach Serverneustart; persistente Tasks lassen sich wiederfinden. Testen Sie mit PR #172 und prüfen Sie vor Wiederholung einer unklaren Übermittlung den Status. [Aktualisierter Leitfaden][workflowguide]
 
 ## Zu einem wartenden Gespräch zurückkehren
 
@@ -44,3 +50,6 @@ Ergänzung vom 14. November: Am 13. November in `main` integrierte Änderungen �
 [related]: /de/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

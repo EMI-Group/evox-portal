@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant : reprendre une conversation en attente"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "La branche main de Genesis maintient les conversations de l’Assistant dans des sessions interactives et affiche le code exact et le nœud cible dans la boîte d’approbation."
 ---
 
@@ -10,6 +10,12 @@ Une personne peut demander à Genesis Assistant d’examiner une tâche en éche
 ![Une personne revient à une conversation marquée et examine une action proposée](./genesis-assistant-interactive-sessions.webp)
 
 *Illustration éditoriale de la reprise d’une conversation de l’Assistant et de l’examen d’une action.*
+
+## Projets et pièces jointes : mise à jour du 16 novembre
+
+La PR #172, intégrée à `main` le 15 novembre, modifie la préparation décrite ci-dessous : discuter et contrôler les tâches ne nécessite plus de copie de Genesis. La référence au code devient facultative et soumise à approbation. Un projet sur l’hôte sélectionné fournit les chemins omis sans lire les fichiers ni autoriser le développement. Le changement de projet est bloqué pendant une réponse ; un autre chemin explicite reste la cible affichée. Assistant partage onze définitions de contrôle avec MCP. L’approbation des mutations lie les paramètres structurés exacts et l’identité serveur du nœud et de la conversation. [Changements intégrés][workflows]
+
+Sélectionnez par exemple un projet, demandez une tâche en arrière-plan, puis examinez et approuvez ses paramètres. Un démarrage réussi active le suivi ; le sélecteur Tasks permet de rechercher une tâche existante. Les cartes montrent l’état observé et l’heure d’actualisation, conservant les derniers faits en cas d’échec. Arrêter la réponse laisse le développement continuer ; envoyer des exigences et demander l’annulation sont des actions distinctes approuvées. L’annulation ne défait pas les modifications Git. Le navigateur accepte texte, PDF, DOCX, images et audio, quatre fichiers par message et 15 MiB chacun ; une pièce jointe terminée peut partir sans texte. L’entrée secondaire de chemin serveur prend en charge le nœud local du tableau de bord, sans le substituer à un nœud distant non pris en charge. Les liens de tâches survivent à la fin de session, mais pas les conversations en mémoire au redémarrage serveur ; les tâches persistantes peuvent être retrouvées. Essayez sur une version contenant la PR #172 et vérifiez l’état avant de répéter une soumission incertaine. [Guide actualisé][workflowguide]
 
 ## Revenir à une conversation en attente
 
@@ -44,3 +50,6 @@ Ajout du 14 novembre : les changements intégrés à `main` le 13 novembre trans
 [related]: /fr/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: Pick up the conversation where it paused"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Genesis main keeps Assistant conversations in interactive sessions and brings pending approvals into a review dialog with the exact code and target node."
 ---
 
@@ -10,6 +10,12 @@ A developer may ask Genesis Assistant to inspect a failed task, leave to review 
 ![A developer returns to a marked conversation and examines one proposed action](./genesis-assistant-interactive-sessions.webp)
 
 *Editorial illustration of resuming an Assistant conversation and reviewing a proposed action.*
+
+## Project-aware tasks and attachments: November 16 update
+
+PR #172, merged into `main` on November 15, changes the setup described below: ordinary chat and task control no longer require a Genesis checkout. Source reference is now optional and approval-gated. Choose a project on the selected host to supply omitted task paths; this does not read project files or authorize development. Project switching is locked during a reply, and an explicit different path remains the target shown for approval. Assistant now shares eleven task-control definitions with MCP. Mutations bind approval to the exact structured parameters and server-owned node/conversation identity. [Merged workflow changes][workflows]
+
+For example, select a project, request a background task, inspect its parameters and approve it. Successful starts are followed automatically; the searchable Tasks picker can attach an existing task. Cards retain observed status and refresh time, keeping last-known facts if refresh fails. Stop reply leaves background development running; sending requirements and requesting task cancellation are separate approved actions. Cancellation does not undo Git changes. Browser upload supports text, PDF, DOCX, images and audio, up to four files and 15 MiB each; completed attachments can send without text. The secondary server-path reader supports the local dashboard node and never substitutes that host for an unsupported remote node. Task links survive an Assistant session ending, but the in-memory conversation store does not survive server restart; persistent tasks can be found and followed again. Try this workflow on a build containing PR #172 and inspect task state before retrying an uncertain submission. [Updated Assistant guide][workflowguide]
 
 ## Return to a waiting conversation
 
@@ -44,3 +50,6 @@ November 14 update: changes merged into `main` on November 13 pass a final, auth
 [related]: /news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

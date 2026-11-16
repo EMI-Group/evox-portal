@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：從暫停的位置接續對話"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在核准視窗顯示確切程式碼及目標節點。"
 ---
 
@@ -10,6 +10,12 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 ![開發者回到有標記的對話並檢視一項擬執行的操作](./genesis-assistant-interactive-sessions.webp)
 
 *編輯插畫：回到 Assistant 對話並審閱擬執行的操作。*
+
+## 專案任務與附件：11 月 16 日更新
+
+11 月 15 日合入 `main` 的 PR #172 改變了下文的準備方式：一般聊天與任務控制不再需要 Genesis 原始碼檢出。原始碼參考改為選用且須核准的能力。選取目標主機的專案可補齊任務省略的路徑，但不會讀取專案檔案或授權開發。回覆期間不能切換專案；明確指定其他路徑時，核准畫面仍顯示實際目標。Assistant 與 MCP 共用十一項任務控制定義，變更操作的核准綁定確切結構化參數，以及伺服器維護的節點和對話身分。[已合併的工作流程更新][workflows]
+
+例如，選取專案、要求背景任務、檢查參數後核准。成功啟動的任務會自動追蹤，也可用可搜尋的 Tasks 選擇器連結既有任務。卡片顯示觀測狀態與更新時間，更新失敗保留最後已知資訊。停止回覆不會停止背景開發；傳送需求與要求取消任務是分別核准的操作，取消不會復原 Git 變更。瀏覽器上傳支援文字、PDF、DOCX、圖片和音訊，每則訊息最多四個檔案、每個 15 MiB；上傳完成即可不加文字傳送。次要伺服器路徑入口支援儀表板本機節點，不會用該主機替代不支援的遠端節點。Assistant 對話結束後任務連結仍保留，但記憶體中的對話不能跨伺服器重新啟動復原；持久化任務可重新尋找及追蹤。請在包含 PR #172 的版本嘗試流程，提交結果不確定時先檢查任務狀態再重試。[更新後的 Assistant 指南][workflowguide]
 
 ## 回到等待輸入的對話
 
@@ -44,3 +50,6 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 [related]: /zh-tw/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

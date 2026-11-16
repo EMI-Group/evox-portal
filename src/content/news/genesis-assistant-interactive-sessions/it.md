@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: riprendere una conversazione in attesa"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "Il ramo main di Genesis mantiene le conversazioni di Assistant in sessioni interattive e mostra codice esatto e nodo di destinazione nella finestra di approvazione."
 ---
 
@@ -10,6 +10,12 @@ Chi sviluppa può chiedere a Genesis Assistant di esaminare un’attività non r
 ![Una persona torna a una conversazione contrassegnata e controlla un’azione proposta](./genesis-assistant-interactive-sessions.webp)
 
 *Illustrazione editoriale della ripresa di una conversazione con Assistant e del controllo di un’azione proposta.*
+
+## Progetti e allegati: aggiornamento del 16 novembre
+
+La PR #172, integrata in `main` il 15 novembre, cambia la preparazione descritta sotto: chat e controllo delle attività non richiedono più una copia di Genesis. Il riferimento al codice è facoltativo e soggetto ad approvazione. Un progetto sull’host selezionato completa i percorsi omessi senza leggere file né autorizzare sviluppo. Il cambio progetto è bloccato durante una risposta; un percorso diverso esplicito resta la destinazione mostrata. Assistant condivide undici definizioni di controllo con MCP. Le approvazioni delle modifiche vincolano parametri strutturati esatti e identità di nodo e conversazione gestite dal server. [Modifiche integrate][workflows]
+
+Scelga ad esempio un progetto, richieda un’attività in background e ne controlli e approvi i parametri. Gli avvii riusciti vengono seguiti automaticamente; il selettore Tasks permette di cercare attività esistenti. Le schede mostrano stato osservato e ora di aggiornamento, mantenendo gli ultimi dati se l’aggiornamento fallisce. Fermare la risposta non ferma lo sviluppo; inviare requisiti e chiedere l’annullamento sono azioni approvate separate. L’annullamento non ripristina le modifiche Git. Il browser carica testo, PDF, DOCX, immagini e audio, fino a quattro file per messaggio da 15 MiB ciascuno; allegati pronti possono partire senza testo. L’ingresso secondario per percorsi server supporta il nodo locale del dashboard e non lo sostituisce a nodi remoti non supportati. I riferimenti alle attività sopravvivono alla sessione, ma le conversazioni in memoria non al riavvio del server; le attività persistenti possono essere ritrovate. Provi con la PR #172 e verifichi lo stato prima di ripetere un invio incerto. [Guida aggiornata][workflowguide]
 
 ## Tornare a una conversazione in attesa
 
@@ -44,3 +50,6 @@ Aggiornamento del 14 novembre: le modifiche integrate in `main` il 13 novembre t
 [related]: /it/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

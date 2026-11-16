@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: retomar una conversación en espera"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "La rama main de Genesis conserva las conversaciones de Assistant en sesiones interactivas y muestra el código exacto y el nodo de destino al revisar una aprobación."
 ---
 
@@ -10,6 +10,12 @@ Un desarrollador puede pedir a Genesis Assistant que examine una tarea fallida, 
 ![Una persona regresa a una conversación marcada y revisa una acción propuesta](./genesis-assistant-interactive-sessions.webp)
 
 *Ilustración editorial sobre cómo retomar una conversación de Assistant y revisar una acción propuesta.*
+
+## Proyectos y adjuntos: actualización del 16 de noviembre
+
+La PR #172, integrada en `main` el 15 de noviembre, cambia la preparación descrita abajo: conversar y controlar tareas ya no requiere una copia de Genesis. Consultar el código es opcional y exige aprobación. Elegir un proyecto del host seleccionado completa rutas omitidas sin leer archivos ni autorizar desarrollo. No se puede cambiar durante una respuesta; otra ruta explícita sigue siendo el destino mostrado para aprobar. Assistant comparte once definiciones de control con MCP. Las aprobaciones vinculan parámetros estructurados exactos e identidades de nodo y conversación gestionadas por el servidor. [Cambios integrados][workflows]
+
+Por ejemplo, elija un proyecto, solicite una tarea en segundo plano y revise y apruebe los parámetros. Los inicios correctos se siguen automáticamente; el selector Tasks permite buscar tareas existentes. Las tarjetas muestran estado observado y hora de actualización, conservando los últimos datos si falla la actualización. Detener la respuesta no detiene el desarrollo; enviar requisitos y pedir cancelación son acciones aprobadas separadas. Cancelar no deshace cambios Git. El navegador carga texto, PDF, DOCX, imágenes y audio, cuatro archivos por mensaje de hasta 15 MiB cada uno; los adjuntos completos se pueden enviar sin texto. La entrada secundaria de ruta del servidor admite el nodo local del panel y no lo sustituye por un nodo remoto no compatible. Los enlaces de tareas sobreviven al fin de sesión, pero las conversaciones en memoria no al reinicio del servidor; las tareas persistentes se pueden volver a encontrar. Pruebe una compilación con la PR #172 y compruebe el estado antes de repetir un envío incierto. [Guía actualizada][workflowguide]
 
 ## Regresar a una conversación que espera respuesta
 
@@ -44,3 +50,6 @@ Actualización del 14 de noviembre: los cambios integrados en `main` el 13 de no
 [related]: /es/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: retomar uma conversa em espera"
 pubDate: 2026-11-12
-updatedDate: 2026-11-14
+updatedDate: 2026-11-16
 summary: "O ramo main do Genesis mantém as conversas do Assistant em sessões interativas e mostra o código exato e o nó de destino na janela de aprovação."
 ---
 
@@ -10,6 +10,12 @@ Um desenvolvedor pode pedir ao Genesis Assistant que analise uma tarefa que falh
 ![Uma pessoa volta a uma conversa assinalada e analisa uma ação proposta](./genesis-assistant-interactive-sessions.webp)
 
 *Ilustração editorial da retomada de uma conversa do Assistant e da análise de uma ação proposta.*
+
+## Projetos e anexos: atualização de 16 de novembro
+
+A PR #172, integrada ao `main` em 15 de novembro, muda a preparação abaixo: conversar e controlar tarefas não exige mais uma cópia de Genesis. Consultar o código é opcional e sujeito a aprovação. Selecionar um projeto no host escolhido preenche caminhos omitidos sem ler arquivos ou autorizar desenvolvimento. A troca fica bloqueada durante uma resposta; outro caminho explícito continua sendo o alvo mostrado. Assistant compartilha onze definições de controle com MCP. As aprovações vinculam parâmetros estruturados exatos e identidades de nó e conversa controladas pelo servidor. [Mudanças integradas][workflows]
+
+Por exemplo, escolha um projeto, solicite uma tarefa em segundo plano e confira e aprove os parâmetros. Inícios bem-sucedidos são acompanhados automaticamente; o seletor Tasks pesquisa tarefas existentes. Os cartões mostram estado observado e horário de atualização, preservando os últimos dados se a atualização falhar. Parar a resposta não para o desenvolvimento; enviar requisitos e solicitar cancelamento são ações aprovadas separadas. Cancelar não desfaz alterações Git. O navegador envia texto, PDF, DOCX, imagens e áudio, quatro arquivos por mensagem e 15 MiB por arquivo; anexos concluídos podem ser enviados sem texto. A entrada secundária de caminho do servidor aceita o nó local do painel e não o substitui por um nó remoto incompatível. Referências a tarefas sobrevivem ao fim da sessão, mas conversas em memória não ao reinício do servidor; tarefas persistentes podem ser encontradas novamente. Experimente uma compilação com a PR #172 e confira o estado antes de repetir um envio incerto. [Guia atualizado][workflowguide]
 
 ## Voltar a uma conversa que aguarda resposta
 
@@ -44,3 +50,6 @@ Atualização de 14 de novembro: mudanças integradas ao `main` em 13 de novembr
 [related]: /pt-br/news/genesis-development-2026-11-07
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
+
+[workflows]: https://github.com/EMI-Group/genesis/pull/172
+[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
