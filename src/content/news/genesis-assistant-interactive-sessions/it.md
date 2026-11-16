@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: riprendere una conversazione in attesa"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Il ramo main di Genesis mantiene le conversazioni di Assistant in sessioni interattive e mostra codice esatto e nodo di destinazione nella finestra di approvazione."
 ---
 
@@ -11,12 +11,6 @@ Chi sviluppa può chiedere a Genesis Assistant di esaminare un’attività non r
 
 *Illustrazione editoriale della ripresa di una conversazione con Assistant e del controllo di un’azione proposta.*
 
-## Progetti e allegati: aggiornamento del 16 novembre
-
-La PR #172, integrata in `main` il 15 novembre, cambia la preparazione descritta sotto: chat e controllo delle attività non richiedono più una copia di Genesis. Il riferimento al codice è facoltativo e soggetto ad approvazione. Un progetto sull’host selezionato completa i percorsi omessi senza leggere file né autorizzare sviluppo. Il cambio progetto è bloccato durante una risposta; un percorso diverso esplicito resta la destinazione mostrata. Assistant condivide undici definizioni di controllo con MCP. Le approvazioni delle modifiche vincolano parametri strutturati esatti e identità di nodo e conversazione gestite dal server. [Modifiche integrate][workflows]
-
-Scelga ad esempio un progetto, richieda un’attività in background e ne controlli e approvi i parametri. Gli avvii riusciti vengono seguiti automaticamente; il selettore Tasks permette di cercare attività esistenti. Le schede mostrano stato osservato e ora di aggiornamento, mantenendo gli ultimi dati se l’aggiornamento fallisce. Fermare la risposta non ferma lo sviluppo; inviare requisiti e chiedere l’annullamento sono azioni approvate separate. L’annullamento non ripristina le modifiche Git. Il browser carica testo, PDF, DOCX, immagini e audio, fino a quattro file per messaggio da 15 MiB ciascuno; allegati pronti possono partire senza testo. L’ingresso secondario per percorsi server supporta il nodo locale del dashboard e non lo sostituisce a nodi remoti non supportati. I riferimenti alle attività sopravvivono alla sessione, ma le conversazioni in memoria non al riavvio del server; le attività persistenti possono essere ritrovate. Provi con la PR #172 e verifichi lo stato prima di ripetere un invio incerto. [Guida aggiornata][workflowguide]
-
 ## Tornare a una conversazione in attesa
 
 Apra **Conversations** sotto **Active Tasks**. L’elenco mostra le sessioni attive del nodo selezionato insieme alle conversazioni salvate nella cache locale. Gli stati distinguono attesa di input, esecuzione e chiusura. Selezionando una conversazione si apre `/assistant?session=<agent_id>`. I vecchi link `/help` reindirizzano a `/assistant` conservando i parametri di query. [Modifica del percorso][route]
@@ -25,11 +19,11 @@ Dopo uno scambio, la sessione può liberare lo slot di esecuzione e tenere il co
 
 ## Esaminare l’attività prima di decidere
 
-Si consideri un’attività di test non riuscita. Chieda ad Assistant di leggere stato, errore e risultato sul nodo che sta visualizzando. Apra la pagina di revisione, confronti il diff con l’errore e torni tramite **Conversations** per fare una domanda più specifica. La conversazione conserva il contesto. Su un’istanza locale, scarichi il sorgente Genesis quando richiesto affinché Assistant possa consultarlo.
-
-Per ritentare, chieda ad Assistant di proporre una nuova attività usando la precedente come contesto. L’ispezione usa il livello di lettura, mentre l’avvio richiede una chiamata di scrittura. La decisione riguarda quella specifica chiamata sul nodo selezionato. [Ispezione e livelli di esecuzione][guide]
+Correzione del 17 novembre: Dalla PR #172, la chat ordinaria e il controllo delle attività non richiedono più un checkout di Genesis. Il riferimento sorgente è facoltativo e soggetto ad approvazione. Le letture delle attività sono dirette; le modifiche usano approvazioni strutturate. I livelli di esecuzione del codice restano propri del valutatore avanzato. Il [percorso delle attività di progetto][newworkflow] descrive destinazioni, approvazioni e monitoraggio.
 
 ## Controllare la scrittura senza perdere il punto
+
+Per le chiamate avanzate a `elixir_eval`, la revisione del codice funziona così.
 
 Una barra fissa tra conversazione e campo di inserimento indica le richieste in attesa. **Review** apre una finestra con una richiesta alla volta. Verifichi il codice esatto e la destinazione, poi scelga **Allow once** o **Deny**. Le richieste di livello `sudo` presentano un avviso evidente perché eseguono Elixir nativo con l’identità del server Genesis.
 
@@ -43,7 +37,7 @@ Dopo l’approvazione della scrittura, controlli l’attività creata e il suo s
 
 Aggiornamento del 14 novembre: le modifiche integrate in `main` il 13 novembre trasmettono uno snapshot finale autorevole ad Assistant e all’ispettore dell’agente selezionato. Trascrizione e stato terminale sono applicati insieme; notifiche tardive non riaprono la conversazione chiusa. Se il passaggio non è disponibile, resta visibile l’ultimo testo coerente in cache, senza una lettura separata della cronologia. L’ispettore può conservare i dettagli di agenti terminati fuori dall’albero attivo. Su una build contenente la modifica, mantenga selezionata la conversazione fino al completamento e verifichi che testo finale e stato concordino prima di ripetere il lavoro. [Implementazione del passaggio finale][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ Aggiornamento del 14 novembre: le modifiche integrate in `main` il 13 novembre t
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /it/news/genesis-assistant-project-workflows

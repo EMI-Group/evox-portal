@@ -32,5 +32,11 @@
     "lists": 13,
     "desktopMobileLightDark": "passed"
   },
-  "locales": 13
+  "locales": 13,
+  "supersededCoverage": {
+    "date": "2026-11-17",
+    "canonicalUrl": "https://www.evox.group/news/genesis-assistant-project-workflows",
+    "record": "docs/assistant-workflow-split-20261117.json",
+    "reason": "User-directed split: new project-task workflow is an independent news event; historical publication and validation retained here."
+  }
 }

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：中断した会話から作業を続ける"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Genesis の main では Assistant の会話が対話セッションとして続き、承認ダイアログに実行するコードと対象ノードが表示されます。"
 ---
 
@@ -11,12 +11,6 @@ summary: "Genesis の main では Assistant の会話が対話セッションと
 
 *Assistant の会話を再開し、提案された操作を確認する様子を描いたイラスト。*
 
-## プロジェクトのタスクと添付：11 月 16 日追記
-
-11 月 15 日に `main` へ統合された PR #172 では、以下で説明した準備方法が変わりました。通常の会話とタスク制御に Genesis のチェックアウトは不要で、ソース参照は承認付きの任意機能です。選択ホストのプロジェクトは省略されたタスクパスを補いますが、ファイル読み取りや開発の許可にはなりません。返信中は切替不可で、別パスの明示指定は承認画面の実際の対象になります。Assistant は MCP と十一のタスク制御定義を共有し、変更操作の承認を正確な構造化パラメーターとサーバー管理のノード・会話識別に結び付けます。[統合された変更][workflows]
-
-例えばプロジェクトを選び、バックグラウンドタスクを依頼し、パラメーターを確認して承認します。起動成功時は自動追跡され、検索可能な Tasks 選択画面から既存タスクも関連付けられます。カードは観測状態と更新時刻を表示し、更新失敗時は既知の情報を保持します。返信停止は開発を停止しません。要件送信とタスク取消は別々の承認操作で、取消は Git 変更を元に戻しません。ブラウザーからテキスト、PDF、DOCX、画像、音声を一回四ファイル、各 15 MiB までアップロードでき、完了後は本文なしでも送れます。補助のサーバーパス入力はダッシュボードのローカルノードに対応し、非対応のリモートノードをそのホストへ置き換えません。会話終了後もタスク参照は残りますが、メモリ内の会話はサーバー再起動を越えて復元されません。永続化されたタスクは再検索できます。PR #172 を含むビルドで試し、送信結果が不明なら再試行前に状態を確認してください。[更新ガイド][workflowguide]
-
 ## 入力を待っている会話に戻る
 
 **Active Tasks** の下にある **Conversations** を開きます。選択中のノードの稼働中のセッションと、ローカルにキャッシュされた会話が並びます。状態は入力待ち、実行中、終了を区別します。会話を選ぶと `/assistant?session=<agent_id>` が開きます。旧 `/help` リンクはクエリ文字列を保ったまま `/assistant` にリダイレクトされます。[ルートの変更][route]
@@ -25,11 +19,11 @@ summary: "Genesis の main では Assistant の会話が対話セッションと
 
 ## 何を変更するか決める前にタスクを調べる
 
-テストタスクが失敗したとします。Assistant に、閲覧中のノードで状態、エラー、結果を読むよう頼みます。レビュー画面で差分と失敗の内容を見比べ、**Conversations** から元の会話に戻って質問を絞ります。ローカルインスタンスでソースのダウンロードを求められたら、Assistant が参照できるよう Genesis のソースを取得します。
-
-再試行する場合は、以前のタスクを背景として新規タスクの開始を提案させます。調査は read ティア、開始は write 呼び出しです。選択したノードで実行する個別の呼び出しについて判断します。[タスク調査と実行ティア][guide]
+11 月 17 日の修正：通常の会話とタスク制御に Genesis のチェックアウトは不要です。ソース検査は任意で承認が必要です。読み取り専用照会は直接実行し、開発変更では正確な構造化パラメーターと対象を承認します。高度な評価はコード単位の制御を維持します。詳細は[プロジェクトのタスクワークフロー][newworkflow]をご覧ください。
 
 ## 読んでいる場所を保ったまま書き込みを確認する
+
+高度な `elixir_eval` 呼び出しのコード単位の確認は、次のように行います。
 
 会話本文と入力欄の間の固定バーが、保留中の要求を知らせます。**Review** で一件ずつ表示し、正確なコードと実行先を確認して **Allow once** または **Deny** を選びます。`sudo` ティアでは Genesis サーバーの実行ユーザーでネイティブ Elixir が動くため、目立つ警告が表示されます。
 
@@ -43,7 +37,7 @@ summary: "Genesis の main では Assistant の会話が対話セッションと
 
 11 月 14 日追記：11 月 13 日に `main` へ統合された変更は、最終的な権威あるスナップショットを Assistant と選択中のエージェントのインスペクターへ渡します。会話と終了状態を同時に適用し、遅れて届くタスク通知で閉じた会話が再開されることを防ぎます。引き継ぎが利用できない場合は、別途履歴を読み込まず、最後の整合したキャッシュ済みテキストを表示します。終了したエージェントの詳細はライブツリー外で保持できます。この変更を含むビルドで会話を完了まで選択したままにし、最終テキストと状態の一致を確認してから再試行を判断してください。[終了時の引き継ぎ実装][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ summary: "Genesis の main では Assistant の会話が対話セッションと
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /ja/news/genesis-assistant-project-workflows

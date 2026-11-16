@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-17",
+  "collection": "news",
+  "story_type": "development-workflow",
+  "depth": "standard",
+  "editorial_action": "new",
+  "reason": "PR #172 adds a distinct project-selection, approved task-control, task-following and attachment workflow. It answers a new user task rather than merely supplementing conversation continuity.",
+  "slug": "genesis-assistant-project-workflows",
+  "repo": "EMI-Group/genesis",
+  "sourceKeys": [
+    "genesis:pr:172",
+    "genesis:commit:6e10e18dd56ca3c84e2215dac647473c30563fee"
+  ],
+  "sources": [
+    "https://github.com/EMI-Group/genesis/pull/172",
+    "https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md"
+  ],
+  "datePolicy": {
+    "pubDate": "2026-11-16",
+    "updatedDate": "2026-11-17",
+    "upstreamMergeDate": "2026-11-15",
+    "reason": "Retain first reported date from the existing November 16 update when splitting; record actual substantive expansion separately."
+  },
+  "canonicalUrl": "https://www.evox.group/news/genesis-assistant-project-workflows",
+  "splitFrom": "https://www.evox.group/news/genesis-assistant-interactive-sessions",
+  "oldArticle": {
+    "pubDate": "2026-11-12",
+    "updatedDate": "2026-11-17",
+    "action": "Remove duplicated November 16 block, correct optional source checkout and structured task approval, scope code review to advanced elixir_eval, preserve November 14 terminal-handoff continuation and link new workflow in all locales."
+  },
+  "coverage": [
+    {
+      "fact": "No checkout needed for ordinary chat/task control; optional approved source reference and separate runtime/reference versions",
+      "location": "Choose target; files"
+    },
+    {
+      "fact": "Project scopes and default paths, explicit targets, locked switching during reply, server identity",
+      "location": "Choose target"
+    },
+    {
+      "fact": "11 shared task definitions, direct queries, immutable structured approval, denial and timeout",
+      "location": "Approval"
+    },
+    {
+      "fact": "Concrete test repair scenario, automatic following and existing-task picker",
+      "location": "Approval"
+    },
+    {
+      "fact": "Queued requirements, stop reply versus task cancellation, no undo of Git changes, observed counters and refresh failures",
+      "location": "Separate work"
+    },
+    {
+      "fact": "Volatile conversation store versus persistent task records, refind after restart and check uncertain submission",
+      "location": "Separate work"
+    },
+    {
+      "fact": "4 files/message, 15 MiB each, text/PDF/DOCX/image/audio, no text required, device/server distinction and cancelled pending transfers",
+      "location": "Files"
+    }
+  ],
+  "omissions": [
+    {
+      "fact": "Detailed upload MIME normalization, internal optimistic UI implementation and advanced evaluator instructions",
+      "reason": "Implementation-level details are linked in the pinned guide; this story explains user actions and observable boundaries."
+    }
+  ],
+  "locales": [
+    "en",
+    "zh-cn",
+    "zh-tw",
+    "ja",
+    "ko",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "es-419",
+    "ru",
+    "pt",
+    "pt-br"
+  ],
+  "image": {
+    "file": "genesis-assistant-project-workflows.webp",
+    "kind": "original-generated-concept-illustration",
+    "tool": "imagegen",
+    "source": "exec-c3793ba4-892c-4560-92cf-00506a64ffd3.png",
+    "content_prompt": "A project folder with a document and a photograph passes a physical approval lever; a crimson line connects it to an independently running engineering workshop. Distinguish scoped request, explicit approval and background work. No fake screenshot or measured result.",
+    "style_prompt": "Neutral white, gray and charcoal editorial ink drawing, textured shading and restrained crimson emphasis; no labels or logo. Style-only reference: evox-news-editor/assets/editorial-style/code-migration.png.",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "bytes": 321190,
+    "localizedAltCaption": true
+  },
+  "validation": {
+    "editorial": "Reviewed mechanism, scenario, actions and adjacent first-party evidence; removed repeated introductions; translations preserve facts and localized links.",
+    "build": "passed: 1196 pages",
+    "seo": "51 stories / 663 localized pages, 0 errors",
+    "render": "26 article pages and 13 news lists passed; covers, alt/captions, OG/Twitter/BlogPosting.image, dates, links and 13 hreflang checked",
+    "visual": "Inspected desktop and mobile screenshots; English and Chinese, light and dark",
+    "production": "To be recorded in automation memory after push and online validation"
+  },
+  "ruleUpdated": {
+    "skill": "evox-news-editor/SKILL.md and references/story-types.md",
+    "automation": "evox-github",
+    "schedule": "daily, preserved",
+    "cursors": "not changed by editorial split"
+  },
+  "englishBodyWordCount": 552
+}

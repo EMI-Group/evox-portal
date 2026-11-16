@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：從暫停的位置接續對話"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在核准視窗顯示確切程式碼及目標節點。"
 ---
 
@@ -11,12 +11,6 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 
 *編輯插畫：回到 Assistant 對話並審閱擬執行的操作。*
 
-## 專案任務與附件：11 月 16 日更新
-
-11 月 15 日合入 `main` 的 PR #172 改變了下文的準備方式：一般聊天與任務控制不再需要 Genesis 原始碼檢出。原始碼參考改為選用且須核准的能力。選取目標主機的專案可補齊任務省略的路徑，但不會讀取專案檔案或授權開發。回覆期間不能切換專案；明確指定其他路徑時，核准畫面仍顯示實際目標。Assistant 與 MCP 共用十一項任務控制定義，變更操作的核准綁定確切結構化參數，以及伺服器維護的節點和對話身分。[已合併的工作流程更新][workflows]
-
-例如，選取專案、要求背景任務、檢查參數後核准。成功啟動的任務會自動追蹤，也可用可搜尋的 Tasks 選擇器連結既有任務。卡片顯示觀測狀態與更新時間，更新失敗保留最後已知資訊。停止回覆不會停止背景開發；傳送需求與要求取消任務是分別核准的操作，取消不會復原 Git 變更。瀏覽器上傳支援文字、PDF、DOCX、圖片和音訊，每則訊息最多四個檔案、每個 15 MiB；上傳完成即可不加文字傳送。次要伺服器路徑入口支援儀表板本機節點，不會用該主機替代不支援的遠端節點。Assistant 對話結束後任務連結仍保留，但記憶體中的對話不能跨伺服器重新啟動復原；持久化任務可重新尋找及追蹤。請在包含 PR #172 的版本嘗試流程，提交結果不確定時先檢查任務狀態再重試。[更新後的 Assistant 指南][workflowguide]
-
 ## 回到等待輸入的對話
 
 在 **Active Tasks** 下方開啟 **Conversations**。清單同時顯示所選節點上的活動工作階段與本機快取的對話，狀態分為等待輸入、執行中和已結束。選擇對話會開啟 `/assistant?session=<agent_id>`。原有的 `/help` 連結會重新導向 `/assistant`，保留查詢參數。[路由變更][route]
@@ -25,11 +19,11 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 
 ## 先檢查任務，再決定要改什麼
 
-以測試失敗為例，先請 Assistant 讀取目前節點上的任務狀態、錯誤和結果。開啟審查頁面，比對程式碼差異與失敗資訊，再從 **Conversations** 回到原對話提出更具體的問題。如果本機執行個體提示下載 Genesis 原始碼，先完成下載，Assistant 才能查閱該份程式碼。
-
-若要重試，可以請 Assistant 提議以前一項任務為背景啟動新任務。檢查屬於讀取層級，啟動工作則使用寫入呼叫，須對所選節點上的該次呼叫作出核准決定。[任務檢查與執行層級][guide]
+11 月 17 日修訂：普通聊天與任務控制無需 Genesis 原始碼檢出。原始碼檢查是可選且需核准的能力。只讀任務查詢直接執行，開發修改會顯示確切結構化引數與執行目標供核准；高階求值呼叫仍保留程式碼級控制。專案選擇、任務跟蹤及附件操作見[專案任務工作流][newworkflow]。
 
 ## 審閱寫入操作時保留閱讀位置
+
+對於進階 `elixir_eval` 呼叫，程式碼層級核准仍採用以下方式。
 
 對話內容與輸入欄之間有固定狀態列，提示待處理請求。**Review** 會開啟對話方塊，每次顯示一項請求。確認要執行的確切程式碼及目標，再選擇 **Allow once** 或 **Deny**。`sudo` 層級的請求會顯示醒目警告，因為它會以 Genesis 伺服器身分執行原生 Elixir。
 
@@ -43,7 +37,7 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 
 11 月 14 日補充：11 月 13 日合入 `main` 的更新，將最終權威快照交給 Assistant 和所選代理的檢查面板。對話內容與終止狀態一起套用，延遲的任務廣播不能重新開啟已封閉的對話。若交接無法使用，介面保留最後一致的快取文字，而非另外讀取歷史。檢查面板可在活動樹之外保留已結束代理的詳細資訊。在包含此更新的版本上，保持選取對話直到完成，確認最終文字與狀態一致後再決定是否重試工作。[終止交接實作][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ summary: "Genesis 主分支以互動工作階段保留 Assistant 對話，並在
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /zh-tw/news/genesis-assistant-project-workflows

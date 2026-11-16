@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: Pick up the conversation where it paused"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Genesis main keeps Assistant conversations in interactive sessions and brings pending approvals into a review dialog with the exact code and target node."
 ---
 
@@ -11,12 +11,6 @@ A developer may ask Genesis Assistant to inspect a failed task, leave to review 
 
 *Editorial illustration of resuming an Assistant conversation and reviewing a proposed action.*
 
-## Project-aware tasks and attachments: November 16 update
-
-PR #172, merged into `main` on November 15, changes the setup described below: ordinary chat and task control no longer require a Genesis checkout. Source reference is now optional and approval-gated. Choose a project on the selected host to supply omitted task paths; this does not read project files or authorize development. Project switching is locked during a reply, and an explicit different path remains the target shown for approval. Assistant now shares eleven task-control definitions with MCP. Mutations bind approval to the exact structured parameters and server-owned node/conversation identity. [Merged workflow changes][workflows]
-
-For example, select a project, request a background task, inspect its parameters and approve it. Successful starts are followed automatically; the searchable Tasks picker can attach an existing task. Cards retain observed status and refresh time, keeping last-known facts if refresh fails. Stop reply leaves background development running; sending requirements and requesting task cancellation are separate approved actions. Cancellation does not undo Git changes. Browser upload supports text, PDF, DOCX, images and audio, up to four files and 15 MiB each; completed attachments can send without text. The secondary server-path reader supports the local dashboard node and never substitutes that host for an unsupported remote node. Task links survive an Assistant session ending, but the in-memory conversation store does not survive server restart; persistent tasks can be found and followed again. Try this workflow on a build containing PR #172 and inspect task state before retrying an uncertain submission. [Updated Assistant guide][workflowguide]
-
 ## Return to a waiting conversation
 
 Open **Conversations** beneath **Active Tasks**. The list shows the selected node's live sessions alongside locally cached chats. The status labels distinguish a session waiting for input, one running, and one that has ended. Selecting a conversation opens it at `/assistant?session=<agent_id>`. Older `/help` links redirect to `/assistant` with their query string preserved. [Route change][route]
@@ -25,11 +19,11 @@ The session can yield after an exchange. While it waits for input, it releases i
 
 ## Inspect the task before deciding what to change
 
-Consider a failed test task. Ask the Assistant to read its status, error and result on the node you are viewing. Then open the review page, compare the diff with the failure and return through **Conversations** with a narrower question. The existing conversation provides the context for that follow-up. On a local instance, download the Genesis source when prompted so the Assistant can consult its checkout.
-
-If the next step is a retry, ask the Assistant to propose starting a new task using the earlier task as context. The inspection uses the read tier, while starting work uses a write call. The write needs a decision about the specific call on the selected node. [Task inspection and execution tiers][guide]
+November 17 correction: Ordinary chat and task control need no Genesis checkout. Source inspection is optional and approval-gated. Read-only task queries run directly; development mutations show their exact structured parameters and target for approval. Advanced evaluator calls retain their code-level controls. See the [project task workflow][newworkflow] for project selection, task following and attachments.
 
 ## Review the proposed write without losing your place
+
+For advanced `elixir_eval` calls, the code-level review works as follows.
 
 A fixed strip between the transcript and composer shows when requests are pending. **Review** opens a dialog with one request at a time. Check the exact code and execution target, then choose **Allow once** or **Deny**. Requests in the `sudo` tier carry a prominent warning because they run native Elixir under the Genesis server's identity.
 
@@ -43,7 +37,7 @@ After a write is accepted, inspect the resulting task and check its status befor
 
 November 14 update: changes merged into `main` on November 13 pass a final, authoritative snapshot to Assistant and the selected-agent inspector. Transcript and terminal status are applied together; late task broadcasts cannot reopen the sealed conversation. If the handoff is unavailable, the last coherent cached text remains visible rather than starting a separate history read. An inspector can retain ended-agent details outside the live tree. On a build containing this change, keep a conversation selected through completion and check that its final text and status agree before retrying work. [Terminal handoff implementation][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ November 14 update: changes merged into `main` on November 13 pass a final, auth
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /news/genesis-assistant-project-workflows

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: 멈춘 대화에서 작업 이어가기"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하며, 검토 대화 상자에 정확한 코드와 대상 노드를 표시합니다."
 ---
 
@@ -11,12 +11,6 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 
 *Assistant 대화를 이어가며 제안된 동작을 검토하는 장면을 그린 편집 삽화입니다.*
 
-## 프로젝트 작업과 첨부: 11월 16일 추가
-
-11월 15일 `main`에 병합된 PR #172는 아래의 준비 방식을 바꿉니다. 일반 대화와 작업 제어에는 Genesis 체크아웃이 필요 없고, 소스 참조는 승인받는 선택 기능입니다. 선택 호스트의 프로젝트는 생략된 작업 경로를 채우지만 파일을 읽거나 개발을 허가하지 않습니다. 답변 중에는 프로젝트 전환이 잠기며, 다른 경로를 명시하면 승인 화면에 실제 대상으로 표시합니다. Assistant는 MCP와 열한 가지 작업 제어 정의를 공유하고, 변경 승인을 정확한 구조화 매개변수와 서버가 관리하는 노드·대화 식별에 연결합니다. [병합된 변경][workflows]
-
-예를 들어 프로젝트를 선택하고 백그라운드 작업을 요청한 뒤 매개변수를 확인하여 승인합니다. 시작에 성공하면 자동으로 추적하며, 검색 가능한 Tasks 선택기에서 기존 작업을 연결할 수도 있습니다. 카드는 관측 상태와 갱신 시각을 표시하고 갱신 실패 시 마지막 정보를 유지합니다. 답변 중지는 백그라운드 개발을 멈추지 않습니다. 요구사항 전송과 작업 취소 요청은 각각 승인하는 동작이며, 취소는 Git 변경을 되돌리지 않습니다. 브라우저 업로드는 텍스트, PDF, DOCX, 이미지, 오디오를 메시지당 네 파일, 파일당 15 MiB까지 지원하며 완료된 첨부는 본문 없이 보낼 수 있습니다. 보조 서버 경로 입력은 대시보드 로컬 노드를 지원하며 미지원 원격 노드를 해당 호스트로 대체하지 않습니다. 세션 종료 후 작업 연결은 남지만 메모리 대화는 서버 재시작 후 복원되지 않습니다. 영속 작업은 다시 찾아 추적할 수 있습니다. PR #172가 포함된 빌드에서 시도하고, 제출 결과가 불확실하면 재시도 전에 상태를 확인하세요. [업데이트된 가이드][workflowguide]
-
 ## 입력을 기다리는 대화로 돌아가기
 
 **Active Tasks** 아래 **Conversations**를 엽니다. 선택한 노드의 활성 세션과 로컬에 캐시된 대화가 표시되며, 입력 대기 중, 실행 중, 종료됨을 구분합니다. 대화를 선택하면 `/assistant?session=<agent_id>`가 열립니다. 기존 `/help` 링크는 쿼리 문자열을 보존하며 `/assistant`로 이동합니다. [경로 변경][route]
@@ -25,11 +19,11 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 
 ## 변경을 결정하기 전에 작업 살펴보기
 
-테스트 작업이 실패했다고 가정해 봅시다. 보고 있는 노드에서 해당 작업의 상태, 오류, 결과를 읽어 달라고 Assistant에 요청합니다. 검토 페이지에서 변경 사항을 실패 정보와 비교한 다음 **Conversations**로 돌아와 더 구체적으로 질문합니다. 로컬 인스턴스에서 Genesis 소스 다운로드를 요청하면 Assistant가 해당 체크아웃을 읽을 수 있도록 내려받습니다.
-
-재시도가 필요하면 이전 작업을 맥락으로 새 작업을 시작하도록 제안해 달라고 요청합니다. 조회는 읽기 단계이며 작업 시작은 쓰기 호출을 사용합니다. 선택한 노드에서 실행할 구체적인 호출을 승인할지 결정해야 합니다. [작업 조회 및 실행 단계][guide]
+11월 17일 수정: 일반 대화와 작업 제어에는 Genesis 체크아웃이 필요 없습니다. 소스 검사는 선택적 승인 기능입니다. 읽기 전용 조회는 바로 실행하며 개발 변경은 정확한 구조화 인수와 대상을 승인받습니다. 고급 평가의 코드 수준 제어는 유지됩니다. 자세한 내용은 [프로젝트 작업 워크플로][newworkflow]에서 확인하세요.
 
 ## 읽던 위치를 유지하며 쓰기 요청 검토하기
+
+고급 `elixir_eval` 호출의 코드 수준 검토는 다음과 같이 진행합니다.
 
 대화 내용과 입력란 사이의 고정된 상태 표시줄은 대기 중인 요청을 알려 줍니다. **Review**를 열면 한 번에 하나씩 볼 수 있습니다. 정확한 코드와 실행 대상을 확인한 후 **Allow once** 또는 **Deny**를 선택합니다. `sudo` 요청은 Genesis 서버의 실행 계정으로 네이티브 Elixir를 실행하므로 눈에 띄는 경고를 표시합니다.
 
@@ -43,7 +37,7 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 
 11월 14일 추가: 11월 13일 `main`에 통합된 변경은 최종 권위 있는 스냅샷을 Assistant와 선택한 에이전트의 검사 패널에 전달합니다. 대화 내용과 종료 상태를 함께 적용하므로 늦은 작업 알림이 닫힌 대화를 다시 열지 못합니다. 인계가 불가능하면 별도 이력을 읽는 대신 마지막으로 일관된 캐시 텍스트를 표시합니다. 검사 패널은 활성 트리 밖에서 종료된 에이전트의 상세 정보를 유지할 수 있습니다. 이 변경을 포함한 빌드에서 완료까지 대화를 선택한 채로 두고, 최종 텍스트와 상태가 일치하는지 확인한 후 재시도를 결정하세요. [종료 인계 구현][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ summary: "Genesis main은 Assistant 대화를 대화형 세션으로 유지하�
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /ko/news/genesis-assistant-project-workflows

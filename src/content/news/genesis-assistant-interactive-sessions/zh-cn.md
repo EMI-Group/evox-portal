@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：回到刚才暂停的对话"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审批窗口显示拟执行的确切代码和目标节点。"
 ---
 
@@ -11,12 +11,6 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 
 *编辑插画：回到 Assistant 会话并审阅拟执行操作。*
 
-## 项目任务与附件：11 月 16 日更新
-
-11 月 15 日合入 `main` 的 PR #172 改变了下文所述准备方式：普通聊天和任务控制不再需要 Genesis 源码检出。源码参考现为可选、需审批的能力。选择目标主机上的项目可补全任务省略的路径，但不会读取项目文件或授权开发。回复期间不能切换项目；明确指定其他路径时，审批仍显示实际目标。Assistant 与 MCP 共用十一项任务控制定义，修改操作的审批绑定确切结构化参数，以及服务器维护的节点和会话身份。[已合并的工作流更新][workflows]
-
-例如，选择项目、请求后台任务、检查参数后批准。成功启动的任务自动跟踪，也可用支持搜索的 Tasks 选择器关联已有任务。卡片显示已观测状态和刷新时间，刷新失败保留最后已知信息。停止回复不会停止后台开发；补充需求和请求取消任务是分别审批的操作，取消不会撤销 Git 修改。浏览器上传支持文本、PDF、DOCX、图片和音频，每条消息最多四个文件、每个 15 MiB，上传完成后可不加文字直接发送。次级服务器路径入口支持仪表板本地节点，不会用该主机替代不支持的远程节点。任务关联在 Assistant 会话结束后仍保留，但内存中的会话存储不能跨服务器重启恢复；持久化任务可以重新查找和跟踪。在包含 PR #172 的构建上尝试这一流程，对结果不确定的提交先检查任务状态再重试。[更新后的 Assistant 指南][workflowguide]
-
 ## 回到等待输入的会话
 
 在 **Active Tasks** 下方打开 **Conversations**。这里会同时列出所选节点上的活动会话和本地缓存的对话，状态会区分等待输入、运行中和已结束。选择会话会打开 `/assistant?session=<agent_id>`。旧的 `/help` 链接会跳转到 `/assistant`，保留原来的查询参数。[路由变更][route]
@@ -25,11 +19,11 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 
 ## 先看清任务，再决定怎么处理
 
-以一次测试失败为例，可以先请 Assistant 读取当前节点上该任务的状态、错误和结果，再打开审阅页面，对照代码差异与失败信息。回到 **Conversations** 后，沿原会话提出更具体的问题。若本地实例提示下载 Genesis 源码，先完成下载，让 Assistant 可以查阅对应的检出版本。
-
-如果需要重试，可以请 Assistant 提议以上次任务为上下文启动新任务。读取状态走只读权限，启动工作走写入权限，需要对所选节点上的这次具体调用作出审批决定。[任务检查与执行权限][guide]
+11 月 17 日修订：普通聊天与任务控制无需 Genesis 源码检出。源码检查是可选且需审批的能力。只读任务查询直接运行，开发修改会显示确切结构化参数与执行目标供审批；高级求值调用仍保留代码级控制。项目选择、任务跟踪及附件操作见[项目任务工作流][newworkflow]。
 
 ## 审批时保留阅读位置
+
+对于高级 `elixir_eval` 调用，代码级审批仍采用以下方式。
 
 对话与输入框之间的固定状态栏会提示有待处理请求。点击 **Review**，弹窗一次展示一条请求。检查将执行的确切代码与目标，再选择 **Allow once** 或 **Deny**。属于 `sudo` 权限的请求会显示醒目的警告，因为它会以 Genesis 服务器身份运行原生 Elixir。
 
@@ -43,7 +37,7 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 
 11 月 14 日补充：11 月 13 日合入 `main` 的更新，将最终权威快照交给 Assistant 和所选智能体的检查面板。对话正文与终止状态一起应用，迟到的任务广播不能重新打开已封闭的会话。如果交接不可用，界面保留最后一致的缓存文本，而不是另行读取历史。检查面板可在活动树之外保留已结束智能体的详情。在包含此更新的构建上，保持选中会话直至完成，确认最终文本与状态一致后再决定是否重试工作。[终止交接实现][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ summary: "Genesis 主分支以交互式会话延续 Assistant 对话，并在审
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /zh-cn/news/genesis-assistant-project-workflows

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant : reprendre une conversation en attente"
 pubDate: 2026-11-12
-updatedDate: 2026-11-16
+updatedDate: 2026-11-17
 summary: "La branche main de Genesis maintient les conversations de l’Assistant dans des sessions interactives et affiche le code exact et le nœud cible dans la boîte d’approbation."
 ---
 
@@ -11,12 +11,6 @@ Une personne peut demander à Genesis Assistant d’examiner une tâche en éche
 
 *Illustration éditoriale de la reprise d’une conversation de l’Assistant et de l’examen d’une action.*
 
-## Projets et pièces jointes : mise à jour du 16 novembre
-
-La PR #172, intégrée à `main` le 15 novembre, modifie la préparation décrite ci-dessous : discuter et contrôler les tâches ne nécessite plus de copie de Genesis. La référence au code devient facultative et soumise à approbation. Un projet sur l’hôte sélectionné fournit les chemins omis sans lire les fichiers ni autoriser le développement. Le changement de projet est bloqué pendant une réponse ; un autre chemin explicite reste la cible affichée. Assistant partage onze définitions de contrôle avec MCP. L’approbation des mutations lie les paramètres structurés exacts et l’identité serveur du nœud et de la conversation. [Changements intégrés][workflows]
-
-Sélectionnez par exemple un projet, demandez une tâche en arrière-plan, puis examinez et approuvez ses paramètres. Un démarrage réussi active le suivi ; le sélecteur Tasks permet de rechercher une tâche existante. Les cartes montrent l’état observé et l’heure d’actualisation, conservant les derniers faits en cas d’échec. Arrêter la réponse laisse le développement continuer ; envoyer des exigences et demander l’annulation sont des actions distinctes approuvées. L’annulation ne défait pas les modifications Git. Le navigateur accepte texte, PDF, DOCX, images et audio, quatre fichiers par message et 15 MiB chacun ; une pièce jointe terminée peut partir sans texte. L’entrée secondaire de chemin serveur prend en charge le nœud local du tableau de bord, sans le substituer à un nœud distant non pris en charge. Les liens de tâches survivent à la fin de session, mais pas les conversations en mémoire au redémarrage serveur ; les tâches persistantes peuvent être retrouvées. Essayez sur une version contenant la PR #172 et vérifiez l’état avant de répéter une soumission incertaine. [Guide actualisé][workflowguide]
-
 ## Revenir à une conversation en attente
 
 Ouvrez **Conversations** sous **Active Tasks**. La liste regroupe les sessions actives du nœud sélectionné et les conversations mises en cache localement. Elle distingue les sessions en attente de saisie, en cours et terminées. Sélectionner une conversation ouvre `/assistant?session=<agent_id>`. Les anciens liens `/help` redirigent vers `/assistant` en conservant leurs paramètres. [Modification de la route][route]
@@ -25,11 +19,11 @@ Après un échange, la session peut libérer son créneau d’exécution tout en
 
 ## Examiner la tâche avant de choisir une action
 
-Prenons une tâche de test en échec. Demandez à l’Assistant de lire son état, son erreur et son résultat sur le nœud consulté. Ouvrez la page de revue, comparez les changements à l’erreur, puis revenez par **Conversations** avec une question plus précise. La conversation existante conserve le contexte. Sur une instance locale, téléchargez les sources de Genesis lorsque l’interface le demande pour que l’Assistant puisse les consulter.
-
-Pour réessayer, demandez à l’Assistant de proposer une nouvelle tâche en s’appuyant sur la précédente. L’inspection utilise le niveau de lecture, tandis que le lancement exige un appel d’écriture. La décision porte sur cet appel précis et sur le nœud sélectionné. [Inspection et niveaux d’exécution][guide]
+Correction du 17 novembre : Depuis la PR #172, la conversation ordinaire et le contrôle des tâches ne nécessitent plus de copie du code de Genesis. La référence source est facultative et soumise à approbation. Les lectures de tâches sont directes ; leurs mutations utilisent des approbations structurées. Les niveaux d’exécution du code restent propres à l’évaluateur avancé. Le [parcours des tâches de projet][newworkflow] détaille les cibles, les approbations et le suivi.
 
 ## Examiner une écriture sans perdre le fil
+
+Pour les appels avancés à `elixir_eval`, la revue du code fonctionne ainsi.
 
 Une barre fixe entre la conversation et la zone de saisie indique les demandes en attente. **Review** ouvre une boîte de dialogue qui présente une demande à la fois. Vérifiez le code exact et la cible, puis choisissez **Allow once** ou **Deny**. Le niveau `sudo` affiche un avertissement bien visible, car il exécute de l’Elixir natif sous l’identité du serveur Genesis.
 
@@ -43,7 +37,7 @@ Après avoir accepté une écriture, consultez la tâche créée et vérifiez so
 
 Ajout du 14 novembre : les changements intégrés à `main` le 13 novembre transmettent un instantané final faisant autorité à Assistant et à l’inspecteur de l’agent sélectionné. Transcription et statut terminal sont appliqués ensemble ; les notifications tardives ne rouvrent pas la conversation close. Si le transfert est indisponible, le dernier texte cohérent en cache reste visible, sans lecture indépendante de l’historique. L’inspecteur peut conserver les détails d’un agent terminé hors de l’arbre actif. Sur une version contenant ce changement, gardez la conversation sélectionnée jusqu’à sa fin et vérifiez l’accord entre texte final et statut avant de relancer le travail. [Implémentation du transfert final][handoff]
 
-[guide]: https://github.com/EMI-Group/genesis/blob/ee8f4ed570c86516f1a76639bd71ea7477688439/docs/genesis-assistant.md
+[guide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
 [session]: https://github.com/EMI-Group/genesis/commit/7bf561a64c5f4f1dcc2193b6788ee248c5326736
 [route]: https://github.com/EMI-Group/genesis/commit/124abbf7eaaa21c5ca6fe803128a962e7384d1b5
 [approval]: https://github.com/EMI-Group/genesis/commit/946ff9735c7b03aac4abb6a312c3a111a79fa51b
@@ -51,5 +45,4 @@ Ajout du 14 novembre : les changements intégrés à `main` le 13 novembre trans
 
 [handoff]: https://github.com/EMI-Group/genesis/commit/716c85c93bb171396c30b18b67d6d8a8c554b1ae
 
-[workflows]: https://github.com/EMI-Group/genesis/pull/172
-[workflowguide]: https://github.com/EMI-Group/genesis/blob/6e10e18dd56ca3c84e2215dac647473c30563fee/docs/genesis-assistant.md
+[newworkflow]: /fr/news/genesis-assistant-project-workflows
