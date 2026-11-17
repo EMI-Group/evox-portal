@@ -1,0 +1,39 @@
+---
+title: "TensorNEAT: aprender parámetros con topologías diferentes"
+pubDate: 2026-03-03
+updatedDate: 2026-11-17
+summary: "Los gradientes paralelos de población ajustan parámetros continuos sin cambiar la estructura discreta de cada candidato."
+---
+
+Una población de redes puede tener conexiones distintas sin necesitar un bucle de entrenamiento por estructura. La [PR #37][s1] de TensorNEAT, integrada en main el 3 de marzo de 2026, añade gradientes a los genomas tensorizados y una vía vectorizada con JAX para ajustar la población.
+
+![Redes diferentes conservan sus conexiones mientras se ajustan los pesos](./topology-gradients.webp)
+
+*Ilustración conceptual: ajustar parámetros continuos conservando la topología de cada red.*
+
+## Estructuras diferentes, una operación de gradiente
+
+TensorNEAT representa redes NEAT con tensores de nodos y conexiones. `genome.grad` devuelve pérdida escalar y gradientes de ambos arrays. Los campos estructurales, índices y tipos de función, y el relleno NaN reciben gradientes nulos. Se ajustan parámetros numéricos conservando la estructura codificada.
+
+La vectorización JAX aplica el cálculo a topologías diferentes. El [ejemplo XOR][s3] inicializa una población, la diversifica por mutación y optimiza las redes con descenso de gradiente. Es una pieza concreta para estudiar estructura y parámetros juntos sin suponer que el gradiente cambia conexiones discretas.
+
+## Hacer diferenciable la evaluación directa
+
+La implementación calcula una pérdida escalar mediante la transformación y evaluación del genoma, y utiliza `jax.value_and_grad` para derivar las matrices de nodos y conexiones. Un vector de entrada se evalúa una vez; un lote usa evaluación vectorizada. Cambiar el objetivo es una decisión explícita del llamante, no una propiedad implícita de la representación. [Implementación del gradiente][implementation]
+
+También requiere cambios bajo la API. El genoma predeterminado recorre un `jax.lax.fori_loop` acotado; conexiones y agregaciones pasan máscaras de validez para evitar que NaN no utilizados contaminen la aritmética. El relleno pertenece a la representación, no a las conexiones entrenables. Mutación estructural y ajuste numérico siguen siendo operaciones distintas aunque compartan matrices.
+
+## El ejemplo XOR separa diversidad y aprendizaje
+
+El ejemplo integrado inicializa 1.000 redes para XOR de tres entradas y aplica 20 rondas de mutación con claves aleatorias distintas. Después ejecuta descenso de gradiente con tasa 0,5 y un máximo de 500 pasos. Esta fase usa `jax.jit(jax.vmap(...))` sobre los individuos sin selección evolutiva. Es una demostración del proyecto sobre estructuras diversas, no una prueba de que el gradiente sustituya la búsqueda topológica. [Ejemplo completo][s3]
+
+Lee el número de individuos válidos junto con la pérdida mínima y media. Un candidato desconectado puede producir salidas no finitas; el ejemplo filtra pérdidas finitas en su informe, y las pruebas conservan la salida NaN de redes desconectadas. Una pérdida mínima decreciente no indica qué proporción de la población es utilizable. Revisa también las predicciones de la red seleccionada tras optimizarla.
+
+## Comprobar las derivadas antes de ampliar el experimento
+
+Las pruebas añadidas cubren gradientes finitos de genomas conectados predeterminados y recurrentes, diferenciación compilada, lotes de población, reducción de pérdida y diferencias finitas. Para una tarea propia, parte del ejemplo XOR versionado y cambia la pérdida manteniendo explícitos entradas y límites topológicos. Comprueba gradientes y campos estructurales antes de alternar aprendizaje y mutación. La posterior [actualización de memoria][memory] cambia el lote de trabajo, un control distinto del aprendizaje de parámetros.
+
+[s1]: https://github.com/EMI-Group/tensorneat/pull/37
+[s3]: https://github.com/EMI-Group/tensorneat/blob/bec15bb5bd497dfd1b7ea765fa0b9f9a095a4709/examples/func_fit/xor_grad.py
+[implementation]: https://github.com/EMI-Group/tensorneat/blob/bec15bb5bd497dfd1b7ea765fa0b9f9a095a4709/src/tensorneat/genome/base.py
+[memory]: /es/news/tensorneat-gradient-memory

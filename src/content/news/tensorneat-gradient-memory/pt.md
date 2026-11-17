@@ -1,26 +1,25 @@
 ---
-title: "TensorNEAT: refinar redes diferentes sem guardar todos os intermediários"
+title: "TensorNEAT: manter a população, limitar a memória de trabalho"
 pubDate: 2026-04-04
-summary: "Gradientes paralelos e execução com memória controlada conectam busca de topologias e ajuste de parâmetros no JAX."
+updatedDate: 2026-11-17
+summary: "Lotes populacionais e intermediários de busca menores reduzem o conjunto de trabalho simultâneo do NEAT sem diminuir a população."
 ---
 
-Buscar estruturas neurais produz indivíduos diferentes. A [integração de gradientes de 3 de março de 2026][s1] no TensorNEAT permite refinar parâmetros em topologias distintas. A [atualização de memória de 4 de abril][s2] reduz intermediários e adiciona lotes populacionais, oferecendo uma opção além de reduzir a busca.
+Mesmo que os genomas caibam na GPU, arrays de transformação e avaliação podem esgotar a memória. A [atualização de 4 de abril de 2026][s2] do TensorNEAT move a transformação para lotes sequenciais e reduz intermediários de busca. Mantém os candidatos enquanto permite controlar o conjunto de trabalho.
 
 ![Redes neurais diferentes atravessam uma pequena abertura em grupos](./cover.webp)
 
 *Ilustração conceptual: preservar a população limitando o lote ativo de trabalho.*
-
-## Estruturas diferentes, uma operação de gradiente
-
-TensorNEAT representa redes NEAT em tensores de nós e ligações. `genome.grad` devolve perda escalar e gradientes dos dois arrays. Campos estruturais, como índices e tipos de função, e preenchimento NaN recebem gradientes zero. Os parâmetros numéricos mudam, preservando a estrutura codificada.
-
-A vetorização JAX aplica esse cálculo mesmo a topologias diferentes. O [exemplo XOR][s3] inicializa uma população, diversifica estruturas por mutação e otimiza por descida do gradiente. É uma base concreta para estudar estrutura e parâmetros juntos sem supor que gradientes alteram ligações discretas.
 
 ## Dividir o trabalho, não o espaço de busca
 
 Abril adiciona `pop_batch_size` a NEAT e Pipeline. O valor no Pipeline substitui o do algoritmo e deve dividir a população. O antigo argumento `eval_batch_size` é substituído, exigindo migração das configurações que o utilizam.
 
 Num único dispositivo, a transformação passa para o loop `jax.lax.scan`. Em vez de materializar primeiro a adjacência densa da população toda, o pipeline transforma e avalia um lote por vez. A mutação também usa esse controlo. A população não muda; muda o conjunto de trabalho simultâneo. É útil quando a diversidade precisa ser mantida no limite da memória GPU.
+
+O ponto decisivo é onde o lote começa. Dividir a avaliação após transformar toda a população deixa o grande array de adjacência já alocado. Mover as duas operações para o corpo de scan altera sua duração. O commit descreve a passagem de população × nós × nós para lote × nós × nós. É uma comparação de implementação, não uma fórmula de memória total: genomas, estado persistente e outros buffers continuam ocupando espaço. [Mudança na transformação][s2]
+
+Usar lotes é uma escolha de execução. Não seleciona menos sobreviventes nem muda a população solicitada. Reduzir a população muda os candidatos participantes e pode alterar a própria busca. Separe essas opções ao diagnosticar falta de memória. Uma primeira comparação útil mantém a população e varia somente um divisor válido para o lote.
 
 ## Consultar sem grandes comparações intermediárias
 
@@ -32,9 +31,8 @@ O commit relata trajetórias idênticas em 15 gerações com semente fixa para D
 
 Comece com ajuste de função pequeno e limites fixos de nós e ligações. Registe a sequência sem lotes e escolha um divisor da população. Compare primeiro a correção; depois meça pico de memória, compilação e tempo por passo separadamente. Lotes menores reduzem memória, mas alteram o paralelismo disponível.
 
-Para gradientes, consulte XOR com perda e taxa de aprendizagem explícitas. Para memória, fixe o [código de abril][s4]. TensorNEAT usa JAX; a integração EvoX do README aponta para o ramo da época JAX, importante ao combinar ambientes. Assim fica mais claro quanta busca estrutural e paramétrica cabe no orçamento de memória.
+Use o [snapshot de abril][s4] para fixar a semântica da configuração, inclusive o argumento de lote renomeado. TensorNEAT é baseado em JAX; a integração documentada com EvoX aponta para o ramo da época JAX. Registre versões das dependências nas medições. O artigo separado sobre [gradientes populacionais][gradient] explica o aprendizagem. Primeiro confira se mudar o lote preserva os resultados da execução escolhida; depois avalie a relação entre memória e tempo.
 
-[s1]: https://github.com/EMI-Group/tensorneat/pull/37
 [s2]: https://github.com/EMI-Group/tensorneat/commit/ce27fa9f794928c9416d9f12c398f58481c821ce
-[s3]: https://github.com/EMI-Group/tensorneat/blob/ce27fa9f794928c9416d9f12c398f58481c821ce/examples/func_fit/xor_grad.py
 [s4]: https://github.com/EMI-Group/tensorneat/tree/ce27fa9f794928c9416d9f12c398f58481c821ce
+[gradient]: /pt/news/tensorneat-population-gradients

@@ -160,7 +160,17 @@
         "generator": "built-in image_gen",
         "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
       },
-      "url": "https://www.evox.group/zh-cn/news/evogp-rocm-population-execution"
+      "url": "https://www.evox.group/zh-cn/news/evogp-rocm-population-execution",
+      "canonicalCoverageRevision": {
+        "date": "2026-11-17",
+        "record": "docs/news-event-split-audit-20261117.json",
+        "retainedSourceKeys": [
+          "evogp:pr:14",
+          "evogp:commit:85c9f96490185b371438768668da53de930cc3f6"
+        ],
+        "movedTo": "evogp-amd-rocm",
+        "note": "Historical publication record preserved; current canonical source coverage is in the linked split audit and automation state."
+      }
     },
     {
       "slug": "tensorneat-gradient-memory",
@@ -196,7 +206,16 @@
         "generator": "built-in image_gen",
         "style_prompt": "Neutral gray editorial ink illustration with charcoal contours and restrained crimson focal details; no text or invented results."
       },
-      "url": "https://www.evox.group/zh-cn/news/tensorneat-gradient-memory"
+      "url": "https://www.evox.group/zh-cn/news/tensorneat-gradient-memory",
+      "canonicalCoverageRevision": {
+        "date": "2026-11-17",
+        "record": "docs/news-event-split-audit-20261117.json",
+        "retainedSourceKeys": [
+          "tensorneat:commit:ce27fa9f794928c9416d9f12c398f58481c821ce"
+        ],
+        "movedTo": "tensorneat-population-gradients",
+        "note": "Historical publication record preserved; current canonical source coverage is in the linked split audit and automation state."
+      }
     },
     {
       "slug": "evomo-0-3-1",

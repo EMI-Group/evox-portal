@@ -1,0 +1,408 @@
+{
+  "preparedAt": "2026-11-17",
+  "productionBase": "4ac6d4b66f88136b75fea45b5baced19cad5599b",
+  "scope": "All 35 existing production news reviewed; 2 composite retrospective articles split into 4 focused stories. Releases inventory checked separately for classification, no changes.",
+  "decisionRule": "Publish separately when a materially new capability, independent event or user task warrants its own entry; revise original for corrections, stronger evidence or operational details within the same story. Preserve URLs, original dates, localized reciprocal links and source canonical mapping.",
+  "audit": [
+    {
+      "slug": "autopso",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "codex-for-evox",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evococo",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evogm",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evogo",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evogp",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evogp-rocm-population-execution",
+      "decision": "split",
+      "reason": "June ROCm backend support and October reporting reductions are separate events with different reader tasks; move ROCm to evogp-amd-rocm and retain the reporting correction at this URL."
+    },
+    {
+      "slug": "evomo-constraint-aware-search",
+      "decision": "retain",
+      "reason": "Feasibility, population size and selection quality belong to the same October 30 PR48 workflow change; later added explanation is evidence for that same event."
+    },
+    {
+      "slug": "evonas",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evorl",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evorl-jax-training-consistency",
+      "decision": "retain",
+      "reason": "Compatibility, state and experiment reproducibility form one version-upgrade reader task; local JSONL recording already has its own article."
+    },
+    {
+      "slug": "evorl-local-jsonl-recording",
+      "decision": "retain",
+      "reason": "Already independent event and reader task, with serialization and local recording mechanisms."
+    },
+    {
+      "slug": "evox-algorithm-correctness",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evox-distributed-evaluation",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evox-genesis",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "evox-quickstart",
+      "decision": "retain",
+      "reason": "Evergreen getting-started task; revised operating instructions maintain the same reader intent."
+    },
+    {
+      "slug": "evox-virtual-populations",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "genesis-assistant-interactive-sessions",
+      "decision": "retain",
+      "reason": "Already split in preceding publication; retains interactive conversation/session continuity including terminal handoff."
+    },
+    {
+      "slug": "genesis-assistant-project-workflows",
+      "decision": "retain",
+      "reason": "Already independent article for project task control, structured approval and monitoring."
+    },
+    {
+      "slug": "genesis-compiler-continuation",
+      "decision": "retain",
+      "reason": "Case-specific methods, validation and limits deepen the same Evidence result; no unrelated new result is appended."
+    },
+    {
+      "slug": "genesis-context-continuity",
+      "decision": "retain",
+      "reason": "Source changes and explanations remain within the named capability and original reader task; no independently useful later event identified."
+    },
+    {
+      "slug": "genesis-development-2026-11-07",
+      "decision": "retain",
+      "reason": "Explicitly bounded November 4–7 roundup; it was published as a period overview, not an old article accumulating later events."
+    },
+    {
+      "slug": "genesis-development-history",
+      "decision": "retain",
+      "reason": "Case-specific methods, validation and limits deepen the same Evidence result; no unrelated new result is appended."
+    },
+    {
+      "slug": "genesis-evoxc",
+      "decision": "retain",
+      "reason": "Case-specific methods, validation and limits deepen the same Evidence result; no unrelated new result is appended."
+    },
+    {
+      "slug": "genesis-local-mcp",
+      "decision": "retain",
+      "reason": "Source changes and explanations remain within the named capability and original reader task; no independently useful later event identified."
+    },
+    {
+      "slug": "genesis-mesa",
+      "decision": "retain",
+      "reason": "Case-specific methods, validation and limits deepen the same Evidence result; no unrelated new result is appended."
+    },
+    {
+      "slug": "genesis-multi-repository",
+      "decision": "retain",
+      "reason": "Source changes and explanations remain within the named capability and original reader task; no independently useful later event identified."
+    },
+    {
+      "slug": "genesis-persistent-server",
+      "decision": "retain",
+      "reason": "Source changes and explanations remain within the named capability and original reader task; no independently useful later event identified."
+    },
+    {
+      "slug": "genesis-project-registry-2026-11-09",
+      "decision": "retain",
+      "reason": "One project-registration workflow and its mechanism; no independent later event embedded."
+    },
+    {
+      "slug": "genesis-tools-and-skills",
+      "decision": "retain",
+      "reason": "Source changes and explanations remain within the named capability and original reader task; no independently useful later event identified."
+    },
+    {
+      "slug": "genesis-wasm-render",
+      "decision": "retain",
+      "reason": "Case-specific methods, validation and limits deepen the same Evidence result; no unrelated new result is appended."
+    },
+    {
+      "slug": "gpu-accelerated-emo",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "iStratDE",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "metade",
+      "decision": "retain",
+      "reason": "Research/development explanation remains centered on its original contribution; no distinct appended event identified in content, source/date references and revision history."
+    },
+    {
+      "slug": "tensorneat-gradient-memory",
+      "decision": "split",
+      "reason": "March population gradients and April memory batching are separate learning and execution controls; move gradients to tensorneat-population-gradients and retain bounded-memory execution here."
+    }
+  ],
+  "articles": [
+    {
+      "collection": "news",
+      "slug": "evogp-amd-rocm",
+      "repo": "evogp",
+      "story_type": "development",
+      "action": "new_canonical_split",
+      "depth": "regular",
+      "englishBodyWords": 515,
+      "briefReason": null,
+      "pubDate": "2026-06-18",
+      "updatedDate": "2026-11-17",
+      "sourceKeys": [
+        "evogp:pr:12",
+        "evogp:commit:5538d75470ee0fa444ee6bbe5ea98b2eed6e99f8"
+      ],
+      "sources": {
+        "s2": "https://github.com/EMI-Group/evogp/pull/12",
+        "s3": "https://github.com/EMI-Group/evogp/blob/5538d75470ee0fa444ee6bbe5ea98b2eed6e99f8/README.md",
+        "related": "/news/evogp",
+        "logging": "/news/evogp-rocm-population-execution"
+      },
+      "coverage": [
+        "One source base for CUDA and ROCm",
+        "Why translating kernel source is only part of the job",
+        "Follow the backend's build environment",
+        "Run the same search on a verified backend"
+      ],
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "url": "https://www.evox.group/zh-cn/news/evogp-amd-rocm",
+      "cover": {
+        "file": "rocm-backend.webp",
+        "sha256": "74f33fba1e9b45424815b8b545cfb3bd56ecb1425270c5d34186668243ea58d0",
+        "concept": "Existing dedicated backend illustration reassigned from the composite story; original provenance retained in ecosystem-backfill-editorial-20261112.json.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "localization": "All 13 alt texts and conceptual captions present; same pixels shared.",
+        "generator": "Existing generated editorial cover"
+      }
+    },
+    {
+      "collection": "news",
+      "slug": "evogp-rocm-population-execution",
+      "repo": "evogp",
+      "story_type": "development",
+      "action": "narrow_original_and_crosslink",
+      "depth": "brief",
+      "englishBodyWords": 262,
+      "briefReason": "One narrow extrema-reduction correction; mechanism, unchanged semantics, practical check and evidence limits are fully explained without padding or unsupported benchmark extrapolation.",
+      "pubDate": "2026-10-16",
+      "updatedDate": "2026-11-17",
+      "sourceKeys": [
+        "evogp:pr:14",
+        "evogp:commit:85c9f96490185b371438768668da53de930cc3f6"
+      ],
+      "sources": {
+        "s1": "https://github.com/EMI-Group/evogp/pull/14",
+        "related": "/news/evogp",
+        "rocm": "/news/evogp-amd-rocm"
+      },
+      "coverage": [
+        "Keep population statistics in tensor operations"
+      ],
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "url": "https://www.evox.group/zh-cn/news/evogp-rocm-population-execution",
+      "cover": {
+        "file": "reporting-reduction.webp",
+        "sha256": "e44aa1f3fed461fe629a2a65816b5b95d2e0db7a9fab3e279ea1d40109ce225f",
+        "concept": "New generated conceptual editorial illustration of collective extrema measurement over a field of program trees; not hardware or benchmark evidence.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "localization": "All 13 alt texts and conceptual captions present; same pixels shared.",
+        "generator": "image_gen; editorial charcoal/gray with restrained crimson accents, no text; style reference model-merging.png"
+      }
+    },
+    {
+      "collection": "news",
+      "slug": "tensorneat-population-gradients",
+      "repo": "tensorneat",
+      "story_type": "development",
+      "action": "new_canonical_split",
+      "depth": "regular",
+      "englishBodyWords": 550,
+      "briefReason": null,
+      "pubDate": "2026-03-03",
+      "updatedDate": "2026-11-17",
+      "sourceKeys": [
+        "tensorneat:pr:37",
+        "tensorneat:commit:bec15bb5bd497dfd1b7ea765fa0b9f9a095a4709"
+      ],
+      "sources": {
+        "s1": "https://github.com/EMI-Group/tensorneat/pull/37",
+        "s3": "https://github.com/EMI-Group/tensorneat/blob/bec15bb5bd497dfd1b7ea765fa0b9f9a095a4709/examples/func_fit/xor_grad.py",
+        "implementation": "https://github.com/EMI-Group/tensorneat/blob/bec15bb5bd497dfd1b7ea765fa0b9f9a095a4709/src/tensorneat/genome/base.py",
+        "memory": "/news/tensorneat-gradient-memory"
+      },
+      "coverage": [
+        "Different structures can share a gradient operation",
+        "Make the forward path differentiable",
+        "An XOR example separates diversity from learning",
+        "Check derivatives before extending the experiment"
+      ],
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "url": "https://www.evox.group/zh-cn/news/tensorneat-population-gradients",
+      "cover": {
+        "file": "topology-gradients.webp",
+        "sha256": "72c4aa4d3b051903722e333c8aab98e7dc5049af0501744b660e50fb964b9765",
+        "concept": "New generated conceptual editorial illustration of adjusting numerical weights across three distinct network topologies while preserving connections.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "localization": "All 13 alt texts and conceptual captions present; same pixels shared.",
+        "generator": "image_gen; editorial charcoal/gray with restrained crimson accents, no text; style reference model-merging.png"
+      }
+    },
+    {
+      "collection": "news",
+      "slug": "tensorneat-gradient-memory",
+      "repo": "tensorneat",
+      "story_type": "development",
+      "action": "narrow_original_and_crosslink",
+      "depth": "regular",
+      "englishBodyWords": 565,
+      "briefReason": null,
+      "pubDate": "2026-04-04",
+      "updatedDate": "2026-11-17",
+      "sourceKeys": [
+        "tensorneat:commit:ce27fa9f794928c9416d9f12c398f58481c821ce"
+      ],
+      "sources": {
+        "s2": "https://github.com/EMI-Group/tensorneat/commit/ce27fa9f794928c9416d9f12c398f58481c821ce",
+        "s4": "https://github.com/EMI-Group/tensorneat/tree/ce27fa9f794928c9416d9f12c398f58481c821ce",
+        "gradient": "/news/tensorneat-population-gradients"
+      },
+      "coverage": [
+        "Batch the working set, not the search space",
+        "Lookups no longer need broad comparison intermediates",
+        "Choose a batch size with a reproducible experiment"
+      ],
+      "locales": [
+        "de",
+        "en",
+        "es",
+        "es-419",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt",
+        "pt-br",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "url": "https://www.evox.group/zh-cn/news/tensorneat-gradient-memory",
+      "cover": {
+        "file": "cover.webp",
+        "sha256": "70fa479f2e6cfdbfeca64d9b837749e6ad91455231b1e33d6907d0543ba3eec8",
+        "concept": "Existing dedicated population-through-batch-aperture illustration retained for the memory execution task.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "localization": "All 13 alt texts and conceptual captions present; same pixels shared.",
+        "generator": "Existing generated editorial cover"
+      }
+    }
+  ],
+  "datePolicy": "Historical retrospective split dates use original upstream event in Asia/Shanghai per user instruction; ROCm merge June 17 16:42 UTC is June 18 locally. Original October 16 and April 4 article dates retained. All editorial revisions dated November 17; deployment recorded separately.",
+  "sourceVerification": "Read full PR12 and pinned README, PR14, PR37 implementation/example/tests patches and pinned sources, memory commit and changed files; reread EvoMO PR48 for same-event determination.",
+  "validation": {
+    "editorial": "Mechanism/scenario/action and fact coverage reviewed before publication. Narrow reporting brief explicitly justified.",
+    "localization": "52 pages: aligned source references, code tokens, section coverage, event dates, alt/captions and reciprocal localized links.",
+    "build": "pnpm build passed; 689 localized pages across 53 stories, 0 SEO audit errors.",
+    "render": "52 local articles and 13 locale news lists passed body, source links, title, summary, dates, canonical/hreflang, OG/Twitter/BlogPosting image; image bytes verified against actual source even when Vite deduplicates asset names.",
+    "visual": "Desktop 1280 and mobile 390; English/Chinese light and dark captures; inspected four representative article views.",
+    "live": "Pending deployment verification; durable automation state stores final commit, deployment and exact-body live checks."
+  }
+}
