@@ -1,0 +1,58 @@
+{
+  "preparedAt": "2026-11-19",
+  "collection": "releases",
+  "slug": "genesis-0-14-3",
+  "story_type": "release",
+  "depth": "regular",
+  "editorial_action": "new",
+  "reason": "Formal release has one canonical release entry; earlier Assistant development articles supply context rather than duplicate release announcements.",
+  "sourceKeys": [
+    "genesis:release:450897926",
+    "genesis:tag:v0.14.3"
+  ],
+  "upstreamPublishedAt": "2026-11-19T04:58:18Z",
+  "pubDate": "2026-11-19",
+  "url": "https://www.evox.group/zh-cn/releases/genesis-0-14-3",
+  "coverage": {
+    "pause": "Running persistent tasks, turn-boundary pause, same task ID, root record gate and interactive exclusion.",
+    "durability": "Separate SQLite state, stable agent identity, whole-tree recovery, completed-child results and anchored commits; explicit uncommitted-change boundary.",
+    "activity": "Atomic watch snapshots, compression/preparation phases, live inspector tail rows.",
+    "concurrency": "Scheduler permits, ownership across background handoff, rejected abandoned launches, timeout cleanup, off-registry probes and bounded checkpoint writer.",
+    "configuration": "Schema-driven partial updates, read-only project lookup, scoped identity-aware approvals, accessible focus/permission/motion behavior.",
+    "assistant": "Project-aware isolation, uploads/following, local skill inventory permissions and commit fallback.",
+    "upgrade": "Verified server commands, exit 10, active-task gate, three supported package targets, migration changes, removed API helpers, Plug/ReqLLM/Nix changes and observable post-upgrade checks.",
+    "omitted": [
+      {
+        "item": "Restricted/ambiguous offline process views fail closed",
+        "reason": "Specialized diagnostic-view behavior is retained in linked full release notes; no change to the central task recovery or upgrade steps."
+      }
+    ]
+  },
+  "sourceChecks": [
+    "Complete GitHub release notes read",
+    "v0.14.3 task pause design compared to actual pause.ex admission rules; code takes precedence over stale pending/awaiting_input wording",
+    "v0.14.3 resume notice implementation confirms checkpoint boundary and subagent behavior",
+    "v0.14.3 server-update guide confirms commands and platform support; stale narrative about restart reconciliation not reproduced"
+  ],
+  "cover": {
+    "file": "whole-tree-resume.webp",
+    "source": "C:/Users/Admin/.codex/generated_images/01a1a583-a6bd-7100-955d-f3276c92b716/exec-4fd537a3-b333-40e7-854b-b4e310de1bb1.png",
+    "generator": "image_gen",
+    "prompt": "Create a dedicated 16:9 high quality editorial concept illustration for Genesis 0.14.3 task pause/resume and restoring the whole agent tree. Content: a single branching mechanical tree structure with a central trunk and three distinct connected articulated branches, each branch attached by a small cable to its own solid archival checkpoint socket on a shared base. A precisely fitted removable section of the trunk is being reconnected, with all branches retaining their separate connections, conveying continuity of individual saved states. Physical construction metaphor, not real architecture or a product screenshot. Clear coherent geometry, a few crimson coupling collars emphasize reconnection. Angled three-quarter view, spacious neutral background, main subject fully within central crop. Style: crisp charcoal ink contours, white and neutral gray surfaces, restrained crosshatching and local paper texture, small dark brand-red details, sophisticated technical editorial illustration. No words, letters, UI, logos, charts, mystical glow, or numeric performance. At least 1600 pixels wide.",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "bytes": 344754,
+    "nature": "Concept illustration, not product screenshot or evidence"
+  },
+  "validation": {
+    "editorial": "Main release groups, mechanisms, practical scenario, limitations and upgrade actions covered; no benchmark claims or fabricated usage.",
+    "languages": 13,
+    "build": "pnpm build passed, 1248 pages",
+    "render": "13 local article pages and all locale release lists verified; title/summary, body sections and code, links, canonical/hreflang, local alt/caption, actual cover bytes, OG/Twitter and BlogPosting checked.",
+    "visual": "English/Chinese desktop1280/mobile390, light/dark; reviewed screenshots",
+    "live": "Required after production deployment; final evidence stored in automation publication record."
+  },
+  "englishBodyWords": 805
+}

@@ -1,0 +1,48 @@
+---
+title: "Genesis 0.14.3: pausar una tarea y reanudar todo su árbol de agentes"
+pubDate: 2026-11-19
+summary: "Los puntos de control persistentes por agente conectan la recuperación de tareas, las fases visibles y la concurrencia limitada de herramientas."
+---
+
+El desarrollo prolongado necesita más que un botón de reinicio: debe conservar qué agentes trabajaban, qué habían aprendido y qué estado de los archivos puede recuperarse. [Genesis 0.14.3][release], publicado el 19 de noviembre de 2026, reúne pausa y reanudación por tarea, estado persistente de agentes, actividad en directo más clara y cambios en configuración, aprobaciones y despliegue.
+
+![Un árbol mecánico ramificado vuelve a conectarse con sus bases ancladas](./whole-tree-resume.webp)
+
+*Ilustración conceptual: recuperar una tarea significa reconectar sus ramas con su propio estado guardado.*
+
+## Pausar una tarea sin cancelarla
+Una tarea en ejecución pasa por `pausing` hasta `paused`. Sus agentes terminan los lotes de herramientas en curso, guardan las conversaciones y crean un commit de sus árboles de trabajo antes de detenerse. Las tareas pausadas siguen visibles y pueden reanudarse; no se convierten en tareas terminadas ni canceladas. Al reanudarlas se mantiene el mismo ID.
+
+Esto resulta útil cuando una implementación con varios agentes debe detenerse entre sesiones. Mantenga activada la persistencia, solicite la pausa y espere al estado pausado antes de considerar consolidado el trabajo. La opción está activada por defecto y también se controla mediante `persistent_state` en `genesis_start_task`. Las sesiones interactivas no pueden pausarse y desactivar la persistencia impide reanudar la tarea. La [implementación de esta versión][pause] exige además un registro duradero del agente raíz: los registros de hijos no bastan.
+## Recuperar el árbol con un límite explícito para los archivos
+Un almacén SQLite separado conserva conversaciones, identidades de ejecución y progreso de lotes de herramientas y subagentes. Al reanudar todo el árbol, los hijos terminados aportan resultados guardados; los que seguían activos retoman sus propios puntos de control y bases de trabajo. Los ID estables mantienen las asociaciones, con una advertencia y una alternativa si la identidad está ocupada.
+
+Las referencias Git bajo `refs/genesis/agent-state` mantienen accesibles los commits tras retirar las ramas de trabajo. Una pausa limpia puede reconstruir el árbol desde el commit de pausa registrado. Tras una interrupción, el [aviso de reanudación][notice] identifica el punto garantizado: no se garantiza conservar cambios sin commit de la ejecución terminada. Si falta el punto de control, el aviso explica el retorno a la base de la tarea.
+
+Si la tarea editaba archivos y lanzaba trabajos, revise el commit indicado, `git status` y `job_list` antes de repetir operaciones. Las llamadas interrumpidas reciben información de reparación, no resultados satisfactorios inventados. La versión también corrige la creación duplicada de subagentes, sesiones interactivas restauradas erróneamente como tareas pausadas tras un fallo y la recuperación al alcanzar el límite de turnos.
+## Ver el trabajo que antes parecía inactivo
+El inspector y Assistant utilizan actividad en directo e instantáneas atómicas de seguimiento. La compresión del contexto y la preparación del siguiente turno tienen fases ocupadas propias. Context Memory muestra las llamadas activas en filas finales y conserva estático el razonamiento histórico. Así se interpretan mejor los intervalos silenciosos y se distingue compresión de una petición bloqueada.
+
+Los permisos de herramientas gestionados por el planificador limitan las llamadas concurrentes y mantienen su titularidad durante los traspasos al segundo plano. Se rechazan lanzamientos abandonados y la limpieza de contención tras un tiempo de espera termina antes de detener las tareas de herramientas. Los avisos de finalización y las consultas de estado del sistema operativo salen de la ruta bloqueante del registro; el cierre de sesiones evita barreras síncronas de persistencia. El escritor de puntos de control agrupa trabajo en cola y limita acumulación y carga útil para contener la presión del almacenamiento.
+## Configuración y aprobaciones más claras
+Las API de ajustes basadas en esquemas permiten actualizaciones parciales; Assistant descubre configuración y consulta proyectos en modo de solo lectura. Los diálogos y avisos de aprobación muestran identidad del solicitante, autoridad y estado de ejecución. Mejoran el alcance de las notificaciones, la gestión del foco, la solicitud de permisos y las opciones de movimiento reducido.
+
+Las sesiones Assistant vinculadas al proyecto incluyen conversaciones aisladas, cargas de archivos y seguimiento de tareas; el [artículo del flujo de proyecto][workflow] explica la interacción. Los comandos explícitos de inventario local de skills omiten las comprobaciones de permisos de herramientas. Un commit automático de respaldo cubre un paso de commit ausente o fallido.
+## Actualizar y comprobar el trabajo recuperado
+Para una instalación existente del servidor headless, la [guía de esta versión][update] documenta:
+```bash
+genesis update --check
+genesis update
+```
+La comprobación devuelve el código 10 cuando hay una actualización. Deje que termine el trabajo activo antes de actualizar: el actualizador comprueba la actividad, prepara la versión, reinicia y verifica la salud del servidor. En la nueva versión, las tareas que se están pausando siguen bloqueando la actualización; las pausadas permanecen reanudables sin bloquearla. La publicación ofrece paquetes para Linux x64, Linux ARM64 y macOS ARM64.
+
+Las actualizaciones de la base de datos usan migraciones normales en lugar de un paso separado de reconciliación histórica. Los conflictos de identidades antiguas se reconcilian de forma aditiva y se rechazan estados residuales o incompletos de migración. La reparación SQLite es solo para desarrollo. Se retiran de la API pública auxiliares de reanudación sin uso y un alias de finalización; las integraciones propias deben revisarlos.
+
+Las dependencias incluyen Plug 1.20.4, con la corrección de seguridad del límite de longitud multipart, y ReqLLM 1.31.0; se renuevan hashes Nix y comprobaciones previas. Tras actualizar, verifique versión y salud, y pruebe una tarea persistente pequeña: páusela, confirme su punto de control, reanude la misma tarea e inspeccione resultados hijos y etiquetas de actividad. Consulte las [notas completas][release] junto con los diagnósticos de migración de su despliegue.
+
+[release]: https://github.com/EMI-Group/genesis/releases/tag/v0.14.3
+[pause]: https://github.com/EMI-Group/genesis/blob/v0.14.3/apps/evo_git/lib/evo_git/task_registry/pause.ex
+[notice]: https://github.com/EMI-Group/genesis/blob/v0.14.3/apps/evo_git/lib/evo_git/agent/resume/notice.ex
+[update]: https://github.com/EMI-Group/genesis/blob/v0.14.3/docs/server-update.md
+[workflow]: /es/news/genesis-assistant-project-workflows
+
