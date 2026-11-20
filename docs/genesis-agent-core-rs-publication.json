@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-20",
+  "collection": "news",
+  "story_type": "Genesis Evidence case",
+  "depth": "in-depth",
+  "editorial_action": "new",
+  "reason": "New GW-000006: openJiuwen Python-to-Rust redevelopment, absent from production articles.",
+  "source_id": "GW-000006",
+  "source": "https://genesis.evox.group/evidence/agent-core-rs/",
+  "revision": "242b5b5243aa46c6b82edd6d3764d0b70c10d571",
+  "slug": "genesis-agent-core-rs",
+  "facts": [
+    "30 crates and 26 examples",
+    "24,293 is source inventory, not captured pass count",
+    "Two tasks: $150.024283, 113h42m with waits; >8 calendar days; failed task unknown usage excluded",
+    "46x prompt and 15x graph ratios scoped to warm-cache no-I/O operations; process rows not equivalent",
+    "Source-reported results; no independent Rust suite reproduction"
+  ],
+  "image": {
+    "tool": "built-in image_gen",
+    "content_and_style_prompt": "Content prompt: Editorial metaphor for porting openJiuwen Agent SDK from Python to Rust while preserving observable contracts. A precise architectural cutaway of two adjacent small modular structures on one continuous foundation: left a layered lightweight framework, right a solid newly fitted modular framework, with identical three socket shapes on their front faces. A single thin crimson path carries a small checkpoint capsule across the shared foundation into the new structure; a small mechanical approval gate on that path is visibly closed ahead of a tool-shaped element. Coherent isometric scene, no people, no computers, no loom, no cables weaving. Metaphor only, no claim of full compatibility or benchmark proof. No text, logos, metrics. Style prompt: Contemporary technology editorial ink illustration, neutral white background, medium achromatic gray structures and confident charcoal contours, subtle local crosshatching in shadows, restrained crimson #c8383c focal accents under 5 percent, no pink or beige cast, clear silhouette, ample negative space. Output: landscape 16:9, 1792x1024 or wider, crop safe margins.",
+    "style_reference_reviewed": "evox-news-editor/assets/editorial-style/code-migration.png",
+    "source": "contract-migration.png",
+    "web": "contract-migration.webp"
+  },
+  "status": "Validated; ready for production",
+  "validation": {
+    "englishWords": 882,
+    "build": "Passed: 1261 pages",
+    "seo": "Passed: 715 localized blog pages, zero errors",
+    "locales": 13,
+    "layout": "1280 light and 390 dark: screenshots reviewed, no horizontal overflow, article image loaded"
+  }
+}
