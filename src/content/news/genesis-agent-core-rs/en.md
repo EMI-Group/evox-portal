@@ -1,16 +1,19 @@
 ---
-title: "Genesis ports openJiuwen to Rust, putting Agent contracts to the test"
+title: "Genesis converts openJiuwen Agent Core from Python to Rust"
 pubDate: 2026-11-20
-summary: "The new agent-core-rs Evidence documents 30 Rust crates, checkpoint and approval examples, and US$150.02 in recorded model costs across two tasks."
+updatedDate: 2026-11-20
+summary: "Genesis redeveloped the Agent SDK as 30 Rust crates with 26 runnable examples. The case traces continued development and checks how session, tool and workflow behavior survives the migration."
 ---
 
-Changing an Agent SDK's implementation language reaches beyond translating functions. Saved sessions must still restore correctly, tool approval must precede execution, and a workflow must take the intended branch. Genesis's [new Evidence record, published on November 20, 2026][evidence], makes those behaviors concrete through **agent-core-rs**, a Rust redevelopment of openJiuwen agent-core.
+openJiuwen Agent Core is a Python SDK for building Agent applications: it connects model calls, tools, workflows and session state. In its [Evidence published on November 20, 2026][evidence], EvoX Genesis documents the SDK's conversion to Rust, producing **agent-core-rs** from Python SDK v0.1.20 as a read-only reference.
 
-Using Python SDK v0.1.20 as a read-only reference, EvoX Genesis produced a workspace of **30 Rust crates and 26 runnable examples**. The record follows initial conversion and subsequent development of the retained code. Its most useful contribution is an inspectable connection between compatibility targets, executable examples and verification records.
+The result is a workspace of **30 Rust crates and 26 runnable examples**, developed through an initial conversion and a later task that continued from the retained code. The engineering question is what behavior survives the change of language: saved sessions must restore correctly, tools must wait for approval, and workflows must take the intended branch.
 
 ![Concept illustration of Python code converting to Rust with matching workflow branches](./contract-migration-v2.webp)
 
 ## Preserve the contract while changing the implementation
+
+The workspace groups shared types, model and tool access, session state, orchestration and application entry points. Its runnable artifacts cover workflows, DeepAgent, team collaboration and the CLI. These layers give the 30-crate count a practical meaning: the conversion spans several parts of an Agent application, with each integration's supported scope recorded in the [coverage matrix][parity].
 
 The [source snapshot at revision 242b5b5][repo] targets Card JSON fields, model wire formats, persisted session data, workflow references and CLI behavior. Rust types, traits, Tokio-based asynchronous execution and Serde serialization replace Python's implementation mechanisms. Shared types sit below their consumers; umbrella crates re-export APIs instead of introducing duplicate behavior.
 
@@ -26,7 +29,7 @@ The [workflow example][workflow] adds a different integration check. Two inputs 
 
 ## Two recorded tasks, with a defined cost boundary
 
-The [task-history appendix][history] records an initial conversion from November 11–16 UTC, manually stopped with its output retained, followed by a completed evolution task on November 19 UTC. Calls attributed to DeepSeek V4 Flash total **US$150.024283** across those two tasks.
+The [task-history appendix][history] records an initial conversion from November 11–16 UTC, manually stopped with its output retained, followed by a completed evolution task on November 19 UTC. Calls attributed to DeepSeek V4 Flash total **US$150.024283** across those two tasks. The second task resumed from the first task's result revision, showing how an existing implementation could be retained and developed further across task boundaries.
 
 Their wall times sum to **113 hours 42 minutes**, including waits and queues; the calendar interval exceeds eight days. The 3,570 registered Agent instances are cumulative, not peak concurrency. Infrastructure, human work and later documentation are outside the model-cost figure. An intervening failed task has unknown usage and is excluded.
 

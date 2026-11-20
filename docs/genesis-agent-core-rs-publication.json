@@ -39,5 +39,13 @@
     "seo": "Passed: 715 localized blog pages, zero errors",
     "locales": 13,
     "layout": "1280 light and 390 dark: screenshots reviewed, no horizontal overflow, article image loaded"
+  },
+  "editorial_revision": {
+    "date": "2026-11-20",
+    "action": "update",
+    "reason": "Merge two Evidence reviews: explicit Python-to-Rust title, SDK introduction, capability overview and retained-code continuation.",
+    "source_changes": "Evidence retitled as openJiuwen Agent Core: Python → Rust; repository visualization clarified as static directory structure.",
+    "scope": "13 locales; publication date, URL, cover, metrics and verification scope retained.",
+    "validation": "Passed: 1261-page build, 715-page SEO audit, desktop light/mobile dark screenshot review; no horizontal overflow"
   }
 }

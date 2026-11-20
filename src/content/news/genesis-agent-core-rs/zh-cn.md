@@ -1,16 +1,19 @@
 ---
-title: "Genesis 将 openJiuwen 迁移至 Rust，让 Agent 行为契约接受验证"
+title: "Genesis 将 openJiuwen Agent Core 从 Python 转换为 Rust"
 pubDate: 2026-11-20
-summary: "新 Evidence 案例 agent-core-rs 展示了 30 个 Rust crate、检查点与审批示例，以及两次任务合计 150.02 美元的模型调用费用。"
+updatedDate: 2026-11-20
+summary: "Genesis 将 Agent SDK 重新开发为包含 30 个 Rust crate、26 个可运行示例的工作区，展示持续开发过程，以及会话、工具和工作流行为如何在迁移后得到验证。"
 ---
 
-迁移 Agent SDK 的实现语言，远不止翻译函数。保存的会话要能够正确恢复，工具必须先获批准再执行，工作流也要走到预期分支。Genesis 在 [2026 年 11 月 20 日发布的新 Evidence][evidence] 中，通过 **agent-core-rs** 展示了这些具体行为：将 openJiuwen agent-core 重新开发为 Rust 实现。
+openJiuwen Agent Core 是用于构建 Agent 应用的 Python SDK，连接模型调用、工具执行、工作流和会话状态。EvoX Genesis 在 [2026 年 11 月 20 日发布的 Evidence][evidence] 中，记录了以 Python SDK v0.1.20 为只读参考、将其转换为 Rust 实现 **agent-core-rs** 的过程。
 
-EvoX Genesis 以 Python SDK v0.1.20 为只读参考，产出了包含 **30 个 Rust crate、26 个可运行示例**的工作区。记录覆盖首次转换及基于保留代码的后续开发。这个案例最有价值的部分，是把兼容性目标、可执行示例与验证记录连接起来，供读者逐项检查。
+产物是包含 **30 个 Rust crate、26 个可运行示例**的工作区，经历首次转换，以及基于保留代码的后续开发。迁移需要回答的工程问题是：更换语言后，哪些行为得以延续？保存的会话要正确恢复，工具要等待批准，工作流也要走到预期分支。
 
 ![Python 代码转换为 Rust 代码，并保留对应工作流分支的概念插画](./contract-migration-v2.webp)
 
 ## 改变实现，保留行为契约
+
+工作区按共享类型、模型与工具访问、会话状态、编排和应用入口分层，可运行产物涵盖工作流、DeepAgent、团队协作和 CLI。这让“30 个 crate”有了具体含义：转换覆盖 Agent 应用的多个组成部分，各项集成的支持范围则由[覆盖矩阵][parity]逐项说明。
 
 [提交 242b5b5 对应的源码快照][repo] 将 Card JSON 字段、模型通信格式、持久化会话数据、工作流引用和 CLI 行为作为兼容目标。Rust 类型、trait、基于 Tokio 的异步执行与 Serde 序列化承接了 Python 的实现机制。公共类型放在使用者的下层；汇总 crate 只重新导出 API，避免重复实现行为。
 
@@ -26,7 +29,7 @@ EvoX Genesis 以 Python SDK v0.1.20 为只读参考，产出了包含 **30 个 R
 
 ## 两次任务，明确的费用口径
 
-[任务历史附录][history] 记录了 UTC 11 月 11–16 日的首次转换：任务被手动停止，但产物保留；随后在 UTC 11 月 19 日完成一次演化任务。两次任务归于 DeepSeek V4 Flash 的模型调用费用合计 **150.024283 美元**。
+[任务历史附录][history] 记录了 UTC 11 月 11–16 日的首次转换：任务被手动停止，但产物保留；随后在 UTC 11 月 19 日完成一次演化任务。两次任务归于 DeepSeek V4 Flash 的模型调用费用合计 **150.024283 美元**。 第二次任务从第一次的结果版本接续开发，展示了如何跨越任务边界保留已有实现，并在其上继续完善。
 
 任务墙钟时间合计 **113 小时 42 分钟**，包含等待与排队；从首次开始到最终完成的日历跨度超过八天。3,570 个 Agent 注册实例是累计数，并非峰值并发数。费用不含基础设施、人工及后续文档工作；中间一次失败任务的用量未知，也未计入。
 

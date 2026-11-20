@@ -1,16 +1,19 @@
 ---
-title: "Genesis porte openJiuwen en Rust et met les contrats des Agents à l’épreuve"
+title: "Genesis convertit openJiuwen Agent Core de Python en Rust"
 pubDate: 2026-11-20
-summary: "Le nouvel Evidence agent-core-rs documente 30 crates Rust, des exemples de reprise et d’approbation, et 150,02 dollars de frais de modèle pour deux tâches."
+updatedDate: 2026-11-20
+summary: "Genesis a réimplémenté le SDK d’Agents en 30 crates Rust et 26 exemples exécutables. Le cas retrace le développement continu et la vérification des sessions, outils et workflows après migration."
 ---
 
-Changer le langage d’un SDK d’Agents dépasse la traduction des fonctions. Les sessions sauvegardées doivent se restaurer, les outils attendre leur autorisation et les workflows suivre la branche prévue. Le [nouvel Evidence publié par Genesis le 20 novembre 2026][evidence] concrétise ces exigences avec **agent-core-rs**, une réimplémentation Rust d’openJiuwen agent-core.
+openJiuwen Agent Core est un SDK Python pour créer des applications d’Agents : il relie appels de modèles, outils, workflows et état des sessions. Dans l’[Evidence publié le 20 novembre 2026][evidence], EvoX Genesis documente sa conversion en Rust, produisant **agent-core-rs** à partir du SDK Python v0.1.20 consulté en lecture seule.
 
-À partir du SDK Python v0.1.20 consulté en lecture seule, EvoX Genesis a produit **30 crates Rust et 26 exemples exécutables**. Le dossier retrace la conversion initiale puis la poursuite du développement du code conservé. Son apport essentiel est de relier des objectifs de compatibilité à des exemples exécutables et à des comptes rendus vérifiables.
+Le résultat est un workspace de **30 crates Rust et 26 exemples exécutables**, issu d’une conversion initiale puis d’une tâche poursuivant le développement du code conservé. La question d’ingénierie porte sur les comportements préservés lors du changement de langage : restaurer les sessions, attendre l’approbation des outils et suivre la branche prévue dans les workflows.
 
 ![Illustration conceptuelle du passage de code Python à Rust avec des branches de workflow correspondantes](./contract-migration-v2.webp)
 
 ## Changer l’implémentation en préservant le contrat
+
+Le workspace regroupe types partagés, accès aux modèles et outils, état des sessions, orchestration et points d’entrée applicatifs. Les artefacts exécutables couvrent workflows, DeepAgent, collaboration en équipe et CLI. Ces couches donnent un sens concret aux 30 crates : la conversion traverse plusieurs composantes d’une application d’Agents, avec le périmètre de chaque intégration dans la [matrice de couverture][parity].
 
 L’[instantané 242b5b5][repo] vise les champs Card JSON, les formats d’échange avec les modèles, les sessions persistées, les références des workflows et le comportement de la CLI. Les types et traits Rust, l’exécution asynchrone avec Tokio et la sérialisation Serde remplacent les mécanismes Python. Les types partagés se situent sous leurs consommateurs ; les crates d’agrégation réexportent les API sans dupliquer leur comportement.
 
@@ -26,7 +29,7 @@ L’[exemple de workflow][workflow] vérifie une autre difficulté d’intégrat
 
 ## Deux tâches, un périmètre de coût défini
 
-L’[annexe historique][history] décrit une conversion du 11 au 16 novembre UTC, arrêtée manuellement en conservant son résultat, puis une tâche d’évolution achevée le 19 novembre UTC. Les appels attribués à DeepSeek V4 Flash totalisent **150,024283 dollars** pour ces deux tâches.
+L’[annexe historique][history] décrit une conversion du 11 au 16 novembre UTC, arrêtée manuellement en conservant son résultat, puis une tâche d’évolution achevée le 19 novembre UTC. Les appels attribués à DeepSeek V4 Flash totalisent **150,024283 dollars** pour ces deux tâches. La seconde tâche reprend la révision produite par la première, montrant comment conserver une implémentation existante et poursuivre son développement au-delà des limites d’une tâche.
 
 Leurs durées cumulées atteignent **113 heures et 42 minutes**, attentes et files comprises ; l’intervalle calendaire dépasse huit jours. Les 3 570 instances d’Agent enregistrées sont un cumul, pas un pic de concurrence. Le coût exclut l’infrastructure, le travail humain et la documentation ultérieure. Une tâche intermédiaire échouée est exclue, sa consommation étant inconnue.
 

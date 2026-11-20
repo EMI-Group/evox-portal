@@ -1,16 +1,19 @@
 ---
-title: "Genesis portiert openJiuwen nach Rust und prüft die Verhaltensverträge der Agents"
+title: "Genesis wandelt openJiuwen Agent Core von Python nach Rust um"
 pubDate: 2026-11-20
-summary: "Der neue Evidence-Fall agent-core-rs dokumentiert 30 Rust-Crates, Beispiele für Wiederherstellung und Freigabe sowie 150,02 US-Dollar Modellkosten aus zwei Aufgaben."
+updatedDate: 2026-11-20
+summary: "Genesis hat das Agent-SDK als 30 Rust-Crates mit 26 ausführbaren Beispielen neu entwickelt. Der Fall zeigt die Weiterentwicklung und die Prüfung von Sitzungs-, Werkzeug- und Workflow-Verhalten nach der Migration."
 ---
 
-Die Implementierungssprache eines Agent-SDKs zu wechseln bedeutet mehr, als Funktionen zu übersetzen. Gespeicherte Sitzungen müssen sich wiederherstellen lassen, Werkzeuge auf Freigaben warten und Workflows den richtigen Zweig nehmen. Der [am 20. November 2026 veröffentlichte Evidence-Bericht][evidence] von Genesis macht diese Anforderungen mit **agent-core-rs** konkret: einer Rust-Neuentwicklung von openJiuwen agent-core.
+openJiuwen Agent Core ist ein Python-SDK für Agent-Anwendungen: Es verbindet Modellaufrufe, Werkzeuge, Workflows und Sitzungszustand. Im [Evidence-Bericht vom 20. November 2026][evidence] dokumentiert EvoX Genesis die Umwandlung nach Rust. **agent-core-rs** entstand mit dem Python SDK v0.1.20 als schreibgeschützter Referenz.
 
-EvoX Genesis nutzte das Python SDK v0.1.20 als schreibgeschützte Referenz und erzeugte **30 Rust-Crates mit 26 ausführbaren Beispielen**. Der Bericht umfasst die erste Konvertierung und die Weiterentwicklung des erhaltenen Codes. Besonders nützlich ist die nachvollziehbare Verbindung von Kompatibilitätszielen, ausführbaren Beispielen und Prüfprotokollen.
+Das Ergebnis ist ein Workspace mit **30 Rust-Crates und 26 ausführbaren Beispielen**, entwickelt durch eine erste Konvertierung und eine spätere Aufgabe auf Basis des erhaltenen Codes. Die technische Frage lautet, welches Verhalten den Sprachwechsel übersteht: Gespeicherte Sitzungen müssen sich korrekt wiederherstellen lassen, Werkzeuge auf Freigaben warten und Workflows den vorgesehenen Zweig nehmen.
 
 ![Konzeptillustration der Umwandlung von Python-Code in Rust mit entsprechenden Workflow-Zweigen](./contract-migration-v2.webp)
 
 ## Die Implementierung ändern, den Vertrag erhalten
+
+Der Workspace gliedert sich in gemeinsame Typen, Modell- und Werkzeugzugriff, Sitzungszustand, Orchestrierung und Anwendungseinstiegspunkte. Ausführbare Artefakte decken Workflows, DeepAgent, Teamzusammenarbeit und CLI ab. Diese Ebenen machen die Zahl von 30 Crates greifbar: Die Konvertierung umfasst mehrere Teile einer Agent-Anwendung; die [Abdeckungsmatrix][parity] dokumentiert den unterstützten Umfang jeder Integration.
 
 Der [Quellstand 242b5b5][repo] zielt auf Card-JSON-Felder, Modellprotokolle, gespeicherte Sitzungsdaten, Workflow-Referenzen und CLI-Verhalten. Rust-Typen und Traits, asynchrone Ausführung mit Tokio und Serde-Serialisierung ersetzen die Python-Mechanismen. Gemeinsame Typen liegen unterhalb ihrer Nutzer; Sammel-Crates exportieren APIs erneut, ohne Verhalten doppelt zu implementieren.
 
@@ -26,7 +29,7 @@ Das [Workflow-Beispiel][workflow] prüft ein anderes Integrationsproblem. Zwei E
 
 ## Zwei Aufgaben mit klar abgegrenzten Kosten
 
-Der [Historienanhang][history] dokumentiert die erste Konvertierung vom 11. bis 16. November UTC, die unter Erhalt des Ergebnisses manuell gestoppt wurde. Eine anschließende Evolutionsaufgabe wurde am 19. November UTC abgeschlossen. Die DeepSeek V4 Flash zugerechneten Modellaufrufe kosteten für beide Aufgaben zusammen **150,024283 US-Dollar**.
+Der [Historienanhang][history] dokumentiert die erste Konvertierung vom 11. bis 16. November UTC, die unter Erhalt des Ergebnisses manuell gestoppt wurde. Eine anschließende Evolutionsaufgabe wurde am 19. November UTC abgeschlossen. Die DeepSeek V4 Flash zugerechneten Modellaufrufe kosteten für beide Aufgaben zusammen **150,024283 US-Dollar**. Die zweite Aufgabe setzte bei der Ergebnisrevision der ersten an. Damit zeigt der Ablauf, wie eine bestehende Implementierung über Aufgabengrenzen hinweg erhalten und weiterentwickelt werden kann.
 
 Die Laufzeiten summieren sich einschließlich Wartezeiten auf **113 Stunden und 42 Minuten**; der Kalenderzeitraum beträgt mehr als acht Tage. 3.570 registrierte Agent-Instanzen sind eine kumulierte Zahl, keine maximale Parallelität. Infrastruktur, menschliche Arbeit und spätere Dokumentation sind nicht enthalten. Eine zwischenzeitlich fehlgeschlagene Aufgabe ist wegen unbekannten Verbrauchs ebenfalls ausgenommen.
 
