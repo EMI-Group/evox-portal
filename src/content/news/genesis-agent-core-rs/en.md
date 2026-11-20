@@ -8,7 +8,7 @@ Changing an Agent SDK's implementation language reaches beyond translating funct
 
 Using Python SDK v0.1.20 as a read-only reference, EvoX Genesis produced a workspace of **30 Rust crates and 26 runnable examples**. The record follows initial conversion and subsequent development of the retained code. Its most useful contribution is an inspectable connection between compatibility targets, executable examples and verification records.
 
-![Concept illustration of changed software structures retaining matching interfaces, a checkpoint and an approval gate](./contract-migration.webp)
+![Concept illustration of Python code converting to Rust with matching workflow branches](./contract-migration-v2.webp)
 
 ## Preserve the contract while changing the implementation
 

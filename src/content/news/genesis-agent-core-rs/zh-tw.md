@@ -8,7 +8,7 @@ summary: "新 Evidence 案例 agent-core-rs 展示 30 個 Rust crate、檢查點
 
 EvoX Genesis 以 Python SDK v0.1.20 為唯讀參考，產出包含 **30 個 Rust crate、26 個可執行範例**的工作區。紀錄涵蓋首次轉換，以及基於保留程式碼的後續開發。這個案例最有價值的部分，是把相容性目標、可執行範例與驗證紀錄連接起來，供讀者逐項檢查。
 
-![軟體結構改變後仍保留對應介面、檢查點和審批關卡的概念插畫](./contract-migration.webp)
+![Python 程式碼轉換為 Rust 程式碼，並保留對應工作流程分支的概念插畫](./contract-migration-v2.webp)
 
 ## 改變實作，保留行為契約
 

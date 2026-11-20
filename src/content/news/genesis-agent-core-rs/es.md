@@ -8,7 +8,7 @@ Cambiar el lenguaje de implementación de un SDK de Agents va más allá de trad
 
 Con el SDK de Python v0.1.20 como referencia de solo lectura, EvoX Genesis produjo **30 crates Rust y 26 ejemplos ejecutables**. El registro abarca la conversión inicial y el desarrollo posterior del código conservado. Su aportación principal es conectar objetivos de compatibilidad, ejemplos ejecutables y registros de verificación que pueden inspeccionarse.
 
-![Ilustración conceptual de estructuras distintas con interfaces compatibles, un punto de control y una barrera de aprobación](./contract-migration.webp)
+![Ilustración conceptual de código Python convertido en Rust con ramas de flujo correspondientes](./contract-migration-v2.webp)
 
 ## Cambiar la implementación conservando el contrato
 
