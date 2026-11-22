@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：从一段对话，到一项项目任务"
 pubDate: 2026-11-16
-updatedDate: 2026-11-17
+updatedDate: 2026-11-22
 summary: "选定项目、批准具体操作并跟踪后台开发，让任务进展不再依赖聊天是否仍在回复。"
 ---
 
@@ -34,6 +34,8 @@ summary: "选定项目、批准具体操作并跟踪后台开发，让任务进�
 浏览器上传支持文本、PDF、DOCX、图片和音频，每条消息最多四个文件、每个 15 MiB，上传完成后可不加文字直接发送。次级服务器路径入口支持仪表板本地节点，不会用该主机替代不支持的远程节点。
 
 浏览器上传读取当前设备上的文件。服务器路径指向另一处位置，且只支持仪表板本地节点。切换上下文前应等待上传结束：切换会话或节点会取消待完成传输。若要查阅 Genesis 代码，可选的源码参考准备仍需审批，并应对照参考版本与实际运行版本。项目上下文和 Genesis 源码参考由此承担不同职责。[文件与源码参考][workflowguide]
+
+[11 月 20 日的工作台更新](/zh-cn/news/genesis-project-workbench)将项目导航、Git 视图与 VCT 作用域草稿整合到同一工作环境。
 
 [previous]: /zh-cn/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

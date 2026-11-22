@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant : transformer une conversation en tâche de projet"
 pubDate: 2026-11-16
-updatedDate: 2026-11-17
+updatedDate: 2026-11-22
 summary: "Choisissez un projet, approuvez une action précise et suivez le développement en arrière-plan indépendamment de la conversation."
 ---
 
@@ -34,6 +34,8 @@ Les liens de tâches survivent à la fin de session, mais pas les conversations 
 Le navigateur accepte texte, PDF, DOCX, images et audio, quatre fichiers par message et 15 MiB chacun ; une pièce jointe terminée peut partir sans texte. L’entrée secondaire de chemin serveur prend en charge le nœud local du tableau de bord, sans le substituer à un nœud distant non pris en charge.
 
 Le téléversement du navigateur prend les fichiers sur l’appareil actuellement utilisé. La lecture d’un chemin serveur vise un autre emplacement et reste limitée au nœud local du tableau de bord. Attendez la fin du téléversement avant de changer de contexte : un changement de conversation ou de nœud annule les transferts en attente. Pour consulter le code de Genesis, la préparation facultative de la référence source reste soumise à approbation ; comparez la version de cette référence à celle du moteur actif. Le contexte d’un projet et la référence du code de Genesis ont ainsi des rôles distincts. [Fichiers et référence source][workflowguide]
+
+Les [changements du 20 novembre](/fr/news/genesis-project-workbench) réunissent navigation par projet, vues Git et brouillons liés au VCT dans un environnement commun.
 
 [previous]: /fr/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

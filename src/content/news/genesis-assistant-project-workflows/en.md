@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: Turn a Conversation into a Project Task"
 pubDate: 2026-11-16
-updatedDate: 2026-11-17
+updatedDate: 2026-11-22
 summary: "Choose a project, approve a concrete action and follow background development without tying its lifetime to the chat."
 ---
 
@@ -34,6 +34,8 @@ Task links survive an Assistant session ending, but the in-memory conversation s
 Browser upload supports text, PDF, DOCX, images and audio, up to four files and 15 MiB each; completed attachments can send without text. The secondary server-path reader supports the local dashboard node and never substitutes that host for an unsupported remote node.
 
 Browser upload takes files from the device currently in use. Reading a server path points somewhere else and is limited to the dashboard's local node. Wait for uploads to finish before changing context: switching conversation or node cancels pending transfers. To consult Genesis code, optional source-reference preparation still requires approval; compare its version with the running runtime. Project context and the Genesis source reference therefore serve different roles. [Files and source reference][workflowguide]
+
+The [November 20 workbench changes](/news/genesis-project-workbench) bring project navigation, Git views and VCT-scoped drafts into a shared working environment.
 
 [previous]: /news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

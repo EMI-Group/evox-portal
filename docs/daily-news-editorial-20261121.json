@@ -1,0 +1,384 @@
+{
+  "date": "2026-11-21",
+  "production_base": "d37371d",
+  "sourceSnapshot": "975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9",
+  "stories": [
+    {
+      "collection": "news",
+      "slug": "genesis-project-workbench",
+      "story_type": "development",
+      "editorial_action": "new",
+      "depth": "regular",
+      "english_body_words": 722,
+      "pubDate": "2026-11-22",
+      "upstream_dates": [
+        "2026-11-19",
+        "2026-11-20"
+      ],
+      "reason": "Genesis brings projects, conversations and Git into one workbench",
+      "coverage_sections": [
+        "One place to inspect the project",
+        "Draft identity is more than a pathname",
+        "Workspaces group projects; tasks still need a real directory",
+        "Verify the handoff between views"
+      ],
+      "sources": {
+        "pr": "https://github.com/EMI-Group/genesis/pull/175",
+        "previous": "/news/genesis-assistant-project-workflows",
+        "scope": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex",
+        "adopt": "https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e",
+        "workspace": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex"
+      },
+      "scope": "Merged main development; no new GitHub release.",
+      "locales": 13,
+      "editorial_review": "Passed: explicit change, implementation mechanism, concrete reader scenario, adjacent source and actionable check; no unsupported runtime/price/performance claims.",
+      "sourceKeys": [
+        "genesis:pr:175:workbench",
+        "genesis:commit:975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9:genesis-project-workbench"
+      ]
+    },
+    {
+      "collection": "news",
+      "slug": "genesis-provider-account-setup",
+      "story_type": "development",
+      "editorial_action": "new",
+      "depth": "regular",
+      "english_body_words": 799,
+      "pubDate": "2026-11-22",
+      "upstream_dates": [
+        "2026-11-19",
+        "2026-11-20"
+      ],
+      "reason": "Genesis connects account setup, model choices and ChatGPT sign-in",
+      "coverage_sections": [
+        "Configure the account, then its models",
+        "Authorize ChatGPT through Genesis",
+        "Keep the connection on the execution host",
+        "Make account schedules explicit"
+      ],
+      "sources": {
+        "pr": "https://github.com/EMI-Group/genesis/pull/175",
+        "profiles": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md",
+        "oauth": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md",
+        "store": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex",
+        "presets": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex"
+      },
+      "scope": "Merged main development; no new GitHub release.",
+      "locales": 13,
+      "editorial_review": "Passed: explicit change, implementation mechanism, concrete reader scenario, adjacent source and actionable check; no unsupported runtime/price/performance claims.",
+      "sourceKeys": [
+        "genesis:pr:175:provider-setup",
+        "genesis:commit:975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9:genesis-provider-account-setup"
+      ]
+    },
+    {
+      "collection": "news",
+      "slug": "genesis-keenable-search",
+      "story_type": "development",
+      "editorial_action": "new",
+      "depth": "brief",
+      "english_body_words": 272,
+      "pubDate": "2026-11-22",
+      "upstream_dates": [
+        "2026-11-19"
+      ],
+      "reason": "Genesis adds an opt-in search path without an API key",
+      "coverage_sections": [
+        "Enable the public route explicitly",
+        "Read the results with their limits"
+      ],
+      "sources": {
+        "pr": "https://github.com/EMI-Group/genesis/pull/174",
+        "adapter": "https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/agent/tools/web_search_providers.ex"
+      },
+      "scope": "Merged main development; no new GitHub release.",
+      "locales": 13,
+      "editorial_review": "Passed: explicit change, implementation mechanism, concrete reader scenario, adjacent source and actionable check; no unsupported runtime/price/performance claims.",
+      "sourceKeys": [
+        "genesis:pr:174"
+      ],
+      "brief_reason": "Single optional adapter feature with two enablement gates, explicit setup, response mapping and test/network limits completely covered. No architecture migration or authentication system rewrite."
+    }
+  ],
+  "historical_update": {
+    "slug": "genesis-assistant-project-workflows",
+    "pubDate": "2026-11-16",
+    "updatedDate": "2026-11-21",
+    "action": "Add localized link to independent workbench story; historical body and sources retained."
+  },
+  "images": {
+    "genesis-project-workbench": {
+      "content_prompt": "A shared wooden workbench seen from a slightly elevated oblique angle, three separate open shallow project drawers, each retaining a distinct miniature mechanical assembly and a folded note. One selected drawer is gently pulled forward with a small red tab and its matching note tucked securely inside; the other drawers retain their own notes and parts. A single connecting rail organizes the drawers without mixing their contents. Concept metaphor for project-scoped drafts, tabs and work context; not an actual product UI. No human figure, screens, arrows, node graph or text.",
+      "style_prompt": "Neutral white and gray editorial illustration, precise charcoal pen outlines, restrained gray wash and sparse cross-hatching in shadows, clean off-white background, tiny accents of brand red #c8383c occupying about 3 percent. Human-crafted technical editorial quality, clear silhouette, no pink wash, no photorealism, no glossy 3D, no words or labels.",
+      "style_reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/code-migration.png",
+      "spec": "16:9 editorial cover, 1792px or greater width, crop-safe centered subject, opaque background",
+      "generated_source": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-8a3cf069-793e-4950-b1d9-f73a5f93c4d2.png",
+      "published_asset": "src/content/news/genesis-project-workbench/cover.webp",
+      "tool": "built-in image_gen",
+      "review": "Accepted: content-specific metaphor, neutral grayscale, sparse red, no fabricated screenshots or data."
+    },
+    "genesis-provider-account-setup": {
+      "content_prompt": "A close editorial still life of an open precision instrument case. One distinctive account key rests in a fitted compartment next to three different interchangeable calibrated instrument heads and a small analog schedule dial. A narrow red latch attaches the key compartment to the chosen instrument head; other parts remain neatly separated. Concept metaphor for one authenticated provider account carrying multiple model choices and a shared schedule. No passwords, text, logo, UI cards, locks suggesting guaranteed security, or network diagram. Intimate cropped three-quarter composition, unlike a wide workbench.",
+      "style_prompt": "Neutral white and gray editorial illustration, precise charcoal pen outlines, restrained gray wash and sparse cross-hatching in shadows, clean off-white background, tiny accents of brand red #c8383c occupying about 3 percent. Human-crafted technical editorial quality, clear silhouette, no pink wash, no photorealism, no glossy 3D, no words or labels.",
+      "style_reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/code-migration.png",
+      "spec": "16:9 editorial cover, 1792px or greater width, crop-safe centered subject, opaque background",
+      "generated_source": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-646dd7f6-1ecc-4e7b-a800-3ff3e50f82c3.png",
+      "published_asset": "src/content/news/genesis-provider-account-setup/cover.webp",
+      "tool": "built-in image_gen",
+      "review": "Accepted: content-specific metaphor, neutral grayscale, sparse red, no fabricated screenshots or data."
+    },
+    "genesis-keenable-search": {
+      "content_prompt": "A quiet small library entrance viewed straight on at an angle: an open narrow gate leads to a tidy shelf of source documents; in the foreground a few selected pages lie in a small reading tray, each with a subtle red corner marker. A second closed service hatch remains beside the public entrance. Concept metaphor for an explicitly chosen public search path and source references, not unlimited service or a literal interface. Strong architectural negative space, no people, computer, magnifying glass, text or numbers.",
+      "style_prompt": "Neutral white and gray editorial illustration, precise charcoal pen outlines, restrained gray wash and sparse cross-hatching in shadows, clean off-white background, tiny accents of brand red #c8383c occupying about 3 percent. Human-crafted technical editorial quality, clear silhouette, no pink wash, no photorealism, no glossy 3D, no words or labels.",
+      "style_reference": "C:/Users/Admin/.codex/skills/evox-news-editor/assets/editorial-style/code-migration.png",
+      "spec": "16:9 editorial cover, 1792px or greater width, crop-safe centered subject, opaque background",
+      "generated_source": "C:\\Users\\Admin\\.codex\\generated_images\\01a1a583-a6bd-7100-955d-f3276c92b716\\exec-e3ebe39d-bd7b-4a77-879f-c39551658291.png",
+      "published_asset": "src/content/news/genesis-keenable-search/cover.webp",
+      "tool": "built-in image_gen",
+      "review": "Accepted: content-specific metaphor, neutral grayscale, sparse red, no fabricated screenshots or data."
+    }
+  },
+  "translations": [
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "de",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "en",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "es-419",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "es",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "fr",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "it",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "ja",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "ko",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "pt-br",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "pt",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "ru",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "zh-cn",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-project-workbench",
+      "locale": "zh-tw",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "de",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "en",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "es-419",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "es",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "fr",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "it",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "ja",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "ko",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "pt-br",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "pt",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "ru",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "zh-cn",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "locale": "zh-tw",
+      "headings": 4,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "de",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "en",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "es-419",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "es",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "fr",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "it",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "ja",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "ko",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "pt-br",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "pt",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "ru",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "zh-cn",
+      "headings": 2,
+      "inlineCodeComplete": true
+    },
+    {
+      "slug": "genesis-keenable-search",
+      "locale": "zh-tw",
+      "headings": 2,
+      "inlineCodeComplete": true
+    }
+  ],
+  "source_decisions": {
+    "other_seven_repositories": "No commits, releases, release-note changes or merged PRs since independent cursors.",
+    "genesis": "242 commits reviewed by event; model setup/auth and workbench/VCT handled separately, optional search brief. Tests, context routing, internal refactors, minor commit-history folding and dependent fixes do not warrant fragmented standalone articles.",
+    "evidence": "Six current cases. New agent-core-rs already covered by prod news/genesis-agent-core-rs. c-compiler, mesa and compiler-continuation unchanged; evoxc and tbench-wasm only clarify static directory illustrations, no new result or method. Prior portal stories do not present reconstructed graph statuses as live evidence."
+  },
+  "actualPublicationDate": "2026-11-22",
+  "recoveredFromPending": true
+}

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: de la conversación a una tarea de proyecto"
 pubDate: 2026-11-16
-updatedDate: 2026-11-17
+updatedDate: 2026-11-22
 summary: "Elige un proyecto, aprueba una acción concreta y sigue el desarrollo en segundo plano sin vincular su duración al chat."
 ---
 
@@ -34,6 +34,8 @@ Los enlaces de tareas sobreviven al fin de sesión, pero las conversaciones en m
 El navegador carga texto, PDF, DOCX, imágenes y audio, cuatro archivos por mensaje de hasta 15 MiB cada uno; los adjuntos completos se pueden enviar sin texto. La entrada secundaria de ruta del servidor admite el nodo local del panel y no lo sustituye por un nodo remoto no compatible.
 
 La carga desde el navegador toma los archivos del dispositivo actual. Leer una ruta del servidor se refiere a otro lugar y está limitado al nodo local del panel. Espera a que termine la carga antes de cambiar de contexto: cambiar de conversación o nodo cancela las transferencias pendientes. Para consultar el código de Genesis, la preparación opcional de la referencia fuente sigue requiriendo aprobación; compara su versión con la del entorno de ejecución activo. El contexto del proyecto y la referencia del código de Genesis cumplen así funciones distintas. [Archivos y referencia fuente][workflowguide]
+
+Los [cambios del entorno del 20 de noviembre](/es/news/genesis-project-workbench) reúnen navegación por proyectos, vistas Git y borradores con ámbito VCT en un espacio común.
 
 [previous]: /es/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172
