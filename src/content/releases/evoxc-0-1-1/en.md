@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1: Less Work Before a Population Can Run"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "The October 30 release improves program batching, graph preparation and backend failure handling, including an XLA client-locking fix."
 ---
 
@@ -38,3 +39,5 @@ Start with a saved population and fixed inputs. Compare merged outputs with indi
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /releases/evoxc-0-1-0
+
+[Later development: custom compilation and backend control](/news/evoxc-custom-compilation-pipeline).

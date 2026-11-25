@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1: menos preparación antes de ejecutar una población"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "La versión del 30 de octubre mejora agrupación de programas, preparación de grafos y errores de los motores, incluido un bloqueo de XLA."
 ---
 
@@ -38,3 +39,5 @@ Parte de una población guardada y entradas fijas. Compara los resultados combin
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /es/releases/evoxc-0-1-0
+
+[Desarrollo posterior: compilación personalizada y control de backends](/es/news/evoxc-custom-compilation-pipeline).

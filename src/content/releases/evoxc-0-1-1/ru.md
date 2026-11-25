@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1: меньше подготовки перед запуском популяции"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "Релиз от 30 октября улучшает группировку программ, подготовку графов и обработку ошибок, включая блокировку клиента XLA."
 ---
 
@@ -38,3 +39,5 @@ IREE сообщает о пределе HAL-привязок на диспетч
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /ru/releases/evoxc-0-1-0
+
+[Дальнейшая разработка: собственная компиляция и управление бэкендами](/ru/news/evoxc-custom-compilation-pipeline).

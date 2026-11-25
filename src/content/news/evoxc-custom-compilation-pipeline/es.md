@@ -1,0 +1,42 @@
+---
+title: "EvoX Compiler abre su flujo a la compilación personalizada"
+pubDate: 2026-11-25
+summary: "Las nuevas interfaces de main aceptan llamadas personalizadas, StableHLO en línea y módulos editados, con límites explícitos por backend."
+---
+
+Una operación experimental puede superar una biblioteca de tensores sin exigir cambiar el resto del programa. Las actualizaciones de la rama predeterminada de EvoX Compiler del 23–24 de noviembre de 2026 permiten insertar operaciones específicas del compilador, compilar código intermedio editado y elegir backends personalizados. Primero hay que decidir dónde ejecutar la extensión: dentro del compilador, como kernel en tiempo de ejecución o como backend completo. [Implementación y guía][guide]
+
+![Un cartucho óptico extraíble se incorpora a un carril modular atravesado por un haz rojo continuo](./cover.webp)
+
+*Ilustración conceptual: sustituir una etapa manteniendo explícito el flujo que la rodea.*
+
+## Elegir el límite del trabajo personalizado
+
+`custom_call` emite una llamada StableHLO con nombre, resultados declarados y configuración opcional del backend. El compilador externo determina si el destino existe y puede traducirse. `inline_stablehlo` inserta un fragmento sin procesar: los operandos usan `%in0` y los índices siguientes, mientras que los resultados deben asignarse a `%out0` y los índices siguientes. Las especificaciones de resultados siguen siendo explícitas. Nombres, configuración y fragmentos son valores estáticos que especializan el grafo. [Contrato de operaciones][ops]
+
+Estas interfaces no registran un kernel arbitrario en IREE o PJRT. Para un kernel Python o Triton que se ejecute en tiempo de ejecución, sigue correspondiendo el registro `external_call`. Una operación portable expresada con operaciones ordinarias de EvoX Compiler puede usar un bloque con su propia descomposición. La distinción evita confundir una declaración para el compilador con una implementación en ejecución.
+
+## Editar el programa intermedio y compilarlo
+
+Por ejemplo, un desarrollador puede inspeccionar un ejecutable con `source_text()`, editar su StableHLO y enviar el texto a `compile_text` con especificaciones de entrada y salida. Se omiten el trazado y la construcción del grafo, y después se usan las etapas normales de compilación y carga. Las especificaciones describen tuplas externas, cuyo contrato debe conservarse al ejecutar. El compilador externo valida el módulo; aceptar el texto no demuestra corrección numérica. [Implementación del flujo][pipeline]
+
+Conserve un pequeño conjunto de entradas y compare resultados con el programa original tras cada edición. Un destino inexistente debe diagnosticarse durante la legalización del compilador, no ocultarse cambiando de backend silenciosamente. El intérprete NumPy y el motor CPU nativo rechazan explícitamente estas extensiones. Las nuevas operaciones del grafo tampoco tienen reglas automáticas de agrupación por lotes ni diferenciación: para esas transformaciones hace falta una alternativa compatible. [Capacidades y límites][guide]
+
+## Conectar un backend de forma deliberada
+
+Las instancias de backend se mantienen coherentes entre etapas. El registro permite sustitución y eliminación explícitas, y los puntos de entrada permiten que paquetes externos proporcionen backends. Un backend compilador declara capacidades y dtypes e implementa compilación y carga; un conjunto vacío de dtypes rechaza todos los grafos. Los módulos personalizados de compilador y runtime IREE se seleccionan con opciones o variables de entorno, sin mezclar el runtime de una compilación personalizada con el módulo predeterminado. [Guía de extensión][guide]
+
+## Comprobar por separado transferencias y resultados numéricos
+
+En el mismo periodo cambian las transferencias Vulkan: las cargas de hasta 16 MiB usan búferes coherentes mapeados y las mayores, una ruta de copia. La lectura de retorno distingue memoria del host de memoria GPU meramente visible para el host. Las medidas registradas corresponden a una sola configuración Intel integrada/Mesa/IREE; mida transferencia y ejecución por separado en su hardware. [Implementación de transferencias][transfer]
+
+La CPU nativa también reutiliza el almacenamiento de grandes búferes y matrices entrantes para reducir asignaciones repetidas. Las reducciones reparten salidas independientes conservando su orden de acumulación. Los adaptadores exponen `split_reduction_threshold` y `split_reduction_non_exact`; al cambiar la política, compruebe tanto resultados numéricos como tiempos. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
+
+Una corrección de `power` en la CPU nativa también alinea los exponentes con la ruta de potencia flotante de NumPy. La herramienta de paridad distingue comparaciones exactas de enteros y booleanos de comparaciones flotantes con tolerancia. Antes de adoptar esta revisión del código, conserve resultados de referencia, pruebe el compilador y dispositivo elegidos y revise la tolerancia. La [versión v0.1.1][release] explica el flujo original; estos cambios amplían su personalización. [Corrección numérica][power]
+
+[guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
+[ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908
+[pipeline]: https://github.com/EMI-Group/evoxc/commit/1762ecec7d6ff56e7656ca7e2ae8d5a24149e1ef
+[transfer]: https://github.com/EMI-Group/evoxc/commit/0177af388a73d1c1dcbb05b8cc3b40f7d184bdc1
+[power]: https://github.com/EMI-Group/evoxc/commit/7fe54d07cc7e071ea80438eca74ad35de0bfa7d6
+[release]: /es/releases/evoxc-0-1-1

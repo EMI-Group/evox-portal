@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1: 개체군 실행 전 준비 작업 줄이기"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "10월 30일 릴리스는 프로그램 배치, 그래프 준비, 백엔드 오류 처리를 개선하고 XLA 클라이언트 잠금 문제를 수정합니다."
 ---
 
@@ -38,3 +39,5 @@ IREE 어댑터는 디스패치당 HAL 바인딩 한계를 대응 가능한 `Back
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /ko/releases/evoxc-0-1-0
+
+[후속 개발: 맞춤 컴파일과 백엔드 제어](/ko/news/evoxc-custom-compilation-pipeline).

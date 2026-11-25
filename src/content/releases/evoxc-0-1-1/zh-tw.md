@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1：減少種群執行前的準備工作"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "10 月 30 日釋出的版本改程序序批處理、計算圖準備和後端錯誤處理，並修復 XLA 客戶端鎖問題。"
 ---
 
@@ -38,3 +39,5 @@ IREE 介面卡現在把單次分派的 HAL 繫結數量限制報告為可採取�
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /zh-tw/releases/evoxc-0-1-0
+
+[後續開發：自訂編譯與後端控制](/zh-tw/news/evoxc-custom-compilation-pipeline).

@@ -1,0 +1,32 @@
+{
+  "collection": "news",
+  "slug": "evoxc-custom-compilation-pipeline",
+  "editorial_action": "new",
+  "reason": "New compiler-extension workflow warrants independent news; historical release retains original event and date with localized forward link.",
+  "story_type": "development",
+  "depth": "regular",
+  "englishBodyWords": 636,
+  "coverage": [
+    "Compiler vs runtime extension boundaries",
+    "custom_call and inline_stablehlo, explicit result specs",
+    "compile_text and source_text editing scenario",
+    "Backend identity, registry and IREE modules",
+    "Capabilities, missing transforms and numerical checks",
+    "Vulkan upload/readback and hardware scope",
+    "CPU memory reuse, reductions and power parity"
+  ],
+  "sourceSnapshot": "../scan-20261125.json",
+  "sourceCommit": "f11167521bd913babf86e295436ea4c902cf3e11",
+  "notRelease": "Version bump commits alone are not GitHub Releases. Release API unchanged.",
+  "image": {
+    "type": "Generated concept illustration",
+    "source": "exec-1441dda4-7e3e-48f8-97e7-f4da28b8066b.png",
+    "content_prompt": "Modular optical rail with removable cartridge and editable tracing plate, red light through the pipeline.",
+    "style_prompt": "Fine charcoal graphite engineering illustration on white, grey texture, red accent, no labels."
+  },
+  "locales": 13,
+  "consistency": "All code identifiers, references, headings and dates checked; full translated bodies and localized alt/caption.",
+  "visualReview": "English desktop and Chinese mobile reviewed.",
+  "validation": "qa-events/compiler-local.json and docs/blog-seo-audit.json",
+  "relatedUpdated": "releases/evoxc-0-1-1, all13, original pubDate retained"
+}

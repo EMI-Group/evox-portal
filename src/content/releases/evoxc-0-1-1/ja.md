@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler v0.1.1：集団を実行する前の作業を減らす"
 pubDate: 2026-10-30
+updatedDate: 2026-11-25
 summary: "10 月 30 日のリリースはプログラムのバッチ化、グラフ準備、バックエンド障害処理を改善し、XLA のクライアントロックも修正します。"
 ---
 
@@ -38,3 +39,5 @@ IREE アダプターはディスパッチごとの HAL バインディング上�
 [s2]: https://github.com/EMI-Group/evoxc/compare/v0.1.0...v0.1.1
 [s3]: https://github.com/EMI-Group/evoxc/blob/v0.1.1/README.md
 [related]: /ja/releases/evoxc-0-1-0
+
+[その後の開発：独自コンパイルとバックエンド制御](/ja/news/evoxc-custom-compilation-pipeline).
