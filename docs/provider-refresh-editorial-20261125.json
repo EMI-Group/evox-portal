@@ -1,0 +1,18 @@
+{
+  "collection": "news",
+  "slug": "genesis-provider-account-setup",
+  "editorial_action": "update",
+  "reason": "Small repairs to the already reported setup flow, no new independent workflow.",
+  "pubDate": "2026-11-22",
+  "updatedDate": "2026-11-25",
+  "sourceKeys": [
+    "genesis:commit:ffb0926723a4f2b695b1562a27954041be0cabd6",
+    "genesis:commit:a0a1f65f68bfd37c5563c3bde25e1ef76eebdf80",
+    "genesis:commit:868842557371daff7bcf68ce5ad59199b897d807",
+    "genesis:commit:2f6b8c93844a572988b9f1ba0d4155c3e67a1960"
+  ],
+  "coverage": "Saved registration reload, same-node refresh, settings-close reload including remote context, recoverable picker and incomplete-account scheduler degradation. Existing setup and migration body preserved.",
+  "locales": 13,
+  "cover": "Existing dedicated cover and localized captions retained",
+  "validation": "Build, SEO and qa-events/provider-local.json passed"
+}

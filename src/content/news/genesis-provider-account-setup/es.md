@@ -1,6 +1,7 @@
 ---
 title: "Genesis conecta la configuración de cuentas, los modelos y el inicio de sesión con ChatGPT"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "Un asistente renovado reúne credenciales, inventarios de modelos, razonamiento y horarios, con una conexión de suscripción ChatGPT gestionada por Genesis."
 ---
 
@@ -41,6 +42,12 @@ La cuenta también contiene concurrencia en horas punta y valle, zona horaria y 
 `off_peak_holidays = "CN"` incorpora el calendario chino incluido, con los días laborables compensatorios. Es un calendario estático para 2025–2027 y no se actualiza solo. Revise zona horaria, fines de semana y supuestos del preajuste. Una concurrencia punta de cero pone nuevas solicitudes en cola; reducir capacidad no expulsa trabajo ya iniciado. [Semántica de horarios][profiles]
 
 Tras pasar a una compilación con estos cambios, revise inventario, razonamiento predeterminado y equipo de ejecución de cada cuenta. Reautorice el perfil ChatGPT y ejecute su prueba de conexión. En cuentas programadas, inspeccione el horario guardado y la próxima transición prevista. Así comprueba las identidades y límites que usarán realmente las tareas futuras.
+
+## Actualizar los modelos después de guardar
+
+Las actualizaciones de `main` del 23 de noviembre de 2026 vinculan el guardado de registros de ChatGPT con la actualización de la configuración. En el mismo nodo de ejecución, un cambio recarga el selector de modelos del proyecto; cerrar los ajustes del entorno de trabajo también solicita una recarga. Los resultados descartados ahora producen un error que permite reintentar, en lugar de una carga indefinida. Espere a que la conexión remota esté lista antes de reintentarlo. [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+Una cuenta incompleta ya no provoca un ciclo de fallos del planificador. Este registra que no puede resolver el modelo predeterminado; complete el inventario de la cuenta y seleccione un modelo válido antes de utilizar ese valor predeterminado. [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md

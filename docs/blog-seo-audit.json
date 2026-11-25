@@ -8,7 +8,7 @@
     },
     "locales": 13,
     "pages": 767,
-    "updatedPages": 468,
+    "updatedPages": 481,
     "articleImages": 767,
     "previewPagesExcluded": 65
   },
@@ -3408,7 +3408,7 @@
         "pt",
         "pt-br"
       ],
-      "updatedDate": null,
+      "updatedDate": "2026-11-25",
       "pages": [
         {
           "locale": "en",

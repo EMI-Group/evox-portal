@@ -1,6 +1,7 @@
 ---
 title: "Genesis 串联账户设置、模型选择与 ChatGPT 登录"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "重建的提供方向导统一管理凭据、模型清单、推理选项和调度，并新增由 Genesis 管理的 ChatGPT 订阅连接。"
 ---
 
@@ -41,6 +42,12 @@ PR 中的 ChatGPT 刷新和流式处理检查使用了测试夹具，该轮评�
 `off_peak_holidays = "CN"` 将内置中国日历加入账户调度，包括调休工作日。日历是静态数据，覆盖 2025—2027 年，不会自动更新。依赖它之前，应检查时区、周末规则与预设假设。高峰并发为零会让新请求排队；降低容量不会驱逐已经执行中的工作。[调度语义][profiles]
 
 切换到包含这些变更的构建后，应重新检查各账户的模型清单、默认推理选项和执行主机。ChatGPT 配置需要重新授权并运行连接测试；采用调度的账户应检查保存的规则和预期的下一次切换。这些检查对应未来任务实际使用的身份与限制。
+
+## 保存后刷新模型选项
+
+2026 年 11 月 23 日合入 `main` 的更新，将保存 ChatGPT 注册信息与配置刷新连接起来。同一执行节点上的配置变化会重新加载项目的模型选择器；关闭工作台设置窗口也会触发重新加载。被丢弃的结果现在会显示可重试错误，避免选择器一直停在加载状态。远程连接就绪后再重试。 [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+账户尚未配置完整时，调度器不再陷入崩溃循环，而是记录默认模型无法解析的警告。请补全账户的模型列表并选择有效模型，再依赖该默认选项。 [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md

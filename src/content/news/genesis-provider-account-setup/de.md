@@ -1,6 +1,7 @@
 ---
 title: "Genesis verbindet Kontoeinrichtung, Modellauswahl und ChatGPT-Anmeldung"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "Ein erneuerter Anbieterassistent bündelt Zugangsdaten, Modellbestand, Denkstufen und Zeitpläne mit einer von Genesis verwalteten ChatGPT-Verbindung."
 ---
 
@@ -41,6 +42,12 @@ Dasselbe Kontomodell trägt Spitzen-/Nebenzeitparallelität, Zeitzone und Zeitpl
 `off_peak_holidays = "CN"` ergänzt den mitgelieferten chinesischen Kalender einschließlich Ausgleichsarbeitstagen. Die statischen Daten decken 2025–2027 ab und aktualisieren sich nicht selbst. Prüfen Sie Zeitzone, Wochenendregeln und Annahmen der Vorgaben. Spitzenparallelität null stellt neue Anfragen zurück; verringerte Kapazität verdrängt keine laufenden Anfragen. [Zeitplansemantik][profiles]
 
 Prüfen Sie nach Umstieg auf einen Build mit diesen Änderungen Modellbestand, Standarddenkstufe und Ausführungshost jedes Kontos. Autorisieren Sie ChatGPT erneut und führen Sie den Verbindungstest aus. Prüfen Sie bei geplanten Konten den gespeicherten Zeitplan und den nächsten erwarteten Wechsel. Das kontrolliert die Identitäten und Grenzen, die spätere Aufgaben tatsächlich nutzen.
+
+## Modellauswahl nach dem Speichern aktualisieren
+
+Die Änderungen auf `main` vom 23. November 2026 verbinden gespeicherte ChatGPT-Registrierungen mit der Aktualisierung der Konfiguration. Auf demselben Ausführungsknoten lädt eine Konfigurationsänderung die Modellauswahl des Projekts neu; auch das Schließen der Workbench-Einstellungen fordert dies an. Verworfene Ergebnisse führen nun zu einem wiederholbaren Fehler statt zu endlosem Laden. Warten Sie vor einem erneuten Versuch, bis die Remote-Verbindung bereit ist. [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+Ein unvollständiges Konto versetzt den Scheduler nicht mehr in eine Absturzschleife. Er protokolliert die nicht auflösbare Standardauswahl. Vervollständigen Sie die Modellliste des Kontos und wählen Sie ein gültiges Modell, bevor Sie diese Standardauswahl verwenden. [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md

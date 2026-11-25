@@ -1,6 +1,7 @@
 ---
 title: "Genesis relie configuration des comptes, choix des modèles et connexion ChatGPT"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "Un assistant de configuration reconstruit réunit identifiants, inventaire des modèles, raisonnement et horaires, avec une connexion ChatGPT gérée par Genesis."
 ---
 
@@ -41,6 +42,12 @@ Le même modèle de compte porte concurrence de pointe et hors pointe, fuseau ho
 `off_peak_holidays = "CN"` ajoute le calendrier chinois fourni à la planification, jours travaillés de rattrapage compris. Ce calendrier statique couvre 2025–2027 et ne se met pas à jour seul. Vérifiez fuseau, règles de week-end et hypothèses des préréglages. Une concurrence de pointe nulle met les nouvelles requêtes en attente ; réduire la capacité n’interrompt pas celles déjà en cours. [Sémantique des horaires][profiles]
 
 Après passage à une compilation contenant ces changements, revérifiez inventaire, raisonnement par défaut et hôte de chaque compte. Réautorisez un profil ChatGPT et lancez son test de connexion. Pour un compte planifié, inspectez les horaires enregistrés et la prochaine transition prévue. Ces vérifications portent sur les identités et limites réellement utilisées par les futures tâches.
+
+## Actualiser les modèles après l’enregistrement
+
+Les mises à jour de `main` du 23 novembre 2026 relient l’enregistrement des inscriptions ChatGPT à l’actualisation de la configuration. Sur le même nœud d’exécution, une modification recharge le sélecteur de modèles du projet ; fermer les paramètres du workbench demande aussi un rechargement. Les résultats abandonnés produisent désormais une erreur permettant de réessayer, au lieu d’un chargement indéfini. Attendez que la connexion distante soit prête avant de réessayer. [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+Un compte incomplet ne provoque plus de boucle de plantage du planificateur. Celui-ci journalise le modèle par défaut non résolu ; complétez l’inventaire du compte et sélectionnez un modèle valide avant de vous appuyer sur ce choix par défaut. [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md

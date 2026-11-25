@@ -1,6 +1,7 @@
 ---
 title: "Genesis connects account setup, model choices and ChatGPT sign-in"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "A rebuilt provider wizard keeps credentials, model inventories, reasoning choices and schedules together, with a new Genesis-managed ChatGPT subscription connection."
 ---
 
@@ -41,6 +42,12 @@ The same account model carries peak/off-peak concurrency, timezone and schedulin
 `off_peak_holidays = "CN"` adds the bundled Chinese calendar to account scheduling, including make-up working days. The calendar is static, covers 2025–2027 and does not update itself. Review timezone, weekend rules and preset assumptions before relying on it. A peak concurrency of zero queues new requests; reducing capacity does not evict work already in flight. [Schedule semantics][profiles]
 
 After moving to a build with these changes, recheck each account's model inventory, default reasoning choice and execution host. For a ChatGPT profile, reauthorize and run its connection test. For a scheduled account, inspect the saved schedule and expected next transition. These checks validate the identities and limits that future tasks will actually use.
+
+## After saving, refresh the model choices
+
+Updates on `main` on November 23, 2026 connect saved ChatGPT registrations to configuration refresh. On the same execution node, a configuration change reloads the project’s model picker; closing the workbench Settings window also requests a reload. Dropped results now produce a retryable error instead of leaving the picker indefinitely loading. Wait for the remote connection to become ready before retrying. [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+An incomplete account no longer forces the scheduler into a crash loop. It logs the unresolved default; complete the account’s model inventory and select a valid model before relying on that default. [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md

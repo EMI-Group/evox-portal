@@ -1,6 +1,7 @@
 ---
 title: "Genesis collega configurazione degli account, modelli e accesso ChatGPT"
 pubDate: 2026-11-22
+updatedDate: 2026-11-25
 summary: "Un assistente rinnovato riunisce credenziali, inventari dei modelli, ragionamento e orari con una connessione ChatGPT gestita da Genesis."
 ---
 
@@ -41,6 +42,12 @@ Lo stesso account contiene concorrenza di punta e fuori punta, fuso orario e pia
 `off_peak_holidays = "CN"` aggiunge il calendario cinese incluso, con i giorni lavorativi compensativi. I dati statici coprono il 2025–2027 e non si aggiornano da soli. Verifichi fuso, regole del fine settimana e ipotesi dei preset. Una concorrenza di punta pari a zero accoda nuove richieste; una riduzione della capacità non interrompe quelle già in corso. [Semantica degli orari][profiles]
 
 Dopo il passaggio a una build con queste modifiche, controlli inventario, ragionamento predefinito e host di ogni account. Riautorizzi il profilo ChatGPT ed esegua il test di connessione. Per gli account pianificati, controlli gli orari salvati e la prossima transizione prevista. Sono verifiche sulle identità e sui limiti che le attività future useranno realmente.
+
+## Aggiornare i modelli dopo il salvataggio
+
+Gli aggiornamenti su `main` del 23 novembre 2026 collegano il salvataggio delle registrazioni ChatGPT all’aggiornamento della configurazione. Sullo stesso nodo di esecuzione, una modifica ricarica il selettore dei modelli del progetto; anche chiudere le impostazioni del workbench richiede il ricaricamento. I risultati scartati producono ora un errore che consente di riprovare, anziché lasciare il caricamento in sospeso. Attenda che la connessione remota sia pronta prima di riprovare. [GitHub](https://github.com/EMI-Group/genesis/commit/ffb0926723a4f2b695b1562a27954041be0cabd6)
+
+Un account incompleto non provoca più un ciclo di arresti dello scheduler. Il sistema registra il modello predefinito non risolvibile: completi l’elenco dei modelli dell’account e ne selezioni uno valido prima di affidarsi a quel valore predefinito. [GitHub](https://github.com/EMI-Group/genesis/commit/868842557371daff7bcf68ce5ad59199b897d807)
 
 [pr]: https://github.com/EMI-Group/genesis/pull/175
 [profiles]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-profiles.md
