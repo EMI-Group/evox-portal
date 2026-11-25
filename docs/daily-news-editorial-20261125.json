@@ -1,0 +1,29 @@
+{
+  "slug": "genesis-dashboard-dependency-hardening",
+  "collection": "news",
+  "editorial_action": "new",
+  "story_type": "development",
+  "depth": "brief",
+  "brief_reason": "One dependency maintenance event: exact versions, maintainer-stated fixes, rebuild scenario and deployment check fully covered; no new configuration contract or architecture.",
+  "wordCount": 241,
+  "sourceKeys": [
+    "genesis:commit:99f450252b8c0f8a07ad64bb3f7491b35f9b23d0",
+    "genesis:commit:bfcc0115ad1cb714ec54d60265816550c1619bd3",
+    "genesis:commit:6a80bba389dec5d120c64a435cab88be4de275bc"
+  ],
+  "sourceVerification": "Read full dependency patches and pinned README source installation section. No Genesis runtime tests claimed.",
+  "image": {
+    "type": "AI conceptual editorial illustration",
+    "source": "exec-3357306d-9742-491f-a806-d859d5fed1cf.png",
+    "content_prompt": "Open door-latch mechanism with a replacement locking component highlighted red; preventative maintenance of shared infrastructure.",
+    "style_prompt": "Charcoal graphite technical editorial drawing, white background, fine ink, soft grey texture, small red accent, no text."
+  },
+  "validation": {
+    "locales": 13,
+    "versions": true,
+    "build": true,
+    "seo": "docs/blog-seo-audit.json",
+    "render": "qa-events/events-local.json",
+    "visualReview": "English desktop and Chinese mobile reviewed; no clipping or overflow."
+  }
+}
