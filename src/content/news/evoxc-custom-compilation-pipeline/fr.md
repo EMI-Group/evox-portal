@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler ouvre son pipeline à la compilation personnalisée"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "La branche main accepte les appels personnalisés, le StableHLO intégré et les modules modifiés, avec des capacités explicites pour chaque backend."
 ---
 
@@ -33,6 +34,9 @@ La même période de développement modifie les transferts Vulkan : les envois j
 Le CPU natif réutilise aussi le stockage des grands tampons et tableaux entrants pour réduire les allocations répétées. Les réductions répartissent les sorties indépendantes en conservant leur ordre d’accumulation. Les adaptateurs exposent `split_reduction_threshold` et `split_reduction_non_exact` : vérifiez résultats numériques et temps lorsque vous changez cette politique. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 Une correction de `power` sur CPU natif aligne aussi le traitement des exposants sur le calcul flottant de NumPy. Le banc de comparaison distingue les contrôles exacts entiers/booléens des comparaisons flottantes avec tolérance. Avant d’adopter ce code source, gardez vos résultats de référence, testez le compilateur et le périphérique choisis et vérifiez les tolérances. La [version v0.1.1][release] décrit le pipeline de préparation initial ; ces modifications étendent sa personnalisation. [Correction numérique][power]
+
+Mise à jour associée · 2026-11-26: [EvoX Compiler v0.2.3 : installer le backend adapté à votre charge de travail](/fr/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

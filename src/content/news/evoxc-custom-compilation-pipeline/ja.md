@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler、自分で拡張できるコンパイル工程へ"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main にカスタム呼び出し、インライン StableHLO、編集済みモジュールの入口を追加。未対応の経路はバックエンドの能力宣言で明示します。"
 ---
 
@@ -33,6 +34,9 @@ summary: "main にカスタム呼び出し、インライン StableHLO、編集�
 ネイティブ CPU は大きなバッファと入力配列のストレージを再利用し、繰り返す割り当ての負担を抑えます。リダクションは出力ごとの集約順序を保って独立した出力を並列化します。コンパイラアダプタは `split_reduction_threshold` と `split_reduction_non_exact` も公開します。方針を変える際は時間と数値結果の両方を確認してください。 [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 ネイティブ CPU の `power` 修正は指数処理を NumPy の浮動小数点べき乗経路に合わせます。一致性確認ツールも、整数・真偽値の厳密比較と浮動小数点の許容誤差比較を区別します。このソースを採用する前に基準出力を保存し、選んだコンパイラと機器で許容誤差も確認してください。従来の準備工程は [v0.1.1 の記事][release]、今回の更新はそのカスタマイズ方法を扱います。[数値修正][power]
+
+関連する更新 · 2026-11-26: [EvoX Compiler v0.2.3：ワークロードに合うバックエンドを導入する](/ja/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

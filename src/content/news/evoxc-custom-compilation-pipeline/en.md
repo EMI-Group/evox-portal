@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler opens its pipeline to custom compilation"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "New main-branch interfaces accept custom calls, inline StableHLO and edited modules, while backend capabilities keep unsupported paths explicit."
 ---
 
@@ -33,6 +34,9 @@ The same development window changes Vulkan transfers: uploads use mapped coheren
 Native CPU changes also reuse storage for large buffers and incoming arrays, targeting repeated allocation costs. Reduction workers split independent outputs while preserving each output’s fold order. Compiler adapters additionally expose `split_reduction_threshold` and `split_reduction_non_exact`; changing reduction policy calls for checking numerical results as well as timing. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 A native CPU `power` correction also aligns exponent handling with NumPy’s floating-power path, while the parity harness explicitly distinguishes exact integer/boolean checks from tolerance-based floating comparisons. Before adopting this source revision, retain your reference outputs, test the chosen compiler and device, and check the comparison tolerance. The earlier [v0.1.1 release][release] explains the original preparation pipeline; these source changes extend how developers can customize it. [Numerical correction][power]
+
+Related update · 2026-11-26: [EvoX Compiler v0.2.3: Install the backend that matches your workload](/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

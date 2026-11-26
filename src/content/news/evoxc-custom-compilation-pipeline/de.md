@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler öffnet seine Pipeline für eigene Kompilierung"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Die main-Änderungen unterstützen Custom Calls, eingebettetes StableHLO und bearbeitete Module; Backend-Fähigkeiten machen Grenzen explizit."
 ---
 
@@ -33,6 +34,9 @@ Im selben Entwicklungszeitraum ändern sich Vulkan-Transfers: Uploads bis 16 MiB
 Die native CPU verwendet Speicher großer Puffer und eingehender Arrays erneut, um wiederholte Allokationen zu reduzieren. Reduktionen verteilen unabhängige Ausgaben unter Erhaltung ihrer jeweiligen Faltungsreihenfolge. Compileradapter bieten zudem `split_reduction_threshold` und `split_reduction_non_exact`; prüfen Sie bei einer geänderten Reduktionsstrategie sowohl Ergebnisse als auch Laufzeit. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 Eine native CPU-Korrektur an `power` gleicht die Exponentenbehandlung außerdem an NumPys Gleitkommapotenzpfad an. Das Vergleichswerkzeug trennt exakte Ganzzahl-/Bool-Prüfungen von toleranzbasierten Gleitkommavergleichen. Bewahren Sie vor Übernahme dieser Quellrevision Referenzausgaben auf, testen Sie Compiler und Gerät und prüfen Sie die Toleranz. Die frühere [Version v0.1.1][release] erklärt die Vorbereitungspipeline; diese Änderungen erweitern deren Anpassbarkeit. [Numerische Korrektur][power]
+
+Zugehörige Aktualisierung · 2026-11-26: [EvoX Compiler v0.2.3: das passende Backend für Ihre Arbeitslast installieren](/de/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

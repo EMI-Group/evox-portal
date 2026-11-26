@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler, 맞춤 컴파일을 위한 파이프라인 개방"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main에 사용자 정의 호출, 인라인 StableHLO, 편집한 모듈의 컴파일 경로가 추가되며 백엔드 기능 선언이 지원 범위를 명확히 합니다."
 ---
 
@@ -33,6 +34,9 @@ summary: "main에 사용자 정의 호출, 인라인 StableHLO, 편집한 모듈
 네이티브 CPU는 큰 버퍼와 입력 배열의 저장 공간을 재사용해 반복 할당 비용을 줄입니다. 리덕션 작업은 각 출력의 누적 순서를 유지하며 독립 출력을 나눕니다. 컴파일러 어댑터는 `split_reduction_threshold`와 `split_reduction_non_exact`도 제공합니다. 리덕션 정책을 바꾸면 시간과 수치 결과를 함께 확인해야 합니다. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 네이티브 CPU의 `power` 수정은 지수 처리를 NumPy의 부동소수점 거듭제곱 경로에 맞춥니다. 동등성 도구도 정수·불리언의 정확 비교와 부동소수점의 허용 오차 비교를 구분합니다. 이 소스 수정본을 도입하기 전에 참조 출력을 보관하고 선택한 컴파일러·장치와 비교 오차를 확인하세요. 기존 준비 과정은 [v0.1.1 발표][release]에 설명되어 있으며 이번 변경은 그 과정을 맞춤화하는 방법을 확장합니다. [수치 수정][power]
+
+관련 업데이트 · 2026-11-26: [EvoX Compiler v0.2.3: 워크로드에 맞는 백엔드 설치](/ko/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

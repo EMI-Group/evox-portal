@@ -1,0 +1,506 @@
+{
+  "date": "2026-11-26",
+  "editorialReview": "passed",
+  "articles": [
+    {
+      "collection": "releases",
+      "slug": "evoxc-0-2-3",
+      "story_type": "release",
+      "editorial_action": "new",
+      "depth": "standard",
+      "englishBodyWords": 580,
+      "sourceUrls": {
+        "release": "https://github.com/EMI-Group/evoxc/releases/tag/v0.2.3",
+        "changes": "https://github.com/EMI-Group/evoxc/blob/v0.2.3/CHANGELOG.md",
+        "requirements": "https://github.com/EMI-Group/evoxc/blob/v0.2.3/pyproject.toml",
+        "guide": "https://github.com/EMI-Group/evoxc/blob/v0.2.3/README.md",
+        "related": "/news/evoxc-custom-compilation-pipeline"
+      },
+      "upstreamDate": "2026-11-25",
+      "pubDate": "2026-11-26",
+      "coverage": {
+        "intro": "Formal v0.2.3 distribution; 0.2-line changes distinguished from patch-only staging fixes; full upstream note read.",
+        "section1": "IREE matched 3.13 dependency range; artifact compatibility; source-reported MI300X/ROCm validation and exclusions; explicit readback.",
+        "section2": "XLA registration/discovery/load option propagation and strict physical device; stale output pointers.",
+        "section3": "NumPy dispatch/value release/shared device; floormod; maturin libraries and flat release staging.",
+        "section4": "Python requirement; verified available macOS/Linux/Windows wheel platforms; pip command and checks; evoxc-hf independent.",
+        "omissions": "Internal bump helper and CI unit-test implementation omitted as release-maintainer-only; no missing deprecation indicated; precise source benchmarks omitted because not generalizable. Plugin-discovery opt-out remains in linked backend guide."
+      },
+      "visual": {
+        "tool": "imagegen",
+        "type": "original concept illustration, not empirical evidence",
+        "sourceFile": "C:/Users/Admin/.codex/generated_images/01a1a583-a6bd-7100-955d-f3276c92b716/exec-4f0b3e7e-356c-44a6-b4b1-4b3461a02133.png",
+        "file": "cover.webp",
+        "sha256": "345f00c04897ad708cd142c3c086fb4d1582ac98b8d4a52a5e276bb57b921684",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "style_prompt": "Neutral white and grey graphite/charcoal editorial line illustration with localized texture and a small brand-red accent; no text or UI; shared across locales.",
+        "content_prompt": "Keyed adapters with different shapes align with their matching sockets beside a checked distribution package and caliper; emphasize physical backend compatibility and usable release artifacts.",
+        "altAndCaption": "localized in all13 files",
+        "review": "Viewed generated WebP; relevant, no fabricated measurements or screenshots, no visible text."
+      },
+      "relatedArticleRevisions": "evoxc-custom-compilation-pipeline",
+      "wordCountMethod": "English prose and headings; excludes frontmatter, alt, caption, inline code and reference definitions."
+    },
+    {
+      "collection": "news",
+      "slug": "genesis-whole-tree-pause",
+      "story_type": "development",
+      "editorial_action": "new",
+      "depth": "standard",
+      "englishBodyWords": 605,
+      "sourceUrls": {
+        "design": "https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md",
+        "registry": "https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74",
+        "coordinator": "https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11",
+        "agent": "https://github.com/EMI-Group/genesis/commit/196261f0157a7139de7e002d20aa7d7c633334ff",
+        "thaw": "https://github.com/EMI-Group/genesis/commit/fbaebed0671282d77fc2972f6818058e115f3616",
+        "related": "/news/genesis-assistant-project-workflows"
+      },
+      "upstreamDate": "2026-11-25",
+      "pubDate": "2026-11-26",
+      "coverage": {
+        "intro": "New whole-tree workflow warrants independent article rather than extending earlier project task article.",
+        "section1": "Task/scheduler pause distinction; states, cancel precedence; concrete parser/test parent-child example.",
+        "section2": "Background job reap, anchored worktree commits, durable marker, no false completion; 120s+10s bounded clean/dirty freeze.",
+        "section3": "Same-ID thaw, root persistence gate, child positions/identity/real outcomes; repair and restart/lease behavior.",
+        "section4": "Source-build and persistence prerequisite; observable same-task/child/checkpoint check; session/external side-effect limits adjacent."
+      },
+      "visual": {
+        "tool": "imagegen",
+        "type": "original concept illustration, not empirical evidence",
+        "sourceFile": "C:/Users/Admin/.codex/generated_images/01a1a583-a6bd-7100-955d-f3276c92b716/exec-daa533c3-ac30-4d46-8974-4e6ef4ff21b4.png",
+        "file": "cover.webp",
+        "sha256": "9d9ca492e110496128e8fc638c38c8b9e6b0dbbaf570cd6b86954d74839bc1b7",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "style_prompt": "Neutral white and grey graphite/charcoal editorial line illustration with localized texture and a small brand-red accent; no text or UI; shared across locales.",
+        "content_prompt": "A branching kinetic mobile held by a support frame and a small red retaining clip; each unfinished suspended branch stays connected in place, expressing preserved task topology and resumable work.",
+        "altAndCaption": "localized in all13 files",
+        "review": "Viewed generated WebP; relevant, no fabricated measurements or screenshots, no visible text."
+      },
+      "relatedArticleRevisions": "genesis-assistant-project-workflows",
+      "wordCountMethod": "English prose and headings; excludes frontmatter, alt, caption, inline code and reference definitions."
+    }
+  ],
+  "languageReview": {
+    "locales": [
+      "en",
+      "zh-cn",
+      "zh-tw",
+      "ja",
+      "ko",
+      "fr",
+      "de",
+      "it",
+      "es",
+      "es-419",
+      "pt",
+      "pt-br",
+      "ru"
+    ],
+    "method": "Translated complete English paragraph arrays; checked shared identifiers, commands, source reference usage, dates and paragraph structure; reviewed localized prose and traditional Chinese terminology.",
+    "status": "passed"
+  },
+  "installationVerification": {
+    "url": "https://pypi.org/pypi/evoxc/0.2.3/json",
+    "status": 200,
+    "version": "0.2.3",
+    "python": ">=3.11",
+    "files": 8,
+    "purpose": "Verify install command; GitHub release and pinned sources remain editorial primary evidence."
+  },
+  "validation": {
+    "build": "pnpm build passed after final text corrections",
+    "seo": {
+      "articles": 62,
+      "byCollection": {
+        "news": 44,
+        "releases": 18
+      },
+      "locales": 13,
+      "pages": 806,
+      "updatedPages": 533,
+      "articleImages": 806,
+      "previewPagesExcluded": 65
+    },
+    "seoErrors": [],
+    "pages": {
+      "verifiedAt": "2026-11-26T09:17:37.148Z",
+      "base": "http://127.0.0.1:4359",
+      "records": [
+        {
+          "route": "/ja/releases/evoxc-0-2-3",
+          "locale": "ja",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "fc20db7339ed99f174593135a68e17fb19dbb6bb15ed1617a41c9331a83fe435",
+          "status": 200
+        },
+        {
+          "route": "/zh-tw/releases/evoxc-0-2-3",
+          "locale": "zh-tw",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "1a3d9473d96da125eeaeca29509686d44d0d9909dc543096bde38d2018440540",
+          "status": 200
+        },
+        {
+          "route": "/zh-tw/news/genesis-whole-tree-pause",
+          "locale": "zh-tw",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "6ce5d88c599cabad5bdb45922aacb2580d2b0b5fce3022520f75dc1613ac5b88",
+          "status": 200
+        },
+        {
+          "route": "/ja/news/genesis-whole-tree-pause",
+          "locale": "ja",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "c16c545d8c4ffdf8c7fbcb0e0a0a74500f0b360e9565f1810d94c4756f84c97a",
+          "status": 200
+        },
+        {
+          "route": "/zh-cn/releases/evoxc-0-2-3",
+          "locale": "zh-cn",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "2f14dc92c1290d0655bc267b9067bd005b51ec8b3b35e787ee548d1050ba7d17",
+          "status": 200
+        },
+        {
+          "route": "/releases/evoxc-0-2-3",
+          "locale": "en",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "25e62f9c7499916630c8daea692061ea8751a06b1a29f377ff12328ab92e20c9",
+          "status": 200
+        },
+        {
+          "route": "/zh-tw/news/evoxc-custom-compilation-pipeline",
+          "locale": "zh-tw",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "12134374884389fb820191165745b03acf3eba16d86141ccc88a773784839f8c",
+          "status": 200
+        },
+        {
+          "route": "/ja/news/evoxc-custom-compilation-pipeline",
+          "locale": "ja",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "2d65e36ae179930d264474867c13875859f62f189f21d8c0c8cc631232af24a9",
+          "status": 200
+        },
+        {
+          "route": "/zh-tw/news/genesis-assistant-project-workflows",
+          "locale": "zh-tw",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "1384f3f80b79b0a0e47324f6f18a5be0254045146cd364a1410a59c64fdc36b4",
+          "status": 200
+        },
+        {
+          "route": "/ja/news/genesis-assistant-project-workflows",
+          "locale": "ja",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "e10a91761a2458f3f643ee3ab36d65bfdaa28737fd7b45346625411080248a0f",
+          "status": 200
+        },
+        {
+          "route": "/zh-cn/news/genesis-whole-tree-pause",
+          "locale": "zh-cn",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "665c15f8b781b4e9c6e160a9af83ce57b4cd509917ac5b3264723a75186fb4c9",
+          "status": 200
+        },
+        {
+          "route": "/news/genesis-whole-tree-pause",
+          "locale": "en",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "0ee83d74978f2c2ed3195e0ef83e4395e057ac44d1e210a897d037ab6b530532",
+          "status": 200
+        },
+        {
+          "route": "/zh-cn/news/evoxc-custom-compilation-pipeline",
+          "locale": "zh-cn",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "e1688b3630de65fbcb0e5d6d50227d128c33f15839ba1768ff134e1916f301e9",
+          "status": 200
+        },
+        {
+          "route": "/news/evoxc-custom-compilation-pipeline",
+          "locale": "en",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "487f89e88fd0e8d04cebb297e78735f1c2b58b66832f94f91166ffda2a6362fc",
+          "status": 200
+        },
+        {
+          "route": "/zh-cn/news/genesis-assistant-project-workflows",
+          "locale": "zh-cn",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "56925233c80b4f5d3e2b76d4e9b9674d449be1d918e655071f2a5bfaee6a83bd",
+          "status": 200
+        },
+        {
+          "route": "/news/genesis-assistant-project-workflows",
+          "locale": "en",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "214c28728f40fd90adae82cce689852282f1e9ad9e920fad4516624242b132d6",
+          "status": 200
+        },
+        {
+          "route": "/it/releases/evoxc-0-2-3",
+          "locale": "it",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "c8451137d48d0ea16586914ef06c83fe4bb437d14aee67e1d6c855ff607ddda5",
+          "status": 200
+        },
+        {
+          "route": "/ko/releases/evoxc-0-2-3",
+          "locale": "ko",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "cffb25473d60a7ea714d635c6b3f0810d9fa84f04fc774f15f2f7ae25da0828a",
+          "status": 200
+        },
+        {
+          "route": "/de/releases/evoxc-0-2-3",
+          "locale": "de",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "86c8176d2b205f4ed0ddca7ab7c0a231becd9931a3f114b4526e59bbbe839c2d",
+          "status": 200
+        },
+        {
+          "route": "/fr/releases/evoxc-0-2-3",
+          "locale": "fr",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "11bce38ffc5562e653407c5cf66b8fa56eb857353512fcf5a704dfe01de9f76d",
+          "status": 200
+        },
+        {
+          "route": "/de/news/genesis-whole-tree-pause",
+          "locale": "de",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "152d9da5786cbc576bbe83f6b6536b195710a9742cd6bc8cdf9bc1c71d2c9347",
+          "status": 200
+        },
+        {
+          "route": "/it/news/genesis-whole-tree-pause",
+          "locale": "it",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "9a4d85034338ae18558d2142e657bea6f15798e149675f780720806f215e7cad",
+          "status": 200
+        },
+        {
+          "route": "/fr/news/genesis-whole-tree-pause",
+          "locale": "fr",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "aeb09144b4a4176d6fddb56c74fb912f08e5f5d79b6862d9671cdd51e39622d4",
+          "status": 200
+        },
+        {
+          "route": "/ko/news/genesis-whole-tree-pause",
+          "locale": "ko",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "440c91d0bd8695b12b6dfc35ddd6f36d8c0de13d38836c03304c5f4e3d3106ab",
+          "status": 200
+        },
+        {
+          "route": "/de/news/evoxc-custom-compilation-pipeline",
+          "locale": "de",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "708223b23e85b78fb621cd408b719423b2193b0937de03c215692bb60bd0f8a1",
+          "status": 200
+        },
+        {
+          "route": "/it/news/evoxc-custom-compilation-pipeline",
+          "locale": "it",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "840f29a6706c0fa0044a61b18baed30061be8c3f3a1987c2af711375e8ac72ba",
+          "status": 200
+        },
+        {
+          "route": "/ko/news/evoxc-custom-compilation-pipeline",
+          "locale": "ko",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "be0de048afd417b7d58d187b9d163a29fb5daa26a01dae783b7beb20405134fb",
+          "status": 200
+        },
+        {
+          "route": "/fr/news/evoxc-custom-compilation-pipeline",
+          "locale": "fr",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "33006be6b2d6e2ef6c857688b585fb42556388bc5f5c72846fd03fd9ec9a9292",
+          "status": 200
+        },
+        {
+          "route": "/it/news/genesis-assistant-project-workflows",
+          "locale": "it",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "405a4280db3d2b749cf57a3c46a2c2eeeba513a39e3d0c1384cad0d4f585929d",
+          "status": 200
+        },
+        {
+          "route": "/de/news/genesis-assistant-project-workflows",
+          "locale": "de",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "3534c74e2dbf3f7ee6a81e9087e44564ca1426f6703d6edf878250ee704ce3da",
+          "status": 200
+        },
+        {
+          "route": "/ko/news/genesis-assistant-project-workflows",
+          "locale": "ko",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "2f63edf3195533632ae95d493b0067080466dbe5969aae634cbda017f5e3f482",
+          "status": 200
+        },
+        {
+          "route": "/fr/news/genesis-assistant-project-workflows",
+          "locale": "fr",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "82190e4024d38b1b23b52d5fb45af6b1a11650092fb046b431d06ccd2d62a2e1",
+          "status": 200
+        },
+        {
+          "route": "/ru/releases/evoxc-0-2-3",
+          "locale": "ru",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "2be31a1ab7533706bddde147ea7ddc8a6e59f0885b0aab8e85d3a544f0945c32",
+          "status": 200
+        },
+        {
+          "route": "/es/releases/evoxc-0-2-3",
+          "locale": "es",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "37b3e3bef27679270a0bef8e7810ab2a3bf24e9ac1296a8b6d2d93226fa6378f",
+          "status": 200
+        },
+        {
+          "route": "/es-419/releases/evoxc-0-2-3",
+          "locale": "es-419",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "b342e256cd1a041d7fd1d9a07e2e99c328bd985596bea40429e8d79bd474ca69",
+          "status": 200
+        },
+        {
+          "route": "/pt/releases/evoxc-0-2-3",
+          "locale": "pt",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "49105103748f5ee29657777c639d8e5be9467f8e3d844c3f1ebc316b98baf336",
+          "status": 200
+        },
+        {
+          "route": "/es/news/genesis-whole-tree-pause",
+          "locale": "es",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "29d60246e668504dd038f0f80c062ae47b8ecca20124f1610097681840e0b3e8",
+          "status": 200
+        },
+        {
+          "route": "/es-419/news/genesis-whole-tree-pause",
+          "locale": "es-419",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "77f4e9fcfa8cc51099f75ebaa8764c79f90c3d5d195e593458b4e2803af781da",
+          "status": 200
+        },
+        {
+          "route": "/ru/news/genesis-whole-tree-pause",
+          "locale": "ru",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "6afa7dfee188ad2b9672af2f6ed23eab9d3801358d84d08608181ad5c06a4efb",
+          "status": 200
+        },
+        {
+          "route": "/pt/news/genesis-whole-tree-pause",
+          "locale": "pt",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "78e81874ea71a7096999340a22d0fe14fb314e22e097031290d4395faef088c9",
+          "status": 200
+        },
+        {
+          "route": "/es-419/news/evoxc-custom-compilation-pipeline",
+          "locale": "es-419",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "6e78b927898c23c6f07fac0d8cc43f9438625af032a208e9ea1864d0b1127b39",
+          "status": 200
+        },
+        {
+          "route": "/es/news/evoxc-custom-compilation-pipeline",
+          "locale": "es",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "22920c177ef16b7ae0f6179f675a1f906b85d50f56c1f3d670343feead914148",
+          "status": 200
+        },
+        {
+          "route": "/ru/news/evoxc-custom-compilation-pipeline",
+          "locale": "ru",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "224c0d6f72030a3d0d14bfc29e283982bf7daa10799aba4926dfe90634fe43ab",
+          "status": 200
+        },
+        {
+          "route": "/pt/news/evoxc-custom-compilation-pipeline",
+          "locale": "pt",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "3772799c82953e294d380e4cfa69e864dec7b2fb4683708d780b82123a8e4b26",
+          "status": 200
+        },
+        {
+          "route": "/ru/news/genesis-assistant-project-workflows",
+          "locale": "ru",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "cdf8ff8e09e37ff6e19e139f71dafb0caae7c7aa755b25afc9895df7e9b2d971",
+          "status": 200
+        },
+        {
+          "route": "/es/news/genesis-assistant-project-workflows",
+          "locale": "es",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "f23d5fb6e7d1b8a5a19a31432281dc25794927820841561f959fdc21ad0602ce",
+          "status": 200
+        },
+        {
+          "route": "/es-419/news/genesis-assistant-project-workflows",
+          "locale": "es-419",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "d6fef110cec2e1801bdcba256a1b8139d47a848e51d1776191b126277fbbe399",
+          "status": 200
+        },
+        {
+          "route": "/pt/news/genesis-assistant-project-workflows",
+          "locale": "pt",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "b7473a2e93cc6bdd68e6d362881d22ded9849c0fcff5c19c99aabe4bebd49790",
+          "status": 200
+        },
+        {
+          "route": "/pt-br/releases/evoxc-0-2-3",
+          "locale": "pt-br",
+          "og": "https://www.evox.group/_astro/cover.DeIRM-bd.webp",
+          "bodyDigest": "54ec66713dce3803c3e5d27e6a0517afe7e9e1d355774f6430374d1c45e12abb",
+          "status": 200
+        },
+        {
+          "route": "/pt-br/news/genesis-whole-tree-pause",
+          "locale": "pt-br",
+          "og": "https://www.evox.group/_astro/cover.Svj14ea-.webp",
+          "bodyDigest": "68af66585773f7d594b554c6b0cf83ac78ee16ec157f0ef1b0885cf354452128",
+          "status": 200
+        },
+        {
+          "route": "/pt-br/news/evoxc-custom-compilation-pipeline",
+          "locale": "pt-br",
+          "og": "https://www.evox.group/_astro/cover.DI1QBGMu.webp",
+          "bodyDigest": "fd673d850e9ba41128326ea4a4de4e14b0afb8a847552df187e501f905c41d77",
+          "status": 200
+        },
+        {
+          "route": "/pt-br/news/genesis-assistant-project-workflows",
+          "locale": "pt-br",
+          "og": "https://www.evox.group/_astro/genesis-assistant-project-workflows.CLvV0NaK.webp",
+          "bodyDigest": "ffadfe35543c7fc5f0a112ea681a53472587f2ddfceeacda6db5a77b80f033ee",
+          "status": 200
+        }
+      ],
+      "localeCount": 13,
+      "articleCount": 4
+    },
+    "visualReview": "English desktop and simplified Chinese mobile/dark screenshots of both new articles inspected; cover source, shape matching and saved branching concept appropriate; no overflow; localized captions and article body legible."
+  }
+}

@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler 开放自定义编译流程"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main 分支新增自定义调用、内联 StableHLO 和编辑后模块的编译入口，并通过后端能力声明明确不受支持的路径。"
 ---
 
@@ -33,6 +34,9 @@ summary: "main 分支新增自定义调用、内联 StableHLO 和编辑后模块
 原生 CPU 的更新还为大缓冲区和传入数组复用存储，减少重复分配开销。归约线程按独立输出拆分工作，同时保留每个输出的折叠顺序。编译适配器也开放了 `split_reduction_threshold` 和 `split_reduction_non_exact`；调整归约策略时，应同时检查数值结果和耗时。 [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 原生 CPU 的 `power` 修复还使指数处理与 NumPy 的浮点幂路径一致，并在一致性检查工具中明确区分整数、布尔值的精确比较与浮点数的容差比较。采用这一源码修订前，保留参考输出，测试所选编译器和设备，并核对比较容差。此前的 [v0.1.1 版本公告][release] 介绍了原有准备流程；本次源码更新扩展了开发者定制该流程的方式。[数值修复][power]
+
+相关更新 · 2026-11-26: [EvoX Compiler v0.2.3：为工作负载安装匹配的后端](/zh-cn/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

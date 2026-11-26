@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler abre o fluxo à compilação personalizada"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "As novas interfaces de main aceitam chamadas personalizadas, StableHLO inline e módulos editados, com capacidades explícitas por backend."
 ---
 
@@ -33,6 +34,9 @@ No mesmo período alteram-se as transferências Vulkan: envios até 16 MiB usam 
 A CPU nativa também reutiliza armazenamento de buffers grandes e arrays de entrada para reduzir alocações repetidas. As reduções repartem saídas independentes preservando a ordem de acumulação de cada uma. Os adaptadores expõem `split_reduction_threshold` e `split_reduction_non_exact`; ao mudar a política, verifique resultados numéricos e tempos. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 Uma correção de `power` na CPU nativa também alinha os expoentes com a via de potência em vírgula flutuante do NumPy. A ferramenta de paridade distingue verificações exatas de inteiros/booleanos de comparações flutuantes com tolerância. Antes de adotar esta revisão do código, conserve resultados de referência, teste o compilador e dispositivo escolhidos e confirme a tolerância. A [versão v0.1.1][release] explica o fluxo original; estas alterações ampliam a sua personalização. [Correção numérica][power]
+
+Atualização relacionada · 2026-11-26: [EvoX Compiler v0.2.3: instalar o backend adequado à carga de trabalho](/pt/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

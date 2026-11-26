@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：会話からプロジェクトのタスクへ"
 pubDate: 2026-11-16
-updatedDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "プロジェクトを選び、具体的な操作を承認し、会話とは独立したバックグラウンド開発を追跡します。"
 ---
 
@@ -36,6 +36,9 @@ MCP と共有する十一の定義は、照会と変更を区別します。タ�
 ブラウザーのアップロードは現在使っている端末からファイルを読み取ります。サーバーパスは別の場所を指し、ダッシュボードのローカルノードだけに対応します。会話やノードを切り替えると未完了の転送を取り消すため、切り替える前にアップロードの完了を待ちます。Genesis コードの任意の参照用コピーの準備には引き続き承認が必要です。そのバージョンを稼働中のランタイムと比較してください。プロジェクトの文脈と Genesis のソース参照は異なる役割を持ちます。[ファイルとソース参照][workflowguide]
 
 [11 月 20 日のワークベンチ更新](/ja/news/genesis-project-workbench)は、プロジェクトナビゲーション、Git ビュー、VCT スコープの下書きを共通の作業環境に統合します。
+
+関連する更新 · 2026-11-26: [Genesis が未完了の子タスクを残したままタスクツリー全体を一時停止](/ja/news/genesis-whole-tree-pause).
+
 
 [previous]: /ja/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

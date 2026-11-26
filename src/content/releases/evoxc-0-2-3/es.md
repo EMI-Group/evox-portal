@@ -1,0 +1,41 @@
+---
+title: "EvoX Compiler v0.2.3: instalar el backend adecuado para cada carga"
+pubDate: 2026-11-26
+summary: "La serie 0.2 incorpora IREE 3.13, descubrimiento automático de plugins XLA y correcciones numéricas; v0.2.3 entrega los artefactos de distribución verificados."
+---
+
+EvoX Compiler v0.2.3 se publicó el 25 de noviembre de 2026 UTC, con wheels de Python y un archivo de código fuente. La breve nota de GitHub enlaza la comparación de v0.2.2 a v0.2.3; el registro versionado recoge los cambios sustanciales de la serie 0.2 y las reparaciones de empaquetado que llevan a esta distribución. Al migrar desde 0.1, las principales preguntas son qué pareja de compilador y runtime instalar, cómo elegir el dispositivo físico y qué comprobaciones numéricas repetir. [Publicación][release] · [Registro de cambios][changes]
+
+![Un adaptador con guía alineado con su conector junto a un paquete comprobado](./cover.webp)
+
+*Ilustración conceptual: una distribución utilizable debe encajar con su entorno de ejecución.*
+
+## Mantener alineados compilador y runtime
+
+El extra IREE exige ahora tanto compilador como runtime en versiones desde 3.13.0 hasta antes de 3.14. Los artefactos compilados dependen de la versión: un archivo generado con otra pareja no tiene por qué cargarse sin cambios. El proyecto original revalidó llvm-cpu y ROCm/HIP en AMD Instinct MI300X con ROCm 7.1, incluidos bucles y escaneos que fallaban en versiones anteriores de IREE. Estas pruebas no abarcan automáticamente CUDA, la ejecución multi-rank ni todos los benchmarks de modelos. [Requisitos versionados][requirements] · [Registro de cambios][changes]
+
+El adaptador también controla la lectura de resultados del dispositivo al host, en lugar de depender ciegamente del atajo del runtime. Esto importa cuando el cálculo funciona pero falla la recuperación del resultado. La memoria del host puede conservar una ruta mapeada; los búferes del dispositivo requieren una transferencia explícita. El tiempo de transferencia forma parte de la carga de la aplicación y debe distinguirse del tiempo del kernel.
+
+## Descubrir el plugin XLA y elegir su dispositivo
+
+El registro de XLA ya no sondea plugins sin opciones antes de que el llamador pueda proporcionar una ruta. El descubrimiento considera la opción explícita del plugin, su variable de entorno, ubicaciones conocidas y paquetes de plugins JAX instalados, sin importar JAX. La disponibilidad se comprueba durante la compilación y la carga, cuando ya existen opciones. Las funciones de construcción también transmiten las opciones resueltas a la carga, corrigiendo el caso en que la compilación encontraba el plugin pero la carga perdía su configuración. [Guía de backends][guide]
+
+Un plugin ROCm debe atender un dispositivo ROCm, y uno CUDA un dispositivo CUDA. Se rechaza proporcionar un plugin GPU manteniendo la selección CPU predeterminada. Para un experimento GPU, hay que elegir el dispositivo correspondiente y mover allí los tensores explícitamente. Antes de copiar resultados al host, conviene comprobar dónde están las salidas. Si falla una ejecución XLA, también se vacían los espacios de punteros de salida en caché para que llamadas posteriores no reutilicen punteros obsoletos.
+
+## Revisar la semántica antes de comparar velocidad
+
+El intérprete de referencia NumPy utiliza planes de despacho en caché, libera valores intermedios muertos en su último uso y comparte una instancia inmutable del dispositivo host. Así reduce preparación y asignaciones sin exigir una nueva forma pública de llamada. Las mediciones TensorNEAT del registro corresponden a cargas concretas, no a un factor universal de aceleración.
+
+La operación compilada de resto sigue ahora NumPy floormod: el resultado tiene el signo del divisor. Por ello, las entradas negativas son una buena prueba de actualización. Se deben conservar entradas fijas y salidas de referencia y comparar intérprete y compilador con tolerancias adecuadas al tipo de dato. Las reparaciones de empaquetado aceptan el directorio de bibliotecas compartidas incluido por maturin y preparan los archivos probados en una estructura plana, resolviendo fallos que impedían su publicación. [Correcciones registradas][changes]
+
+## Actualizar en un entorno limpio
+
+Se requiere Python 3.11 o posterior. El wheel 0.2.3 elegido entre los recursos de la publicación se instala con pip; hay wheels para Linux, macOS y Windows y un archivo de código fuente. Para el extra IREE, puede utilizarse `pip install "evoxc[iree]==0.2.3"`, comprobando las dos dependencias IREE. La distribución independiente evoxc-hf conserva su propia versión. Antes de trasladar una carga mayor, hay que ejecutar `pip check`, consultar la versión instalada y repetir un grafo representativo, un caso de resto negativo y una transferencia de ida y vuelta al dispositivo. [Guía de instalación][guide]
+
+Para conocer las transformaciones de grafos, operaciones personalizadas y etapas explícitas de compilación de estos backends, véase el artículo sobre [compilación personalizada][related] junto con la documentación de esta publicación.
+
+[release]: https://github.com/EMI-Group/evoxc/releases/tag/v0.2.3
+[changes]: https://github.com/EMI-Group/evoxc/blob/v0.2.3/CHANGELOG.md
+[requirements]: https://github.com/EMI-Group/evoxc/blob/v0.2.3/pyproject.toml
+[guide]: https://github.com/EMI-Group/evoxc/blob/v0.2.3/README.md
+[related]: /es/news/evoxc-custom-compilation-pipeline

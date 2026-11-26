@@ -1,6 +1,7 @@
 ---
 title: "EvoX Compiler apre la pipeline alla compilazione personalizzata"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Le novità su main accettano chiamate personalizzate, StableHLO inline e moduli modificati, dichiarando esplicitamente i limiti dei backend."
 ---
 
@@ -33,6 +34,9 @@ Nello stesso periodo cambiano i trasferimenti Vulkan: fino a 16 MiB gli upload u
 La CPU nativa riusa inoltre lo spazio di grandi buffer e array in ingresso, riducendo le allocazioni ripetute. Le riduzioni ripartiscono output indipendenti mantenendone l’ordine di accumulo. Gli adattatori espongono anche `split_reduction_threshold` e `split_reduction_non_exact`: cambiando questa politica, controlli risultati numerici e tempi. [GitHub](https://github.com/EMI-Group/evoxc/commit/beb6c45e21099cf9d3d0f6e2a0e0d00475189ac7) · [GitHub](https://github.com/EMI-Group/evoxc/commit/83a6254ae0bfdef4f9df37cdcaaead6e8ca98048) · [GitHub](https://github.com/EMI-Group/evoxc/commit/df40224b8adc988d2d2a72cd35bd0aceef5bb660) · [GitHub](https://github.com/EMI-Group/evoxc/commit/501759257b739912d8b5179ae314e05e1e2dc9ba)
 
 Una correzione di `power` sulla CPU nativa allinea inoltre gli esponenti al percorso di potenza in virgola mobile di NumPy. Il banco di confronto distingue controlli esatti per interi e booleani da confronti flottanti con tolleranza. Prima di adottare questa revisione sorgente, conservi gli output di riferimento, provi compilatore e dispositivo scelti e controlli le tolleranze. La [versione v0.1.1][release] descrive la pipeline originale; queste modifiche ne estendono la personalizzazione. [Correzione numerica][power]
+
+Aggiornamento correlato · 2026-11-26: [EvoX Compiler v0.2.3: installare il backend adatto al carico di lavoro](/it/releases/evoxc-0-2-3).
+
 
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908

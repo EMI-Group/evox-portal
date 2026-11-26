@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: Vom Gespräch zur Projektaufgabe"
 pubDate: 2026-11-16
-updatedDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "Ein Projekt auswählen, eine konkrete Aktion freigeben und Hintergrundarbeit verfolgen, ohne ihre Laufzeit an den Chat zu binden."
 ---
 
@@ -36,6 +36,9 @@ Browser-Uploads unterstützen Text, PDF, DOCX, Bilder und Audio, vier Dateien pr
 Der Browser-Upload liest Dateien vom gerade verwendeten Gerät. Ein Serverpfad bezeichnet einen anderen Ort und kann nur auf dem lokalen Dashboard-Knoten gelesen werden. Warten Sie vor einem Kontextwechsel auf abgeschlossene Uploads: Ein Wechsel von Gespräch oder Knoten bricht ausstehende Übertragungen ab. Für das Nachschlagen im Genesis-Code bleibt die optionale Vorbereitung der Quellreferenz genehmigungspflichtig; vergleichen Sie deren Version mit der laufenden Runtime. Projektkontext und Genesis-Quellreferenz erfüllen damit unterschiedliche Aufgaben. [Dateien und Quellreferenz][workflowguide]
 
 Die [Workbench-Änderungen vom 20. November](/de/news/genesis-project-workbench) vereinen Projektnavigation, Git-Ansichten und VCT-gebundene Entwürfe in einer gemeinsamen Arbeitsumgebung.
+
+Zugehörige Aktualisierung · 2026-11-26: [Genesis pausiert den gesamten Aufgabenbaum, ohne unfertige Kinder abzuschließen](/de/news/genesis-whole-tree-pause).
+
 
 [previous]: /de/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

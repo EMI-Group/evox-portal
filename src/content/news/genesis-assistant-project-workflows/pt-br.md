@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant: da conversa à tarefa de projeto"
 pubDate: 2026-11-16
-updatedDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "Escolha um projeto, aprove uma ação concreta e acompanhe o desenvolvimento em segundo plano sem vincular sua duração ao chat."
 ---
 
@@ -36,6 +36,9 @@ O navegador envia texto, PDF, DOCX, imagens e áudio, quatro arquivos por mensag
 O envio pelo navegador busca arquivos no dispositivo em uso. Ler um caminho do servidor aponta para outro local e fica limitado ao nó local do painel. Aguarde o envio terminar antes de mudar de contexto: trocar de conversa ou nó cancela transferências pendentes. Para consultar o código do Genesis, a preparação opcional da referência de código-fonte continua sujeita à aprovação; compare sua versão com a do runtime ativo. O contexto do projeto e a referência do código do Genesis têm, assim, funções distintas. [Arquivos e referência de código-fonte][workflowguide]
 
 As [alterações de 20 de novembro](/pt-br/news/genesis-project-workbench) reúnem navegação por projetos, visualizações Git e rascunhos com escopo VCT em um ambiente comum.
+
+Atualização relacionada · 2026-11-26: [Genesis pausa toda a árvore de tarefas sem concluir os filhos inacabados](/pt-br/news/genesis-whole-tree-pause).
+
 
 [previous]: /pt-br/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172

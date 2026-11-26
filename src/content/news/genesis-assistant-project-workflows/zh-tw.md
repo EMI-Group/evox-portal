@@ -1,7 +1,7 @@
 ---
 title: "Genesis Assistant：從一段對話，到一項專案任務"
 pubDate: 2026-11-16
-updatedDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "選定專案、批准具體操作並跟蹤後臺開發，讓任務進展不再依賴聊天是否仍在回覆。"
 ---
 
@@ -36,6 +36,9 @@ Assistant 對話結束後任務連結仍保留，但記憶體中的對話不能�
 瀏覽器上傳讀取當前裝置上的檔案。伺服器路徑指向另一處位置，且只支援儀表板本地節點。切換上下文前應等待上傳結束：切換會話或節點會取消待完成傳輸。若要查閱 Genesis 程式碼，可選的原始碼參考準備仍需核准，並應對照參考版本與實際執行版本。專案上下文和 Genesis 原始碼參考由此承擔不同職責。[檔案與原始碼參考][workflowguide]
 
 [11 月 20 日的工作臺更新](/zh-tw/news/genesis-project-workbench)將專案導覽、Git 檢視與 VCT 作用域草稿整合到同一工作環境。
+
+相關更新 · 2026-11-26: [Genesis 暫停整棵任務樹，保留尚未完成的子任務](/zh-tw/news/genesis-whole-tree-pause).
+
 
 [previous]: /zh-tw/news/genesis-assistant-interactive-sessions
 [workflows]: https://github.com/EMI-Group/genesis/pull/172
