@@ -1,6 +1,7 @@
 ---
 title: "Genesis reforça as dependências do painel"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main atualiza Phoenix, LiveView, Bandit e jsv; instalações a partir do código-fonte exigem uma nova compilação."
 ---
 
@@ -24,3 +25,5 @@ Por exemplo, uma equipe com hospedagem próprio pode atualizar o código e conti
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+A manutenção de 25 de novembro de 2026 também eleva `db_connection` a 2.10.3. O código associa este mínimo de segurança a estruturas de fluxo forjadas que alcançam a opção de registro. Atualiza ainda dependências nativas de Markdown e hashes Nix. Reconstrua com o arquivo de bloqueio e as configurações Nix correspondentes. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

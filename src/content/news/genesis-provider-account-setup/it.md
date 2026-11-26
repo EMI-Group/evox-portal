@@ -1,7 +1,7 @@
 ---
 title: "Genesis collega configurazione degli account, modelli e accesso ChatGPT"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Un assistente rinnovato riunisce credenziali, inventari dei modelli, ragionamento e orari con una connessione ChatGPT gestita da Genesis."
 ---
 
@@ -54,3 +54,5 @@ Un account incompleto non provoca più un ciclo di arresti dello scheduler. Il s
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+Dal 25 novembre 2026 il salvataggio delle impostazioni viene rifiutato se l’identità del nodo BEAM locale è cambiata dopo il montaggio della pagina. Ricarichi il contesto del nodo prima di riprovare, evitando una conferma associata a un ambito di configurazione obsoleto. [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

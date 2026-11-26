@@ -1,6 +1,7 @@
 ---
 title: "Genesis härtet die Abhängigkeiten seines Dashboards"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main aktualisiert Phoenix, LiveView, Bandit und jsv; Installationen aus dem Quellcode benötigen einen neuen Build."
 ---
 
@@ -24,3 +25,5 @@ Ein selbst hostendes Team kann beispielsweise den Quellcode aktualisieren, währ
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+Die Wartung vom 25. November 2026 hebt auch `db_connection` auf 2.10.3 an. Der Quellcode begründet die Sicherheitsuntergrenze mit gefälschten Stream-Strukturen, die die Logging-Option erreichen. Native Markdown-Abhängigkeiten und Nix-Hashes werden ebenfalls aktualisiert. Bauen Sie mit passendem Lockfile und passenden Nix-Definitionen neu. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

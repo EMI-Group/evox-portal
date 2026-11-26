@@ -1,6 +1,7 @@
 ---
 title: "Genesis усиливает зависимости панели управления"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "В main обновлены Phoenix, LiveView, Bandit и jsv; для установки из исходников приложение нужно пересобрать."
 ---
 
@@ -24,3 +25,5 @@ summary: "В main обновлены Phoenix, LiveView, Bandit и jsv; для у
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+Обслуживание от 25 ноября 2026 года также обновляет `db_connection` до 2.10.3. Код связывает этот минимум безопасности с поддельными структурами потока, достигающими параметра журналирования. Обновлены нативные зависимости Markdown и хеши Nix. Пересоберите с согласованными файлом фиксации зависимостей и определениями Nix. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

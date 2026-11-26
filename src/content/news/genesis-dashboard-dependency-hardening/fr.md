@@ -1,6 +1,7 @@
 ---
 title: "Genesis renforce les dépendances de son tableau de bord"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "La branche main actualise Phoenix, LiveView, Bandit et jsv ; les déploiements depuis les sources nécessitent une reconstruction."
 ---
 
@@ -24,3 +25,5 @@ Une équipe auto-hébergée peut, par exemple, actualiser ses sources tout en ex
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+La maintenance du 25 novembre 2026 passe aussi `db_connection` à 2.10.3. Le code attribue ce minimum de sécurité à des structures de flux forgées atteignant l’option de journalisation. Les dépendances Markdown natives et les empreintes Nix sont actualisées. Reconstruisez avec le fichier de verrouillage et les définitions Nix correspondants. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

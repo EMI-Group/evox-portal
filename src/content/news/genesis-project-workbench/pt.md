@@ -1,6 +1,7 @@
 ---
 title: "Genesis reúne projetos, conversas e Git no mesmo ambiente de trabalho"
 pubDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "Rascunhos por projeto e espaços VCT mantêm o contexto no repositório e nó corretos durante a mudança de tarefa."
 ---
 
@@ -43,3 +44,5 @@ Numa compilação com estas alterações, experimente dois projetos com rascunho
 [scope]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex
 [adopt]: https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
+
+Os ajustes de 25 de novembro de 2026 mantêm opções no formulário, abrem projetos escolhidos explicitamente na visão geral e encaminham tarefas ativas para um inspetor de agentes filtrado por tarefa. O rascunho Assistant do projeto só aparece após confirmar a identidade, preservando projeto e nó durante a navegação. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).

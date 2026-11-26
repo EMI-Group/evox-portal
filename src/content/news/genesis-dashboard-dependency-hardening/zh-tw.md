@@ -1,6 +1,7 @@
 ---
 title: "Genesis 加固工作臺背後的 Web 依賴"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main 分支更新 Phoenix、LiveView、Bandit 和 jsv；原始碼部署需要重新構建應用才能納入這些變化。"
 ---
 
@@ -24,3 +25,5 @@ Genesis 的依賴宣告將 Phoenix 更新關聯到 presence 跟蹤器和廣播�
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+2026 年 11 月 25 日的維護還將 `db_connection` 提升至 2.10.3。原始碼說明，這一下限針對偽造流結構透過日誌選項觸發的安全問題；同時更新了 Markdown 原生依賴和 Nix 雜湊。重新構建時應配套使用鎖檔案與 Nix 定義。 [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

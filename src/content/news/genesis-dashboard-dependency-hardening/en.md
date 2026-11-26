@@ -1,6 +1,7 @@
 ---
 title: "Genesis hardens the dependencies behind its dashboard"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "The main branch updates Phoenix, LiveView, Bandit and jsv; source deployments need a rebuilt application to receive the changes."
 ---
 
@@ -24,3 +25,5 @@ For example, a self-hosted team can update its checkout yet continue running an 
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+November 25, 2026 maintenance also raises `db_connection` to 2.10.3. The source attributes the security floor to forged stream structures reaching the logging option; it also refreshes Markdown native dependencies and Nix hashes. Rebuild with the matching lockfile and Nix definitions. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

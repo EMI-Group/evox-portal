@@ -1,6 +1,7 @@
 ---
 title: "Genesis, 대시보드 의존성 보강"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main에서 Phoenix, LiveView, Bandit, jsv를 업데이트했습니다. 소스 배포에는 애플리케이션 재빌드가 필요합니다."
 ---
 
@@ -24,3 +25,5 @@ Genesis 의존성 선언은 Phoenix 업데이트를 presence 추적기와 브로
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+2026년 11월 25일 유지보수는 `db_connection`도 2.10.3으로 올립니다. 소스는 위조된 스트림 구조가 로그 옵션에 도달하는 보안 문제를 이유로 설명합니다. Markdown 네이티브 의존성과 Nix 해시도 갱신했습니다. 일치하는 잠금 파일과 Nix 정의로 다시 빌드하세요. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

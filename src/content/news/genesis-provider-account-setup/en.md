@@ -1,7 +1,7 @@
 ---
 title: "Genesis connects account setup, model choices and ChatGPT sign-in"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "A rebuilt provider wizard keeps credentials, model inventories, reasoning choices and schedules together, with a new Genesis-managed ChatGPT subscription connection."
 ---
 
@@ -54,3 +54,5 @@ An incomplete account no longer forces the scheduler into a crash loop. It logs 
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+The November 25, 2026 changes reject a Settings save when the local BEAM node identity has changed since the page was mounted. Reload the page’s node context before retrying; this avoids a write whose acknowledgement belongs to stale configuration scope. [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

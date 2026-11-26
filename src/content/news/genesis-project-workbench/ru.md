@@ -1,6 +1,7 @@
 ---
 title: "Genesis объединяет проекты, разговоры и Git в одном рабочем пространстве"
 pubDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "Черновики отдельных проектов и пространства VCT сохраняют контекст нужного репозитория и узла при переключении задач."
 ---
 
@@ -43,3 +44,5 @@ VCT теперь имеет уровень группировки `vct:///worksp
 [scope]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex
 [adopt]: https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
+
+Улучшения от 25 ноября 2026 года оставляют параметры задачи в форме, открывают явно выбранные проекты на обзоре и направляют активные задачи в инспектор агентов с фильтром по задаче. Черновик Assistant проекта предлагается лишь после подтверждения его идентичности, сохраняя проект и узел при навигации. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).

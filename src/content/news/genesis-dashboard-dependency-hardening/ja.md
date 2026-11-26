@@ -1,6 +1,7 @@
 ---
 title: "Genesis、ダッシュボードの依存ライブラリを強化"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main で Phoenix、LiveView、Bandit、jsv を更新。ソースからの導入では再ビルドが必要です。"
 ---
 
@@ -24,3 +25,5 @@ Genesis の依存宣言は、Phoenix の更新を presence トラッカーとブ
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+2026 年 11 月 25 日の保守では `db_connection` も 2.10.3 に更新されました。ソースは、偽造されたストリーム構造がログオプションに到達する問題への対策と説明しています。Markdown のネイティブ依存と Nix ハッシュも更新されました。対応するロックファイルと Nix 定義で再ビルドしてください。 [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

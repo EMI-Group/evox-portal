@@ -1,7 +1,7 @@
 ---
 title: "Genesis、アカウント設定・モデル選択・ChatGPT ログインを接続"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "刷新された設定ウィザードが認証情報、モデル一覧、推論設定とスケジュールをまとめ、Genesis 管理の ChatGPT 接続を追加します。"
 ---
 
@@ -54,3 +54,5 @@ PR の ChatGPT 更新・ストリーミング確認にはフィクスチャー�
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+2026 年 11 月 25 日の変更は、ページのマウント後にローカル BEAM ノードの識別情報が変わった場合、設定の保存を拒否します。再試行前にページのノードコンテキストを再読み込みし、古い設定スコープに属する応答を避けてください。 [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

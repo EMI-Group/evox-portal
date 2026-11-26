@@ -1,7 +1,7 @@
 ---
 title: "Genesis conecta la configuración de cuentas, los modelos y el inicio de sesión con ChatGPT"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Un asistente renovado reúne credenciales, inventarios de modelos, razonamiento y horarios, con una conexión de suscripción ChatGPT gestionada por Genesis."
 ---
 
@@ -54,3 +54,5 @@ Una cuenta incompleta ya no provoca un ciclo de fallos del planificador. Este re
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+Desde el 25 de noviembre de 2026 se rechaza guardar los ajustes si la identidad del nodo BEAM local cambió desde que se montó la página. Recargue el contexto del nodo antes de reintentarlo, evitando una confirmación perteneciente a un ámbito de configuración obsoleto. [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

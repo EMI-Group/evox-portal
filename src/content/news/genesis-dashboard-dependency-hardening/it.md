@@ -1,6 +1,7 @@
 ---
 title: "Genesis rafforza le dipendenze della dashboard"
 pubDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "main aggiorna Phoenix, LiveView, Bandit e jsv; le installazioni dai sorgenti richiedono una nuova compilazione."
 ---
 
@@ -24,3 +25,5 @@ Un team che gestisce il proprio server può, per esempio, aggiornare i sorgenti 
 [pins]: https://github.com/EMI-Group/genesis/commit/bfcc0115ad1cb714ec54d60265816550c1619bd3
 [nix]: https://github.com/EMI-Group/genesis/commit/6a80bba389dec5d120c64a435cab88be4de275bc
 [install]: https://github.com/EMI-Group/genesis/blob/43705acdfc9a4ebc885e0d457d75242286924637/README.md
+
+La manutenzione del 25 novembre 2026 porta anche `db_connection` a 2.10.3. Il codice collega questo minimo di sicurezza a strutture stream contraffatte che raggiungono l’opzione di logging. Aggiorna inoltre dipendenze Markdown native e hash Nix. Ricompili con lockfile e definizioni Nix corrispondenti. [GitHub](https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10).

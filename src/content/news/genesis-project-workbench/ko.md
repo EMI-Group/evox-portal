@@ -1,6 +1,7 @@
 ---
 title: "Genesis, 프로젝트·대화·Git을 하나의 워크벤치로 연결"
 pubDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "프로젝트별 초안과 VCT 워크스페이스가 작업 전환 중에도 올바른 저장소와 실행 노드에 맥락을 유지합니다."
 ---
 
@@ -43,3 +44,5 @@ PR에는 작업 생성과 완료, Assistant 키보드 제출과 스트리밍, �
 [scope]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex
 [adopt]: https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
+
+2026년 11월 25일 개선은 작업 옵션을 폼 안에 유지하고, 명시적으로 선택한 프로젝트의 개요를 열며, 실행 중인 작업 링크를 작업별 에이전트 검사기로 연결합니다. 프로젝트 식별이 확인된 뒤에만 해당 Assistant 초안을 제공해 탐색 중에도 프로젝트와 실행 노드를 유지합니다. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).

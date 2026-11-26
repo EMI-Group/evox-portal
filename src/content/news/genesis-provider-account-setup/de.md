@@ -1,7 +1,7 @@
 ---
 title: "Genesis verbindet Kontoeinrichtung, Modellauswahl und ChatGPT-Anmeldung"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Ein erneuerter Anbieterassistent bündelt Zugangsdaten, Modellbestand, Denkstufen und Zeitpläne mit einer von Genesis verwalteten ChatGPT-Verbindung."
 ---
 
@@ -54,3 +54,5 @@ Ein unvollständiges Konto versetzt den Scheduler nicht mehr in eine Absturzschl
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+Seit dem 25. November 2026 wird ein Speichern der Einstellungen abgelehnt, wenn sich die lokale BEAM-Knotenidentität seit dem Laden der Seite geändert hat. Laden Sie vor dem Wiederholen den Knotenkontext neu, damit die Bestätigung nicht zu einem veralteten Konfigurationsbereich gehört. [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

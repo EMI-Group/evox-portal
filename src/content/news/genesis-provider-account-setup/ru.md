@@ -1,7 +1,7 @@
 ---
 title: "Genesis связывает настройку аккаунтов, выбор моделей и вход через ChatGPT"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "Обновлённый мастер объединяет учётные данные, список моделей, уровни рассуждения и расписания с подключением ChatGPT под управлением Genesis."
 ---
 
@@ -54,3 +54,5 @@ Welcome использует пошаговый мастер провайдер�
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+С 25 ноября 2026 года сохранение настроек отклоняется, если идентификатор локального узла BEAM изменился после открытия страницы. Перед повтором перезагрузите контекст узла, чтобы подтверждение записи не относилось к устаревшей области конфигурации. [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

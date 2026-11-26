@@ -1,6 +1,7 @@
 ---
 title: "Genesis 将项目、对话与 Git 汇集到同一工作台"
 pubDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "项目级草稿和 VCT 工作区让开发者切换任务时，上下文仍归属于正确的仓库与执行节点。"
 ---
 
@@ -43,3 +44,5 @@ PR 记录了创建并完成任务、Assistant 键盘提交与流式输出、账�
 [scope]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex
 [adopt]: https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
+
+2026 年 11 月 25 日的改进将任务选项保留在表单内，显式选择项目后打开概览，并将运行中任务的链接指向按任务过滤的智能体检查器。项目身份确认后，才提供该项目的 Assistant 草稿。这些检查在导航时保留所选项目与执行节点。 [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).

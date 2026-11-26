@@ -1,0 +1,362 @@
+{
+  "date": "2026-11-26",
+  "type": "editorial-revisions",
+  "rationale": "Same-event navigation, configuration-scope and dependency maintenance; retain original publication dates. Independent tree snapshot workflow published separately.",
+  "articles": [
+    {
+      "slug": "genesis-project-workbench",
+      "collection": "news",
+      "story_type": "development",
+      "editorial_action": "update",
+      "source": "https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4",
+      "coverage": "Explicit overview, inline options, task-scoped inspector, confirmed Assistant context.",
+      "locales": [
+        "de",
+        "en",
+        "es-419",
+        "es",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt-br",
+        "pt",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "editorialReview": "passed; localized appended facts checked against English and source; original body retained"
+    },
+    {
+      "slug": "genesis-dashboard-dependency-hardening",
+      "collection": "news",
+      "story_type": "development",
+      "editorial_action": "update",
+      "source": "https://github.com/EMI-Group/genesis/commit/6e008cbed33eb16bd370136628097933e4906f10",
+      "coverage": "db_connection 2.10.3 security floor and synchronized native/Nix dependencies; source-attributed security explanation.",
+      "locales": [
+        "de",
+        "en",
+        "es-419",
+        "es",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt-br",
+        "pt",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "editorialReview": "passed; localized appended facts checked against English and source; original body retained"
+    },
+    {
+      "slug": "genesis-provider-account-setup",
+      "collection": "news",
+      "story_type": "development",
+      "editorial_action": "update",
+      "source": "https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b",
+      "coverage": "Reject stale local-node Settings save; reload node context before retrying.",
+      "locales": [
+        "de",
+        "en",
+        "es-419",
+        "es",
+        "fr",
+        "it",
+        "ja",
+        "ko",
+        "pt-br",
+        "pt",
+        "ru",
+        "zh-cn",
+        "zh-tw"
+      ],
+      "editorialReview": "passed; localized appended facts checked against English and source; original body retained"
+    }
+  ],
+  "validation": {
+    "verifiedAt": "2026-11-26T09:03:31.791Z",
+    "base": "http://127.0.0.1:4359",
+    "records": [
+      {
+        "route": "/ja/news/genesis-dashboard-dependency-hardening",
+        "locale": "ja",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "26b7b624337a7799638c58beca987c1c0b0ac3e1f31b95dac7d0b9aaa3823613",
+        "status": 200
+      },
+      {
+        "route": "/zh-tw/news/genesis-dashboard-dependency-hardening",
+        "locale": "zh-tw",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "ee179ae50919882aa13286ed21cd6d3453647ad8638bfe5dd32726e94a6c5cdf",
+        "status": 200
+      },
+      {
+        "route": "/ja/news/genesis-project-workbench",
+        "locale": "ja",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "497f688c7c75429a773d49879bd1ab0d2acb74596db116ddd478615779482a9f",
+        "status": 200
+      },
+      {
+        "route": "/zh-tw/news/genesis-project-workbench",
+        "locale": "zh-tw",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "9db8eccf827de4089dccd9aff009a872d95f11a8adf37c6e8c680141d75f1b54",
+        "status": 200
+      },
+      {
+        "route": "/news/genesis-dashboard-dependency-hardening",
+        "locale": "en",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "4a53fa2e29f182925dc3878dab534a12fb1a00ebf1561abe4fde97d04cd3dc95",
+        "status": 200
+      },
+      {
+        "route": "/zh-cn/news/genesis-dashboard-dependency-hardening",
+        "locale": "zh-cn",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "4c2be89229dc2a76e5b74f5dc07c8cfbff6fa4579b440758fcaf5065d6fb71d7",
+        "status": 200
+      },
+      {
+        "route": "/zh-tw/news/genesis-provider-account-setup",
+        "locale": "zh-tw",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "8ee60e7f0e4ac70a463eacfa8d4b86c63893ecced3c97edf7213f36ad5738d70",
+        "status": 200
+      },
+      {
+        "route": "/ja/news/genesis-provider-account-setup",
+        "locale": "ja",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "b4c1a423a5905d5285afa93cf225acbe645fa0f6c03448b7f043bc2e4bac4855",
+        "status": 200
+      },
+      {
+        "route": "/news/genesis-project-workbench",
+        "locale": "en",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "d0c063c975c75187f91f7ae444e01225505034ee57b09148054c722356d18464",
+        "status": 200
+      },
+      {
+        "route": "/zh-cn/news/genesis-project-workbench",
+        "locale": "zh-cn",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "9c7d6afdf7a1640040fc4c8889dcf4dcc3a55f57404fdea67baecffbdf694a3c",
+        "status": 200
+      },
+      {
+        "route": "/news/genesis-provider-account-setup",
+        "locale": "en",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "8ce951cdc49eab146a1415179af9dd143fd9e77ac03155a7c6c1aa75c3e960e2",
+        "status": 200
+      },
+      {
+        "route": "/zh-cn/news/genesis-provider-account-setup",
+        "locale": "zh-cn",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "daf074a80a611572b8a4235df0acc45612242347f4b3912b7dcb793ec81c051b",
+        "status": 200
+      },
+      {
+        "route": "/it/news/genesis-dashboard-dependency-hardening",
+        "locale": "it",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "02682dfd5b175484d4fca669b417a764f53fe8c7f911c8330210ae20e8462a75",
+        "status": 200
+      },
+      {
+        "route": "/de/news/genesis-dashboard-dependency-hardening",
+        "locale": "de",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "c20fb203493bf2832d2b128ff905dd4ce0277ca32f6eaebf6535152b293cf085",
+        "status": 200
+      },
+      {
+        "route": "/ko/news/genesis-dashboard-dependency-hardening",
+        "locale": "ko",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "1264dd640c9914392a9700dff82c150bd0fab22308f3230c862fd42cbe0a1054",
+        "status": 200
+      },
+      {
+        "route": "/fr/news/genesis-dashboard-dependency-hardening",
+        "locale": "fr",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "847d96ba84b38b78162933d31e5b7a2bf510c612e53e95e216461a7959980520",
+        "status": 200
+      },
+      {
+        "route": "/it/news/genesis-project-workbench",
+        "locale": "it",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "abc5586e2c0ba383b145cf19f447170e33f98446ed84513cf7e902fe0dbeeeae",
+        "status": 200
+      },
+      {
+        "route": "/de/news/genesis-project-workbench",
+        "locale": "de",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "7ffbc6e6013a4078401d5979d4a013361504bfc423935fb4b14aeaecdd0e9498",
+        "status": 200
+      },
+      {
+        "route": "/ko/news/genesis-project-workbench",
+        "locale": "ko",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "59e2425c324603c6ed64781ce9c803001fd08b700e01dc8feccc67f230ead2d4",
+        "status": 200
+      },
+      {
+        "route": "/fr/news/genesis-project-workbench",
+        "locale": "fr",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "6fab448c65972201475f4e7df50ef2eccb202189671d92421224f32b94832fe7",
+        "status": 200
+      },
+      {
+        "route": "/it/news/genesis-provider-account-setup",
+        "locale": "it",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "8bce2e7946572afd8ffd00f69ea655b1b47da7f11ed9b93a282bb85ae799358b",
+        "status": 200
+      },
+      {
+        "route": "/de/news/genesis-provider-account-setup",
+        "locale": "de",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "5c70363aae1f0ab2b99ca31b19f9809be2400c893b9e850c4930df8e7f35649c",
+        "status": 200
+      },
+      {
+        "route": "/ko/news/genesis-provider-account-setup",
+        "locale": "ko",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "d93b86f855f7cfd3a0b04124ad4cf3728f306d61203d18e4ea38b4281b52fffa",
+        "status": 200
+      },
+      {
+        "route": "/fr/news/genesis-provider-account-setup",
+        "locale": "fr",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "8b738870860eefc7af6c10c5eca7ee66f44fe6c41cb8eaedc34d6b6d6b13bcdb",
+        "status": 200
+      },
+      {
+        "route": "/es-419/news/genesis-dashboard-dependency-hardening",
+        "locale": "es-419",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "a388778938e81ef589f340efd56c01e034523bac8258fe8474518c7e8f5e9f21",
+        "status": 200
+      },
+      {
+        "route": "/ru/news/genesis-dashboard-dependency-hardening",
+        "locale": "ru",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "79ac6479d9c335e651b286759078a931aff7554ff49010476c1dde00d3285b5a",
+        "status": 200
+      },
+      {
+        "route": "/es/news/genesis-dashboard-dependency-hardening",
+        "locale": "es",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "a388778938e81ef589f340efd56c01e034523bac8258fe8474518c7e8f5e9f21",
+        "status": 200
+      },
+      {
+        "route": "/pt/news/genesis-dashboard-dependency-hardening",
+        "locale": "pt",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "0fc1c8d7f58d787234c031afea27eed9b7fd6dd6dee6d5ebab7fd436e59ff889",
+        "status": 200
+      },
+      {
+        "route": "/ru/news/genesis-project-workbench",
+        "locale": "ru",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "51a1eeaf48b0736c82e5a3e391cc0c69fae4792a5c33f741e85a1e7bf3c5534b",
+        "status": 200
+      },
+      {
+        "route": "/es-419/news/genesis-project-workbench",
+        "locale": "es-419",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "003f985679cde6b58fcde4af49689c12f6760a9e5d88a4ea3f2a452e4b9db5f6",
+        "status": 200
+      },
+      {
+        "route": "/pt/news/genesis-project-workbench",
+        "locale": "pt",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "5d388a3ed86ee734e19fe0e0c5270f4ae98a062ded64e9dae5f97b0fef1ec892",
+        "status": 200
+      },
+      {
+        "route": "/es/news/genesis-project-workbench",
+        "locale": "es",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "210e4fd063e1189f3e522dc3c6ac04527bd82ce96218548a823b2a1dd15ca628",
+        "status": 200
+      },
+      {
+        "route": "/es-419/news/genesis-provider-account-setup",
+        "locale": "es-419",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "7c023e70f5ee8a3e575d3986ba74bd8507639f49306695a42c4b3b2312b1f094",
+        "status": 200
+      },
+      {
+        "route": "/pt/news/genesis-provider-account-setup",
+        "locale": "pt",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "67b1c711985edd525757891d614c01a26378d872f2da3c970aa47afd63829b27",
+        "status": 200
+      },
+      {
+        "route": "/ru/news/genesis-provider-account-setup",
+        "locale": "ru",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "b8af450bf07af7fc19835ffc7a39fec7cb872f4eda9ebb51e2e0e04f419c6873",
+        "status": 200
+      },
+      {
+        "route": "/es/news/genesis-provider-account-setup",
+        "locale": "es",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "7c023e70f5ee8a3e575d3986ba74bd8507639f49306695a42c4b3b2312b1f094",
+        "status": 200
+      },
+      {
+        "route": "/pt-br/news/genesis-dashboard-dependency-hardening",
+        "locale": "pt-br",
+        "og": "https://www.evox.group/_astro/cover.BkddWXvD.webp",
+        "bodyDigest": "4041946e5210530468364a648bceba5be251641e4deec18103da3df0ddeceb46",
+        "status": 200
+      },
+      {
+        "route": "/pt-br/news/genesis-project-workbench",
+        "locale": "pt-br",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "713d01ba0d1ef86986f611613eab780e540c70036cd9c3640df5f6555eee67b3",
+        "status": 200
+      },
+      {
+        "route": "/pt-br/news/genesis-provider-account-setup",
+        "locale": "pt-br",
+        "og": "https://www.evox.group/_astro/cover.DXlRr3rt.webp",
+        "bodyDigest": "31ca6b74f6a848c0c7a390c99a9fb3640acc26c836f7b6956e9d5c5824b0cd7b",
+        "status": 200
+      }
+    ],
+    "localeCount": 13,
+    "articleCount": 3
+  },
+  "build": "pnpm build passed",
+  "visualReview": "English desktop and Chinese mobile screenshots inspected; no clipping or overflow; automated responsive checks cover every affected story."
+}

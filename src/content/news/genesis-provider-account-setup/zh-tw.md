@@ -1,7 +1,7 @@
 ---
 title: "Genesis 串聯賬戶設定、模型選擇與 ChatGPT 登入"
 pubDate: 2026-11-22
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 summary: "重建的提供方向導統一管理憑據、模型清單、推理選項和排程，並新增由 Genesis 管理的 ChatGPT 訂閱連線。"
 ---
 
@@ -54,3 +54,5 @@ PR 中的 ChatGPT 重新整理和流式處理檢查使用了測試夾具，該�
 [oauth]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/docs/llm-oauth.md
 [store]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/auth/chatgpt/store.ex
 [presets]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/evo_git/config/provider_presets.ex
+
+2026 年 11 月 25 日的修改會在本地 BEAM 節點身份自頁面掛載後發生變化時拒絕設定儲存。請先重新載入頁面的節點上下文再重試，避免寫入回執仍屬於過時的配置範圍。 [GitHub](https://github.com/EMI-Group/genesis/commit/5ed383a3e803df692bd105504b36aa65768e7a3b).

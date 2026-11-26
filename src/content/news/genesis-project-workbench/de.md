@@ -1,6 +1,7 @@
 ---
 title: "Genesis vereint Projekte, Gespräche und Git in einer Workbench"
 pubDate: 2026-11-22
+updatedDate: 2026-11-26
 summary: "Projektbezogene Entwürfe und VCT-Workspaces halten den Kontext beim Aufgabenwechsel beim richtigen Repository und Ausführungsknoten."
 ---
 
@@ -43,3 +44,5 @@ Probieren Sie mit einem Build dieser Änderungen zwei Projekte mit unterschiedli
 [scope]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_dash/lib/evo_dash_web/live/draft_scope.ex
 [adopt]: https://github.com/EMI-Group/genesis/commit/a0f7b141ed448590030f6d36de951bbb1ca3673e
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
+
+Die Änderungen vom 25. November 2026 halten Aufgabenoptionen im Formular, öffnen explizit gewählte Projekte in der Übersicht und verlinken aktive Aufgaben mit einem aufgabenbezogenen Agenteninspektor. Ein projektbezogener Assistant-Entwurf erscheint erst nach bestätigter Projektidentität. Projekt und Ausführungsknoten bleiben beim Navigieren erhalten. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
