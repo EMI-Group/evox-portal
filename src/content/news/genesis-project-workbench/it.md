@@ -1,7 +1,7 @@
 ---
 title: "Genesis riunisce progetti, conversazioni e Git in un unico ambiente di lavoro"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "Le bozze per progetto e gli spazi VCT mantengono il contesto associato al repository e al nodo corretti durante il cambio di attività."
 ---
 
@@ -46,3 +46,5 @@ Con una build che include queste modifiche, provi due progetti con bozze diverse
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 I miglioramenti del 25 novembre 2026 mantengono le opzioni nel modulo, aprono i progetti scelti esplicitamente nella panoramica e indirizzano le attività in corso a un ispettore agenti filtrato per attività. La bozza Assistant del progetto compare solo dopo la conferma della sua identità, conservando progetto e nodo durante la navigazione. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+La PR #178, integrata in main il 27 novembre 2026, migliora il selettore esistente: progetti recenti per primi, esplorazione delle cartelle e inserimento manuale del percorso disponibile ma compresso. La scelta conserva la bozza e resta legata alla conversazione che ha aperto la finestra; una finestra scaduta non può modificarne un’altra. Su Windows il pulsante computer esplora le radici dei dischi del nodo selezionato. Gli avvisi interni spariscono dalla trascrizione visibile ma il modello conserva il contesto; il primo invio non duplica più la cronologia. Dopo un cambio di progetto si attenda che History risolva il nuovo ambito prima di controllare i risultati. [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).

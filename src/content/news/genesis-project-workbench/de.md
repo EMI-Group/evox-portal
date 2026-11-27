@@ -1,7 +1,7 @@
 ---
 title: "Genesis vereint Projekte, Gespräche und Git in einer Workbench"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "Projektbezogene Entwürfe und VCT-Workspaces halten den Kontext beim Aufgabenwechsel beim richtigen Repository und Ausführungsknoten."
 ---
 
@@ -46,3 +46,5 @@ Probieren Sie mit einem Build dieser Änderungen zwei Projekte mit unterschiedli
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 Die Änderungen vom 25. November 2026 halten Aufgabenoptionen im Formular, öffnen explizit gewählte Projekte in der Übersicht und verlinken aktive Aufgaben mit einem aufgabenbezogenen Agenteninspektor. Ein projektbezogener Assistant-Entwurf erscheint erst nach bestätigter Projektidentität. Projekt und Ausführungsknoten bleiben beim Navigieren erhalten. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+PR #178 wurde am 27. November 2026 in main integriert und verfeinert die bestehende Projektauswahl: zuletzt genutzte Projekte zuerst, Ordnernavigation und weiterhin verfügbare, eingeklappte Pfadeingabe. Die Auswahl bewahrt den Entwurf und gehört zur Unterhaltung, die den Dialog geöffnet hat; ein veralteter Dialog kann keine andere Unterhaltung ändern. Unter Windows zeigt die Computerschaltfläche Laufwerkswurzeln des gewählten Knotens. Interne Projekthinweise werden im sichtbaren Verlauf ausgeblendet, bleiben aber Modellkontext; beim ersten Senden entstehen keine doppelten Verlaufseinträge mehr. Warten Sie nach einem Projektwechsel, bis History den neuen Geltungsbereich aufgelöst hat. [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).

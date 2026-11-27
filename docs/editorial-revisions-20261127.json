@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-27",
+  "editorial_action": "update",
+  "articles": [
+    {
+      "slug": "genesis-project-workbench",
+      "reason": "Existing project selection workflow refinements and scope/history bug fixes, not an independent task capability.",
+      "sources": [
+        "https://github.com/EMI-Group/genesis/pull/178",
+        "https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd"
+      ],
+      "coverage": "Recent projects, folder/drive browsing, preserved draft and conversation scope, hidden internal notices, first-send deduplication, pending History scope."
+    },
+    {
+      "slug": "genesis-compiler-continuation",
+      "reason": "Same case with newly available source records and starting revision; replace obsolete source-availability wording and preserve original date.",
+      "sources": [
+        "https://genesis.evox.group/evidence/compiler-continuation/"
+      ],
+      "coverage": "Starting revision37216cfa254a; two prompt/JSON exports; project-reported result vs independent validation; no invented new performance or cost."
+    }
+  ],
+  "locales": 13,
+  "visuals": "Retained each existing dedicated cover; checked body/list/OG/Twitter/BlogPosting images.",
+  "editorialReview": "Full existing articles retained, affected passages revised in all13 locales; source identifiers and scope consistent.",
+  "validation": {
+    "verifiedAt": "2026-11-27T08:48:49.635Z",
+    "base": "http://127.0.0.1:4359",
+    "records": [
+      {
+        "route": "/zh-tw/news/genesis-project-workbench",
+        "locale": "zh-tw",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "63087d8a5d1a65ec04d873b5d956ebdda063014a7e0e92a6e380fe7ac0c74509",
+        "status": 200
+      },
+      {
+        "route": "/ja/news/genesis-project-workbench",
+        "locale": "ja",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "7cb97c2a33205df56424870df6b343a33fa3b0ea638b7e5e971e517d3cc4cad1",
+        "status": 200
+      },
+      {
+        "route": "/zh-tw/news/genesis-compiler-continuation",
+        "locale": "zh-tw",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "171da389cd614d040481dbb7d061f31a61200b3ffeb971972adfa29e3916db35",
+        "status": 200
+      },
+      {
+        "route": "/zh-cn/news/genesis-project-workbench",
+        "locale": "zh-cn",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "1acb6defc89be58edacf3e299433cd11f1321aa579eedc661199db777179eff3",
+        "status": 200
+      },
+      {
+        "route": "/ja/news/genesis-compiler-continuation",
+        "locale": "ja",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "9d31986801b7a56d29664ab9cb7cad13258f9000d4f865372131bed496a2b1ea",
+        "status": 200
+      },
+      {
+        "route": "/news/genesis-project-workbench",
+        "locale": "en",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "8afbb420b331ecbc141d4841c3837162f8b2d1aca24e3d4ecc0729166266b146",
+        "status": 200
+      },
+      {
+        "route": "/zh-cn/news/genesis-compiler-continuation",
+        "locale": "zh-cn",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "3380a503fdaeaf247258c8ca1b564b69901c16453d23d6806b9c8e61b23c05f3",
+        "status": 200
+      },
+      {
+        "route": "/news/genesis-compiler-continuation",
+        "locale": "en",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "d0d85cad34b38f19e904014de21ced2d0dd13232c338a931c7f0ddd3dd5f2bee",
+        "status": 200
+      },
+      {
+        "route": "/de/news/genesis-project-workbench",
+        "locale": "de",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "7025ea2fbfc8120b3ea250b3197332c5be8d8cc67e2d03ead66da60cf85ea909",
+        "status": 200
+      },
+      {
+        "route": "/fr/news/genesis-project-workbench",
+        "locale": "fr",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "ecc9b97f4f7eaf4b39e53a4e0821f5543fedd919e1827f373184e63209e9962d",
+        "status": 200
+      },
+      {
+        "route": "/it/news/genesis-project-workbench",
+        "locale": "it",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "292418a2142eb8a65b1c9bae8b07b6df00000561fd1708c8a3fc8ef8a823f4c1",
+        "status": 200
+      },
+      {
+        "route": "/ko/news/genesis-project-workbench",
+        "locale": "ko",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "ac4b74707699c8c89c9bba1e9590a22be4cfd44eda249b8851d6fd7ea0eeec85",
+        "status": 200
+      },
+      {
+        "route": "/fr/news/genesis-compiler-continuation",
+        "locale": "fr",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "a2764436668c865a67bb84f569a21adcdbf7bbde3256c8c45ecd2d210f9b842b",
+        "status": 200
+      },
+      {
+        "route": "/de/news/genesis-compiler-continuation",
+        "locale": "de",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "7584cd81fcd05dfb852e67f92aac3e76c08ac9ff0654bfd4ba9a579e71092aae",
+        "status": 200
+      },
+      {
+        "route": "/ko/news/genesis-compiler-continuation",
+        "locale": "ko",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "1dc83e12eafb1e43664953d6a8d871a51e83637e6338495d4bc28aebfef7ec67",
+        "status": 200
+      },
+      {
+        "route": "/it/news/genesis-compiler-continuation",
+        "locale": "it",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "f01b36aa20559fe86dbcdc483391b7942188d99707623f525c340314354ce202",
+        "status": 200
+      },
+      {
+        "route": "/es-419/news/genesis-project-workbench",
+        "locale": "es-419",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "a4a479ffc3aeb8516eca7e7296a09fa6f6c6bc578dfc7e9fb377af358c9f0c1e",
+        "status": 200
+      },
+      {
+        "route": "/ru/news/genesis-project-workbench",
+        "locale": "ru",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "71191630ea8f59d8f2762423405f99dd61985cc98d1916c75995286599f77140",
+        "status": 200
+      },
+      {
+        "route": "/pt/news/genesis-project-workbench",
+        "locale": "pt",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "44c8bb50054b319053307e2131e25d1bc6d7f4ae2555465afebe88526aea3b81",
+        "status": 200
+      },
+      {
+        "route": "/es/news/genesis-project-workbench",
+        "locale": "es",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "c8f744a431cee6f395fd69babe6060fb21a31b54368efe5b6b445d56d1d9ac49",
+        "status": 200
+      },
+      {
+        "route": "/es-419/news/genesis-compiler-continuation",
+        "locale": "es-419",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "ef4675ec5df368942b99e6068344d676e429e26bdd02be04f024540e0847ecbe",
+        "status": 200
+      },
+      {
+        "route": "/pt/news/genesis-compiler-continuation",
+        "locale": "pt",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "833c371ac99a175d08cc23606283408db24ad59207c40cc6345456b1ebe22303",
+        "status": 200
+      },
+      {
+        "route": "/ru/news/genesis-compiler-continuation",
+        "locale": "ru",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "4e703d5a037aed949a1204a2b4a264416daf3136519394fbf189435e931c4cc2",
+        "status": 200
+      },
+      {
+        "route": "/es/news/genesis-compiler-continuation",
+        "locale": "es",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "ee7c564132f8bb44d06b3324f1cfb1a91d1371966c21ae353b396a981e7065bf",
+        "status": 200
+      },
+      {
+        "route": "/pt-br/news/genesis-project-workbench",
+        "locale": "pt-br",
+        "og": "https://www.evox.group/_astro/cover.BO5r1zeh.webp",
+        "bodyDigest": "ab96cc00554c8d6b647295e9cabe4362061dfc24cfbeec65752797d9b2487a55",
+        "status": 200
+      },
+      {
+        "route": "/pt-br/news/genesis-compiler-continuation",
+        "locale": "pt-br",
+        "og": "https://www.evox.group/_astro/compiler-model-handoff.B6B9gcs7.webp",
+        "bodyDigest": "353a59f968438f18b87ac077f9bc68a30071388862e66f80b2e91d2c0a3425c0",
+        "status": 200
+      }
+    ],
+    "localeCount": 13,
+    "articleCount": 2
+  },
+  "build": "passed",
+  "seo": "806 pages, zero errors",
+  "visualReview": "Inspected Chinese mobile and English desktop screenshots; responsive automated checks passed."
+}

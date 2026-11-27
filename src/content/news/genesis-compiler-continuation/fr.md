@@ -1,7 +1,7 @@
 ---
 title: "Passage de relais du compilateur Genesis : ce dont le modèle suivant hérite et comment la continuité est vérifiée"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "Un passage de relais entre modèles conserve une lignée de compilateur acceptée. Le résultat rapporté et les harnais de régression du compilateur public montrent ce qui peut être vérifié à travers cette frontière."
 ---
 
@@ -9,7 +9,7 @@ Le [registre Evidence du 7 septembre 2026](https://genesis.evox.group/evidence/c
 
 ![Un projet de compilateur conservé entre différents ensembles d'outils](./compiler-model-handoff.webp)
 
-Le registre rapporte que **1 820/1 820 cas LLVM SingleSource conservés ont réussi** après la continuation, et que la profondeur de récursion des tâches est passée de 4 à 8. Il ne publie pas de transcription par correction, ni le volume de code ajouté ou le coût de la continuation. Les sources jcc publiques ci-dessous expliquent les interfaces et les mécanismes de régression du compilateur ; leur instantané distinct ne reconstruit pas la séquence exacte des actions de passage de relais.
+Précision des sources, 27 novembre 2026 : Evidence identifie désormais la révision initiale `37216cfa254a` et relie les prompts originaux et exports JSON des tâches GLM 5.2 et DeepSeek V4 Flash. Les métadonnées des agents et objectifs deviennent consultables, remplaçant notre ancienne description de dossiers indisponibles. Le résultat 1 820/1 820 et le passage de profondeur 4 à 8 restent rapportés par la source. Ces exports ne constituent ni une reproduction indépendante ni un manifeste complet ; le volume de code ajouté et le coût incrémental restent non rapportés. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## Un compilateur hérité possède des frontières qu'un successeur doit préserver
 

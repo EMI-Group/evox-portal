@@ -1,7 +1,7 @@
 ---
 title: "Genesis réunit projets, conversations et Git dans un même espace de travail"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "Les brouillons propres à chaque projet et les espaces VCT conservent le contexte du bon dépôt et du bon nœud lors des changements de tâche."
 ---
 
@@ -46,3 +46,5 @@ Sur une compilation contenant ces changements, essayez deux projets avec des bro
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 Les ajustements du 25 novembre 2026 gardent les options dans le formulaire, ouvrent les projets explicitement choisis sur leur aperçu et dirigent les tâches actives vers un inspecteur filtré par tâche. Un brouillon Assistant propre au projet n’est proposé qu’après confirmation de son identité, préservant projet et nœud pendant la navigation. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+La PR #178, intégrée à main le 27 novembre 2026, affine le sélecteur existant : projets récents en premier, navigation dans les dossiers et saisie manuelle du chemin repliée mais disponible. Le choix conserve le brouillon et reste lié à la conversation ayant ouvert la boîte ; une boîte périmée ne peut modifier une autre conversation. Sous Windows, le bouton ordinateur explore les racines des disques du nœud choisi. Les notifications internes disparaissent de la transcription visible, tout en gardant le contexte du modèle ; le premier envoi ne duplique plus les lignes d’historique. Après un changement de projet, attendez la résolution du nouveau périmètre de History avant de consulter les résultats. [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).

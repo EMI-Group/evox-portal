@@ -1,7 +1,7 @@
 ---
 title: "Genesis 编译器接续：接手模型继承了什么，如何验证后续变更"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "模型交接保留了已验收的编译器开发历史。其报告的结果和公开编译器的回归测试框架展示了跨越该边界时可被检查的内容。"
 ---
 
@@ -9,7 +9,7 @@ summary: "模型交接保留了已验收的编译器开发历史。其报告的�
 
 ![在不同工具链之间保留的编译器项目](./compiler-model-handoff.webp)
 
-该记录报告在延续后，**1,820/1,820 个保留的 LLVM SingleSource 案例通过测试**，且任务递归深度从 4 增加到 8。它并未公布逐项修复日志，也未公布延续过程中增加的代码量和成本。下方的公开 jcc 源码解释了该编译器的接口和回归机制；它们的独立快照并不能重构交接操作的确切序列。
+来源说明更新（2026 年 11 月 27 日）：Evidence 页面现已明确起始修订为 `37216cfa254a`，并链接 GLM 5.2 和 DeepSeek V4 Flash 的原始提示与 JSON 任务导出。读者可以查看智能体元数据和任务目标，因此此前关于任务记录不可用的说明已不再适用。1,820/1,820 的结果和深度从 4 增至 8 仍属于来源报告；这些导出不是独立复测或完整测试清单，接续期间新增代码量与费用仍未报告。 [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## 接手模型需要保留哪些模块边界
 

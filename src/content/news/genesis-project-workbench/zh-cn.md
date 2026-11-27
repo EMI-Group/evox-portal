@@ -1,7 +1,7 @@
 ---
 title: "Genesis 将项目、对话与 Git 汇集到同一工作台"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "项目级草稿和 VCT 工作区让开发者切换任务时，上下文仍归属于正确的仓库与执行节点。"
 ---
 
@@ -46,3 +46,5 @@ PR 记录了创建并完成任务、Assistant 键盘提交与流式输出、账�
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 2026 年 11 月 25 日的改进将任务选项保留在表单内，显式选择项目后打开概览，并将运行中任务的链接指向按任务过滤的智能体检查器。项目身份确认后，才提供该项目的 Assistant 草稿。这些检查在导航时保留所选项目与执行节点。 [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+2026 年 11 月 27 日合入 main 的 PR #178 改进了现有项目选择器：优先显示最近项目，可浏览文件夹，手动路径输入默认折叠但仍可使用。选择会保留当前草稿，并绑定打开对话框的会话，过期对话框不能修改另一会话。Windows 上的计算机按钮可浏览所选节点的盘符根目录。内部项目提示不再进入可见对话记录，模型仍接收项目上下文；首次发送也不再产生重复历史条目。切换项目时，等待 History 确定新作用域后再检查结果。 [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).

@@ -1,7 +1,7 @@
 ---
 title: "Genesis Compiler Handoff: Was das nächste Modell erbt und wie die Kontinuität geprüft wird"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "Ein Modell-Handoff behält eine akzeptierte Compiler-Abstammung bei. Das berichtete Ergebnis und die Regressions-Harnesses des öffentlichen Compilers zeigen auf, was über diese Grenze hinweg geprüft werden kann."
 ---
 
@@ -9,7 +9,7 @@ Der [Evidence-Datensatz vom 7. September 2026](https://genesis.evox.group/eviden
 
 ![Ein Compiler-Projekt, das zwischen verschiedenen Toolsets beibehalten wurde](./compiler-model-handoff.webp)
 
-Der Datensatz berichtet, dass **1.820/1.820 beibehaltene LLVM SingleSource-Fälle** nach der Fortsetzung bestanden haben, wobei die Task-Rekursionstiefe von 4 auf 8 stieg. Ein Transkript pro Fix oder das hinzugefügte Codevolumen und die Kosten der Fortsetzung werden nicht veröffentlicht. Die unten aufgeführten öffentlichen jcc-Quellen erläutern die Schnittstellen und Regressionsmechanismen des Compilers; ihr separater Snapshot rekonstruiert nicht die exakte Abfolge der Handoff-Aktionen.
+Quellenpräzisierung vom 27. November 2026: Evidence nennt nun `37216cfa254a` als Ausgangsrevision und verlinkt Originalprompts und JSON-Aufgabenexporte für GLM 5.2 und DeepSeek V4 Flash. Agentenmetadaten und Ziele sind damit einsehbar; die frühere Beschreibung nicht verfügbarer Aufgabenaufzeichnungen ist überholt. 1.820/1.820 Fälle und die Tiefenänderung von 4 auf 8 bleiben Quellenangaben. Die Exporte sind weder unabhängige Wiederholung noch vollständiges Testmanifest; zusätzlicher Codeumfang und inkrementelle Kosten bleiben unberichtet. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## Ein geerbter Compiler hat Grenzen, die ein Nachfolger wahren muss
 

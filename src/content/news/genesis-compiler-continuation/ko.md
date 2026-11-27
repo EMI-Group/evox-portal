@@ -1,7 +1,7 @@
 ---
 title: "Genesis Compiler Handoff: 차기 모델이 상속받는 자산과 연속성 검증 방법"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "모델 핸드오프는 승인된 컴파일러 계보를 유지합니다. 보고된 결과와 공개 컴파일러의 회귀 테스트 하네스는 해당 경계를 넘어 무엇을 확인할 수 있는지 보여줍니다."
 ---
 
@@ -9,7 +9,7 @@ summary: "모델 핸드오프는 승인된 컴파일러 계보를 유지합니�
 
 ![서로 다른 도구 세트 간에 유지되는 컴파일러 프로젝트](./compiler-model-handoff.webp)
 
-해당 기록에 따르면, 연속성 작업 이후 **1,820/1,820개의 유지된 LLVM SingleSource 케이스가 통과**되었으며 작업 재귀 깊이는 4에서 8로 증가했습니다. 수정 사항별 트랜스크립트나 연속성 작업으로 추가된 코드 분량 및 비용은 공개되지 않았습니다. 아래의 공개 jcc 소스는 컴파일러의 인터페이스와 회귀 메커니즘을 설명하며, 해당 별도 스냅샷이 핸드오프 작업의 정확한 시퀀스를 재구성하지는 않습니다.
+출처 설명 갱신(2026년 11월 27일): Evidence 페이지는 시작 리비전을 `37216cfa254a`로 명시하고 GLM 5.2 및 DeepSeek V4 Flash의 원본 프롬프트와 JSON 작업 내보내기를 연결합니다. 에이전트 메타데이터와 작업 목표를 확인할 수 있어 작업 기록을 이용할 수 없다는 이전 설명을 수정합니다. 1,820/1,820 결과와 깊이 4에서 8로의 변화는 여전히 출처 보고입니다. 내보내기는 독립 재실행이나 전체 테스트 목록이 아니며, 후속 개발의 추가 코드량과 비용은 보고되지 않았습니다. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## 상속된 컴파일러에는 후속 모델이 보존해야 할 경계가 있습니다
 

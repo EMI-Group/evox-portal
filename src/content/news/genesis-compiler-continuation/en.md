@@ -1,7 +1,7 @@
 ---
 title: "Genesis Compiler Handoff: What the Next Model Inherits and How Continuation Is Checked"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "A model handoff retains an accepted compiler lineage. Its reported result and the public compiler's regression harnesses show what can be checked across that boundary."
 ---
 
@@ -9,7 +9,7 @@ The [September 7, 2026 Evidence record](https://genesis.evox.group/evidence/comp
 
 ![A compiler project retained between different toolsets](./compiler-model-handoff.webp)
 
-The record reports **1,820/1,820 retained LLVM SingleSource cases passing** after continuation and task-recursion depth growing from 4 to 8. It does not publish a per-fix transcript or the continuation's added code volume and cost. The public jcc sources below explain the compiler's interfaces and regression mechanisms; their separate snapshot does not reconstruct the exact sequence of handoff actions.
+Source clarification, November 27, 2026: the Evidence page now identifies the starting revision as `37216cfa254a` and links original prompts and JSON task exports for GLM 5.2 and DeepSeek V4 Flash. These exports make agent metadata and task objectives inspectable; they supersede the earlier description of unavailable task records. The 1,820/1,820 result and depth change from 4 to 8 remain source-reported. The exports are not an independent rerun or a complete test manifest, and the continuation’s incremental code volume and cost remain unreported. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## An inherited compiler has boundaries a successor must preserve
 

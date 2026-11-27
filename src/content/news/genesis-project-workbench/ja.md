@@ -1,7 +1,7 @@
 ---
 title: "Genesis、プロジェクト・会話・Git を一つのワークベンチへ"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "プロジェクト単位の下書きと VCT ワークスペースにより、作業を切り替えても正しいリポジトリと実行ノードに文脈が残ります。"
 ---
 
@@ -46,3 +46,5 @@ PR には、タスク作成と完了、Assistant のキーボード送信とス�
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 2026 年 11 月 25 日の改善はタスク設定をフォーム内に保ち、明示的に選択したプロジェクトは概要を開き、実行中タスクのリンクはタスク別のエージェント表示へ進みます。プロジェクト確認後にだけ専用の Assistant 下書きを提示し、移動中もプロジェクトと実行ノードを保持します。 [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+2026年11月27日に main に統合された PR #178 は既存のプロジェクト選択を改善します。最近のプロジェクトを先に表示し、フォルダーを参照でき、手動パス入力も折り畳んだ状態で残ります。選択は草稿を保持し、ダイアログを開いた会話に結び付き、古いダイアログが別の会話を変更することを防ぎます。Windows のコンピューターボタンは選択ノードのドライブルートを参照します。内部のプロジェクト通知は会話表示から除外されますが、モデルには文脈が渡ります。初回送信の履歴重複も修正されました。プロジェクト切り替え時は History の新しい範囲が確定してから結果を確認してください。 [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).

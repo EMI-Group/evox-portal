@@ -1,7 +1,7 @@
 ---
 title: "Passaggio di consegne del compilatore Genesis: cosa eredita il modello successivo e come viene verificata la continuità"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "Un passaggio di consegne tra modelli mantiene una discendenza del compilatore accettata. Il risultato riportato e i test di regressione del compilatore pubblico mostrano ciò che può essere verificato oltre tale confine."
 ---
 
@@ -9,7 +9,7 @@ Il [record Evidence del 7 settembre 2026](https://genesis.evox.group/evidence/co
 
 ![Un progetto di compilatore mantenuto tra diversi set di strumenti](./compiler-model-handoff.webp)
 
-Il record riporta **1.820/1.820 casi LLVM SingleSource mantenuti superati** dopo la continuazione e una profondità di ricorsione dei task passata da 4 a 8. Non pubblica una trascrizione per ogni correzione né il volume di codice aggiunto o il costo della continuazione. I sorgenti pubblici di jcc riportati di seguito spiegano le interfacce e i meccanismi di regressione del compilatore; il loro snapshot separato non ricostruisce l'esatta sequenza delle azioni di passaggio.
+Precisazione delle fonti, 27 novembre 2026: Evidence indica ora la revisione iniziale `37216cfa254a` e collega prompt originali ed esportazioni JSON dei task GLM 5.2 e DeepSeek V4 Flash. Metadati degli agenti e obiettivi sono consultabili, superando la precedente descrizione di registrazioni non disponibili. Il risultato 1.820/1.820 e la profondità da 4 a 8 restano dichiarazioni della fonte. Gli export non sono una ripetizione indipendente né un manifesto completo dei test; codice aggiunto e costo incrementale non sono riportati. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## Un compilatore ereditato ha confini che un successore deve preservare
 

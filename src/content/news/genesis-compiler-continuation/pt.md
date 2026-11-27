@@ -1,7 +1,7 @@
 ---
 title: "Genesis Compiler Handoff: O que o Próximo Modelo Herda e Como a Continuidade é Verificada"
 pubDate: 2026-11-03
-updatedDate: 2026-11-10
+updatedDate: 2026-11-27
 summary: "Uma transferência de modelo retém uma linhagem de compilador aceite. O seu resultado reportado e as baterias de regressão do compilador público mostram o que pode ser verificado através dessa fronteira."
 ---
 
@@ -9,7 +9,7 @@ O [registo Evidence de 7 de setembro de 2026](https://genesis.evox.group/evidenc
 
 ![Um projeto de compilador retido entre diferentes conjuntos de ferramentas](./compiler-model-handoff.webp)
 
-O registo reporta **1.820/1.820 casos LLVM SingleSource retidos com sucesso** após a continuidade e o crescimento da profundidade de recursão de tarefas de 4 para 8. Não publica uma transcrição por correção nem o volume de código adicionado e o custo da continuidade. As fontes públicas do jcc abaixo explicam as interfaces e os mecanismos de regressão do compilador; o seu snapshot separado não reconstitui a sequência exata das ações de transferência.
+Esclarecimento das fontes, 27 de novembro de 2026: Evidence identifica agora `37216cfa254a` como revisão inicial e liga os prompts originais e exportações JSON das tarefas GLM 5.2 e DeepSeek V4 Flash. Os metadados dos agentes e objetivos podem ser consultados, substituindo a descrição anterior de registos indisponíveis. O resultado 1.820/1.820 e a profundidade de 4 para 8 continuam a ser dados da fonte. As exportações não são uma repetição independente nem um manifesto completo; o código acrescentado e o custo incremental não foram reportados. [GLM 5.2 JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-273c7f674c7e832e.json) · [DeepSeek V4 Flash JSON](https://genesis.evox.group/evidence/compiler-continuation/sources/archive-d9116072090c5c24.json).
 
 ## Um compilador herdado possui fronteiras que um sucessor deve preservar
 

@@ -1,7 +1,7 @@
 ---
 title: "Genesis, 프로젝트·대화·Git을 하나의 워크벤치로 연결"
 pubDate: 2026-11-22
-updatedDate: 2026-11-26
+updatedDate: 2026-11-27
 summary: "프로젝트별 초안과 VCT 워크스페이스가 작업 전환 중에도 올바른 저장소와 실행 노드에 맥락을 유지합니다."
 ---
 
@@ -46,3 +46,5 @@ PR에는 작업 생성과 완료, Assistant 키보드 제출과 스트리밍, �
 [workspace]: https://github.com/EMI-Group/genesis/blob/975b9ba32be5f6772b456ea3c92bfa3b4ae22cb9/apps/evo_git/lib/mix/tasks/vct.workspace.ex
 
 2026년 11월 25일 개선은 작업 옵션을 폼 안에 유지하고, 명시적으로 선택한 프로젝트의 개요를 열며, 실행 중인 작업 링크를 작업별 에이전트 검사기로 연결합니다. 프로젝트 식별이 확인된 뒤에만 해당 Assistant 초안을 제공해 탐색 중에도 프로젝트와 실행 노드를 유지합니다. [GitHub](https://github.com/EMI-Group/genesis/commit/c40b76d207345ed6b9dc1435887b3482ff3ad9a4) · [GitHub](https://github.com/EMI-Group/genesis/commit/732f127e1712424fc4501bfe59200fa4661514f4) · [GitHub](https://github.com/EMI-Group/genesis/commit/e3bba720387f921bd72dda49016cdfb4ef0fa46b) · [GitHub](https://github.com/EMI-Group/genesis/commit/4f8a233f89a1dcecb63ce3d342b437b4d4fbf8af).
+
+2026년 11월 27일 main에 병합된 PR #178은 기존 프로젝트 선택기를 개선합니다. 최근 프로젝트를 먼저 표시하고 폴더 탐색을 지원하며 수동 경로 입력은 접힌 상태로 유지합니다. 선택은 현재 초안을 보존하고 대화상자를 연 대화에 연결되므로 오래된 대화상자가 다른 대화를 바꿀 수 없습니다. Windows의 컴퓨터 버튼은 선택 노드의 드라이브 루트를 탐색합니다. 내부 프로젝트 알림은 화면 대화에서 숨기지만 모델에는 문맥을 전달하며, 첫 전송 시 중복 기록도 방지합니다. 프로젝트를 바꾼 뒤 History가 새 범위를 확정한 후 결과를 확인하십시오. [PR #178](https://github.com/EMI-Group/genesis/pull/178) · [History](https://github.com/EMI-Group/genesis/commit/0fc1182ea3e53baa50613f3504ff0a52798984dd).
