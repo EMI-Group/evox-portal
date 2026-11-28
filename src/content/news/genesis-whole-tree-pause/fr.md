@@ -32,6 +32,8 @@ Un lot gelé proprement est restauré sans la réparation d’outils pendants em
 
 Utilisez une construction des sources incluant ces commits et activez la persistance des agents. Mettez en pause une tâche avec des enfants actifs, attendez l’état paused, puis reprenez et vérifiez l’identité de la tâche, les liens entre enfants et le travail conservé. Examinez tout avis de pause dirty avant de poursuivre des opérations externes. Sans persistance, la pause est refusée ; la récupération dépend des checkpoints durables. Le [workflow précédent][related] explique le contexte de projet et d’approbation ; cette évolution définit la conservation de l’exécution inachevée.
 
+Mise à jour associée · 2026-11-28: [Genesis v0.15.0 : relier le travail de projet, de la connexion à la reprise](/fr/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

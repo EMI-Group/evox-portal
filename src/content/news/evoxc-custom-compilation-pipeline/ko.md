@@ -38,6 +38,8 @@ summary: "main에 사용자 정의 호출, 인라인 StableHLO, 편집한 모듈
 관련 업데이트 · 2026-11-26: [EvoX Compiler v0.2.3: 워크로드에 맞는 백엔드 설치](/ko/releases/evoxc-0-2-3).
 
 
+관련 업데이트 · 2026-11-28: [EvoX Compiler, 재사용할 준비 과정과 변화하는 입력을 분리하다](/ko/news/evoxc-structural-input-split).
+
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908
 [pipeline]: https://github.com/EMI-Group/evoxc/commit/1762ecec7d6ff56e7656ca7e2ae8d5a24149e1ef

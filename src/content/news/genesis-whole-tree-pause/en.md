@@ -32,6 +32,8 @@ A clean frozen batch is restored without the dangling-tool repair used for inter
 
 Use a source build containing these commits with durable agent state enabled. Pause a development task with active children, wait for the recorded paused state, then resume and confirm the same task identity, child relationships and saved work. Inspect any dirty-pause notice before continuing external operations. With persistent state disabled, pause is refused; recovery is bounded by durable checkpoints. The [earlier task workflow][related] provides the surrounding project and approval context, while this change defines how unfinished execution is preserved.
 
+Related update · 2026-11-28: [Genesis v0.15.0: keep project work connected, from sign-in to recovery](/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

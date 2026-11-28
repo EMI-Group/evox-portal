@@ -32,6 +32,8 @@ summary: "协调快照保留父任务等待位置、子任务身份和工作树�
 
 使用包含这些提交的源码构建，并启用智能体状态持久化。暂停一个仍有活跃子任务的开发任务，等待状态记录为 paused，再恢复并核对任务身份、子任务关系和保存的工作保持一致。继续外部操作前，查看任何 dirty pause 提示。关闭持久化时，暂停会被拒绝；恢复能力受持久化检查点约束。[此前的任务工作流][related]介绍项目与审批上下文，本次变化则定义如何保留尚未完成的执行。
 
+相关更新 · 2026-11-28: [Genesis v0.15.0：从登录到恢复，让项目工作保持连贯](/zh-cn/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

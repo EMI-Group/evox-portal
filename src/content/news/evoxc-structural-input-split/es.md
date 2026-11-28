@@ -1,0 +1,38 @@
+---
+title: "EvoX Compiler separa la preparación reutilizable de las entradas variables"
+pubDate: 2026-11-28
+summary: "Nuevas transformaciones estructurales exponen una frontera prepare/apply para examinar qué puede reutilizarse y qué debe ejecutarse en cada llamada."
+---
+
+Un cálculo repetido suele mezclar entradas fijas y variables. Recalcular la parte fija puede desperdiciar recursos, pero guardar cualquier valor intermedio puede cambiar el comportamiento silenciosamente. EvoX Compiler main incorpora split_by_inputs y analyze_inputs: una transformación estructural separa un grafo trazado en preparación y aplicación, con una frontera de tensores inspeccionable. El original no cambia. Las modificaciones del 27–28 de noviembre hacen de la reutilización una decisión explícita, no una caché oculta. [Implementación y contrato][contract]
+
+![Una prensa mantiene una placa grabada preparada mientras entran hojas distintas por un alimentador separado](./cover.webp)
+
+*Ilustración conceptual: preparar una vez la contribución fija y reutilizarla con entradas variables.*
+
+## Elegir las entradas fijas
+
+Por ejemplo, se pueden evaluar muchos tensores candidatos frente a las mismas referencias. Si un grafo lineal deriva primero un intermedio solo de las referencias y luego lo combina con cada candidato, esa derivación puede ir a prepare. El candidato variable entra en apply junto con el árbol variable y la tupla preparada. Es un ejemplo de estructura adecuada, no una aceleración medida.
+
+La máscara fixed refleja el pytree de entrada: True fija un tensor y False o None lo deja variable. También pueden darse índices planos de tensores con fixed_leaves. Se exige exactamente un selector. Las hojas estáticas ya especializan el grafo y no cruzan la frontera; una máscara distinta de None se rechaza allí. Ambas partes necesitan entradas tensoriales, por lo que fijarlas todas o ninguna es inválido. Tuplas, listas y diccionarios normales se podan por hoja; se rechaza la poda parcial de nodos registrados de aridad fija, dataclass o namedtuple. [Selección][split]
+
+## Examinar el coste de la frontera
+
+La transformación propaga máscaras de dependencia por SSA lineal, recorre desde las salidas hacia atrás para eliminar operaciones muertas y selecciona valores fijos necesarios para operaciones mixtas o retornos. Clona operaciones en módulos nuevos. Las constantes se copian en la parte correspondiente, sin enviarlas como resultados preparados. Las entradas variables sin uso permanecen en la firma de apply.
+
+SplitPlan informa de frontera, formas, tipos, bytes estimados y operaciones. Un tamaño estático desconocido produce una estimación desconocida. Se cuentan ID distintos de operaciones fuente: una constante copiada a ambos lados cuenta en cada uno, pero una sola vez en la unión para calcular descartes. La suma no tiene por qué coincidir con el total original. El informe compara almacenamiento retenido y cálculo repetido sin convertir operaciones en una predicción de tiempo real. [API de análisis][analysis]
+
+## Una instantánea con límites explícitos
+
+Cambiar una entrada fija exige ejecutar prepare de nuevo. Ningún grafo gestiona invalidación. Se rechazan efectos fuera de pure/read: no depender de entradas variables no garantiza que ejecutar una sola vez sea seguro. La primera implementación rechaza regiones anidadas como cond, while_loop y scan. Colectivas, callbacks y llamadas externas o personalizadas necesitan otra estrategia cuando quedan bloqueadas.
+
+analyze_inputs usa las mismas dependencias sin ejecutar, trazar ni importar backends. Expone posibilidad de división, motivo de bloqueo, consumidores, salidas afectadas y coste de fijar cada entrada por separado cuando es legal. Es el primer paso: una frontera grande o poco cálculo fijo puede hacer poco atractiva la división. Un rechazo describe el grafo, no justifica suprimir un efecto.
+
+## Comparar ambas partes con el original
+
+Use fuentes con estos commits. Obtenga un SplitPlan y llame a verify para comprobar invariantes y conexiones. Cada Graph pasa por lower, compile y load; build rechaza deliberadamente grafos ya trazados. Ejecute prepare solo con argumentos fijos y apply con el árbol variable y la tupla preparada. Compare varias entradas variables con el original usando las tolerancias del backend; cambie después las fijas y repita la preparación. Mida preparación, ejecución recurrente y memoria por separado. El [artículo sobre la compilación][related] explica las etapas circundantes.
+
+[contract]: https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/CONTEXT.md
+[split]: https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/split.py
+[analysis]: https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/analyze.py
+[related]: /es/news/evoxc-custom-compilation-pipeline

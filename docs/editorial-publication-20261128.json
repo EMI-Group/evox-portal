@@ -1,0 +1,190 @@
+{
+  "date": "2026-11-28",
+  "productionBase": "9dc9b2d40b5d654e39dd223b9b06d0773acea5e7",
+  "articles": [
+    {
+      "collection": "releases",
+      "slug": "genesis-0-15-0",
+      "story_type": "version-release",
+      "editorial_action": "new",
+      "editorial_reason": "A distinct official version with upgrade actions; links prior mechanism news.",
+      "depth": "regular",
+      "englishWords": 718,
+      "coverage": {
+        "intro": "Version, upstream date, continuity problem, scope of release",
+        "section1": "Project overview/task Agents/composer; VCT membership and execution directory; Source Control; tab semantics/navigation; project draft restore/history scope/late activation fixes",
+        "section2": "ChatGPT browser/remote/CLI login and cancellation; profiles/models refresh; reasoning/schedule presets and China calendar; Chat Completions routing and subscription headers; Keenable; account fallback/node identity; secrets/project ownership",
+        "section3": "Whole-tree pause vs drain and durable checkpoints; terminal review and follow-up; job IDs/logs/retention/memory; auto-commit fallback and merge coauthors",
+        "section4": "Shared/Local context and consolidation; streaming/archive/timezone/remote load fixes; security dependencies; density/removed lists; optional desktop titlebar; OS assets/update commands/data retention/post-upgrade verification",
+        "groupedOrOmitted": "Cosmetic disclosure animation symmetry, single-interior-commit folding, picker spacing, duration formatting, plain-language confirmation copy, keyed stream rendering and async loading internals are grouped under interface/loading fixes or omitted as low-impact implementation detail. Custom-agent initial-state crash and superseded update-check races are minor specific fixes covered by the complete linked notes; no migration step or changed public contract is inferred."
+      },
+      "sources": {
+        "release": "https://github.com/EMI-Group/genesis/releases/tag/v0.15.0",
+        "guide": "https://github.com/EMI-Group/genesis/blob/v0.15.0/README.md",
+        "workbench": "/news/genesis-project-workbench",
+        "accounts": "/news/genesis-provider-account-setup",
+        "pause": "/news/genesis-whole-tree-pause"
+      },
+      "sourceKeys": [
+        "genesis:release:460505877",
+        "genesis:tag:v0.15.0"
+      ],
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "fr",
+        "de",
+        "es",
+        "es-419",
+        "pt",
+        "pt-br",
+        "it",
+        "ja",
+        "ko",
+        "ru"
+      ],
+      "pubDate": "2026-11-28",
+      "upstreamDate": "2026-11-27",
+      "canonicalUrl": "https://www.evox.group/releases/genesis-0-15-0",
+      "contentHashes": {
+        "de.md": "988bb9cc5562580c020211f472177b8be7f5f609c17462a4382b894792ee8c7a",
+        "en.md": "5de877d99b0a8ac13aef70213a7fe2805421c63af223eda43885c0fa98b8fdab",
+        "es-419.md": "04f0dce1aafe4f5555987a2fd391aedeb45e490b50b8c007ca3e8071b10eebf5",
+        "es.md": "c0ade1a5b8fc05f9b46268315f4b0e2148f9385b9a63366d21d97f7e9c4fd9e7",
+        "fr.md": "682a21af100a77b5235c6ac6f8cf9d7bde3a06e0bfaa393ad0f3c81ab6637fbc",
+        "it.md": "7e7618dad35844714ee31cb7da6315d3c978cce7d421a0bcc8e96b67a813c3a6",
+        "ja.md": "ee2ccfb880ca9c922bc03db038e8ef6e21b7670b66ab4b2b9e236675933f929a",
+        "ko.md": "77bd8ee6415ea1c27487ba982d2abccc6d308f96fafd839f48367d4f702c45b8",
+        "pt-br.md": "52ebe035c37367768f6d38d893a114223f3537c87a986c20f778866c493d61f0",
+        "pt.md": "02e720788bb078ff1978d6f788bdb9dc9475685f9f0182dccc8d3320fbd7d2d8",
+        "ru.md": "9b7595c9ae9aec69b11428937272a485645e27f04c4782d6a9884b227ddb565d",
+        "zh-cn.md": "2ca8731829e6249762f76db725bb440cc767a667491fefffe5877854f506bfb9",
+        "zh-tw.md": "ca376a494e7ae4027a45ac1428d861cbacce392f3bc8cb053e91012ec6da9af6"
+      },
+      "image": {
+        "path": "src/content/releases/genesis-0-15-0/cover.webp",
+        "source": "OpenAI imagegen original conceptual editorial illustration; not measured or documentary evidence",
+        "originalFile": "exec-f3221eb6-ed2d-4947-8c02-f82759c345fc.png",
+        "generationPrompt": "Content prompt: Editorial conceptual illustration for Genesis v0.15.0 software release connecting project identity, account setup and resumable agent work. A precise architectural drafting control desk viewed in three-quarter perspective, an open project ledger held by a small red indexing clip, a key integrated into a control lever, and a small suspended branching mechanical assembly whose parts remain connected in a protective frame on the desk. One coherent scene, no screens, no lettering, no invented metrics, no logos. The ledger is project continuity; the key is account identity; held branching assembly is preserved unfinished work. Style prompt: sophisticated graphite and charcoal hand-drawn editorial illustration, neutral white/light gray paper, crisp linework and selective pencil texture, dark balanced shadows, a single small vermilion red accent. No pink wash, beige cast, gradients or glossy 3D render. Output: landscape 16:9, generous safe margins, readable as article cover, no text.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "bytes": 374478,
+        "sha256": "1ad4564a3fd0cfc59a9af3a4133ff71d6b481281ac083e5cee6be62e543390e1",
+        "localeAltCaption": true
+      }
+    },
+    {
+      "collection": "news",
+      "slug": "evoxc-structural-input-split",
+      "story_type": "development",
+      "editorial_action": "new",
+      "editorial_reason": "New independently usable structural graph transformation and input-analysis workflow, distinct from custom compilation.",
+      "depth": "regular",
+      "englishWords": 603,
+      "coverage": {
+        "intro": "Default-branch structural split, immutable source graph, explicit reuse rather than cache",
+        "section1": "Candidate/reference scenario; mask and leaf index semantics; static leaves; selector exclusivity; nonempty halves; per-leaf pruning and registered arity restriction",
+        "section2": "SSA dependence/backward live set/cloning/boundary; constants and unused variable arguments; byte estimates and distinct source operation counting",
+        "section3": "Reprepare after fixed-input changes; pure/read and nested-region gates; analyze_inputs facts/blocking and retained-memory decision",
+        "section4": "Pinned implementation checkout; verify; lower/compile/load vs build; exact varying-tree then prepared-tuple ordering; comparison against original and separate setup/runtime/memory measurement",
+        "notClaimed": "No performance number, unexecuted benchmark or general automatic speedup claim. Example scenario is explicitly illustrative."
+      },
+      "sources": {
+        "contract": "https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/CONTEXT.md",
+        "split": "https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/split.py",
+        "analysis": "https://github.com/EMI-Group/evoxc/blob/11ed232dc90b138c71787f42335dd8c38caf8fb9/evoxc/transforms/analyze.py",
+        "related": "/news/evoxc-custom-compilation-pipeline"
+      },
+      "sourceKeys": [
+        "evoxc:commit:2e4e946facde5a0746bcf187b94764cab2c13406",
+        "evoxc:commit:e93e06d83a531ebcf007c204dacd07383f96735a",
+        "evoxc:commit:f721f8ffd5f7837a91c29e9aaaa01f2bf7a354b5",
+        "evoxc:commit:1449264578cb6e1c0fb0939af567457f05d455e0",
+        "evoxc:commit:69ef5da3c5c5950e670581fb3950b8e062e06335"
+      ],
+      "locales": [
+        "en",
+        "zh-cn",
+        "zh-tw",
+        "fr",
+        "de",
+        "es",
+        "es-419",
+        "pt",
+        "pt-br",
+        "it",
+        "ja",
+        "ko",
+        "ru"
+      ],
+      "pubDate": "2026-11-28",
+      "upstreamDate": "2026-11-27/28",
+      "canonicalUrl": "https://www.evox.group/news/evoxc-structural-input-split",
+      "contentHashes": {
+        "de.md": "7b65c04704fa4e3766b64a031c7df506df37b8067495a7021b5d8acdc861d908",
+        "en.md": "46fa110f0188d0003a5a2e9c9738bf302163828f13890b0357674eb06f8db635",
+        "es-419.md": "0bf007d30c466e0455f7d44fb3cfe6f84cdf5e53731fa29b11f8ac4413c41ecb",
+        "es.md": "6f1b43fc58a61109514a1bcf29dfe2694f439496846fd9e6cd773e5b4394b019",
+        "fr.md": "41420fbad92f64572bafec519b43442b03f5bfff164cf9fe9e349a35a5626f1f",
+        "it.md": "343054cedda333815b19b96b9f5f22962106a138a95cade70db767b4e57645cf",
+        "ja.md": "3bcb2265d6fa0c9dfec6856a1da88182c258f3ca3500805bd1ac6b5afede1b4b",
+        "ko.md": "7b7b9d5491aa618169f1f8fe353c3d5e6bb91f0d237135b2dcb5b0f0e68edae6",
+        "pt-br.md": "89cf0f9d41ded5a0d5ee42da694ec9bcd867608c861406d9b3dc9ad8741fdb70",
+        "pt.md": "3f24a80e5d289ca3eac99e7c40350c58b404f9f62d4463ee14cb6550ed95b368",
+        "ru.md": "b98c44f3cb072db8cf05366f64e335e4369399f9439de5f3a995bc55a7137296",
+        "zh-cn.md": "898fadb051d0da901b41eac7587c523b11875b5a3a2a94ad9fa28e1acd778a9d",
+        "zh-tw.md": "32697a05043872fbc6c774258a5301727fd78aef0c0429188e5397f045926dbd"
+      },
+      "image": {
+        "path": "src/content/news/evoxc-structural-input-split/cover.webp",
+        "source": "OpenAI imagegen original conceptual editorial illustration; not measured or documentary evidence",
+        "originalFile": "exec-2c8b4276-9f9b-4ad0-bd55-696f465da24d.png",
+        "generationPrompt": "Content prompt: A dedicated editorial metaphor for EvoX Compiler split_by_inputs, separating reusable fixed preparation from per-call varying inputs. Show a fine traditional tabletop printing press in side three-quarter view. At left a carefully prepared engraved metal plate with an abstract geometric motif rests in a fitted holder, held by one small red clamp. At right a distinct feed holds several blank paper sheets that can pass under the same prepared plate. Focus on one fixed plate reused across changing sheets, simple mechanically plausible arrangement, plenty of breathing room. No words, numbers, arrows, chart or software UI. This is a conceptual illustration, not benchmark evidence. Style prompt: expert graphite and charcoal editorial line drawing on neutral white/light grey background, rich but selective pencil texture, crisp silhouettes, balanced mid-grey and charcoal contrast; one tiny brand-red accent; no pink wash, no sepia, no 3D plastic. Output specification: landscape 16:9 cover, 1600px or greater, crop-safe focal objects, no text or logos.",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "bytes": 274424,
+        "sha256": "39e0e06d55155c72002eaacc0d8a899d380145f47d63473b5f715ae1f81b4f02",
+        "localeAltCaption": true
+      }
+    }
+  ],
+  "validation": {
+    "build": "pnpm build passed; 1378 pages",
+    "seo": "832 localized blog pages; zero errors",
+    "localPages": 52,
+    "localVerifiedAt": "2026-11-28T09:02:40.313Z",
+    "responsive": "English desktop; Simplified Chinese mobile; light and dark; no horizontal overflow; reviewed screenshots",
+    "checks": [
+      "title/summary",
+      "canonical/hreflang",
+      "source links",
+      "localized body sections and inline commands",
+      "localized alt/caption",
+      "list membership",
+      "body/list/social image identity",
+      "OG/Twitter/BlogPosting.image HTTP and bytes",
+      "publication/revision dates"
+    ],
+    "snapshotFiles": [
+      "C:\\Users\\Admin\\.codex\\visualizations\\2026\\11\\04\\01a1a583-a6bd-7100-955d-f3276c92b716\\scan-20261128.json",
+      "C:\\Users\\Admin\\.codex\\visualizations\\2026\\11\\04\\01a1a583-a6bd-7100-955d-f3276c92b716\\evidence-node-20261128.json"
+    ]
+  },
+  "relatedArticles": {
+    "genesis-whole-tree-pause": "13 localized reciprocal release links; original publication and revision dates retained; historical source description retained.",
+    "evoxc-custom-compilation-pipeline": "13 localized reciprocal links; original publication and revision dates retained."
+  },
+  "scan": {
+    "repositories": 8,
+    "commits": 98,
+    "newReleases": 1,
+    "newMergedPRs": 0,
+    "evidence": "8 successful responses, byte-identical to November27 snapshot",
+    "excluded": "Other EvoXC changes add documentation site source/API references, tests and internal routing. No separately verified public deployment or independent runtime capability; structural transform changes grouped into one news story."
+  }
+}

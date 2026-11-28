@@ -32,6 +32,8 @@ Um lote congelado corretamente é restaurado sem a reparação de ferramentas pe
 
 Deve usar-se uma compilação a partir do código-fonte com estes commits e persistência dos agentes ativada. Pause-se uma tarefa com filhos ativos, espere-se pelo estado paused e retome-se, confirmando a identidade da tarefa, as relações entre filhos e o trabalho guardado. Antes de continuar operações externas, importa verificar os avisos dirty. Sem persistência, a pausa é rejeitada; a recuperação é limitada pelos checkpoints duradouros. O [fluxo de tarefas anterior][related] explica o contexto de projeto e aprovação; esta alteração define como preservar a execução inacabada.
 
+Atualização relacionada · 2026-11-28: [Genesis v0.15.0: continuidade do projeto, da autenticação à recuperação](/pt/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

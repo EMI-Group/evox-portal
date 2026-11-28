@@ -38,6 +38,8 @@ summary: "main にカスタム呼び出し、インライン StableHLO、編集�
 関連する更新 · 2026-11-26: [EvoX Compiler v0.2.3：ワークロードに合うバックエンドを導入する](/ja/releases/evoxc-0-2-3).
 
 
+関連する更新 · 2026-11-28: [EvoX Compiler、再利用する前処理と変化する入力を分離](/ja/news/evoxc-structural-input-split).
+
 [guide]: https://github.com/EMI-Group/evoxc/blob/f11167521bd913babf86e295436ea4c902cf3e11/README.md
 [ops]: https://github.com/EMI-Group/evoxc/commit/879ca9a70cd390aae1a7757698d10b6e43b64908
 [pipeline]: https://github.com/EMI-Group/evoxc/commit/1762ecec7d6ff56e7656ca7e2ae8d5a24149e1ef

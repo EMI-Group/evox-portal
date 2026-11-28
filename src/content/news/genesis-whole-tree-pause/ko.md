@@ -32,6 +32,8 @@ summary: "조정된 스냅샷이 부모의 대기 위치, 자식의 식별자, �
 
 이 커밋들이 포함된 소스 빌드를 사용하고 에이전트 상태 영속화를 켜십시오. 자식이 실행 중인 개발 작업을 중지하고 paused 상태 기록을 기다린 뒤 재개하여 같은 작업 식별자, 자식 관계, 저장 작업이 유지되는지 확인합니다. 외부 작업을 이어가기 전에 dirty pause 알림을 검토하십시오. 영속화가 꺼져 있으면 일시 중지는 거부되며 복구 범위는 영속 체크포인트로 제한됩니다. [이전 작업 워크플로][related]는 프로젝트와 승인 문맥을 설명하고 이번 변경은 미완료 실행을 보존하는 방법을 정의합니다.
 
+관련 업데이트 · 2026-11-28: [Genesis v0.15.0: 로그인부터 복구까지 프로젝트 작업을 연결하다](/ko/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

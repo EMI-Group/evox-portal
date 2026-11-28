@@ -32,6 +32,8 @@ Un batch congelato correttamente viene ripristinato senza la riparazione degli s
 
 Si utilizzi una build dai sorgenti con questi commit e persistenza dello stato degli agenti attiva. Si metta in pausa un task con figli attivi, si attenda lo stato paused, poi si riprenda controllando identità del task, relazioni dei figli e lavoro salvato. Eventuali avvisi dirty vanno esaminati prima di continuare operazioni esterne. Senza persistenza la pausa è rifiutata; il recupero è limitato ai checkpoint duraturi. Il [workflow precedente][related] spiega il contesto di progetto e approvazione; questa modifica definisce come preservare l’esecuzione incompiuta.
 
+Aggiornamento correlato · 2026-11-28: [Genesis v0.15.0: continuità del progetto, dall’accesso al recupero](/it/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

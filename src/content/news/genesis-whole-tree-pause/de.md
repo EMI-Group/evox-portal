@@ -32,6 +32,8 @@ Ein sauber eingefrorener Stapel wird ohne die Reparatur offener Werkzeugaufrufe 
 
 Verwenden Sie einen Quellbuild mit diesen Commits und aktivierter dauerhafter Agentenspeicherung. Pausieren Sie eine Entwicklungsaufgabe mit aktiven Kindern, warten Sie auf paused und setzen Sie sie fort. Prüfen Sie Aufgabenidentität, Kindbeziehungen und gesicherte Arbeit. Beachten Sie Hinweise auf eine dirty pause, bevor externe Operationen weiterlaufen. Ohne Persistenz wird Pause abgelehnt; Wiederherstellung reicht nur bis zu dauerhaften Checkpoints. Der [bisherige Aufgabenablauf][related] liefert den Projekt- und Freigabekontext; diese Änderung definiert den Erhalt unfertiger Ausführung.
 
+Weiterführende Aktualisierung · 2026-11-28: [Genesis v0.15.0: Projektarbeit von der Anmeldung bis zur Wiederaufnahme verbinden](/de/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11

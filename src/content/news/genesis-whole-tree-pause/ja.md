@@ -32,6 +32,8 @@ summary: "協調スナップショットが親の待機位置、子の識別子�
 
 これらのコミットを含むソースビルドを使い、エージェント状態の永続化を有効にしてください。子が動いている開発タスクを停止し、paused の記録を待ってから再開して、タスク ID、子との関係、保存した作業が維持されることを確認します。外部操作を続ける前に dirty pause 通知を調べてください。永続化が無効なら一時停止は拒否され、復旧の範囲は永続化されたチェックポイントに制限されます。[従来のタスクワークフロー][related]はプロジェクトと承認の文脈を説明し、今回の変更は未完了の実行を保存する方法を定めています。
 
+関連する更新 · 2026-11-28: [Genesis v0.15.0：サインインから復旧まで、プロジェクトの作業をつなぐ](/ja/releases/genesis-0-15-0).
+
 [design]: https://github.com/EMI-Group/genesis/blob/d0796aeef2372221fa3becb13692f7137ceeaffe/docs/task-pause.md
 [registry]: https://github.com/EMI-Group/genesis/commit/4af29fadb58dd0096cff5eb95dfcd1e9b8dbae74
 [coordinator]: https://github.com/EMI-Group/genesis/commit/e4b4ef863c5515f61e0ce56a40e3acd8c4970d11
